@@ -1,0 +1,490 @@
+<div class="client-route-data-form">
+    <div class="card">
+
+        <form *ngIf="pointRouteForm && deliveryZoneName_messages" [formGroup]="pointRouteForm">
+
+            <div class="card-body pb-4">
+                <div class="col-xl-12 col-12 pt-3 ">
+                    <p class="title-user mb-1"> {{'DELIVERY_POINTS.ASSIGNED_ROUTE' | translate }} </p>
+                    <p class="sub-title-user"> {{'DELIVERY_POINTS.ASSIGNED_ROUTE_MESSAGE' | translate }} </p>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="form-row pt-3">
+
+                        <!-- Ruta asignada -->
+                        <div class="col-xl-4 col-12  mb-2">
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': pointRouteForm.controls['deliveryZoneId'].invalid 
+                                && ( pointRouteForm.controls['deliveryZoneId'].dirty 
+                                || pointRouteForm.controls['deliveryZoneId'].touched) }">
+                                <ng-container *ngIf="showSelect">
+                                    <span class="has-float-label w-100">
+                                        <select class="form-select form-control w-100" id="deliveryZoneId" placeholder="Seleccione"
+                                            formControlName="deliveryZoneId">
+                                            <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                                            <option *ngFor="let zone of zones | async" [value]="zone.id">
+                                                {{ zone.name }}
+                                            </option>
+                                        </select>
+
+                                        <label for="type" class="mt-2 title-col"> {{'DELIVERY_POINTS.ASSIGNED_ROUTE' | translate }} </label>
+                                    </span>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showSelect">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                        <div class="fa-3x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- Compañia asociada -->
+                        <div class="col-xl-4 col-12  mb-2">
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': pointRouteForm.controls['companyAssociatedId'].invalid 
+                                && ( pointRouteForm.controls['companyAssociatedId'].dirty 
+                                || pointRouteForm.controls['companyAssociatedId'].touched) }">
+                                <ng-container *ngIf="showcompanys">
+                                    <span class="has-float-label w-100">
+                                        <select class="form-select form-control w-100" id="companyAssociatedId" placeholder="Seleccione"
+                                            formControlName="companyAssociatedId">
+                                            <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                                            <option *ngFor="let item of associatedCompany" [value]="item.id">
+                                                {{ item.name }}
+                                            </option>
+                                        </select>
+
+                                        <label for="type" class="mt-2 title-col"> {{ 'COMPANIES.ASSOCIATED_COMPANY' | translate }} </label>
+                                    </span>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showcompanys">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                        <div class="fa-3x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- Agente comercial -->
+                        <div class="col-xl-4 col-12  mb-2">
+                            <div class="form-group input-group">
+                                <ng-container *ngIf="showUserAgent">
+                                    <span class="has-float-label w-100">
+                                        <select class="form-select form-control w-100" id="agentUserId" placeholder="Seleccione"
+                                            formControlName="agentUserId">
+                                            <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                                            <option *ngFor="let user of userAgent" [value]="user.id">
+                                                {{ user.name }} {{ user.surname }}
+                                            </option>
+                                        </select>
+
+                                        <label for="type" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.COMMERCIAL_AGENT' | translate }} </label>
+                                    </span>
+                                    
+                                    <ng-container *ngFor="let validation of deliveryZoneName_messages.agentUserId">
+                                        <div class="w-100 text-center">
+                                            <small class="form-control-feedback text-danger" 
+                                                *ngIf="pointRouteForm.get('agentUserId').hasError( validation.type ) 
+                                                && (pointRouteForm.get('agentUserId').dirty 
+                                                || pointRouteForm.get('agentUserId').touched)">
+                                                {{ validation.message }}
+                                            </small>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showUserAgent">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                        <div class="fa-3x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+                        <!-- Verificar horas -->
+                        <div class="col-xl-4 col-12 mb-2">
+                            <div class="row">
+                                <div class="col-xl-12 col-12 pl-2">
+                                    <div class="">
+                                        <div class="switch w-100">
+                                            <label class="switch-width mb-0">
+                                                <input type="checkbox" formControlName="verifiedByDriver" id="verifiedByDriver" />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                                <span class="title-toggle toogle-style title-user"> {{ 'DELIVERY_POINTS.VERIFIED_BY_DRIVER' | translate }} </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <!-- Tiempo de retraso-->
+            <div class="card-footer pt-3 pb-5" style="display: block;" *ngIf="showDelaySeccion">
+                <div class="col-xl-12 col-12 mb-2">
+                    <div class="row">
+                        <div class="col-xl-12 col-12 pl-2">
+                            <div class="">
+                                <div class="switch w-100">
+                                    <label class="switch-width mb-0">
+                                        <input type="checkbox" formControlName="allowDelayTime"
+                                        (change)="validationDElayTime($event.target.checked)" />
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle toogle-style title-user"> Permitir y aplicar tiempo de retraso </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="col-12">
+                            <p class="sub-title-user mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'DELIVERY_POINTS.BY_ALLOWING_DELAY_TIME_IN_CLIENTES_THE_SOFTWARE_WHEN_ORGANIZING_THE_ROUTE' | translate }} </p>
+                        </div>
+        
+                        <ng-container *ngIf="pointRouteForm && pointRouteForm.controls['allowDelayTime'] && pointRouteForm.controls['allowDelayTime'].value">
+                            <ng-container *ngIf="allowDelayTime">
+                                <div class="col-12" >
+            
+                                    <div class="row mt-1 pl-xl-5 ml-xl-3">
+            
+                                        <div class="col-xl-4 col-12 p-0">
+
+                                            <div class="form-group input-group" *ngIf="allowDelayTime.length > 0">
+
+                                                <span class="has-float-label w-100">
+                        
+                                                    <select class="form-select form-control w-100" id="companyPreferenceDelayTimeId"
+                                                        formControlName="companyPreferenceDelayTimeId" placeholder="Seleccione">
+                                                        <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                                                        <option *ngFor="let item of allowDelayTime" [value]="item.id">
+                                                            {{ item.name }}
+                                                        </option>
+                                                    </select>
+                        
+                                                    <label for="type" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.DELAY_TIME_' | translate }} </label>
+                        
+                                                </span>
+            
+                                                <ng-container *ngFor="let validation of deliveryZoneName_messages.companyPreferenceDelayTimeId">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                            pointSettingForm
+                                                                .get('companyPreferenceDelayTimeId')
+                                                                .hasError(validation.type) &&
+                                                            (pointSettingForm.get('companyPreferenceDelayTimeId').dirty ||
+                                                                pointSettingForm.get('companyPreferenceDelayTimeId')
+                                                                    .touched)
+                                                        ">
+                                                        {{ validation.message }}
+                                                    </small>
+                                                </ng-container>
+            
+                                            </div>
+            
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+        
+                    </div>
+                </div>
+            </div>   
+
+
+            <!-- Tiempo de descarga -->
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+
+                <div class="col-xl-12 col-12 pt-3">
+
+                    <p class="title-user mb-1">  {{ 'DELIVERY_POINTS.SERVICE_TIME' | translate }} </p>
+
+                    <p class="sub-title-user"> Determina el tiempo promedio de descarga que se tarda en realizar el servicio al cliente. </p>
+
+                </div>
+
+                <div class="container-fluid">
+                    <div class="form-row pt-3">
+
+                        <!-- Minutos -->
+                        <div class="col-xl-4 col-md-6 col-12 mb-2">
+
+                            <div class="form-group input-group">
+        
+                                <span class="has-float-label w-100">
+        
+                                    <input class="form-control point showNUmber" id="serviceTimeMinute" type="number" min="0" 
+                                        formControlName="serviceTimeMinute" placeholder="{{
+                                        'GENERAL.MINUTES' | translate}}" 
+                                        [ngClass]="{
+                                        'form-control-danger':
+                                        pointRouteForm.controls['serviceTimeMinute']
+                                        .invalid &&
+                                        (pointRouteForm.controls['serviceTimeMinute']
+                                        .dirty ||
+                                        pointRouteForm.controls['serviceTimeMinute'].touched)}" />
+        
+                                    <label for="first" class="mt-2 title-col"> {{'GENERAL.MINUTES'| translate }} </label>
+        
+                                </span>
+
+                                <ng-container *ngFor="
+                                    let validation of deliveryZoneName_messages.serviceTimeMinute
+                                    ">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    pointRouteForm.get('serviceTimeMinute')
+                                    .hasError(validation.type) &&
+                                    (pointRouteForm.get('serviceTimeMinute')
+                                    .dirty ||
+                                    pointRouteForm.get('serviceTimeMinute')
+                                    .touched)">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+        
+                            </div>
+        
+                        </div>
+                        
+                        <!-- Segundo -->
+                        <div class="col-xl-4 col-md-6 col-12 mb-2">
+        
+                            <div class="form-group input-group">
+        
+                                <span class="has-float-label w-100">
+        
+                                    <input class="form-control showNUmber point"id="serviceTimeSeconds" type="number" min="0" formControlName="serviceTimeSeconds" [min]="0" [max]="24 * 60 - 1" placeholder="{{
+                                        'GENERAL.SECONDS' | translate}}" [ngClass]="{'form-control-danger':
+                                        pointRouteForm.controls['serviceTimeSeconds'].invalid &&
+                                        (pointRouteForm.controls['serviceTimeSeconds'].dirty ||
+                                        pointRouteForm.controls['serviceTimeSeconds'].touched)}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{ 'GENERAL.SECONDS' | translate }}  </label>
+        
+                                </span>
+
+                                <!-- <ng-container *ngFor="let validation of deliveryZoneName_messages.serviceTimeSeconds">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                        pointRouteForm.get('serviceTimeSeconds').hasError(validation.type) &&
+                                        (pointRouteForm.get('serviceTimeSeconds').dirty ||
+                                        pointRouteForm.get('serviceTimeSeconds').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container> -->
+        
+                            </div>
+        
+                        </div>
+        
+                        <!-- Tiempo promedio -->
+                        <div class="col-xl-4 col-12 mb-2">
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': pointRouteForm.controls['deliveryWindowEnd'].invalid 
+                                && ( pointRouteForm.controls['deliveryWindowEnd'].dirty 
+                                || pointRouteForm.controls['deliveryWindowEnd'].touched) }" style="display: block;">
+                                <span class="has-float-label w-100">
+                                    <input type="text" class="form-control radiusDeliveryOrderCode" id="avgServiceTime" disabled [value]="durationPipe.transform( point.avgServiceTime)" />
+
+                                    <label for="type" class="mt-2 title-col"> {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.AVG_TIME' | translate }} </label>
+                                </span>
+
+                                <span class="has-float-label w-100 has-float-eye point" 
+                                    *ngIf="point.id > '' || point.id != ''">
+                                    <button type="button" class="btn btn-defauld btn-save" (click)="modalRegisterTime()"
+                                        style="vertical-align: text-bottom;" id="tooltip">
+                                        <img src="assets/icons/eye_black.svg" alt="eye">
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            
+            </div>
+
+
+            <!-- Especificación de servicios -->
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+                <div class="col-12 pt-3">
+
+                    <p class="title-user mb-1"> {{ 'VEHICLES.SERVICE_TYPE.SPECIFICATION_OF_SERVICES' | translate }} </p>
+
+                    <p class="sub-title-user">
+                        {{ 'DELIVERY_POINTS.SELECT_WHAT_TYPE_OF_SPECIFIC_VEHICLE_CAN_OFFER_YOU_MUST_CREATE_THEM_ON_THE_SCREEN' | translate }}
+                            <a class="point link" (click)="openServiceType('serviceSpecification')">{{'DELIVERY_POINTS.SPECIFICATION_OF_SERVICES' | translate }}</a>
+                        {{'DELIVERY_POINTS.TO_LATER_BE_ABLE_TO_SELECT_THEM' | translate }}
+                    </p>
+
+                </div>
+
+                <div class="container-fluid">
+                    <div class="form-row mt-2 pb-2">
+
+                        <ng-container *ngIf="showServiceType">
+
+                            <ng-container *ngIf="deliveryPointServiceType && deliveryPointServiceType.length > 0">
+
+                                <div class="col-xl-12 col-12 pl-1 pr-1">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-4 col-12 pl-xl-3 p-xl-0 mt-3">
+                                            <div class="border-special">
+                                                <div class="row pl-4 pt-2 pb-0">
+                                                    <div class="round round-little round-new-form ml-0">
+                                                        <input type="radio" id="free" [value]="null" formControlName="deliveryPointServiceType" 
+                                                            [disabled]="pointRouteForm.controls['deliveryPointServiceType'].value > 0" 
+                                                            [checked]="pointRouteForm.controls['deliveryPointServiceType'].value === null" 
+                                                            style="height: 30px !important;"/>
+                                                        <label for="free"></label>
+                                                    </div>
+                                                    <label title="{{ 'GENERAL.FREEE' | translate}}" for="free" style="margin-left: 1.3rem; margin-top: 0.3rem;">
+                                                        {{ 'GENERAL.FREEE' | translate}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 pl-xl-3 p-xl-0 mt-3" 
+                                            *ngFor="let filter of deliveryPointServiceType; let g = index">
+                                            <div class="border-special">
+                                                <div class="row pl-4 pt-2 pb-0">
+                                                    <div class="round round-little round-new-form ml-0">
+                                                        <input type="radio" formControlName="deliveryPointServiceType" [value]="filter.id" 
+                                                        [id]="'deliveryPointServiceType' + filter.id" [value]="filter.id" style="height: 30px !important;" />
+                                                        <label [for]="'deliveryPointServiceType' + filter.id"></label>
+                                                    </div>
+                                                    <label [title]="deliveryPointServiceType.name" [for]="'deliveryPointServiceType' + filter.id" 
+                                                        style="margin-left: 1.3rem; margin-top: 0.3rem;">
+                                                        {{ sliceString( deliveryPointServiceType[g].name ) }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!showServiceType">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <div class="fa-5x mt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Especificacion  de ruta -->
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+                <div class="col-12 pt-3">
+
+                    <p class="title-user mb-1"> {{ 'DELIVERY_POINTS.PATH_SPECIFICATION' | translate }} </p>
+
+                    <p class="sub-title-user">
+                        {{ 'DELIVERY_POINTS.SELECT_WHICH_ROUTE_SPECIFICATION_TO_APPLY_TO_THIS_PARTICULAR_ROUTE_YOU_MUST_CREATE_THEM_ON_THE_SCREEN' | translate }}
+                        <a class="point link" (click)="openDeliveryZoneSpecificationType()">{{'DELIVERY_POINTS.ROUTE_SPECIFICATION' | translate }}</a>
+                        {{'DELIVERY_POINTS.TO_LATER_BE_ABLE_TO_SELECT_THEMS' | translate }}
+                    </p>
+
+                </div>
+
+                <div class="container-fluid">
+                    <div class="form-row mt-2 pb-2">
+
+                        <ng-container *ngIf="showServiceType">
+
+                            <ng-container *ngIf="deliveryZoneSpecificationType && deliveryZoneSpecificationType.length > 0">
+
+                                <div class="col-xl-12 col-12 pl-1 pr-1">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-4 col-12 pl-xl-3 p-xl-0 mt-3">
+                                            <div class="border-special">
+                                                <div class="row pl-4 pt-2 pb-0">
+                                                    <div class="round round-little round-new-form ml-0">
+                                                        <input type="radio" id="freeZOne" [value]="null" formControlName="deliveryZoneSpecificationType" 
+                                                            [disabled]="pointRouteForm.controls['deliveryZoneSpecificationType'].value > 0" 
+                                                            [checked]="pointRouteForm.controls['deliveryZoneSpecificationType'].value === null" 
+                                                            style="height: 30px !important;"/>
+                                                        <label for="freeZOne"></label>
+                                                    </div>
+                                                    <label title="{{ 'GENERAL.FREEE' | translate}}" for="freeZOne" style="margin-left: 1.3rem; margin-top: 0.3rem;">
+                                                        {{ 'GENERAL.FREEE' | translate}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 pl-xl-3 p-xl-0 mt-3" 
+                                            *ngFor="let zone of deliveryZoneSpecificationType; let g = index">
+                                            <div class="border-special">
+                                                <div class="row pl-4 pt-2 pb-0">
+                                                    <div class="round round-little round-new-form ml-0">
+                                                        <input type="radio" formControlName="deliveryZoneSpecificationType" [value]="zone.id" 
+                                                        [id]="'deliveryZoneSpecificationType' + zone.id" [value]="zone.id" style="height: 30px !important;" />
+                                                        <label [for]="'deliveryZoneSpecificationType' + zone.id"></label>
+                                                    </div>
+                                                    <label [title]="deliveryZoneSpecificationType.name" [for]="'deliveryZoneSpecificationType' + zone.id" 
+                                                        style="margin-left: 1.3rem; margin-top: 0.3rem;">
+                                                        {{ sliceString( deliveryZoneSpecificationType[g].name ) }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!showServiceType">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <div class="fa-5x mt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Botón -->
+            <div class="card-footer pt-3 pb-3" style="display: block;">
+                <div class="col-sm-6 col-12 text-sm-left text-center">
+                    <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="!pointRouteForm.valid || !pointRouteForm.dirty">
+                        <span *ngIf="point.id === ''">{{ 'GENERAL.ADD_' | translate }}</span>
+                        <span *ngIf="point.id !== ''">{{ 'GENERAL.SAVE' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+            
+        </form> 
+
+    </div>
+</div>

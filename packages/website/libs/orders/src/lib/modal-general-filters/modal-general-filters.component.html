@@ -1,0 +1,76 @@
+<div class="row mb-3 border-bottom">
+    <div class="col-3 text-center">
+        <h3 for="" class="ml-4 filter-title">Filtros</h3>
+    </div>
+    <div class="col-9 text-right pt-3 pr-4">
+        <button class="btn clear" (click)="closeDialog()"> <i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+
+<div class="row justify-content-around pb-1 mt-4 pl-4 pr-3">
+    <label class="control-label col-12 col-especial m-0" for="orderDate">{{ 'GENERAL.DATE' |translate }}</label>
+
+    <div class="col-12 col-md-6 mt-2">
+        <div class="input-group">
+            <input class="form-control" placeholder="{{ 'GENERAL.FROM' | translate }}"
+                [(ngModel)]="model" name="dateFrom" (ngModelChange)="getDate($event, dateFrom)" ngbDatepicker
+                #b="ngbDatepicker" autocomplete="off" [minDate]="datemin" [startDate]="dateNow" id="dateFrom">
+            <button class="btn btn-calendar calendar table-append m-0 " (click)="b.toggle()" type="button">
+                <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                    aria-hidden="true">
+            </button>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 mt-2">
+        <div class="input-group">
+            <input class="form-control" placeholder="{{ 'GENERAL.TO' | translate }}"
+                [disabled]="disabledateto" [(ngModel)]="model2" name="datedateTo"
+                (ngModelChange)="getDate($event, datedateTo)" ngbDatepicker #d="ngbDatepicker" autocomplete="off"
+                [minDate]="dateMax" [startDate]="dateNow" id="dateTo">
+            <button class="btn btn-calendar calendar table-append m-0" (click)="d.toggle()" type="button">
+                <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                    aria-hidden="true">
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="row justify-content-around pb-4 mt-4 pl-4 pr-3">
+    <div class="col-12 mt-2 mt-sm-0">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'ORDERS.ORDERS_HISTORICAL.PREPARERS' | translate }}</label>
+
+        <div class="text-center p-2" *ngIf="loading == 'loading'">
+            <div class="fa-3x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+        <div class="text-center p-2" *ngIf="loading == 'success' && preparer.length == 0">
+            <p class="text-center text-danger">{{ 'ORDERS.ORDERS_HISTORICAL.NO_PREPARERS_AVAILABLE' | translate }}</p>
+        </div>
+        <div class="input-group hack-select" *ngIf="loading == 'success' && preparer.length > 0">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.userAsignedId" class="form-control letter-app"
+                #userAsignedId id="userAsignedId">
+                <option value="">{{ 'GENERAL.SELECT_AN_OPTION_' | translate }}</option>
+                <option *ngFor="let status of preparer" [value]="status.id">{{status.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="loading == 'error'">
+            <p class="text-danger text-center pointer" (click)="getPreparer()">{{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' |
+                translate }}<ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 offset-3 col-md-6 text-center mt-4">
+        <button class="btn btn-primary btn-block" (click)="closeDialog()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 text-left ml-4 position-absolute bottom-0">
+        <a (click)="clearSearch()">Limpiar filtro</a>
+    </div>
+</div>

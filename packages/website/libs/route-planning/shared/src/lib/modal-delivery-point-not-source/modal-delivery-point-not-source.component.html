@@ -1,0 +1,85 @@
+<div class="modal-Delivery-Not-Source">
+    <div class="row pt-2">
+        <div class="offset-md-3 col-md-6 col-12 text-center border-bottom-header">
+            <h2 class="line-primary">{{ '¡Atención!' | uppercase }}</h2>
+        </div>
+        <div class="col-md-3 col-12 text-right pt-2 pr-4">
+            <i class="fas fa-times close-button" (click)="cancel()"></i>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-8 offset-2 text-center">
+            <span>
+                Los siguientes puntos de entrega no han podido ser localizados en el mapa.
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2 text-center">
+            <span>
+                Actualiza la dirección a continuación o eliminalos de la lista de puntos de entrega.
+            </span>
+        </div>
+    </div>
+    
+    <div class="row pt-2">
+        <div class="col-10 offset-1">
+            <div class="accordion mb-2" id="accordion" style="max-height: 400px;overflow-y: auto;">
+                <div class="card" *ngFor="let point of deliveryPoints">
+                    <div class="card-header" [id]="point.id">
+                        <h2 class="m-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                                [attr.data-target]="'#poin-'+point.id" aria-expanded="false" aria-controls="collapseTwo"
+                                (click)="initForm(point)"
+                                >
+                                {{ point.name }}
+                            </button>
+                        </h2>
+                    </div>
+                    <div [id]="'poin-'+point.id" class="collapse" [attr.aria-labelledby]="point.id" data-parent="#accordion">
+                        <div class="card-body">
+                            <form [formGroup]="form" *ngIf="form && point.id === deliverySelected.id" (submit)="submit()">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="latitude">{{ 'DELIVERY_POINTS.ADDRESS' | translate }}</label>
+                                        <AutocompleteComponent style="width: 100%;"
+                                        (setAddress)="getEstablishmentAddress($event)"
+                                        [autocompleteInput]="point.address"></AutocompleteComponent>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="latitude">{{ 'DELIVERY_POINTS.LATITUDE' | translate }}</label>
+                                        <input class="form-control" id="latitude" formControlName="latitude">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="longitude">{{ 'DELIVERY_POINTS.LONGITUDE' | translate }}</label>
+                                        <input class="form-control" id="longitude" formControlName="longitude">
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-6">
+                                        <button class="btn btn-cancel btn-block" type="button" (click)="delete(point)">Eliminar</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2 mb-2">
+        <div class="col-6 offset-3 text-center">
+            <button class="btn btn-cancel btn-block" (click)="cancel()">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>

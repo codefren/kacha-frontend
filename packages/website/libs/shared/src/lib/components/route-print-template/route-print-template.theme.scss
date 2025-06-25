@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+@import 'shared/src/lib/common';
+
+@mixin route-print-template-mat-color-styler($color) {
+    @include mat-color-styler($color, !important);
+}
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin route-print-template-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+    // Define any styles affected by the theme.
+
+    div#buttonContainer button {
+        background-color: mat-color($primary);
+        color: mat-color($primary, default-contrast);
+    }
+}
+
+@mixin route-print-template-typography($config) {
+}

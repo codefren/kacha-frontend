@@ -1,0 +1,11 @@
+@import './lib/users/users-table/users-table.theme.scss';
+@import './lib/companies/companies-table/companies-table.theme.scss';
+
+@mixin users-management-theming($theme, $typo) {
+    @include optimroute-users-table-theme($theme);
+    @include optimroute-users-table-typography($typo);
+
+    @include optimroute-companies-table-theme($theme);
+    @include optimroute-companies-table-typography($typo);
+
+}

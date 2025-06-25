@@ -1,0 +1,121 @@
+<div class="optimroute-delivery-points">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog([])"></i>
+    </div>
+
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12 text-center">
+                <label class="title"> <i class="fas fa-plus"></i> Añadir</label>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 offset-1">
+                <div class="radio-custom radio-primary">
+                    <input type="radio" id="option1" name="tabOptionRadio" [value]="1" [(ngModel)]="tabOption" (ngModelChange)="changeOption($event)">
+                    <label for="option1">{{ 'DELIVERY_POINTS.ADD_CLIENT_SHIPMENT' | translate }}</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="radio-custom radio-primary">
+                    <input type="radio" id="option2" name="tabOptionRadio" [value]="2" [(ngModel)]="tabOption" (ngModelChange)="changeOption($event)">
+                    <label for="option2">{{ 'DELIVERY_POINTS.ADD_CLIENT_PICKUP' | translate }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center pt-4" *ngIf="tabOption === 1">
+        <div class="col-11 text-left title-table ml-0">
+            {{ 'DELIVERY_POINTS.ADD_CLIENT' | translate }}
+        </div>
+    </div>
+    <div class="row pt-2" *ngIf="next === 1 ">
+        <div class="col-12">
+            <div class="table-content table-responsive">
+                <table id="clients" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>{{ 'DELIVERY_POINTS.ID' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.NAME_' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.ADDRESS' | translate }}</th>
+                            <th>{{ 'DELIVERY_ZONES.NAME' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.START' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.END' | translate }}</th>
+                            <th style="border-right: 1px solid #7387c2 !important;">
+                                <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;" *ngIf="tabOption === 1">
+                                    <div class="round round-little">
+                                        <input type="checkbox" checked="" id="checkboxExample1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+                                        <label for="checkboxExample1" class="m-0"></label>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="next === 2">
+        <div class="row pt-2 mt-4 ">
+            <div class="col-8 offset-2">
+                <div class="row row-quantity pt-2 pb-2">
+                    <div class="col-10 align-self-center align-items-center">
+                        <label for="">Cliente Selecionado:</label>
+                        <ng-container *ngIf="selected && (selected.length >= 1 && selected.length <= 3)">
+                            <span *ngFor="let item of selected">
+                                {{ item.name }}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="selected.length > 3">
+                            <span>Selecciono {{ selected.length }} clientes</span>
+                        </ng-container>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn link" (click)="editSelecteds()">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row pt-2 mt-4">
+            <div class="col-4 offset-2 pl-0">
+                <label for="cantidad">Cantidad</label>
+                <input class="form-control" type="number" [(ngModel)]="quantity">
+            </div>
+        </div>
+        <div class="row pt-2 mt-4">
+            <div class="col-8 offset-2 pl-0">
+                <label for="cantidad">Descripción</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="description">
+                </textarea>
+            </div>
+        </div>
+    </ng-container>
+
+    <div class="container">
+        <div class="row justify-content-center mt-4 mb-4">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-md-6 col-12 text-center text-md-right">
+                        <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="closeDialog([])">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+
+                    <div class="col-md-6 col-12 mt-2 mt-md-0 text-center text-md-left">
+                        <button class="btn btn-primary size-btn-modal modal-dismiss" *ngIf="(tabOption === 1) || (tabOption === 2 && next === 2)" [disabled]="selected.length == 0" (click)="submit(selected)">
+                            {{ 'GENERAL.ACCEPT' | translate }}
+                        </button>
+
+                        <button class="btn btn-primary size-btn-modal modal-dismiss" *ngIf="tabOption === 2 && next === 1" [disabled]="selected.length == 0" (click)="nextOption()">
+                            {{ 'GENERAL.NEXT' | translate }}
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row pt-2">
+
+    <div class="col-xl-12 col-12">
+
+        <label class="title-road"> {{ 'DELIVERY_VALORATION.VALORATIONS' | translate }} </label>
+
+        <p class="sub-title-road mt-1"> {{ 'DELIVERY_VALORATION.VALORATION_TEXT' | translate }} {{ 'DELIVERY_VALORATION.MAX_VALORATION' | translate }}</p>
+
+
+    </div>
+
+</div>
+
+<div class="row pb-1 ">
+
+    <div class="col-xl-12 col-12 pl-xl-1">
+        <div class="switch w-100">
+            <label class="switch-width mb-0">
+                <input type="checkbox" [checked]="useValoration" (change)="changeActiveValoration($event.target.checked)" id="useValoration"/>
+                <span class="lever lever-general switch-col-primary m-2"></span>
+                <span class="title-toggle title-road"> 
+                    Activar en app
+                </span>
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<div class="row pb-1 " *ngFor="let valoration of valorations; let i = index;" [ngClass]="{'pb-4': valorations.length >= 6 && i == (valorations.length - 1)}">
+    <div class="col-4 mt-1 pl-3">
+        <input class="form-control" type="text" [(ngModel)]="valoration.name" (focusout)="changeValorationItem(valoration)">
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <div class="round round-little">
+                <input type="checkbox" [checked]="valoration.isActive" (change)="changeActive(valoration, $event.target.checked)" [id]="'ReviewType'+ i" />
+                <label [for]="'ReviewType' + i"></label>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="valorations.length <= 5">
+    <div class="row pb-1 ">
+        <div class="col-4 mt-1 pl-3">
+            <input class="form-control" type="text" #inputValoration>
+        </div>
+    </div>
+    <div class="row mt-1 pt-1 pb-4 " [ngClass]="{'pb-3': valorations.length === 5}">
+        <div class="col-4 mt-1 pl-3 pr-5">
+            <a class="add-others" (click)="addOthers(inputValoration.value); inputValoration.value = '';">Añadir otro</a>
+        </div>
+    </div>
+</ng-container>

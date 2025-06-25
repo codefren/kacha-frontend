@@ -1,0 +1,667 @@
+<div class="route-integration">
+
+    <div class="row">
+
+        <div class="col-xl-6 col-12 text-xl-left text-center mb-3 pl-xl-0 pl-lg-0">
+            <label class="title-left-sheet point" (click)="returnsListIntegration()">
+                <img src="assets/icons/short_left.svg"> Salir
+            </label>
+        </div>
+
+        <div class="card">
+
+            <form [formGroup]="dataForm" class="form-width font-general w-100" *ngIf="dataIntegration">
+
+                <div class="card-body p-xl-4">
+
+                    <div class="row pt-2">
+
+                        <div class="col-xl-12 col-12">
+
+                            <label class="title-road"> Plantilla de integración de rutas </label>
+
+                            <p class="sub-title-road mt-1"> Ponle un nombre a la plantilla para poder identificarla y completa los campos indicando en que columnas del EXCEL/CSV se encuentra la siguiente información. Por ejemplo, el nombre del cliente se encuentra en la columna A. </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row pb-3">
+
+                        <!-- templateName -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['templateName'].invalid && (dataForm.controls['templateName'].dirty || dataForm.controls['templateName'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                <input type="text" class="form-control form-input" type="text"
+
+                                placeholder="Nombre plantilla" formControlName="templateName" />
+
+                                <label for="templateName" class="mt-2 title-col"> Nombre plantilla <span class="text-danger">*</span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.templateName">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('templateName').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('templateName').dirty ||
+                                                dataForm.get('templateName').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end templateName -->
+
+                        <!-- readTo -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['readTo'].invalid && (dataForm.controls['readTo'].dirty || dataForm.controls['readTo'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                <input type="number" class="form-control point showNUmber" min="0"
+
+                                placeholder="Leer apartir de la linea" formControlName="readTo" />
+
+                                <label for="readTo" class="mt-2 title-col"> Leer a partir de la línea <span class="text-danger">*</span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.readTo">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('readTo').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('readTo').dirty ||
+                                                dataForm.get('readTo').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+                        <!-- end readTo -->
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+
+                    <div class="row pb-3">
+
+                        <!-- Identificador único del cliente (id) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['deliveryPointId'].invalid && (dataForm.controls['deliveryPointId'].dirty || dataForm.controls['deliveryPointId'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                <input type="text" class="form-control form-input" type="text"
+
+                                placeholder="Columna" formControlName="deliveryPointId"/>
+
+                                <label for="deliveryPointId" class="mt-2 title-col">Identificador único del cliente (id)  <span class="text-danger">*</span> </label>
+
+                                </span>
+                                <ng-container *ngFor="let validation of dataMessages.deliveryPointId">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('deliveryPointId').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('deliveryPointId').dirty ||
+                                                dataForm.get('deliveryPointId').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Identificador único del cliente (id) -->
+
+                        <!-- Nombre del cliente (name) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['name'].invalid && (dataForm.controls['name'].dirty || dataForm.controls['name'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                <input type="text" class="form-control form-input" type="text"
+
+                                placeholder="Columna" formControlName="name"/>
+
+                                <label for="name" class="mt-2 title-col"> Nombre del cliente (name)<span class="text-danger">*</span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.name">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('name').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('name').dirty ||
+                                                dataForm.get('name').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!--end Nombre del cliente (name) -->
+
+                        <!-- Dirección de entrega cliente (address) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['address'].invalid && (dataForm.controls['address'].dirty || dataForm.controls['address'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                <input type="text" class="form-control form-input" type="text"
+
+                                placeholder="Columna" formControlName="address"/>
+
+                                <label for="address" class="mt-2 title-col"> Dirección de entrega cliente (address)<span class="text-danger">*</span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.address">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('address').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('address').dirty ||
+                                                dataForm.get('address').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Dirección de entrega cliente (address)-->
+
+                        <!-- Zona del cliente (deliveryZoneId) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['deliveryZoneId'].invalid && (dataForm.controls['deliveryZoneId'].dirty || dataForm.controls['deliveryZoneId'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                <input type="text" class="form-control form-input" type="text"
+
+                                placeholder="Columna" formControlName="deliveryZoneId"/>
+
+                                <label for="deliveryZoneId" class="mt-2 title-col">Zona del cliente (deliveryZoneId)<span class="text-danger">*</span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.deliveryZoneId">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('deliveryZoneId').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('deliveryZoneId').dirty ||
+                                                dataForm.get('deliveryZoneId').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Zona del cliente (deliveryZoneId) -->
+
+                        <!-- Población (population) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['population'].invalid && (dataForm.controls['population'].dirty || dataForm.controls['population'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="population"/>
+
+                                    <label for="population" class="mt-2 title-col">Población (population)</label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.population">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            dataForm.get('population').hasError(
+                                                validation.type
+                                            ) &&
+                                            (dataForm.get('population').dirty ||
+                                            dataForm.get('population').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Población (population) -->
+
+                        <!-- Código Postal (postalCode) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['postalCode'].invalid && (dataForm.controls['postalCode'].dirty || dataForm.controls['postalCode'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="postalCode"/>
+
+                                    <label for="postalCode" class="mt-2 title-col">Código Postal (postalCode)</label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.postalCode">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('postalCode').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('postalCode').dirty ||
+                                                dataForm.get('postalCode').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Código Postal (postalCode) -->
+
+                        <!-- Horario apertura (delievryWindow.start) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['deliveryWindowStart'].invalid && (dataForm.controls['deliveryWindowStart'].dirty || dataForm.controls['deliveryWindowStart'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="deliveryWindowStart"/>
+
+                                    <label for="deliveryWindowStart" class="mt-2 title-col"> Horario apertura (deliveryWindow.start) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.deliveryWindowStart">
+
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('deliveryWindowStart').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('deliveryWindowStart').dirty ||
+                                                dataForm.get('deliveryWindowStart').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Horario apertura (delievryWindow.start) -->
+
+                        <!-- Horario cierre (deliveryWindow.end) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['deliveryWindowEnd'].invalid && (dataForm.controls['deliveryWindowEnd'].dirty || dataForm.controls['deliveryWindowEnd'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="deliveryWindowEnd"/>
+
+                                    <label for="deliveryWindowEnd" class="mt-2 title-col">Horario cierre (deliveryWindow.End) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.deliveryWindowEnd">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('deliveryWindowEnd').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('deliveryWindowEnd').dirty ||
+                                                dataForm.get('deliveryWindowEnd').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Horario cierre (deliveryWindow.end) -->
+
+                        <!-- Teléfono (phoneNumber) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['phoneNumnber'].invalid && (dataForm.controls['phoneNumnber'].dirty || dataForm.controls['phoneNumnber'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="phoneNumnber"/>
+
+                                    <label for="phoneNumnber" class="mt-2 title-col"> Teléfono (phoneNumber) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.phoneNumnber">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('phoneNumnber').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('phoneNumnber').dirty ||
+                                                dataForm.get('phoneNumnber').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Teléfono (phoneNumber) -->
+
+                        <!-- Correo electrónico (email) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['email'].invalid && (dataForm.controls['email'].dirty || dataForm.controls['email'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="email"/>
+
+                                    <label for="first" class="mt-2 title-col"> Correo electrónico (email) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.email">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('email').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('email').dirty ||
+                                                dataForm.get('email').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Correo electrónico (email) -->
+
+                        <!-- Carga (demand) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['demand'].invalid && (dataForm.controls['demand'].dirty || dataForm.controls['demand'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="demand"/>
+
+                                    <label for="first" class="mt-2 title-col"> Carga (demand) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.demand">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('demand').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('demand').dirty ||
+                                                dataForm.get('demand').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Carga (demand) -->
+
+                        <!-- Volumen (volumetric) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['volumetric'].invalid && (dataForm.controls['volumetric'].dirty || dataForm.controls['volumetric'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="volumetric"/>
+
+                                    <label for="first" class="mt-2 title-col"> Volumen (volumetric) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.volumetric">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('volumetric').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('volumetric').dirty ||
+                                                dataForm.get('volumetric').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Volumen (volumetric) -->
+
+                        <!-- Observaciones pedido (deliveryNotes) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['deliveryNotes'].invalid && (dataForm.controls['deliveryNotes'].dirty || dataForm.controls['deliveryNotes'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="deliveryNotes"/>
+
+                                    <label for="first" class="mt-2 title-col"> Observaciones pedido (deliveryNotes) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.deliveryNotes">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('deliveryNotes').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('deliveryNotes').dirty ||
+                                                dataForm.get('deliveryNotes').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Observaciones pedido (deliveryNotes) -->
+
+                        <!-- numero de orden (orderNumber) -->
+
+                        <div class="col-xl-4 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':dataForm.controls['orderNumber'].invalid && (dataForm.controls['orderNumber'].dirty || dataForm.controls['orderNumber'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                    <input type="text" class="form-control form-input" type="text"
+
+                                    placeholder="Columna" formControlName="orderNumber"/>
+
+                                    <label for="first" class="mt-2 title-col"> Número de pedido (orderNumber) </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of dataMessages.orderNumber">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                dataForm.get('orderNumber').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (dataForm.get('orderNumber').dirty ||
+                                                dataForm.get('orderNumber').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Observaciones pedido (deliveryNotes) -->
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+
+                    <div class="row pt-2">
+
+                        <div class="col-xl-12 col-12">
+
+                            <label class="title-road"> Concatenar dirección </label>
+
+                            <p class="sub-title-road mt-1"> En caso de estar activa esta configuración se concatenarán los campos dirección, código postal y población a la hora de cargar el excel en el planificador de rutas. </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-xl-4 col-12">
+                            <div class="border-special">
+                                <div class="switch w-100">
+                                    <label class="switch-width mb-0 mt-0">
+                                        <input type="checkbox" formControlName="concatenateAddress"/>
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="lever-text">Concatenar dirección</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer pt-4 pb-4">
+
+                    <div class="row">
+
+                        <div class="col-sm-6 text-xl-left mt-1">
+
+                            <button class="btn btn-primary size-btn-form" [disabled]="!dataForm.valid || !dataForm.dirty" (click)="submit()">
+
+                                Guardar plantilla
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

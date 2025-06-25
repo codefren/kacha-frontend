@@ -1,0 +1,73 @@
+<div class="sub-category-setting">
+
+    <div class="card">
+
+        <div class="card-body pl-4 pr-xl-4">
+
+            <div class="row pt-2 align-items-center">
+
+                <div class="col-xl-6 col-12">
+
+                    <label class="title-category"> Lista de formatos </label>
+
+                    <p class="sub-category-setting mt-0 mb-1"> Crea los distintos formatos con los que trabaja la empresa. </p>
+
+                </div>
+
+                <ng-container *ngIf="showSentProductFranshise()">
+
+                    <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                        <button class="btn btn-outline-dark btn-ouline-gray point" (click)="openModalFranchise()">
+    
+                            <img class="pr-2" src="assets/icons/sendCategory.svg">
+    
+                            <label class="label-btn-gray point"> {{ 'PRODUCTS.SEND_TO_FRANCHISES' | translate }} </label>
+    
+                        </button>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- tabla de categorias -->
+
+        <div class="card-footer pl-4 pr-xl-4">
+
+            <div class="row mt-3">
+
+                <div class="col-12 mb-3">
+
+                    <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" id="measureSettings" style="text-align: center ; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="border-top-left-radius: 6px;" class="text-left"> {{ 'CONFIGURATIONS.MEASURE.ID' | translate }}</th>
+                                <th class="text-left">{{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}</th>
+                                <th class="text-left"> {{ 'CONFIGURATIONS.MEASURE.FORMAT_TYPE' | translate }}</th>
+                                <th class="text-left"> {{ 'CONFIGURATIONS.MEASURE.CREATED_BY' | translate }}</th>
+                                <th class="text-left"> {{ 'CONFIGURATIONS.FORMAT.ALLOW_DECIMAL_AMOUNTS' | translate }}</th>
+                                <th class="text-left" width="120px"> {{ 'CONFIGURATIONS.MEASURE.ACTIVE' | translate }}</th>
+                                <th style="border-top-right-radius: 6px;" class="text-center"></th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody></tbody>
+
+                    </table>
+                </div>
+
+                <div class="col-12">
+                    <label class="label-add point" (click)="openModalCreateFormat()">+ Añadir formatos</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- end tabla de categoria -->
+
+    </div>
+</div>

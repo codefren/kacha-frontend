@@ -1,0 +1,149 @@
+<div class="easyroute-total-invoiced">
+
+    <div class="row text-center mt-3 mb-1">
+
+
+
+        <div class="col-12">
+
+
+
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="row">
+
+                        <ng-container *ngIf="show">
+
+                            <!-- title -->
+
+                            <div class="col-12 text-left">
+                                <label class="title-invoiced"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.YOU_HAVE_INCOICED' | translate }} </label>
+                            </div>
+
+                            <!-- end title -->
+
+                            <!-- total invoice -->
+
+                            <div class="col-12 text-left">
+                                <label class="tot-invoice"> {{ decimal (totalInvoiced.sumTotalOrder) }} </label>
+                            </div>
+
+                            <!-- end total invoice -->
+
+
+                            <!-- progress -->
+
+                            <div class="col-12 mt-3">
+                                <div class="progress light no-complete">
+                                    <div class="progress-bar bg-warning complete" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" [style.width]="parcent  + '%'">
+                                        <!-- <ng-container *ngIf="parcent">
+                                            {{ parcent }}% Completado
+                                        </ng-container> -->
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- end progress -->
+
+                        </ng-container>
+
+
+
+
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="col-12 text-center">
+                                <div class="fa-3x mb-2">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+
+
+                        </ng-container>
+
+
+                    </div>
+
+                    <!-- cuadros -->
+                    <div class="row pt-4">
+
+                        <div class="col-6 border-end">
+
+                            <ng-container *ngIf="show">
+
+                                <p class="total-end m-0">
+                                    {{ decimal (totalInvoiced.totalObjetive) }}
+                                </p>
+
+                                <label class="label-end">
+                                    {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.TARGET' | translate }}
+                                </label>
+
+
+                            </ng-container>
+
+
+                            <ng-container *ngIf="!show">
+
+                                <div class="col-12 text-center">
+                                    <div class="fa-3x mb-2">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+
+
+                            </ng-container>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <ng-container *ngIf="show">
+
+                                <p class="total-end m-0">
+                                    {{ decimal (totalInvoiced.totalpending) }}
+                                </p>
+                                <label class="label-end">
+                                    {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.EARRING' | translate }}
+                                </label>
+
+
+                            </ng-container>
+
+
+
+                            <ng-container *ngIf="!show">
+
+                                <div class="col-12 text-center">
+                                    <div class="fa-3x mb-2">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+
+
+                            </ng-container>
+                        </div>
+
+                    </div>
+                    <!-- end cuadros -->
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+</div>

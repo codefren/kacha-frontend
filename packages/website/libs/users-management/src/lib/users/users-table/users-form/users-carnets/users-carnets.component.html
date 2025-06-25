@@ -1,0 +1,137 @@
+<div class="user-carnet-form pt-4 pb-4" *ngIf="user || carnetFormGroup || otherLicenses && otherLicenses.length > 0">
+    <form *ngIf="carnetFormGroup" [formGroup]="carnetFormGroup">
+        <!-- Carnets de conducir -->
+        <div class="row container-fluid m-0">
+
+            <div class="col-12 col-lg-12">
+                <p class="mb-0 title-user"> {{'USERS.SETTINGS.DRIVING_LICENSES' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'USERS.CARNETS.MESSAGE_DRIVING' | translate }}
+                    <a (click)="redirect('drivingLicenses')" class="redirect point">"{{'USERS.CARNETS.DRIVING_LICENSE' | translate }}"</a>
+                </p>
+            </div>
+
+            <div class="col-12 mt-3">
+                <div class="form-row" *ngIf="drivingLicensAdd && drivingLicensAdd.length > 0">
+
+                    <ng-container formArrayName="drivingLicenses">
+
+                        <div class="col-12 col-lg-4 col-md-4 mt-3" *ngFor="let filterDrivingLicen of drivingLicensAdd.controls; let g = index" [formGroup]="drivingLicensAdd.controls[g]">
+
+                            <div class="border-special">
+                                <div class="row pl-4 pt-1 pb-2">
+                                    <div class="round round-little margin-days round-1">
+                                        <input type="checkbox" formControlName="companyLicenseId" [id]="'licen_'+drivingLicenses[g].id" (change)="changeCheckbox($event.target.checked, filterDrivingLicen, g)" />
+                                        <label [for]="'licen_'+drivingLicenses[g].id"></label>
+                                    </div>
+                                    <label [title]="drivingLicenses[g].name" [for]="'licen_'+drivingLicenses[g].id" class="label-check point pl-2">
+                                            {{ sliceString( drivingLicenses[g].name ) }}
+                                        </label>
+                                </div>
+
+                                <ng-container *ngIf="drivingLicensAdd.controls[g].get('companyLicenseId').value">
+                                    <hr>
+
+                                    <div class="row pl-4">
+                                        <div class="col-6">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <input class="form-control point" formControlName="expirationDate" [id]="'licen_'+drivingLicenses[g].id" type="date" (change)="changeDate($event.target.value, filterDrivingLicen, g)"/>
+                                                    <label [for]="'licen_'+drivingLicenses[g].id"  class="mt-2"> Caducidad </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 align-self-end text-right pr-4" *ngIf="drivingLicensAdd.controls[g].get('expirationDate').value">
+                                            <label class="mb-3 title-col" [ngClass]="{ 'text-danger': getDiffDays(drivingLicensAdd.controls[g].get('expirationDate').value) <30 }"> {{getDiffDays(drivingLicensAdd.controls[g].get('expirationDate').value)}} días </label>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-5 mb-5 p-0"></div>
+
+        <!-- Otros carnets -->
+        <div class="row container-fluid m-0">
+
+            <div class="col-12 col-lg-12">
+                <p class="mb-0 title-user"> {{'USERS.SETTINGS.OTHER_LICENSES' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'USERS.CARNETS.MESSAGE_DRIVING' | translate }}
+                    <a (click)="redirect('otherCards')" class="redirect point">"{{'USERS.SETTINGS.OTHER_LICENSES' | translate }}"</a>
+                </p>
+            </div>
+
+            <div class="col-12 mt-3">
+                <div class="form-row" *ngIf="drivingOtherLicensAdd && drivingOtherLicensAdd.length > 0">
+
+
+                    <ng-container formArrayName="otherLicenses">
+
+                        <div class="col-12 col-lg-4 col-md-4 mt-3" *ngFor="let others of drivingOtherLicensAdd.controls; let o = index" [formGroup]="drivingOtherLicensAdd.controls[o]">
+
+                            <div class="border-special">
+                                <div class="row pl-4 pt-1 pb-2">
+                                    <div class="round round-little margin-days round-1">
+                                        <input type="checkbox" formControlName="companyOtherLicenseId" [id]="'other_'+otherLicenses[o].id" (change)="changeOtherLicensesCheckbox($event.target.checked, others, o)" />
+                                        <label [for]="'other_'+otherLicenses[o].id"></label>
+                                    </div>
+                                    <label [title]="otherLicenses[o].name" [for]="'other_'+otherLicenses[o].id" class="label-check point pl-2">
+                                            {{ sliceString( otherLicenses[o].name ) }}
+                                        </label>
+                                </div>
+
+                                <ng-container *ngIf="drivingOtherLicensAdd.controls[o].get('companyOtherLicenseId').value">
+                                    <hr>
+
+                                    <div class="row pl-4">
+                                        <div class="col-6">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                        <input class="form-control point" formControlName="expirationDate" id="name" type="date" (change)="changeOtherDate($event.target.value, others, o)"/>
+                                                        <label for="name" class="mt-2"> Caducidad </label>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 align-self-end text-right pr-4" *ngIf="drivingOtherLicensAdd.controls[o].get('expirationDate').value">
+                                            <label for="name" class="mb-3 title-col" [ngClass]="{ 'text-danger': getDiffDays(drivingOtherLicensAdd.controls[o].get('expirationDate').value) <30 }">  {{getDiffDays(drivingOtherLicensAdd.controls[o].get('expirationDate').value)}} días </label>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </ng-container>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-5 mb-4 p-0"></div>
+
+        <!-- Botón -->
+        <div class="row container-fluid m-0">
+            <div class="col-sm-6 col-12 text-sm-left text-center mt-1 pb-2">
+                <button type="submit" class="btn btn-primary" [disabled]=" carnetFormGroup.invalid" (click)="submit()">
+                    <span>{{ 'GENERAL.SAVE' | translate }}</span>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

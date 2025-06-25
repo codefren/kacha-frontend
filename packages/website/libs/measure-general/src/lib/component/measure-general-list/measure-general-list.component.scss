@@ -1,0 +1,25 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+
+.btn-default {
+    color: white;
+    background-color: #ff9e4d;
+    border: none;
+    font-weight: lighter;
+    font-size: 16px;
+    border-radius: 0px;
+    text-transform: uppercase;
+}
+
+.btn-large {
+    width: 250px;
+    height: 40px;
+}
+
+.info-texto {
+    font-size: 12px;
+}
+
+.line-grey {
+    border-bottom: 1px solid #c6c7c9;
+    margin-top: 0px;
+}

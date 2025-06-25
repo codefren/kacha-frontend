@@ -1,0 +1,54 @@
+<div class="orders-modal-search-client">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-3">
+                <i class="fas fa-times close-button" (click)="closeDialog()"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ 'ORDERS.ORDERS_LIST.SEARCH_CLIENTS' | translate }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center pt-4">
+        <div class="col-md-11 col-12 text-center text-md-left">
+            {{ 'ORDERS.ORDERS_LIST.SEARCH_CLIENTS' | translate }}
+        </div>
+    </div>
+
+    <div class="row pt-2 orders-modal-search-client">
+        <div class="col-12 mb-4">
+            <div class="table-content">
+                <table id="clients" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th class="reset">{{ 'CLIENTS.CODE_CLIENTS' | translate }}</th>
+                            <th>{{ 'CLIENTS.CLIENTS_LIST.NAME' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.COMMERCIAL_AGENT' | translate }}</th>
+                            <th>{{ 'CLIENTS.CLIENTS_LIST.EMAIL' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="row mb-2 mt-3">
+                <div class="col-md-6 col-12 text-center text-md-right">
+                    <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="activeModal.close(false)">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+
+                <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                    <button class="btn btn-primary size-btn-modal modal-confirm" (click)="activeModal.close(client)">
+                        {{ 'GENERAL.ADD' | translate }}
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+.name-plan {
+    font-size: 35px !important;
+}
+.icon-software {
+    width: 74px;
+    height: 13px;
+}
+
+.description {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+
+    color: #454545;
+}
+.description {
+    .font-weight-bold, b, strong {
+        font-weight: 600 !important;
+    }
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    padding-left: 1.3em;
+}
+li:before {
+    content: ''; /* FontAwesome Unicode */
+}
+.benefits {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+
+    color: #3c3c3c;
+}

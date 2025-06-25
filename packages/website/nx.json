@@ -1,0 +1,213 @@
+{
+    "npmScope": "easyroute",
+    "implicitDependencies": {
+        "angular.json": "*",
+        "package.json": "*",
+        "tsconfig.json": "*",
+        "tslint.json": "*",
+        "nx.json": "*"
+    },
+    "projects": {
+        "easyroute": {
+            "tags": ["easyroute"]
+        },
+        "easyroute-e2e": {
+            "tags": []
+        },
+        "backend": {
+            "tags": ["backend", "api"]
+        },
+        "shared": {
+            "tags": ["shared"]
+        },
+        "route-planning": {
+            "tags": ["route-planning"]
+        },
+        "management": {
+            "tags": ["planning"]
+        },
+        "preferences": {
+            "tags": ["preferences"]
+        },
+        "help": {
+            "tags": ["help"]
+        },
+        "profile": {
+            "tags": ["profile"]
+        },
+        "map": {
+            "tags": ["map"]
+        },
+        "delivery-points": {
+            "tags": ["delivery-points"]
+        },
+        "delivery-zones": {
+            "tags": ["delivery-zones"]
+        },
+        "vehicles": {
+            "tags": ["vehicles"]
+        },
+        "routing-inputs": {
+            "tags": ["routing-inputs"]
+        },
+        "routing-outputs": {
+            "tags": ["routing-outputs"]
+        },
+        "routing-computations": {
+            "tags": ["routing-computations"]
+        },
+        "route-planning-shared": {
+            "tags": []
+        },
+        "state-preferences": {
+            "tags": []
+        },
+        "state-vehicles": {
+            "tags": []
+        },
+        "state-delivery-zones": {
+            "tags": []
+        },
+        "state-profile": {
+            "tags": []
+        },
+        "state-route-planning": {
+            "tags": []
+        },
+        "state-auth": {
+            "tags": []
+        },
+        "state-profile-settings": {
+            "tags": []
+        },
+        "state-easyroute": {
+            "tags": []
+        },
+        "state-users": {
+            "tags": []
+        },
+        "users-management": {
+            "tags": ["users-management"]
+        },
+        "state-companies": {
+            "tags": ["state-companies"]
+        },
+        "auth-local": {
+            "tags": ["authLocal"]
+        },
+        "login": {
+            "tags": ["login"]
+        },
+        "state-points": {
+            "tags": []
+        },
+        "control-panel": {
+            "tags": ["controlPanel"]
+        },
+        "integration": {
+            "tags": ["integration"]
+        },
+        "note": {
+            "tags": ["note"]
+        },
+        "my-note": {
+            "tags": ["my-note"]
+        },
+        "category": {
+            "tags": ["category"]
+        },
+        "category-general": {
+            "tags": ["category-general"]
+        },
+        "products": {
+            "tags": ["products"]
+        },
+        "measure": {
+            "tags": ["measure"]
+        },
+        "measure-general": {
+            "tags": ["measure-general"]
+        },
+        "orders": {
+            "tags": ["orders"]
+        },
+        "my-orders": {
+            "tags": ["my-orders"]
+        },
+        "state-register": {
+            "tags": []
+        },
+        "home": {
+            "tags": []
+        },
+        "miwigo-clients-unlinked": {
+            "tags": ["miwigo-clients-unlinked"]
+        },
+        "state-geolocation": {
+            "tags": []
+        },
+        "franchise": {
+            "tags": ["franchise"]
+        },
+        "sub-category": {
+            "tags": ["sub-category"]
+        },
+        "category-filter": {
+            "tags": ["category-filter"]
+        },
+        "module": {
+            "tags": ["module"]
+        },
+        "notifications": {
+            "tags": ["notifications"]
+        },
+        "management-logistics": {
+            "tags": []
+        },
+        "super-admin": {
+            "tags": ["super-admin"]
+        },
+        "vehicle-maintenance": {
+            "tags": ["vehicle-maintenance"]
+        },
+        "bills": {
+            "tags": ["bills"]
+        },
+        "dashboard": {
+            "tags": ["dashboard"]
+        },
+        "filter-state": {
+            "tags": []
+        },
+        "providers": {
+            "tags": ["providers"]
+        },
+        "sheet-route": {
+            "tags": ["sheet-route"]
+        },
+        "parcel": {
+            "tags": ["parcel"]
+        },
+        "cost": {
+            "tags": ["cost"]
+        },
+        "report": {
+            "tags": ["report"]
+        },
+        "loading-dock": {
+            "tags": ["loading-dock"]
+        },
+        "company-profile": {
+            "tags": ["company-profile"]
+        },
+        "travel-tracking": {
+            "tags": ["travel-tracking"]
+        },
+        "partners-super-admin": {
+            "tags": ["partners-super-admin"]
+        },
+        "chat": {
+            "tags": ["chat"]
+        }
+    }
+}

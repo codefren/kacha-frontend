@@ -1,0 +1,90 @@
+.jobs-api:
+    before_script:
+        - cd packages/jobs-api 
+    only:
+        changes:
+            - packages/jobs-api/**/*
+
+.test jobs-api:
+    extends: .jobs-api
+    stage: test
+    dependencies: []
+    allow_failure: true
+    script:
+        - docker-compose -f docker-compose.test.yml up --abort-on-container-exit
+    coverage: '/Lines\s+: \d+\.\d+/'
+
+.code quality jobs-api:
+    extends: .jobs-api
+    stage: test
+    image: docker:stable
+    allow_failure: true
+    dependencies: []
+    services:
+        - docker:stable-dind
+    script:
+        - $SCRIPTS_FOLDER/code_quality
+    artifacts:
+        paths: [packages/jobs-api/gl-code-quality.sh-report.json]
+
+.dependency scan jobs-api:
+    extends: .jobs-api
+    image: node:10-alpine
+    stage: test
+    dependencies: []
+    script:
+        - npm audit
+    allow_failure: true
+
+push docker jobs-api:
+    extends: .jobs-api
+    stage: build
+    image: docker:stable-git
+    services:
+        - docker:stable-dind
+    dependencies: []
+    script:
+        - $SCRIPTS_FOLDER/push-to-docker.sh jobs-api
+
+development jobs-api:
+    extends: .jobs-api
+    stage: deploy
+    script:
+        - $SCRIPTS_FOLDER/deploy-k8s.sh jobs-api
+    dependencies: []
+    environment:
+        name: development
+        url: http://dev.$JOBS_API_DOMAIN
+    only:
+        refs:
+            - dev
+        
+
+staging jobs-api:
+    extends: .jobs-api
+    stage: deploy
+    script:
+        - $SCRIPTS_FOLDER/deploy-k8s.sh jobs-api
+    dependencies: []
+    environment:
+        name: staging
+        url: http://staging.$JOBS_API_DOMAIN
+    only:
+        refs:
+            - master
+        
+
+production jobs-api:
+    extends: .jobs-api
+    stage: deploy
+    script:
+        - $SCRIPTS_FOLDER/deploy-k8s.sh jobs-api
+    dependencies: []
+    environment:
+        name: production
+        url: http://$JOBS_API_DOMAIN
+    when: manual
+    only:
+        refs:
+            - master
+        

@@ -1,0 +1,58 @@
+.easyroute-clients-linked-table {
+    .general-panel-table {
+        background: #fdfdfd !important;
+        border-radius: 5px 5px 0 0 !important;
+        border-bottom: 1px solid #DADADA !important;
+        padding: 8px !important;
+        position: relative !important;
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: 300;
+        max-height: 50px;
+    }
+    .card-style-general {
+        border: 1px solid #d7dce1;
+    }
+    .general-h2-table {
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+    }
+
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 0px solid #bec4ca;
+        background-color: #7387c2;
+        padding: 0.9rem;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 19px !important;
+        color: #FFFFFF;
+    }
+
+   /*  .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+    } */
+
+    .title-user {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-user {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+
+}

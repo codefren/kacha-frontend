@@ -1,0 +1,6 @@
+<div class="easyroute-management-vehicles bg-white">
+    <div class="vehicles-table bg-white">
+        <easyroute-management-vehicles-table [vehicles]="(vehicles$ | async) ? (vehicles$ | async) : []" [zones]="(zones$ | async).zones" (addVehicle)="addVehicle($event)" (editVehicle)="editVehicle($event)" (deleteVehicle)="deleteVehicle($event)">
+        </easyroute-management-vehicles-table>
+    </div>
+</div>

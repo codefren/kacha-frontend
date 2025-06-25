@@ -1,0 +1,17 @@
+router-outlet {
+    margin-top: 47.5px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.login-class {
+    background: url('../assets/images/pages/login/fondo.jpg') 0 0 round;
+}
+
+.order-class {
+    background: url('../assets/images/pages/login/fondo.jpg') 0 0 round;
+}

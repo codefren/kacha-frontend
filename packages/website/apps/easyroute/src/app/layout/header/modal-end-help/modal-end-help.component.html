@@ -1,0 +1,33 @@
+<div class="modalhelp">
+    <section class="card">
+    
+        <header class="card-header">
+            <div class="col-12 text-center pt-2 pb-2">
+                <h2 class="card-title title-color text-center">
+                    {{ 'GENERAL.END_GUIDE_ROUTE' | translate }}
+                </h2>
+            </div>
+        </header>
+
+        <div class="card-body p-2">
+            <div class="modal-wrapper p-0">
+                <div class="modal-text">
+                    <p class="mb-0 text-center pr-2 pl-2 text-general">
+                        {{ 'GENERAL.END_ROUTE_COMPLETED' | translate }}
+                        <b>{{ 'GENERAL.END_ROUTE_COMPLETED_1' | translate }}</b>
+                        {{ 'GENERAL.END_ROUTE_COMPLETED_2' | translate }}
+                    </p>
+                </div>
+            </div>
+            <div class="row d-flex flex-row justify-content-center pt-3 mt-4 mb-4">
+                <button
+                    type="button"
+                    class="btn  btn-secondary size-btn-modal mr-3"
+                    (click)="closeModal(true)"
+                >
+                    {{ 'GENERAL.END' | translate }}
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

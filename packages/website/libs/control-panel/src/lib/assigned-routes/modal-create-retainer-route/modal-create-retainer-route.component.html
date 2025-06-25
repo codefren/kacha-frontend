@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-10 mt-3 mb-3"  *ngIf="step < 4">
+        <span class="title ml-3">
+            Crear ruta - {{ step }}/3
+        </span>
+        
+    </div>
+    <div class="col-10 mt-3 mb-3" *ngIf="step === 4">
+        <span class="title ml-3">
+            Crear ruta - Resumen
+        </span>
+    </div>
+    <div class="col-2 mt-3 ">
+        <i class="fas fa-times float-right mr-3 pointer" (click)="close(false)"></i>
+    </div>
+    <div class="col-12  mt-2 mb-3">
+        <span class="subtitle ml-3">
+            <ng-container *ngIf="step == 1">Selecciona una ruta donde cargar los clientes.</ng-container>
+            <ng-container *ngIf="step == 2">Selecciona el vehículo que quieres asignar.</ng-container>
+            <ng-container *ngIf="step == 3">Selecciona los clientes que quieres añadir a la ruta.</ng-container>
+            <ng-container *ngIf="step == 4">Selecciona los clientes que quieres añadir a la ruta.</ng-container>            
+        </span>
+    </div>
+    <div class="col-12">
+        <span *ngIf="step >= 1" class="name-step ml-3">Nombre de la ruta</span><span *ngIf="step >= 2" class="name-step"> > Nombre del chófer</span><span *ngIf="step >= 3" class="name-step"> > {{ selectedPoints.length }} Clientes</span>
+    </div>
+</div>
+<ng-container *ngIf="step === 1">
+    <div class="row optimroute-integration-table">
+        <div class="col-12">
+            <div class="table-content">
+                <table id="delivery-zones" class="table table-bordered table-striped mb-0"
+                    style="text-align: center; width: 100%">
+                    <thead class="thead-new">
+                        <tr>
+                            <th>{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                            <th>{{ 'DELIVERY_ZONES.NAME_' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="step === 2">
+    <div class="row optimroute-integration-table">
+        <div class="col-12">
+            <div class="table-content">
+                <table id="vehicle" class="table table-bordered table-striped mb-0"
+                    style="text-align: center; width: 100%">
+                    <thead class="thead-new">
+                        <tr>
+                            <th>{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                            <th>{{ 'GENERAL.NAME' | translate }}</th>
+                            <th>{{ 'Matrícula' }}</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="step === 3">
+    <div class="row optimroute-integration-table">
+        <div class="col-12">
+            <div class="table-content">
+                <table id="delivery_points" class="table table-bordered table-striped mb-0"
+                    style="text-align: center; width: 100%">
+                    <thead class="thead-new">
+                        <tr>
+                            <th>{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                            <th>{{ 'GENERAL.NAME' | translate }}</th>
+                            <th>{{ 'GENERAL.SURNAME' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="step === 4">
+    <div class="list ml-3 mr-3 mb-3 mt-3">
+        <div class="row">
+            <div class="col-12 border-bottom">
+                <span> Clientes seleccionados</span>
+            </div>
+        </div>
+        <div class="row" *ngFor="let data of selectedPoints; let i = last">
+            <div class="col-12" [ngClass]="{'border-bottom': !i}">
+                <span>{{ data.id }} | {{ data.name }} </span>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container>
+   <div class="row mt-3 mb-3">
+        <div class="col-10 offset-1"  *ngIf="step === 1">
+            <button class="btn btn-primary btn-block" (click)="next()" [disabled]="step == 1 && selected.length === 0">Siguiente</button>
+        </div>
+        <div class="col-5 offset-1"  *ngIf="step > 1">
+            <button class="btn btn-outline-primary btn-block" (click)="back()">Anterior</button>
+        </div>
+        <div class="col-5"  *ngIf="step > 1 && step < 4">
+            <button class="btn btn-primary btn-block" (click)="next()" [disabled]="(step === 1 && selected.length === 0) || (step === 2 && selectedVehicle.length === 0) || (step === 3 && selectedPoints.length === 0)">Siguiente</button>
+        </div>
+        <div class="col-5"  *ngIf="step === 4">
+            <button class="btn btn-primary btn-block" (click)="create()">Crear ruta</button>
+        </div>
+   </div>
+   
+</ng-container>

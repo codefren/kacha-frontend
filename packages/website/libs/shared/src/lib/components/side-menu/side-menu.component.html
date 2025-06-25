@@ -1,0 +1,33 @@
+<div fxLayout="row" fxFlex="">
+    <nav
+        [class.primary]="color === 'primary'"
+        [class.accent]="color === 'accent'"
+        [class.warn]="color === 'warn'"
+        [fxFlexOrder]="sideMenuOrder()"
+        mat-tab-nav-bar
+        class="app-side-menu"
+        app-side-menu-theme
+        [class.left-side-nav]="leftSide"
+    >
+        <a
+            mat-tab-link
+            *ngFor="let item of menuItems; let i = index"
+            [routerLink]="item.route"
+            [active]="isActiveItem(i)"
+            [skipLocationChange]="skipLocation"
+            [class.primary]="color === 'primary'"
+            [class.accent]="color === 'accent'"
+            [class.warn]="color === 'warn'"
+        >
+            <mat-icon>{{ item.icon }}</mat-icon>
+        </a>
+        <easyroute-vertical-ink-bar
+            class="vertical-ink-bar"
+            [class.left-side]="leftSide"
+            [class.primary]="color === 'primary'"
+            [class.accent]="color === 'accent'"
+            [class.warn]="color === 'warn'"
+        ></easyroute-vertical-ink-bar>
+    </nav>
+    <router-outlet></router-outlet>
+</div>

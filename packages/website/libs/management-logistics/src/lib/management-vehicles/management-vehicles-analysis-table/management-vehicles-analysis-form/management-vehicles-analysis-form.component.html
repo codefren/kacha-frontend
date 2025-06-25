@@ -1,0 +1,156 @@
+<div class="vehicles-analysis-form font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'VEHICLES.VEHICLES_ANALYSIS.VEHICLE_ANALYSIS' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <button class="mb-1 mt-xl-0 mt-1 btn btn-default" (click)="openModalViewPdf()">
+
+                <img src="assets/icons/donwload.svg">
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0">
+
+            <div class="card" *ngIf="vehiclesAnalysis">
+
+                <div class="card-body" style="display: block;">
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <p class="title-add"> {{ 'GENERAL.CUSTOMER_VEHICLE_PHOTO' | translate }} </p>
+
+                        </div>
+
+
+                        <!-- cargar y ver imagen -->
+
+                        <div class="col-12 text-center">
+
+                            <div class="card">
+
+                                <!-- si no hay nada -->
+
+                                <ng-container *ngIf="!imgLoad">
+
+                                    <img class="size-img point" src="assets/icons/vehiclesAdd.svg" (click)="fileAddImage.click()">
+
+                                </ng-container>
+
+                                <!-- end si no hay nada -->
+
+                                <!-- si hay imagen -->
+
+                                <ng-container *ngIf="imgLoad">
+
+                                    <div class="size-hover1 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                        <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage()"></i>
+
+                                    </div>
+
+                                    <img class="size-load point" [src]="imgLoad" (click)="fileAddImage.click()">
+
+                                </ng-container>
+
+                                <!-- en si hay imagenes -->
+
+                            </div>
+
+                        </div>
+
+                        <!-- end cargar y ver imagen -->
+
+                        <!-- error -->
+
+                        <div class="col-12 text-center mt-3" *ngIf="imageError.length > 0">
+
+                            <span class="text-danger">{{ imageError }}</span>
+
+                        </div>
+
+                        <!-- end error -->
+
+
+
+                        <!-- input hidden type file -->
+
+                        <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChangeEvent($event)" />
+
+                        <!-- end input hidden type file -->
+
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> Estado </label>
+
+                    <p class="sub-title mb-0"> {{ status }} </p>
+                </div>
+
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> Nombre </label>
+
+                    <p class="sub-title mb-0"> {{ vehiclesAnalysis.name }} </p>
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> Matrícula </label>
+
+                    <p class="sub-title mb-0"> {{ vehiclesAnalysis.registration }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> ID </label>
+
+                    <p class="sub-title mb-0"> #{{ vehiclesAnalysis.id }} </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12" *ngIf="vehiclesAnalysis">
+
+            <easyroute-management-vehicles-analysis-detail [idVehicle]="idVehicle" (filters)="getValidateDateFilter($event)"></easyroute-management-vehicles-analysis-detail>
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+</div>

@@ -1,0 +1,125 @@
+.answers-form {
+    .title-answers {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .general-panel-table {
+        background: #fdfdfd !important;
+        border-radius: 5px 5px 0 0 !important;
+        border-bottom: 1px solid #DADADA !important;
+        padding: 8px !important;
+        position: relative !important;
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: 300;
+        max-height: 50px;
+    }
+    .card-style-general {
+        border: 1px solid #d7dce1;
+    }
+    .general-h2-table {
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #ffffff !important;
+        opacity: 1;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7F96E0;
+        color: white;
+        padding: 0.9rem;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        // border-top: 1px solid #dee2e6 !important;
+    }
+    .title-col {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        opacity: 2;
+    }
+    .has-float-label input,
+    .has-float-label select {
+        font-size: 14px !important;
+    }
+    .sub-title-col {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .row-border {
+        background: #F9F9FC;
+        border: 1px solid #DFE1E8;
+        border-radius: 5px;
+    }
+    .has-float-label input {
+        height: 67px !important;
+        padding: 1.375rem 0.75rem 0px 13px !important;
+    }
+    input {
+        padding-left: 13px !important;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        /*  background-position-x: right; */
+        background-position-x: 95%;
+        background-image: url(../../../../../../../apps//easyroute//src/assets/icons/arrow.png);
+    }
+    .toggle-directions {
+        background: #444A60;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFFFFF;
+        }
+        .button-document {
+            border-radius: 3px;
+            width: 156px !important;
+            padding: 0 12px;
+            label {
+                color: #24397c !important;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,58 @@
+.users-confirm-dialog-partners {
+    /*     .modal-size {
+        height: 365px !important;
+    } */
+    /*  .picture {
+        background-image: url(../../../../../../../apps/easyroute/src/assets/icons/optimmanage/warning.svg);
+        background-repeat: no-repeat;
+    } */
+    .title {
+        font-size: 26px !important;
+        color: #24397c;
+        font-weight: bold;
+        font-family: Helvetica;
+    }
+    .breakdownTypeDetail {
+        font-size: 14px;
+        color: black !important;
+    }
+    .size {
+        width: 50%;
+    }
+    .Label-date-hour {
+        font-size: 15px;
+    }
+    .style-lines {
+        margin-left: 6.333333%;
+    }
+    .details-incident {
+        color: #afafaf;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 5px;
+    }
+    .subtitle-general {
+        color: #eaeaea !important;
+        border-bottom: 1px solid #eaeaea !important;
+    }
+    .plr-5 {
+        padding-left: 18rem;
+        padding-right: 18rem;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .size {
+            width: 100%;
+        }
+        /*  .modal-size {
+            height: 100%;
+        } */
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) and ( orientation: landscape) {
+        .size {
+            width: 50%;
+        }
+        /* .modal-size {
+            height: 100%;
+        } */
+    }
+}

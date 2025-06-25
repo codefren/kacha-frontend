@@ -1,0 +1,49 @@
+<div class="easyroute-modal-recover-optimization">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-3">
+                <i class="fas fa-times close-button" (click)="closeDialog([false, null])"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ 'ROUTE_PLANNING.TOOLBAR.SAVED_SESSIONS' | translate }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row title-table">
+        {{ 'ROUTE_PLANNING.TOOLBAR.SAVED_SESSIONS' | translate }}
+    </div>
+
+    <div class="mt-3 mb-4 table-content">
+        <table id="details" class="table table-bordered table-striped mb-0 p-0" style="text-align: center; width: 100%;">
+            <thead>
+                <tr>
+                    <th>{{ 'RECOVER_SESSION.SESSION_ID' | translate }}</th>
+                    <th>{{ 'RECOVER_SESSION.NAME' | translate }}</th>
+                    <th>{{ 'RECOVER_SESSION.DESCRIPTION' | translate }}</th>
+                    <th>{{ 'RECOVER_SESSION.DATE' | translate }}</th>
+                    <th>{{ 'RECOVER_SESSION.HOUR' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="container-sm mt-3">
+            <div class="row reset">
+                <div class="col-md-6 col-12 text-md-right text-center">
+                    <button class="btn btn-cancel size-btn-modal modal-dismiss" (click)="closeDialog([false, null])">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+
+                <div class="col-md-6 col-12 text-md-left text-center mt-2 mt-md-0">
+                    <button id="card-button" class="btn btn-primary size-btn-modal modal-confirm" [disabled]="!Secion" (click)="closeDialog([true, Secion])">
+                        {{ 'GENERAL.Search' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

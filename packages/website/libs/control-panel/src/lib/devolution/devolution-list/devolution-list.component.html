@@ -1,0 +1,350 @@
+<div class="devolution-list main-container container-fluid  p-0 pt-4 pb-4">
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title">
+
+                <img class="img-title" src="assets/icons/devolution1.svg">
+
+                <span class="ml-2"> {{ 'DEVOLUTION.NAME' | translate }} </span>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex form-row flex-row align-items-center justify-content-end">
+
+                <ng-container>
+
+                    <!-- settings -->
+
+                    <button class="btn btn-icon btn-icon-white dropdown-toggle p-2 mt-xl-0 mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <img src="assets/icons/point.svg">
+
+                    </button>
+
+                    <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                        <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openPdf()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_PDF' | translate }}
+
+                        </a>
+
+                        <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openCsv()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_EXCEL' | translate }}
+
+                        </a>
+
+                    </div>
+
+                    <!-- settings -->
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Cuadros informativos -->
+
+    <div class="row align-items-center mt-3 pl-4 pr-4">
+
+        <div class="col-xl col-md-6 col-12">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'DEVOLUTION.TOTAL_DEVOLUTION' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+
+                    <p class="p-sub-number" *ngIf="informativeDevolution"> {{ informativeDevolution.TotalDevolution }} </p>
+
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+
+                    <div class="fa-2x">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 ">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 ">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 ">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 ">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 ">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 ">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end Cuadros informativos -->
+
+
+
+    <!-- filter -->
+
+    <div class="row mt-3 pl-4 pr-4 align-items-center font-row mb-xl-0 mb-2">
+
+        <div class="col-xl-9 col-12">
+
+            <div class="form-row mb-1 mt-2 pl-1 align-items-center">
+
+                <!-- date -->
+
+                <div class="col-12 col-xl-3 col-sm-4 mb-1">
+
+                    <div class="dp-hidden position-absolute">
+
+                        <div class="input-group">
+
+                            <input name="datepicker" class="form-control  input-size date1 point" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                tabindex="-1" />
+
+                            <ng-template #t let-date let-focused="focused">
+
+                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                    {{ date.day }}
+                                </span>
+
+                            </ng-template>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input #dpFromDate class="form-control form-control-date" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                        <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+
+                            <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- end date -->
+
+                <!-- all route -->
+
+                <!-- [ngClass]="{'col-xl-2': filter.deliveryPointId.length == 0 , 'col-xl-2': filter.deliveryPointId.length > 0}" -->
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+                    <button id="deliveryPointId" class="btn btn-btn btn-cancel btn-block btn-no-radios" type="button" (click)="addclient()" *ngIf="filter.values.deliveryPointId.length == 0">
+
+                        {{'REPORT.SUMMARY_UPDATE_OF_DATA.CUSTOMER' | translate }}
+
+                        <img src="assets/icons/donwload1.svg">
+
+                    </button>
+
+                    <button id="deliveryPointId" class="btn btn-btn btn-cancel btn-block btn-no-radios" type="button" [title]="clientName" (click)="addclient()" *ngIf="filter.values.deliveryPointId.length > 0 && filter.values.nameClient">
+
+                        <span>
+
+                            {{ filter.values.nameClient | slice:0:15 }} {{ filter.values.nameClient.length > 25 ? '...' : '' }}
+
+                        </span>
+
+                         <img src="assets/icons/donwload1.svg">
+
+                    </button>
+
+
+                </div>
+
+                <div class="col-xl-1 col-12 mb-1 point" *ngIf="filter.values.deliveryPointId.length > 0">
+
+                    <button class="btn btn-btn btn-cancel-1 btn-block" (click)="clearClient()">
+
+                        <img title="Limpiar filtro" src="assets/images/delete.svg">
+
+                    </button>
+
+                </div>
+
+                <!-- end all route -->
+
+                <!-- users -->
+
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+
+
+                    <select id="userDriverId" (change)="ChangeFilter($event)" [value]="filter.values.userDriverId" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+
+                            <option value="">Chófer</option>
+
+                            <option *ngFor="let item of users | async" [value]="item.id">
+                                {{ item.name + ' ' + item.surname }}
+                            </option>
+
+                        </select>
+
+                </div>
+
+                <!-- end users -->
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-12">
+
+            <div class="row">
+
+                <div class="col-xl-9 col-12">
+
+                    <div class="input-group datatables-input-group-width mr-xl-3 mr-3">
+
+                        <input id="search" type="text" class="form-control search-general
+                                pull-right input-personalize-datatable" placeholder="{{ 'COST.SEARCH' | translate }}" style="max-width: initial;">
+
+                        <span class="input-group-append input-group-appenda">
+
+                            <span class="input-group-text input-group-text-general table-append">
+
+                                <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+
+                            </span>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12 text-center mt-xl-0 mt-2">
+
+                    <button class="btn btn-default btn-edit-travel" id="dt-buttons-table" type="button">
+
+                        <img src="assets/icons/edittable.svg">
+
+                        Tabla
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- end filter -->
+
+
+
+    <!-- table -->
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="table-content table-content-general">
+
+                <table class="table table-striped table-bordered table-responsive-lg mb-0" id="devolution" style="text-align: center; width: 100%;">
+
+                    <thead>
+
+                        <tr>
+                            <th>
+                                {{ 'DEVOLUTION.DELIVERY_DATE' | translate }}
+                            </th>
+                            <th>
+                                {{ 'DEVOLUTION.CLIENT' | translate }}
+                            </th>
+                            <th>
+                                {{ 'DEVOLUTION.DRIVER' | translate }}
+                            </th>
+                            <th>
+                                {{ 'DEVOLUTION.RETURNED_PRODUCTS' | translate }}
+                            </th>
+                            <th>
+                                {{ 'DEVOLUTION.OBSERVATIONS' | translate }}
+
+                            </th>
+                            <th Style="border-right: 1px solid #7387c2 !important;" class="widthAccionDatatable ">
+
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

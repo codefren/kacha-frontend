@@ -1,0 +1,77 @@
+import { ZoneFranchiseImage } from "./zone-franchise-image.type";
+
+export interface ZoneFranchise {
+    id: number,
+    companyParentId: number,
+    name: string,
+    code: number,
+    showInApp: boolean,
+    allowedRadius: number,
+    address: string,
+    email:string,
+    phone:string,
+    addressOrderRange:string,
+    coordinatesLatitude: number,
+    coordinatesLongitude: number,
+    minPayment: number, 
+    prepaidPayment: number,
+    allowWithoutMinimun: boolean,
+    quantityBuyWithoutMinimun: number,
+    orderLimitDay: number;
+    orderMaxTime: number, 
+    assignedNextDay: false,
+    acceptSameDay:false,
+    activeMonday :false,
+    activeTuesday: false,
+    activeWednesday: false,
+    activeThursday:false,
+    activeFriday: false,
+    activeSaturday: false,
+    activeSunday: false,
+    scheduleStart: number,
+    scheduleEnd: number,
+    isActive: boolean,
+    sumQuantityBuyWithoutMinimunToTicket: boolean,
+    sumDeliveryPriceToTicket: boolean,
+    images:ZoneFranchiseImage[];
+    zoneSchedule?: any [],
+}
+
+export class ZoneFranchise  implements ZoneFranchise  {
+	constructor(){
+        this.id = 0,
+        this.companyParentId = 0,
+        this.name = '',
+        this.code = 0,
+        this.showInApp = false,
+        this.allowedRadius = 0,
+        this.address = '',
+        this.email = '',
+        this.phone = '',
+        this.addressOrderRange ='',
+        this.coordinatesLatitude = 0,
+        this.coordinatesLongitude = 0,
+        this.minPayment = 0, 
+        this.prepaidPayment = 0,
+        this.allowWithoutMinimun = false,
+        this.quantityBuyWithoutMinimun = 0,
+        this.orderLimitDay = 0;
+        this.orderMaxTime = -1, 
+        this.assignedNextDay=  false,
+        this.acceptSameDay = false,
+        this.activeMonday = false,
+        this.activeTuesday =  false,
+        this.activeWednesday =  false,
+        this.activeThursday = false,
+        this.activeFriday =  false,
+        this.activeSaturday =  false,
+        this.activeSunday = false,
+        this.scheduleStart = 0,
+        this.scheduleEnd = 0,
+        this.isActive = true,
+        this.sumQuantityBuyWithoutMinimunToTicket = false,
+        this.sumDeliveryPriceToTicket = false,
+        this.zoneSchedule =[];
+        this.images = []
+	}
+}

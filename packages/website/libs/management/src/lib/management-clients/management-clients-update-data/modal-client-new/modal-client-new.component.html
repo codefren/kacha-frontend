@@ -1,0 +1,67 @@
+<div class="modal-client-new">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'ORDERS.ORDERS_LIST.SEARCH_CLIENTS' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="closeDialog()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="table-content">
+
+                    <div class="table-content">
+                        <table id="clients" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th class="reset">{{ 'CLIENTS.CODE_CLIENTS' | translate }}</th>
+                                    <th>{{ 'CLIENTS.CLIENTS_LIST.NAME' | translate }}</th>
+                                    <th>{{ 'DELIVERY_POINTS.COMMERCIAL_AGENT' | translate }}</th>
+                                    <th>{{ 'CLIENTS.CLIENTS_LIST.EMAIL' | translate }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center p-xl-0">
+                <button class="btn btn-default mr-2" (click)="activeModal.close(false)"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button [className]="cssStyle" [disabled]="!client" (click)="activeModal.close(client)"> {{ 'GENERAL.ADD' | translate }} </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,89 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+
+.easyroute-my-note-form {
+
+    .colorLink {
+        color: #0088cc!important;
+        cursor: pointer;
+    }
+
+   /*  .card-style-general {
+        border: 1px solid #d7dce1;
+    } */
+
+    .striped {
+        // background: #cfd8dc;
+        background: #f1f1f1;
+        color: #000;
+    }
+
+    .nostriped {
+        background: white;
+        color: #000;
+        border-color: #f1f1f1;
+    }
+    
+    .badge {
+        background: #737373;
+        margin-right: 4px;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 5px 8px;
+        font-size: 85%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 3px;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin-top: 6px;
+    }
+    
+    .badge [data-role="remove"]:after {
+        content: "×";
+        padding: 0px 4px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        font-size: 13px;
+    }
+    
+    .badge [data-role="remove"]:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+    }
+    .card-featured {
+        margin-top: 20px;
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        // border-bottom: 2px solid #bec4ca;
+        background-color: #737373;
+        color: white;
+    }
+
+    .h2-table {
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+    }
+
+    .card-style-general {
+        border: 1px solid #d7dce1;
+    }
+
+    .padding-header-sub {
+        padding: 8px;
+        color: rgba(0, 0, 0, 0.87) !important;
+        background: white;
+    }
+
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        // border-top: 1px solid #dee2e6 !important;
+    }
+}

@@ -1,0 +1,52 @@
+.easyroute-edit-franchise {
+    overflow-y: hidden;
+    .card {
+        height: 93px;
+        width: 140px;
+        background: #f9f9f9;
+    }
+    .card+.card {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    label,
+    input {
+        font-size: 16px !important;
+        font-weight: lighter;
+        color: #4c4c4c;
+
+    }
+    button {
+        width: 31%;
+        font-size: 16px;
+    }
+    .form-row {
+        margin-bottom: 17px !important;
+    }
+    .padding-form {
+        padding: 20px;
+    }
+    .img-upload {
+        max-width: 100%;
+        height: 100%;
+        border-radius: 4px;
+    }
+    .w-r {
+        width: 25%;
+    }
+    @media screen and ( min-width: 360px) and ( max-width: 767px) {
+        button {
+            width: 100%;
+        }
+        .padding-form {
+            padding: 0;
+        }
+        label,
+        input {
+            font-size: 14px;
+        }
+        .w-r {
+            width: 100%;
+        }
+    }
+}

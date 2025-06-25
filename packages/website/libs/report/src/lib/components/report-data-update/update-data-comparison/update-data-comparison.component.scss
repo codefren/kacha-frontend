@@ -1,0 +1,41 @@
+.cost-comparison {
+    .card {
+        height: 444px;
+    }
+    .card-body {
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-radius: 12px;
+        //height: 152px;
+    }
+    .title-radial {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        color: #000000;
+    }
+    .title-footer {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        color: #9899AA;
+    }
+    .title-price {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        text-align: right;
+        color: #9899AA;
+    }
+    .img-circle {
+        vertical-align: text-top;
+    }
+    /*  #chart {
+        width: 300px;
+        margin: 0 auto;
+    } */
+}

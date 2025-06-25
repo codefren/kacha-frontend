@@ -1,0 +1,263 @@
+<div class="data-update">
+
+    <!-- Supervisar la actualización de datos antes de aplicar -->
+
+    <div class="card">
+        <div class="card-body pl-4 pr-4">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                <input type="checkbox"  [checked]="( optimizationPreferences$ | async).superviseDataUpdate"
+
+                                (change)="toggleOptimizationAction('superviseDataUpdate',$event.target.checked)" />
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                <span class="title-toggle toogle-style"> {{'DELIVERY_POINTS.MONITOR_DATA_UPDATE_BEFORE_APPLYING' | translate }} </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{'DELIVERY_POINTS.TEXT_UPDATE' | translate }} </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Activar la función de combinar registros -->
+    <div class="card mt-3" *ngIf="allowCompanyPreferenceDuplicate">
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                <input type="checkbox"  [checked]="allowCompanyPreferenceDuplicate.allowCombiningRecords"
+                                (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'allowCombiningRecords')" />
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                <span class="title-toggle toogle-style"> {{'DELIVERY_POINTS.SETTINGS.ACTIVATE_FUNCTION_COMBINING_RECORDS' | translate }} </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{'DELIVERY_POINTS.SETTINGS.ACTIVATE_FUNCTION_COMBINING_RECORDS_MESSAGE' | translate }} </p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="card-footer" *ngIf="allowCompanyPreferenceDuplicate.allowCombiningRecords">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                <input type="checkbox" [checked]="allowCompanyPreferenceDuplicate.allowAddDuplicateClientsGroupAutomatically"
+                                (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'allowAddDuplicateClientsGroupAutomatically')" />
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                <span class="title-toggle toogle-style"> {{'DELIVERY_POINTS.SETTINGS.ALLOW_ADD_DUPLICATE_CLIENTS_GROUP_AUTOMATICALLY' | translate }} </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{'DELIVERY_POINTS.SETTINGS.ALLOW_ADD_DUPLICATE_CLIENTS_GROUP_AUTOMATICALLY_MESSAGE' | translate }} </p>
+                </div>
+            </div>
+
+            <ng-container>
+                <div class="row mb-4 pl-xl-4 ml-xl-4">
+
+                    <!-- taxName -->
+                    <div class="col-xl-4 col-12">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="taxName" [checked]="allowCompanyPreferenceDuplicate.taxName" (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'taxName')" />
+
+                                    <label for="taxName"></label>
+
+                                </div>
+
+                                <label title="{{'DELIVERY_POINTS.SETTINGS.TAX_NAME' | translate }}" for="taxName" class="label-check point">
+                                    {{'DELIVERY_POINTS.SETTINGS.TAX_NAME' | translate }}
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- phone -->
+                    <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="phone" [checked]="allowCompanyPreferenceDuplicate.phone" (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'phone')" />
+
+                                    <label for="phone"></label>
+
+                                </div>
+
+                                <label title=" {{'DELIVERY_POINTS.SETTINGS.PHONE' | translate }}" for="phone" class="label-check point">
+                                    {{'DELIVERY_POINTS.SETTINGS.PHONE' | translate }}
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- address -->
+                    <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="address" [checked]="allowCompanyPreferenceDuplicate.address" (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'address')" />
+
+                                    <label for="address"></label>
+
+                                </div>
+
+                                <label title="{{'DELIVERY_POINTS.SETTINGS.ADDRESS' | translate }}" for="address" class="label-check point">
+                                    {{'DELIVERY_POINTS.SETTINGS.ADDRESS' | translate }}
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- population -->
+                    <div class="col-xl-4 col-12 mt-3">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="population" [checked]="allowCompanyPreferenceDuplicate.population" (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'population')" />
+
+                                    <label for="population"></label>
+
+                                </div>
+
+                                <label title="{{'DELIVERY_POINTS.SETTINGS.POPULATION' | translate }}" for="population" class="label-check point">
+                                    {{'DELIVERY_POINTS.SETTINGS.POPULATION' | translate }}
+                                </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- postalCode -->
+                    <div class="col-xl-4 col-12 mt-3">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="postalCode" [checked]="allowCompanyPreferenceDuplicate.postalCode" (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'postalCode')" />
+
+                                    <label for="postalCode"></label>
+
+                                </div>
+
+                                <label title="{{'DELIVERY_POINTS.SETTINGS.POSTAL_CODE' | translate }}" for="postalCode" class="label-check point">
+                                    {{'DELIVERY_POINTS.SETTINGS.POSTAL_CODE' | translate }}
+                                </label>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- latitude -->
+                    <div class="col-xl-4 col-12 mt-3">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="coordinates" [checked]="allowCompanyPreferenceDuplicate.coordinates" (change)="updateCompanyPreferenceDuplicate($event.target.checked, 'coordinates')" />
+
+                                    <label for="coordinates"></label>
+
+                                </div>
+
+                                <label title="{{'DELIVERY_POINTS.SETTINGS.COORDINATES' | translate }}" for="latitcoordinatesude" class="label-check point">
+                                    {{'DELIVERY_POINTS.SETTINGS.COORDINATES' | translate }}            
+                                </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

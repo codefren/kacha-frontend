@@ -1,0 +1,112 @@
+.btn-filter {
+    background-color: #b5b5b5;
+    border-radius: 20px;
+    width: 132px;
+    height: 40px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.users {
+    background-color: #EFF0F4 !important;
+    .page-title {
+        span {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 26px;
+            align-items: center;
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+    }
+    img {
+        vertical-align: sub;
+    }
+    .dropdown {
+        img {
+            vertical-align: baseline;
+        }
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+    .btn-group .dropdown-menu.show {
+        width: 14.5rem;
+        box-shadow: 2px 2px 10px rgb(0 0 0 / 10%);
+        border-radius: 5px;
+        border: 0px solid rgba(0, 0, 0, 0.15);
+    }
+    .card {
+        height: 100px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .card-left {
+        /* width: 156px; */
+        height: 100px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .card-rigth {
+        height: 100px;
+        background: #E8E9EE;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .p-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #000000;
+    }
+    .p-sub-number {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 29px;
+        color: #000000;
+    }
+    .dataTable thead th {
+        font-size: 14px !important;
+        padding: 21px;
+    }
+    .size-import {
+        width: 31px;
+    }
+    .size-load-albaran {
+        cursor: default;
+        width: 95px !important;
+        border-radius: 5px 0px 0px 5px;
+    }
+    .size-open {
+        margin-left: 2px;
+        width: 39px !important;
+        border-radius: 0px 5px 5px 0px;
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "tslint.autoFixOnSave": true,
+    "gitlab.instanceUrl": "https://gitlab.com",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "auto-close-tag.activationOnLanguage": [
+        "xml",
+        "php",
+        "blade",
+        "ejs",
+        "jinja",
+        "plaintext",
+        "markdown",
+        "vue",
+        "liquid",
+        "erb",
+        "lang-cfml",
+        "cfml",
+        "HTML (Eex)"
+    ],
+    "terminal.integrated.fontFamily": "monospace, Meslo LG M for Powerline",
+    "editor.rulers": [
+        92
+    ],
+    "vsicons.presets.nestjs": true,
+    "files.associations": {
+        "ostream": "cpp"
+    }
+}

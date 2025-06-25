@@ -1,0 +1,66 @@
+<div class="easyroute-observation">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ title }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="activeModal.close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <form [formGroup]="observationForm" novalidate>
+
+            <div class="col-xl-12 col-12 p-0">
+                <div class="form-group input-group">
+                    <span class="has-float-label w-100">
+                        <textarea class="form-control point" id="observation" type="text" 
+                            placeholder="{{ 'DELIVERY_POINTS.WRITE' | translate }}" formControlName="observation">
+                        </textarea>
+
+                        <label for="observation" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.OBSERVATION' | translate }}</label>
+                    </span>
+                    <ng-container *ngFor="let validation of note_messages.observation">
+                        <div class="w-100 text-left">
+                            <small class="form-control-feedback text-danger" *ngIf="
+                                    observationForm.get('observation').hasError(
+                                        validation.type
+                                    ) &&
+                                    (observationForm.get('observation').dirty ||
+                                    observationForm.get('observation').touched)
+                                ">
+                                {{ validation.message }}
+                            </small>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-xl-12 col-12 p-0 pt-2">
+                <span class="characters">Máximo 200 caracteres</span>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center">
+                <button class="btn btn-cancel mr-2" (click)="activeModal.close(false)"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary size-btn-modal" (click)="createSubNote()" [disabled]="!observationForm.valid"> {{ 'GENERAL.SAVE' | translate }} </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

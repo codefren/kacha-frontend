@@ -1,0 +1,256 @@
+@import '../../../../../../apps/easyroute/src/common';
+.easyroute-suscription-status {
+    .title-page-subscription-status {
+        font-size: 15px;
+        color: #000000;
+    }
+
+    .line {
+        border-bottom: 1px solid #c6c7c9;
+    }
+
+    .card-footer {
+        padding: 0px !important;
+        border-top: none;
+        min-height: 60px;
+        p {
+            margin: 0px 0px 10px 0px;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 18px;
+            /* identical to box height */
+
+            text-align: center;
+
+            color: #000000;
+        }
+    }
+    .icon-software {
+        width: 51px;
+    }
+    .name-plan {
+        font-size: 24px !important;
+        border-bottom: 1px solid;
+    }
+
+    h3 .name-plan {
+        margin-top: 0px !important;
+    }
+
+    .a-plan {
+        color: #000000 !important;
+        text-decoration: underline !important;
+        font-weight: bold !important;
+        font-size: 15px !important;
+        cursor: pointer !important;
+    }
+
+    .number-total {
+        font-size: 30px;
+        line-height: 35px;
+    }
+
+    .btn {
+        padding: 0.37rem 0.75rem;
+        font-size: 16px;
+        width: 15rem;
+    }
+    .btn-danger {
+        border-radius: 15px;
+    }
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        font-weight: lighter;
+        font-size: 16px;
+        border-radius: 0px;
+    }
+    .next-pay {
+        font-weight: bold;
+    }
+    .permanence-status {
+        margin: 0 auto;
+        margin-bottom: 16px;
+    }
+    .key {
+        text-align: right;
+    }
+    .value {
+        text-align: left;
+    }
+    .planTitle {
+        font-weight: bold;
+        margin: 0px;
+        font-size: 12px;
+    }
+    .badge-danger,
+    .badge-warning {
+        padding: 15px;
+        font-size: 14px;
+    }
+    @media (max-width: 576px) {
+        .break-line {
+            margin-top: 20px;
+        }
+    }
+    .description {
+        p {
+            font-size: 14px !important;
+        }
+    }
+    .title-page-subscription-status-demo {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 17px;
+
+        color: #000000;
+    }
+
+    h3 {
+        margin-bottom: 0px !important;
+    }
+
+    .bg-white {
+        background-color: #dfdfdf !important;
+        min-height: 280px;
+    }
+
+    .add-plan {
+        font-family: 'Roboto';
+        cursor: pointer;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+
+        color: #24397c;
+    }
+
+    .link-view-more {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 18px;
+        /* identical to box height */
+
+        text-align: center;
+        text-decoration-line: underline;
+        cursor: pointer;
+        color: #919191;
+    }
+
+    .rounded-lg {
+        border-radius: 0.2rem !important;
+    }
+
+    .text-muted {
+        text-decoration: line-through;
+    }
+
+    .price {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    p {
+        margin: 0;
+        font-size: 15px;
+        color: #9f9f9f;
+    }
+
+    .selected-plans {
+        .bg-white {
+            background-color: #ffffff !important;
+            min-height: 280px !important;
+        }
+
+        .link-view-more {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 18px;
+            /* identical to box height */
+
+            text-align: center;
+            text-decoration-line: underline;
+
+            color: #454545;
+        }
+    }
+
+    .size-btn-modal {
+        border-radius: 0.5rem !important;
+    }
+
+    .card-footer {
+        p {
+            margin: 0px 0px 10px 0px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 18px;
+            /* identical to box height */
+
+            text-align: center;
+
+            color: #000000;
+        }
+    }
+
+    .size-btn-modal {
+        font-size: 14px !important;
+    }
+
+    input {
+        background-color: #e0e8ff !important;
+    }
+
+    .plan-actually {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+
+        color: #6c6c6c;
+    }
+
+    .bg-white-finish {
+        background-color: #ffffff !important;
+        min-height: 200px;
+    }
+
+    .plan-expired-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 20px;
+        text-align: center;
+
+        color: #24397c;
+    }
+
+    .plan-expired-description {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        text-align: center;
+
+        color: #000;
+    }
+
+    .add-payment-method-p {
+        font-weight: 500;
+        color: #000;
+    }
+}

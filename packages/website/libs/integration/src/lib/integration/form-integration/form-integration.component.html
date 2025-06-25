@@ -1,0 +1,335 @@
+<div class="padding-body pt-0 bg-white2" *ngIf="integration">
+    <div class="container">
+        <div class="row pt-5 align-items-center justify-content-center">
+            <div class="mr-3 return-left point" routerLink="/integration">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0">{{ 'INTEGRATION.EDIT_PLANNED_DELIVERY' | translate }}</p>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <!-- formulario -->
+            <form [formGroup]="Form" novalidate (ngSubmit)="submit()" class="form-horizontal form-bordered" *ngIf="Form"
+                style="width: 100%;">
+                <div class="form-row justify-content-around">
+                    <div class="col-lg-4 mt-2 mt-lg-0">
+                        <label class="control-label margin-label" for="name">
+                            {{ 'INTEGRATION.NAME' | translate }}
+                            <span class="asterisco">* </span>
+                        </label>
+                        <div class="form-group" [ngClass]="{
+                                'has-danger':
+                                    Form.controls['name'].invalid &&
+                                    (Form.controls['name'].dirty ||
+                                        Form.controls['name'].touched)
+                            }">
+                            <input type="text" id="name" class="form-control" autocomplete="off" formControlName="name"
+                                [ngClass]="{
+                                    'form-control-danger':
+                                        Form.controls['name'].invalid &&
+                                        (Form.controls['name'].dirty ||
+                                            Form.controls['name'].touched)
+                                }" />
+                            <ng-container *ngFor="let validation of integration_messages.name">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        Form.get('name').hasError(validation.type) &&
+                                        (Form.get('name').dirty || Form.get('name').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 offset-lg-4 mt-2 mt-lg-0">
+                        <label class="control-label margin-label" for="dateSession">
+                            {{ 'INTEGRATION.DATE_SESSION' | translate }}
+                            <span class="asterisco">*</span>
+                        </label>
+                        <div class="input-group" [ngClass]="{
+                                'has-danger':
+                                    Form.controls['dateSession'].invalid &&
+                                    (Form.controls['dateSession'].dirty ||
+                                        Form.controls['dateSession'].touched)
+                            }">
+                            <input class="form-control" readonly
+                                placeholder="{{ 'INTEGRATION.DATE_SESSION' | translate }}" formControlName="dateSession"
+                                ngbDatepicker #d="ngbDatepicker" autocomplete="off" [startDate]="dateNow" id="date"
+                                (dateSelect)="startDateSelect($event)" />
+                            <div class="input-group-append">
+                                <button class="btn btn-calendar calendar" (click)="d.toggle()" type="button">
+                                    <img class="icons-calendar point"
+                                        src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-2 mt-lg-0">
+                        <div class="form-group" [ngClass]="{
+                                'has-danger':
+                                    Form.controls['description'].invalid &&
+                                    (Form.controls['description'].dirty ||
+                                        Form.controls['description'].touched)
+                            }">
+                            <label class="control-label margin-label" for="description">
+                                {{ 'INTEGRATION.DESCRIPTION' | translate }}
+                                <!-- <span class="asterisco">* </span> -->
+                            </label>
+                            <div class="form-group" [ngClass]="{
+                                    'form-control-danger':
+                                        Form.controls['description'].invalid &&
+                                        (Form.controls['description'].dirty ||
+                                            Form.controls['description'].touched)
+                                }">
+                                <input type="text-area" id="description" class="form-control" autocomplete="off"
+                                    formControlName="description" />
+                                <ng-container *ngFor="
+                                        let validation of integration_messages.description
+                                    ">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            Form.get('description').hasError(
+                                                validation.type
+                                            ) &&
+                                            (Form.get('description').dirty ||
+                                                Form.get('description').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 offset-lg-4 col-12 mt-3 mt-lg-0">
+                        <div
+                            class="d-flex flex-row justify-content-lg-start justify-content-center align-items-lg-end h-100">
+                            <button type="button" class="btn btn-cancel abs" [disabled]="integration.id == 0"
+                                title="{{ 'INTEGRATION.ADD_ROUTES' | translate }}" (click)="addRoutes()">
+                                <!-- <i class="fas fa-plus addVehicleIcon pr-1"></i> -->
+                                {{ 'INTEGRATION.ADD_ROUTES' | translate }}
+                            </button>
+
+                            <button type="button" class="btn btn-primary abs ml-2" [disabled]="integration.id == 0"
+                                title="{{ 'INTEGRATION.DOWNLOAD_CSV' | translate }}" (click)="downloadFileCsv()">
+                                <!-- <i class="fas fa-download"></i> -->
+                                {{ 'INTEGRATION.DOWNLOAD_CSV' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- acordeon aqui esta todo el acordeon -->
+                <div class="col-md-12 col-12 mt-5 p-0"
+                    *ngIf="integration.integration_delivery_zones && integration.integration_delivery_zones != null && integration.integration_delivery_zones.length > 0">
+                    <section role="main" class="section-help">
+                        <div class=" section-help-panels">
+                            <div class="accordion section-help" id="accordionExample">
+                                <div class="toggle-directions mb-3"
+                                    *ngFor="let zone of integration.integration_delivery_zones"
+                                    title="Ruta: {{ zone.deliveryZoneId }}">
+                                    <div class="col-12 pt-2 pb-2 pl-3 mt-4">
+                                        <div class="row m-0">
+                                            <div class="col-md-10 col-6 p-0 toggle-pointer " data-toggle="collapse"
+                                                [attr.data-target]="
+                                                    '#acc' +
+                                                    DeleteWhiteSpaces(
+                                                        zone.deliveryZoneId.replace(
+                                                            ' ',
+                                                            '-'
+                                                        )
+                                                    )
+                                                " href="#basic1" [attr.aria-controls]="
+                                                    '#acc' +
+                                                    DeleteWhiteSpaces(
+                                                        zone.deliveryZoneId.replace(
+                                                            ' ',
+                                                            '-'
+                                                        )
+                                                    )
+                                                ">
+                                                <h4>
+                                                    {{
+                                                    zone.name === null
+                                                    ? zone.id
+                                                    : zone.name
+                                                    }}
+                                                </h4>
+                                            </div>
+                                            <!--  <div class="col-md-1 col-12 text-center pb-1">
+                                                <button class="btn align-items-end btn-blank" type="button" (click)="openModalDeleteDeliveryZones( zone.id, false )">
+                                                    Eliminar
+                                                </button>
+                                            </div> -->
+                                            <div class="col-md-2 col-6 p-0 text-right">
+                                                <button class="btn align-items-end btn-blank" type="button" (click)="
+                                                        modalAddPonits(zone.deliveryZoneId)
+                                                    ">
+                                                    Añadir cliente
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- accordion-body -->
+                                    <div [id]="
+                                            'acc' +
+                                            DeleteWhiteSpaces(
+                                                zone.deliveryZoneId.replace(' ', '-')
+                                            )
+                                        " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body p-0">
+                                            <div class="accordion" id="accordionExample2">
+                                                <!-- table -->
+                                                <div class="table-responsive">
+                                                    <table style="width: 100%"
+                                                        class="table table-bordered table-striped mb-0"
+                                                        style="text-align: center">
+                                                        <thead class="thead thead-new">
+                                                            <tr>
+                                                                <th>
+                                                                    {{
+                                                                    'DELIVERY_POINTS.ID'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                                <th>
+                                                                    {{
+                                                                    'DELIVERY_POINTS.NAME_'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                                <th>
+                                                                    {{
+                                                                    'DELIVERY_POINTS.ADDRESS'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                                <th>
+                                                                    {{
+                                                                    'DELIVERY_POINTS.START'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                                <th>
+                                                                    {{
+                                                                    'DELIVERY_POINTS.END'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                                <th>
+                                                                    {{
+                                                                    'DELIVERY_POINTS.NUMBER_ORDER'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                                <th>
+                                                                    {{
+                                                                    'GENERAL.ACTIONS'
+                                                                    | translate
+                                                                    }}
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let deliverypoints of zone.integration_delivery_points; let i = index"
+                                                                class="point"
+                                                                [ngClass]="{'striped':  i % 2 == 0, 'no-striped': i % 2 > 0 }">
+                                                                <td data-title="id">
+                                                                    {{
+                                                                    deliverypoints.deliveryPointId
+                                                                    }}
+                                                                </td>
+                                                                <td data-title="name">
+                                                                    {{
+                                                                    deliverypoints.name
+                                                                    }}
+                                                                </td>
+                                                                <td data-title="address">
+                                                                    {{
+                                                                    deliverypoints.address
+                                                                    }}
+                                                                </td>
+                                                                <td data-title="postalCode">
+                                                                    {{
+                                                                    deliverypoints.deliveryWindowStart
+                                                                    | dayTime
+                                                                    }}
+                                                                </td>
+                                                                <td data-title="province">
+                                                                    {{
+                                                                    deliverypoints.deliveryWindowEnd
+                                                                    | dayTime
+                                                                    }}
+                                                                </td>
+                                                                <td data-title="orderNumber">
+                                                                    {{
+                                                                    deliverypoints.orderNumber
+                                                                    }}
+                                                                </td>
+
+                                                                <td data-title="Open">
+                                                                    <button type="button" class="btn editar" title="{{
+                                                                            'GENERAL.UPDATE'
+                                                                                | translate
+                                                                        }}" (click)="
+                                                                            openModalEditDeliveryPoints(
+                                                                                deliverypoints.id,
+                                                                                deliverypoints,
+                                                                                zone.deliveryZoneId
+                                                                            )
+                                                                        ">
+                                                                        <img class="icons-datatable point"
+                                                                            src="assets/images/edit.svg" />
+                                                                    </button>
+
+                                                                    <button type="button" class="btn editar" title="{{
+                                                                            'GENERAL.DELETE'
+                                                                                | translate
+                                                                        }}" (click)="
+                                                                            openModalDeleteDeliveryPoints(
+                                                                                deliverypoints.id,
+                                                                                deliverypoints,
+                                                                                zone.deliveryZoneId
+                                                                            )
+                                                                        ">
+                                                                        <i
+                                                                            class="far fa-times-circle point icon-delect"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr *ngIf="zone.integration_delivery_points && zone.integration_delivery_points != null && zone.integration_delivery_points.length == 0">
+                                                                <td colspan="6" class="data-avalilable">
+                                                                    {{ 'ORDERS.ORDERS_FORM.NO_CUSTOMER_DATA_AVALILABLE'
+                                                                    | translate }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- submit-button -->
+                <div class="row pt-5">
+                    <!-- <div class="col-sm-4 offset-2 col-12 text-center mt-1">
+                        <button class="size-btn-form btn btn-cancel mr-sm-4" routerLink="/integration">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div> -->
+                    <div class="col-sm-12 col-12 text-center mt-1 pb-2">
+                        <button type="submit" class="btn btn-primary size-btn-form" [disabled]="!Form.valid">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

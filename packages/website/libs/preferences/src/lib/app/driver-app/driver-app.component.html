@@ -1,0 +1,1286 @@
+<div class="driver-app">
+
+    <div class="card">
+
+        <div class="card-body pl-4 pr-xl-4">
+
+            <!-- TITLE CARD -->
+
+            <div class="row pt-2">
+
+                <div class="col-xl-12 col-12">
+
+                    <label class="title-road"> {{ 'PREFERENCES.APP.ADDITIONAL_SCEENS' | translate }} </label>
+
+                    <p class="sub-title-road mt-1"> {{'PREFERENCES.APP.TEXT' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <!-- END TITLE CARD -->
+
+            <div class="row pt-2">
+
+                <div class="col-12">
+
+                    <!-- RECOGER CAJAS -->
+
+                    <div class="card">
+
+                        <div class="card-body border-card-options">
+
+                            <div class="d-flex flex-sm-row flex-column">
+
+                                <img class="img-size-app" src="assets/icons/pickupBoxes.jpg">
+
+                                <div class="">
+
+                                    <div class="switch switch-1 w-100">
+
+                                        <label class="switch-width mb-3">
+    
+                                        
+                                            <input type="checkbox" [checked]="(appPreferences$ | async).usePickupBoxes" (change)="toggleAppPreference('usePickupBoxes',$event.target.checked)"  id="app-pickup-boxes"/>
+
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span class="title-toggle title-road"> 
+                                                {{ 'PREFERENCES.APP.PICK_UP_BOXES' | translate }} 
+                                            </span>
+    
+                                            <p class="title-infor-app  mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-0"> {{ 'PREFERENCES.APP.TEXT_2' | translate }}
+    
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- END RECOGER CAJAS -->
+
+                    <!-- Devoluciones -->
+
+                    <div class="card mt-2">
+
+                        <div class="card-body border-card-options">
+
+                            <div class="d-flex flex-sm-row flex-column">
+
+                                <img class="img-size-app" src="assets/icons/returnsDrivers.svg">
+
+                                <div class="">
+
+                                    <div class="switch switch-1 w-100">
+
+                                        <label class="switch-width mb-3">
+    
+                                        
+                                            <input type="checkbox"   [checked]="(appPreferences$ | async).useRefunds" (change)="toggleAppPreference('useRefunds',$event.target.checked)" id="app-refund-boxes" />
+
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span class="title-toggle title-road"> 
+                                                {{ 'PREFERENCES.APP.RETURNS' | translate }} 
+                                            </span>
+    
+                                            <p class="title-infor-app  mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-0"> {{ 'PREFERENCES.APP.TEXT_4' | translate }}
+    
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--   <div class="row">
+    
+                                <div class="col-xl-1 col-12">
+                                    <img src="assets/icons/pickupBoxes.jpg">
+                                </div>
+    
+    
+                                <div class="col-xl-11 col-12">
+    
+                                    <div class="">
+    
+                                        <div class="switch w-100">
+    
+                                            <label class="switch-width mb-3">
+    
+                                            
+    
+                                                <input type="checkbox"  
+                                                 />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                                <span class="title-toggle title-road"> 
+                                                    {{ 'PREFERENCES.OPTIMIZATION.DATA_SESSION.SAVE_SESION_IN_LOAD_AUTO.NAME' | translate }} 
+                                                </span>
+                                                <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción se guardará un registro de forma automática cada vez que se carguen datos en el planificador y cada vez que se asignen rutas. En caso de estar desactivado, se habilitará un botón para generar el guardado
+                                                    de forma manual.
+                                                </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                               
+                            </div> -->
+
+                        </div>
+                    </div>
+
+                    <!-- END Devoluciones -->
+
+                    <!-- Observación del servicio -->
+
+                    <div class="card mt-2">
+
+                        <div class="card-body border-card-options">
+
+                            <div class="d-flex flex-sm-row flex-column">
+
+                                <img class="img-size-app" src="assets/icons/Observations.svg">
+
+                                <div class="">
+
+                                    <div class="switch switch-1 w-100">
+
+                                        <label class="switch-width mb-3">
+    
+                                        
+                                            <input type="checkbox" [checked]="(appPreferences$ | async).useObservation" (change)="toggleAppPreference('useObservation',$event.target.checked)" id="app-observation"/>
+
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span class="title-toggle title-road"> 
+                                                {{ 'PREFERENCES.APP.SERVICE_OBSERVATION' | translate }} 
+                                            </span>
+    
+                                            <p class="title-infor-app  mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-0"> {{ 'PREFERENCES.APP.TEXT_5' | translate }}
+    
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--   <div class="row">
+    
+                                <div class="col-xl-1 col-12">
+                                    <img src="assets/icons/pickupBoxes.jpg">
+                                </div>
+    
+    
+                                <div class="col-xl-11 col-12">
+    
+                                    <div class="">
+    
+                                        <div class="switch w-100">
+    
+                                            <label class="switch-width mb-3">
+    
+                                            
+    
+                                                <input type="checkbox"  
+                                                 />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                                <span class="title-toggle title-road"> 
+                                                    {{ 'PREFERENCES.OPTIMIZATION.DATA_SESSION.SAVE_SESION_IN_LOAD_AUTO.NAME' | translate }} 
+                                                </span>
+                                                <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción se guardará un registro de forma automática cada vez que se carguen datos en el planificador y cada vez que se asignen rutas. En caso de estar desactivado, se habilitará un botón para generar el guardado
+                                                    de forma manual.
+                                                </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                               
+                            </div> -->
+
+                        </div>
+                    </div>
+
+                    <!-- END Observación del servicio -->
+
+                    <!-- Firma digital -->
+
+                    <div class="card mt-2">
+
+                        <div class="card-body border-card-options">
+
+                            <div class="d-flex flex-sm-row flex-column">
+
+                                <img class="img-size-app" src="assets/icons/signature.svg">
+
+                                <div class="">
+
+                                    <div class="switch switch-1 w-100">
+
+                                        <label class="switch-width mb-3">
+
+                                            <input type="checkbox" [checked]="(appPreferences$ | async).useDeliveryNoteSignature" 
+                                            (change)="toggleAppPreference('useDeliveryNoteSignature',$event.target.checked)" 
+                                            id="app-signature"/>
+
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                            <span class="title-toggle title-road"> 
+                                                {{ 'PREFERENCES.APP.DIGITAL_SIGNATURE' | translate }} 
+                                            </span>
+
+                                            <p class="title-infor-app  mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-0"> {{ 'PREFERENCES.APP.TEXT_6' | translate }}
+                        
+                                            <ng-container *ngIf="(appPreferences$ | async).useDeliveryNoteSignature">
+
+                                                    <div class="row pl-xl-3">
+
+                                                            <!-- firma digital -->
+
+                                                        <div class="col-xl-3 col-12 border-col-tips mt-4 mr-2">
+
+                                                            <div class="row pt-2 pb-2">
+
+                                                                <div class="col-12 mb-1 d-flex flex-row">
+
+                                                                    <div class="round round-little margin-days">
+
+                                                                        <input type="checkbox" [checked]="(appPreferences$ | async).digitalSignature" (change)="toggleAppPreference('digitalSignature', $event.target.checked)" id="app-digitalSignature" />
+
+                                                                        <label for="app-digitalSignature"></label>
+
+                                    </div>
+
+                                    <label for="app-digitalSignature" class="label-check point style-children-check">
+
+                                                                        {{ 'APP.DIGITAL_SIGNATURE' | translate }} *
+                                                    
+                                                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end firma digital -->
+
+                        <!-- foto sello -->
+
+                        <div class="col-xl-3 col-12 border-col-tips mt-4 mr-2">
+
+                            <div class="row pt-2 pb-2">
+
+                                <div class="col-12 mb-1 d-flex flex-row">
+
+                                    <div class="round round-little margin-days">
+
+                                        <input type="checkbox" [checked]="(appPreferences$ | async).photographyStamp" (change)="toggleAppPreference('photographyStamp', $event.target.checked)" id="app-photographyStamp" />
+
+                                        <label for="app-photographyStamp"></label>
+
+                                    </div>
+
+                                    <label for="app-photographyStamp" class="label-check point style-children-check">
+
+                                                                                            {{ 'APP.PHOTOGRAPHY_STAMP' | translate }} *
+                                                                                                                                                                                            
+                                                                                </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end foto sello -->
+
+                        <!-- Escaneo del Albaran -->
+
+                        <div class="col-xl-3 col-12 border-col-tips mt-4 mr-2">
+
+                            <div class="row pt-2 pb-2">
+
+                                <div class="col-12 mb-1 d-flex flex-row">
+
+                                    <div class="round round-little margin-days">
+
+                                        <input type="checkbox" [checked]="(appPreferences$ | async).scanDeliveryNote" (change)="toggleAppPreference('scanDeliveryNote', $event.target.checked)" id="app-scanDeliveryNote" />
+
+                                        <label for="app-scanDeliveryNote"></label>
+
+                                    </div>
+
+                                    <label for="app-scanDeliveryNote" class="label-check point style-children-check">
+
+                                                                                                    {{ 'APP.SCAN_DELIVERY_NOTE' | translate }}
+                                                                                                                                                                                            
+                                                                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end escaneo del albaran -->
+
+                    </div>
+
+                    </ng-container>
+
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <ng-container *ngIf="(appPreferences$ | async).useDeliveryNoteSignature">
+
+        <div class="card-footer card-footer-signature">
+
+            <div class="col-xl-12 col-12 p-xl-0">
+
+                <div class="row pb-1">
+
+                    <div class="col-12 mb-1 d-flex flex-row">
+
+                        <div class="round round-little margin-days">
+
+                            <input type="checkbox" [checked]="(appPreferences$ | async).everyRequired" (change)="toggleAppPreference('everyRequired', $event.target.checked)" id="app-ever-requiered" />
+
+                            <label for="app-ever-requiered"></label>
+
+                        </div>
+
+                        <label for="app-ever-requiered" class="label-check point style-check-requerid">
+
+                                            {{ 'Marca esta casilla si quieres que la firma sea obligatoria en todos los clientes' }}
+
+                                        </label>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </ng-container>
+
+</div>
+
+<!-- END Firma digital -->
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Cerrar sesión en la app de forma automática -->
+
+<div class="card mt-3">
+
+    <div class="card-body pr-xl-5">
+
+        <div class="row">
+
+            <div class="col-xl-12 col-12">
+                <div class="">
+                    <div class="switch w-100">
+                        <label class="switch-width mb-0">
+                            <input type="checkbox" [checked]="(appPreferences$| async).allowAutomaticLogoutTime" (change)="toggleAppPreference('allowAutomaticLogoutTime',$event.target.checked)" />
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+                            <span class="title-toggle title-road"> 
+                                Cerrar sesión en la app de forma automática
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                    Para asegurar una correcta utilización de la geolocalización y una actualización eficiente de la app de Polpoo, configura el límite de días que la sesión puede permanecer abierta para que al pasar el periodo estipulado Polpoo cierre las sesiones de manera
+                    automática.
+                </p>
+            </div>
+
+
+
+            <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3" *ngIf="(appPreferences$| async).allowAutomaticLogoutTime">
+
+                <div class="form-group">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                                        <input class="form-control form-input showHour" type="number" placeholder="0" [value]="(appPreferences$| async).automaticLogoutTime" (focusout)="toggleAppPreference('automaticLogoutTime',$event.target.value)"/>
+
+                                        <label for="first" class="mt-2 title-col size-secund"> Cerrar sesión al pasar: </label>
+
+                                    </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Cerrar sesión en la app de forma automática -->
+
+<!-- Permitir actualizar la información del cliente desde la app -->
+
+<div class="card mt-3">
+
+    <div class="card-body pr-xl-5">
+
+        <!-- Permitir actualizar la información del cliente desde la app -->
+        <div class="row">
+
+            <div class="col-xl-12 col-12">
+                <div class="">
+                    <div class="switch w-100">
+                        <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="(appPreferences$ | async ).allowUpdatingClientInformation" (change)="toggleAppPreference('allowUpdatingClientInformation',$event.target.checked) "/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        {{ 'PREFERENCES.APP.ALLOW_UPDATING_CLIENT_INFORMATION' | translate }}
+                                    </span>
+                                </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                    {{ 'PREFERENCES.APP.ALLOW_UPDATING_CLIENT_INFORMATION_MESSAGE' | translate }}
+                </p>
+            </div>
+
+        </div>
+        <!-- end Permitir actualizar la información del cliente desde la app -->
+
+    </div>
+
+    <div class="card-footer pt-4" *ngIf="(appPreferences$ | async ).allowUpdatingClientInformation">
+
+        <div class="card-body style-card-settings pt-2 pb-2">
+
+            <div class="row">
+
+                <!-- allowUpdateClientSchedule -->
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                        <input type="checkbox"  [checked]="(appPreferences$ | async ).allowUpdateClientSchedule" (change)="toggleAppPreference('allowUpdateClientSchedule',$event.target.checked)"/>
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle title-road"> 
+                                            {{ 'PREFERENCES.APP.UPDATE_CUSTOMER_SCHEDULE_FOR_SERVICES' | translate }}
+                                        </span>
+                                    </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end allowUpdateClientSchedule -->
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        {{ 'PREFERENCES.APP.ALLOW_UPDATE_CLIENT_SCHEDULE_MESSAGE' | translate }}
+                    </p>
+                </div>
+
+                <!-- serviceUpdateSchedule -->
+
+                <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3" *ngIf="(appPreferences$ | async ).allowUpdateClientSchedule">
+
+                    <div class="form-group">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+            
+                                            <input class="form-control form-input" type="number" placeholder="0" [value]="( appPreferences$ | async ).serviceUpdateSchedule" min="0" max="9999999" class="form-control" (focusout)="toggleAppPreference('serviceUpdateSchedule', $event.target.value)"/>
+            
+                                            <label for="first" class="mt-2 title-col size-secund"> Servicios para actualizar horario </label>
+            
+                                        </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end serviceUpdateSchedule -->
+
+                <!-- actualizar horario del cliente -->
+
+                <div class="col-xl-12 col-12 mt-3">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                        <input type="checkbox" [checked]="( appPreferences$ | async ).deliveryTimeAsOpeningHours" (change)="toggleAppPreference('deliveryTimeAsOpeningHours', $event.target.checked)"/>
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle title-road"> 
+                                            {{ 'PREFERENCES.APP.DELIVERY_TIME_AS_CUSTOMER_OPENING_HOURS' | translate }}
+                                        </span>
+                                    </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        {{ 'PREFERENCES.APP.TEXT_3' | translate }}
+                    </p>
+                </div>
+
+                <!-- end actualizar horario del cliente -->
+            </div>
+        </div>
+
+        <!-- Actualizar dirección principal del cliente -->
+
+        <div class="card-body style-card-settings pt-2 pb-2 mt-3">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                        <input type="checkbox" [checked]="( appPreferences$ | async ).allowChangeMainAddress" (change)="toggleAppPreference('allowChangeMainAddress',$event.target.checked)" />
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle title-road"> 
+                                            {{ 'PREFERENCES.APP.ALLOW_UPDATE_ADDRESS_MAIN' | translate }}
+                                        </span>
+                                    </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        {{ 'PREFERENCES.APP.UPDATE_ADDRESS_MAIN_ADDRESS' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3 mb-2" *ngIf="(appPreferences$ | async ).allowChangeMainAddress">
+
+                    <div class="form-group">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+            
+                                            <input class="form-control form-input showHour" type="number" placeholder="0" [value]="( appPreferences$ | async ).serviceUpdateMainAddress" min="0" max="9999999" class="form-control" (focusout)="toggleAppPreference('serviceUpdateMainAddress', $event.target.value)"/>
+            
+                                            <label for="first" class="mt-2 title-col size-secund"> {{ 'PREFERENCES.APP.SERVICE_UPDATE_MAIN_ADDRESS' | translate }} </label>
+            
+                                        </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- end Actualizar dirección principal del cliente -->
+
+        <!-- Actualizar fotografías del local del cliente   -->
+
+        <div class="card-body style-card-settings pt-2 pb-2 mt-3">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                        <input type="checkbox" [checked]="( appPreferences$ | async ).allowUpdateClientPhoto" (change)="toggleAppPreference('allowUpdateClientPhoto', $event.target.checked)"/>
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle title-road"> 
+                                            {{ 'PREFERENCES.APP.ALLOW_UPDATE_CLIENT_PHOTO' | translate }}
+                                        </span>
+                                    </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        {{ 'PREFERENCES.APP.ALLOW_UPDATE_CLIENT_PHOTO_MESSAGE' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3 mb-2" *ngIf="(appPreferences$ | async ).allowUpdateClientPhoto">
+
+                    <div class="form-group">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+            
+                                            <input class="form-control form-input showHour" type="number" placeholder="0" [value]="( appPreferences$ | async ).serviceUpdatePhoto" min="0" max="9999999" class="form-control" (focusout)="toggleAppPreference('serviceUpdatePhoto', $event.target.value)"/>
+            
+                                            <label for="first" class="mt-2 title-col size-secund"> {{ 'PREFERENCES.APP.SERVICE_UPDATE_PHOTO' | translate }} </label>
+            
+                                        </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end  Actualizar fotografías del local del cliente  -->
+
+        <!-- Actualizar teléfono del cliente -->
+
+        <div class="card-body style-card-settings pt-2 pb-2 mt-3 mb-2">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                        <input type="checkbox" [checked]="( appPreferences$ | async ).allowUpdateClientPhone"(change)="toggleAppPreference('allowUpdateClientPhone', $event.target.checked)"/>
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle title-road"> 
+                                            {{ 'PREFERENCES.APP.ALLOW_UPDATE_CLIENT_PHONE' | translate }}
+                                        </span>
+                                    </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        {{ 'PREFERENCES.APP.ALLOW_UPDATE_CLIENT_PHONE_MESSAGE' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3 mb-2" *ngIf="(appPreferences$ | async ).allowUpdateClientPhone">
+
+                    <div class="form-group">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+            
+                                            <input class="form-control form-input showHour" type="number" placeholder="0" [value]="( appPreferences$ | async ).serviceUpdatePhone" min="0" max="9999999" class="form-control" (focusout)="toggleAppPreference('serviceUpdatePhone', $event.target.value)"/>
+            
+                                            <label for="first" class="mt-2 title-col size-secund"> {{ 'PREFERENCES.APP.SERVICE_UPDATE_PHONE' | translate }} </label>
+            
+                                        </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end Actualizar teléfono del cliente -->
+    </div>
+
+</div>
+
+<!-- end Permitir actualizar la información del cliente desde la app -->
+
+<!-- Modificar orden desde la app -->
+
+<div class="card mt-3">
+    <div class="card-body pr-xl-5">
+        <div class="row">
+
+            <div class="col-xl-12 col-12">
+                <div class="">
+                    <div class="switch w-100">
+                        <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="(appPreferences$| async).allowRouteOrderChange" (change)="toggleAppPreference('allowRouteOrderChange',$event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        {{ 'Modificar orden de puntos desde la app' }}
+                                    </span>
+                                </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                    {{ 'Al activar la modificación de puntos de entrega/recogida desde la app, permites que el chófer re ordene de manera libre los puntos de entrega después de haberlo optimizado y asignado.'}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- end Modificar orden desde la app -->
+
+<!-- Checking de productos/servicios -->
+
+<div class="card mt-3">
+
+    <div class="card-body pl-xl-4 pr-xl-5">
+
+        <div class="row pt-2">
+
+            <div class="col-xl-12 col-12">
+
+                <label class="title-road"> Checking de productos/servicios </label>
+
+                <p class="sub-title-road mt-1"> Desde la app el chófer podrá marcar con un check tanto los productos entregados/recogidos como los que no. A continuación configura este apartado para agilizar el proceso. </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-footer pl-xl-4 pr-xl-4">
+
+        <!-- Checking marcado por defecto -->
+
+        <div class="card-body style-card-settings pt-2 pb-2 mt-2">
+
+            <div class="row">
+
+
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                        <input type="checkbox"  [checked]="(appPreferences$| async).autoCheckProductDeliveryNote" (change)="toggleAppPreference('autoCheckProductDeliveryNote',$event.target.checked)"/>
+
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                        <span class="title-toggle title-road"> 
+
+                                            {{ 'Checking marcado por defecto' }}
+
+                                        </span>
+
+                                    </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        Al activar el checking marcado por defecto, cuando aparezca la pantalla de los productos por entregar vendrán todos marcados por defecto con el check de “bien”.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Checking marcado por defecto -->
+
+        <!-- Permitir modificar la cantidad -->
+
+        <div class="card-body style-card-settings pt-2 pb-2 mt-3 mb-2">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                        <input type="checkbox"  [checked]="(appPreferences$| async).allowModifyDeliveryNote" (change)="toggleAppPreference('allowModifyDeliveryNote',$event.target.checked)"/>
+
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                        <span class="title-toggle title-road"> 
+
+                                            {{ 'Permitir modificar la cantidad' }}
+
+                                        </span>
+
+                                    </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">
+                        {{ 'MODULES.MODIFY_DELIVERY_NOTE_MESSAGE' | translate }}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Permitir modificar la cantidad -->
+
+    </div>
+
+</div>
+
+<!-- end Checking de productos/servicios -->
+
+<!-- Radio de acción -->
+
+<div class="card mt-3">
+
+    <div class="card-body">
+
+        <div class="row pt-2 ml-2 mr-2">
+
+            <!-- title -->
+
+            <div class="col-xl-12 col-12 p-xl-0">
+
+                <label class="title-road"> Radio de acción </label>
+
+            </div>
+
+            <!-- end title -->
+
+
+
+            <div class="card">
+
+                <!-- Permitir realizar el servicio solo dentro del radio de acción -->
+                <div class="card-body style-card-settings pt-2 pb-2 mt-3 mb-2">
+
+                    <div class="col-xl-12 col-12 p-xl-0">
+
+                        <div class="row pb-1">
+
+                            <div class="col-12 mb-1 d-flex flex-row">
+
+                                <div class="round round-little margin-days">
+
+                                    <input type="checkbox" [checked]="( appPreferences$ | async ).applyRadiusActionClients" (change)="toggleAppPreference('applyRadiusActionClients',$event.target.checked)" id="applyRadiusActionClients" />
+
+                                    <label style="border-radius: 50% !important;" for="applyRadiusActionClients"></label>
+
+                                </div>
+
+                                <label for="applyRadiusActionClients" class="label-check point title-radios-actios ">
+                        
+                                                Permitir realizar el servicio solo dentro del radio de acción
+                        
+                                        </label>
+
+                            </div>
+
+                            <div class="col-12">
+                                <p class="sub-title-radios-actios  mt-xl-0 pt-2">
+                                    Al activar esta opción se aplicará un radio de acción desde la dirección de cada cliente. Si el chófer no está dentro de ese radio no podrá realizar la entrega/recogida y solo podrá si está dentro del radio de distancia establecido en la configuración.
+                                    Define la distancia mínima de alcance de la cual el chófer debe estar para realizar la entrega/recogida.
+                                </p>
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-4  mt-xl-2 mt-3 mb-2" *ngIf="( appPreferences$ | async ).applyRadiusActionClients">
+
+                                <div class="form-group">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+                        
+                                                        <input class="form-control form-input showM" type="number" placeholder="000" [value]="( appPreferences$ | async ).rangeDistanceInMeter" min="0" max="9999999" (focusout)="toggleAppPreference('rangeDistanceInMeter',$event.target.value)"/>
+                        
+                                                        <label for="first" class="mt-2 title-col size-secund"> Distancia de alcance (metros) </label>
+                        
+                                                    </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 mb-1 d-flex flex-row" *ngIf="( appPreferences$ | async ).applyRadiusActionClients">
+
+                                <div class="round round-little margin-days">
+
+                                    <input type="checkbox" [checked]="( appPreferences$ | async ).appAllowOutOfRange" (change)="toggleAppPreference('appAllowOutOfRange',$event.target.checked)" id="appAllowOutOfRange" />
+
+                                    <label for="appAllowOutOfRange"></label>
+
+                                </div>
+
+                                <label for="appAllowOutOfRange" class="label-check point title-radios-actios ">
+                        
+                                    {{ 'Permitir realizar el servicio aunque estén fuera del radio de acción' }}
+                
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- end Permitir realizar el servicio solo dentro del radio de acción -->
+
+                <!-- Marcar hora de llegada y salida mediante el radio de acción -->
+
+                <div class="card-body style-card-settings pt-2 pb-2 mt-3 mb-2">
+
+                    <div class="col-xl-12 col-12 p-xl-0">
+
+                        <div class="row pb-1">
+
+                            <div class="col-12 mb-1 d-flex flex-row">
+
+                                <div class="round round-little margin-days">
+
+                                    <input type="checkbox" [checked]="( appPreferences$ | async ).markArrivalExitRadiusAction" (change)="toggleAppPreference('markArrivalExitRadiusAction', $event.target.checked)" id="markArrivalExitRadiusAction" />
+
+                                    <label style="border-radius: 50% !important;" for="markArrivalExitRadiusAction"></label>
+
+                                </div>
+
+                                <label for="markArrivalExitRadiusAction" class="label-check point title-radios-actios ">
+                        
+                                    Marcar hora de llegada y salida mediante el radio de acción
+                        
+                                 </label>
+
+                            </div>
+
+                            <div class="col-12">
+                                <p class="sub-title-radios-actios  mt-xl-0 pt-2">
+                                    Al activar esta opción se aplicará un radio de acción desde la dirección de cada cliente y una vez el chófer entre dentro de este radio se marcará como “llegada” y en el momento en el que salga del radio se marcara como “salida”.
+                                </p>
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-4  mt-xl-2 mt-3 mb-2" *ngIf="( appPreferences$ | async ).markArrivalExitRadiusAction">
+
+                                <div class="form-group">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+                        
+                                            <input class="form-control form-input showM" type="number" placeholder="000"  [value]="( appPreferences$ | async ).arrivalExitRangeDistanceInMeter" min="0" max="9999999" (focusout)="toggleAppPreference('arrivalExitRangeDistanceInMeter',$event.target.value)"/>
+            
+                                            <label for="first" class="mt-2 title-col size-secund"> Distancia de alcance (metros) </label>
+            
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- end Marcar hora de llegada y salida mediante el radio de acción -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end Radio de acción -->
+
+    <!-- encuesta de albaran -->
+    <div class="card mt-3">
+        <div class="card-body pr-xl-5">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                    <input type="checkbox"  [checked]="(appPreferences$| async).allowDeliveryNoteStatus" (change)="toggleAppPreference('allowDeliveryNoteStatus',$event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        {{ 'Mostrar encuesta estado de albarán' }}
+                                    </span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        {{ 'Al activar esta opción se añadirá una pantalla después de la firma para que el chófer determine cual es el estado del albarán.'}}
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="row mt-3 pb-2  d-flex flex-row pl-xl-3 pr-xl-3" *ngIf="(appPreferences$| async ).allowDeliveryNoteStatus">
+                <div class="col-xl-6 col-md-6 col-6  d-flex flex-row" *ngFor="let state of stateAlbaran">
+
+                    <div class="round round-little">
+                        <input type="checkbox" [checked]="state.companyDeliveryNoteStatusUse && state.companyDeliveryNoteStatusUse !== null ? state.companyDeliveryNoteStatusUse.isActive : false" (change)="
+                            updateStatePreference(
+                                state,
+                                $event.target.checked
+                            )
+                        " [id]="'state-'+ state.id" />
+                        <label [for]="'state-'+ state.id"></label>
+                    </div>
+                    <label [for]="'state-'+ state.id" class="label-check">
+                            {{ state.name }} ({{ state.id }})
+                        </label>
+                </div>
+            </div>
+            <div class="row mt-3 pb-2 pl-xl-3 pr-xl-3" *ngIf="(appPreferences$ | async).allowDeliveryNoteStatus">
+                <div class="col-xl-6 col-md-6 col-6">
+                    <p class="title-add-check" style="font-weight: bold;">Añadir un campo personalizado</p>
+                </div>
+            </div>
+            <div class="row mt-1 pb-2 d-flex flex-row pl-xl-3 pr-xl-3" *ngIf="(appPreferences$ | async).allowDeliveryNoteStatus">
+                <div class="col-1 pr-0">
+                    <div class="round round-little">
+                        <input type="checkbox" [(ngModel)]="isActiveState" id="add-state-active" />
+                        <label style="border-radius: 50% !important;" for="add-state-active"></label>
+                    </div>
+                </div>
+                <div class="col-5 pl-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-input" [(ngModel)]="nameAddState" />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1 pb-2 pl-xl-3 pr-xl-3" *ngIf="(appPreferences$ | async).allowDeliveryNoteStatus">
+                <div class="col-3 offset-1 pl-0">
+                    <p class="add-state-albaran" (click)="addStateAlbaran()">Añadir otro</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end encuesta de albaran -->
+
+    <!-- verificación chófer -->
+    <div class="card mt-3">
+        <div class="card-body pr-xl-5">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="(managementPreferences$ | async) .driverVerifyClientTime" (change)="toggleManagementPreference( 'driverVerifyClientTime', $event.target.checked )"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        {{ 'Verificación chófer' }}
+                                    </span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        {{ 'Verificar horario inicial de los clientes: Al activar esta opción, la primera vez que se realice un servicio a un cliente desde la App aparecerá una ventana para modificar el horario de apertura y cierre del cliente de forma automática'}}
+                    </p>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- end verificación chófer -->
+
+    <!-- Finalizar ruta al finalizar el último servicio -->
+
+    <div class="card mt-3">
+        <div class="card-body pr-xl-5">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                    <input type="checkbox"  [checked]="(appPreferences$| async).autoFinishRouteOnLastPoint" (change)="toggleAppPreference('autoFinishRouteOnLastPoint', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        {{ 'Finalizar ruta al finalizar el último servicio' }}
+                                    </span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        {{ 'Al activar esta opción, cuando el chófer finalice el servicio del último cliente se finalizará la ruta de manera automática sin tener que hacer clic en ningún botón.' }}
+                    </p>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- end Finalizar ruta al finalizar el último servicio -->
+
+    <!-- autoventa -->
+    <div class="card mt-3">
+        <div class="card-body pr-xl-5">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="(appPreferences$| async).allowAutoSell" (change)="toggleAppPreference('allowAutoSell', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        {{ 'Autoventa' }}
+                                    </span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        {{ 'Al activar "Autoventa", al chófer se le mostrará después de seleccionar al cliente de la ruta la pantalla generar un nuevo pedido.' }}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- end autoventa -->
+
+    <!-- Valoración de entrega -->
+
+    <ng-container *ngIf="activeValoration && authLocal.isLogged() &&
+    (isControlPanel() || isAdmin() || isAdminCompany() || isControlPartners()) &&
+    (isActive() || defeatedDemo() || inTrial() || (isAdmin() && !isControlPanel()))">
+
+        <div class="card mt-3">
+
+            <div class="card-body pl-4 pr-xl-5">
+
+                <easyroute-valoration-preference></easyroute-valoration-preference>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+
+    <!-- Mostrar sesion de repostaje en app -->
+    <div class="card mt-3">
+        <div class="card-body pr-xl-5">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="(appPreferences$| async).showRefuelingSection" (change)="toggleAppPreference('showRefuelingSection', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        Mostrar sección de repostaje en app
+                                    </span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        Al activar esta opción se mostrará la opción de añadir repostaje desde la app de chófer.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- end autoventa -->
+
+    <!-- editar cliente desde app -->
+    <div class="card mt-3">
+        <div class="card-body pr-xl-5">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="(appPreferences$| async).allowEditClientInApp" (change)="toggleAppPreference('allowEditClientInApp', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road"> 
+                                        Editar cliente desde la app
+                                    </span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        Al activar esta opción, los chóferes podrán acceder y editar la información de los clientes desde la app.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--END editar cliente desde app -->
+
+</div>

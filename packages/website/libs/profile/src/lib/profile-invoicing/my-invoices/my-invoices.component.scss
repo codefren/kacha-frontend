@@ -1,0 +1,65 @@
+@import '../../../../../../apps/easyroute/src/common';
+.easyroute-my-invoices {
+    .error-title {
+        font-weight: bold;
+    }
+    @media (max-width: 576px) {
+        .break-line {
+            margin-top: 1.2em;
+        }
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: transparent;
+        opacity: 1;
+    }
+    .title-page-invoices {
+        font-size: 15px;
+        color: #000000;
+    }
+    .line {
+        border-bottom: 1px solid #c6c7c9;
+    }
+    .space-button {
+        color: #ff9e4d;
+    }
+    .btn {
+        padding: 0.37rem 0.75rem;
+        font-size: 16px;
+    }
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        font-weight: lighter;
+        font-size: 16px;
+        border-radius: 0px;
+    }
+
+    .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:focus {
+        color: black !important;
+        background-color: white !important;
+        border: 1px solid #cecece !important;
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: helvetica;
+        width: 8rem;
+        padding: 2px;
+    }
+
+    .input-group {
+        .form-control {
+            padding: 10px 20px !important;
+            height: 48px !important;
+            font-size: 14px !important;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            background: #fff;
+        }
+    }
+}

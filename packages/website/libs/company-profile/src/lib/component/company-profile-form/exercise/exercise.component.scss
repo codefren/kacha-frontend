@@ -1,0 +1,72 @@
+.exercise {
+    .title-row {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #9899AA;
+    }
+    .title-label {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .form-control-select,
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .btn-add-concept {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        padding: 0px;
+    }
+    .add-concept {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px !important;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #3B4FFF !important;
+    }
+    .btn-primary {
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+    }
+    .form-control-date {
+        height: 45px;
+        border: 1.5px solid #DFE1E8;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-top-left-radius: 5px !important;
+        border-bottom-left-radius: 5px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    .btn-calendar {
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+    }
+}

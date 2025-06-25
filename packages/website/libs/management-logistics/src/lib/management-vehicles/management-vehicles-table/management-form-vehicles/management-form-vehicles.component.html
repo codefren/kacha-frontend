@@ -1,0 +1,236 @@
+<div class="vehicles-form font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'VEHICLES.NAME' | translate }} </label>
+
+        </div>
+
+
+
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0">
+
+
+            <div class="card" *ngIf="vehicles">
+
+
+
+                <div class="card-body" style="display: block;">
+
+                    <div class="row">
+
+
+                        <div class="col-12">
+
+                            <p class="title-add"> {{ 'GENERAL.CUSTOMER_VEHICLE_PHOTO' | translate }} </p>
+
+                        </div>
+
+
+
+                        <!-- cargar y ver imagen -->
+
+                        <div class="col-12 text-center">
+
+
+
+
+                            <div class="card">
+
+                                <!-- si no hay nada -->
+
+                                <ng-container *ngIf="!imgLoad">
+
+                                    <img class="size-img point" src="assets/icons/vehiclesAdd.svg" (click)="fileAddImage.click()">
+
+                                </ng-container>
+
+                                <!-- end si no hay nada -->
+
+                                <!-- si hay imagen -->
+
+                                <ng-container *ngIf="imgLoad">
+
+                                    <div class="size-hover1 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                        <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage()"></i>
+
+                                    </div>
+
+                                    <img class="size-load point" [src]="imgLoad" (click)="fileAddImage.click()">
+
+                                </ng-container>
+
+                                <!-- en si hay imagenes -->
+
+                            </div>
+
+                        </div>
+
+                        <!-- end cargar y ver imagen -->
+
+                        <!-- error -->
+
+                        <div class="col-12 text-center mt-3" *ngIf="imageError.length > 0">
+
+                            <span class="text-danger">{{ imageError }}</span>
+
+                        </div>
+
+                        <!-- end error -->
+
+
+
+                        <!-- input hidden type file -->
+
+                        <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChangeEvent($event)" />
+
+                        <!-- end input hidden type file -->
+
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+                    <p class="title-route mb-0"> {{ 'VEHICLES.VEHICLE_STATUS' | translate }} </p>
+
+                    <div class="border-special">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                            <input type="checkbox" [checked]="activeVehicles" (change)="changeActive($event.target.checked)"/>
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+                            <span class="lever-text">{{ 'GENERAL.ACTIVE' | translate }}</span>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> ID </label>
+
+                    <p class="sub-title mb-0"> #{{ vehicles.id }} </p>
+                </div>
+
+                <ng-container *ngIf="vehicles.id > 0">
+                    <div class="card-footer pb-4" style="display: block;">
+
+                        <label class="style-info"> {{'VEHICLES.CREATION_DATE' | translate }} </label>
+
+                        <p class="m-0 name-title ">{{returnsDate(vehicles.createdAt)}}</p>
+
+                    </div>
+
+                    <div class="card-footer pb-4" style="display: block;">
+
+                        <label class="style-info"> {{'VEHICLES.CREATED_BY' | translate }} </label>
+
+                        <p class="m-0 name-title "> {{vehicles.created_by_user ? vehicles.created_by_user:'No disponibles' }} </p>
+
+                    </div>
+                </ng-container>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12" *ngIf="vehicles">
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'generic_information'}" (click)="changePage('generic_information')">
+
+                <label class="title-selected point" for=""> {{'VEHICLES.GENERIC_INFORMATION' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [disabled]="vehicles && !vehicles.id" [ngClass]="{'no-selecter': select != 'assignments', 'no-point': vehicles.id == 0}" (click)="changePage('assignments')">
+
+                <label class="title-selected point" for=""> {{ 'VEHICLES.ASSIGMENTS' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [disabled]="vehicles && !vehicles.id" [ngClass]="{'no-selecter': select != 'documentation', 'no-point': vehicles.id == 0}" (click)="changePage('documentation')">
+
+                <label class="title-selected" [ngClass]="{'point': vehicles.id > 0}" for=""> {{ 'VEHICLES.DOCUMENTATION' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [disabled]="vehicles && !vehicles.id" [ngClass]="{'no-selecter': select != 'maintenance', 'no-point': vehicles.id == 0}" (click)="changePage('maintenance')" *ngIf="vehicleMaintenanceActive()">
+
+                <label class="title-selected" [ngClass]="{'point': vehicles.id > 0}" for="">
+                    <img class="img-anclar" src="assets/icons/anclar.svg"> {{ 'VEHICLES.MAINTENANCE' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [disabled]="vehicles && !vehicles.id" [ngClass]="{'no-selecter': select != 'costs', 'no-point': vehicles.id == 0}" (click)="changePage('costs')" *ngIf="ModuleCost() && showNotTraffic()">
+
+                <label class="title-selected" [ngClass]="{'point': vehicles.id > 0}" for=""> 
+                    <img class="img-anclar" [ngClass]="{'point': vehicles.id > 0}" src="assets/icons/anclar.svg"> {{ 'VEHICLES.COST' | translate }} </label>
+
+            </button>
+
+            <ng-container *ngIf="select === 'generic_information'">
+
+
+                <easyroute-generic-information [idParan]="idParan" [imgLoad]="imgLoad"></easyroute-generic-information>
+
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'assignments'">
+
+
+                <easyroute-assignments [idParan]="idParan"></easyroute-assignments>
+
+
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'documentation'">
+
+                <easyroute-documentation [idParan]="idParan"></easyroute-documentation>
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'maintenance' && vehicleMaintenanceActive()">
+                <easyroute-maintenance [idParan]="idParan"></easyroute-maintenance>
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'costs' && ModuleCost()">
+
+
+                <easyroute-costs [data]="vehicles" (vehiclesOut)="getData($event)"></easyroute-costs>
+
+
+
+
+            </ng-container>
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+</div>

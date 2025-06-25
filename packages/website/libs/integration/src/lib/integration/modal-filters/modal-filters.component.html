@@ -1,0 +1,95 @@
+<div class="row mb-3 border-bottom">
+    <div class="col-3 text-center">
+        <h3 for="" class="ml-4 filter-title">Filtros</h3>
+    </div>
+    <div class="col-9 text-right pt-3 pr-4">
+        <button class="btn clear" (click)="closeDialog()"> <i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+
+<!-- Filtros -->
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'USERS.SHOW' | translate }}</label>
+        <div class="hack-select w-100">
+            <select id="favorites" (change)="ChangeFilter($event)" [(ngModel)]="filter.favorites" #favorites class="form-control">
+                <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option value="true">{{ 'GENERAL.FAVORITES' | translate }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'INTEGRATION.PLANNING_TYPE' | translate }}</label>
+        <div class="input-group">
+            <div class="hack-select w-100">
+                <select (change)="ChangeFilter($event)" [(ngModel)]="filter.integrationSessionTypeId" #integrationSessionTypeId class="form-control letter-app" id="integrationSessionTypeId">
+                    <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                    <option [value]="1">{{ 'INTEGRATION.DELIVERY_POINTS' | translate  }}</option>
+                    <option [value]="2">{{ 'INTEGRATION.ORDERS' | translate }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0">{{ 'ORDERS.ORDERS_LIST.INTERVAL' | translate }}</label>
+        <div class="control-label col-especial m-0 hack-select">
+            <select (change)="ChangeFilter($event)" #interval id="interval" [(ngModel)]="typeInterval" class="form-control letter-app">
+                <option value="todas" selected>{{ 'GENERAL.ALL_' | translate }}</option>
+                <option value="hoy">{{ 'GENERAL.FROM_TODAY' | translate }}</option>
+                <option value="por fecha">{{ 'GENERAL.BY_DATE' | translate }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4" *ngIf="showIntervalFiel">
+    <ng-container>
+        <div class="col-12 mt-2 mt-sm-0 ml-3">
+            <label class="control-label col-especial m-0" for="orderDate">{{ 'GENERAL.FROM' |translate }}</label>
+            <div class="input-group">
+
+                <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}"
+                    [(ngModel)]="model" name="dateFrom" (ngModelChange)="getDate($event, dateFrom)" ngbDatepicker
+                    #b="ngbDatepicker" autocomplete="off" [minDate]="datemin" [startDate]="dateNow" id="dateFrom">
+                <button class="btn btn-calendar calendar table-append m-0 " (click)="b.toggle()" type="button">
+                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                        aria-hidden="true">
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4" *ngIf="showIntervalFiel">
+    <ng-container>
+        <div class="col-12 mt-2 mt-sm-0 ml-3">
+            <label class="control-label col-especial m-0" for="orderDate">{{ 'GENERAL.TO' |translate }}</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}"
+                    [disabled]="disabledateto" [(ngModel)]="model2" name="datedateTo"
+                    (ngModelChange)="getDate($event, datedateTo)" ngbDatepicker #d="ngbDatepicker" autocomplete="off"
+                    [minDate]="dateMax" [startDate]="dateNow" id="dateTo">
+                <button class="btn btn-calendar calendar table-append m-0" (click)="d.toggle()" type="button">
+                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                        aria-hidden="true">
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 offset-3 col-md-6 text-center mt-4">
+        <button class="btn btn-primary btn-block" (click)="closeDialog()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 text-left ml-4 position-absolute bottom-0">
+        <a (click)="clearSearch()">Limpiar filtro</a>
+    </div>
+</div>

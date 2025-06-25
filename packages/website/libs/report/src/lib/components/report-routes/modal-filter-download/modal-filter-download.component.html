@@ -1,0 +1,410 @@
+<div class="modal-filter-donwload">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'REPORT.CUSTOM_DOWNLOAD' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close1.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="title-infor"> {{'REPORT.SELECT_THE_SECTIONS_OF' | translate }} </p>
+
+            </div>
+
+            <!-- sumary -->
+
+            <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('sumary')" [(ngModel)]="filter.sumary" name="flexRadioDefault" id="flexRadioDefault8">
+
+                            <label for="flexRadioDefault8"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault8" class="label-check point label-filter">
+    
+                            {{ 'REPORT.SUMMARY1' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- points no delivered -->
+
+            <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('pointNoDelivered')" [(ngModel)]="filter.pointNoDelivered" name="flexRadioDefault" id="pointNoDelivered7">
+
+                            <label for="pointNoDelivered7"></label>
+
+                        </div>
+
+                        <label for="pointNoDelivered7" class="label-check point  label-filter">
+
+                            {{ 'REPORT.POINT_NO_DELIVERED'| translate }}
+
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- delay -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('delay')" [(ngModel)]="filter.delay" name="flexRadioDefault" id="flexRadioDefault3">
+
+                            <label for="flexRadioDefault3"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault3" class="label-check point label-filter">
+    
+                            {{ 'REPORT.DELAY' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- products no delivered -->
+
+            <!-- <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('productNotDelivered')" [(ngModel)]="filter.productNotDelivered" name="flexRadioDefault" id="productNotDelivered7">
+
+                            <label for="productNotDelivered7"></label>
+
+                        </div>
+
+                        <label for="productNotDelivered7" class="label-check point  label-filter">
+
+                            {{ 'REPORT.PRODUCTS_NOT_DELIVERIED'| translate }}
+ 
+                        </label>
+
+                    </div>
+                </div>
+            </div> -->
+
+
+            <!-- albaran -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('albaran')" [(ngModel)]="filter.albaran" name="flexRadioDefault" id="flexRadioDefault4">
+
+                            <label for="flexRadioDefault4"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault4" class="label-check point label-filter">
+    
+                           {{ 'REPORT.MODIFIED_DELIVERY_NOTES1' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- bill resumen de cobro -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('bill')" [(ngModel)]="filter.bill" name="flexRadioDefault" id="bill7">
+
+                            <label for="bill7"></label>
+
+                        </div>
+
+                        <label for="bill7" class="label-check point  label-filter">
+    
+                            {{ 'REPORT.SUMMARY_OF_COLLECTIONS'| translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- devolution -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('devolution')" [(ngModel)]="filter.devolution" name="flexRadioDefault" id="flexRadioDefault5">
+
+                            <label for="flexRadioDefault5"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault5" class="label-check point label-filter">
+    
+                            {{ 'REPORT.RETURNS_' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- round -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('round')" [(ngModel)]="filter.round" name="flexRadioDefault" id="round6">
+
+                            <label for="round6"></label>
+
+                        </div>
+
+                        <label for="round6" class="label-check point label-filter">
+    
+                           {{ 'REPORT.SECOND_LAPS'| translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- outRange -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('outRange')" [(ngModel)]="filter.outRange" name="outRange" id="outRange">
+
+                            <label for="outRange"></label>
+
+                        </div>
+
+                        <label for="outRange" class="label-check point label-filter">
+    
+                            {{ 'REPORT.SERVICE_OUTRANGE' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- comparative -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('comparative')" [(ngModel)]="filter.comparative" name="flexRadioDefault" id="flexRadioDefault9">
+
+                            <label for="flexRadioDefault9"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault9" class="label-check point label-filter">
+    
+                            {{ 'REPORT.COMPARATIVE' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- control de coste -->
+            <div class="col-xl-6 col-12 mt-2" *ngIf="moduleCost()">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('costControl')" [(ngModel)]="filter.costControl" name="flexRadioDefault10" id="flexRadioDefault10">
+
+                            <label for="flexRadioDefault10"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault10" class="label-check point label-filter">
+    
+                            {{ 'REPORT.COST_CONTROL_1' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- end control de coste -->
+
+            <!-- Refueling -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('refueling')" [(ngModel)]="filter.refueling" name="flexRadioDefault11" id="flexRadioDefault11">
+
+                            <label for="flexRadioDefault11"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault11" class="label-check point label-filter">
+    
+                            {{ 'REPORT.REFUELING' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- end control de coste -->
+
+            <!-- envases -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('boxes')" [(ngModel)]="filter.boxes" name="flexRadioDefault11" id="flexRadioDefault12">
+
+                            <label for="flexRadioDefault12"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault12" class="label-check point label-filter">
+    
+                            {{ 'REPORT.PACKAGING' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- end envases -->
+
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center">
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary mr-2" [disabled]="!filter.sumary 
+                && !filter.comparative && !filter.delay && !filter.albaran && !filter.devolution 
+                && !filter.round && !filter.bill && !filter.productNotDelivered 
+                && !filter.pointNoDelivered && !filter.outRange && !filter.costControl && !filter.refueling && !filter.boxes" (click)="donwloadFilter()"> {{ 'REPORT.DISCHARGE'| translate }} </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

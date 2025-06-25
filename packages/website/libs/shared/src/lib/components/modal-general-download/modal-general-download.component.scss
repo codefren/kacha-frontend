@@ -1,0 +1,103 @@
+.modal-general-download {
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .title-sub {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 19px;
+        color: #7F8198;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-header {
+        display: block;
+        padding: 1rem 2.5rem;
+    }
+    .modal-footer {
+        display: block;
+    }
+    .modal-body {
+        padding: 1rem 2rem;
+    }
+    @media screen and (min-width: 1025px) and (max-width: 3000px) {
+        .modal-body {
+            padding: 1rem 2.5rem;
+        }
+    }
+    .has-float-label input,
+    .has-float-label select {
+        font-size: 14px !important;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740 !important;
+        opacity: 1 !important;
+        font-size: 14px !important;
+    }
+    .has-float-label label::after {
+        background: transparent !important;
+    }
+    .add-concept {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px !important;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #3B4FFF !important;
+    }
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .title-label {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740 !important;
+    }
+    .btn-primary {
+        border-radius: 5px !important;
+    }
+    .btn-icon-gray {
+        width: 42px;
+    }
+    .span-color {
+        font-weight: 400;
+        .asterisco {
+            color: #E91313;
+            font-size: 15px;
+        }
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        //border-radius: 5px;
+        border-radius: 5px;
+    }
+    .round-1 {
+        position: absolute;
+    }
+}

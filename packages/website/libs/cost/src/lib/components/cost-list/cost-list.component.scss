@@ -1,0 +1,129 @@
+.cost-list {
+    .btn-secondary {
+        height: 45px;
+        border-radius: 5px
+    }
+    .page-title {
+        span {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 26px;
+            align-items: center;
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+    }
+    img {
+        vertical-align: sub;
+    }
+    .btn-write-anclar {
+        background: #FFFFFF;
+        border-radius: 5px;
+        height: 45px;
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+    .btn-group .dropdown-menu.show {
+        width: 14.5rem;
+        box-shadow: 2px 2px 10px rgb(0 0 0 / 10%);
+        border-radius: 5px;
+        border: 0px solid rgba(0, 0, 0, 0.15);
+    }
+    .card {
+        height: 100px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .p-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #000000;
+    }
+    .p-sub-number {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 29px;
+        color: #000000;
+    }
+    .special-display {
+        display: block;
+        z-index: 10000;
+    }
+    .dataTable thead th {
+        font-size: 14px !important;
+        padding: 21px;
+    }
+    .card-left {
+        // width: 180px;
+        height: 100px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .card-rigth {
+        // width: 195px;
+        height: 100px;
+        background: #E8E9EE;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .btn-default {
+        background: #FFFFFF;
+        border-radius: 5px;
+        border-color: #fff;
+        //height: 45px;
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .no-selecter {
+        opacity: 0.65;
+        .title-selected {
+            font-weight: 500;
+        }
+    }
+    .size-load-albaran {
+        cursor: default;
+        width: 139px !important;
+        border-radius: 5px 0px 0px 5px;
+    }
+    .size-open {
+        margin-left: 2px;
+        width: 39px !important;
+        border-radius: 0px 5px 5px 0px;
+        img {
+            vertical-align: inherit !important;
+        }
+    }
+}

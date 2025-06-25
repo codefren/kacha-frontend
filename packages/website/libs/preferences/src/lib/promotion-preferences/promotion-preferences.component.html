@@ -1,0 +1,347 @@
+<div class="promotion-preference" *ngIf="promotionsPreferences">
+
+    <!-- Pasar promoción automáticamente -->
+
+    <div class="card">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [(ngModel)]="promotionsPreferences.activeCarouselTime" (change)="changeCarouselTime( $event.target.checked)" />
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road"> 
+                                    {{ 'PROMOTIONS.PASS_PROMOTION_AUTOMATICALLY' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">{{ 'PROMOTIONS.IN_CASE_OF_BEING_ACTIVE_THE_PROMOTIONS_ARE_PASSED_AUTOMATICALLY_EVERY_CERTAIN_TIME_AS_CONFIGURED' |translate }}</p>
+                </div>
+
+            </div>
+
+            <div class="row pb-3 pl-xl-5 ml-xl-2" *ngIf="promotionsPreferences && promotionsPreferences.activeCarouselTime">
+
+                <div class="col-xl-3 col-md-6 col-12">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="number" class="form-control primary form-input" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="
+                            promotionsPreferences.carouselTimeIntervalPromotions
+                            " (blur)="
+                                changeCarouselTime()
+                            " (keyup.enter)="
+                                changeCarouselTime()
+                            " placeholder="00" required />
+
+                            <label for="first" class="mt-2 title-col"> {{'GENERAL.SECONDS'| translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mostrar promoción entre productos -->
+
+    <div class="card mt-3">
+
+        <div class="card-body pl-4 pr-xl-5">
+
+            <div class="row pt-2">
+
+                <div class="col-xl-12 col-12">
+
+                    <label class="title-road"> {{ 'PROMOTIONS.MOTIVATE_PROMOTION_BETWEEN_PRODUCTS' | translate }} </label>
+
+                    <p class="sub-title-road mt-1"> {{ 'PROMOTIONS.CONFIGURE_HOW_MANY_PRODUCTS_YOU_WANT_THE_PROMOTION_BANNER_TO_DISPLAY' |translate }} </p>
+
+                </div>
+
+            </div>
+
+            <div class="row pb-3 pl-xl-2">
+
+                <div class="col-xl-3 col-md-6 col-12 padding-col-download">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="number" class="form-control primary form-input" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="
+                                promotionsPreferences.timePromotionBetweenProducts
+                                " (blur)="
+                                    changeCarouselTime()
+                                " (keyup.enter)="
+                                    changeCarouselTime()
+                                " placeholder="00" required />
+
+                            <label for="first" class="mt-2 title-col"> Mostrar promoción cada </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mostrar promociones Pre Home -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [(ngModel)]="promotionsPreferences.showPromotionHome" (change)="changeCarouselTime( $event.target.checked)" />
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road"> 
+                                    {{ 'PROMOTIONS.SHOW_PROMOTIONS_PR_HOME' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road m-1 mt-1 pl-xl-5 ml-xl-4">{{ 'PROMOTIONS.THE_PRE_HOME_PROMOTIONS_ARE_THOSE_THAT_WILL_BE_DISPLAYED_AFTER_LOADING_THE_SPLASH' | translate }}</p>
+                    <p class="sub-title-road m-1 mt-1 pl-xl-5 ml-xl-4">{{ 'PROMOTIONS.IMPORTAN_UNTIL_THE_4_PROMOTION_ARE_LOADED_IN_THE_2_1_FORMAT_TOGETHER_WITH_A_LINK_THAT_REDIRECTS_TO_A_CATEGORY_IT_WILL_NOT_BE_DISPLAYED_IN_THE_APP' | translate }}</p>
+                    <p class="sub-title-road mt-1 pl-xl-5 ml-xl-4">{{ 'PROMOTIONS.THIS_SCREEM_WILL_HAVE_A_CERTAIN_DURACION_THAT_IS_FULLY_CUSTOMIZABLES_IT_IS_RECOMMENDED_NOT_TO_LOWER_THAN_7_SECONDS_OF_VISUALIZATION' | translate }}</p>
+                </div>
+
+            </div>
+
+            <div class="row pb-3 pl-xl-5 ml-xl-2" *ngIf="promotionsPreferences && promotionsPreferences.showPromotionHome">
+
+                <div class="col-xl-3 col-md-6 col-12">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="number" class="form-control primary form-input" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="
+                                promotionsPreferences.timePromotionHome
+                                " (blur)="
+                                    changeCarouselTime()
+                                " (keyup.enter)="
+                                    changeCarouselTime()
+                                " placeholder="{{
+                                    'GENERAL.SECONDS'
+                                        | translate
+                                }}" required />
+
+                            <label for="first" class="mt-2 title-col"> {{'PROMOTIONS.SCREEN_DURATION_TIME' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <ng-container *ngIf="promotionsPreferences && promotionsPreferences.showPromotionHome">
+
+            <div class="card-footer pt-4" *ngFor="let item of companyPrefeProduct; let i=index;">
+
+                <div class="row pb-3 pl-xl-5 ml-xl-2">
+
+                    <div class="col-12">
+                        <label class="title-road">{{ 'PROMOTIONS.PRE_HOME_PROMOTION' | translate }} ({{i + 1}})</label>
+
+                        <p class="sub-title-road">{{ 'PROMOTIONS.REMEMBER_THAT_THE_IMAGE_MUST_BE_IN_2_1_RARIO_AND_WITH_A_MAXIMUN_OF_1MB' | translate }}</p>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 pb-2">
+                        <div class="pl-0 pr-0 d-flex flex-row justify-content-xl-start justify-content-md-start justify-content-center w-100">
+                            <div class="card border card-img point" *ngIf="item.urlImage">
+                                <div class="w-100 h-100 show-background point" (click)="deleteImgPRomotion(item)">
+                                    <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                        <i class="color-icon fas fa-trash fa-2x"></i>
+                                    </div>
+                                </div>
+
+                                <div class="w-100 h-100 text-center">
+                                    <img src="assets/icons/optimmanage/pre-home.svg" *ngIf="!item.urlImage">
+                                    <ng-container *ngIf="!item.id">
+                                        <img #urlLogo [src]="item.urlImage" alt="" *ngIf="item.urlImage !== null" class="img-flud img-render img-upload img-load" />
+                                    </ng-container>
+                                    <ng-container *ngIf="item.id >0">
+                                        <img #urlLogo [src]="item.urlImage + timeImage" alt="" *ngIf="item.urlImage !== null" class="img-flud img-render img-upload img-load" />
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="card border card-img  point" (click)="fileAddProduct.click()" *ngIf="!item.urlImage">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+
+                                    <img src="assets/icons/optimmanage/pre-home.svg">
+                                </div>
+
+                                <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event, item)" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="imageError.length > 0">
+
+                            <p class="text-danger mb-0 font-text-p">
+                                {{ imageError }}
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 pb-2 align-self-end">
+                        <div class="row mt-3">
+                            <div class="form-group input-group">
+
+                                <ng-container *ngIf="loadingCompanyList == 'loading'">
+                                    <div class="col-12 text-center p-2">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="loadingCompanyList == 'error'">
+                                    <div class="col-12">
+                                        <p class="text-danger pointer" (click)="getCategory()">
+                                            {{ 'GENERAL.THERE_WAS' | translate }}
+                                            <ins>{{ 'GENERAL.HERE' | translate }}</ins
+                                        >!
+                                        </p>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="category && category.length == 0 && loadingCompanyList == 'success'">
+                                    <div class="col-12 text-center p-2">
+                                        <p class="text-danger">
+                                            {{ 'PRODUCTS.NO_CATEGORY_REGISTERED' | translate }}
+                                        </p>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="category && category.length > 0 && loadingCompanyList == 'success'">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" [id]="'itemMondaySelect'+ i" (change)="changeSelectPromotion($event.target.value, item)">
+            
+                                            <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+
+                                            <option *ngFor="let categorylist of category" [value]="categorylist.id" 
+                                                [selected]="item.category.id === categorylist.id">
+                                                <span>{{ categorylist.name }}</span>
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="product_category" class="mt-2 title-col"> {{ 'PROMOTIONS.ASSIGN_CATEGORY' | translate }}</label>
+            
+                                    </span>
+                                </ng-container>
+        
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 pb-2 align-self-end" *ngIf="subcategory && subcategory[i]">
+                        <div class="form-row mt-3" >
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-row form-group" [id]="'forrow'+ i">
+
+                                    <ng-container *ngIf="loadingCompanyList == 'loading'">
+                                        <div class="col-12 text-center p-2">
+                                            <div class="fa-2x">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="loadingCompanyList == 'error'">
+                                        <div class="col-12">
+                                            <p class="text-danger pointer" (click)="getCategory()">
+                                                {{ 'GENERAL.THERE_WAS' | translate }}
+                                                <ins>{{ 'GENERAL.HERE' | translate }}</ins
+                                            >!
+                                        </p>
+                                    </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="category && category.length == 0 && loadingCompanyList == 'success'">
+                                        <div class="col-12 text-center p-2">
+                                            <p class="text-danger">
+                                                {{ 'PRODUCTS.NO_CATEGORY_REGISTERED' | translate }}
+                                            </p>
+                                        </div>
+                                    </ng-container>
+                    
+                                    <ng-container *ngIf="category && category.length > 0 && loadingCompanyList == 'success'">
+
+                                        <span class="has-float-label w-100">
+                
+                                            <select class="form-select form-control w-100" [id]="'itemMondaySelect'+ i" (change)="changeSubcategoryPromotion($event.target.value, item)">
+                
+                                                <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+    
+                                                <option *ngFor="let subCategorylist of subcategory[i]" [value]="subCategorylist.id" 
+                                                    [selected]="item.subCategory && item.subCategory.id && item.subCategory.id === subCategorylist.id">
+                                                    <span>{{ subCategorylist.name }}</span>
+                                                </option>
+                
+                                            </select>
+                
+                                            <label for="product_category" class="mt-2 title-col"> {{ 'PROMOTIONS.ASSIGN_SUBCATEGORY' | translate }} </label>
+                
+                                        </span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <ng-container *ngIf="companyPrefeProduct" >
+                <div class="card-footer pt-4">
+
+                    <div class="row pb-3 pl-xl-5 ml-xl-2">
+                        <div class="col-12 text-left">
+                            <ng-container *ngIf="showBtn()" >
+                                <button class="btn btn-default btn-primary size-btn-form color-btn" disabled type="button">Publicar promociones</button>
+                            </ng-container>
+                            <ng-container *ngIf="showBtnCreate()" >
+                                <button class="btn btn-default btn-primary size-btn-form color-btn" [disabled]="DisabledBtn() && promotionsPreferences.showPromotionHome" type="button"  (click)="Submit()">Publicar promociones</button>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </ng-container>
+
+    </div>
+
+</div>

@@ -1,0 +1,82 @@
+.summary-of-updates {
+    .card {
+        height: 809px;
+    }
+    .card-body {
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-radius: 12px;
+        //height: 152px;
+    }
+    .title-radial {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: left;
+        color: #000000;
+    }
+    .overflow-scroos {
+        height: 320px;
+        // width: 518px;
+        width: 100%;
+        overflow-y: auto;
+        box-sizing: border-box;
+        padding: 0rem;
+        overflow-x: hidden;
+    }
+    /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+    .overflow-scroos::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:vertical {
+        width: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-button:increment,
+    .overflow-scroos::-webkit-scrollbar-button {
+        display: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-thumb {
+        /* background-color: #797979;
+        border-radius: 20px;
+        border: 2px solid #f1f2f3; */
+        background-color: #79797900;
+        border-radius: 20px;
+        border: 2px solid #f1f2f300;
+    }
+    .overflow-scroos::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+    .dataTable>thead>tr {
+        background-color: #ffffff;
+        //color: #000;
+    }
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 19px;
+        color: #9899AA;
+        .dataTable>thead>tr>th[class*="sort"]:before,
+        .dataTable>thead>tr>th[class*="sort"]:after {
+            content: "" !important;
+        }
+    }
+    .table td {
+        //border-top: 1px solid #dee2e6;
+        padding: 1.5rem;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #202020;
+    }
+    .color-red-parcen {
+        color: #DC1010;
+    }
+}

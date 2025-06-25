@@ -1,0 +1,4 @@
+{
+    "tslint.rulesDirectory": "./node_modules/codelyzer",
+    "angular.enable-strict-mode-prompt": false
+}

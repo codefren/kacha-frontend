@@ -1,0 +1,177 @@
+<div class="modal-add-cost-vehicles">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center pl-0">
+
+                <label class="title-modal"> Añadir coste </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point pr-0" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 p-0">
+
+                <div class="form-row">
+
+                    <!-- mes -->
+
+                    <div class="col-xl-4 col-12 mt-2">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+
+                                <select class="form-select form-control w-100" id="month" [(ngModel)]="selectMonth" placeholder="Seleccione" >
+
+                                    <option value="">Seleccione...</option>
+
+                                    <option *ngFor="let type of month" [value]="type"> {{ type }}</option>
+
+                                </select>
+
+                                <label for="type" class="mt-2 title-col">Mes </label>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <!-- end mes -->
+
+                    <!-- year -->
+
+                    <div class="col-xl-4 col-12 mt-2">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+
+                                <select class="form-select form-control w-100" id="year" [(ngModel)]="selectYear" placeholder="Seleccione">
+
+                                    <option value="">Seleccione...</option>
+
+                                    <option [value]="item" *ngFor="let item of getYear()">{{ item }}</option>
+
+                                </select>
+
+                                <label for="type" class="mt-2 title-col"> Año </label>
+                                
+                            </span>
+
+                        </div>
+                    </div>
+                    <!-- end year -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="modal-footer p-1">
+
+        <form [formGroup]="vehicleFuelForm" class="form-width-prod" *ngIf="conceptVehicleFuel">
+
+            <div class="form-width-prod">
+
+                <div class="card style-card">
+
+                    <div class="card-body p-3 modalScrollAuto">
+
+                        <ng-container *ngIf="!showVehicles">
+                            <div class="col-12 text-center">
+                                <div class="fa-6x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="showVehicles">
+
+                            <div class="row mt-2">
+
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> Nombre vehículo </label>
+
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> Matricula </label>
+
+                                <label for="first" class="mb-2 title-label col-xl col-12 col-md col-sm">{{ 'VEHICLES.COSTS_TAP_VEHICLE.QUANTITY' | translate }} </label>
+
+                                <label for="first" class="mb-2 title-label col-xl col-12 col-md col-sm">{{ 'VEHICLES.COSTS_TAP_VEHICLE.AMOUNT' | translate }} </label>
+
+                            </div>
+                            
+                            <ng-container *ngIf="conceptVehicleFuel.length > 0">
+                                <ng-container formArrayName="conceptVehicleFuel">
+                                    <ng-container *ngFor="let vehicleFuelItem of conceptVehicleFuel.controls; let p = index;" [formGroup]="vehicleFuelItem">
+
+                                        <div class="form-row" [ngClass]="{'mt-2' : i > 0}">
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                <input class="form-control form-control-input" readonly formControlName="name" placeholder="Vehículo" />
+
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                <input class="form-control form-control-input" readonly formControlName="registration" placeholder="Matrícula" />
+
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                <input class="form-control form-control-input" type="number" formControlName="quantity" value="0" min="1" placeholder="0"/>
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                <input class="form-control form-control-input" type="number" formControlName="import" value="0" min="0" placeholder="0" />
+                                            </div>
+
+                                        </div>
+
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+
+                    </div>
+                    
+                </div>
+                    
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary mr-2" [disabled]="(!selectMonth && !selectYear) || !validateImport() || !vehicleFuelForm.valid" 
+                    (click)="submit()"> {{ 'COST.APPLY_FUEL_COST' | translate }}  </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,76 @@
+.delays-settings {
+    .switch label input[type=checkbox]:checked+.lever {
+        background-color: #29cc97 !important;
+    }
+    .title-toggle {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .sub-title-text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .label-check {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        opacity: 2.6 !important;
+    }
+    .padding-col-download {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .showNUmber {
+        background-image: url(/assets/icons/numberInput.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .showMin {
+        background-image: url("/assets/icons/min.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        border-width: 0px;
+        margin: 0;
+        //border-left: 1px solid #d8d8d8;
+        height: 34px;
+        width: 23px;
+        cursor: pointer;
+    }
+    .add-other {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #3B4FFF;
+    }
+}

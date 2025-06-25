@@ -1,0 +1,14 @@
+<div class="chat p-0 bg-white">
+    <div class="row">
+
+        <div class="col-xl-4 col-12 pr-xl-0">
+            <easyroute-chat-list #ChatListComponent (userSelect)="selectUserToChat($event)" (filters)=getEmiteChats($event) [selectTap]="selectTap" [chats]="chats" (selectList)="getData($event)">
+            </easyroute-chat-list>
+        </div>
+
+        <div class="col-xl-8 col-12 pl-xl-0">
+            <easyroute-chat-talks #ChatTalksComponent *ngIf="chat" (accept)="acceptChat($event)" (reject)="rejectChat($event)" [chat]="chat" (assign)="assign($event)" (end)="endChat($event)" (message)="sendMessage($event)" (img)="sendUploadImg($event)"></easyroute-chat-talks>
+        </div>
+    </div>
+
+</div>

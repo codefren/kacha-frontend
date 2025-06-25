@@ -1,0 +1,92 @@
+.client-service-type-form {
+    .title-modal {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 23px;
+        line-height: 27px;
+        color: #000000;
+    }
+    .subtitle-general {
+        color: #000000 !important;
+    }
+    .color-a-sync {
+        background-color: #24397c;
+        border: 1px solid #24397c;
+    }
+    .background-color-sync {
+        background-color: #eaefff;
+        opacity: 1;
+    }
+    .color-icon-sync {
+        color: #ffffff;
+        font-size: 1rem;
+    }
+    .color-card-solved {
+        background: #f1f4ff;
+    }
+    .color-control-form-async {
+        border: 1px solid #24397c;
+    }
+    .color-label-info {
+        color: #818181 !important;
+        font-size: 12px !important;
+    }
+ 
+   /*  height: 89vh; */
+    .code-edit-form {
+        border-top-right-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
+    }
+    .info-texto {
+        font-size: 12px;
+        color: #7e7e7e;
+    }
+    .style-subtitle-sub {
+        font-size: 14px;
+        color: black;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .switch label .lever {
+        margin: 0 6px !important;
+    }
+
+    .btn-primary-width {
+        background: #24397C;
+        border-radius: 5px;
+        /* width: 200px; */
+    }
+
+    .btn-primary:disabled {
+        background-color: #24397c !important;
+        border-color: #24397c #24397c #24397c !important;
+    }
+    .btn-primary:active {
+        background-color: #24397c !important;
+        border-color: #24397c #24397c #24397c !important;
+    }
+
+    .has-float-label input,
+    .has-float-label select {
+        font-size: 14px !important;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        font-size: 14px !important;
+        color: #363740 !important;
+        opacity: 1;
+    }
+    .has-float-label label::after{
+        background: transparent !important;
+    }
+    .has-float-primary {
+        background-color: #24397c;
+        border-color: #24397c #24397c #24397c;
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+    }
+    .radiusDeliveryOrderCode {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+}

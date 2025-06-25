@@ -1,0 +1,62 @@
+.modal-Delivery-Not-Source {
+    .line-primary {
+        color: #ff9e4d;
+    }
+
+    .btn-link {
+        width: 100% !important;
+    }
+    
+    .accordion .card-header {
+        background-color: #ffffff !important;
+        padding: 0;
+        border-radius: 4px !important;
+        border: 1px solid #e8e5e5 !important;
+    }
+    
+    .accordion>.card .card-header {
+        margin-bottom: 0px !important;
+    }
+    
+    .btn-link:focus, .btn-link.focus {
+        text-decoration: none;
+        box-shadow: none;
+    }
+    
+    .card-body {
+        border-radius: 4px !important;
+        border: 1px solid #e8e5e5 !important;
+    }
+    
+    
+    .m-0>button:after {
+        // familia unicode > 100 colocar font-weight: 900
+        content: '\f105';
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free";
+        left: 0;
+        float: right;
+        padding-right: 10px;
+        font-size: 12px;
+        color: #ff9e4d;
+    }
+    
+    .m-0>button[aria-expanded='true']:after {
+        // content: "\f078";
+        content: '\f107';
+        font-weight: 900;
+    }
+    
+    #accordion .d button[aria-expanded='true'] {
+        background: #afbec4;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+    }
+}
+

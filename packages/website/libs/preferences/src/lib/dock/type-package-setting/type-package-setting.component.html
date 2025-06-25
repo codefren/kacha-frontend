@@ -1,0 +1,42 @@
+<div class="type-package">
+    <div class="card">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="title-road" for=""> {{ 'LOADING_DOCK.SETTING.PACKAGES' | translate }} </label>
+                    <p class="sub-title-road mt-1 mb-0"> {{'LOADING_DOCK.SETTING.MESSAGE_PACKAGES' | translate }}</p>
+                </div>
+            </div>
+
+            <!-- tables -->
+            <div class="row pt-4">
+                <div class="col-12">
+                    <table class="table table-striped table-responsive-lg table-responsive-md  table-bordered mb-0 mt-4" id="typePackage" style="text-align: center ; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th> </th>
+                                <th style="border-top-left-radius: 6px;" width="10%"> {{'LOADING_DOCK.SETTING.STATUS' | translate }} </th>
+                                <th width="30%"> {{'LOADING_DOCK.SETTING.ORDER_APP' | translate }} </th>
+                                <th> {{'LOADING_DOCK.SETTING.TYPE_PACKAGE' | translate }} </th>
+                                <th width="5%"></th>
+                                <th style="border-top-right-radius: 6px;" width="5%"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row pt-3 pb-3">
+                <div class="col-12">
+                    <a class="add-expenses-type point" (click)="modalAddTypePackage()"> + {{ 'LOADING_DOCK.SETTING.ADD_TYPE_PACKAGE' | translate }} </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

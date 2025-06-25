@@ -1,0 +1,76 @@
+<div class="easyroute-zones" fxLayout="column" fxLayoutAlign="start center" *ngIf="(sidenavOpened$ | async)">
+    <div class="view-toggle-overlay row">
+        <div class="col-lg-12 p-0">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <button class="btn" [ngClass]="{ 'active-btn' : +routePlanning.viewingMode === 1,  'no-active': +routePlanning.viewingMode === 0  }" (click)="switchView(0)">
+                    <span class="text-center size-spand">{{ 'ROUTE_PLANNING.TOOLBAR.EVALUATED' | translate }}</span>
+                </button>
+                <!-- remover la clase btn-no-border en caso de dejar como antes-->
+                <button [disabled]="(mapStage$ | async) !== 'routes'" class="btn btn-no-border" [ngClass]="{ 'active-btn' : +routePlanning.viewingMode === 0,  'no-active': +routePlanning.viewingMode === 1  }" (click)="switchView(1)">
+                    <span class="text-center size-spand mr-1">{{ 'ROUTE_PLANNING.TOOLBAR.OPTIMIZED' | translate }}</span>
+                    <span class="count-zones">{{ (countZones$ | async).countZonesOptimized }}/{{ (countZones$ | async).countZones }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- z-index: 9999999; -->
+    <!-- agregar la clase z-index: 9999999; en caso de dejar como antes-->
+    <div class="row" style="margin-top: 30px; padding-top: 8px; background: #fff; width: 100%; position: absolute; ">
+        <div class="col-lg-3 col-md-2 p-1 text-right">
+            <button class="btn mr-1 ml-1 btn-gray-panel btn-block" (click)="joinZones()">
+                Unir rutas
+            </button>
+        </div>
+        <div class="col-lg-4 col-md-3 p-1 text-right">
+            <button class="btn mr-1 btn-gray-panel btn-block" (click)="resumeRoute()">
+                Resumen rutas
+            </button>
+        </div>
+        <div class="col-lg-4 col-md-4 p-1 text-right">
+            <button class="btn mr-1 btn-gray-panel btn-block" [ngClass]="{'btn-pending': (deliveryPendingAll$ | async ) && (deliveryPendingAll$ | async ) > 0}" style="padding-left: 5%; padding-right: 5%;" (click)="showDeliveryPointPending()" [disabled]="!((deliveryPendingAll$ | async ) && (deliveryPendingAll$ | async ) > 0)">
+                <img class="ico-modify" style="margin-right: 5px; width: 19px;"
+                src="assets/icons/warning.svg" *ngIf="(deliveryPendingAll$ | async ) && (deliveryPendingAll$ | async ) > 0"> Puntos pendientes({{ (deliveryPendingAll$ | async ) }})
+            </button>
+        </div>
+        <div class="col-lg-1 col-md-3 p-1 text-right">
+            <button class="btn btn-gray-panel btn-block mr-1">
+                <label class="round round-little m-0">
+                    <input type="checkbox" id="zoneId" #selectAll (change)="onSelectAllChange($event.target, routePlanning.viewingMode)" [checked]="allSelected(
+                            routePlanning.deliveryZonesStatus,
+                            routePlanning.routesStatus,
+                            0
+                        )" />
+
+                    <label for="zoneId" style="top: 0;" #click_all_zones></label>
+                </label>
+            </button>
+        </div>
+    </div>
+    <!-- remover la clase style-scroll en caso de dejar como antes-->
+    <div class="style-scroll" style="margin-top: 80px !important;">
+        <span *ngFor="let zone of orderedZones; trackBy: trackByFn;">
+            <easyroute-zone
+                *ngIf="
+                    !routePlanning.showOnlyOptimizedZones ||
+                    routePlanning.viewingMode === 0 ||
+                    routePlanning.showOnlyOptimizedZones &&
+                    zone.optimization &&
+                    zone.optimization.solution &&
+                    zone.optimization.solution.routes &&
+                    zone.optimization.solution.routes.length > 0
+                "
+                [zone]="zone"
+                [mapStage]="mapStage$ | async"
+                [useRouteColors]="routePlanning.useRouteColors"
+                [highlightedRoute]="routePlanning.highlightedRoute"
+                [zoneStatus]="(zonesStatus$ | async) ? (zonesStatus$ | async)[zone.id] : null"
+                [routesStatus]="(routesStatus$ | async) ? (routesStatus$ | async)[zone.id] : null"
+                [viewingMode]="routePlanning.viewingMode"     
+            >
+            </easyroute-zone>
+        </span>
+    </div>
+    <div *ngIf="routePlanning.viewingMode === 0" class="mt-3">
+        <button class="btn btn-primary" (click)="createZone()"><i class="fas fa-plus"></i> Nueva ruta</button>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="route-integration">
+
+    <ng-container *ngIf="showData ==='list'">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center mb-3">
+                <label class="title-left-sheet"> Integración albaranes </label>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-body p-xl-4">
+                <div class="row">
+                    <div class="col-xl-12 col-12">
+                        <div class="">
+                            <div class="border-special">
+                                <div class="switch w-100">
+                                    <label class="switch-width mb-0">
+                                        <input type="checkbox" [checked]="(optimizationPreferences$ | async).activateDeliveryNoteIntegration" (change)="showToggleCategory('activateDeliveryNoteIntegration', $event.target.checked)" />
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                        <span class="title-toggle toogle-style"> Activar la integración de albaranes </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Configura la plantilla de integración de forma personalizada. Empieza añadiendo una plantilla nueva, asígnale un nombre y empieza a indicar la posición de cada campo en tus ficheros. </p>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="toggleIntegration">
+
+                    <div class="row pl-xl-5 ml-xl-2">
+
+                        <div class="col-12 mb-3">
+
+                            <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" id="routeIntegrationDeliveryNote" style="text-align: center ; width: 100%;">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th style="border-top-left-radius: 6px;" class="text-left">Plantilla</th>
+
+                                        <th width="40" class="text-center"></th>
+
+                                        <th width="30" style="border-top-right-radius: 6px;" class="text-center"></th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="label-add point" (click)="addTemplate()">+ Añadir plantilla</label>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="showData ==='details'">
+
+        <div class="col-12">
+            <!-- <easyroute-form-integration (showDatas)="getData($event)" [integrationId]="integrationId"></easyroute-form-integration> -->
+            <easyroute-form-delivery-note-integration (showDatas)="getData($event)" [integrationId]="integrationId"></easyroute-form-delivery-note-integration>
+
+        </div>
+
+
+    </ng-container>
+
+
+
+</div>

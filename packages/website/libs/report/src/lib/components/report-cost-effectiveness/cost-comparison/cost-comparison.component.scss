@@ -1,0 +1,111 @@
+.cost-comparison {
+    .card {
+        height: 300px;
+    }
+    .card-body {
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-radius: 12px;
+        //height: 152px;
+    }
+    .card-header {
+        background: #FFFFFF;
+    }
+    .diff-span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 36px;
+        display: flex;
+        align-items: flex-end;
+        color: #202020;
+    }
+    .label-progress {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        color: #202020;
+    }
+    .label-amount {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        text-align: right;
+        color: #202020;
+    }
+    .pogress-planificado {
+        background-color: #3B4FFF;
+    }
+    .pogress-ejecutado {
+        background-color: #FF8D24;
+    }
+    .diff-text {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        color: #878F9A;
+    }
+    .title-radial {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        color: #000000;
+    }
+    .title-cost-comparisson {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 19px;
+        line-height: 22px;
+        color: #202020;
+    }
+    .title-footer {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        color: #9899AA;
+    }
+    .title-price {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        text-align: right;
+        color: #9899AA;
+    }
+    .img-circle {
+        vertical-align: text-top;
+    }
+    /*  #chart {
+        width: 300px;
+        margin: 0 auto;
+    } */
+    .icon-diff {
+        width: 11px;
+        margin-left: 4px;
+    }
+    .radius-progress {
+        border-radius: 30px;
+    }
+    .color-red-parcen {
+        color: #DC1010;
+    }
+    .color-blue-parcen {
+        color: #318DFA;
+    }
+    .color-green-parcen {
+        color: #8EE400;
+    }
+}

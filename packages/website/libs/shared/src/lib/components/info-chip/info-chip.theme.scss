@@ -1,0 +1,75 @@
+@import 'shared/src/lib/common';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin info-chip-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background-default: map-get($theme, background);
+    $foreground-default: map-get($theme, foreground);
+
+    .info-chip-modified {
+        border-radius: 0px !important;
+        padding: 0 8px 0 8px !important;
+    }
+
+    .info-chip {
+        background-color: mat-color($background-default, background);
+        color: mat-color($foreground-default, text);
+
+        .material-icon-container {
+            background-color: $dark-transparency;
+        }
+
+        &.primary,
+        &.accent,
+        &.warn,
+        &.primary-200,
+        &.secondary-200 {
+            .material-icon-container {
+                background-color: $white-transparency;
+            }
+        }
+
+        // Define any styles affected by the theme.
+        &.primary {
+            background-color: mat-color($primary, 300) !important;
+            color: mat-color($primary, '300-contrast') !important;
+        }
+
+        &.primary-200 {
+            background-color: mat-color($primary, 200) !important;
+            color: mat-color($primary, '200-contrast') !important;
+        }
+
+        &.primary-900 {
+            background-color: mat-color($primary, 900) !important;
+            color: mat-color($primary, '200-contrast') !important;
+        }
+
+        &.primary-300 {
+            background-color: mat-color($primary, 300) !important;
+            color: mat-color($primary, '200-contrast') !important;
+        }
+
+        &.accent {
+            background-color: mat-color($accent, 400) !important;
+            color: mat-color($accent, '400-contrast') !important;
+        }
+
+        &.warn {
+            @include mat-color-styler($warn);
+        }
+    }
+}
+
+@mixin info-chip-typography($config) {
+    .info-chip {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

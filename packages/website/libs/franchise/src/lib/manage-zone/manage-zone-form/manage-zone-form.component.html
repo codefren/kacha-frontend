@@ -1,0 +1,1513 @@
+<div class="bg-white2 optimroute-manage-zone-form" *ngIf="zoneData">
+    <div class="container">
+        <div class="row justify-content-center pt-5 align-items-center pb-5">
+            <div class="return-left mr-3 point" routerLink="/franchise/zone">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+
+            <p class="title m-0" *ngIf="!zoneData.id">
+                {{ 'FRANCHISE.ADD_ZONE' | translate }}
+            </p>
+
+            <p *ngIf="zoneData.id" class="title m-0">
+                {{ 'FRANCHISE.EDIT_ZONE' | translate }}
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+            <form [formGroup]="ZoneFranchiseForm" class="form-width-prod">
+                <div class="form-row justify-content-center mb-0 mt-0">
+                    <a class="info-picture-zone">{{ 'FRANCHISE.PHOTO_OF_THE_AREA' |translate }}</a>
+                </div>
+                <div class="form-row justify-content-center mb-0 mt-0">
+                    <a class="link" (click)="showModalImgInfo()">{{ 'PRODUCTS.HOW_IMAGE' | translate }}</a>
+                </div>
+
+                <!-- image -->
+                <div class="mb- images mt-2 promotion-images" *ngIf="zoneData">
+                    <div class="pl-0 pr-0 d-flex flex-row justify-content-center w-100">
+                        <div class="card border card-img point" *ngIf="zoneData.images.length > 0">
+                            <div class="w-100 h-100 show-background point" *ngIf="
+                                    zoneData &&
+                                    zoneData.images === null &&
+                                    !cardImageBase64
+                                ">
+                                <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                    <i class="color-icon fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}"></i>a
+                                </div>
+
+                            </div>
+
+                            <div class="w-100 h-100 text-center">
+                                <div class="w-100 d-flex show-background-trans point h-100 flex-column justify-content-center align-items-center" (click)="deleteImage( $event, zoneData.images[0] )">
+                                    <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}"></i>
+                                </div>
+                                <img [src]="cardImageBase64" *ngIf="cardImageBase64" class="img-flud img-render img-upload img-load" alt="" />
+
+                                <img #urlLogo [src]="zoneData.images[0].image" alt="" *ngIf="zoneData.images !== null && !cardImageBase64" class="img-flud img-render img-upload img-load" />
+                            </div>
+
+                            <!--  <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event)" /> -->
+                        </div>
+
+                        <div class="card border card-img  point" (click)="fileAddProduct.click()" *ngIf="
+                                (zoneData && zoneData.images === null) ||
+                                zoneData.images.length == 0
+                            ">
+                            <div class="w-100 d-flex flex-column align-items-center show-background justify-content-center" *ngIf="
+                            (zoneData && zoneData.images === null) ||
+                            zoneData.images.length == 0">
+                                <i class="color-icon">{{ 'FRANCHISE.UPLOAD_IMAGE' |translate }}</i>
+                            </div>
+
+                            <div class="w-100 h-100 d-flex flex-column align-items-center  justify-content-center">
+                                <i class="color-icon fas fa-camera fa-2x"></i>
+                            </div>
+
+
+                            <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <!-- <p class=" mb-2 mt-3 color-alert">
+                            Maximo 1Mb
+                        </p> -->
+                        <p class="text-danger mb-0 font-text-p" *ngIf="imageError.length > 0">
+                            {{ imageError }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- end image -->
+
+                <!-- for data -->
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                            {{ 'FRANCHISE.ZONE_DATA' | translate }}
+
+                        </h3>
+                    </div>
+                    <div class="col-12 col-md-5 pr-sm-4">
+                        <!-- NAME ZONE -->
+                        <div class="form-row form-group" [ngClass]="{
+                                'has-danger':
+                                    ZoneFranchiseForm.controls['name'].invalid &&
+                                    (ZoneFranchiseForm.controls['name'].dirty ||
+                                        ZoneFranchiseForm.controls['name'].touched)
+                            }">
+                            <label for="name">
+                                {{ 'FRANCHISE.NAME_LOCATED' | translate }}
+                                <!--   <span class="asterisco">*</span> -->
+                            </label>
+
+                            <input type="text" placeholder="{{ 'FRANCHISE.NAME_LOCATED' | translate }}" id="name" class="form-control" autocomplete="off" formControlName="name" />
+
+                            <ng-container *ngFor="let validation of promotion_messages.name">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            ZoneFranchiseForm
+                                                .get('name')
+                                                .hasError(validation.type) &&
+                                            (ZoneFranchiseForm.get('name').dirty ||
+                                                ZoneFranchiseForm.get('name').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="switch w-100 col-12">
+                                    <label class="switch-width">
+                                    <input
+                                        type="checkbox"
+                                        formControlName="showInApp"
+                                    />
+                                    <span class="lever switch-col-primary m-0"></span>
+
+                                    <span  class="pl-4">
+                                        {{ 'FRANCHISE.SHOW_THIS_AREA_IN_THE_APP' |translate }}
+                                     </span>  
+                                </label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                        <!-- code -->
+                        <ng-container *ngIf="showCode">
+
+                            <label class="color-label-async" for="code">
+                                {{ 'PROMOTIONS.FORM.CODE' | translate }}
+                            </label>
+                            <div class="input-group" [ngClass]="{ 'has-danger': ZoneFranchiseForm.controls['code'].invalid && ( ZoneFranchiseForm.controls['address'].dirty || ZoneFranchiseForm.controls['address'].touched)}">
+                                <input type="text" class="form-control color-control-form-async" [ngClass]="{'code-edit':zoneData.id >0}" id="code" formControlName="code" placeholder="{{
+                                    'PROMOTIONS.FORM.CODE'
+                                        | translate}}" [ngClass]="{
+                                    'form-control-danger':
+                                    ZoneFranchiseForm.controls['code'].invalid &&
+                                    (ZoneFranchiseForm.controls['code'].dirty ||
+                                    ZoneFranchiseForm.controls['code'].touched)
+                                }" />
+                                <div class="input-group-append" *ngIf="zoneData.id === 0">
+                                    <a class="colorLink input-group-text point color-a-sync" (click)="searchCode()" id="tooltip" disabled="false" data-toggle="tooltip" data-placement="top" title="¿Buscar codigo?">
+                                        <i class="fas fa-sync color-icon-sync"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="zoneData.id === 0">
+                                <label class="mt-0 color-label-info">
+                                    <i class="fas fa-sync"></i>
+                                    {{ 'FRANCHISE.FILL_CODE_AUTOMATICALLY' | translate }}
+                                    </label>
+                            </ng-container>
+
+                            <ng-container *ngFor="let validation of promotion_messages.code">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                    ZoneFranchiseForm
+                                        .get('code')
+                                        .hasError(validation.type) &&
+                                    (ZoneFranchiseForm.get('code').dirty ||
+                                    ZoneFranchiseForm.get('code')
+                                            .touched)
+                                ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-container *ngIf="!showCode">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <div class="fa-3x mt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                </div>
+
+                <!--end form data -->
+
+                <!-- row información zone -->
+                <div class="row mt-4">
+
+                    <div class="col-12">
+                        <h3 class="subtitle-general">
+                            {{ 'FRANCHISE.CONTAC_INFORMATION_FOR_THE_AREA' | translate }}
+                        </h3>
+                    </div>
+
+
+                    <!-- Email zone -->
+                    <div class="col-12 col-md-5 pr-sm-4">
+                        <div class="form-group form-row" [ngClass]="{
+                            'has-danger':
+                            ZoneFranchiseForm.controls['email'].invalid &&
+                            (ZoneFranchiseForm.controls['email'].dirty ||
+                            ZoneFranchiseForm.controls['email'].touched) }">
+                            <label for="franchise_billing_email"> 
+                                {{ 'FRANCHISE.EMAIL' | translate }}
+                            </label>
+                            <input type="text" class="form-control" id="email" autocomplete="off" placeholder="{{ 'FRANCHISE.EMAIL' | translate }}" formControlName="email" [ngClass]="{
+                                'form-control-danger':
+                                ZoneFranchiseForm.controls['email'].invalid &&
+                                (ZoneFranchiseForm.controls['email'].dirty ||
+                                ZoneFranchiseForm.controls['email'].touched)}" />
+                            <ng-container *ngFor="let validation of promotion_messages.email">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    ZoneFranchiseForm
+                                    .get('email')
+                                    .hasError(validation.type) &&
+                                    (ZoneFranchiseForm.get('email').dirty ||
+                                    ZoneFranchiseForm.get('email').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- End Email zone -->
+
+
+                    <!-- Phone zone -->
+                    <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+
+                        <div class="form-group form-row" [ngClass]="{
+                            'has-danger':
+                            ZoneFranchiseForm.controls['phone'].invalid &&
+                            (ZoneFranchiseForm.controls['phone'].dirty ||
+                            ZoneFranchiseForm.controls['phone'].touched) }">
+                            <label for="franchise_phone"> 
+                                {{ 'GENERAL.PHONE_NUMBER' | translate}}
+                            </label>
+                            <input type="text" class="form-control" id="franchise_phone" autocomplete="off" placeholder="{{ 'GENERAL.PHONE_NUMBER' | translate }}" formControlName="phone" prefix="+34" mask=" 0 00000000" [ngClass]="{
+                                'form-control-danger':
+                                ZoneFranchiseForm.controls['phone'].invalid &&
+                                (ZoneFranchiseForm.controls['phone'].dirty ||
+                                ZoneFranchiseForm.controls['phone'].touched)}" />
+                            <ng-container *ngFor="let validation of promotion_messages.phone">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    ZoneFranchiseForm
+                                    .get('phone')
+                                    .hasError(validation.type) &&
+                                     (ZoneFranchiseForm.get('phone').dirty ||
+                                     ZoneFranchiseForm.get('phone').touched)
+                                ">
+                                {{ validation.message }}
+                            </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- end  Phone zone -->
+
+                    <div class="col-12 col-md-5 pr-sm-4">
+
+
+                        <!-- addressOrderRange -->
+                        <div class="form-row form-group" [ngClass]="{
+                        'has-danger':
+                            ZoneFranchiseForm.controls['addressOrderRange'].invalid &&
+                            (ZoneFranchiseForm.controls['addressOrderRange'].dirty ||
+                            ZoneFranchiseForm.controls['addressOrderRange'].touched)
+                         }">
+                            <label for="addressOrderRange">
+                                {{ 'FRANCHISE.MAIN_STORE_ADDRESS' | translate }}
+                            </label>
+                            <input type="text" placeholder="{{ 'FRANCHISE.MAIN_STORE_ADDRESS' | translate }}" id="addressOrderRange" class="form-control" autocomplete="off" formControlName="addressOrderRange" />
+                            <ng-container *ngFor="let validation of promotion_messages.addressOrderRange">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                        ZoneFranchiseForm
+                                            .get('addressOrderRange')
+                                            .hasError(validation.type) &&
+                                        (ZoneFranchiseForm.get('addressOrderRange').dirty ||
+                                            ZoneFranchiseForm.get('addressOrderRange').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <!-- end addressOrderRange -->
+                    </div>
+                </div>
+                <!-- end row información zone -->
+
+                <!-- tabla de Tiendas -->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                            {{ 'FRANCHISE.STORE_BELONING_TO_THIS_AREA' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                                    <div class="col-md-10 col-7 p-0 text-center text-sm-left">
+                                        <span>{{ 'FRANCHISE.STORE' | translate }}</span>
+                                    </div>
+                                    <div class="col-md-2 col-5 p-0 text-sm-right">
+                                        <button class="btn btn-add card-button mt-2 mt-sm-0" type="button" title="{{ 'FRANCHISE.ADD_STORE' | translate }}" (click)="searchCompanyFranchise()">
+                                        <label>{{ 'FRANCHISE.ADD_STORE' | translate }}</label>
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ng-container *ngIf="showZoneList">
+                                    <table class="table  table-responsive-lg mb-0" *ngIf="zoneTable && zoneTable.length > 0">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="text-center">
+                                                    {{ 'FRANCHISE.INTERNAL_NAMES' | translate }}
+                                                </th>
+                                                <th class="text-center">
+                                                    {{ 'FRANCHISE.CIF' | translate }}
+                                                </th>
+                                                <th class="text-center">
+                                                    {{ 'FRANCHISE.ADDRESS' | translate }}
+                                                </th>
+
+                                                <th class="text-center">
+                                                    {{ 'GENERAL.DELETE' | translate }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let zoneTable of zoneTable; let i = index" [ngClass]="{
+                                                'bg-white': i % 2 == 0,
+                                                'bg-gray': i % 2 > 0
+                                            }">
+                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                    {{ zoneTable?.name }}
+                                                </td>
+
+                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                    {{ zoneTable?.nif }}
+                                                </td>
+
+                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                    {{ zoneTable?.streetAddress }}
+                                                </td>
+
+                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id >0">
+                                                    <label *ngIf="zoneTable && !zoneTable?.company">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                    <label *ngIf="zoneTable && zoneTable?.company"> {{ zoneTable?.company?.name }}</label>
+
+                                                </td>
+
+                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id >0">
+                                                    <label *ngIf="zoneTable && !zoneTable?.company">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                    <label *ngIf="zoneTable && zoneTable?.company"> {{ zoneTable?.company?.nif }}</label>
+
+                                                </td>
+
+                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id >0">
+                                                    <label *ngIf="zoneTable && !zoneTable?.company">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                    <label *ngIf="zoneTable && zoneTable?.company" [title]="zoneTable?.company?.streetAddress"> {{ sliceMediaString( zoneTable?.company?.streetAddress, 60, '(min-width: 360px)' ) }}</label>
+
+                                                </td>
+                                                <td data-title="Open" class="text-center">
+                                                    <div *ngIf="zoneData.id > 0" class="editar point" title="{{ 'GENERAL.DELETE' | translate }}" (click)="deleteZone(zoneTable.id)">
+                                                        <!--   <i class="far fa-times-circle fa-2x"></i> -->
+                                                        <img class="icons-datatable point" src="assets/icons/optimmanage/delete-blue.svg">
+                                                    </div>
+                                                    <div *ngIf="zoneData.id == 0" class="editar point" title="{{ 'GENERAL.DELETE' | translate }}" (click)="deleteZoneTable(zoneTable.id)">
+                                                        <!-- <i class="far fa-times-circle fa-2x"></i> -->
+                                                        <img class="icons-datatable point" src="assets/icons/optimmanage/delete-blue.svg">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h5 class="text-center data-avalilable" *ngIf="zoneTable && zoneTable.length == 0">
+                                        {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                                    </h5>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showZoneList">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                        <div class="fa-4x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End tabal tienda -->
+
+                <!-- card Gestion de tiendas -->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="card style-card-app mt-2">
+                            <div class="card-body px-5">
+                                <p class="card-title">
+                                    {{ 'MODULES.STORE_MANAGEMENT_APP' | translate }}
+
+                                </p>
+
+                                <!-- Rango de zona -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-12 col-md-12 col-12 d-flex flex-row">
+                                        <p class="m-0" style="font-weight: bold;">
+                                            {{ 'MODULES.RANGE_RADIUS' | translate }}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p class="label-store-managent m-0">
+                                            {{ 'MODULES.THE_RADIUS_OF_REACH_IS_THE_MAXIMUN_DISTANCE' | translate }}
+                                        </p>
+                                        <p class="label-description-store">
+                                            {{ 'MODULES.ADD_THE_DIRECTION_THAT_WILL_DETERMINE_THE_MIDPOINT' | translate }}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-12 col-md-5 pr-sm-4">
+                                        <!-- address -->
+                                        <div class="form-row form-group" [ngClass]="{
+                                    'has-danger':
+                                        ZoneFranchiseForm.controls['address'].invalid &&
+                                        (ZoneFranchiseForm.controls['address'].dirty ||
+                                            ZoneFranchiseForm.controls['address'].touched)
+                                }">
+                                            <label for="address">
+                                    {{ 'FRANCHISE.DIRECTION_FOR_RADIUS_CALCULATION' | translate }}
+                                    
+                                </label>
+                                            <input type="text" placeholder="{{ 'FRANCHISE.DIRECTION_FOR_RADIUS_CALCULATION' | translate }}" id="address" class="form-control" autocomplete="off" formControlName="address" />
+                                            <ng-container *ngFor="let validation of promotion_messages.address">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                ZoneFranchiseForm
+                                                    .get('address')
+                                                    .hasError(validation.type) &&
+                                                (ZoneFranchiseForm.get('address').dirty ||
+                                                    ZoneFranchiseForm.get('address').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                                        <!-- allowedRadius -->
+                                        <div class="form-row form-group" [ngClass]="{
+                                    'has-danger':
+                                        ZoneFranchiseForm.controls['allowedRadius'].invalid &&
+                                        (ZoneFranchiseForm.controls['allowedRadius'].dirty ||
+                                            ZoneFranchiseForm.controls['allowedRadius'].touched)
+                                }">
+                                            <label for="allowedRadius">
+                                    {{
+                                        'MODULES.DEFINES_THE_RANGE_DISTANCE_IN_KM'
+                                            | translate
+                                    }}
+                                </label>
+                                            <input type="number" placeholder="{{ 'MODULES.DEFINES_THE_RANGE_DISTANCE_IN_KM' | translate }}" id="allowedRadius" class="form-control" autocomplete="off" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;" formControlName="allowedRadius"
+                                                required autofocus step="0.01" />
+                                            <ng-container *ngFor="let validation of promotion_messages.allowedRadius">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                ZoneFranchiseForm
+                                                    .get('allowedRadius')
+                                                    .hasError(validation.type) &&
+                                                (ZoneFranchiseForm.get('allowedRadius').dirty ||
+                                                    ZoneFranchiseForm.get('allowedRadius').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end rando de zona -->
+
+                                <!-- payment -->
+                                <div class="row mt-2">
+                                    <div class="col-lg-12 col-md-12 col-12 mb-1 d-flex flex-row">
+                                        <label class="m-0" style="font-weight: bold;">
+                                {{ 'MODULES.PAYMENT' | translate }}
+                            </label>
+                                    </div>
+                                    <div class="col-12 col-md-5 pr-sm-4">
+                                        <!-- minPayment-->
+                                        <div class="form-row form-group" [ngClass]="{
+                                    'has-danger':
+                                        ZoneFranchiseForm.controls['minPayment'].invalid &&
+                                        (ZoneFranchiseForm.controls['minPayment'].dirty ||
+                                            ZoneFranchiseForm.controls['minPayment'].touched)
+                                }">
+                                            <label for="minPayment">
+                                    {{ 'MODULES.MINIMUN_AMOUNT_OF_PURCHASE'| translate }}
+                                </label>
+                                            <input type="number" placeholder="{{ 'FRANCHISE.MINIMUN_AMOUNT_OF_PURCHASE' | translate }}" id="minPayment" class="form-control" autocomplete="off" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;" formControlName="minPayment"
+                                                required autofocus step="0.01" />
+                                            <ng-container *ngFor="let validation of promotion_messages.minPayment">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                ZoneFranchiseForm
+                                                    .get('minPayment')
+                                                    .hasError(validation.type) &&
+                                                (ZoneFranchiseForm.get('minPayment').dirty ||
+                                                    ZoneFranchiseForm.get('minPayment').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                                        <!-- prepaidPayment -->
+                                        <div class="form-row form-group" [ngClass]="{
+                                        'has-danger':
+                                        ZoneFranchiseForm.controls['prepaidPayment'].invalid &&
+                                        (ZoneFranchiseForm.controls['prepaidPayment'].dirty ||
+                                            ZoneFranchiseForm.controls['prepaidPayment'].touched)
+                                        }">
+                                            <label for="prepaidPayment">
+                                            {{
+                                                    'MODULES.PREPAID_AMOUNT' | translate
+                                            }}
+                                        </label>
+                                            <input type="number" placeholder="{{ 'MODULES.PREPAID_AMOUNT' | translate }}" id="prepaidPayment" class="form-control" autocomplete="off" id="prepaidPayment" class="form-control" autocomplete="off" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;"
+                                                formControlName="prepaidPayment" required autofocus step="0.01" />
+                                            <ng-container *ngFor="let validation of promotion_messages.prepaidPayment">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                ZoneFranchiseForm
+                                                    .get('prepaidPayment')
+                                                    .hasError(validation.type) &&
+                                                (ZoneFranchiseForm.get('prepaidPayment').dirty ||
+                                                    ZoneFranchiseForm.get('prepaidPayment').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end payment -->
+
+                                <div class="row mt-2">
+                                    <!-- allowWithoutMinimun -->
+                                    <div class="col-xl-10 col-md-12 col-12">
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                            <input
+                                                type="checkbox"
+                                                formControlName="allowWithoutMinimun"
+                                                (click)="setTimeoutFuntion();"
+                                            />
+                                            <span class="lever switch-col-primary m-0"></span>
+    
+                                            <span style="font-size: 14px; font-weight: bold;" class="pl-2">
+                                                    {{'MODULES.ALLOW_CHARGING_WITHOUT_MEETING_THE_PURCHASE_AMOUNT' | translate }}
+                                                </span>  
+                                        </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-5 col-md-12 col-12" *ngIf="ZoneFranchiseForm && ZoneFranchiseForm.controls['allowWithoutMinimun'] && ZoneFranchiseForm.controls['allowWithoutMinimun'].value">
+                                        <!-- quantityBuyWithoutMinimun -->
+                                        <div class="form-row form-group" [ngClass]="{
+                                                'has-danger':
+                                                    ZoneFranchiseForm.controls['quantityBuyWithoutMinimun'].invalid &&
+                                                    (ZoneFranchiseForm.controls['quantityBuyWithoutMinimun'].dirty ||
+                                                        ZoneFranchiseForm.controls['quantityBuyWithoutMinimun'].touched)
+                                            }">
+                                            <label for="quantityBuyWithoutMinimun">
+                                                {{'MODULES.QUANTITY_IF_IT_DOES_NOT_EXCEED_THE_MINIMUN_QUANTITY' |translate }}
+                                                <span data-toggle="tooltip" data-placement="top" title="{{'MODULES.THIS_AMOUNT_WILL_BE_ADDED_TO_THE_TOTAL_ORDER_IF_IT_DOES_NOT_MEET_THE_MINIMUN_AMOUNT_ESTABLISHED' |translate }}">
+                                                    <i class="fas fa-info-circle point i-relative"></i>
+                                                    </span>
+                                            </label>
+                                            <input type="number" placeholder="{{'MODULES.QUANTITY_IF_IT_DOES_NOT_EXCEED_THE_MINIMUN_QUANTITY' |translate }}" id="quantityBuyWithoutMinimun" class="form-control" autocomplete="off" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;"
+                                                formControlName="quantityBuyWithoutMinimun" required autofocus step="0.01" />
+                                            <ng-container *ngFor="let validation of promotion_messages.quantityBuyWithoutMinimun">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                        ZoneFranchiseForm
+                                                            .get('quantityBuyWithoutMinimun')
+                                                            .hasError(validation.type) &&
+                                                        (ZoneFranchiseForm.get('quantityBuyWithoutMinimun').dirty ||
+                                                            ZoneFranchiseForm.get('quantityBuyWithoutMinimun').touched)
+                                                        ">
+                                                        {{ validation.message }}
+                                                    </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <!-- end quantityBuyWithoutMinimun -->
+                                    </div>
+                                    <!-- end allowWithoutMinimun -->
+
+
+                                    <!-- sumDeliveryPriceToTicket -->
+                                    <div class="col-lg-12 col-md-12 col-12 mb-1 d-flex flex-row">
+                                        <label style="font-weight: bold;">
+                                            {{ 'MODULES.CHARGE_OF_DELIVERY' | translate }}
+                                        </label>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p class="label-store-managent">
+                                            {{ 'MODULES.TEXT_CHARGE_OF_DELIVERY' | translate }}{{ moneySymbol }}.
+                                        </p>
+                                        <p class="label-store-managent">
+                                            {{ 'MODULES.TEXT_CHARGE_OF_DELIVERY_1' | translate }}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-xl-10 col-md-12 col-12">
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                                        <input
+                                                            type="checkbox"
+                                                            formControlName="sumDeliveryPriceToTicket"
+                                                            (click)="setTimeoutFuntion();"
+                                                        />
+                                                        <span class="lever switch-col-primary m-0"></span>
+                
+                                                        <span style="font-size: 14px;" class="pl-2">
+                                                            {{'MODULES.APPLY_CHARGE_OF_DELIVERY'
+                                                            | translate }}
+                                                        </span>  
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end sumDeliveryPriceToTicket -->
+
+                                    <ng-container *ngIf="hideMultidelegation()">
+
+                                        <!-- sumQuantityBuyWithoutMinimunToTicket -->
+                                        <div class="col-lg-12 col-md-12 col-12 mb-1 d-flex flex-row">
+                                            <label style="font-weight: bold;">
+                                                {{ 'MODULES.CHARGE_OF_MINIUM_WITHOUT_AMOUNT' | translate }}
+                                            </label>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p class="label-store-managent">
+                                                {{ 'MODULES.TEXT_CHARGE_OF_MINIUM_WITHOUT_AMOUNT' | translate }}.
+                                            </p>
+                                            <p class="label-store-managent">
+                                                {{ 'MODULES.TEXT_CHARGE_OF_MINIUM_WITHOUT_AMOUNT_1' | translate }}
+                                            </p>
+                                        </div>
+
+                                        <div class="col-xl-10 col-md-12 col-12">
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="switch w-100 col-12">
+                                                        <label class="switch-width">
+                                                            <input
+                                                                type="checkbox"
+                                                                formControlName="sumQuantityBuyWithoutMinimunToTicket"
+                                                                (click)="setTimeoutFuntion();"
+                                                            />
+                                                            <span class="lever switch-col-primary m-0"></span>
+                    
+                                                            <span style="font-size: 14px;" class="pl-2">
+                                                                {{'MODULES.APPLY_MINIMUM_ORDER_CHARGES_NOT_EXCEEDED'
+                                                                | translate }}
+                                                            </span>  
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end sumQuantityBuyWithoutMinimunToTicket -->
+
+                                    </ng-container>
+
+
+
+                                </div>
+
+                                <ng-container *ngIf="hideMultidelegation()">
+                                    <!-- orderLimitDay -->
+                                    <div class="row mt-2">
+                                        <div class="col-lg-12 col-md-12 col-12 mb-1 d-flex flex-row">
+                                            <label class="m-0" style="font-weight: bold;">
+                                            {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.SUBTITLE' | translate }}
+                                            </label>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="label-store-managent">
+                                                {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.MESSAGE' | translate }}
+                                            </p>
+                                        </div>
+
+                                        <div class="col-12 col-md-5 pr-sm-4">
+                                            <div class="form-row form-group" [ngClass]="{
+                                                    'has-danger':
+                                                        ZoneFranchiseForm.controls['orderLimitDay'].invalid &&
+                                                        (ZoneFranchiseForm.controls['orderLimitDay'].dirty ||
+                                                            ZoneFranchiseForm.controls['orderLimitDay'].touched)
+                                                }">
+                                                <label for="orderLimitDay">
+                                                        {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.INPUT_LABEL' | translate }}
+                                                </label>
+                                                <input type="number" placeholder="{{ 'MODULES.DEFINES_THE_RANGE_DISTANCE_IN_KM' | translate }}" id="orderLimitDay" class="form-control" autocomplete="off" class="form-control" autocomplete="off" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;"
+                                                    formControlName="orderLimitDay" required autofocus step="1" />
+                                                <ng-container *ngFor="let validation of promotion_messages.orderLimitDay">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                    ZoneFranchiseForm
+                                                        .get('orderLimitDay')
+                                                        .hasError(validation.type) &&
+                                                    (ZoneFranchiseForm.get('orderLimitDay').dirty ||
+                                                        ZoneFranchiseForm.get('orderLimitDay').touched)
+                                                ">
+                                                {{ validation.message }}
+                                            </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end  orderLimitDay-->
+                                </ng-container>
+
+
+                                <!-- row zone horarios -->
+                                <div class="row mt-2">
+
+                                    <div class="col-12">
+                                        <h3 class="subtitle-general">
+                                            {{ 'FRANCHISE.SCHEDULE_ZONE' | translate }}
+                                        </h3>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p class="colo-echedule-zone m-0">
+                                            {{'FRANCHISE.CHOOSE_THE_OPENUNG_HOURSE_OF_THE_AREA.' |translate }}
+                                        </p>
+
+                                    </div>
+
+                                    <!-- franchise_schedule_start -->
+                                    <div class="col-12 col-md-5 pr-sm-4">
+                                        <div class="form-group form-row" [ngClass]="{
+                                'has-danger':
+                                ZoneFranchiseForm.controls['scheduleStart'].invalid &&
+                                (ZoneFranchiseForm.controls['scheduleStart'].dirty ||
+                                ZoneFranchiseForm.controls['scheduleStart'].touched) }">
+                                            <label for="franchise_schedule_start"> {{ 'FRANCHISE.HOURS_FROM' | translate}}</label>
+                                            <input class="form-control" id="franchise_schedule_start" (change)="changetime($event, 'scheduleStart')" formControlName="scheduleStart" type="time" [ngClass]="{
+                                'form-control-danger':
+                                ZoneFranchiseForm.controls['scheduleStart'].invalid &&
+                                (ZoneFranchiseForm.controls['scheduleStart'].dirty ||
+                                ZoneFranchiseForm.controls['scheduleStart'].touched)}" />
+                                            <ng-container *ngFor="let validation of promotion_messages.scheduleStart">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                        ZoneFranchiseForm
+                                        .get('scheduleStart')
+                                        .hasError(validation.type) &&
+                                        (ZoneFranchiseForm.get('scheduleStart').dirty ||
+                                        ZoneFranchiseForm.get('scheduleStart').touched)
+                                            ">
+                                        {{ validation.message }}
+                                        </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                        <!-- franchise_schedule_end -->
+                                    </div>
+
+                                    <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+
+                                        <div class="form-group form-row" [ngClass]="{
+                                'has-danger':
+                                ZoneFranchiseForm.controls['scheduleEnd'].invalid &&
+                                (ZoneFranchiseForm.controls['scheduleEnd'].dirty ||
+                                ZoneFranchiseForm.controls['scheduleEnd'].touched) }">
+                                            <label for="franchise_schedule_end"> {{ 'FRANCHISE.HOURS_UNTIL' | translate}}</label>
+                                            <input class="form-control" type="time" (change)="changetime($event, 'scheduleEnd')" formControlName="scheduleEnd" class="form-control" [ngClass]="{
+                                'form-control-danger':
+                                ZoneFranchiseForm.controls['scheduleEnd'].invalid &&
+                                (ZoneFranchiseForm.controls['scheduleEnd'].dirty ||
+                                ZoneFranchiseForm.controls['scheduleEnd'].touched)}" />
+                                            <ng-container *ngFor="let validation of promotion_messages.scheduleEnd">
+                                                <div class="w-100 text-left">
+                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                        ZoneFranchiseForm
+                                        .get('scheduleEnd')
+                                        .hasError(validation.type) &&
+                                        (ZoneFranchiseForm.get('scheduleEnd').dirty ||
+                                        ZoneFranchiseForm.get('scheduleEnd').touched)
+                                        ">
+                                        {{ validation.message }}
+                                        </small>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- end zone horarios -->
+
+                                <!-- tabla manage zone schedule -->
+                                <div class="row mt-2">
+                                    <!-- Horarios de entregas -->
+                                    <div class="col-12">
+                                        <h3 class="subtitle-general">
+                                            <i class="far fa-clock"></i> {{ 'FRANCHISE.ZONE_DELIVERY_SCHEDULE_CONFIGURATION' | translate }}
+
+                                        </h3>
+
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p class="colo-echedule-zone">
+                                            {{'FRANCHISE.THE_DELIVERY_TIMES_WILL_HELP_TO_DEFINE_THE_HOUSE_IN_AREA' |translate }}
+                                        </p>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card mt-1 w-100 h-100">
+                                            <div class="card-header">
+                                                <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                                                    <div class="col-md-10 col-8 p-0">
+                                                        <span>{{ 'FRANCHISE.DELIVERY_TIMES_IN_THE_AREA' | translate }}</span>
+                                                    </div>
+                                                    <div class="col-md-2 col-12 p-0 text-center text-sm-right">
+                                                        <button class="btn btn-add card-button mt-2 mt-sm-0" title="{{ 'FRANCHISE.ADD_DELIVERY' |translate }}" type="button" (click)="addDeliveryTime()">
+                                                        <label>{{ 'FRANCHISE.ADD_DELIVERY' |translate }}</label>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <ng-container *ngIf="ShowSheduleLIst">
+                                                    <table class="table  table-responsive-lg mb-0" *ngIf="deliverySchedule.length > 0">
+                                                        <thead class="thead">
+                                                            <tr>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'FRANCHISE.HOUR_NAME' |translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'FRANCHISE.HOURS_FROM' |translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'FRANCHISE.HOURS_UNTIL' |translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.SHOW_IN_APP' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'FRANCHISE.DELETE_SHEDULE' | translate }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let schedule of deliverySchedule; let i = index trackBy:deliveryScheduleId" [ngClass]="{
+                                                        'bg-white': i % 2 == 0,
+                                                        'bg-gray': i % 2 > 0
+                                                    }">
+                                                                <td data-title="Company" class="text-center" style="width:28%;" *ngIf="zoneData.id == 0">
+                                                                    <input class="input-table text-center name" #input min="1" [ngClass]="{
+                                                        'error-schedule':!validateInput(input.value ?  input.value : '') || input.value > 255 }" max="255" style="text-align: center; width: calc(8.5em + 8.75rem + 16px);" type="text" (change)="
+                                                        changeDeliveryShedule(
+                                                        $event.target.value,
+                                                        schedule,
+                                                        'name'
+                                                    )" class="form-control" (blur)="validateInput(input.value)" (keyup.enter)="validateInput(input.value)" [value]="schedule?.name" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" style="width:28%;" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center name" #input [ngClass]="{
+                                                            'error-schedule':!validateInput(input.value ?  input.value : '') || input.value > 255 }" min="1" max="255" style="text-align: center; width: calc(8.5em + 8.75rem + 16px);" type="text" (change)="
+                                                            changeDeliverySheduleUpdate(
+                                                            $event.target.value,
+                                                            schedule,
+                                                            'name'
+                                                        )" class="form-control" (blur)="validateInput(input.value)" (keyup.enter)="validateInput(input.value)" [value]="schedule?.name" required autofocus />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" style="width:32%;" *ngIf="zoneData.id == 0">
+                                                                    <input class="input-table text-center" [ngClass]="{'error-schedule': validtimeStart(schedule)}" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changeDeliveryShedule(
+                                                            $event.target.value,
+                                                            schedule,
+                                                            'scheduleStart'
+                                                        )" class="form-control" [value]="secondToTime(schedule?.scheduleStart)" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" style="width:32%;" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center" [ngClass]="{'error-schedule': validtimeStart(schedule)}" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changeDeliverySheduleUpdate(
+                                                            $event.target.value,
+                                                            schedule,
+                                                            'scheduleStart'
+                                                        )" class="form-control" [value]="secondToTime(schedule?.scheduleStart)" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" style="width:27%;" *ngIf="zoneData.id == 0">
+                                                                    <input class="input-table text-center" [ngClass]="{'error-schedule': validtimeEnd(schedule)}" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changeDeliveryShedule(
+                                                            $event.target.value,
+                                                            schedule,
+                                                            'scheduleEnd'
+                                                        )" class="form-control" [value]="secondToTime(schedule?.scheduleEnd)" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" style="width:27%;" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center" [ngClass]="{'error-schedule': validtimeEnd(schedule)}" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changeDeliverySheduleUpdate(
+                                                            $event.target.value,
+                                                            schedule,
+                                                            'scheduleEnd'
+                                                        )" class="form-control" [value]="secondToTime(schedule?.scheduleEnd)" />
+                                                                </td>
+                                                                <td class="text-center" style="width:24%;">
+                                                                    <div class="round margin-rounder" *ngIf="zoneData.id === 0">
+                                                                        <input type="checkbox" [id]="'isActiveitem' + i" [checked]="schedule.isActive" (change)="changeDeliveryShedule($event.target.checked, schedule ,'isActive')" />
+                                                                        <label [for]="'isActiveitem'+ i"></label>
+                                                                    </div>
+                                                                    <div class="round margin-rounder" *ngIf="zoneData.id > 0">
+                                                                        <input type="checkbox" [id]="'isActiveitem' + schedule.id" [checked]="schedule.isActive" (change)="activeDeliverySchedule($event.target.checked, schedule)" />
+                                                                        <label [for]="'isActiveitem'+ schedule.id"></label>
+                                                                    </div>
+                                                                </td>
+                                                                <!-- eliminar dejar si cambian de parecer -->
+                                                                <td data-title="Open" class="text-center">
+                                                                    <div *ngIf="zoneData.id > 0" class="editar point" title="{{ 'GENERAL.DELETE' | translate }}" (click)="deleteScheduleZoneEdit(schedule)">
+                                                                        <img class="icons-datatable point" src="assets/icons/optimmanage/delete-blue.svg">
+                                                                    </div>
+                                                                    <div *ngIf="zoneData.id == 0" class="editar point" title="{{ 'GENERAL.DELETE' | translate }}" (click)="deleteSheduleZone(schedule, i)">
+                                                                        <img class="icons-datatable point" src="assets/icons/optimmanage/delete-blue.svg">
+                                                                    </div>
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <h5 class="text-center data-avalilable" *ngIf="deliverySchedule.length == 0">
+                                                        {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                                                    </h5>
+                                                </ng-container>
+
+                                            </div>
+
+                                            <ng-container *ngIf="!ShowSheduleLIst">
+                                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                                    <div class="fa-4x">
+                                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!-- end tabla manage zone schedule -->
+
+                                <!-- tabla de tarifas de entregas -->
+                                <div class="row mt-2">
+                                    <!-- tarifas de entregas -->
+                                    <div class="col-12">
+                                        <h3 class="subtitle-general">
+                                            <i class="fas fa-motorcycle"></i> {{ 'FRANCHISE.ZONE_DELIVERY_RATE_SETTINGS' | translate }}
+                                        </h3>
+
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p class="colo-echedule-zone">
+                                            {{ 'FRANCHISE.DELIVERY_RATES_WILL_HELP_WILL_HELP_DEFINE_THE_TYPE_OF_DELEVERY_THAT_YOUR_COMPANY_CAN_MAKE,SUCH_AS:EXPRESS,ORDINARY DELIVERY.' |translate }}
+                                        </p>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card mt-1 w-100 h-100">
+                                            <div class="card-header">
+                                                <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                                                    <div class="col-md-10 col-8 p-0">
+                                                        <span>{{ 'MODULES.DELIVERY_RATES' | translate }}</span>
+                                                    </div>
+                                                    <div class="col-md-2 col-12 p-0 text-center text-sm-right">
+                                                        <button class="btn btn-add card-button mt-2 mt-sm-0" title="{{ 'GENERAL.ADD_RATE' | translate }}" type="button" (click)="addDeliveryRate()">
+                                                        <label>{{ 'GENERAL.ADD_RATE' | translate }}</label>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0">
+
+                                                <ng-container *ngIf="showDeliveryRates">
+                                                    <table class="table table-responsive  table-responsive-lg mb-0" *ngIf="delivery &&  delivery.length > 0">
+                                                        <thead class="thead">
+                                                            <tr>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.ORDER_IN_THE_APP' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.DELIVERY_NAME' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.MINIMUN_TIME' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.MAXIMUN_TIME' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'GENERAL.PRICE' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.SHOW_IN_APP' | translate }}</th>
+                                                                <th class="text-center" style="vertical-align: middle;">{{ 'MODULES.EXPRESS_DELIVERY' | translate }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngFor="let item of delivery ; let i = index; trackBy:deliveryId" [ngClass]="{'bg-white': i % 2 == 0, 'bg-gray': i % 2 > 0 }">
+                                                            <tr>
+                                                                <td class="input-table" style="min-width: 90px" *ngIf="zoneData.id === 0">
+                                                                    <input class="input-table text-center td-price" style="width: calc(7.5em + 0.75rem + 16px); text-align: center;" type="number" min="0" (change)="
+                                                        changePrice(
+                                                            $event.target.value,
+                                                            item,
+                                                            'order'
+                                                        )" class="form-control" [value]="item.order ? item.order:0" />
+                                                                </td>
+                                                                <td class="input-table" style="min-width: 90px" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center td-price" style="width: calc(7.5em + 0.75rem + 16px); text-align: center;" type="number" min="0" (change)="
+                                                            changePriceUpdate(
+                                                            $event.target.value,
+                                                            item,
+                                                            'order'
+                                                        )" class="form-control" [value]="item.order ? item.order:0" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id === 0">
+                                                                    <input class="input-table" style="text-align: center;" type="text" (change)="
+                                                        changePrice(
+                                                            $event.target.value,
+                                                            item,
+                                                            'name'
+                                                        )" class="form-control" [value]="item?.name" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table" style="text-align: center;" type="text" (change)="
+                                                            changePriceUpdate(
+                                                            $event.target.value,
+                                                            item,
+                                                            'name'
+                                                        )" class="form-control" [value]="item?.name" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id === 0">
+                                                                    <input class="input-table text-center" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                        changePrice(
+                                                            $event.target.value,
+                                                            item,
+                                                            'minTime'
+                                                        )" class="form-control" [value]="secondToTime(item?.minTime )" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changePriceUpdate(
+                                                            $event.target.value,
+                                                            item,
+                                                            'minTime'
+                                                        )" class="form-control" [value]="secondToTime(item?.minTime )" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id === 0">
+                                                                    <input class="input-table text-center" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changePrice(
+                                                                $event.target.value,
+                                                                item,
+                                                                'maxTime'
+                                                            )" class="form-control" [value]="secondToTime(item?.maxTime)" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                            changePriceUpdate(
+                                                            $event.target.value,
+                                                            item,
+                                                            'maxTime'
+                                                        )" class="form-control" [value]="secondToTime(item?.maxTime)" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center pl-1 " style="width:200px;" *ngIf="zoneData.id === 0">
+                                                                    <input class="input-table text-center " #input style="text-align: center;" [ngClass]="{
+                                                            'error-price':!patterPrice(input.value ?  input.value : '') || input.value > 99999 }" title="" type="number" min="1" max="99999" onKeyPress="if(this.value.length==9) return false;" (change)="
+                                                            changePrice(
+                                                                $event.target.value,
+                                                                item,
+                                                                'price'
+                                                            )" class="form-control" (blur)="patterPrice(input.value)" (keyup.enter)="patterPrice(input.value)" [value]="item?.price" required autofocus step="0.01" />
+                                                                </td>
+                                                                <td data-title="Company" class="text-center pl-1 " style="width:200px;" *ngIf="zoneData.id > 0">
+                                                                    <input class="input-table text-center" #input style="text-align: center; " [ngClass]="{
+                                                            'error-price':!patterPrice(input.value ?  input.value : '') || input.value > 99999 }" title="" type="number" min="1" max="99999" onKeyPress="if(this.value.length==9) return false;" (change)="
+                                                            changePriceUpdate(
+                                                                    $event.target.value,
+                                                                    item,
+                                                                    'price'
+                                                                )" class="form-control" (blur)="patterPrice(input.value)" (keyup.enter)="patterPrice(input.value)" [value]="item?.price" required autofocus step="0.01" />
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="round" *ngIf="zoneData.id === 0">
+                                                                        <input type="checkbox" [id]="'isActiveitemRates' + i" [checked]="item.isActive" (change)="changePrice($event.target.checked,item, 'isActive')" />
+                                                                        <label [for]="'isActiveitemRates'+ i"></label>
+                                                                    </div>
+                                                                    <div class="round" *ngIf="zoneData.id > 0">
+                                                                        <input type="checkbox" [id]="'isActiveitemRates' + item.id" [checked]="item.isActive" (change)="activeDeliveryRates($event.target.checked,item)" />
+                                                                        <label [for]="'isActiveitemRates'+ item.id"></label>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td class="text-center">
+                                                                    <div class="round" *ngIf="zoneData.id === 0">
+                                                                        <input type="checkbox" [id]="'expresstem' + i" [checked]="item.express" (change)="changePriceUpdate($event.target.checked,item, 'express')" />
+                                                                        <label [for]="'expresstem'+ i"></label>
+                                                                    </div>
+                                                                    <div class="round" *ngIf="zoneData.id > 0">
+                                                                        <input type="checkbox" [id]="'expresstem' + item.id" [checked]="item.express" (change)="activeExpressDeliveryRates($event.target.checked,item)" />
+                                                                        <label [for]="'expresstem'+ item.id"></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <h5 class="text-center data-avalilable" *ngIf="delivery && delivery.length === 0">
+                                                        {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                                                    </h5>
+                                                </ng-container>
+                                            </div>
+
+                                            <ng-container *ngIf="!showDeliveryRates">
+                                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                                    <div class="fa-4x">
+                                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!-- end tabla de tarifas de entregas -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end card gestion de tienda -->
+
+                <ng-container *ngIf="hideMultidelegation()">
+
+                    <!-- Configuraci+ón de PEDIDOS -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card style-card-app">
+                                <div class="card-body px-5">
+                                    <label style="font-weight: bold;">
+                                        {{ 'FRANCHISE.ORDER_CONFIGURATION' |translate }}
+                                    </label>
+
+
+                                    <!--  configuracion de enterega-->
+                                    <div class="row mt-2">
+
+                                        <div class="col-12 col-xl-5 col-md-12 pr-sm-4">
+                                            <!-- acceptSameDay-->
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="switch w-100 col-12">
+                                                        <label class="switch-width">
+                                                            <input type="checkbox" formControlName="acceptSameDay"/>
+                                                            <span class="lever switch-col-primary m-0"></span>
+                                                            <span  class="pl-4">
+                                                                {{
+                                                                    'PREFERENCES.OPTIMIZATION.MAP_POINTS.ACCEPT_SAME_DAY'
+                                                                        | translate
+                                                                }}
+                                                            </span>  
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- end acceptSameDay -->
+
+                                            <!-- assignedNextDay -->
+
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="switch w-100 col-12">
+                                                        <label class="switch-width">
+                                                            <input type="checkbox" formControlName="assignedNextDay"/>
+                                                            <span class="lever switch-col-primary m-0"></span>
+                                                            <span  class="pl-4">
+                                                                {{
+                                                                    'PREFERENCES.OPTIMIZATION.MAP_POINTS.NEXT_DAY'
+                                                                        | translate
+                                                                }}
+                                                            <span data-toggle="tooltip" data-placement="top"
+                                                            title="{{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.NEXT_DAY' | translate}}">
+                                                            <i class="fas fa-info-circle point i-relative"></i>
+                                                                </span>
+                                                            </span>  
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end assignedNextDay -->
+                                        </div>
+
+                                    </div>
+
+                                    <!-- end configuracion de enterega-->
+
+                                    <!-- dias -->
+
+                                    <div class="row mt-2">
+                                        <div class="col-12 mb-4">
+                                            <p class="card-title">
+                                                {{ 'PREFERENCES.OPTIMIZATION.ORDERS.ORDER_FULFILLMENT_DAYS' | translate }}
+                                            </p>
+                                        </div>
+
+
+                                        <!-- lunes a miercoles -->
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input type="checkbox" id="monday-week" formControlName="activeMonday" />
+                                                        <label for="monday-week"></label>
+                                                    </div>
+                                                    <label for="monday-week" class="label-check">
+                                                        {{
+                                                            'CLIENTS.CLIENTS_FORMS.MONDAY'
+                                                                | translate
+                                                        }}
+                                                    </label>
+                                                </div>
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input type="checkbox" id="tuesday-week" formControlName="activeTuesday" />
+                                                        <label for="tuesday-week"></label>
+                                                    </div>
+                                                    <label for="tuesday-week" class="label-check">
+                                                        {{'CLIENTS.CLIENTS_FORMS.TUESDAY'| translate}}
+                                                    </label>
+                                                </div>
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input type="checkbox" id="wednesday-week" formControlName="activeWednesday" />
+                                                        <label for="wednesday-week"></label>
+                                                    </div>
+                                                    <label for="wednesday-week" class="label-check">
+                                                        {{
+                                                            'CLIENTS.CLIENTS_FORMS.WEDNESDAY'
+                                                                | translate
+                                                        }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end lunes a miercoles -->
+
+                                        <!-- juves a sabado -->
+
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input type="checkbox" id="thursday-week" formControlName="activeThursday" />
+                                                        <label for="thursday-week"></label>
+                                                    </div>
+                                                    <label for="thursday-week" class="label-check">
+                                                        {{
+                                                            'CLIENTS.CLIENTS_FORMS.THURSDAY'
+                                                                | translate
+                                                        }}
+                                                    </label>
+                                                </div>
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input type="checkbox" id="friday-week" formControlName="activeFriday" />
+                                                        <label for="friday-week"></label>
+                                                    </div>
+                                                    <label for="friday-week" class="label-check">
+                                                        {{'CLIENTS.CLIENTS_FORMS.FRIDAY' | translate}}
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input id="saturday-week" type="checkbox" formControlName="activeSaturday" />
+                                                        <label for="saturday-week"></label>
+                                                    </div>
+                                                    <label for="saturday-week" class="label-check">
+                                                        {{
+                                                            'CLIENTS.CLIENTS_FORMS.SATURDAY'
+                                                                | translate
+                                                        }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- end jueves a sabado -->
+
+                                        <!-- domingo -->
+
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12 mb-1 d-flex flex-row">
+                                                    <div class="round round-little margin-days">
+                                                        <input type="checkbox" id="sunday-week" formControlName="activeSunday" />
+                                                        <label for="sunday-week"></label>
+                                                    </div>
+                                                    <label for="sunday-week" class="label-check">
+                                                        {{
+                                                            'CLIENTS.CLIENTS_FORMS.SUNDAY'
+                                                                | translate
+                                                        }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end domingo -->
+                                    </div>
+
+                                    <!--  end dias -->
+                                    <!-- orderMaxTime -->
+                                    <div class="row mt-3">
+                                        <div class="col-12 col-md-5 pr-sm-4">
+                                            <div class="form-group form-row">
+                                                <label for="orderMaxTime"> 
+                                                    {{
+                                                    'PREFERENCES.OPTIMIZATION.ORDERS.MAX_ORDER_TIME'
+                                                        | translate
+                                                    }}
+                                                    <span data-toggle="tooltip" data-placement="top"
+                                                    title="{{ 'DESCRIPTIONS.MAX_ORDER_TIME'| translate}}">
+                                                    <i class="fas fa-info-circle point i-relative"></i>
+                                                    </span>
+                                                </label>
+                                                <input class="form-control" id="orderMaxTime" format="HH:mm" formControlName="orderMaxTime" type="time" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end orderMaxTime -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end configuración de pedidos -->
+
+                    <!-- RIDERS -->
+
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                                {{ 'FRANCHISE.ASSIGN_RIDERS_TO_THIS_ZONE' | translate }}
+
+                            </h3>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                                        <div class="col-md-10 col-7 p-0 text-center text-sm-left">
+                                            <span>{{ 'FRANCHISE.RIDERS' | translate }}</span>
+                                        </div>
+                                        <div class="col-md-2 col-5 p-0 text-sm-right">
+                                            <button class="btn btn-add card-button mt-2 mt-sm-0" type="button" title="{{ 'FRANCHISE.ADD_RIDERS' | translate }}" (click)="searchRiders()">
+                                            <label>{{ 'FRANCHISE.ADD_RIDERS' | translate }}</label>
+                                        </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <ng-container *ngIf="zoneData.id == 0">
+                                        <table class="table  table-responsive-mg mb-0" *ngIf="ridersTable && ridersTable.length > 0">
+                                            <thead class="thead">
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ 'FRANCHISE.IDENTIFICATION_DOCUMENT' | translate }}
+                                                    </th>
+                                                    <th class="text-center">
+                                                        {{ 'GENERAL.NAME' | translate }}
+                                                    </th>
+                                                    <th class="text-center">
+                                                        {{ 'GENERAL.SURNAME' | translate }}
+                                                    </th>
+
+                                                    <th class="text-center">
+                                                        {{ 'GENERAL.PHONE' | translate }}
+                                                    </th>
+
+                                                    <th class="text-center">
+                                                        {{ 'GENERAL.DELETE' | translate }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let riders of ridersTable; let i = index" [ngClass]="{
+                                                    'bg-white': i % 2 == 0,
+                                                    'bg-gray': i % 2 > 0
+                                                }">
+                                                    <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                        <label *ngIf="riders && !riders?.nationalId">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                        <label *ngIf="riders && riders?.nationalId" [title]="riders?.nationalId">  {{ riders?.nationalId }} </label>
+                                                    </td>
+
+                                                    <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                        <label *ngIf="riders && !riders?.name">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                        <label *ngIf="riders && riders?.name" [title]="riders?.name">  {{ riders?.name }} </label>
+                                                    </td>
+
+                                                    <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                        <label *ngIf="riders && !riders?.surname">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                        <label *ngIf="riders && riders?.surname" [title]="riders?.surname">  {{ riders?.surname }} </label>
+                                                    </td>
+                                                    <td data-title="Company" class="text-center" *ngIf="zoneData.id ==0">
+                                                        <label *ngIf="riders && !riders?.phone">{{'GENERAL.NOT_AVAILABLE' |translate }}</label>
+                                                        <label *ngIf="riders && riders?.phone" [title]="riders?.phone">  {{ riders?.phone }} </label>
+                                                    </td>
+
+                                                    <td data-title="Open" class="text-center">
+                                                        <div *ngIf="zoneData.id == 0" class="editar point" title="{{ 'GENERAL.DELETE' | translate }}" (click)="deleteRidersTable(riders.id)">
+                                                            <!-- <i class="far fa-times-circle fa-2x"></i> -->
+                                                            <img class="icons-datatable point" src="assets/icons/optimmanage/delete-blue.svg">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <h5 class="text-center data-avalilable" *ngIf="ridersTable && ridersTable.length == 0">
+                                            {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                                        </h5>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="zoneData.id > 0">
+
+
+                                        <table id="ridersZonetable" style="width: 100%" class="table table-bordered table-striped mb-0" style="text-align: center">
+                                            <thead class="thead-new">
+                                                <tr>
+                                                    <th>{{ 'FRANCHISE.IDENTIFICATION_DOCUMENT' | translate }}</th>
+                                                    <th>{{ 'GENERAL.NAME' | translate }}</th>
+                                                    <th>{{ 'GENERAL.SURNAME' | translate }}</th>
+                                                    <th>{{ 'GENERAL.PHONE' | translate }}</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- END RIDERS -->
+
+                </ng-container>
+
+                <!-- btn -->
+                <div class="row pt-5 pb-3">
+                    <div class="col-sm-6 col-12 text-center text-sm-right mt-1">
+                        <button class="btn btn-cancel size-btn-form" type="button" routerLink="/franchise/zone">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-sm-6 col-12 text-center text-sm-left mt-1 pb-2">
+                        <button (click)="createProduct()" type="submit" class="btn btn-primary size-btn-form" [disabled]="ZoneFranchiseForm.invalid  || validIntervalHours() ">
+                            <span *ngIf="zoneData.id == 0">{{
+                                'FRANCHISE.CREATE_ZONE' | translate
+                            }}</span>
+                            <span *ngIf="zoneData.id > 0">{{
+                                'GENERAL.SAVE' | translate
+                            }}</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- end btn -->
+            </form>
+        </div>
+    </div>
+</div>

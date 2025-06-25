@@ -1,0 +1,21 @@
+<div class="easyroute-profile-modules padding-body pt-0">
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8 mt-5 text-center">
+          <p class="title">{{ 'MODULES.MODULES' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row padding-container mt-4" *ngIf="modules && company">
+      <div class="col-sm-6 col-xl-3 col-12" *ngFor="let module of modules">
+        <easyroute-card-module 
+          [cardModule]="module"
+          [company]="company"
+          (openModal)="openModalModules( $event )"
+        ></easyroute-card-module>
+      </div>
+
+    </div>
+</div>

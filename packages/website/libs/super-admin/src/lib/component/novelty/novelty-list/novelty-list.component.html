@@ -1,0 +1,65 @@
+<div class="nolvelty-list bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'MENU.SUPER_ADMIN' | translate }}</p>
+            </div>
+        </div>
+
+        <!-- navs-->
+        <div class="row justify-content-center mb-3">
+            <nav class="row p-0 m-0 group-btn">
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='start' }" (click)="changePage( 'start' )">
+                    <a class="text-center">{{ 'COMPANIES.START' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='company' }" (click)="changePage( 'company' )">
+                    <a class="text-center">{{ 'COMPANIES.NAME' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='user' }" (click)="changePage( 'user' )">
+                    <a class="text-center">{{ 'USERS.NAME' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='novelty' }" (click)="changePage( 'novelty' )">
+                    <a class="text-center">{{ 'WHATS_NEW.NAME' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='invoice' }" (click)="changePage( 'invoice' )">
+                    <a class="text-center">{{ 'INVOICES.NAME' | translate }}</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- botones -->
+    <div class="row justify-content-center align-items-end">
+        <div class="col-md-4 col-12 mb-1">
+            <!-- <label class="title-table">
+                {{ 'WHATS_NEW.NAME' | translate }}
+            </label> -->
+        </div>
+        <div class="col-md-4 col-12 text-center mb-1">
+            <button class="btn btn-secondary mt-sm-1 ml-sm-2 btn-large " style="text-transform: initial;" routerLink="new">
+                {{ 'WHATS_NEW.ADD_NOVELITY' | translate }}
+            </button>
+        </div>
+
+        <!-- space -->
+        <div class class="col-md-4 col-12 pr-lg-4 text-right  mb-1">
+
+        </div>
+
+    </div>
+
+    <div class="table-content mt-3">
+        <table style="width: 100%; text-align: center;" class="table table-striped table-bordered mb-0" id="novelty">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th> {{ 'WHATS_NEW.TITLE' | translate }} </th>
+                    <th> {{ 'WHATS_NEW.DESCRIPTION' | translate }} </th>
+                    <th> {{ 'WHATS_NEW.URL' | translate }} </th>
+                    <th> {{'WHATS_NEW.CREATION_DATE'| translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

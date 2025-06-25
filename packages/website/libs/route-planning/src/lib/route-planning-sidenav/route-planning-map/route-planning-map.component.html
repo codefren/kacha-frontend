@@ -1,0 +1,1675 @@
+<div class="easyroute-route-planning-map">
+    <agm-map [latitude]="!fitBounds ? currentCenter.latitude : initialCenter.latitude"
+        [longitude]="!fitBounds ? currentCenter.longitude : initialCenter.longitude" [mapDraggable]="isDraggable"
+        [fitBounds]="fitBounds" (idle)="centerChange()" (mapReady)="centerMap($event)"
+        (zoomChange)="onZoomChange($event)" [zoom]="currentZoom" [styles]="mapStyles">
+        <span *ngIf="showGeolocation">
+            <agm-overlay *ngFor="let geo of geolocation;trackBy: trackById" [latitude]="geo.lat" [longitude]="geo.lng">
+                <ng-container *ngIf="!showAllSelected || (geo.selected)">
+                    <div class="depot-marker-container" [class.depot-marker-container]="hoverGeoId === geo.id"
+                        (click)="selectGeo(geo.id)">
+                        <div>
+                            <div style="height: 28px;
+                            background-color: #FFF;
+                            padding: 8px;
+                            font-weight: bold;">{{ geo.name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-icon size="m" class="depot-marker" *ngIf="geo.isDriver"
+                                    [ngClass]="{'red-icon': geo.violatedConstraintStoppedDriver }">
+                                    directions_car
+                                </mat-icon>
+
+                                <mat-icon size="m" class="depot-marker" *ngIf="!geo.isDriver"
+                                    [ngClass]="{'red-icon': geo.violatedConstraintStoppedCommercial }">
+                                    person
+                                </mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </agm-overlay>
+
+            <agm-overlay *ngFor="let geo of geolocation;trackBy: trackById" [latitude]="geo.lat" [longitude]="geo.lng">
+                <ng-container *ngIf="!showAllSelected || (geo.selected)">
+                    <agm-snazzy-info-window [latitude]="geo.lat" [longitude]="geo.lng" [placement]="'top'"
+                        (mouseover)="isDraggable = false" (mouseout)="isDraggable = true" [openOnMarkerClick]="true"
+                        [closeWhenOthersOpen]="true" *ngIf="geo.id === selectedGeoId || hoverGeoId === geo.id">
+                        <mat-card class="map-card" [style.zIndex]="'3'">
+                            <mat-card-header [style.background-color]="'black'" [style.color]="'white'" fxLayout="row"
+                                class="">
+                                <mat-card-title class="help-cursor" [title]="geo.name">
+                                    {{ geo.name }}
+                                </mat-card-title>
+
+                                <div class="header-buttons" fxLayout="column" fxLayoutAlign="space-around"
+                                    [style.visibility]="'initial'">
+                                    <button mat-icon-button class="close-button"
+                                        (click)="selectGeo(-1);isDraggable = true">
+                                        <mat-icon [ngStyle]="{color:'white'}" fxFlexAlign="center"
+                                            (click)="isDraggable = true">
+                                            close
+                                        </mat-icon>
+                                    </button>
+                                </div>
+                            </mat-card-header>
+
+                            <div class="marker-container" fxLayout="row" fxLayoutAlign="space-between"
+                                *ngIf="geo.id === selectedGeoId">
+                                <mat-card-content fxLayout="column" fxLayoutAlign="space-around">
+                                    <p class="mb-1 detail-users"><b>Nombre:</b> {{geo.name }}</p>
+
+                                    <p class="mb-1 detail-users">
+                                        <b>Última actualización:</b> {{ changeToMoment(geo.localizationLastUpdate,
+                                        'DD-MM-YYYY HH:mm:ss') }}
+                                    </p>
+
+                                    <p class="mb-1 detail-users"
+                                        *ngIf="(geo.isDriver && geo.violatedConstraintStoppedDriver) || (!geo.isDriver && geo.violatedConstraintStoppedCommercial)">
+                                        <b>Tiempo detenido:</b> {{ geo.stoppedTime > 86400 ? '24h+' : (geo.stoppedTime |
+                                        duration) }}
+                                    </p>
+
+                                    <p class="mb-1 detail-users"
+                                        *ngIf="geo.user_vehicle && geo.user_vehicle.length > 0">
+                                        <b>Vehículo(s) asignado:</b> <span
+                                            *ngFor="let vehicle of geo.user_vehicle; let i = index;trackBy: trackById">{{
+                                            vehicle.name + (geo.user_vehicle.length > 1 && geo.user_vehicle.length > i+1
+                                            ? ' , ' : ' ' ) }}</span>
+                                    </p>
+
+                                    <p class="mb-1 detail-users"
+                                        *ngIf="geo.user_profile && geo.user_profile.length > 0">
+                                        <b>Perfil(es): </b> <span
+                                            *ngFor="let profile of geo.user_profile; let i = index;trackBy: trackById">{{
+                                            profile.profile.name + (geo.user_profile.length > 1 &&
+                                            geo.user_profile.length > i+1 ? ' , ' : ' ' ) }}</span>
+                                    </p>
+                                </mat-card-content>
+                            </div>
+                        </mat-card>
+                    </agm-snazzy-info-window>
+                </ng-container>
+            </agm-overlay>
+        </span>
+
+        <span *ngIf="mapStage !== 'empty'">
+            <span *ngFor="let zone of (zones | keyvalue);trackBy: trackById">
+                <agm-marker *ngFor="let point of zone.value.deliveryPoints; index as currentPoint;trackBy: trackById"
+                    [latitude]="point.coordinates.latitude" [longitude]="point.coordinates.longitude"
+                    [agmFitBounds]="true" [visible]="false"></agm-marker>
+            </span>
+
+            <agm-marker [latitude]="routePlanning.planningSession.depotPoint.coordinates.latitude"
+                [longitude]="routePlanning.planningSession.depotPoint.coordinates.longitude" [agmFitBounds]="true"
+                [visible]="false"></agm-marker>
+
+            <agm-overlay *ngIf="routePlanning.planningSession?.depotPoint"
+                [latitude]="routePlanning.planningSession.depotPoint.coordinates.latitude"
+                [longitude]="routePlanning.planningSession.depotPoint.coordinates.longitude" [visible]="false">
+            </agm-overlay>
+        </span>
+
+        <agm-overlay *ngIf="mapStage === 'empty' &&  initialCenter && initialCenter.latitude !== 0"
+            [latitude]="initialCenter.latitude" [longitude]="initialCenter.longitude">
+            <div class="depot-marker-container">
+                <!--<mat-icon size="m" class="depot-marker">local_parking</mat-icon>-->
+                <mat-icon size="m" class="depot-marker" svgIcon="open_book"></mat-icon>
+            </div>
+        </agm-overlay>
+
+        <agm-overlay *ngIf="mapStage !== 'empty' && routePlanning.planningSession?.depotPoint as depotPoint"
+            [latitude]="depotPoint.coordinates.latitude" [longitude]="depotPoint.coordinates.longitude">
+            <div class="depot-marker-container" (click)="toggleDepotOpened()">
+                <!--<mat-icon size="m" class="depot-marker">local_parking</mat-icon>-->
+
+                <mat-icon size="m" class="depot-marker" svgIcon="open_book"></mat-icon>
+
+            </div>
+
+            <agm-snazzy-info-window *ngIf="routePlanning.depotOpened" [latitude]="depotPoint.coordinates.latitude"
+                [longitude]="depotPoint.coordinates.longitude" [placement]="'top'" (mouseover)="isDraggable = false"
+                (mouseout)="isDraggable = true">
+                <div class="depot-header-container">
+                    <mat-icon (click)="toggleDepotOpened(); isDraggable = true" class="close-button">
+                        close
+                    </mat-icon>
+
+                    <div class="depot-name-container" fxLayoutAlign="space-around left" fxLayout="column"
+                        fxLayoutGap="8px">
+                        <span class="depot-name-title mat-h2">Almacén</span>
+
+                        <div fxLayoutAlign="start center">
+                            <a title="Depot's address" class="item-icon"
+                                href="https://maps.google.com/?q={{depotPoint.address}}" target="_blank">
+                                <img src="https://img.icons8.com/color/24/000000/google-maps.png" />
+                            </a>
+
+                            <span class="mat-h4 item-value depot-address" title="{{ depotPoint.address }}">
+                                {{ depotPoint.address }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="depot-content-container">
+                    <span *ngIf="anyVehicles(); else: noVehiclesContainer">
+                        <div *ngIf="routePlanning.viewingMode === 0" fxLayout="column" fxLayoutAlign="start start"
+                            fxLayoutGap="8px" c lass="depot-list">
+                            <span
+                                *ngFor="let zone of (routePlanning.planningSession.deliveryZones | keyvalue);trackBy: trackById">
+                                <div>
+                                    <div>
+                                        <app-info-chip content [bordered]="true" size="s" [text]="zone.value.identifier"
+                                            [help]="zone.value.name" [color]="zone.value.color" class="zone-identifier">
+                                        </app-info-chip>
+
+                                        <span class="depot-name-vehicles-division"><b>·</b></span>
+
+                                        <span class="map-font">
+                                            {{
+                                            zone.value.vehicles
+                                            ? zone.value.vehicles.length === 1
+                                            ? '1 vehículo asignado:'
+                                            : zone.value.vehicles.length > 0
+                                            ? zone.value.vehicles.length +
+                                            ' vehículos asignados:'
+                                            : '0 vehículos asignados:'
+                                            : '0 vehículos asignados:'
+                                            }}
+                                        </span>
+                                    </div>
+
+                                    <ul fxLayout="column" fxLayoutGap="4px"
+                                        *ngIf="zone.value.vehicles?.length > 0; else: noVehicleError">
+                                        <li *ngFor="let vehicle of zone.value.vehicles; trackBy: trackById"
+                                            fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px"
+                                            class="zones-depot-vehicle-row map-font">
+                                            <span title="Nombre del vehículo" class="depot-vehicle-row-item">
+                                                <b>{{ vehicle.name }}</b>
+                                            </span>
+
+                                            <span title="Capacidad del vehículo" class="depot-vehicle-row-item"
+                                                fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                                                <mat-icon svgIcon="loaded-truck" inline></mat-icon>
+
+                                                <span>{{ vehicle.capacity }}</span>
+                                            </span>
+
+                                            <span class="depot-vehicle-row-item large-item map-font">
+                                                Estado:&nbsp;
+                                                <span *ngIf="zoneStatus[zone.value.id].evaluated else: vehicleUnused"
+                                                    class="map-font primary">
+                                                    <b>En uso</b>
+                                                </span>
+
+                                                <ng-template #vehicleUnused>
+                                                    <span class="map-font accent"><b>Libre</b></span>
+                                                </ng-template>
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <ng-template #noVehicleError>
+                                        <ul class="map-font warn">
+                                            <b>Error:</b>
+                                            Ruta sin vehículo asignado
+                                        </ul>
+                                    </ng-template>
+                                </div>
+                            </span>
+                        </div>
+
+                        <div *ngIf="routePlanning.viewingMode === 1" fxLayout="column" fxLayoutAlign="start start"
+                            fxLayoutGap="8px" class="depot-list">
+                            <span
+                                *ngFor="let zone of (routePlanning.planningSession.deliveryZones | keyvalue);trackBy: trackById">
+                                <div *ngIf="zoneStatus[zone.value.id] && zoneStatus[zone.value.id].optimized">
+                                    <div>
+                                        <app-info-chip content [bordered]="true" size="s" [text]="zone.value.identifier"
+                                            [help]="zone.value.name" [color]="zone.value.color" class="zone-identifier">
+                                        </app-info-chip>
+
+                                        <span class="depot-item-name mat-h3">&nbsp;{{ zone.value.name }}</span>
+                                    </div>
+
+                                    <ul fxLayout="column" fxLayoutGap="4px">
+                                        <li *ngFor="let route of zone.value.optimization?.solution.routes; trackBy: trackById"
+                                            fxLayout="row" fxLayoutAlign="start" fxLayoutGap="4px" class="map-font">
+                                            <div>
+                                                <app-info-chip *ngIf="routePlanning.useRouteColors" content
+                                                    [bordered]="true" size="s" [help]="route.name" [color]="route.color"
+                                                    class="zone-identifier"></app-info-chip>
+
+                                                <span class="depot-item-name route mat-h4">
+                                                    &nbsp;<b>{{ 'GENERAL.ROUTE' | translate }}&nbsp;{{ route.name }}</b>
+                                                </span>
+                                            </div>
+
+                                            <div *ngIf="route.vehicle as vehicle; else: noVehicleError"
+                                                class="routes-depot-vehicle-row" fxLayout="row"
+                                                fxLayoutAlign="start center" fxLayoutGap="4px">
+                                                <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+
+                                                <span title="Nombre del vehículo" class="depot-vehicle-row-item">
+                                                    <b>{{ vehicle.name }}</b>
+                                                </span>
+
+                                                <span title="Capacidad del vehículo" class="depot-vehicle-row-item"
+                                                    fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                                                    <mat-icon svgIcon="loaded-truck" inline></mat-icon>
+
+                                                    <span>{{ vehicle.capacity }}</span>
+                                                </span>
+
+                                                <span title="Hora de salida del almacén" class="depot-vehicle-row-item">
+                                                    <mat-icon inline>arrow_drop_up</mat-icon>
+                                                    {{ route.departureDayTime | dayTime }}h
+                                                </span>
+
+                                                <span title="Hora de vuelta al almacén" class="depot-vehicle-row-item">
+                                                    <mat-icon inline>arrow_drop_down</mat-icon>
+                                                    {{ route.depotArrivalDayTime | dayTime }}h
+                                                </span>
+                                            </div>
+
+                                            <ng-template #noVehicleError>
+                                        <li class="map-font warn">
+                                            |&nbsp;<b>Error:</b> Ruta sin vehículo
+                                            asignado
+                                        </li>
+                                        </ng-template>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+                    </span>
+
+                    <ng-template #noVehiclesContainer class="empty-vehicles">
+                        <span class="map-font">Este almacén no continene ningún vehículo en la actualidad.</span>
+                    </ng-template>
+                </div>
+            </agm-snazzy-info-window>
+        </agm-overlay>
+
+        <span *ngIf="mapStage !== 'empty' && routePlanning.viewingMode === 0">
+            <span *ngFor="let zone of (zones | keyvalue);trackBy: trackById">
+                <span *ngIf="!showSelected || zoneStatus[zone.value.id].selected">
+                    <agm-overlay class="map-point-overlay"
+                        *ngFor="let point of zone.value.deliveryPoints;trackBy: trackById"
+                        [latitude]="point.coordinates.latitude" [longitude]="point.coordinates.longitude">
+                        <div class="marker-container" fxLayout="column" fxLayoutAlign="center"
+                            (mouseover)="changeHovered(point.id)" (mouseout)="changeHovered(-1)"
+                            *ngIf="routePlanning.selectedDeliveryPoint !== point.id">
+                            <div *ngIf="!showSelected || zoneStatus[zone.value.id].selected"
+                                (click)="changeSelected(point.id, point)" class="marker-icon"
+                                [class.hovered-point]="zone.value.id == hoveredZone || point.id == hoveredPoint"
+                                [style.background-color]="point.fromPending ? '#E91313' : zone.value.color">
+                                <span *ngIf="zone.value.evaluated"
+                                    [style.color]="isLight(zone.value.color) ? 'black': 'white'" class="point-order">
+                                    {{ point.order }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div *ngIf="routePlanning.selectedDeliveryPoint === point.id" class="point-selected">
+                            <i class="fas fa-map-marker-alt" style="font-size: 50px; z-index:9999;"
+                                [style.color]="point.fromPending ? '#E91313' : zone.value.color"></i>
+                        </div>
+                    </agm-overlay>
+
+                    <agm-overlay *ngFor="let point of zone.value.deliveryPoints;trackBy: trackById"
+                        [latitude]="point.coordinates.latitude" [longitude]="point.coordinates.longitude">
+                        <mat-card class="map-card"
+                            *ngIf=" routePlanning.selectedDeliveryPoint !== point.id && hoveredPoint === point.id && hoverInMap"
+                            [style.zIndex]="point.id === hoveredPoint && !hoverInMap ? '3' : '2'">
+                            <mat-card-header [style.background-color]="point.fromPending ? '#E91313' : zone.value.color"
+                                [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                fxLayout="row" class="">
+                                <mat-card-title class="help-cursor" [title]="point.name">
+                                    {{ point.name }}
+                                </mat-card-title>
+
+                                <mat-card-subtitle
+                                    [style.color]="point.fromPending ? 'black' :  isLight(zone.value.color) ? 'black' : 'white'">
+                                    <div>
+                                        <span>
+                                            <b>Ruta:</b> &nbsp;{{ zone.value.name }}
+                                        </span>
+                                    </div>
+                                </mat-card-subtitle>
+                                <mat-card-subtitle class="mt-1" [style.color]="'black'" *ngIf="point.fromPending">
+                                    <div>
+                                        <span>
+                                            Pendiente de entrega desde {{ returnHours(point.fromPendingDate) }}
+                                        </span>
+                                    </div>
+                                </mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                    </agm-overlay>
+                </span>
+            </span>
+        </span>
+
+        <span *ngIf="selectedShape && pointInPolygon && pointInPolygon.length > 0">
+            <agm-overlay class="info-window-overlay dibujarMapa" [latitude]="markerClose.position.lat()"
+                [longitude]="markerClose.position.lng()" [zIndex]="9999">
+                <agm-snazzy-info-window [openOnMarkerClick]="true" [closeWhenOthersOpen]="true"
+                    [latitude]="markerClose.position.lat()" [longitude]="markerClose.position.lng()"
+                    (mouseover)="isDraggable = false" (mouseout)="isDraggable = true">
+                    <ng-template>
+
+                        <mat-card class="map-card">
+                            <mat-card-content *ngIf="drawinManagerType === 1" fxLayout="column"
+                                fxLayoutAlign="space-around" style="width:100%">
+                                <div class="change-order">
+                                    <div class="row p-0 m-0" style="overflow: auto;max-height: 150px; width: 100%;">
+                                        <div class="col-12 p-2 odd">
+                                            {{ pointInPolygon.length }} {{ ' Puntos seleccionados'}}
+                                        </div>
+                                    </div>
+                                    <div class="row p-2 m-0">
+                                        <div class="col-4 text-center border-bottom pb-2" (click)="tapDibujar = 0"
+                                            [ngClass]="{'tabDibujarSelected': tapDibujar === 0}">
+                                            Ruta
+                                        </div>
+                                        <div class="col-4 text-center border-bottom pb-2" (click)="tapDibujar = 1"
+                                            [ngClass]="{'tabDibujarSelected': tapDibujar === 1}">
+                                            Reparto
+                                        </div>
+                                        <div class="col-4 text-center border-bottom pb-2" (click)="tapDibujar = 2"
+                                            [ngClass]="{'tabDibujarSelected': tapDibujar === 2}">
+                                            Comercial
+                                        </div>
+                                    </div>
+
+                                    <ng-container *ngIf="tapDibujar == 2">
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="offset-1 col-5">
+                                                Comercial
+                                            </div>
+                                            <div class="col-5">
+                                                <select class="form-control" [(ngModel)]="_salesman">
+                                                    <ng-container *ngFor="let salesman of usersSalesman">
+                                                        <option [value]="salesman.id"
+                                                            *ngIf="salesman.isActive || salesman.id === _salesman">
+                                                            {{ salesman.name + ' '+ salesman.surname }}
+                                                        </option>
+                                                    </ng-container>
+
+
+                                                    <option [value]="0">Seleccione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="col-10 offset-1">
+                                                Día de visita
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="offset-1 col-10">
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox1"
+                                                        [(ngModel)]="scheduleDaysVisits[0].isActive"> Lu.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox2"
+                                                        [(ngModel)]="scheduleDaysVisits[1].isActive"> Ma.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysVisits[2].isActive"> Mi.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysVisits[3].isActive"> Ju.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysVisits[4].isActive"> Vi.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysVisits[5].isActive"> Sa.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysVisits[6].isActive"> Do.
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row pt-2">
+                                            <div class="col-12 text-center mb-2">
+                                                <button mat-raised-button (click)="asignateCommercial()"
+                                                    color="primary">
+                                                    {{ 'GENERAL.ACCEPT' | translate }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+
+
+                                    <ng-container *ngIf="tapDibujar == 1">
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="offset-1 col-5">
+                                                Ruta
+                                            </div>
+                                            <div class="col-5">
+                                                <select class="form-control" [(ngModel)]="_ruta">
+                                                    <option
+                                                        *ngFor="let deliveryZone of allDeliveryZone;trackBy: trackById"
+                                                        [value]="deliveryZone.id">
+                                                        {{ deliveryZone.name }}
+                                                    </option>
+
+                                                    <option [value]="''">Seleccione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="col-10 offset-1">
+                                                Día de visita
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="offset-1 col-10">
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox1"
+                                                        [(ngModel)]="scheduleDaysRoute[0].isActive"> Lu.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox2"
+                                                        [(ngModel)]="scheduleDaysRoute[1].isActive"> Ma.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysRoute[2].isActive"> Mi.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysRoute[3].isActive"> Ju.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysRoute[4].isActive"> Vi.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysRoute[5].isActive"> Sa.
+                                                </label>
+                                                <label class="checkbox-inline padding-right">
+                                                    <input type="checkbox" id="inlineCheckbox3"
+                                                        [(ngModel)]="scheduleDaysRoute[6].isActive"> Do.
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row pt-2">
+                                            <div class="col-12 text-center mb-2">
+                                                <button mat-raised-button (click)="assignateRuta()" color="primary">
+                                                    {{ 'GENERAL.ACCEPT' | translate }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf="tapDibujar == 0">
+                                        <div class="row pt-2 d-flex align-items-center">
+                                            <div class="offset-1 col-5">
+                                                Rutas:
+                                            </div>
+
+                                            <div class="col-5">
+                                                <select class="form-control" [(ngModel)]="zonePolygon"
+                                                    *ngIf="routePlanning.viewingMode === 0">
+                                                    <option *ngFor="let zone of (zones | keyvalue);trackBy: trackById"
+                                                        [value]="zone.value.id">
+                                                        {{ zone.value.name }}
+                                                    </option>
+
+                                                    <option [value]="0">Seleccione</option>
+                                                </select>
+
+                                                <select class="form-control" [(ngModel)]="_selectedZoneId"
+                                                    (change)="zoneChangedMap()" *ngIf="routePlanning.viewingMode === 1">
+                                                    <option
+                                                        *ngFor="let zone of (zoneOptim | keyvalue);trackBy: trackById"
+                                                        [value]="zone.value.id">
+                                                        {{ zone.value.name }}
+                                                    </option>
+
+                                                    <option [value]="0">Seleccione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row pt-2 d-flex align-items-center"
+                                            *ngIf="routePlanning.viewingMode === 1 && zoneOptim && _selectedZoneId > 0">
+                                            <div class="offset-1 col-5">
+                                                Rutas calculadas:
+                                            </div>
+
+                                            <div class="col-5">
+                                                <select class="form-control" [(ngModel)]="zonePolygon">
+                                                    <option
+                                                        *ngFor="let route of (zoneOptim[_selectedZoneId].routes | keyvalue);trackBy: trackById"
+                                                        [value]="route.value.route.id">
+                                                        {{ route.value.route.name }}
+                                                    </option>
+
+                                                    <option [value]="0">Seleccione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row pt-2 pb-1 d-flex align-items-center">
+                                            <div class="offset-1 col-5">
+                                                Crear ruta:
+                                            </div>
+
+                                            <div class="col-5">
+                                                <button class="btn btn-outline-dark" (click)="createZone()">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row pt-2">
+                                            <div class="col-12 text-center mb-2">
+                                                <button mat-raised-button (click)="changeZonePolygon()"
+                                                    [disabled]="zonePolygon == 0" color="primary">
+                                                    {{ 'GENERAL.ACCEPT' | translate }}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </ng-container>
+
+
+
+
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </ng-template>
+                </agm-snazzy-info-window>
+            </agm-overlay>
+        </span>
+
+        <span *ngIf="Agglomeration && Agglomeration.length > 0 && routePlanning.viewingMode === 0">
+            <agm-overlay *ngFor="let agglomeration of showAgglomeration();trackBy: trackById"
+                [latitude]="agglomeration.coordinates.latitude" [longitude]="agglomeration.coordinates.longitude"
+                [zIndex]="1">
+                <agm-marker (markerClickable)="true" [visible]="false" [latitude]="agglomeration.coordinates.latitude"
+                    [longitude]="agglomeration.coordinates.longitude">
+                    <div (click)="selectedAgglomeration(agglomeration)"
+                        style="position: absolute;left: 5px;top: -15px;">
+                        <div class="si-frame si-content-wrapper"
+                            style="background-color: rgb(248, 148, 2); padding: 0px; color: rgb(255, 255, 255);">
+                            <div class="si-content" style="max-width: 198px; max-height: 183px;">
+                                <div>
+                                    <div></div>
+                                    <span style="padding: 0px 12px; cursor: pointer">{{ agglomeration.datos.length
+                                        }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="si-pointer-top si-pointer-border-top"></div>
+
+                        <div class="si-pointer-top si-pointer-bg-top"
+                            style="border-top-color: rgb(248, 148, 2); border-width: 15px; margin-bottom: 0px; top: -1px;">
+                        </div>
+                    </div>
+                </agm-marker>
+            </agm-overlay>
+        </span>
+
+        <span *ngIf="mapStage === 'routes' && routePlanning.viewingMode === 1">
+            <span *ngFor="let zone of (zones | keyvalue);trackBy: trackById">
+                <span *ngIf="zoneStatus[zone.value.id].optimized">
+                    <span *ngFor="let route of zone.value.optimization.solution.routes;trackBy: trackById">
+                        <agm-overlay class="map-point-overlay"
+                            *ngFor="let point of route.deliveryPoints;trackBy: trackById"
+                            [latitude]="point && point.coordinates && point.coordinates.latitude ? point.coordinates.latitude : null"
+                            [longitude]="point && point.coordinates && point.coordinates.longitude ? point.coordinates.longitude : null">
+                            <div class="marker-container" fxLayout="column" fxLayoutAlign="center"
+                                (mouseover)="changeHovered(point.id)" (mouseout)="changeHovered(-1)">
+                                <div *ngIf="!showSelected || (zoneStatus[zone.value.id].selected && routesStatus[zone.value.id][route.id].selected)"
+                                    (click)="changeSelected(point.id, point)" class="marker-icon"
+                                    [class.hovered-point]="zone.value.id == hoveredZone || point.id == hoveredPoint"
+                                    [style.background-color]="
+                                        point.fromPending ? '#E91313' :
+                                        routePlanning.useRouteColors
+                                            ? zone.value.activeRoute === route.id
+                                                ? route.color
+                                                : route.color
+                                            : zone.value.activeRoute === route.id ||
+                                              zone.value.activeRoute === -1
+                                            ? zone.value.color
+                                            : zone.value.color
+                                    ">
+                                    <span
+                                        [style.color]="isLight(routePlanning.useRouteColors ? route.color : zone.value.color) ? 'black' : 'white'"
+                                        class="point-order">
+                                        {{ point.order }}
+                                    </span>
+                                </div>
+                            </div>
+                        </agm-overlay>
+
+                        <agm-overlay *ngFor="let point of route.deliveryPoints; trackBy: trackById"
+                            [latitude]="point && point.coordinates && point.coordinates.latitude ? point.coordinates.latitude : null"
+                            [longitude]="point && point.coordinates && point.coordinates.longitude ? point.coordinates.longitude : null">
+                            <mat-card class="map-card" *ngIf="hoveredPoint === point.id && selectedPoint !== point.id"
+                                [style.zIndex]="point.id === hoveredPoint && !hoverInMap ? '3' : '2'">
+                                <mat-card-header
+                                    [style.background-color]="point.fromPending ? '#E91313' : zone.value.color"
+                                    [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                    fxLayout="row" class="">
+                                    <mat-card-title class="help-cursor" [title]="point.name">
+                                        {{ point.name }}
+                                    </mat-card-title>
+
+                                    <mat-card-subtitle
+                                        [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'">
+                                        <div>
+                                            <span>
+                                                <b>Ruta:</b> &nbsp;{{ zone.value.name }}
+                                            </span>
+                                        </div>
+                                    </mat-card-subtitle>
+                                    <mat-card-subtitle class="mt-1" [style.color]="'black'" *ngIf="point.fromPending">
+                                        <div>
+                                            <span>
+                                                Pendiente de entrega desde {{ returnHours(point.fromPendingDate) }}
+                                            </span>
+                                        </div>
+                                    </mat-card-subtitle>
+                                </mat-card-header>
+                            </mat-card>
+                        </agm-overlay>
+                    </span>
+                </span>
+            </span>
+        </span>
+    </agm-map>
+
+    <div class="overlay recenter-button-overlay" *ngIf="mapStage !== 'empty'">
+        <button mat-icon-button class="recenter-button" (click)="centerMap()" [disabled]="mapCentered">
+            <mat-icon>my_location</mat-icon>
+        </button>
+    </div>
+
+    <div class="overlay infochips-overlay-right">
+        <div class="d-flex flex-column justify-content-end w-100" style="float: right;">
+            <!-- mostrar usuarios -->
+            <div *ngIf="mapStage !== 'empty'">
+                <div class="col-12 text-right">
+                    <div class="flot-icon-paint-map" (click)="initDrawingManager()">
+                        <span class="pr-2 pl-4">Dibujar zona</span>
+                        <img src="assets/icons/lapiz.svg">
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="mt-4" *ngIf="mapStage !== 'empty'">
+                <div class="col-12 text-right">
+                    <div class="show-selected-eye text-center p-3">
+                        <span class="pr-1" (click)="click_all_selected.click()">Mostrar sólo seleccionadas</span>
+                        <img src="assets/icons/eye-map.svg" (click)="click_all_selected.click()" class="pr-2">
+                        <label class="round round-little m-0">
+                            <input click_all_selected [checked]="routePlanning.showSelected" type="checkbox"
+                                class="mr-1" id="check" (change)="onShowSelectedChange()">
+
+                            <label for="check" style="top: 0;" #click_all_selected></label>
+                        </label>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="mt-4" *ngIf="activeGeolocation">
+                <div class="col-12 text-right">
+                    <div class="show-geolocation text-center p-3">
+                        <span class="pr-5" (click)="check_users.click()">Geolocalización</span>
+                        <img src="assets/icons/geolocation-map.svg" (click)="check_users.click()" class="pr-2">
+                        <label class="round round-little m-0">
+                            <input type="checkbox" class="mr-1" id="check-users" [(ngModel)]="showGeolocation"
+                                (change)="showAllUser($event.target.checked)">
+
+                            <label #check_users for="check-users" style="top: 0;"></label>
+                        </label>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row mt-4" *ngIf="showGeolocation && geolocation && geolocation.length > 0">
+                <div class="col-12">
+                    <div class="users-shows">
+
+                        <div class="users-shows-body">
+                            <div class="row no-margin-row">
+                                <div class="col-12 p-1">
+                                    <div class="input-group mb-1">
+                                        <input autocomplete="off" id="exampleInputEmail1" type="text"
+                                            class="form-control" [(ngModel)]="filterGeo"
+                                            (keyup)="searchUser($event.target.value)" placeholder="Usuarios">
+
+                                        <span class="input-group-append">
+                                            <span class="input-group-text table-append">
+                                                <img class="icons-search"
+                                                    src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row no-margin-row p-2 pointer">
+                                <div class="col-12 p-0">
+                                    <label class="round round-little m-0">
+                                        <input type="checkbox" class="mr-1" id="checkSelectedUsers"
+                                            [(ngModel)]="showAllSelected"
+                                            (change)="showAllSelectedFunc($event.target.checked)" />
+
+                                        <label #checkSelectedUsers for="checkSelectedUsers" style="top: 0;"></label>
+                                    </label>
+
+                                    <label class="m-0 ml-3 mr-2 pointer" (click)="checkSelectedUsers.click()">
+                                        {{ 'ROUTE_PLANNING.TOOLBAR.SHOW_SELECTED_USERS' | translate }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--
+                                [ngClass]="
+                                    {'red-icon': (geo.isDriver && geo.violatedConstraintStoppedDriver)
+                                    || (!geo.isDriver && geo.violatedConstraintStoppedCommercial),
+                                    'row-selected': geo.id === selectedGeoId}
+                                "
+                             -->
+                            <div class="row no-margin-row p-2 pointer"
+                                [ngClass]="{'row-selected': geo.id === selectedGeoId}"
+                                *ngFor="let geo of geolocationFilter;trackBy: trackById"
+                                (mouseover)="hoverInGeo(geo.id)" (mouseout)="hoverOutGeo()">
+                                <div class="col-1 p-0 pt-2" (click)="selectedGeo(geo.id, !geo.selected)">
+                                    <label class="round round-little m-0">
+                                        <input type="checkbox" class="mr-1" [id]="'geo' + geo.id"
+                                            [ngModel]="geo.selected"
+                                            (change)="selectedGeo(geo.id, $event.target.checked)" />
+
+                                        <label></label>
+                                    </label>
+                                </div>
+
+                                <div class="col-10 p-0 name-users pl-3"
+                                    (click)=" geo.id === selectedGeoId ? moveToUser(geo, -1) :  moveToUser(geo, geo.id)">
+                                    {{ geo.name }}
+                                    <p class="mb-0 m text-muted"
+                                        *ngIf="(geo.isDriver && geo.violatedConstraintStoppedDriver) || (!geo.isDriver && geo.violatedConstraintStoppedCommercial)">
+                                        Tiempo detenido: {{ geo.stoppedTime > 86400 ? '24h+' :( geo.stoppedTime |
+                                        duration) }}
+                                    </p>
+                                </div>
+
+                                <div class="col-1 p-0 name-users pt-2"
+                                    (click)="geo.id === selectedGeoId ? moveToUser(geo, -1) :  moveToUser(geo, geo.id)">
+                                    <!-- <i class="fas fa-map-marker-alt color-primary"></i> -->
+                                    <img class="ico-modify" src="assets/icons/optimmanage2/icono-localizcion2.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="overlay edit-point" *ngIf="routePlanning.viewingMode === 0">
+        <ng-container *ngFor="let zone of (zones | keyvalue);trackBy: trackById">
+            <ng-container *ngFor="let point of zone.value.deliveryPoints;trackBy: trackById">
+                <div class="card" *ngIf=" routePlanning.selectedDeliveryPoint === point.id"
+                    style="width: 41vh;border-radius: 15px 15px 0px 0px;">
+                    <div class="card-body p-0" style="border-radius: 5px 5px 0px 0px;">
+                        <div class="card-title"
+                            [style.background-color]="point.fromPending ? '#E91313' : zone.value.color"
+                            [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                            [title]="point.name" style="border-radius: 15px 15px 0px 0px;">
+                            <div class="row m-0">
+                                <div class="col-11 col-lg-11 col-md-11">
+                                    <h6 class="title-edit">{{ point.name }}</h6>
+                                </div>
+                                <div class="col-1 col-lg-1 col-md-1 text-right p-0">
+                                    <button class="btn btn-clear"
+                                        [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                        (mouseover)="closeHover = true" (mouseleave)="closeHover = false"
+                                        (click)="changeSelected(-1); isDraggable = true">
+                                        <i class="fas fa-times" [ngStyle]="{
+                                            color: closeHover == true ? highlighted(getContrastColor(zone.value.color))
+                                            : getContrastColor(zone.value.color) }">
+                                        </i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 col-md-12 col-lg-12 pb-1">
+                                    <span
+                                        [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                        class="subtitle-edit">
+                                        <b>Ruta:</b> &nbsp;{{ zone.value.name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row m-0" *ngIf="point.fromPending">
+                                <div class="col-12 col-md-12 col-lg-12 pb-1">
+                                    <span [style.color]="'black'" class="subtitle-edit">
+                                        Pendiente de entrega desde {{ returnHours(point.fromPendingDate) }}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row m-0 mt-2 mb-3">
+                            <div class="col-4 text-center tab-select pointer"
+                                [ngClass]="{'tab-selected': tabSelected === 0}"
+                                [style.borderColor]="(tabSelected === 0 ? zone.value.color : 'white')"
+                                (click)="tabSelected = 0">
+                                Cliente
+                            </div>
+                            <div class="col-4 text-center tab-select pointer"
+                                [ngClass]="{'tab-selected': tabSelected === 1}"
+                                [style.borderColor]="(tabSelected === 1 ? zone.value.color : 'white')"
+                                (click)="tabSelected = 1">
+                                Datos de ruta
+                            </div>
+                            <div class="col-4 text-center tab-select pointer"
+                                [ngClass]="{'tab-selected': tabSelected === 2}"
+                                [style.borderColor]="(tabSelected === 2 ? zone.value.color : 'white')"
+                                (click)="selectCommercialTab()">
+                                Comercial
+                            </div>
+                        </div>
+                        <ng-container *ngIf="tabSelected === 0">
+                            <div class="row m-0 mb-4">
+                                <div class="col-12 col-md-12 col-lg-12 pl-4" style="border-bottom: 1px solid #b9b9b9;">
+                                    <span [style.color]="'#b9b9b9'">Dirección y horario</span>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-3 mb-1 help-cursor"
+                                title="{{ 'ROUTE_PLANNING.MAP.MAP_CARD.ADDRESS' | translate }}">
+                                <div class="col-3 col-lg-3 col-md-3">
+                                    <span class="align-middle pt-2">Dirección:</span>
+                                </div>
+                                <div class="col-9 col-md-9 col-lg-9">
+                                    <div class="input-group">
+                                        <AutocompleteComponent style="width: 100%;"
+                                            (setAddress)="getEstablishmentAddress($event)"
+                                            [autocompleteInput]="point.address"></AutocompleteComponent>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-3 col-lg-3 col-md-3">
+                                    <span class="align-middle pt-2">{{ 'DELIVERY_POINTS.LATITUDE' | translate }}:</span>
+                                </div>
+                                <div class="col-9 col-md-9 col-lg-9">
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" [(ngModel)]="_latitude">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-3 col-lg-3 col-md-3">
+                                    <span class="align-middle pt-2">{{ 'DELIVERY_POINTS.LONGITUDE' | translate
+                                        }}:</span>
+                                </div>
+                                <div class="col-9 col-md-9 col-lg-9">
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" [(ngModel)]="_longitude">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-3 col-lg-3 col-md-3">
+                                    <span class="align-middle pt-2">{{ 'GENERAL.FROM' | translate }}</span>
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4">
+                                    <div class="input-group">
+                                        <input type="time" class="form-control" [(ngModel)]="_openingTime">
+                                    </div>
+                                </div>
+                                <div class="col-1 col-md-1 col-lg-1 p-0">
+                                    <div class="input-group">
+                                        <span class="align-middle pt-2">{{ 'GENERAL.TO' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4">
+                                    <div class="input-group">
+                                        <input type="time" class="form-control" [(ngModel)]="_closingTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-3 col-lg-3 col-md-3">
+                                    <span class="align-middle pt-2">Min</span>
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4">
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" min="0" max="59"
+                                            [(ngModel)]="dischargingMinutes">
+                                    </div>
+                                </div>
+                                <div class="col-1 col-md-1 col-lg-1 p-0">
+                                    <div class="input-group">
+                                        <span class="align-middle pt-2">Seg</span>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4">
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" min="0" max="59"
+                                            [(ngModel)]="dischargingSeconds">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="tabSelected === 1">
+                            <div class="row m-0 mb-4">
+                                <div class="col-12 col-md-12 col-lg-12 pl-4" style="border-bottom: 1px solid #b9b9b9;">
+                                    <span [style.color]="'#b9b9b9'">Cambiar ruta y/o posición</span>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-6">
+                                    <span class="align-middle pt-2">Ruta Destino</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <select [(ngModel)]="_selectedZoneId" class="form-control"
+                                            (change)="zoneChanged()">
+                                            <option *ngFor="let zone of (zones | keyvalue);trackBy: trackById"
+                                                [value]="zone.value.id">
+                                                {{ zone.value.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-6">
+                                    <span class="align-middle pt-2">Posición Destino</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <input [(ngModel)]="_order" class="form-control" type="number">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-6 col-lg-6 col-md-6">
+                                    <span class="align-middle pt-2">Entrega o recogida</span>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-6">
+                                    <div class="input-group">
+                                        <select class="form-control" [(ngModel)]="_deliveryType">
+                                            <option value="shipment">Entrega</option>
+                                            <option value="pickup">Recogida</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mb-4">
+                                <div class="col-12 col-md-12 col-lg-12 pl-4" style="border-bottom: 1px solid #b9b9b9;">
+                                    <span [style.color]="'#b9b9b9'">Información del pedido</span>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor">
+                                <div class="col-4 col-lg-4 col-md-4">
+                                    <span class="align-middle pt-2">N° pedido</span>
+                                </div>
+                                <div class="col-8 col-md-8 col-lg-8">
+                                    <div class="input-group">
+                                        <input class="form-control" [(ngModel)]="_orderNumber">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 mt-1 mb-1 help-cursor"
+                                *ngIf="_deliveryNotes && _deliveryNotes.length > 0">
+                                <div class="col-4 col-lg-4 col-md-4">
+                                    <span class="align-middle pt-2">Descripción</span>
+                                </div>
+                                <div class="col-8 col-md-8 col-lg-8">
+                                    <textarea class="form-control" disabled rows="2"
+                                        [(ngModel)]="_deliveryNotes"></textarea>
+                                </div>
+                            </div>
+                            <ng-container
+                                *ngIf="(optimizationPreference$ | async ) && (optimizationPreference$ | async ).allowDelayTime ">
+                                <div class="row m-0 mb-4">
+                                    <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                        style="border-bottom: 1px solid #b9b9b9;">
+                                        <span [style.color]="'#b9b9b9'">Tiempo de retraso</span>
+                                    </div>
+                                </div>
+                                <div class="row m-0 mt-1 mb-1 help-cursor">
+                                    <div class="col-6 col-lg-6 col-md-6">
+                                        <span class="align-middle pt-2">Activar</span>
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                                        <input type="checkbox" [checked]="allowDelayTime"
+                                                            (change)="changeAllowDelayTime($event.target.checked)" />
+                                                        <span class="lever switch-col-primary m-0"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0 mt-1 mb-1 help-cursor" *ngIf="allowDelayTime">
+                                    <div class="col-6 col-lg-6 col-md-6">
+                                        <span class="align-middle pt-2">Tipo retraso</span>
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-6">
+                                        <div class="input-group">
+                                            <select class="form-control" [(ngModel)]="companyPreferenceDelayTimeId">
+                                                <option [value]="null">Seleccione...</option>
+                                                <option [value]="+item.id" *ngFor="let item of delayTimes">{{ item.name
+                                                    }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="tabSelected === 2">
+                            <form [formGroup]="formVisits">
+                                <div class="row m-0 mb-4">
+                                    <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                        style="border-bottom: 1px solid #b9b9b9;">
+                                        <span [style.color]="'#b9b9b9'">Comercial asginado</span>
+                                    </div>
+                                </div>
+                                <div class="row m-0 mt-1 mb-1 help-cursor">
+                                    <div class="col-4 col-lg-4 col-md-4">
+                                        <span class="align-middle pt-2">Comercial</span>
+                                    </div>
+                                    <div class="col-8 col-md-8 col-lg-8">
+                                        <select class="form-control" formControlName="agentUserId"
+                                            (change)="updateCommercial($event.target.value)">
+                                            <ng-container *ngFor="let item of usersSalesman">
+                                                <option value="shipment" [value]="item.id"
+                                                    *ngIf="item.isActive || item.id === _salesman">
+                                                    {{ item.name + ' ' + item.surname
+                                                    }}
+                                                </option>
+                                            </ng-container>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row m-0 mb-4">
+                                    <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                        style="border-bottom: 1px solid #b9b9b9;">
+                                        <span [style.color]="'#b9b9b9'">Días y horas de visitas</span>
+                                    </div>
+                                </div>
+                                <div class="row m-0 mt-1 help-cursor">
+                                    <div class="col-4 col-lg-4 col-md-4 align-self-center">
+                                        <span class="align-middle pt-2">Hor. por defecto</span>
+                                    </div>
+                                    <div class="col-4 col-md-4 col-lg-4">
+                                        <input type="time" class="form-control"
+                                            formControlName="deliveryWindowVisitStart"
+                                            (focusout)="changeHoursDefault($event.target.value, 'start')">
+
+                                    </div>
+                                    <div class="col-4 col-md-4 col-lg-4">
+                                        <input type="time" class="form-control" formControlName="deliveryWindowVisitEnd"
+                                            (focusout)="changeHoursDefault($event.target.value, 'end')">
+
+                                    </div>
+                                </div>
+                                <div class="row m-0 mt-0" *ngIf="formVisits.get('activateDeliveryVisitSchedule').value">
+                                    <div class="col-5 col-lg-5 col-md-5 offset-8 pointer p-1" (click)="applyAllDay()">
+                                        <span class="align-middle pointer apply-all">Aplicar a todas <img
+                                                src="assets/icons/union.svg"> </span>
+                                    </div>
+                                </div>
+                                <div class="row m-0 mb-1 help-cursor">
+                                    <div class="col-4 col-lg-4 col-md-4 align-self-center">
+                                        <span class="align-middle pt-2">Horario por día</span>
+                                    </div>
+                                    <div class="col-sm-8 col-8 text-left">
+
+                                        <div class="switch">
+                                            <label class="font-general">
+                                                <input type="checkbox" id="highlight"
+                                                    (change)="changeActivateDeliveryVisitSchedule($event.target.checked)"
+                                                    formControlName="activateDeliveryVisitSchedule" class="mr-3" />
+                                                <span class="lever switch-col-primary"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="formVisits.get('activateDeliveryVisitSchedule').value">
+                                    <!--Lunes-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="monday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 0)"
+                                                    formControlName="activeScheduleMondayVisit">
+                                                <label for="monday">Lunes</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleMondayVisit"
+                                                (focusout)="changeHours($event.target.value, 0, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeSheduleMondayVisit"
+                                                (focusout)="changeHours($event.target.value, 0, 'end')">
+                                        </div>
+                                    </div>
+                                    <!--Martes-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="Tuesday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 1)"
+                                                    formControlName="activeScheduleTuesdayVisit">
+                                                <label for="Tuesday">Martes</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleTuesdayVisit"
+                                                (focusout)="changeHours($event.target.value, 1, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeScheduleTuesdayVisit"
+                                                (focusout)="changeHours($event.target.value, 1, 'end')">
+                                        </div>
+                                    </div>
+                                    <!--Miercoles-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="Wednesday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 2)"
+                                                    formControlName="activeScheduleWednesdayVisit">
+                                                <label for="Wednesday">Miércoles</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleWednesdayVisit"
+                                                (focusout)="changeHours($event.target.value, 2, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeScheduleWednesdayVisit"
+                                                (focusout)="changeHours($event.target.value, 2, 'end')">
+                                        </div>
+                                    </div>
+                                    <!--Jueves-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="Thursday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 3)"
+                                                    formControlName="activeScheduleThursdayVisit">
+                                                <label for="Thursday">Jueves</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleThursdayVisit"
+                                                (focusout)="changeHours($event.target.value, 3, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeScheduleThursdayVisit"
+                                                (focusout)="changeHours($event.target.value, 3, 'end')">
+                                        </div>
+                                    </div>
+                                    <!--Viernes-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="Friday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 4)"
+                                                    formControlName="activeScheduleFridayVisit">
+                                                <label for="Friday">Viernes</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleFridayVisit"
+                                                (focusout)="changeHours($event.target.value, 4, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeScheduleFridayVisit"
+                                                (focusout)="changeHours($event.target.value, 4, 'end')">
+                                        </div>
+                                    </div>
+                                    <!--Sábado-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="Saturday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 5)"
+                                                    formControlName="activeScheduleSaturdayVisit">
+                                                <label for="Saturday">Sábado</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleSaturdayVisit"
+                                                (focusout)="changeHours($event.target.value, 5, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeScheduleSaturdayVisit"
+                                                (focusout)="changeHours($event.target.value, 5, 'end')">
+                                        </div>
+                                    </div>
+                                    <!--Domingo-->
+                                    <div class="row m-0 mt-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="Sunday"
+                                                    (change)="changeActiveDeliveryScheduleDay($event.target.checked, 6)"
+                                                    formControlName="activeScheduleSundayVisit">
+                                                <label for="Sunday">Domingo</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="startTimeScheduleSundayVisit"
+                                                (focusout)="changeHours($event.target.value, 6, 'start')">
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <input class="form-control" type="time"
+                                                formControlName="endTimeScheduleSundayVisit"
+                                                (focusout)="changeHours($event.target.value, 6, 'end')">
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </form>
+                        </ng-container>
+                        <div class="row m-0 mt-1 mb-2 help-cursor">
+                            <div class="col-6">
+                                <button class="btn btn-cancel btn-block"
+                                    (click)="changeSelected(-1); this.isDraggable = true">
+                                    {{ 'GENERAL.CANCEL' | translate }}
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-primary btn-block" (click)="accept()">
+                                    {{ 'GENERAL.ACCEPT' | translate }}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+    </div>
+
+
+    <div class="overlay edit-point" *ngIf="routePlanning.viewingMode === 1">
+        <ng-container *ngFor="let zone of (zones | keyvalue);trackBy: trackById">
+            <ng-container *ngIf="zoneStatus[zone.value.id].optimized">
+                <ng-container *ngFor="let route of zone.value.optimization.solution.routes; trackBy: trackById">
+                    <ng-container *ngFor="let point of route.deliveryPoints; trackBy: trackById">
+                        <div class="card" *ngIf=" routePlanning.selectedDeliveryPoint === point.id"
+                            style="width: 41vh;border-radius: 15px 15px 0px 0px;">
+                            <div class="card-body p-0" style="border-radius: 5px 5px 0px 0px;">
+                                <div class="card-title"
+                                    [style.background-color]="point.fromPending ? '#E91313' : zone.value.color"
+                                    style="border-radius: 15px 15px 0px 0px;"
+                                    [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                    [title]="point.name">
+                                    <div class="row m-0">
+                                        <div class="col-11 col-lg-11 col-md-11">
+                                            <h6 class="title-edit">{{ point.name }}</h6>
+                                        </div>
+                                        <div class="col-1 col-lg-1 col-md-1 text-right p-0">
+                                            <button class="btn btn-clear"
+                                                [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                                (mouseover)="closeHover = true" (mouseleave)="closeHover = false"
+                                                (click)="changeSelected(-1); isDraggable = true">
+                                                <i class="fas fa-times" [ngStyle]="{
+                                                    color: closeHover == true ? highlighted(getContrastColor(zone.value.color))
+                                                    : getContrastColor(zone.value.color) }">
+                                                </i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-12 col-lg-12 pb-1">
+                                            <span
+                                                [style.color]="point.fromPending ? 'black' : isLight(zone.value.color) ? 'black' : 'white'"
+                                                class="subtitle-edit">
+                                                <b>Ruta:</b> &nbsp;{{ zone.value.name }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0" *ngIf="point.fromPending">
+                                        <div class="col-12 col-md-12 col-lg-12 pb-1">
+                                            <span [style.color]="'black'" class="subtitle-edit">
+                                                Pendiente de entrega desde {{ returnHours(point.fromPendingDate) }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row m-0 mt-2 mb-3">
+                                    <div class="col-6 text-center tab-select pointer"
+                                        [ngClass]="{'tab-selected': tabSelected === 0}"
+                                        [style.borderColor]="(tabSelected === 0 ? zone.value.color : 'white')"
+                                        (click)="tabSelected = 0">
+                                        Cliente
+                                    </div>
+                                    <div class="col-6 text-center tab-select pointer"
+                                        [ngClass]="{'tab-selected': tabSelected === 1}"
+                                        [style.borderColor]="(tabSelected === 1 ? zone.value.color : 'white')"
+                                        (click)="tabSelected = 1">
+                                        Datos de ruta
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="tabSelected === 0">
+                                    <div class="row m-0 mb-4">
+                                        <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                            style="border-bottom: 1px solid #b9b9b9;">
+                                            <span [style.color]="'#b9b9b9'">Dirección y horario</span>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-3 mb-1 help-cursor"
+                                        title="{{ 'ROUTE_PLANNING.MAP.MAP_CARD.ADDRESS' | translate }}">
+                                        <div class="col-3 col-lg-3 col-md-3">
+                                            <span class="align-middle pt-2">Dirección:</span>
+                                        </div>
+                                        <div class="col-9 col-md-9 col-lg-9">
+                                            <div class="input-group">
+                                                <input [value]="point.address" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor">
+                                        <div class="col-3 col-lg-3 col-md-3">
+                                            <span class="align-middle pt-2">{{ 'GENERAL.FROM' | translate }}</span>
+                                        </div>
+                                        <div class="col-4 col-md-4 col-lg-4">
+                                            <div class="input-group">
+                                                <input type="time" class="form-control" [(ngModel)]="_openingTime">
+                                            </div>
+                                        </div>
+                                        <div class="col-1 col-md-1 col-lg-1 p-0">
+                                            <div class="input-group">
+                                                <span class="align-middle pt-2 pt-2">{{ 'GENERAL.TO' | translate
+                                                    }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md-4 col-lg-4">
+                                            <div class="input-group">
+                                                <input type="time" class="form-control" [(ngModel)]="_closingTime">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor">
+                                        <div class="col-3 col-lg-3 col-md-3">
+                                            <span class="align-middle pt-2">Min</span>
+                                        </div>
+                                        <div class="col-4 col-md-4 col-lg-4">
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" min="0" max="59" disabled
+                                                    [(ngModel)]="dischargingMinutes">
+                                            </div>
+                                        </div>
+                                        <div class="col-1 col-md-1 col-lg-1 p-0">
+                                            <div class="input-group">
+                                                <span class="align-middle pt-2">Seg</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md-4 col-lg-4">
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" min="0" max="59" disabled
+                                                    [(ngModel)]="dischargingSeconds">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="tabSelected === 1">
+                                    <div class="row m-0 mb-4">
+                                        <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                            style="border-bottom: 1px solid #b9b9b9;">
+                                            <span [style.color]="'#b9b9b9'">Cambiar ruta y/o posición</span>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor">
+                                        <div class="col-6">
+                                            <span class="align-middle pt-2">Ruta Destino</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <select [(ngModel)]="_selectedZoneId" class="form-control"
+                                                    (change)="zoneChanged()">
+
+                                                    <ng-container *ngIf="routePlanning.viewingMode === 0">
+                                                        <option
+                                                            *ngFor="let zone of (zones | keyvalue);trackBy: trackById"
+                                                            [value]="zone.value.id">
+                                                            {{ zone.value.name }}
+                                                        </option>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="routePlanning.viewingMode === 1">
+
+                                                        <option
+                                                            *ngFor="let zone of (zoneOptim | keyvalue);trackBy: trackById"
+                                                            [value]="zone.value.id">
+                                                            {{ zone.value.name }}
+
+
+                                                        </option>
+                                                    </ng-container>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor"
+                                        *ngIf="routePlanning.viewingMode === 1 && zoneOptim">
+                                        <div class="col-6">
+                                            <span class="align-middle pt-2">Calculada Destino</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <select [(ngModel)]="_selectedRouteId" class="form-control">
+                                                    <option
+                                                        *ngFor="let route of (zoneOptim[_selectedZoneId].routes | keyvalue); trackBy: trackById"
+                                                        [value]="route.value.id">
+                                                        {{ route.value.route.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor">
+                                        <div class="col-6">
+                                            <span class="align-middle pt-2">Posición Destino</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <input [(ngModel)]="_order" class="form-control" type="number">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor">
+                                        <div class="col-6 col-lg-6 col-md-6">
+                                            <span class="align-middle pt-2">Entrega o recogida</span>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6">
+                                            <div class="input-group">
+                                                <select class="form-control" [(ngModel)]="_deliveryType">
+                                                    <option value="shipment">Entrega</option>
+                                                    <option value="pickup">Recogida</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mb-4">
+                                        <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                            style="border-bottom: 1px solid #b9b9b9;">
+                                            <span [style.color]="'#b9b9b9'">Información del pedido</span>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <span class="align-middle pt-2">N° pedido</span>
+                                        </div>
+                                        <div class="col-8 col-md-8 col-lg-8">
+                                            <div class="input-group">
+                                                <input class="form-control" [(ngModel)]="_orderNumber">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 mt-1 mb-1 help-cursor"
+                                        *ngIf="_deliveryNotes && _deliveryNotes.length > 0">
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <span class="align-middle pt-2">Descripción</span>
+                                        </div>
+                                        <div class="col-8 col-md-8 col-lg-8">
+                                            <textarea class="form-control" disabled rows="2"
+                                                [(ngModel)]="_deliveryNotes"></textarea>
+                                        </div>
+                                    </div>
+                                    <ng-container
+                                        *ngIf="(optimizationPreference$ | async ) && (optimizationPreference$ | async ).allowDelayTime ">
+                                        <div class="row m-0 mb-4">
+                                            <div class="col-12 col-md-12 col-lg-12 pl-4"
+                                                style="border-bottom: 1px solid #b9b9b9;">
+                                                <span [style.color]="'#b9b9b9'">Tiempo de retraso</span>
+                                            </div>
+                                        </div>
+                                        <div class="row m-0 mt-1 mb-1 help-cursor">
+                                            <div class="col-6 col-lg-6 col-md-6">
+                                                <span class="align-middle pt-2">Activar</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <div class="form-row">
+                                                        <div class="switch w-100 col-12">
+                                                            <label class="switch-width">
+                                                                <input type="checkbox" [checked]="allowDelayTime"
+                                                                    (change)="changeAllowDelayTime($event.target.checked)" />
+                                                                <span class="lever switch-col-primary m-0"></span>
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row m-0 mt-1 mb-1 help-cursor" *ngIf="allowDelayTime">
+                                            <div class="col-6 col-lg-6 col-md-6">
+                                                <span class="align-middle pt-2">Tipo retraso</span>
+                                            </div>
+                                            <div class="col-6 col-md-6 col-lg-6">
+                                                <div class="input-group">
+                                                    <select class="form-control"
+                                                        [(ngModel)]="companyPreferenceDelayTimeId">
+                                                        <option [value]="null">Seleccione...</option>
+                                                        <option [value]="+item.id" *ngFor="let item of delayTimes">{{
+                                                            item.name }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                                <div class="row m-0 mt-3 mb-2 help-cursor">
+                                    <div class="col-6">
+                                        <button class="btn btn-cancel btn-block"
+                                            (click)="changeSelected(-1); this.isDraggable = true">
+                                            {{ 'GENERAL.CANCEL' | translate }}
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-primary btn-block" (click)="accept()">
+                                            {{ 'GENERAL.ACCEPT' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+    </div>
+
+    <div class="overlay agglomeration" *ngIf="routePlanning.viewingMode === 0 && agglomerationSelected
+                                    && agglomerationSelected.datos && agglomerationSelected.datos.length > 0">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-agglomeration">
+                    <div class="card-body p-2">
+                        <h5 class="card-title text-right"><i class="far fa-times-circle"
+                                (click)="closeAgglomeration()"></i></h5>
+                        <p class="card-text m-0">Clientes seleccionados</p>
+                        <hr class="mt-0 mb-2">
+                        <div style="overflow: auto;max-height: 350px;">
+                            <p class="card-text row-point p-2 mb-1" (mouseover)="changeHovered(point.id)"
+                                (mouseout)="changeHovered(-1)"
+                                *ngFor="let point of agglomerationSelected.datos; trackBy: trackById"
+                                (click)="changeSelected(point.id)">{{ point.name }}</p>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-secondary btn-block"
+                                (click)="unificarPoints(agglomerationSelected.datos)">Unificar
+                                clientes</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>

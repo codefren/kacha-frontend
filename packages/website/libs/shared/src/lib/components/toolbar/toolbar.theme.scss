@@ -1,0 +1,39 @@
+@import 'shared/src/lib/common';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin toolbar-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background-default: map-get($theme, background);
+    $foreground-default: map-get($theme, foreground);
+
+    .app-toolbar .toolbar-container {
+        background-color: mat-color($background-default, background);
+        color: mat-color($foreground-default, text);
+
+        // Define any styles affected by the theme.
+        &.primary {
+            @include mat-color-styler($primary);
+        }
+
+        &.accent {
+            @include mat-color-styler($accent);
+        }
+
+        &.warn {
+            @include mat-color-styler($warn);
+        }
+    }
+}
+
+@mixin toolbar-typography($config) {
+    .app-toolbar .toolbar-container {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

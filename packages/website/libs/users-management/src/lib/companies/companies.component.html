@@ -1,0 +1,10 @@
+<optimroute-companies-table
+    [companies]="(companies$ | async) ? (companies$ | async) : []"
+    [me]="me"
+    (addCompany)="addCompany($event)"
+    (editCompany)="editCompany($event)"
+    (deleteCompany)="deleteCompany($event)"
+    (editDemoCompany)="editDemoCompany($event)"
+    (editActiveCompany)="editActiveCompany($event)"
+>
+</optimroute-companies-table>

@@ -1,0 +1,59 @@
+<div class="modal-add-type-package" *ngIf="typePackageForm">
+
+    <div class="row p-5">
+
+        <div class="col-xl-6 col-12 text-xl-left text-center">
+            <label class="title-modal"> {{'LOADING_DOCK.SETTING.TYPE_PACKAGE' | translate }} </label>
+        </div>
+
+        <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+            <img src="assets/icons/close1.svg">
+        </div>
+
+        <form [formGroup]="typePackageForm" class="padding-form" style="width: 100%" novalidate action="">
+
+            <div class="col-12 mt-2">
+                <div class="form-row mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input class="form-control point" id="order" type="number"
+                            placeholder="{{ 'USERS.SETTINGS.WRITE' | translate }}" formControlName="order"/>
+                            <label for="first" class="mt-2 title-col"> {{'LOADING_DOCK.SETTING.ORDER' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-2">
+                <div class="form-row mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input class="form-control point" id="name" type="text"
+                            placeholder="{{ 'USERS.SETTINGS.WRITE' | translate }}" formControlName="name"/>
+                            <label for="first" class="mt-2 title-col"> {{'LOADING_DOCK.SETTING.TYPE' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="col-12 mt-3">
+            <div class="form-row mt-2">
+                <ng-container *ngIf="!data">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!typePackageForm.valid" (click)="submit()">
+                        {{ 'LOADING_DOCK.SETTING.ADD_NEW' | translate }}
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="data">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!typePackageForm.valid" (click)="submit()">
+                        {{'GENERAL.SAVE' | translate }}
+                    </button>
+                    <button class="btn btn-outline-primary btn-block" type="button" (click)="deleteService(data)">
+                        {{ 'GENERAL.DELETE' | translate }}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

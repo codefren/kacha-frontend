@@ -1,0 +1,98 @@
+<div class="update-of-update mb-4">
+
+    <div class="card">
+
+        <div class="card-body pl-xl-5 pr-xl-5">
+
+            <p class="title-radial pt-3"> {{'REPORT.TYPES_OF_UPDATES' | translate }} </p>
+
+            <ng-container *ngIf="!show">
+
+                <div class="row">
+
+                    <div class="col-12 text-center">
+
+                        <div class="fa-10x mb-2 text-center pt-5">
+
+                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="show">
+
+                <div class="row pt-3 pb-3 border-bottom">
+
+                    <div class="col-xl-6 col-12">
+
+                        <label class="title-update"> {{'REPORT.SCHEDULE' | translate }} </label>
+
+                    </div>
+
+                    <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                        <label class="title-update-total"> {{ reportDataUpdateTypeTotalized.totalHour }} </label>
+
+                    </div>
+
+                </div>
+
+                <div class="row border-bottom pt-3 pb-3">
+
+                    <div class="col-xl-6 col-12">
+
+                        <label class="title-update"> {{'REPORT.PHONE' | translate }} </label>
+                    </div>
+
+                    <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                        <label class="title-update-total"> {{ reportDataUpdateTypeTotalized.totalPhone }} </label>
+
+                    </div>
+
+                </div>
+
+                <div class="row border-bottom pt-3 pb-3">
+
+                    <div class="col-xl-6 col-12">
+
+                        <label class="title-update"> {{'REPORT.ADDRESS' | translate }} </label>
+
+                    </div>
+
+                    <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                        <label class="title-update-total"> {{ reportDataUpdateTypeTotalized.totalAddres }} </label>
+
+                    </div>
+
+                </div>
+
+                <div class="row border-bottom pt-3 pb-3 mb-3">
+
+                    <div class="col-xl-6 col-12">
+
+                        <label class="title-update"> {{'REPORT.TOTAL' | translate }} </label>
+
+                    </div>
+
+                    <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                        <label class="title-update-total"> {{ reportDataUpdateTypeTotalized.totalUpdate }} </label>
+
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+</div>

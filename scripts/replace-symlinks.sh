@@ -1,0 +1,1 @@
+test -d $1 && find $1 -type l -exec bash -c "echo 'Replacing {} ...';  cp -LR '{}' '{}'.dereferenced;  rm '{}';  mv '{}'.dereferenced '{}'" \; || true

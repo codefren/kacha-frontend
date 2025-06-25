@@ -1,0 +1,247 @@
+<div class="download-times">
+
+    <!-- Tiempo de descarga por defecto -->
+
+    <div class="card">
+
+        <div class="card-body pl-4 pr-4">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <p class="title-download"> Tiempo de descarga por defecto </p>
+
+                    <p class="sub-title-download mt-xl-0 mt-0"> El tiempo de descarga por defecto sirve para tener inicialmente un tiempo estimado de lo que se cree que el chófer tarda en descargar a los clientes. Determina y define el tiempo que se aplicará por defecto. </p>
+
+                </div>
+
+            </div>
+
+            <div class="row pl-xl-2">
+
+                <div class="col-xl-3 col-md-6 col-12 padding-col-download">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showNUmber point showKg" id="inputPassword" type="number" min="0" max="59" type="number" [(ngModel)]="dischargingMinutes" 
+                            (blur)="updateDefaultDischargingTime()" (keyup.enter)="updateDefaultDischargingTime()" 
+                            (change)="dischargingMinutesChanged = true" placeholder="{{'GENERAL.MINUTES'| translate }}" required/>
+
+                            <label for="first" class="mt-2 title-col"> {{'GENERAL.MINUTES'| translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-md-6 col-12 padding-col-download mt-xl-0 mt-md-0 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showNUmber point showKg" placeholder="0"  min="0" max="59" [(ngModel)]="dischargingSeconds"  type="number" 
+                            (blur)="updateDefaultDischargingTime()" (keyup.enter)="updateDefaultDischargingTime()" (change)="dischargingSecondsChanged = true"
+                            />
+
+                            <label for="first" class="mt-2 title-col"> {{ 'GENERAL.SECONDS' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-md-6 col-12 align-self-xl-end padding-col-download mt-xl-0 mt-md-2 mt-3">
+
+                    <button class="btn btn-primary btn-large ml-2" title="Aplicar a todos los clientes" (click)="asignDischageTimeDefault()">
+
+                        Aplicar a todos los clientes
+    
+                    </button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- end Tiempo de descarga por defecto -->
+
+
+    <!-- Tiempo de descarga promedio en clientes -->
+
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <p class="title-download"> Tiempo de descarga promedio en clientes </p>
+
+                    <p class="sub-title-download mt-xl-0 mt-0"> Los tiempos promedios de clientes nos permiten obtener las métricas del tiempo de descarga y planificar las rutas según lo que se tarda por cada uno de ellos. </p>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <!-- Activar cáclulo promedio servicio -->
+
+                <div class="col-xl-4 col-lg col-md-6 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="init_average" [checked]="(managementPreferences$ | async ).activateAvgCalcServiceTime" (change)="activateAvgCalcServiceTime('activateAvgCalcServiceTime',$event.target.checked)" />
+
+                                <label for="init_average"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.LOWER_SALARY' | translate }}" for="init_average" class="label-check point">
+    
+                                    Activar cálculo promedio servicio
+    
+                                </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end Activar cáclulo promedio servicio -->
+
+                <!-- Activar tiempo promedio descarga -->
+
+                <div class="col-xl-4 col-lg col-md-6 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="time_average" [checked]="( managementPreferences$ | async).useAvgServiceTime" (change)="useAvgServiceTime('useAvgServiceTime', $event.target.checked)" />
+
+                                <label for="time_average"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.LOWER_SALARY' | translate }}" for="time_average" class="label-check point">
+    
+                                Activar tiempo promedio descarga
+    
+                                </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end Activar tiempo promedio descarga -->
+
+                <div class="col-xl-4 col-lg col-12">
+
+                </div>
+            </div>
+
+            <div class="row pl-xl-2 mt-4">
+
+                <div class="col-12">
+                    <p class="title-check-download mb-2">El tiempo de servicio mínimo promedio es:</p>
+                </div>
+
+                <div class="col-xl-3 col-12 padding-col-download">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showNUmber point showKg" id="inputPassword" min="0" max="59" type="number" [(ngModel)]=" minAvgServiceTimeMinutes" (blur)="updateMinAvgServiceTime()" (keyup.enter)="updateMinAvgServiceTime()" placeholder="{{ 'GENERAL.MINUTES'| translate }}" required/>
+
+                            <label for="first" class="mt-2 title-col"> {{'GENERAL.MINUTES'| translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12 padding-col-download mt-xl-0 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showNUmber point showKg" placeholder="0" type="number"  min="0" max="59" [(ngModel)]="minAvgServiceTimeSeconds" (blur)="updateMinAvgServiceTime()" (keyup.enter)="updateMinAvgServiceTime()" placeholder="{{'GENERAL.SECONDS'| translate }}" required/>
+
+                            <label for="first" class="mt-2 title-col"> {{ 'GENERAL.SECONDS' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row pl-xl-2 mt-4">
+
+                <div class="col-12">
+                    <p class="title-check-download mb-2">El tiempo de servicio máximo promedio es:</p>
+                </div>
+
+                <div class="col-xl-3 col-12 padding-col-download">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showNUmber point showKg" id="inputPassword" type="number" min="0" max="59"  [(ngModel)]="maxAvgServiceTimeMinutes" (blur)="updateMaxAvgServiceTime()" (keyup.enter)="updateMaxAvgServiceTime()" placeholder="{{ 'GENERAL.MINUTES'| translate }}" required/>
+
+                            <label for="first" class="mt-2 title-col"> {{'GENERAL.MINUTES'| translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12 padding-col-download mt-xl-0 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showNUmber point showKg" placeholder="0"  min="0" max="59" type="number" [(ngModel)]="maxAvgServiceTimeSeconds" (blur)="updateMaxAvgServiceTime()" (keyup.enter)="updateMaxAvgServiceTime()" placeholder="{{'GENERAL.SECONDS' | translate }}" required />
+
+                            <label for="first" class="mt-2 title-col"> {{ 'GENERAL.SECONDS' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

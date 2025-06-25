@@ -1,0 +1,21 @@
+<div
+    app-editable-field-element-theme
+    class="app-editable-field-element"
+    [class.primary]="color === 'primary'"
+    [class.accent]="color === 'accent'"
+    [class.warn]="color === 'warn'"
+    (click)="p.open(); $event.stopPropagation()"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    [satPopoverAnchor]="p" 
+    #anchor=satPopoverAnchor
+    class="mr-2"
+>
+    <div class="content"><ng-content select="[content]"></ng-content></div>
+    <!-- <mat-icon fxLayoutAlign="center center">edit</mat-icon> -->
+</div>
+<sat-popover #p xAlign="start" yAlign="start"  verticalAlign="below" [anchor]="anchor" (closed)="close($event)" hasBackdrop>
+    <app-editable-field-popover>
+        <ng-content select="[form]"></ng-content>
+    </app-editable-field-popover>
+</sat-popover>

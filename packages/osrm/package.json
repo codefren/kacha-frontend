@@ -1,0 +1,26 @@
+{
+  "name": "@optimroute/osrm",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "\"\"\"\"\"Albert Segarra Roca\"\"\"\"\" <\"\"\"\"\"albertsgrc@gmail.com\"\"\"\"\">",
+  "homepage": "https://gitlab.com/routesolutions/optimroute#readme",
+  "license": "ISC",
+  "main": "lib/osrm.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/routesolutions/optimroute.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/routesolutions/optimroute/issues"
+  }
+}

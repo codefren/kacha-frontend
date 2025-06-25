@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+@mixin route-planning-sidenav-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-route-planning-sidenav[easyroute-route-planning-sidenav-theme] {
+        mat-drawer-container.app-side-nav[app-side-nav-theme] mat-drawer.mat-drawer {
+            background-color: black !important;
+        }
+    }
+}
+
+@mixin route-planning-sidenav-typography($config) {
+    .app-routes-toolbar[app-routes-toolbar-theme] {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

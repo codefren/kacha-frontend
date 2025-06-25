@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-12">
+        <section class="card padding-body">
+            <header class="card-header general-panel">
+                <div class="row">
+                    <div class="col-6 col-md-6 text-left">
+                        <h2 class="general-h2">{{ 'MYNOTES.MYNOTES' | translate }}</h2>
+                    </div>
+                    <div class="col-6 col-md-6 text-right">
+                        <button
+                            id="addToTable"
+                            class="btn btn-default btn-sm"
+                            type="submit"
+                            title="{{ 'MYNOTES.MYNOTES_LIST.ADD_NEW_NOTES' | translate }}"
+                            routerLink="new"
+                        >
+                            <i class="fas fa-plus mr-1"></i>
+                            {{ 'GENERAL.ADD' | translate }}sadsad
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="card-body">
+                <table
+                    class="table table-bordered table-striped table-responsive-lg mb-0"
+                    id="myNotes"
+                    style="text-align: center;"
+                >
+                    <thead>
+                        <tr>
+                            <th>{{ 'MYNOTES.MYNOTES_FORM.TITLE' | translate }}</th>
+                            <th>{{ 'MYNOTES.MYNOTES_LIST.MESSAGE' | translate }}</th>
+                            <th>
+                                {{ 'MYNOTES.MYNOTES_LIST.USER_TO_DESTINATION' | translate }}
+                            </th>
+                            <th>{{ 'MYNOTES.MYNOTES_LIST.CREATION_DATE' | translate }}</th>
+                            <th>{{ 'MYNOTES.MYNOTES_LIST.CREATED_BY' | translate }}</th>
+                            <th>{{ 'MYNOTES.MYNOTES_LIST.ISDELETED' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>

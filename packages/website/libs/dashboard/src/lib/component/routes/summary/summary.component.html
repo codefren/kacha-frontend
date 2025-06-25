@@ -1,0 +1,233 @@
+<div class="easyroute-summary-route">
+
+    <div class="row text-center mt-2 mb-1">
+
+        <!-- lado derecho -->
+
+        <div class="col-xl-8 col-12">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-12 mt-xl-0 mt-3">
+
+                    <div class="card border-card-2">
+
+                        <div class="card-body">
+
+                            <ng-container *ngIf="show">
+
+                                <p class="card-text style-info-card paragran mt-2" *ngIf="dataDuringDelivery">
+                                    {{ dataDuringDelivery.totalRoute }}
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!show">
+
+                                <div class="fa-3x mb-2">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+
+                            <label class="footer-card"> {{ 'DASHBOARD.SUMMARY.TOTAL_ROUTE' | translate }} </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-12 mt-xl-0 mt-3 pl-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card border-card">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <!-- completedDeliveries -->
+
+                                        <div class="col-lg-6 col-border">
+
+                                            <ng-container *ngIf="show">
+
+                                                <p class="card-text style-info-card paragran mt-2"
+                                                    *ngIf="dataDuringDelivery">
+                                                    {{ dataDuringDelivery.finishedDeliveries }}
+                                                </p>
+
+                                            </ng-container>
+
+                                            <ng-container *ngIf="!show">
+
+                                                <div class="fa-3x mb-2">
+                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                </div>
+
+                                            </ng-container>
+
+                                            <label class="footer-card"> {{ 'DASHBOARD.SUMMARY.DELIVERY_COMPLETED' |
+                                                translate }} </label>
+                                        </div>
+
+                                        <!-- end completedDeliveries -->
+
+                                        <!-- pendingDeliveries -->
+
+                                        <div class="col-lg-6 mt-lg-0 mt-3">
+
+                                            <ng-container *ngIf="show">
+
+                                                <p class="card-text style-info-card paragran mt-2"
+                                                    *ngIf="dataDuringDelivery">
+                                                    {{ dataDuringDelivery.pendingDeliveries }}
+                                                </p>
+
+                                            </ng-container>
+
+                                            <ng-container *ngIf="!show">
+
+                                                <div class="fa-3x mb-2">
+                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                </div>
+
+                                            </ng-container>
+
+                                            <label class="footer-card"> {{ 'DASHBOARD.SUMMARY.DELIVERY_PENDING' |
+                                                translate }} </label>
+
+                                        </div>
+
+                                        <!-- end pendingDeliveries -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-xl-2 col-lg-2 col-12 mt-xl-0 mt-3 pl-0">
+
+                    <div class="card border-card-2">
+
+                        <div class="card-body">
+
+                            <ng-container *ngIf="show">
+
+                                <p class="card-text style-info-card paragran mt-2" *ngIf="dataDuringDelivery">
+                                    {{ dataDuringDelivery.incidence }}
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!show">
+
+                                <div class="fa-3x mb-2">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+
+                            <label class="footer-card"> {{ 'DASHBOARD.SUMMARY.INCIDENCE' | translate }} </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-xl-2 col-lg-2 col-12 mt-xl-0 mt-3 pl-0">
+
+                    <div class="card border-card-2">
+
+                        <div class="card-body">
+
+                            <ng-container *ngIf="show">
+
+                                <p class="card-text style-info-card paragran mt-2" *ngIf="dataDuringDelivery">
+                                    {{ dataDuringDelivery.devolutions }}
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!show">
+
+                                <div class="fa-3x mb-2">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+
+
+                            <label class="footer-card"> {{ 'DASHBOARD.SUMMARY.RETURN' | translate }} </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- end lado derecho -->
+
+        <!-- Lado izquierda -->
+
+        <!-- finishedDeliveries -->
+
+        <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div class="row mt-xl-0 mt-3">
+
+                        <div class="col-lg-12 text-left p-xl-0 pr-lg-0">
+
+                            <div class="card border-card">
+
+                                <div class="card-body font-end" [ngStyle]="setMyStyle()">
+
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <p class="card-text number-parcent paragran mt-2" *ngIf="dataDuringDelivery">
+                                            {{ dataDuringDelivery.completedDeliveries }}%
+                                        </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-3x mb-2">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <label class="parcent"> {{ 'DASHBOARD.SUMMARY.DELIVERY_COMPLETE' | translate }}
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end finishedDeliveries -->
+
+        <!-- End Lado izquierda -->
+
+    </div>
+</div>

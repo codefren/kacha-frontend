@@ -1,0 +1,18 @@
+<div class="easyroute-route-planning-options">
+    <div *ngIf="routeId === undefined" class="easyroute-common-options" fxLayout="column">
+        <easyroute-zone-vehicles [zoneId]="zoneId" [zone]="zoneState$ | async"></easyroute-zone-vehicles>
+
+
+        <div *ngIf="routeId !== undefined" class="easyroute-route-common-options">
+            <easyroute-route-delivery-schedule [deliveryScheduleStart]="
+                (route$ | async) ? (route$ | async).settings.deliverySchedule.start : null
+            " [deliveryScheduleEnd]="
+                (route$ | async) ? (route$ | async).settings.deliverySchedule.end : null
+            " [forceDeparture]="
+                (route$ | async) ? (route$ | async).settings.forceDepartureTime : false
+            " (updateToggleForceDepartureValue)="toggleRouteForceDepartureValue($event)"
+                (updateDeliveryScheduleValue)="saveRouteDeliveryScheduleValue($event)">
+            </easyroute-route-delivery-schedule>
+            <mat-divider></mat-divider>
+        </div>
+    </div>

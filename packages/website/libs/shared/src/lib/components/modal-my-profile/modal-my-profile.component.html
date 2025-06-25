@@ -1,0 +1,340 @@
+<div class="modal-form-field">
+
+    <div class="row p-5">
+
+        <div class="col-xl-10 col-12 text-xl-left text-center padding-profile">
+
+            <label class="title-modal"> Perfil: {{ email }} </label>
+
+            <p class="mb-1 mt-1 title-rol">
+                Rol:
+                <span *ngFor="let item of  profile.profiles; let t=index" [title]="item.name"> {{ item.name }} 
+
+                    <span *ngIf=" t + 1 <  profile.profiles.length">,</span>
+
+                </span>
+            </p>
+
+        </div>
+
+        <div class="col-xl-2 col-12 text-xl-right text-center point" (click)="close()">
+
+            <img src="assets/icons/close1.svg">
+
+        </div>
+
+
+        <!-- type -->
+        <form [formGroup]="profileSettingsGroup" *ngIf="profileSettingsGroup" class="padding-form" style="width: 100%" novalidate action="">
+
+            <!-- name -->
+
+            <div class="col-12 mt-2">
+
+                <div class="form-row mt-3">
+
+
+                    <div class="form-group input-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['name'].invalid && ( profileSettingsGroup.controls['name'].dirty || profileSettingsGroup.controls['name'].touched) }">
+
+                        <span class="has-float-label w-100">
+
+                        <input class="form-control point" id="profile-name" formControlName="name" type="text" placeholder="{{ 'GENERAL.NAME' | translate }}"/>
+
+                        <label for="name" class="mt-2 title-col"> {{ 'GENERAL.NAME' | translate }} <span class="asterisco"> *</span></label>
+
+                        </span>
+                        <ng-container *ngFor="let validation of profileMessages.name">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('name').hasError( validation.type ) && (profileSettingsGroup.get('name').dirty || profileSettingsGroup.get('name').touched)">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- end NAME -->
+
+            <!-- SURNAMES -->
+
+            <div class="col-12 mt-2">
+                <div class="form-row mt-2">
+
+                    <div class="form-group input-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['surname'].invalid && (profileSettingsGroup.controls['surname'].dirty || profileSettingsGroup.controls['surname'].touched) }">
+
+                        <span class="has-float-label w-100">
+
+                        <input class="form-control point" id="profile-surname" formControlName="surname" type="text" placeholder="{{ 'GENERAL.SURNAMES' | translate }}"/>
+
+                        <label for="name" class="mt-2 title-col"> {{ 'GENERAL.SURNAMES' | translate }} <span class="asterisco"> *</span></label>
+
+                        </span>
+                        <ng-container *ngFor="let validation of profileMessages.name">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('surname').hasError( validation.type ) && (profileSettingsGroup.get('surname').dirty || profileSettingsGroup.get('surname').touched)">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- end SURNAMES -->
+
+
+
+            <div class="col-12">
+                <div class="row">
+
+                    <!-- phone -->
+                    <div class="col-xl-6 col-12 mt-2">
+
+                        <div class="form-row mt-2">
+
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['phone'].invalid && (profileSettingsGroup.controls['phone'].dirty || profileSettingsGroup.controls['phone'].touched) }">
+
+                                <span class="has-float-label w-100">
+        
+                                <input class="form-control point" id="profile-phone-number" [formControl]="profileSettingsGroup.controls['phone']" mask="999 999999999" prefix="+" placeholder="{{ 'GENERAL.PHONE_NUMBER' | translate }}"/>
+        
+                                <label for="name" class="mt-2 title-col"> {{ 'GENERAL.PHONE_NUMBER' | translate }} <span class="asterisco"> *</span></label>
+
+                                </span>
+                                <ng-container *ngFor="let validation of profileMessages.phone">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('phone').hasError( validation.type ) && (profileSettingsGroup.get('phone').dirty || profileSettingsGroup.get('phone').touched )">
+                                            {{ validation.message }}
+                                            {{ validation.type === 'invalidPhone' ? ' ' + (profile.profile.country !== null ? profile.profile.country: 'España'): '' }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- end phone -->
+
+                    <!-- nationalId -->
+
+                    <div class="col-xl-6 col-12 mt-2">
+
+                        <div class="form-row mt-2">
+
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['nationalId'].invalid && (profileSettingsGroup.controls['nationalId'].dirty || profileSettingsGroup.controls['nationalId'].touched) }">
+
+                                <span class="has-float-label w-100">
+        
+                                <input class="form-control point" id="profile-dni" type="text" formControlName="nationalId" placeholder="{{ 'COMPANY_PROFILE.DNI_NIE' | translate }}"/>
+        
+                                <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.DNI_NIE' | translate }} <span class="asterisco"> *</span></label>
+
+                                </span>
+                                <ng-container *ngFor="let validation of profileMessages.nationalId">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('nationalId').hasError( validation.type ) && (profileSettingsGroup.get('nationalId').dirty || profileSettingsGroup.get('nationalId').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- end nationalId -->
+                </div>
+            </div>
+
+            <!-- end phone -->
+
+        </form>
+
+        <div class="col-12">
+
+            <div class="form-row mt-3">
+
+                <ng-container *ngIf="!showChangePass">
+
+                    <img class="img-returns point" src="assets/icons/Lock.svg" (click)="showChangePassword()">
+
+                </ng-container>
+
+                <label class="title-change-pass  point" [ngClass]="{'active-change-Pass pl-0':showChangePass, 'pl-2': !showChangePass }" (click)="showChangePassword()"> Cambiar contraseña </label>
+
+            </div>
+
+        </div>
+
+        <ng-container *ngIf="showChangePass">
+
+            <form [formGroup]="changePasswordForm" *ngIf="changePasswordForm" class="padding-form" style="width: 100%" novalidate action="">
+
+                <!-- current_password -->
+
+                <div class="col-12 mt-2">
+
+                    <div class="form-row mt-3">
+
+
+                        <div class="form-group input-group" [ngClass]="{ 'has-danger': changePasswordForm.controls['current_password'].invalid && (changePasswordForm.controls['current_password'].dirty || changePasswordForm.controls['current_password'].touched) }">
+
+                            <span class="has-float-label w-100">
+    
+                            <input class="form-control point" id="profile-old-pass" type="password" formControlName="current_password" placeholder=" {{ 'USERS.PASSWORD_OLD' | translate }}"/>
+    
+                            <label for="name" class="mt-2 title-col">  {{ 'USERS.PASSWORD_OLD' | translate }} <span class="asterisco"> *</span></label>
+
+                            </span>
+
+                            <ng-container *ngFor="let validation of passwordMessages.current_password">
+
+                                <div class="w-100 text-left">
+
+                                    <small class="form-control-feedback text-danger" *ngIf="changePasswordForm.get('current_password').hasError( validation.type ) && (changePasswordForm.get('current_password').dirty || changePasswordForm.get('current_password').touched)">
+
+                                        {{ validation.message }}
+
+                                    </small>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end current_password -->
+
+                <!-- password -->
+
+                <div class="col-12 mt-2">
+
+                    <div class="form-row mt-3">
+
+
+                        <div class="form-group input-group" [ngClass]="{ 'has-danger': changePasswordForm.controls['password'].invalid && (changePasswordForm.controls['password'].dirty || changePasswordForm.controls['password'].touched) }">
+
+                            <span class="has-float-label w-100">
+    
+                            <input class="form-control point" id="profile-new-pass" type="password" formControlName="password" placeholder="Nueva contraseña"/>
+    
+                            <label for="name" class="mt-2 title-col"> Nueva contraseña <span class="asterisco"> *</span></label>
+
+                            </span>
+
+                            <ng-container *ngFor="let validation of passwordMessages.password">
+
+                                <div class="w-100 text-left">
+
+                                    <small class="form-control-feedback text-danger" *ngIf="changePasswordForm.get('password').hasError(validation.type) && (changePasswordForm.get('password').dirty || changePasswordForm.get('password').touched)">
+
+                                        {{ validation.message }}
+
+                                    </small>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end password -->
+
+                <!-- password_confirmation -->
+
+                <div class="col-12 mt-2">
+
+                    <div class="form-row mt-3">
+
+
+                        <div class="form-group input-group" [ngClass]="{ 'has-danger': changePasswordForm.controls['password_confirmation'].invalid && (changePasswordForm.controls['password_confirmation'].dirty || changePasswordForm.controls['password_confirmation'].touched) }">
+
+                            <span class="has-float-label w-100">
+    
+                            <input class="form-control point" d="profile-confir-pass" type="password"  formControlName="password_confirmation" placeholder="Repetir contraseña"/>
+    
+                            <label for="name" class="mt-2 title-col"> Repetir contraseña <span class="asterisco"> *</span></label>
+
+                            </span>
+
+                            <ng-container *ngFor="let validation of passwordMessages.password_confirmation">
+
+                                <div class="w-100 text-left">
+
+                                    <small class="form-control-feedback text-danger" *ngIf="changePasswordForm.get('password_confirmation').hasError(validation.type) && (changePasswordForm.get('password_confirmation').dirty || changePasswordForm.get('password_confirmation').touched)">
+
+                                        {{ validation.message }}
+
+                                    </small>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end password_confirmation -->
+
+            </form>
+
+        </ng-container>
+
+        <!-- btn -->
+
+        <div class="col-12 mt-3">
+
+            <div class="form-row mt-2">
+
+                    <ng-container *ngIf="showChangePass">
+
+                        <button class="btn btn-outline-primary btn-block" type="button" (click)="cancelChangePasswork()">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="showChangePass">
+
+                        <button class="btn btn-primary btn-block" type="button" [disabled]="!formIsCorrect() || !profileSettingsGroup.valid || !changePasswordForm.valid" (click)="update()">
+
+                            {{'GENERAL.SAVE' | translate }}
+
+                        </button>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="!showChangePass">
+
+                        <button class="btn btn-primary btn-block" type="button" [disabled]="!formIsCorrect() || !profileSettingsGroup.dirty" (click)="update()">
+
+                            {{'GENERAL.SAVE' | translate }}
+
+                        </button>
+
+                    </ng-container>
+
+
+            </div>
+
+        </div>
+
+        <!-- end btn -->
+    </div>
+
+</div>

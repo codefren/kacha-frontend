@@ -1,0 +1,9 @@
+@import '../../../../../apps/easyroute/src/common';
+
+:host {
+    flex: 1;
+}
+
+router-outlet {
+    margin-top: 48px;
+}

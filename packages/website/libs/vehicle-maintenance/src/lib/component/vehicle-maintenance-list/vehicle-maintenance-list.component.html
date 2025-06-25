@@ -1,0 +1,484 @@
+<div class="vehicles-maintenance-list main-container container-fluid pt-4 pb-4 p-2">
+
+    <!-- header -->
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start point" (click)="returnsVehicle()">
+
+            <div class="page-title">
+
+                <img src="assets/icons/retunrs.svg" class="header-brand-img img-providers img-anclar" alt="Provider">
+
+                <img src="assets/icons/mantVehicles.svg" class="header-brand-img img-providers ml-3" alt="Provider">
+
+                <span class="ml-2"> {{ 'VEHICLE_MAINTENANCE.VEHICLE_MAINTENANCE' | translate }} </span>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end">
+
+
+
+                <div class="btn-group">
+
+                    <button type="button" class="btn btn-icon btn-icon-white dropdown-toggle pl-2 pr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <img src="assets/images/tres_point.svg" class="header-brand-img" alt="#">
+
+                    </button>
+
+                    <div class="dropdown-menu p-2">
+
+                        <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openPdf()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_PDF' | translate }}
+
+                        </a>
+
+                        <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openCsv()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_EXCEL' | translate }}
+
+                        </a>
+
+
+                        <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                            <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <!-- Cajas informativas -->
+    <div class="row align-items-center separatorButtonBox pl-4 pr-4">
+
+        <!-- Total revisiones -->
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'VEHICLE_MAINTENANCE.TOTAL_REVIEWS' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number"> {{ MaintenanceInformative.totalRevisions }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+
+            </div>
+        </div>
+
+        <!-- END Total revisiones -->
+
+        <!-- ESTADO: MUY BIEN -->
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'VEHICLE_MAINTENANCE.STATUS_VERY_WELL' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number"> {{ MaintenanceInformative.totalStatusVeryWell }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+
+            </div>
+        </div>
+
+        <!-- END ESTADO: MUY BIEN -->
+
+        <!-- Estado: Bien -->
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'VEHICLE_MAINTENANCE.CONDITION_GOOD' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number"> {{ MaintenanceInformative.totalStatusCorrect }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+
+            </div>
+        </div>
+
+        <!-- END Estado: Bien -->
+
+        <!-- Estado: Regular -->
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'VEHICLE_MAINTENANCE.STATUS_REGULAR' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number"> {{ MaintenanceInformative.totalStatusRegular }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+
+            </div>
+        </div>
+
+        <!-- END Estado: Regular -->
+
+        <!-- Estado: Mal -->
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'VEHICLE_MAINTENANCE.STATUS_BAD' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number"> {{ MaintenanceInformative.totalStatusBad }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- END Estado: Mal -->
+
+        <!-- ESTADO : MUY MAL -->
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'VEHICLE_MAINTENANCE.STATUS_VERY_BAD' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number"> {{ MaintenanceInformative.totalStatusVeryBad }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+
+            </div>
+
+        </div>
+
+        <!-- END ESTADO MUY MAL -->
+
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1 mt-xl-0 mt-2">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- filter -->
+    <div class="row mt-3 pl-4 pr-4 align-items-center font-row mb-xl-0 mb-2">
+
+
+        <div class="col-xl-9 col-12">
+
+            <div class="form-row mb-1 mt-2 pl-1 align-items-center">
+
+                <!-- date -->
+
+                <div class="col-12 col-xl-3 col-sm-4 mb-1">
+
+                    <div class="dp-hidden position-absolute">
+
+                        <div class="input-group">
+
+                            <input name="datepicker" class="form-control  input-size date1 point" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                tabindex="-1" />
+
+                            <ng-template #t let-date let-focused="focused">
+
+                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                    {{ date.day }}
+                                </span>
+
+                            </ng-template>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input #dpFromDate class="form-control form-control-date" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                        <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+
+                            <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+
+                        </button>
+
+                    </div>
+
+
+
+                </div>
+
+                <!-- end date -->
+
+                <!-- all urser -->
+
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+                    <ng-container *ngIf="load === 'success'">
+
+                        <select id="idUser" [value]="filterMaintenance.values.idUser" (change)="changeroutePlanningRouteId($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+
+                            <option value=""> {{ 'VEHICLE_MAINTENANCE.USERS' | translate }} </option>
+
+                            <option *ngFor="let item of driverList" [value]="item.id" > {{ item.name }} {{item.surname}} </option>
+
+                        </select>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="load === 'loading'">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+                <!-- end all route -->
+
+                <!-- vehicle -->
+
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+                    <ng-container *ngIf="loadVehicles === 'success'">
+
+                        <select id="vehicleId" [value]="filterMaintenance.values.vehicleId" (change)="changeVehicleId($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+
+                            <option value=""> {{ 'VEHICLE_MAINTENANCE.VEHICLE' | translate }} </option>
+
+                            <option *ngFor="let item of VehicleList" [value]="item.id" > {{ item.name }}</option>
+
+                        </select>
+
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="loadVehicles === 'loading'">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+                </div>
+
+                <!-- end users -->
+
+                <!-- mantenimiento -->
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+                    <ng-container *ngIf="showmaintenanceVehicleState">
+
+                        <select id="maintenanceVehicleStateTypeId" [value]="filterMaintenance.values.maintenanceVehicleStateTypeId" (change)="changeMaitenanceId($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+
+                            <option value=""> {{ 'VEHICLE_MAINTENANCE.VEHICLE_STATUS' | translate }} </option>
+
+                            <option *ngFor="let item of maintenanceVehicleStateTypeList" [value]="item.id" > {{ item.name }}</option>
+
+                        </select>
+
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="!showmaintenanceVehicleState">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+                </div>
+                <!-- end mantenimiento -->
+
+                <!-- status maitenance -->
+
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+                    <ng-container *ngIf="showMaintenanceVehicleStateTypeId">
+
+                        <select id="maintenanceStatusId" [value]="filterMaintenance.values.maintenanceStatusId" (change)="maintenanceVehicleStateTypeId($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+
+                            <option value=""> {{ 'VEHICLE_MAINTENANCE.MAINT_STATUS' | translate }} </option>
+
+                            <option *ngFor="let item of maintenanceStatusList" [value]="item.id" > {{ item.name }}</option>
+
+                        </select>
+
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="!showMaintenanceVehicleStateTypeId">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+                </div>
+
+                <!-- end status maitenance -->
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-12">
+
+            <div class="row">
+
+                <div class="col-xl-9 col-12">
+                    <div class="input-group datatables-input-group-width mr-xl-3 mr-3">
+
+                        <input id="search" type="text" class="form-control search-general
+                                pull-right input-personalize-datatable" placeholder="{{ 'COST.SEARCH' | translate }}" style="max-width: initial;">
+                        <span class="input-group-append input-group-appenda">
+                            <span class="input-group-text input-group-text-general table-append">
+                                <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-12 text-center mt-xl-0 mt-2">
+                    <button class="btn btn-default btn-edit-travel" id="dt-buttons-table" type="button">
+                        <img src="assets/icons/edittable.svg">
+                        Tabla
+                    </button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <!-- end filter -->
+
+    <!-- table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general">
+
+                <table class="table table-striped table-bordered table-responsive-lg mb-0" id="manteanace" style="text-align: center; width: 100%;">
+
+                    <thead>
+                        <tr>
+                            <th> {{ 'VEHICLE_MAINTENANCE.USERS' | translate }} </th>
+                            <th> {{ 'VEHICLE_MAINTENANCE.VEHICLE' | translate }} </th>
+                            <th> {{ 'VEHICLE_MAINTENANCE.TUITION' | translate }} </th>
+                            <th> {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_DATE' | translate }} </th>
+                            <th> {{'VEHICLE_MAINTENANCE.VEHICLE_STATUS' | translate }} </th>
+                            <th> {{'VEHICLE_MAINTENANCE.PHOTO' | translate }}</th>
+                            <th> {{'VEHICLE_MAINTENANCE.REVISION' | translate }}</th>
+                            <th> {{'VEHICLE_MAINTENANCE.STATE' | translate }}</th>
+
+                            <th class="widthAccionDatatable"></th>
+                        </tr>
+
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

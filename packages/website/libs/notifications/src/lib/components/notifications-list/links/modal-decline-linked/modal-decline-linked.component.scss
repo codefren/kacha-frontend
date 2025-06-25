@@ -1,0 +1,50 @@
+.modal-decline-link {
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px;
+    }
+    .title-infor {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #363740;
+    }
+    .modal-footer {
+        display: block;
+        padding: 0rem 3rem 2rem 3rem;
+        border: 0px;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+        width: 150px;
+    }
+    .btn-red-general {
+        width: 150px;
+    }
+    .modal-header {
+        display: block;
+        padding: 3rem 3rem 0rem 3rem;
+        border: 0px;
+    }
+    .modal-body {
+        padding: 1rem 3rem 0rem 3rem;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+}

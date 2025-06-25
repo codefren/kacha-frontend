@@ -1,0 +1,110 @@
+.report-contol-doc-details {
+    .btn-primary {
+        height: 45px;
+        background: #D8DAE2;
+        border-radius: 5px;
+    }
+    .btn-default {
+        background: #FFFFFF;
+        border-radius: 5px;
+        border-color: #fff;
+        height: 45px;
+    }
+    .alt-btn-default {
+        width: 134px;
+    }
+    .title-sheet {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 16px;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .img-returns {
+        vertical-align: baseline;
+    }
+    .title-route {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .title-descargar {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #363740;
+    }
+    .dataTable thead th {
+        font-size: 14px !important;
+        padding: 15px;
+    }
+    table {
+        thead th {
+            border: 1px solid #DFE1E8;
+        }
+    }
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        border: 1px solid #DFE1E8;
+    }
+    .table td {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border: 1px solid #DFE1E8;
+    }
+    .border-resumen {
+        background: #7F96E0;
+        border-radius: 5px 5px 0px 0px;
+        border: 0px solid #7F96E0 !important;
+    }
+    .title-span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #FFFFFF;
+    }
+    .table thead th {
+        font-size: 16px;
+    }
+    .footer-table {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 19px;
+        line-height: 22px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #3F3F3D;
+    }
+    .card-footer {
+        border-top: 0px solid rgba(0, 0, 0, 0.125);
+    }
+    table {
+        border-collapse: collapse;
+        border-radius: 5px;
+        border-style: hidden;
+        box-shadow: 0 0 0 1px #DFE1E8;
+    }
+    td {
+        border: 1px solid #DFE1E8;
+    }
+    .delay-class {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #CB0909 !important;
+    }
+}

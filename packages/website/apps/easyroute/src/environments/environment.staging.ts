@@ -1,0 +1,58 @@
+export const environment = {
+    production: false,
+    apiUrl: 'https://staging.restapi.optimmanage.com/api/',
+    jobsUrl: 'wss://staging.core.optimmanage.com',
+    geolocationWss: {
+        pusher_key: 'key_JdwDDV9sWV7kEhXgFGbEKtfjrkPdFeyc',
+        cluster: 'mt1',
+        wsHost: 'localhost',
+        wssPort: 6001,
+        wsPort: 6001,
+        // wsPort: 6001,
+        httpHost: 'localhost:6001',
+        httpPort: 6001,
+        enableStats: true,
+        enabledTransports: ['ws'],
+        forceTLS: false,
+    },
+    sessionTimeOut: 1,
+    refresh_datatable_assigned: 240000,
+    name: 'staging',
+    sentryEnabled: true,
+    version: require('../../../../package.json').version,
+    loadDefaultRoutes: false,
+    stripePublicKey: "pk_test_CXnsXulMSsQW3WzXLWA0LUGB00VRUUrZm0",
+    Recaptcha: {
+        name: 'optimmanage',
+        siteKey: '6LfTU6oZAAAAAHBGWu4ZhNXtJHYCAQFTC30fiS7z',
+    },
+    DataTableEspaniol: {
+        emptyTable: 'No hay datos disponibles en esta tabla',
+        /* info: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros', */
+        /* infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros', */
+        info: 'Mostrando _END_ registros de _TOTAL_',
+        infoEmpty: 'Mostrando 0 registros de 0',
+        infoFiltered: '(filtrado de un total de _MAX_ registros)',
+        infoPostFix: '',
+        infoThousands: ',',
+        loadingRecords: 'Cargando...',
+        lengthMenu: 'Mostrar _MENU_',
+        processing: 'Cargando...',
+        search: 'Buscar:',
+        url: '',
+        zeroRecords: 'No hay datos disponibles en esta tabla',
+        paginate: {
+            first: '&laquo;&laquo;',
+            previous: '&laquo;',
+            next: '&raquo;',
+            last: '&raquo;&raquo;',
+        },
+        aria: {
+            sortAscending: ': Activar para ordenar la columna de manera ascendente',
+            sortDescending: ': Activar para ordenar la columna de manera descendente',
+        },
+    },
+    URL_TERMS_CONDITIONS: 'https://www.polpoo.com',
+    URL_PRIVACY_TERMS: 'https://www.polpoo.com',
+    MONEY_SYMBOL: '€'
+};

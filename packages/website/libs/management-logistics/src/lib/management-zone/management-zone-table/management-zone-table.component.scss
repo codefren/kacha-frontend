@@ -1,0 +1,63 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+@media (max-width: 576px) {
+    h2 {
+        font-size: 17px;
+    }
+}
+
+.management-zone-table {
+    .group-btn {
+        //font-size: 16px;
+        font-weight: bolder;
+        width: 30%;
+        height: 41px;
+    }
+    .row-center {
+        text-align: -webkit-center;
+    }
+    .btn-grey {
+        width: 200px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 1px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        width: 14%;
+        padding: 14px;
+    }
+    .hack-select {
+        width: 12rem;
+    }
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 14px !important;
+        height: 43px !important;
+        color: #808080;
+        option {
+            color: #808080;
+        }
+    }
+    .size-select {
+        height: 48px !important;
+    }
+    .hack-select:after {
+        /* color: #808080; */
+        top: 22%;
+        right: 15px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .group-btn {
+            width: 83%;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .group-btn {
+            width: 50%;
+        }
+    }
+}

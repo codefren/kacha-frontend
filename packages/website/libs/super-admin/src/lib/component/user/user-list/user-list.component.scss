@@ -1,0 +1,67 @@
+.user-list {
+    background-color: #ffffff;
+    height: 100%;
+    background: white;
+    .btn-large {
+        width: 209px;
+        height: 40px;
+        border-radius: 24px;
+    }
+    .title {
+        color: #24397C;
+        text-transform: initial;
+        font-size: 18px;
+    }
+    .group-btn {
+        //font-size: 16px;
+        font-weight: bolder;
+        width: 68%;
+        height: 41px;
+    }
+    .btn-franchise {
+        width: 209px;
+        height: 40px;
+        background-color: #24397c;
+        border-radius: 24px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+    .padding-label {
+        padding-left: 5rem;
+    }
+    .div:focus,
+    .div.focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(247, 247, 247, 0.25);
+    }
+    .btn-filter {
+        background-color: #b5b5b5;
+        border-radius: 20px;
+        width: 132px;
+        height: 40px;
+        font-size: 14px;
+        color: #ffffff;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        button {
+            width: 92% !important;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+        .group-btn {
+            width: 99%;
+            height: 10%;
+            border-radius: 18px;
+        }
+        div .text-right {
+            text-align: center !important;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .group-btn {
+            width: 50%;
+        }
+    }
+}

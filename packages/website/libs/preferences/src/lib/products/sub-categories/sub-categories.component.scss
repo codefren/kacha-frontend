@@ -1,0 +1,72 @@
+.sub-category-setting {
+    .title-category {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .sub-category-setting {
+        color: #9899AA;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .btn-ouline-gray {
+        border-radius: 5px;
+        border: 1px solid #9899AA;
+        background: #FFF;
+        height: 45px;
+        width: 170px;
+    }
+    .btn-ouline-gray:hover {
+        color: #575b63;
+        text-decoration: none;
+        background-color: #d3d3d3c2 !important;
+        border-color: #c1c1c1 !important;
+    }
+    .label-btn-gray {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7F96E0;
+        padding: 0.9rem;
+        color: #FFF !important;
+        font-family: Roboto !important;
+        font-size: 16px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        // border-top: 1px solid #dee2e6 !important;
+    }
+    .label-add {
+        color: #3B4FFF;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .label-add:hover {
+        text-decoration: underline;
+    }
+}

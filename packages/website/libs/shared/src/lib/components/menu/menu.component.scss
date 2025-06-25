@@ -1,0 +1,33 @@
+
+.btn-group > .active {
+    color: #ffffff;
+    font-weight: bold;
+    border-bottom-color: #CACACA !important;
+    border-bottom: 3px solid !important;
+}
+
+.no-border {
+    border-radius: 0 0 0 0;
+    border-top-color: transparent;
+
+    
+}
+html body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link, html.dark body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link, html body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:hover, html.dark body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:hover, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:hover, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:hover, html body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:focus, html.dark body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:focus, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:focus, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:focus{
+    border-bottom-color: #ffffff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+html body .tabs-primary .nav-tabs li .nav-link, html.dark body .tabs-primary .nav-tabs li .nav-link, html body .tabs-primary .nav-tabs.nav-justified li .nav-link, html.dark body .tabs-primary .nav-tabs.nav-justified li .nav-link, html body .tabs-primary .nav-tabs li .nav-link:hover, html.dark body .tabs-primary .nav-tabs li .nav-link:hover, html body .tabs-primary .nav-tabs.nav-justified li .nav-link:hover, html.dark body .tabs-primary .nav-tabs.nav-justified li .nav-link:hover{
+    color: #ffffff;
+    background: #F2840F;
+}
+
+html body .tabs-primary.tabs-bottom .nav-tabs li .nav-link:hover, html.dark body .tabs-primary.tabs-bottom .nav-tabs li .nav-link:hover, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li .nav-link:hover, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li .nav-link:hover{
+    border-bottom-color: #ffffff;
+    color: #ffffff;
+}
+
+html body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link, html.dark body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link, html body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:hover, html.dark body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:hover, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:hover, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:hover, html body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:focus, html.dark body .tabs-primary.tabs-bottom .nav-tabs li.active .nav-link:focus, html body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:focus, html.dark body .tabs-primary.tabs-bottom .nav-tabs.nav-justified li.active .nav-link:focus{
+    background: #F2840F;
+}

@@ -1,0 +1,76 @@
+<div class="easyroute-image-view d-flex justify-content-center">
+
+    <!-- <p class="color-alert text-center mt-1 pl-2"> {{ 'GENERAL.MAXIMUN_1MB' | translate}} </p> -->
+    <!-- imagenes de mantenimiento de vehículo no borrar -->
+    <div class="d-flex flex-column margin-lateral justify-content-around column" *ngIf="delete">
+        <div class="card" [ngClass]="{ 'card-franchise': franchise }">
+            <div *ngIf="!image" class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                <!--  <i class="color-icon fas fa-camera fa-2x"></i> -->
+                <img src="assets/icons/optimmanage/camara2.svg">
+            </div>
+
+            <ng-container *ngIf="image">
+                <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center" [ngClass]="{'show-background-mainte':delete}" (click)="viewImage( $event, image )">
+                    <i class="fas fa-expand fa-2x"></i>
+                </div>
+                <div class="text-center w-100 h-100">
+                    <img [src]="image.urlimage" class="img-upload">
+                </div>
+            </ng-container>
+        </div>
+
+        <input type="file" hidden #fileImage (change)="handleFileChange( $event, image )">
+
+    </div>
+    <!-- end imagenes de mantenimiento de vehículos no borrar -->
+
+    <!-- imagnes de cliente no borrar -->
+    <div class="d-flex flex-column justify-content-around column" [ngClass]="{'margin-lateral':incient}" *ngIf="!delete">
+        <div class="card point" [ngClass]="{ 'card-style-incident': incient }">
+            <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center" (click)="fileImage.click()" *ngIf="!image">
+                <!--   <i class="color-icon fas fa-camera fa-2x"></i> -->
+                <img class="point" src="assets/icons/optimmanage/camara.svg">
+
+            </div>
+            <div class="w-100  d-flex flex-column align-items-center show-background justify-content-center" *ngIf="
+            (image && image === null) ||
+            image == undefined" (click)="fileImage.click()">
+                <i class="color-icon">{{ 'FRANCHISE.UPLOAD_IMAGE' |translate }}</i>
+            </div>
+            <div class="text-center w-100 h-100" *ngIf="image && !incient">
+                <img [src]="image.image" class="img-upload">
+            </div>
+            <ng-container *ngIf="image && incient">
+                <div class="w-100 d-flex show-background-trans point h-100 flex-column justify-content-center align-items-center" (click)="deleteImg( $event, image)">
+                    <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}"></i>
+                </div>
+                <!--   <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+                    <div class="row mt-5">
+                        <div class="col-6 mt-5 text-center pr-5" (click)="deleteImg( $event, image )">
+                            <img src="assets/icons/optimmanage/borrar.svg">
+                        </div>
+                        <div class="col-6 mt-5 text-center pl-5">
+
+                            <img src="assets/icons/optimmanage/descarga.svg" (click)="donwload(image.image)">
+
+
+                            <a hidden #downloadImage target="_blank" [href]="image.image" download>
+                                <img [src]="image.image">
+                            </a>
+
+
+                        </div>
+                    </div>
+
+
+                </div> -->
+                <div class="text-center w-100 h-100">
+                    <img [src]="image.image" class="img-upload">
+                </div>
+            </ng-container>
+        </div>
+        <input type="file" hidden #fileImage [disabled]="disabled" (change)="handleFileChange( $event, image )">
+        <p class="color-alert text-center mt-1">máximo 1MB</p>
+    </div>
+    <!-- end imagenes cliente no borrar -->
+</div>

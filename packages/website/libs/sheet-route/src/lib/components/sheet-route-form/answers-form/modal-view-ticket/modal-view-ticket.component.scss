@@ -1,0 +1,39 @@
+.model-ticket {
+    border-radius: 0px !important;
+    .title-ticket {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .img-ticket {
+        border-radius: 5px;
+        max-width: 431px;
+        margin: 0 auto;
+    }
+    .btn-default {
+        width: 95px;
+        height: 40px;
+        background: #FFFFFF;
+        border: 1px solid #D8DAE2;
+        border-radius: 3px;
+    }
+    @media screen and (max-width: 320px) {
+        .img-ticket {
+            max-width: 240px;
+        }
+    }
+    @media screen and (min-width: 360px) and (max-width:640px) {
+        .img-ticket {
+            max-width: 284px;
+        }
+    }
+    /* iphone 4, 5e */
+    @media screen and (max-width: 480px) and (orientation: landscape) {
+        .img-ticket {
+            max-width: 431px;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="model-returns">
+
+    <div class="row align-items-center mt-4 mb-3">
+
+        <div class="col-xl-12 col-12 pl-xl-5 text-xl-left text-center">
+
+            <label class="title-ticket">{{'SHEET_ROUTE.RETURNS' | translate }} ({{numberLength}})</label>
+
+        </div>
+
+        <!--  <div class="col-xl-6 col-12 text-xl-right text-center pr-5">
+
+            <button class="btn btn-default mr-2" (click)="donwload()">{{'SHEET_ROUTE.DISCHARGE' | translate }}</button>
+
+            <button class="btn btn-default mr-2" (click)="downloadPdf()"> {{'SHEET_ROUTE.TO_PRINT' | translate }}</button>
+
+        </div> -->
+
+    </div>
+
+    <div class="row mt-3 mb-4">
+
+        <div class="col-12 text-center pl-5 pr-5">
+
+            <table class="table table-striped table-bordered mb-0 mt-5" id="returns" style="text-align: center ; width: 100%;">
+                <thead>
+                    <tr>
+                        <th>{{'SHEET_ROUTE.CLIENT' | translate }}</th>
+                        <th>{{ 'SHEET_ROUTE.PRODUCT' |translate }}</th>
+                        <th>{{ 'SHEET_ROUTE.QUANTITY' |translate }}</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

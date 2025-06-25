@@ -1,0 +1,272 @@
+<div class="modal-modify-fuel">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-8 text-xl-left text-left pl-0">
+
+                <label class="title-modal"> {{ 'COST.APPLY_FUEL_COST' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-4 text-xl-right text-right point pr-0" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 p-0">
+
+                <p class="title-sub m-0"> {{'COST.MESSAGE_APPLY_FUEL_COST' | translate }} </p>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+
+            <div class="col-12 p-0">
+
+                <div class="form-row">
+
+                    <!-- mes -->
+
+                    <div class="col-xl-4 col-12 mt-2">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+
+                                <select class="form-select form-control w-100" id="month" [(ngModel)]="selectMonth" placeholder="Seleccione" >
+
+                                    <option value="">Seleccione...</option>
+
+                                    <option *ngFor="let type of month" [value]="type"> {{ type }}</option>
+
+                                </select>
+
+                                <label for="type" class="mt-2 title-col">Mes <span class="asterisco"> *</span> </label>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <!-- end mes -->
+
+                    <!-- year -->
+
+                    <div class="col-xl-4 col-12 mt-2">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+
+                                <select class="form-select form-control w-100" id="year" [(ngModel)]="selectYear" placeholder="Seleccione">
+
+                                    <option value="">Seleccione...</option>
+
+                                    <option [value]="item" *ngFor="let item of getYear()">{{ item }}</option>
+
+                                </select>
+
+                                <label for="type" class="mt-2 title-col"> Año  <span class="asterisco"> *</span></label>
+
+                            </span>
+
+                        </div>
+                    </div>
+                    <!-- end year -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal-footer modal-footer-contenido pt-0">
+
+        <form [formGroup]="vehicleFuelForm" class="form-width-prod" *ngIf="conceptVehicleFuel">
+
+            <div class="form-width-prod">
+
+                <div class="card style-card">
+                    <div class="card-body p-0 modalScrollAuto">
+
+                        <ng-container *ngIf="!showVehicles">
+                            <div class="col-12 text-center">
+                                <div class="fa-6x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="showVehicles">
+
+                            <div class="row mt-3">
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.VEHICLE' | translate }} <span class="asterisco span-color"> *</span></label>
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.PROVIDER' | translate }} <span class="asterisco span-color"> *</span></label>
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.CONCEPT' | translate }} <span class="asterisco span-color"> *</span></label>
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.QUANTITY' | translate }} <span class="asterisco span-color"> *</span></label>
+                                <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.AMOUNT' | translate }} <span class="asterisco span-color"> *</span></label>
+                                <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+
+                            </div>
+
+                            <ng-container *ngIf="conceptVehicleFuel.length > 0">
+
+                                <ng-container formArrayName="conceptVehicleFuel">
+
+                                    <ng-container *ngFor="let vehicleFuelItem of conceptVehicleFuel.controls; let p = index; let last=last" [formGroup]="vehicleFuelItem">
+
+                                        <div class="form-row" [ngClass]="{'mt-3': p > 0}">
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                <!-- <input class="form-control form-control-input" readonly formControlName="registration" placeholder="Matrícula" /> -->
+                                                <ng-container *ngIf="showVehicles">
+                                                    <select [id]="'registration' +p" formControlName="registration" (change)="changeSelectVehicleIdOfName($event.target.value, vehicleFuelItem, p, 'registration'+ p)" class="form-select size-select form-control form-control-select-datatable  select-search-user point">
+                                                        <option value="">Matrícula</option>
+                                                        <option *ngFor="let item of vehicleList" [value]="item.id"> {{ item.registration }}</option>
+                                                    </select>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="!showVehicles">
+                                                    <div class="col-12 text-center mt-2">
+                                                        <div class="fa-4x">
+                                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                <ng-container *ngIf="showProviders">
+                                                    <select class="form-select form-control form-control-select" style="height: 45px !important;" [id]="'itemSelect'+ p" formControlName="providerId" (change)="changeSelectProvider($event.target.value, vehicleFuelItem, p, 'itemSelect'+ p)">
+
+                                                            <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+
+                                                            <option *ngFor="let X of providerList[conceptVehicleFuel.controls[p].get('providerTypeId').value]" [value]="X.id">
+                                                                {{X.name}}
+                                                            </option>
+
+                                                        </select>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="!showProviders">
+                                                    <div class="col-12 text-center mt-2">
+                                                        <div class="fa-4x">
+                                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                <ng-container *ngIf="showConcept">
+                                                    <select class="form-select form-control form-control-select" style="height: 45px !important;" [id]="'itemSelect'+ p" formControlName="providerTypeConceptId" (change)="changeSelectConcept($event.target.value, vehicleFuelItem, p, 'itemSelect'+ p)">
+
+                                                            <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+
+                                                            <option *ngFor="let X of conceptList[conceptVehicleFuel.controls[p].get('providerId').value]" [value]="X.id">
+                                                                {{X.name}}
+                                                            </option>
+
+                                                        </select>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="!showConcept">
+                                                    <div class="col-12 text-center mt-2">
+                                                        <div class="fa-4x">
+                                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                <input class="form-control form-control-input" type="number" formControlName="quantity" value="0" min="1" placeholder="0" />
+                                            </div>
+
+                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                <input class="form-control form-control-input" type="number" formControlName="import" value="0" min="0" placeholder="0" />
+                                            </div>
+
+                                            <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1 p-0">
+                                                <button type="button" class="btn btn-icon btn-icon-gray" [disabled]="conceptVehicleFuel.controls.length === 1" (click)="deleteVehicleInsurancelist(vehicleFuelItem,p)">
+                                                    <img src="assets/images/delete.svg" class="header-brand-img"  alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                </button>
+
+                                                <ng-container *ngIf="last">
+
+                                                    <button type="button" class="btn btn-icon btn-icon-gray ml-xl-2" (click)="addFullVehicle()">
+
+                                                        <img src="assets/icons/addFuel.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.ADD' | translate">
+
+                                                    </button>
+
+                                                </ng-container>
+
+
+                                                <!--  <div class="row">
+
+                                                    <div class="col-6">
+                                                       
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteVehicleInsurancelist(vehicleFuelItem,p)">
+                                                            <img src="assets/icons/addFuel.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.ADD' | translate">
+                                                        </button>
+                                                    </div>
+                                                </div> -->
+
+
+                                            </div>
+                                            <!-- <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteVehicleInsurancelist(vehicleFuelItem,p)">
+                                                    <img src="assets/icons/addFuel.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.ADD' | translate">
+                                                </button>
+                                            </div> -->
+                                        </div>
+
+                                    </ng-container>
+                                </ng-container>
+
+                            </ng-container>
+
+                        </ng-container>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer modal-footer-">
+
+        <div class="row">
+            <div class="col-12 text-right">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary" type="button" [disabled]="(!selectMonth || !selectYear) || !validateData() || !vehicleFuelForm.valid" (click)="submit()"> {{ 'COST.APPLY_FUEL_COST' | translate }} 
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

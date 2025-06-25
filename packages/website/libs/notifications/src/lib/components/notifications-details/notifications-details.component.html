@@ -1,0 +1,1248 @@
+<div class="polpo-notifications-details ">
+
+
+    <div class="">
+
+        <!-- INCIDENCIAS -->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails.vehicleBreakdown && notificationsDetails.notificationTypeId === 2">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <!-- row de header -->
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-6 col-lg-6 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.INCIDENCE' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails. description }}</span>
+
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- end row header -->
+
+                </div>
+
+                <!-- date -->
+                <div class="card-body" style="display: block;">
+
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img [src]="'assets/images/pages/users/avatars/'+notificationsDetails.driver.urlImage" alt="Joseph Doe" *ngIf="notificationsDetails.driver.urlImage != null"
+                                    class="rounded-circle" />
+                                    <img src="assets/icons/optimmanage/user.svg" alt="Joseph Doe" *ngIf="notificationsDetails.driver.urlImage == null"
+                                    class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12 pl-md-2  pt-1">
+
+                                    <label class="style-name" *ngIf="notificationsDetails && notificationsDetails.driver">{{ notificationsDetails.driver.name }} {{ notificationsDetails.driver.surname }}</label>
+
+                                    <br>
+
+                                    <label class="style-title-body">Rol:{{ 'NOTIFICATIONS.DETAILS.DRIVER' |translate }}</label>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> 
+
+                                {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- indicencia -->
+
+                <div class="card-footer" *ngIf="notificationsDetails && notificationsDetails.notificationDate">
+
+                    <div class="row pt-4">
+
+                        <div class="col-12">
+
+                            <p class="title-date-incident pl-5 ml-2">
+
+                                Ha ocurrido el {{formatDate(notificationsDetails.notificationDate)}} a las {{formaHour(notificationsDetails.notificationDate)}}
+
+                            </p>
+
+                            <p class="style-details-incident mt-4 pl-5 ml-2"> {{ 'NOTIFICATIONS.DETAILS.WHAT_HAS_HAPPENED?' |translate }}</p>
+
+                            <div class="pl-5 ml-2" *ngIf="notificationsDetails && notificationsDetails.vehicleBreakdown">
+
+                                <ng-container *ngFor="let item of notificationsDetails.vehicleBreakdown">
+
+                                    <p class="paragrnd-for"> {{ item.breakdownTypeDetail }}</p>
+
+                                </ng-container>
+
+                            </div>
+
+                            <p class="style-details-incident mt-4 pl-5 ml-2"> {{ 'NOTIFICATIONS.DETAILS.OBSERVATIONS' |translate }} </p>
+
+                            <p class="pb-4 pl-5 ml-2 paragrand-style" style="font-size: 16px;"> {{ notificationsDetails.driverObservation }}.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end incidencia -->
+
+                <!-- informacion -->
+
+                <div class="card-footer border-contac" *ngIf="notificationsDetails && notificationsDetails.driver">
+
+                    <div class="row pt-3">
+
+                        <div class="col-xl-6 col-12 pb-5">
+
+                            <p class="title-header pl-5 ml-2">{{'NOTIFICATIONS.DETAILS.CONTACT_FROM' |translate }} {{ notificationsDetails.driver.name }} </p>
+
+                            <label class="info-header pl-5 ml-2">{{ 'NOTIFICATIONS.DETAILS.TELEPHONE' |translate }}: {{  notificationsDetails.driver.phone }}</label>
+
+                            <br>
+
+                            <label class="info-header pl-5 ml-2">Mail: {{  notificationsDetails.driver.email }}</label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end informacion -->
+            </div>
+
+
+        </ng-container>
+
+        <!-- END INCIDENCIAS -->
+
+        <!-- FACTURA NO COBRADA  -->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails.bills && notificationsDetails.notificationTypeId === 7">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-8 col-lg-6 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.INVOICE_NOT_CHARGED' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails.description }}</span>
+
+                        </div>
+
+                        <div class="col-xl-4 col-lg-6 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row Date y chofer -->
+
+                <div class="card-body" style="display: block;">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img [src]="'assets/images/pages/users/avatars/'+notificationsDetails.bills[0].driver.urlImage" alt="Joseph Doe" 
+                                    *ngIf="notificationsDetails && notificationsDetails.bills[0].driver && notificationsDetails.bills[0].driver.urlImage != null"
+                                    class="rounded-circle" />
+                                    <img src="assets/icons/optimmanage/user.svg" alt="Joseph Doe" 
+                                    *ngIf="notificationsDetails && notificationsDetails.bills[0].driver && notificationsDetails.bills[0].driver.urlImage == null"
+                                    class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12 pl-md-2  pt-1">
+
+                                    <label class="style-name" *ngIf="notificationsDetails && notificationsDetails.bills[0].driver">{{ notificationsDetails.bills[0].driver.name }} {{ notificationsDetails.bills[0].driver.surname }}</label>
+
+                                    <br>
+
+                                    <label class="style-title-body">Rol:{{ 'NOTIFICATIONS.DETAILS.DRIVER' |translate }}</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> 
+
+                                {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row factura no cobrada -->
+                <div class="card-footer" *ngIf="notificationsDetails">
+
+                    <div class="row pt-4">
+
+                        <div class="col-12">
+
+                            <p class="date-horse-incidenc pl-5 ml-2">
+
+                                <b>{{ 'NOTIFICATIONS.DETAILS.INVOICE_NOT_CHARGED' |translate }}</b>
+
+                            </p>
+
+                            <p class="date-horse-incidenc pl-5 ml-2"> {{ notificationsDetails.description }}</p>
+
+                            <div class="form-row mt-4 mb-5 pl-5 ml-2">
+
+                                <div class="col-12 p-2 card-header-1 col-md-10">
+
+                                    <div class="row">
+
+                                        <div class="col-12 col-md-8 d-flex justify-content-center justify-content-md-start align-items-center toggle-pointer order-last order-md-first">
+
+                                            <span class="pl-xl-4 pl-0 mb-xl-0 mb-3">{{ 'NOTIFICATIONS.DETAILS.INVOICE_NOT_CHARGED' | translate }}</span>
+
+                                        </div>
+
+                                        <div class="pt-2 pt-md-0 spacing-table col-md-4 col-12 text-center text-md-right order-first order-md-last mb-3 mb-md-0 p-xl-4 p-0">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 col-md-10 p-0">
+
+                                    <table id="autorizedChargesNotification" style="width: 100%; text-align: center;" class="table p-0 table-bordered table-striped mb-0">
+
+                                        <thead class="table-head">
+
+                                            <tr>
+
+                                                <th style="border-left: 1px solid #7387c2 !important;" class="text-center">{{ 'PRODUCTS.CODE' | translate }}</th>
+
+                                                <th class="text-center">{{ 'BILLS.AUTORIZED_BY' | translate }}</th>
+
+                                                <th style="border-right: 1px solid #7387c2 !important;" class="text-center">{{'BILLS.DATE' | translate }}</th>
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr *ngFor="let item of notificationsDetails.bills; let i = index">
+
+                                                <td data-title="Code" class="text-center">
+
+                                                    {{ item.code }}
+
+                                                </td>
+
+                                                <td data-title="Company" class="text-center">
+
+                                                    {{ item.authorizingName }}
+
+                                                </td>
+
+                                                <td data-title="Company" class="text-center">
+
+                                                    {{ formatDate(item.authorizingDate) }}
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row información -->
+
+                <div class="card-footer border-contac" *ngIf="notificationsDetails && notificationsDetails.bills[0].driver">
+
+                    <div class="row pt-3">
+
+                        <div class="col-xl-6 col-12 pb-5">
+
+                            <p class="title-header pl-5 ml-2">{{'NOTIFICATIONS.DETAILS.CONTACT_FROM' |translate }} {{ notificationsDetails.bills[0].driver.name }} </p>
+
+                            <label class="info-header pl-5 ml-2">{{ 'NOTIFICATIONS.DETAILS.TELEPHONE' |translate }}: {{  notificationsDetails.bills[0].driver.phone }}</label>
+
+                            <br>
+
+                            <label class="info-header pl-5 ml-2">Mail: {{  notificationsDetails.bills[0].driver.email }}</label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <!-- END FACTURA NO COBRADA -->
+
+        <!-- SOLICITUD ACTUALIZACIÓN DE DATOS -->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails.notificationTypeId === 11">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <!-- row de header -->
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-10 col-lg-8 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.DATA_UPDATE_REQUEST' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails.description }}</span>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-4 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+
+                    <!-- row datos chofer y Date  -->
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img [src]="'assets/images/pages/users/avatars/'+notificationsDetails.driver.urlImage" alt="Joseph Doe" *ngIf="notificationsDetails.driver.urlImage != null"
+                                    class="rounded-circle" />
+                                    <img src="assets/icons/optimmanage/user.svg" alt="Joseph Doe" *ngIf="notificationsDetails.driver.urlImage == null"
+                                    class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 pl-md-2 pt-1">
+
+                                    <label class="style-title-update">{{ notificationsDetails.driver.name }} {{ notificationsDetails.driver.surname }}</label>
+
+                                    <br>
+
+                                    <label class="style-name-update">Rol: Chófer</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})</label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+
+                    <!-- Datos informativos -->
+
+                    <div class="row pt-3 pb-3 content-padding">
+
+                        <div class="col-12 p-0">
+
+                            <p class="content-polpoo">{{ 'NOTIFICATIONS.DETAILS.POLPOO_HAS_DETECTED_A_DATA_CHANGE' |translate }} </p>
+
+                            <p class="content-polpoo mb-0" [innerHTML]="notificationsDetails.descriptionUpdate"></p>
+
+                            <p class="content-polpoo">{{ 'NOTIFICATIONS.DETAILS.THIS_HAS_BEEN_THE_UPDATE' |translate }}: </p>
+
+                            <ng-container *ngIf="notificationsDetails.deliveryPointUpdate.deliveryPointUpdateTypeId === 1">
+
+                                <p class="content-polpoo dataUpdate mb-0">Horario actualizado: {{ notificationsDetails.deliveryPointUpdate.deliveryPointDataUpdate }}</p>
+
+                                <p class="content-polpoo">Horario anterior: {{ notificationsDetails.deliveryPointUpdate.deliveryPointCurrentData }}</p>
+    
+                            </ng-container>
+
+                            <ng-container *ngIf="notificationsDetails.deliveryPointUpdate.deliveryPointUpdateTypeId === 2">
+                                
+                                <p class="content-polpoo dataUpdate mb-0">Dirección actualizada: {{ notificationsDetails.deliveryPointUpdate.deliveryPointDataUpdate }}</p>
+
+                                <p class="content-polpoo">Dirección anterior: {{ notificationsDetails.deliveryPointUpdate.deliveryPointCurrentData }}</p>
+    
+                            </ng-container>
+                            
+                            <ng-container *ngIf="notificationsDetails.deliveryPointUpdate.deliveryPointUpdateTypeId === 3">
+                                
+                                <p class="content-polpoo dataUpdate mb-0">Teléfono actualizado: {{ notificationsDetails.deliveryPointUpdate.deliveryPointDataUpdate }}</p>
+
+                                <p class="content-polpoo">Teléfono anterior: {{ notificationsDetails.deliveryPointUpdate.deliveryPointCurrentData }}</p>
+    
+                            </ng-container>                            
+                            
+                        </div>
+
+                        <div class="col-xl-6 col-12 p-0" *ngIf="notificationsDetails && notificationsDetails.notificationDate">
+
+                            <div class="mt-4 mb-5 col-xl-10 col-lg-6 col-md-8 col-12 p-0">
+
+
+                                <button type="button" class="btn  btn-primary" routerLink="/management/clients/update">
+
+                                    {{ 'NOTIFICATIONS.DETAILS.SEE_RECORD' |translate }}
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer border-contac" *ngIf="notificationsDetails && notificationsDetails.driver">
+                    <!-- Contacto -->
+                    <div class="row pt-3 content-padding">
+
+                        <div class="col-xl-6 col-12 pb-5 p-0">
+
+                            <p class="title-header-update">{{'NOTIFICATIONS.DETAILS.CONTACT_FROM' |translate }} {{ notificationsDetails.driver.name }} </p>
+
+                            <label class="title-header-update">{{ 'NOTIFICATIONS.DETAILS.TELEPHONE' |translate }}: {{  notificationsDetails.driver.phone }}</label>
+
+                            <br>
+
+                            <label class="title-header-update">Mail: {{  notificationsDetails.driver.email }}</label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </ng-container>
+
+        <!-- END SOLICITUD DE ACTUALIZACIÓN DE DATOS -->
+
+        <!-- NOVEDADES-->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails.novelty && notificationsDetails.notificationTypeId === 5">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <!-- row de header -->
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-6 col-lg-6 col-12 pt-2">
+
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.NOLVELTY' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails. description }}</span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- end row header -->
+
+                </div>
+
+                <div class="card-body" style="display: block;">
+                    <!-- row Date  -->
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img src="assets/icons/optimmanage/polpoNotification2.svg"
+                                    alt="Joseph Doe" class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12 pl-md-2  pt-1">
+
+                                    <label class="style-title-body">{{ 'NOTIFICATIONS.DETAILS.REPORT' |translate }}</label>
+
+                                    <br>
+
+                                    <label class="style-name">{{'NOTIFICATIONS.DETAILS.POLPO_TECHNOLOGY' | translate }}</label>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> 
+
+                                {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <!-- row incidencia -->
+                    <div class="row pt-4">
+
+                        <div class="col-12" *ngIf="notificationsDetails && notificationsDetails.novelty">
+
+                            <p class="title-nolvelty pl-5 ml-2">
+
+                                {{ notificationsDetails.novelty.title }}
+
+                            </p>
+
+
+                            <!--  <p class="info-novelty mt-5 mb-0"> </p> -->
+
+                            <p class="info-novelty mt-4 text-justify pl-5 ml-2"> {{ notificationsDetails.novelty.descripcion }}. </p>
+
+                        </div>
+
+                        <div class="col-xl-6 col-12 mb-3" *ngIf="notificationsDetails && notificationsDetails.novelty">
+
+                            <div class="mt-2 col-xl-9 col-lg-6 col-md-8 col-12 pl-5 ml-2">
+
+                                <button type="button" class="btn btn-link btn-nolvety" (click)="url.click()">
+
+                                   {{ 'NOTIFICATIONS.DETAILS.KNOW_MORE' |translate }}
+                                
+                                </button>
+
+                                <a hidden #url target="_blank" [href]="notificationsDetails.novelty.url">
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <!-- row data de contactos -->
+
+                    <div class="row pt-3">
+
+                        <div class="col-xl-6 col-12 pb-5">
+
+                            <p class="title-header pl-5 ml-2">{{'NOTIFICATIONS.DETAILS.CONTACT_FROM' |translate }} Polpoo</p>
+
+                            <label class="info-header pl-5 ml-2">{{ 'NOTIFICATIONS.DETAILS.TELEPHONE' |translate }}: 665 179 276</label>
+
+                            <br>
+
+                            <label class="info-header pl-5 ml-2">Mail: comunicacion@polpoo.com</label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <!-- END NOVEDAD -->
+
+        <!-- COMENTARIOS APP -->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails && notificationsDetails.notificationTypeId === 8">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <!-- row de header -->
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-8 col-lg-6 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.APP_COMMENT' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails.descriptionNotificacion }}</span>
+
+                        </div>
+
+                        <div class="col-xl-4 col-lg-6 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <!-- row Date y chofer -->
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img [src]="'assets/images/pages/users/avatars/'+notificationsDetails.user.urlImage" alt="Joseph Doe" *ngIf="notificationsDetails.user.urlImage != null"
+                                    class="rounded-circle" />
+                                    <img src="assets/icons/optimmanage/user.svg" alt="Joseph Doe" *ngIf="notificationsDetails.user.urlImage == null"
+                                    class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12 pl-md-2  pt-1">
+
+                                    <label class="style-title-body">{{ 'NOTIFICATIONS.APP_USER' |translate }}</label>
+
+                                    <br>
+
+                                    <label class="style-name" *ngIf="notificationsDetails && notificationsDetails.user">{{ notificationsDetails.user.email }}</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> 
+
+                                {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- row comentario y fecha del usaurio -->
+
+                <div class="card-footer">
+
+                    <div class="row pt-4">
+
+                        <div class="col-12 pb-4" *ngIf="notificationsDetails">
+
+                            <p class="title-date-incident pl-5 ml-2">
+                                <b>{{ 'NOTIFICATIONS.SHIPPING_DATE' |translate }}:</b> {{formatDate(notificationsDetails.notificationDate)}}
+                            </p>
+
+                            <p class="title-date-incident mt-4 pl-5 ml-2">
+                                <b> {{'NOTIFICATIONS.USER_COMMENT' | translate }} </b>
+                            </p>
+
+                            <p class="style-coment-app-end pl-5 ml-2">
+
+                                {{ notificationsDetails.description }}.
+                            </p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </ng-container>
+
+        <!-- END COMENTARIOS APP -->
+
+        <!-- ESTADO DE PEDIDOS MODIFICADO -->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails && notificationsDetails.notificationTypeId === 9">
+
+            <div class="card">
+
+                <!-- row de header -->
+
+                <div class="card-header">
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-10 col-lg-9 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.MODIFIED_ORDER_STATUS' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails. description }}</span>
+
+                        </div>
+
+                        <div class="col-xl-2 col-lg-3 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end row header -->
+
+                <div class="card-body">
+
+                    <!-- row Date  -->
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+                                    <img src="assets/icons/optimmanage/user.svg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12 pl-md-2  pt-1">
+                                    <label class="style-title-body">{{ 'NOTIFICATIONS.DETAILS.PREPARER' |translate }}</label>
+
+                                    <br>
+
+
+                                    <label class="style-name" *ngIf="notificationsDetails && notificationsDetails.order && notificationsDetails.order.user_marked_as_payed"> {{ notificationsDetails.order.user_marked_as_payed.name }} {{ notificationsDetails.order.user_marked_as_payed.surname }}</label>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> 
+
+                                {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row Descripción -->
+
+                <div class="card-footer" *ngIf="notificationsDetails && notificationsDetails.description && notificationsDetails.order">
+
+                    <div class="row pt-4">
+
+                        <div class="col-12 pb-5 mb-3">
+
+                            <p class="span-nick mb-4  pl-5 ml-2">
+
+                                {{ notificationsDetails.description }}
+
+                            </p>
+
+                            <p class="date-horse-incidenc  pl-5 ml-2">
+
+                                <b>{{ 'NOTIFICATIONS.DETAILS.REASON' |translate }} : </b> {{ notificationsDetails.order.markAsPayedDescription ? notificationsDetails.order.markAsPayedDescription : 'No disponible' }}.
+
+                            </p>
+
+                            <p class="date-horse-incidenc  pl-5 ml-2">
+
+                                <b>{{ 'NOTIFICATIONS.DETAILS.PAYMENT_METHOD' |translate }} : </b> {{ notificationsDetails.order.order_payment_type ? notificationsDetails.order.order_payment_type.name : 'No disponible' }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end row Descripción -->
+
+                <!-- row información -->
+
+                <div class="card-footer" *ngIf="notificationsDetails && notificationsDetails.order.user_marked_as_payed">
+
+                    <div class="row pt-3">
+
+                        <div class="col-xl-6 col-12 pb-5">
+
+                            <p class="title-header pl-5 ml-2">{{'NOTIFICATIONS.DETAILS.CONTACT_FROM' |translate }} {{ notificationsDetails.order.user_marked_as_payed.name }} {{ notificationsDetails.order.user_marked_as_payed.surname }} </p>
+
+                            <label class="info-header pl-5 ml-2">{{ 'NOTIFICATIONS.DETAILS.TELEPHONE' |translate }}: {{  notificationsDetails.order.user_marked_as_payed.phone }}</label>
+
+                            <br>
+
+                            <label class="info-header pl-5 ml-2">Mail: {{  notificationsDetails.order.user_marked_as_payed.email }}</label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end row información -->
+
+            </div>
+
+
+        </ng-container>
+
+        <!-- END ESTADO DE PEDIDOS MODIFICADOS -->
+
+        <!-- Código de escaneo repetido  -->
+
+        <ng-container *ngIf="notificationsDetails  && notificationsDetails.notificationTypeId === 10">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <!-- row de header -->
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-8 col-lg-6 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.REPEATED_SCAN_CODE' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails.descriptionDeliveryNote }}</span>
+
+                        </div>
+
+                        <div class="col-xl-4 col-lg-6 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row Date y title -->
+
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img src="assets/icons/optimmanage/polpoNotification2.svg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12 pl-md-2  pt-1">
+
+                                    <label class="style-title-body">{{ 'NOTIFICATIONS.DETAILS.POLPO' |translate }}</label>
+
+                                    <br>
+
+                                    <label class="style-name">{{ 'NOTIFICATIONS.DETAILS.ERROR_NOTICE' |translate }}</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 text-right">
+
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> 
+
+                                {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row factura no cobrada -->
+
+                <div class="card-footer" *ngIf="notificationsDetails">
+
+                    <div class="row pt-4">
+
+                        <div class="col-12">
+
+                            <p class="style-code pl-5 ml-2"> {{ notificationsDetails.description }} </p>
+
+                            <div class="form-row mt-2 mb-5 pl-5 ml-2" *ngIf="notificationsDetails && notificationsDetails.deliveryNote">
+
+                                <div class="col-12 pl-xl-0">
+
+                                    <table class="table size-table">
+
+                                        <thead class="table-head">
+
+                                            <tr>
+
+                                                <td style="padding-left: 2px;">
+
+                                                    <ng-container *ngIf="notificationsDetails.etiquetaTabla ==='Albaranes'">
+
+                                                        <label class="title-table-code">{{ 'NOTIFICATIONS.DETAILS.DELIVERY_NOTES' | translate }}</label>
+
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="notificationsDetails.etiquetaTabla ==='Productos'">
+
+                                                        <label class="title-table-code">{{ 'NOTIFICATIONS.DETAILS.PRODUCT' | translate }}</label>
+
+                                                    </ng-container>
+
+                                                </td>
+
+                                                <td>
+                                                    <label class="title-table-code">{{ 'NOTIFICATIONS.DETAILS.CODE' | translate }}</label>
+                                                </td>
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let item of notificationsDetails.deliveryNote; let i = index">
+
+                                                <td class="border-Notes">
+
+                                                    <label class="deliveryNoteCode"> 
+
+                                                    <ng-container *ngIf="notificationsDetails.etiquetaTabla ==='Albaranes'">
+
+                                                        {{ 'NOTIFICATIONS.DETAILS.DELIVERYNOTE' | translate }}
+
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="notificationsDetails.etiquetaTabla ==='Productos'">
+
+                                                        {{ 'NOTIFICATIONS.DETAILS.PRODUCT1' | translate }}
+                                                        
+                                                    </ng-container> #{{ item.identifierCode }} </label>
+
+                                                </td>
+
+                                                <td class="border-Notes">
+
+                                                    <label class="codeStyle">#{{ item.scannedCode }}</label>
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <!-- END Código de escaneo repetido  -->
+
+        <!-- VINCULACIONES -->
+
+        <ng-container *ngIf="notificationsDetails && notificationsDetails.notificationTypeId === 1">
+
+            <div class="card">
+
+                <!-- row de header -->
+
+                <div class="card-header">
+
+                    <div class="row" *ngIf="notificationsDetails">
+
+                        <div class="col-xl-6 col-lg-6 col-12 pt-2">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="!delected" (click)="returnsNotifications()">
+
+                            <img src="assets/icons/returnsNoti.svg" class="pr-3 point" title="{{'NOTIFICATIONS.BACK_TO_NOTIFICATIONS' |translate }}" *ngIf="delected" (click)="returnsNotifications()">
+
+                            <label class="label-indicent">{{ 'NOTIFICATIONS.DETAILS.PENDING_PAIRING' | translate }} </label> -<span class="span-nick"> {{ notificationsDetails. description }}</span>
+
+
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-12 text-xl-right text-lg-right text-center">
+
+                            <button class="btn btn-reSend mark" id="mail" title="{{ 'NOTIFICATIONS.SEND_BY_MAIL' |translate }}" (click)="sendMail()">
+
+                                <span class="style-icon-resend mr-2">Reenviar</span>
+
+                                <img class="icons-notification" src="assets/icons/sendMailNoti.svg">
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end row header -->
+
+                <!-- row Date  -->
+
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="pl-3">
+
+                                    <img [src]="'assets/images/pages/users/avatars/'+notificationsDetails.user.urlImage" alt="Joseph Doe" *ngIf="notificationsDetails.user.urlImage != null"
+                                    class="rounded-circle" />
+                                    <img src="assets/icons/optimmanage/user.svg" alt="Joseph Doe" *ngIf="notificationsDetails.user.urlImage == null"
+                                    class="rounded-circle" data-lock-picture="assets/img/login/man.png" />
+
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 pl-md-2  pt-1">
+
+                                    <label class="style-title-body">{{ 'NOTIFICATIONS.DETAILS.CLIENT' |translate }}</label>
+
+                                    <br>
+
+                                    <label class="style-name" *ngIf="notificationsDetails && notificationsDetails.user">{{ notificationsDetails.user.name }} {{ notificationsDetails.user.surname }}</label>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-6 text-right">
+                            <label class="time-notification" *ngIf="notificationsDetails && notificationsDetails.notificationDate"> {{dateLast(notificationsDetails.notificationDate)}} ({{TimerOld(notificationsDetails.notificationDate)}})</label>
+                            <!--  <label class="time-notification">Mar,25 ene. 08:09 (hace 5 horas)</label> -->
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- row vincular btn -->
+
+                <div class="card-footer" *ngIf="notificationsDetails && notificationsDetails.notificationDate">
+
+                    <div class="row pt-5 pb-5">
+
+                        <div class="col-xl-6 col-12">
+
+                            <div class="col-12 p-0">
+
+                                <label class="label-vinculate label-vinculate pl-5 ml-2" for="vinculate">
+
+                                    {{'NOTIFICATIONS.DETAILS.ACCEPT_OR_REJECT_THE_LINK_YOU_HAVE_REQUESTED' |translate }} {{ notificationsDetails?.user?.name }} {{  notificationsDetails?.user?.surname }}
+
+                                </label>
+
+                            </div>
+
+                            <div class="mt-2 col-xl-12 col-lg-6 col-md-8 col-12 pl-5 ml-2">
+
+                                <button type="button" class="btn  btn-link button-active-user btn-sm editar btn-vinculate" routerLink="/miwigo-unlinked">
+
+                                     {{ 'NOTIFICATIONS.DETAILS.GO_TO_PENDING_BINDINGS' |translate }}
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer" *ngIf="notificationsDetails && notificationsDetails.user">
+
+                    <!-- row información -->
+
+                    <div class="row pt-3">
+
+                        <div class="col-xl-6 col-12 pb-5">
+
+                            <p class="title-header pl-5 ml-2">{{'NOTIFICATIONS.DETAILS.CONTACT_FROM' |translate }} {{ notificationsDetails.user.name }} </p>
+
+                            <label class="info-header pl-5 ml-2">{{ 'NOTIFICATIONS.DETAILS.TELEPHONE' |translate }}: {{  notificationsDetails.user.phone }}</label>
+
+                            <br>
+
+                            <label class="info-header pl-5 ml-2">Mail: {{  notificationsDetails.user.email }}</label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <!-- END VINCULACIONES -->
+
+    </div>
+</div>

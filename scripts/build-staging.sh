@@ -1,0 +1,2 @@
+#!/bin/sh
+cd ../packages/website/ && NODE_OPTIONS="--max-old-space-size=4096" yarn build --configuration=staging --prod --base-href ./ &&  cd dist/apps/ && cp -fR easyroute/* /home/staging/html/website

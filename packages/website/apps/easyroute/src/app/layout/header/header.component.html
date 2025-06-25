@@ -1,0 +1,730 @@
+<div class="HeaderComponentClass">
+    <div class="text-center warning-demo" *ngIf="defeatedDemo() && demoDay() <= 15">
+        {{ 'INVOICING.SUBSCRIPTION_STATUS.LATE_PAYMENT1' | translate }}
+        <b>
+            {{ demoDay() }}
+            {{
+            'INVOICING.SUBSCRIPTION_STATUS.LATE_PAYMENT2'
+            | translate
+            }}
+        </b> {{ 'INVOICING.SUBSCRIPTION_STATUS.LATE_PAYMENT3' | translate }}
+        <b style="cursor: pointer; text-decoration: underline;" (click)="closeSubscriptionAlert(true)">
+            {{
+            'INVOICING.SUBSCRIPTION_STATUS.LATE_PAYMENT4'
+            | translate
+            }}
+        </b> {{ 'INVOICING.SUBSCRIPTION_STATUS.LATE_PAYMENT5' | translate }}
+    </div>
+    <header class="header" id="header" (click)="reverseColor()" [ngClass]="{ 'header-position': defeatedDemo() && demoDay() <= 15 }">
+
+
+        <div class="logo-container" [ngClass]="{ 'logo-container-responsive': defeatedDemo() && demoDay() <= 15 }">
+
+            <a routerLink="" class="logo" id="logo">
+                <img class="logo-img text-center p-t-20 p-r-10" [src]="logo" alt="Porto Admin" *ngIf="logo" />
+            </a>
+
+            <button class="btn header-btn-collapse-nav d-lg-none" data-toggle-class="collapse" data-target=".header-nav" (click)="hideUserbox()">
+                <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
+            </button>
+
+
+
+            <div class="header-nav collapse" id="prueba">
+                <div class="header-nav-main  header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                    <nav id="primaryNav">
+                        <ul class="nav nav-pills" id="mainNav">
+                            <!-- Pantallas normal -->
+                            <ng-container *ngIf="
+                                    (!detectorDeviceIpad && !detectorDeviceWidth) ||
+                                    (!detectorDeviceIpad && detectorDeviceWidth)
+                                ">
+                                <ng-container *ngFor="let menu of menuItems; let i = index">
+                                    <li class="dropdown point" [ngClass]="{ showed: menu.showDropdown }" *ngIf="menu.show" routerLinkActive="active" [ngClass]="{
+                                            'border-right':
+                                                (i === 3 && validateCommercial()) ||
+                                                (menu.iconName === 'logistics' &&
+                                                    validatelogistics() &&
+                                                    !validateCommercial())
+                                        }">
+                                        <a href="#" class="nav-link" *ngIf="!menu.subMenu" [routerLink]="menu.route">
+                                            {{ menu.name | translate }}
+                                        </a>
+
+                                        <a href="#" class="nav-link dropdown-toggle" (click)="
+                                                openDropdown(
+                                                    (menu.showDropdown = !menu.showDropdown)
+                                                )
+                                            " *ngIf="menu.subMenu">
+                                            {{ menu.name | translate }}
+                                        </a>
+
+                                        <ul class="dropdown-menu no-border-top" *ngIf="menu.subMenu">
+                                            <ng-container *ngFor="let item of menu.subMenu">
+                                                <li *ngIf="item.show" [ngClass]="{
+                                                        ' dropdown-submenu':
+                                                            item.dropdownMenu &&
+                                                            item.dropdownMenu.length > 0,
+                                                        'dropdown-li': menu.subMenu
+                                                    }">
+                                                    <ng-container *ngIf="
+                                                            item.dropdownMenu &&
+                                                            item.dropdownMenu.length > 0
+                                                        ">
+                                                        <a class="nav-link" routerLinkActive="active">
+                                                            {{ item.name | translate }}
+                                                        </a>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="
+                                                            !item.dropdownMenu ||
+                                                            item.dropdownMenu.length === 0
+                                                        ">
+                                                        <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
+                                                            {{ item.name | translate }}
+                                                        </a>
+                                                    </ng-container>
+
+                                                    <!-- Menu desplegable -->
+                                                    <ul class="dropdown-menu" *ngIf="
+                                                            item.dropdownMenu &&
+                                                            item.dropdownMenu.length > 0
+                                                        ">
+                                                        <li class="dropdown-li" *ngFor="
+                                                                let dropdownMenu of item.dropdownMenu
+                                                            ">
+                                                            <a class="nav-link" [routerLink]="
+                                                                    dropdownMenu.route
+                                                                " routerLinkActive="active">
+                                                                {{
+                                                                dropdownMenu.name
+                                                                | translate
+                                                                }}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </li>
+                                </ng-container>
+                            </ng-container>
+
+                            <!-- ipad and ipad prod -->
+                            <ng-container *ngIf="
+                                    (detectorDeviceIpad && !detectorDeviceWidth) ||
+                                    (detectorDeviceIpad && detectorDeviceWidth)
+                                ">
+                                <ng-container *ngFor="let menu of menuItems; let i = index">
+                                    <li class="dropdown" *ngIf="menu.show" routerLinkActive="active" [ngClass]="{ 'border-right': i === 3 }">
+                                        <a href="#" class="nav-link" *ngIf="!menu.subMenu" [routerLink]="menu.route">
+                                            {{ menu.name | translate }}
+                                        </a>
+
+                                        <a href="#" class="nav-link dropdown-toggle" *ngIf="menu.subMenu">
+                                            {{ menu.name | translate }}
+                                        </a>
+
+                                        <ul class="dropdown-menu" *ngIf="menu.subMenu">
+                                            <ng-container *ngFor="let item of menu.subMenu">
+                                                <li *ngIf="item.show" [ngClass]="{
+                                                        ' dropdown-submenu':
+                                                            item.dropdownMenu &&
+                                                            item.dropdownMenu.length > 0
+                                                    }">
+                                                    <ng-container *ngIf="
+                                                            item.dropdownMenu &&
+                                                            item.dropdownMenu.length > 0
+                                                        ">
+                                                        <a class="nav-link" routerLinkActive="active" href="#">
+                                                            {{ item.name | translate }}
+                                                        </a>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="
+                                                            !item.dropdownMenu ||
+                                                            item.dropdownMenu.length === 0
+                                                        ">
+                                                        <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
+                                                            {{ item.name | translate }}
+                                                        </a>
+                                                    </ng-container>
+
+                                                    <ul class="dropdown-menu" *ngIf="
+                                                            item.dropdownMenu &&
+                                                            item.dropdownMenu.length > 0
+                                                        ">
+                                                        <li class="dropdown-li" *ngFor="
+                                                                let dropdownMenu of item.dropdownMenu
+                                                            ">
+                                                            <a class="nav-link" [routerLink]="
+                                                                    dropdownMenu.route
+                                                                " routerLinkActive="active">
+                                                                {{
+                                                                dropdownMenu.name
+                                                                | translate
+                                                                }}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </li>
+                                </ng-container>
+                            </ng-container>
+
+                            <!-- Menu Ocultado -->
+                            <li class="dropdown" *ngIf="showDropDownPrio" routerLinkActive="active">
+                                <a class="nav-link dropdown" href="#">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <ng-container *ngFor="let menu of menuItemsHidden; let i = index">
+                                        <li *ngIf="menu.show" [ngClass]="{
+                                                'dropdown-submenu':
+                                                    menu.subMenu && menu.subMenu.length > 0
+                                            }">
+                                            <a class="nav-link" routerLinkActive="active" href="#" *ngIf="
+                                                    menu.subMenu && menu.subMenu.length > 0
+                                                ">
+                                                {{ menu.name | translate }}
+                                            </a>
+
+                                            <a class="nav-link" [routerLink]="menu.route" routerLinkActive="active" *ngIf="
+                                                    !menu.subMenu ||
+                                                    menu.subMenu.length === 0
+                                                ">
+                                                {{ menu.name | translate }}
+                                            </a>
+
+                                            <ul class="dropdown-menu" *ngIf="menu.subMenu">
+                                                <ng-container *ngFor="let subMenu of menu.subMenu">
+                                                    <li *ngIf="subMenu.show">
+                                                        <a class="nav-link" [routerLink]="subMenu.route" routerLinkActive="active">
+                                                            {{ subMenu.name | translate }}
+                                                        </a>
+                                                    </li>
+                                                </ng-container>
+                                            </ul>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+
+            <div class="header-right" id="header-right" [ngClass]="{ 'Header-rigth-responsive': defeatedDemo() && demoDay() <= 15 }">
+
+                <span class="espacing"></span>
+
+                <ul class="notifications" *ngIf="isChat()">
+
+                    <li class="show" *ngIf="isChat()">
+
+                        <a class="dropdown-toggle no-selecter-link notification-icon point" *ngIf="haveChat() && ChatModule()" [class.selecter-link-chat]="router.isActive('/chat')" data-toggle="dropdown" aria-expanded="true">
+
+                            <picture>
+
+                                <source srcset="assets/icons/chat2.svg" media="(max-width: 767px)">
+
+                                <img src="assets/icons/chat.svg" alt="" />
+
+                            </picture>
+
+                            <span class="badge badge-chat color-chat" *ngIf=" chats &&  opens> 0">
+                                &nbsp;
+                                <!-- <ng-container *ngIf=" opens < 100" >
+                                    1
+                                </ng-container>
+
+                                <ng-container *ngIf=" opens > 100">
+                                    1
+                                </ng-container> -->
+                                
+                            </span>
+                        </a>
+
+                        <div class="dropdown-menu notification-menu notification-menu-1 card-notifications notifications-no-lines" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 11px; left: 0px; transform: translate3d(0px, 30px, 0px);">
+                            <div class="p-3">
+                                <label class="title-notification"> Chat </label>
+                            </div>
+                            <hr>
+                            <div>
+                                <ul>
+                                    <ng-container *ngIf="showChats">
+
+                                        <ng-container *ngIf=" chats && chats.length > 0 ">
+
+                                            <ng-container *ngFor="let item of chats; let lat = last;">
+
+                                                <li class="content m-0">
+
+                                                    <a class="clearfix">
+
+                                                        <div class="company-select">
+
+                                                            <p class="company-address-menu mt-2 text-no-wrap mb-1" [title]="getUserTo(item)"> <b> {{getUserTo(item)}} </b> <br>
+
+                                                                <ng-container *ngIf="lastMessage(item) && !lastMessage(item).urlChatImage">
+
+                                                                    {{ lastMessage(item).text }}
+
+                                                                </ng-container>
+
+                                                                <ng-container *ngIf="lastMessage(item) && lastMessage(item).urlChatImage">
+
+                                                                    <img class="size-img-file-chat" src="assets/icons/adjunt.svg"> <b class="b-file-style">Archivo</b>
+
+                                                                </ng-container>
+
+                                                            </p>
+                                                        </div>
+
+                                                        <span class="message">{{date(lastMessage(item).datetime)}} </span>
+
+                                                    </a>
+
+                                                </li>
+
+                                                <hr *ngIf="!lat">
+
+                                            </ng-container>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="opens && opens === 0 || chats && chats.length === 0 ">
+
+                                            <div class="col-12 text-center">
+
+                                                <div class="pt-3 pb-3"> {{'GENERAL.NO_CHAT_AVAILABLE' | translate }} </div>
+
+                                            </div>
+
+                                        </ng-container>
+
+
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf="!showNotificactios">
+                                        <div class="col-12 text-center mt-2">
+                                            <div class="fa-4x color-fa">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                </ul>
+
+                                <hr>
+
+                                <div class="text-center pt-2 pb-3">
+                                    <span class="view-mas point" routerLink="/chat" routerLinkActive="selecter-link-chat"> {{'GENERAL.SEE_ALL' | translate }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- !validateSAC() && -->
+                <ul class="notifications" *ngIf="!onlyChat()">
+
+                    <li class="show">
+
+                        <a class="dropdown-toggle notification-icon point" data-toggle="dropdown" aria-expanded="true">
+
+                            <picture>
+
+                                <source srcset="assets/icons/camp2.svg" media="(max-width: 767px)">
+
+                                <img src="assets/icons/camp.svg" alt="" />
+
+                            </picture>
+
+                            <span class="badge badge-asc" *ngIf="unReadCount && unReadCount > 0">
+
+                                <ng-container *ngIf="unReadCount < 100" >
+                                    {{ unReadCount }}
+                                </ng-container>
+
+                                <ng-container *ngIf="unReadCount > 100">
+                                    +99
+                                </ng-container>
+                                
+                            </span>
+                        </a>
+
+                        <div class="dropdown-menu notification-menu notification-menu-1 card-notifications notifications-no-lines" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 11px; left: 0px; transform: translate3d(0px, 30px, 0px);">
+                            <div class="p-3">
+                                <label class="title-notification"> {{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }} </label>
+                            </div>
+                            <hr>
+                            <div>
+                                <ul>
+                                    <ng-container *ngIf="showNotificactios">
+
+                                        <ng-container *ngIf="notificationsLast && notificationsLast.length > 0 ">
+
+                                            <ng-container *ngFor="let item of notificationsLast; let lat = last;">
+
+                                                <li class="content m-0">
+
+                                                    <a class="clearfix">
+
+                                                        <div class="company-select">
+
+                                                            <p class="company-address-menu mt-2 text-no-wrap mb-1" [title]="item.description"> <b> {{item.notification_type.name}} </b> {{ item.description }} </p>
+
+                                                        </div>
+
+                                                        <span class="message">{{date(item.notificationDate)}} </span>
+
+                                                    </a>
+
+                                                </li>
+
+                                                <hr *ngIf="!lat">
+
+                                            </ng-container>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="notificationsLast && notificationsLast.length === 0">
+
+                                            <div class="col-12 text-center">
+
+                                                <div class="pt-3 pb-3"> {{'GENERAL.NO_NOTIFICATIONS_AVAILABLE' | translate }} </div>
+
+                                            </div>
+
+                                        </ng-container>
+
+
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf="!showNotificactios">
+                                        <div class="col-12 text-center mt-2">
+                                            <div class="fa-4x color-fa">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                </ul>
+
+                                <hr>
+
+                                <div class="text-center pt-2 pb-3">
+                                    <span class="view-mas point" (click)="redirectNotifications()"> {{'GENERAL.SEE_ALL' | translate }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+
+
+                <div id="userbox" class="userbox">
+                    <div class="btn-group dropup">
+                        <button type="button" class="btn btn-menu-user" data-toggle="dropdown">
+                            <figure class="profile-picture">
+                               
+                               <div class="rows">
+                                <div class="name-header" *ngFor='let item of names; let i = index'>
+                                    <span class="title-name-header">
+                                        {{ i +1 < 4 ? getInitials(item , i) : '+' + (names.length - i) }}
+                                    </span> 
+                                </div>
+                            </div>
+
+                            </figure>
+                            
+
+                            <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com"
+                                *ngIf="profile && profile.profile">
+                                <div class="profile-name">
+
+                                    <p class="profile-menu mt-2 text-no-wrap mb-1" [title]=" profile.profile.name + ' ' + profile.profile.surname">   {{ profile.profile.name + ' ' + profile.profile.surname }} </p>
+                                </div>
+                               <!--  <span class="name nick-name" [ngClass]="{ 'name-activated': !color }">
+                                    {{ profile.profile.name + ' ' + profile.profile.surname }}
+                                </span> -->
+                            </div>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-user" role="menu">
+                            <ul class="list-unstyled mb-2">
+
+                                <li class="p-3 border-icon-menu">
+
+                                    <div class="row align-items-center">
+                                        <div class="col-3 p-0 pl-3">
+                                            <div class="rows">
+                                                <div class="circles" *ngFor='let item of names; let i = index'>
+                                                    <span class="title-name-user">
+                                                    {{ i +1
+                                                    < 4 ? getInitials(item , i) : '+' + (names.length - i) }}</span> </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col text-left p-0 pl-2">
+
+                                            <!-- nombre -->
+
+                                            <div class="profile-name-sub">
+
+                                                <p class="profile-menu-sub mt-2 text-no-wrap mb-1" [title]=" profile.profile.name + ' ' + profile.profile.surname"> {{ profile.profile.name + ' ' + profile.profile.surname }} </p>
+
+                                            </div>
+
+                                            <!-- end nombre -->
+
+                                            <!-- roles -->
+
+                                            <div class="profile-name-sub">
+
+                                                <p class="title-role mb-0">
+
+                                                    <span class="title-role" *ngFor="let item of  profile.profiles; let t=index" [title]="item.name"> {{item.name}} 
+
+                                                        <span *ngIf=" t + 1 <  profile.profiles.length">,</span>
+
+                                                    </span>
+
+                                                </p>
+
+                                            </div>
+
+
+                                            <!--  <span class="name-user-menu  text-no-wrap">{{ profile.profile.name + ' ' + profile.profile.surname}}</span> -->
+
+                                        </div>
+                                    </div>
+
+
+                                </li>
+
+                                <!-- mi perfil -->
+
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" (click)="openModalMyProfile()">
+
+                                    <a role="menuitem" tabindex="-1">
+
+                                        <img class="img-menu-position" src="assets/icons/iconMenu/profile.svg"> {{ 'GENERAL.MY_PROFILE' | translate }}
+
+                                    </a>
+
+                                </li>
+
+                                <!-- end mi perfil -->
+
+                                <!-- Perfil empresa -->
+                                <ng-container *ngIf="isAdminAdministrative()">
+                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/company-profile">
+                                        <a role="menuitem" tabindex="-1">
+                                            <img src="assets/icons/iconMenu/companyProfile.svg"> Perfil empresa
+                                        </a>
+                                    </li>
+                                </ng-container>
+
+
+                                <!-- compania asociada -->
+
+                                <ng-container *ngIf="canUser() || isCommercialDirector()">
+                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/management/associated-companies">
+                                        <a role="menuitem" tabindex="-1">
+                                            <img class="img-menu-position" src="assets/icons/iconMenu/AssociatedCompanies.svg"> {{'COMPANIES.ASSOCIATED_COMPANIES' | translate }}
+                                        </a>
+                                    </li>
+                                </ng-container>
+
+                                <!-- en compania asociada -->
+
+                                <!-- facturación -->
+
+                                <ng-container *ngIf="canUser() && billsModuleActive() 
+                                && (isAdmin() ||
+                                isAdminCompany() ||
+                                !isCommercialAgent() ||
+                                isControlPanel() ||
+                                isCommercialDirector()) &&
+                                validatelogistics()">
+                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/bills">
+                                        <a role="menuitem" tabindex="-1">
+                                            <img class="img-menu-position" src="assets/icons/iconMenu/Billing.svg"> {{'MENU.BILLING' | translate }}
+                                        </a>
+                                    </li>
+                                </ng-container>
+
+                                <!-- end facturación -->
+
+
+                                <!-- configuración -->
+
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" (click)="openSettings()" *ngIf="(isAdminGlobal() || showChangeCompanyToAdminCompany() && (!this.Partners() || this.isControlPartners())) || (validateSAC() || isTraffic() && (franchisesActive() || !showStoreFranchise()) )">
+
+                                    <a role="menuitem" tabindex="-1">
+
+                                        <img class="img-menu-position" src="assets/icons/iconMenu/Setting.svg"> {{ 'GENERAL.SETTING' | translate }}
+
+                                    </a>
+
+                                </li>
+
+                                <!-- end configuración -->
+
+                                <!-- Polpoo Store -->
+
+                                <!--  <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/modules">
+
+                                    <a role="menuitem" tabindex="-1">
+
+                                        <img src="assets/icons/iconMenu/PolpooStore.svg"> Polpoo Store
+
+                                    </a>
+
+                                </li> -->
+
+                                <!-- ACADEMY -->
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" (click)="goToLinkAcademy(urlAcademy)">
+
+                                    <a role="menuitem" tabindex="-1">
+
+                                        <img class="academy-header" src="assets/icons/iconMenu/Academy.svg"> Academy
+
+                                    </a>
+
+                                </li>
+                                <!-- END ACADEMY -->
+
+
+                                <!-- SUBSCRIPTION -->
+
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/profile/invoicing" *ngIf="(isAdminGlobal() || showChangeCompanyToAdminCompany() && (!this.Partners() || this.isControlPartners())) || (validateSAC() || isTraffic() && (franchisesActive()|| !showStoreFranchise()))">
+
+                                    <a role="menuitem" tabindex="-1">
+
+                                        <img class="img-menu-position" src="assets/icons/iconMenu/Subscription.svg"> {{'GENERAL.SUBSCRIPTION' | translate }}
+
+                                    </a>
+
+                                </li>
+
+                                <!-- end SUBSCRIPTION -->
+
+                                <!-- cambiar company nuevo -->
+
+                                <ng-container *ngIf="companies && companies.length > 0 && (isAdminGlobal() || showChangeCompanyToAdminCompany()) || (validateSAC() || isTraffic() || Partners() && (franchisesActive()|| !showStoreFranchise()))">
+
+                                    <li class="pl-3 size-change-company pointer border-icon-menu d-flex align-items-center" (click)="openModalChangeCompany()">
+
+                                        <a role="menuitem" tabindex="-1">
+
+                                            <img src="assets/icons/iconMenu/SwitchAccount.svg"> {{ 'GENERAL.SWITH_ACCOUNT' | translate }}
+
+                                            <img class="change-user" type="button" src="assets/icons/iconMenu/arrowLeft.svg" id="dropdownMenuButtonChangeCompany">
+
+
+                                            <div class="profile-name size-name-company-change">
+
+                                                <!-- <ng-container *ngIf="Partners()">
+
+                                                    <p class="company mb-0 text-no-wrap  pl-4 mt-1" [title]="showCompanyPanertsSelecter(profile)">  {{ showCompanyPanertsSelecter(profile)}} </p>
+
+                                                </ng-container> -->
+
+                                                <!-- <ng-container *ngIf="!Partners()"> -->
+
+                                                <p class="company mb-0 text-no-wrap  pl-4 mt-1" [title]="profile.company.name">{{ profile.company.name }}</p>
+
+                                                <!-- </ng-container> -->
+
+                                            </div>
+
+                                        </a>
+
+                                    </li>
+
+                                </ng-container>
+
+
+                                <!-- cerrar sesión -->
+
+                                <li class="pl-3 d-flex align-items-center size-menu-li pointer" (click)="logOut()">
+
+                                    <a role="menuitem" tabindex="-1">
+
+                                        <img class="point img-menu-position" src="assets/icons/iconMenu/SignOff.svg"> {{ 'GENERAL.LOG_OUT' | translate }}
+
+                                    </a>
+
+                                </li>
+
+                                <!-- end cerrar sesion -->
+
+                                <li class="divider">
+                                </li>
+
+
+                                <li>
+                                    <div class="row">
+                                        <div class="col-7 offset-2 text-center">
+                                            <a class="privacity-policy block" target="_blank" [href]="urlPrivacyTerms"> {{ 'GENERAL.PRIVACY_POLICIES' | translate }} </a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-menu notification-menu" [ngClass]="{'show': showHelpGuide}" x-placement="bottom-start">
+
+                        <div class="content" *ngIf="helpGuideStep">
+                            <div class="row" *ngIf="helpGuideStep.beforeUrl !== '' && helpGuideStep.beforeUrl !== null" (click)="before()">
+                                <div class="col-12 pl-5 text-left">
+                                    <a (click)="skip()" class="skip-ref">{{ 'GENERAL.SKIP' | translate }}</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 title-help-guide text-center">
+                                    {{ helpGuideStep.title }}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-8 offset-2 description text-center">
+                                    {{ helpGuideStep.description }}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-5 text-center pl-5">
+                                    <button class="btn btn-gray btn-block" *ngIf="helpGuideStep.beforeUrl === '' || helpGuideStep.beforeUrl === null" (click)="skip()">
+                                        {{ 'GENERAL.SKIP' | translate }}
+                                    </button>
+                                    <button class="btn btn-gray btn-block" *ngIf="helpGuideStep.beforeUrl !== '' && helpGuideStep.beforeUrl !== null" (click)="before()">
+                                        {{ 'GENERAL.BEFORE' | translate }}
+                                    </button>
+                                </div>
+                                <div class="col-2 text-center steps">
+                                    {{ helpGuideStep.step }}/{{ helpGuideStep.count }}
+                                </div>
+                                <div class="col-5 text-center pr-5">
+                                    <button class="btn btn-secondary btn-block" (click)="next()" *ngIf="helpGuideStep.nextUrl !== '' && helpGuideStep.nextUrl !== null">
+                                        Siguiente
+                                    </button>
+                                    <button class="btn btn-secondary btn-block" (click)="end()" *ngIf="helpGuideStep.nextUrl === '' || helpGuideStep.nextUrl === null">
+                                        Finalizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>

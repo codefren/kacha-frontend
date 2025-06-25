@@ -1,0 +1,33 @@
+.select-franchises-text {
+    border-bottom: 1px solid #D7D7D9;
+}
+
+
+/* .modal-add-product-to-franchise {
+    .row {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+} */
+
+.modal-add-product-to-franchise {
+    .row {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+    .row-pad {
+        padding: 10px;
+    }
+    .overflow-container {
+        margin-top: 10px;
+        /* .text-mute {
+            color: gray;
+            font-size: 14px;
+        } */
+        .round-little {
+            label {
+                border: 1px solid #cdcdcf !important;
+            }
+        }
+    }
+}

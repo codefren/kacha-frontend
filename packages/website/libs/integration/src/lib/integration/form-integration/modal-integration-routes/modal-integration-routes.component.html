@@ -1,0 +1,46 @@
+<div class="optimroute-integration-table">
+
+    <section class="card p-2">
+        <div class="row justify-content-center ">
+            <div class="col-12 text-right">
+                <i class="fas fa-times close-button" (click)="modalDismiss()"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ 'DELIVERY_ZONES.SELECT_ROUTES' | translate }}</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="row justify-content-center pt-4">
+        <div class="col-11 text-left">
+            {{ 'DELIVERY_ZONES.SELECT_ROUTES' | translate }}
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <div class="table-content">
+                <table id="delivery-zones" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%">
+                    <thead class="thead-new">
+                        <tr>
+                            <th>{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                            <th>{{ 'DELIVERY_ZONES.NAME_' | translate }}</th>
+                            <th style="border-right: 1px solid #7387c2 !important;">{{ 'DELIVERY_ZONES.COLOR' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="row justify-content-center pt-2 pb-4">
+        <div class="col-12 col-md-6 text-center text-md-right">
+            <button class="btn btn-cancel size-btn-modal" (click)="modalDismiss()">{{ 'GENERAL.CANCEL' | translate }}</button>
+        </div>
+        <div class="mt-2 mt-md-0 col-12 col-md-6 text-center text-md-left">
+            <button class="btn btn-primary size-btn-modal" [disabled]="selected.length == 0" (click)="closeModal()">
+          {{ 'GENERAL.ACCEPT' | translate }}
+        </button>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,77 @@
+.easyroute-vehicle-maintenance-bill {
+    $backgroundCard: #314684;
+    $light: #fff;
+    $errorColor: #d2322d;
+    .card {
+        .address-card {
+            background-color: #444a60;
+            i {
+                color: white;
+                font-size: 20px;
+            }
+            p {
+                color: white !important;
+                font-size: 15px;
+                margin: 0;
+            }
+            .btn-add-address {
+                width: 10rem;
+                color: #444a60;
+                background-color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                font-size: 15px;
+                font-family: helvetica;
+                font-weight: bold;
+            }
+        }
+        .card-body {
+            .card-title {
+                color: #314684 !important;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            .card-description {
+                color: gray !important;
+                line-height: 18px;
+            }
+        }
+    }
+    .style-descrip {
+        font-weight: inherit;
+        color: #494949 !important;
+        font-size: 14px !important;
+    }
+    .style-check-state {
+        color: black;
+    }
+    .subtitle-general label {
+        color: #000000 !important;
+        margin-bottom: 0px;
+        font-weight: 200;
+    }
+    .spand-toogle {
+        font-size: 14px;
+        color: #000000;
+    }
+    .extra-campo {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .w-input {
+        width: 78%;
+    }
+    .add-another {
+        color: #24397c;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+    .padding-test {
+        padding: 0px 0px 0px 20px !important;
+    }
+    .label-check {
+        margin-left: 21px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+}

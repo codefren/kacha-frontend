@@ -1,0 +1,13 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+
+
+.btn-large {
+    width: 250px;
+    height: 40px;
+}
+
+@media ( max-width: 768px ) {
+    .btn-large {
+        width: 180px !important;
+    }
+}

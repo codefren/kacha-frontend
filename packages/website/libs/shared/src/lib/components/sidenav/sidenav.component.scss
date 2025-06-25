@@ -1,0 +1,41 @@
+@import '~@angular/material/theming';
+
+mat-drawer-container.app-side-nav[app-side-nav-theme] {
+    mat-drawer {
+        // width: 900px;
+
+        &.elevation {
+            @include mat-elevation(2);
+        }
+    }
+
+    mat-drawer-content {
+        flex: 1;
+    }
+
+    .drawer-content-placeholder {
+        button.sidenav-button {
+            border-radius: 10px;
+            position: absolute;
+
+            height: 45px;
+            margin: 24px 4px 4px 4px;
+            width: 26px;
+            z-index: 15;
+        }
+        button.sidenav-button-complete {
+            border-radius: 10px;
+            position: absolute;
+
+            height: 45px;
+            margin: 78px 4px 4px 4px;
+            width: 26px;
+            z-index: 15;
+            color: #F88D24;
+        }
+    }
+
+    .mat-drawer-inner-container {
+        display: flex;
+    }
+}

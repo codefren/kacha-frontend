@@ -1,0 +1,70 @@
+.easyroute-detail-page {
+    .subtitle-detail {
+        font-weight: bold;
+    }
+    .lines-info-client {
+        border-bottom: 1px solid #d6d7dc;
+    }
+    .label-info {
+        color: #000000 !important;
+        font-weight: 600;
+    }
+    .style-info-p {
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: lighter;
+        line-height: 23px;
+    }
+    .form-control[disabled] {
+        background: #fff;
+    }
+    .border-btn {
+        border-radius: 7px;
+        width: 100%;
+    }
+    .jumbotron {
+        padding: 20px;
+        p {
+            color: #24397c;
+            line-height: 30px;
+            span {
+                font-weight: bold;
+            }
+            span:first-child {
+                font-size: 70px;
+            }
+            span:nth-child(2) {
+                font-size: 50px;
+            }
+            span:last-child {
+                font-size: 18px;
+                font-weight: lighter;
+                margin-top: 10px;
+            }
+        }
+    }
+    .jumbotron-subtitle {
+        color: #24397c;
+        margin-top: 0;
+    }
+    .container-special {
+        margin-left: 140px;
+        margin-right: 140px;
+    }
+    @media screen and ( max-width: 767px) {
+        .container-special {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .jumbotron {
+            p {
+                span:first-child {
+                    font-size: 45px;
+                }
+                span:nth-child(2) {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}

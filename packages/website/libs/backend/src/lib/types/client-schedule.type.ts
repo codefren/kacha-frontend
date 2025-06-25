@@ -1,0 +1,62 @@
+export interface ClientSchedule {
+    id: number,
+    companyId: number,
+    companyClientId: number,
+    mondayActive: boolean,
+    mondayScheduleStart: number,
+    mondayScheduleEnd: number,
+    tuesdayActive: boolean,
+    tuesdayScheduleStart: number,
+    tuesdayScheduleEnd: number,
+    wednesdayActive: boolean,
+    wednesdayScheduleStart: number,
+    wednesdayScheduleEnd: number,
+    thursdayActive: boolean,
+    thursdayScheduleStart: number,
+    thursdayScheduleEnd: number,
+    fridayActive: boolean,
+    fridayScheduleStart: number,
+    fridayScheduleEnd: number,
+    saturdayActive: boolean,
+    saturdayScheduleStart: number,
+    saturdayScheduleEnd: number,
+    sundayActive: boolean,
+    sundayScheduleStart: number,
+    sundayScheduleEnd: number,
+    vacationDateStart: string,
+    vacationDateEnd: string
+    isActive: boolean
+}
+
+
+export class ClientSchedule  implements ClientSchedule {
+	constructor(){
+        this.id = 0,
+        this.companyId = 0,
+        this.companyClientId = 0,
+        this.mondayActive = true,
+        this.mondayScheduleStart = 0,
+        this.mondayScheduleEnd = 0,
+        this.tuesdayActive = true,
+        this.tuesdayScheduleStart = 0,
+        this.tuesdayScheduleEnd = 0,
+        this.wednesdayActive = true,
+        this.wednesdayScheduleStart = 0,
+        this.wednesdayScheduleEnd = 0,
+        this.thursdayActive = true,
+        this.thursdayScheduleStart = 0,
+        this.thursdayScheduleEnd = 0,
+        this.fridayActive = true,
+        this.fridayScheduleStart = 0,
+        this.fridayScheduleEnd = 0,
+        this.saturdayActive = false,
+        this.saturdayScheduleStart = 0,
+        this.saturdayScheduleEnd = 0,
+        this.sundayActive = false,
+        this.sundayScheduleStart = 0,
+        this.sundayScheduleEnd = 0,
+        this.vacationDateStart = '',
+        this.vacationDateEnd = '',
+        this.isActive = true
+	}
+}

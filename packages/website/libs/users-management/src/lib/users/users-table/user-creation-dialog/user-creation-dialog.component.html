@@ -1,0 +1,199 @@
+<div id="modalForm">
+    <section class="card">
+        <header class="card-header card-header-color">
+            <h2 class="card-title card-title-custon text-center">{{ 'USERS.USERS_DATA' | translate }}</h2>
+        </header>
+        <div class="card-body user-creation-dialog">
+            <form [formGroup]="createUserFormGroup">
+                <div class="form-row">
+                    <div class="form-group col-md-4" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['companyId'].invalid &&
+                          (createUserFormGroup.controls['companyId'].dirty ||
+                          createUserFormGroup.controls['companyId'].touched)
+                        }">
+                        <label for="companyId"><span class="text-danger">* </span>{{ 'COMPANIES.NAME' | translate }}</label>
+
+                        <select class="form-control letter-app " formControlName="companyId">
+                            <option value="0">{{ 'COMPANIES.SELECT' | translate }}</option>
+                            <option *ngFor="let item of companies" [value]="item.id">{{ item.name }}</option>
+                        </select>
+                        <ng-container *ngFor="let validation of usuario_messages.companyId">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('companyId').hasError(validation.type) 
+                            && (createUserFormGroup.get('companyId').dirty 
+                            || createUserFormGroup.get('companyId').touched)"> {{ validation.message }}</small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-4 mb-4 mb-lg-0" [ngClass]="{
+                        'has-danger': createUserFormGroup.controls['country'].invalid  && 
+                        (createUserFormGroup.controls['country'].dirty || 
+                        createUserFormGroup.controls['country'].touched)}">
+
+                        <label for="country"><span class="text-danger"> * </span>{{ 'GENERAL.COUNTRY' | translate }}</label>
+                        <select class="form-control" formControlName="country" (change)="changeCountry($event.target.value)">
+                            <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
+                        </select>
+
+                        <!-- <ng-container *ngFor="let validation of usuario_messages.countryCode">
+                            <small } class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('countryCode').hasError(validation.type) 
+                                && (createUserFormGroup.get('countryCode').dirty 
+                                || createUserFormGroup.get('countryCode').touched)"> {{ validation.message }} </small>
+                        </ng-container> -->
+                    </div>
+
+                    <div class="form-group col-md-4 mb-3 mb-lg-0" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['email'].invalid &&
+                          (createUserFormGroup.controls['email'].dirty ||
+                          createUserFormGroup.controls['email'].touched)
+                        }">
+                        <label for="email"><span class="text-danger">* </span>{{ 'GENERAL.EMAIL' | translate }}</label>
+                        <input type="text" class="form-control" id="email" placeholder="{{ 'GENERAL.EMAIL' | translate }}" formControlName="email">
+                        <ng-container *ngFor="let validation of usuario_messages.email">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('email').hasError(validation.type) 
+                                && (createUserFormGroup.get('email').dirty 
+                                || createUserFormGroup.get('email').touched)"> {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['name'].invalid &&
+                          (createUserFormGroup.controls['name'].dirty ||
+                          createUserFormGroup.controls['name'].touched)
+                        }">
+                        <label for="name"><span class="text-danger">* </span>{{ 'GENERAL.NAME' | translate }}</label>
+                        <input type="text" class="form-control" id="name" placeholder="{{ 'GENERAL.NAME' | translate }}" formControlName="name">
+                        <ng-container *ngFor="let validation of usuario_messages.name">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('name').hasError(validation.type) 
+                                && (createUserFormGroup.get('name').dirty 
+                                || createUserFormGroup.get('name').touched)"> {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-3 mb-3 mb-lg-0" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['surname'].invalid &&
+                          (createUserFormGroup.controls['surname'].dirty ||
+                          createUserFormGroup.controls['surname'].touched)
+                        }">
+                        <label for="surname"><span class="text-danger">* </span>{{ 'GENERAL.SURNAMES' | translate }}</label>
+                        <input type="text" class="form-control" id="surname" placeholder="{{ 'GENERAL.SURNAMES' | translate }}" formControlName="surname">
+                        <ng-container *ngFor="let validation of usuario_messages.surname">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('surname').hasError(validation.type) 
+                                && (createUserFormGroup.get('surname').dirty 
+                                || createUserFormGroup.get('surname').touched)"> {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+
+                    <div class="form-group col-md-3 mb-3 mb-lg-0" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['nationalId'].invalid &&
+                          (createUserFormGroup.controls['nationalId'].dirty ||
+                          createUserFormGroup.controls['nationalId'].touched)
+                        }">
+                        <label for="nationalId">{{ 'GENERAL.DNI' | translate }}</label>
+                        <input type="text" class="form-control" id="nationalId" placeholder="{{ 'GENERAL.DNI' | translate }}" formControlName="nationalId">
+
+                        <ng-container *ngFor="let validation of usuario_messages.nationalId">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('nationalId').hasError(validation.type) 
+                            && (createUserFormGroup.get('nationalId').dirty 
+                            || createUserFormGroup.get('nationalId').touched)"> {{ validation.message }}</small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-3 mb-3 mb-lg-0" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['phone'].invalid &&
+                          (createUserFormGroup.controls['phone'].dirty ||
+                          createUserFormGroup.controls['phone'].touched)
+                        }">
+                        <label for="phone"><span class="text-danger">* </span>{{ 'GENERAL.PHONE_NUMBER' | translate }}</label>
+                        <input type="text" class="form-control" id="phone" mask="999999999999" prefix="+" placeholder="{{ 'GENERAL.PHONE_NUMBER' | translate }}" formControlName="phone">
+                        <ng-container *ngFor="let validation of usuario_messages.phone">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('phone').hasError(validation.type) 
+                                && (createUserFormGroup.get('phone').dirty 
+                                || createUserFormGroup.get('phone').touched)"> {{ validation.message }} {{ validation.type === 'invalidPhone' ? ' ' + createUserFormGroup.get('country').value : '' }} </small>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['password'].invalid &&
+                          (createUserFormGroup.controls['password'].dirty ||
+                          createUserFormGroup.controls['password'].touched)
+                        }">
+                        <label for="password">
+                            <span class="text-danger" [ngClass]="{'text-white': data.user.id || data.user.id > 0}">* </span>
+                            {{ 'USERS.PASSWORD' | translate }}</label>
+                        <input type="password" class="form-control" id="password" placeholder="{{ 'USERS.PASSWORD' | translate }}" formControlName="password">
+                        <ng-container *ngFor="let validation of usuario_messages.password">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('password').hasError(validation.type) 
+                                && (createUserFormGroup.get('password').dirty 
+                                || createUserFormGroup.get('password').touched)"> {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-4" [ngClass]="{
+                        'has-danger':
+                        createUserFormGroup.controls['password_confirmation'].invalid &&
+                          (createUserFormGroup.controls['password_confirmation'].dirty ||
+                          createUserFormGroup.controls['password_confirmation'].touched)
+                        }">
+                        <label for="password_confirmation">
+                            <span class="text-danger" [ngClass]="{'text-white': data.user.id || data.user.id > 0}">* </span>
+                            {{ 'USERS.PASSWORD_CONFIRMATION' | translate }}</label>
+                        <input type="password" class="form-control" id="password_confirmation" placeholder="{{ 'USERS.PASSWORD_CONFIRMATION' | translate }}" formControlName="password_confirmation">
+                        <ng-container *ngFor="let validation of usuario_messages.password_confirmation">
+                            <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('password_confirmation').hasError(validation.type) 
+                                && (createUserFormGroup.get('password_confirmation').dirty 
+                                || createUserFormGroup.get('password_confirmation').touched)"> {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-4 mb-3 mb-lg-0">
+                        <label for="isActive"><span class="text-danger">* </span>{{ 'GENERAL.IS_ACTIVE' | translate }}</label >
+                        <br>
+                        <div class="switch">
+                            <label> OFF
+                                <input type="checkbox" id="isActive" formControlName="isActive"/>
+                                <span class="lever switch-col-primary"></span>
+                                ON
+                            </label>
+                    </div>
+                </div>
+        </div>
+
+        <div>
+            <h2 class="card-subtitle">{{ 'GENERAL.PROFILES' | translate }}</h2>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6 checkbox-custom chekbox-primary" formArrayName="profiles" *ngFor="let profile of createUserFormGroup?.get('profiles')?.controls; 
+                      let i = index
+                        ">
+                <input type="checkbox" class="chk-col-light-blue" [formControlName]="i" [id]="i" />
+                <label [for]="i"> {{ profiles[i].name }} </label>
+            </div>
+        </div>
+
+        </form>
+</div>
+<footer class="card-footer">
+    <div class="row">
+        <div class="col-md-6 col-6 text-center">
+            <button class="btn btn-cancel modal-dismiss size-btn-modal" (click)="closeDialog([false, null])">{{ 'GENERAL.CANCEL' | translate}}</button>
+        </div>
+        <div class="col-md-6 col-6 text-center">
+            <button class="btn btn-primary modal-confirm size-btn-modal" [disabled]="!createUserFormGroup.valid" (click)="createUser()">{{ 'GENERAL.ACCEPT' | translate}}</button>
+        </div>
+    </div>
+</footer>
+</section>
+</div>

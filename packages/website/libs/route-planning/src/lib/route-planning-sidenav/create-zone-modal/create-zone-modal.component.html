@@ -1,0 +1,188 @@
+<div class="easyroute-create-zone-modal">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-3">
+                <i class="fas fa-times close-button" (click)="closeDialog(false)"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title"> {{ 'ASSIGNED_ROUTES.NEW_ROUTE' | translate }}</p>
+                <!-- <hr class="line-primary" /> -->
+            </div>
+        </div>
+
+        <div class="row " [ngClass]="{'justify-content-center': showZoneOld}">
+            <div class="col-4 offset-1">
+                <div class="radio-custom radio-primary">
+                    <input type="radio" id="option1" name="tabOptionRadio" [value]="1" [(ngModel)]="tabOption"  (ngModelChange)="changeOption($event)">
+                    <label for="option1">Crear ruta desde cero</label>
+                </div>
+            </div>
+            <div class="col-4" *ngIf="showZoneOld">
+                <div class="radio-custom radio-primary">
+                    <input type="radio" id="option2" name="tabOptionRadio" [value]="2" [(ngModel)]="tabOption"  (ngModelChange)="changeOption($event)">
+                    <label for="option2">Añadir una ruta guardada</label>
+                </div>
+            </div>
+        </div>
+
+        <ng-container *ngIf="tabOption === 1">
+            <!-- form  -->
+            <form [formGroup]="FormGroup">
+                <div class="form-row">
+                    <div class="col-md-6 col-12">
+                        <label for="name">
+                            {{ 'SESSION.NAME' | translate }}
+                            <span class="asterisco"> * </span>
+                        </label>
+                        <div class="form-group" [ngClass]="{
+                        'has-danger':
+                        FormGroup.controls['name'].invalid &&
+                            (FormGroup.controls['name'].dirty ||
+                            FormGroup.controls['name'].touched)
+                    }">
+                            <input type="text" class="form-control" autocomplete="off" formControlName="name"
+                                placeholder="{{ 'SESSION.NAME' | translate }}" id="save_name" />
+
+                            <ng-container *ngFor="let validation of deliveryZone_messages.name">
+                                <div class="text-left w-100">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    FormGroup.get('name').hasError(validation.type) &&
+                                        (FormGroup.get('name').dirty ||
+                                        FormGroup.get('name').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <label for="vehicles">
+                            {{ 'ASSIGNED_ROUTES.VEHICLE' | translate }}
+                            <span class="asterisco"> * </span>
+                        </label>
+                        <div class="form-group" [ngClass]="{
+                        'has-danger':
+                        FormGroup.controls['vehicles'].invalid &&
+                            (FormGroup.controls['vehicles'].dirty ||
+                            FormGroup.controls['vehicles'].touched)
+                    }">
+
+                            <select class="form-control" formControlName="vehicles">
+                                <option [value]="0">Seleccione...</option>
+                                <option [value]="vehicle.id" *ngFor="let vehicle of availableVehicles"> {{ vehicle.name
+                                    }} (
+                                    {{ vehicle?.user?.name }}
+                                    {{ vehicle?.user?.surname }}) </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <label for="color">
+                            {{ 'DELIVERY_ZONES.COLOR' | translate }}
+                            <span class="asterisco"> * </span>
+                        </label>
+                        <div class="form-group" [ngClass]="{
+                        'has-danger':
+                        FormGroup.controls['color'].invalid &&
+                            (FormGroup.controls['color'].dirty ||
+                            FormGroup.controls['color'].touched)
+                    }">
+                            <div class="hack-select">
+                                <input type="color" class="point input-color form-control" autocomplete="off"
+                                    formControlName="color" placeholder="{{ 'DELIVERY_ZONES.COLOR' | translate }}"
+                                    id="color" />
+                            </div>
+
+                            <ng-container *ngFor="let validation of deliveryZone_messages.color">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    FormGroup
+                                    .get('color')
+                                    .hasError(validation.type) &&
+                                (FormGroup.get('color').dirty ||
+                                FormGroup.get('color').touched)
+                                ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="offset-md-6"></div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" formControlName="settingsIgnorecapacitylimit"
+                                    id="Ignorecapacitylimit" />
+                                <label for="Ignorecapacitylimit">{{
+                                    'DELIVERY_ZONES.IGNORE_CAPACITY_LIMIT' | translate
+                                    }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- end form -->
+
+            <!-- footer btn -->
+            <footer class="p-3 mt-3 mt-md-0">
+                <div class="row">
+                    <div class="col-md-6 col-12 mb-sm-0 mb-2 text-center text-sm-right">
+                        <button type="button" class="btn btn-cancel size-btn-modal" (click)="closeDialog(false)">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-6 text-center text-sm-left">
+                        <button type="button" class="btn btn-primary size-btn-modal" [disabled]="!FormGroup.valid"
+                            (click)="submit()">
+                            {{ 'GENERAL.ACCEPT' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </footer>
+            <!-- end btn -->
+        </ng-container>
+        <ng-container *ngIf="tabOption === 2">
+            <div class="optimroute-integration-table">
+            <div class="row pt-2">
+                <div class="col-12">
+                    <div class="table-content">
+                        <table id="delivery-zones" class="table table-bordered table-striped mb-0"
+                            style="text-align: center; width: 100%">
+                            <thead class="thead-new">
+                                <tr>
+                                    <th>{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                                    <th>{{ 'DELIVERY_ZONES.NAME_' | translate }}</th>
+                                    <th style="border-right: 1px solid #7387c2 !important;">{{ 'DELIVERY_ZONES.COLOR' |
+                                        translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="row justify-content-center pt-2 pb-4">
+                <div class="col-12 col-md-6 text-center text-md-right">
+                    <button class="btn btn-cancel size-btn-modal" (click)="modalDismiss()">{{ 'GENERAL.CANCEL' |
+                        translate }}</button>
+                </div>
+                <div class="mt-2 mt-md-0 col-12 col-md-6 text-center text-md-left">
+                    <button class="btn btn-primary size-btn-modal" [disabled]="selected.length == 0"
+                        (click)="closeModal()">
+                        {{ 'GENERAL.ACCEPT' | translate }}
+                    </button>
+                </div>
+            </footer>
+        </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="row delivery-zone-form bg-white2 h-100" *ngIf="deliveryZoneSpecificationType">
+
+    <div class="container">
+        <div class="row pt-5 justify-content-center align-items-center">
+            <div class="return-left mr-3 point" routerLink="/management-logistics/delivery-zones/specification">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <ng-container *ngIf="deliveryZoneSpecificationType">
+                <p class="title m-0" *ngIf="deliveryZoneSpecificationType.id > 0"> {{ 'DELIVERY_ZONES.EDIT_ROUTE_SPECIFICATIION' | translate }}</p>
+                <p class="title m-0" *ngIf="deliveryZoneSpecificationType.id == 0"> {{ 'DELIVERY_ZONES.ADD_ROUTE_SPECIFICATIION' | translate }} </p>
+            </ng-container>
+
+        </div>
+
+
+
+        <div class="row justify-content-center mt-5 pt-3">
+            <form [formGroup]="deliveryZoneSpecificationTypeForm" class="form-width font-general" *ngIf="deliveryZoneSpecificationType">
+
+                <div class="row">
+                    <div class="col-12 pl-2">
+                        <h3 class="subtitle-general d-flex flex-row justify-content-between align-items-end">
+                            {{ 'DELIVERY_ZONES.ROUTE_SPECIFICATION_DATA' | translate }}
+                        </h3>
+                    </div>
+
+                    <!-- name -->
+
+                    <div class="col-12 col-md-5">
+
+
+                        <div class="form-row form-group" [ngClass]="{ 'has-danger': deliveryZoneSpecificationTypeForm.controls['name'].invalid && (deliveryZoneSpecificationTypeForm.controls['name'].dirty || deliveryZoneSpecificationTypeForm.controls['name'].touched) }">
+                            <label for="name">
+                                {{ 'DELIVERY_ZONES.PATH_SPECIFICATION_NAME' | translate }}
+                                <span class="asterisco">* </span>
+                            </label>
+                            <input type="text" id="name" class="form-control" placeholder="{{ 'DELIVERY_ZONES.PATH_SPECIFICATION_NAME' | translate }}" autocomplete="off" formControlName="name" [ngClass]="{'form-control-danger': deliveryZoneSpecificationTypeForm.controls['name'].invalid && (deliveryZoneSpecificationTypeForm.controls['name'].dirty || deliveryZoneSpecificationTypeForm.controls['name'].touched)}"
+                            />
+
+                            <ng-container *ngFor="let validation of sub_category_messages.name">
+                                <small class="form-control-feedback text-danger" *ngIf="deliveryZoneSpecificationTypeForm.get('name').hasError(validation.type) && (deliveryZoneSpecificationTypeForm.get('name').dirty || deliveryZoneSpecificationTypeForm.get('name').touched)
+                                ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+
+
+                    </div>
+
+                    <!-- end name -->
+
+                    <!-- code -->
+
+                    <div class="col-md-5 mt-2 col-12 mt-md-0 offset-md-2">
+
+                        <div class="form-row form-group" [ngClass]="{ 'has-danger': deliveryZoneSpecificationTypeForm.controls['code'].invalid && (deliveryZoneSpecificationTypeForm.controls['code'].dirty || deliveryZoneSpecificationTypeForm.controls['code'].touched) }">
+                            <ng-container *ngIf="showCode">
+
+                                <label class="color-label-async" for="code">
+                                    {{ 'VEHICLES.SERVICE_TYPE.CODE' | translate }}
+                                </label>
+                                <div class="input-group" [ngClass]="{ 'has-danger': deliveryZoneSpecificationTypeForm.controls['code'].invalid && ( deliveryZoneSpecificationTypeForm.controls['code'].dirty || deliveryZoneSpecificationTypeForm.controls['code'].touched)}">
+                                    <input *ngIf="deliveryZoneSpecificationType.id > 0" type="text" readonly class="form-control code-edit-form" id="code" formControlName="code" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}" [ngClass]="{
+                                        'form-control-danger':
+                                        deliveryZoneSpecificationTypeForm.controls['code'].invalid &&
+                                            (deliveryZoneSpecificationTypeForm.controls['code'].dirty ||
+                                            deliveryZoneSpecificationTypeForm.controls['code'].touched)
+                                    }" />
+                                    <input *ngIf="!deliveryZoneSpecificationType.id" type="text" class="form-control" onKeyPress="if(this.value.length==31) return false;" id="code" formControlName="code" placeholder="{{ 'VEHICLES.SERVICE_TYPE.CODE' | translate }}" [ngClass]="{
+                                        'form-control-danger':
+                                        deliveryZoneSpecificationTypeForm.controls['code'].invalid &&
+                                        (deliveryZoneSpecificationTypeForm.controls['code'].dirty ||
+                                        deliveryZoneSpecificationTypeForm.controls['code'].touched)
+                                    }" required/>
+                                    <div class="input-group-append" *ngIf="!deliveryZoneSpecificationType.id">
+                                        <a class="colorLink input-group-text point color-a-sync" (click)="searchIncidentCode()" id="tooltip" disabled="false" data-toggle="tooltip" data-placement="top" title="¿Buscar codigo?">
+                                            <i class="fas fa-sync color-icon-sync"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <label class="mt-0 color-label-info" *ngIf="!deliveryZoneSpecificationType.code">
+                                        <i class="fas fa-sync"></i>
+                                        {{ 'VEHICLES.SERVICE_TYPE.GEMERATE_CODE_AUTOMATICALLY' | translate }}
+                                </label>
+                                <ng-container *ngFor="let validation of sub_category_messages.code">
+                                    <div>
+                                        <small class="form-control-feedback text-danger ml-2" *ngIf="
+                                            deliveryZoneSpecificationTypeForm.get('code')
+                                            .hasError(validation.type) &&
+                                            (deliveryZoneSpecificationTypeForm.get('code').dirty ||
+                                            deliveryZoneSpecificationTypeForm.get('code').touched)">
+                                                {{ validation.message }}
+                                            </small>
+                                    </div>
+
+                                </ng-container>
+
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!showCode">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <div class="fa-3x mt-5">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+
+                    </div>
+
+                    <!-- end code -->
+
+                    <!-- Active -->
+                    <div class="col-12 col-md-5  mt-2">
+                        <div class="form-row">
+                            <div class="switch w-100">
+                                <label class="switch-width">
+                                    <input
+                                        type="checkbox"
+                                        formControlName="isActive"
+                                        
+                                    />
+                                    <span class="lever switch-col-primary"></span>
+
+                                    {{ 'CONFIGURATIONS.MEASURE.ACTIVE' | translate }}
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- end Active -->
+                </div>
+
+
+                <div class="row text-center mt-5 mb-5">
+                    <div class="col-sm-6 col-12 mt-1 text-center text-sm-right">
+                        <button class="btn btn-default btn-special-ipad btn-cancel size-btn-form" type="button" routerLink="/management-logistics/delivery-zones/specification">
+                          {{ 'GENERAL.CANCEL' | translate  }}
+                      </button>
+                    </div>
+
+                    <div class="col-sm-6 col-12 mt-1 pb-2 text-center text-sm-left">
+                        <button type="submit" class="btn btn-primary btn-special-ipad size-btn-form" [disabled]="!deliveryZoneSpecificationTypeForm.valid" (click)="createVehiclesServiceType()" *ngIf="deliveryZoneSpecificationType.id ==0">
+                          {{ 'GENERAL.ADD' | translate  }}
+                      </button>
+                        <button type="submit" class="btn btn-primary btn-special-ipad size-btn-form" [disabled]="!deliveryZoneSpecificationTypeForm.valid" (click)="createVehiclesServiceType()" *ngIf="deliveryZoneSpecificationType.id >0">
+                        {{ 'GENERAL.SAVE' | translate  }}
+                    </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

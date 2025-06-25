@@ -1,0 +1,186 @@
+<div class="vehicle-history-form bg-white2">
+
+    <div class="container">
+        <div class="row pt-5 justify-content-center align-items-center">
+            <div class="return-left mr-3 point" routerLink="/vehicle-maintenance/history">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+
+            <p class="title m-0"> {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_DETAIL' | translate }}</p>
+
+
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <form class="form-width font-general" *ngIf="vehicleMaintenace">
+
+                <!-- data maintenance -->
+                <div class="col-12 extra-campo  p-0 pt-3">
+                    <label class="subtitle-general mb-0 w-100">
+                            {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_DATA' | translate }}
+                    </label>
+                </div>
+
+                <div class="form-row mt-2">
+                    <div class="col-12 col-md-5">
+                        <div class="form-group">
+                            <label for="vehicleName">
+                                {{'VEHICLE_MAINTENANCE.VEHICLE' | translate }}
+                                <!--  <span class="asterisco">* </span> -->
+                            </label>
+                            <input type="text" class="form-control" readonly id="vehicleName" placeholder="{{ 'VEHICLE_MAINTENANCE.VEHICLE' | translate }}" [value]="vehicleMaintenace.vehicle.name" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maintenanceStatus">
+                                {{ 'VEHICLE_MAINTENANCE.MAINTENANCE' | translate }}
+                            </label>
+                            <input type="text" class="form-control" readonly id="maintenanceStatus" placeholder="{{ 'VEHICLE_MAINTENANCE.MAINTENANCE' | translate }}" [value]="vehicleMaintenace.maintenanceStatus.name" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 mt-2 col-12 mt-md-0 offset-md-2">
+                        <div class="form-group">
+                            <label for="name">
+                                {{ 'VEHICLE_MAINTENANCE.DRIVER' | translate }}
+                            </label>
+                            <input type="text" class="form-control" readonly id="name" placeholder="{{ 'VEHICLE_MAINTENANCE.DRIVER' | translate }}" [value]="vehicleMaintenace.user.name +' '+ vehicleMaintenace.user.surname" />
+
+                        </div>
+                        <div class="form-group">
+                            <label for="date">
+                                {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_DATE' | translate }}
+                            </label>
+                            <input type="text" class="form-control" readonly id="date" placeholder="{{ 'VEHICLE_MAINTENANCE.MAINTENANCE_DATE' | translate }}" [value]="formDate(vehicleMaintenace.date)" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end data maintenance -->
+
+                <!-- VEHICLE_STATUS -->
+
+                <div class="col-12 extra-campo  p-0 pt-4">
+                    <label class="subtitle-general mb-0 w-100">
+                            {{ 'VEHICLE_MAINTENANCE.VEHICLE_STATUS' | translate }}
+                    </label>
+                </div>
+
+                <div class="form-row mt-2">
+                    <div class="col-12">
+                        <div class="form-group mt-3">
+                            <p class="vehicle-maintenance-status" for="maintenanceVehicleStateType">
+                                {{vehicleMaintenace.maintenanceVehicleStateType && vehicleMaintenace.maintenanceVehicleStateType.name ? vehicleMaintenace.maintenanceVehicleStateType&& vehicleMaintenace.maintenanceVehicleStateType.name:'No disponible'}}
+                                <!--  <span class="asterisco">* </span> -->
+                            </p>
+                        </div>
+
+
+                    </div>
+
+                    <!-- img -->
+                    <div class="col-12 pt-3">
+                        <label class="mb-0 w-100">
+                                {{ 'VEHICLE_MAINTENANCE.PHOTOS_ATTACHED' | translate }}
+                        </label>
+
+                        <div class="form-row justify-content-xl-center  justify-content-center" [ngClass]="{'mb-5': vehicleMaintenace.total_vehicle_review === 0}">
+                            <div class="col-xl-4 col-12" *ngFor="let card of [1,2,3]; let i = index">
+                                <easyroute-image-view-delivery-point [image]="franchiseImages[i]" [disabled]="false" [index]="i" (error)="imageError = $event" [state]="state" [delete]="true" [franchise]="false" [incient]="true" (updateImage)="_handleUpdateImage( $event )" (deleteImage)="_handleDeleteImage( $event.id, $event.image )"></easyroute-image-view-delivery-point>
+                            </div>
+
+                            <div class="col-12 text-center" *ngIf="imageError.length > 0">
+                                <span class="text-danger">{{ imageError }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end img -->
+                </div>
+
+                <!-- end VEHICLE_STATUS -->
+
+                <!-- check -->
+                <ng-container *ngIf="vehicleMaintenace.total_vehicle_review > 0">
+
+                    <div class="col-12 extra-campo  p-0 pt-3">
+                        <label class="subtitle-general mb-0 w-100">
+                            {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_CHECK' | translate }}
+                    </label>
+                    </div>
+
+                    <div class="form-row mt-2">
+
+                        <!-- check indicativos -->
+                        <div class="col-12">
+                            <div class="form-group mt-3">
+                                <p class="vehicle-maintenance-status" style="font-size: 55px !important;" for="maintenanceVehicleStateType">
+                                    {{ vehicleMaintenace.total_vehicle_review }}/{{ vehicleMaintenace.total_preference_review }}
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ng-container *ngIf="!show">
+                        <div class="col-12 text-center mt-5 mb-5">
+                            <div class="fa-6x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="show">
+                        <div class="form-row mt-4 mb-5 pb-5">
+                            <div class="col-12 col-md-5 lines-for-col-top" [ngClass]="{'mt-2 mt-md-0 offset-md-2 lines-for-col-bottom': i % 2 > 0 }" *ngFor="let item of MaintenanceDataFormReview; let i = index">
+
+                                <div class="row mt-3">
+                                    <div class="col-2 text-center">
+                                        <ng-container *ngIf="item.checked">
+                                            <img src="assets/icons/optimmanage/check-green.svg">
+                                        </ng-container>
+                                        <ng-container *ngIf="!item.checked">
+                                            <img src="assets/icons/optimmanage/x-roja.svg">
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-10 text-left p-0">
+                                        <p [title]="item.name" class="font-checkd">
+                                            {{ sliceString(item.name) }}
+                                        </p>
+                                    </div>
+
+                                    <!-- comments -->
+                                    <ng-container *ngIf="item.comentary && item.comentary != null && item.comentary.length > 0">
+                                        <div class="col-2 text-center">
+                                            <img src="assets/icons/optimmanage/message.svg">
+                                        </div>
+                                        <div class="col-10 text-left p-0">
+                                            <p class="color-comments">
+                                                {{ item.comentary ? item.comentary :'No disponible'}}
+                                            </p>
+                                        </div>
+                                    </ng-container>
+
+
+                                    <!-- end comments -->
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
+
+
+
+                    <!-- end check indicativos -->
+
+                    <!-- end check -->
+                </ng-container>
+            </form>
+        </div>
+    </div>
+</div>

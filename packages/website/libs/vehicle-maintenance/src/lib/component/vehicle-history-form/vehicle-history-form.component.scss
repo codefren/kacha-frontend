@@ -1,0 +1,33 @@
+.vehicle-history-form {
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #ffffff;
+        opacity: 1;
+    }
+    .info-texto {
+        font-size: 12px;
+        color: #7e7e7e;
+    }
+    .style-subtitle-sub {
+        font-size: 14px;
+        color: black;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .vehicle-maintenance-status {
+        font-size: 33px;
+        font-weight: bold;
+    }
+    .font-checkd {
+        color: #454545;
+        font-size: 14px;
+    }
+    .lines-for-col-top {
+        border-bottom: 1px solid #cacaca;
+    }
+    .lines-for-col-bottom {
+        border-bottom: 1px solid #cacaca;
+    }
+    .color-comments {
+        color: #a0a0a0;
+    }
+}

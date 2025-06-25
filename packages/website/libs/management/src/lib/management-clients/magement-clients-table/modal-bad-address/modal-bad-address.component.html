@@ -1,0 +1,31 @@
+<div class="easyroute-modal-bad-address">
+    <section class="card">
+        <header class="card-header card-header-color">
+            <h2 class="card-title card-title-custon text-center">{{ 'DELIVERY_POINTS.DELIVERY_POINTS_WITHOUT_COORDINATES' | translate }}</h2>
+        </header>
+
+        <div class="card-body">
+            <div class="container">
+                <ul class="widget-todo-list">
+                    <li *ngFor="let item of data.badAddress">
+                        <label class="todo-label">
+                            <span>{{ 'DELIVERY_POINTS.THE_POINT' | translate }} </span>
+                            <span class="fontWeight">{{ item.id }} </span>
+                            <span>{{ 'DELIVERY_POINTS.WITH_DIRECTION' | translate }} </span>
+                            <span class="fontWeight">{{ item.address }} </span>
+                            <span>{{ 'DELIVERY_POINTS.COORDINATE_ERROR' | translate }} </span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-12 col-12 text-right">
+                    <button class="btn btn-dark modal-dismiss" (click)="closeDialog([false, null])">{{ 'GENERAL.ACCEPT' | translate }}</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

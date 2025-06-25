@@ -1,0 +1,76 @@
+<div class="bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">
+                    {{ 'CONFIGURATIONS.MEASURE.GENERAL_MEASUREMENTS' | translate }}
+                </p>
+                <hr class="line-primary" />
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-10 text-center mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-7 col-sm-12 text-right">
+                        <p class="info-texto mr-4">
+                            {{ 'GENERAL.HERE_YOU_MUST_RECORD' | translate }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-5 col-sm-12 text-left">
+                        <button
+                            id="addToTable"
+                            class="btn btn-default mt-1 ml-2 btn-large"
+                            title="{{
+                                'CONFIGURATIONS.MEASURE.MEASURE_LIST.ADD_NEW_MEASURE'
+                                    | translate
+                            }}"
+                            (click)="newAddition()"
+                        >
+                            {{ 'CONFIGURATIONS.MEASURE.ADD_MEASURE' | translate }}
+                        </button>
+                    </div>
+                </div>
+                <hr class="line-grey" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mt-5">
+                <div class="table-content">
+                    <table
+                        class="table table-bordered table-striped table-responsive-lg mb-0"
+                        id="measure"
+                        style="text-align: center"
+                    >
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'CONFIGURATIONS.MEASURE.ID' | translate }}
+                                </th>
+                                <th>
+                                    {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}
+                                </th>
+                                <th>
+                                    {{ 'CONFIGURATIONS.MEASURE.NAME' | translate }}
+                                </th>
+                                <th>
+                                    {{ 'CONFIGURATIONS.MEASURE.ACTIVE' | translate }}
+                                </th>
+                                <th>
+                                    {{ 'CONFIGURATIONS.MEASURE.CREATION_DATE' | translate }}
+                                </th>
+                                <th>
+                                    {{ 'CONFIGURATIONS.MEASURE.CREATED_BY' | translate }}
+                                </th>
+                                <th>{{ 'GENERAL.ACTIONS' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,361 @@
+<div class="optimroute-analysis-list main-container container-fluid p-0 pt-4 pb-4">
+
+    <!-- Parte superior -->
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title point" (click)="redirectTo()">
+
+                <img _ngcontent-dnq-c5="" alt="cost" class="header-brand-img img-providers point" src="assets/icons/update.svg">
+
+                <span class="ml-2 point"> {{ 'CLIENTS.DATA_UPDATE' | translate }} </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Cuadros informativos -->
+
+    <div class="row align-items-center mt-3 pl-4 pr-4">
+
+        <div class="col-xl col-md-6 col-12">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.UPDATES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+
+                    <p class="p-sub-number"> {{ totalizedDate.totalUpdate }} </p>
+
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+
+                    <div class="fa-2x">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.SCHEDULE' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+
+                    <p class="p-sub-number"> {{ totalizedDate.totalHour }} </p>
+
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+
+                    <div class="fa-2x">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+        </div>
+
+
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.PHONE' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+
+                    <p class="p-sub-number"> {{ totalizedDate.totalPhone }} </p>
+
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+
+                    <div class="fa-2x">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.ADDRESS' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+
+                    <p class="p-sub-number"> {{ totalizedDate.totalAddres }} </p>
+
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+
+                    <div class="fa-2x">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth"></div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth"></div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth"></div>
+
+        </div>
+    </div>
+
+
+    <!-- Filter -->
+
+    <div class="row mt-3 pl-4 pr-4 align-items-center font-row mb-xl-0 mb-2">
+
+        <div class="col-xl-10 col-12">
+
+            <div class="form-row mb-1 mt-2 align-items-center">
+
+                <!-- date -->
+                <div class="col-12 col-xl-3 col-sm-4 mb-1">
+
+                    <div class="dp-hidden position-absolute">
+
+                        <div class="input-group">
+
+                            <input name="datepicker" class="form-control  input-size date1 point" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                tabindex="-1" />
+
+                            <ng-template #t let-date let-focused="focused">
+
+                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                    {{ date.day }}
+                                </span>
+
+                            </ng-template>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input #dpFromDate class="form-control form-control-date" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                        <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+    
+                            <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+
+                        </button>
+
+                    </div>
+
+                </div>
+                <!-- end date -->
+
+                <!-- drivers -->
+
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+
+                    <ng-container *ngIf="showUserVehicle">
+
+                        <select id="userId" [value]="filter.values.userId" (change)="ChangeFilter($event)" class="form-control-select-datatable size-select form-control point">
+
+                            <option value=""> {{ 'CLIENTS.DRIVER' | translate }} </option>
+
+                            <option *ngFor="let zone of usersVehicles" [value]="zone.id" > {{ zone.name }} {{ zone.surname }} </option>
+
+                        </select>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="!showUserVehicle">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+                <!-- end drivers -->
+
+
+                <!-- clientes -->
+
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+                    <ng-container *ngIf="!filter.values.deliveryPointId">
+
+                        <button class="btn btn-btn btn-cancel btn-block btn-no-radios" (click)="openClient()">Cliente
+
+                            <img src="assets/images/polygon.svg">
+
+                        </button>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="filter.values.deliveryPointId && filter.values.nameClient">
+
+                        <button class="btn btn-btn btn-cancel btn-block btn-no-radios" [title]="filter.values.nameClient" (click)="openClient()">
+
+                            {{ filter.values.nameClient | slice:0:15 }} {{ filter.values.nameClient.length > 25 ? '...' : '' }}
+
+                            <img src="assets/images/polygon.svg">
+
+                        </button>
+
+                    </ng-container>
+
+                </div>
+
+                <div class="col-12 col-xl-1 col-sm-4 mb-1 point" *ngIf="filter.values.deliveryPointId.length > 0">
+                    <!--   <div class="text-left clear-client bottom-0" (click)="clearClient()">
+                        <a>Limpiar filtro</a>
+                    </div> -->
+                    <button class="btn btn-btn btn-cancel-1 btn-block" (click)="clearClient()"> 
+    
+                        <img title="Limpiar filtro" src="assets/images/delete.svg">
+
+                    </button>
+                </div>
+
+                <!-- end clientes -->
+
+                <!-- type -->
+                <div class="col-12 col-xl-2 col-sm-4 mb-1 point">
+
+
+                    <ng-container *ngIf="showTypeList">
+
+                        <select id="deliveryPointUpdateTypeId" [value]="filter.values.deliveryPointUpdateTypeId" (change)="ChangeFilter($event)" class="form-control-select-datatable size-select form-control point">
+
+                            <option value=""> {{ 'CLIENTS.TYPE' | translate }} </option>
+
+                            <option *ngFor="let type of typeList" [value]="type.id" > {{ type.name }}  </option>
+
+                        </select>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="!showTypeList">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                </div>
+                <!-- end type -->
+
+            </div>
+
+        </div>
+
+        <!-- Buscar -->
+
+        <div class="col-xl-2 col-12">
+
+            <div class="input-group datatables-input-group-width mr-xl-3 mr-3 mb-2 mt-2">
+
+                <input id="search" type="text" class="form-control search-general pull-right input-personalize-datatable" placeholder="{{ 'COST.SEARCH' | translate }}" style="max-width: initial;">
+
+                <span class="input-group-append input-group-appenda">
+
+                    <span class="input-group-text input-group-text-general table-append">
+
+                        <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- end buscar -->
+
+    </div>
+
+    <!-- Tabla -->
+
+    <div class="row">
+
+        <div class="col-12">
+            <div class="table-content table-content-general">
+                <table id="clientsAnalysis" style="width: 100%; text-align: center" class="table table-striped table-bordered table-responsive-lg mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{ 'CLIENTS.DATE' | translate }}</th>
+                            <th>{{ 'CLIENTS.DRIVER' | translate }}</th>
+                            <th>{{ 'CLIENTS.CUSTOMER' | translate }}</th>
+                            <th>{{ 'CLIENTS.TYPE' | translate }} </th>
+                            <th>{{ 'CLIENTS.ANCIENT' | translate }}</th>
+                            <th>{{ 'CLIENTS.UPDATE' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

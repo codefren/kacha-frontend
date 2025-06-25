@@ -1,0 +1,334 @@
+<div class="">
+    <div class="row row-nav align-items-center h-100 pb-1">
+        <div class="col-md-8 col-lg-8 mdl-color--light-green-400 d-none d-md-block p-0 m-0">
+            <div class="row align-items-center h-100">
+                <div class="col-md-12 col-lg-12 d-none d-md-block p-0 m-0 pl-5 pr-2">
+                    <form>
+                        <input #fileImport hidden type="file" accept=".csv,.json" (change)="importPlanSession($event.target.files[0]); $event.target.value = null" />
+                        <input #fileTxtImport  hidden type="file" accept=".txt" (change)="importTxt($event.target.files); $event.target.value = null" multiple="multiple" />
+                    </form>
+
+                    <ul class="notifications pl-1">
+                        <li class="">
+                            <button type="button" class="btn mr-2 btn-secondary btn-import-plus" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-plus mr-1"></i>
+                                Rutas
+                            </button>
+
+                            <div class="dropdown-menu notification-menu small width-28">
+                                <div class="content box-content">
+                                    <!-- <div class="p-1 btn-warning text-center" style="margin: 0 0 12px;">
+                                        Importar desde:
+
+                                    </div> -->
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="fileImport.click()">
+                                                <div
+                                                    class="w-100 d-flex flex-row justify-content-start align-items-center">
+                                                    <img class="ico-modify" style="margin-right: 14px;"
+                                                        src="assets/icons/optimmanage2/icono-carpetanaranja.svg">
+                                                    <span class="fs-13">{{ 'ROUTE_PLANNING.TOOLBAR.DESKTOP' | translate
+                                                        }}</span>
+                                                </div>
+                                            </button>
+                                        </li>
+
+                                        <li *ngIf="showIntegrationTxt" >
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="fileTxtImport.click()">
+                                                <div
+                                                    class="w-100 d-flex flex-row justify-content-start align-items-center">
+                                                    <img class="ico-modify" style="margin-right: 14px;"
+                                                        src="assets/icons/optimmanage2/icono-carpetanaranja.svg">
+                                                    <span class="fs-13">{{ 'ROUTE_PLANNING.TOOLBAR.DESKTOP_TXT' | translate
+                                                        }}</span>
+                                                </div>
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="newAddition()">
+                                                <!--  <img class="icons-calendar mr-2" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true"> -->
+                                                <div
+                                                    class="w-100 d-flex flex-row justify-content-start align-items-center">
+                                                    <i class="fas fa-calendar-alt float-left mr-3"></i>
+                                                    <span class="fs-13">{{ 'ROUTE_PLANNING.TOOLBAR.DELIVERY_PLANNER' |
+                                                        translate }}</span>
+                                                </div>
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="recoverOptimization()">
+                                                <div
+                                                    class="w 100 d-flex flex-row justify-content-start align-items-center">
+                                                    <img class="ico-modify" style="margin-right: 14px;"
+                                                        src="assets/icons/optimmanage2/icono-nuvenaranja.svg">
+                                                    <span class="fs-13">{{ 'ROUTE_PLANNING.TOOLBAR.SAVED_SESSIONS' |
+                                                        translate }}</span>
+                                                </div>
+                                            </button>
+                                        </li>
+                                        <!-- crear entregas -->
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="addRoute()">
+                                                <div
+                                                    class="w-100 d-flex flex-row align-items-center justify-content-start">
+                                                    <i class="fas fa-plus-circle float-left mr-3"></i>
+                                                    <span class="fs-13">{{ 'ROUTE_PLANNING.TOOLBAR.CREATE_DELIVERY' |
+                                                        translate }}</span>
+                                                </div>
+                                            </button>
+                                        </li>
+                                        <!-- crear visitas -->
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="planningVisits()">
+                                                <div
+                                                    class="w 100 d-flex flex-row justify-content-start align-items-center">
+                                                    <img class="ico-modify" style="margin-right: 14px;"
+                                                        src="assets/icons/optimmanage2/visits.svg">
+                                                    <span class="fs-13">Planificar visitas</span>
+                                                </div>
+                                            </button>
+                                        </li>
+
+                                        <ng-container *ngIf="showIntegrationRoute">
+
+                                            <li>
+                                                <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block btn-gris p-10" (click)="loadTemplateRoute()">
+                                                    <div
+                                                        class="w 100 d-flex flex-row justify-content-start align-items-center">
+                                                        <img class="ico-modify" style="margin-right: 14px;"
+                                                            src="assets/icons/optimmanage2/spreadsheet.svg">
+                                                        <span class="fs-13">Cargar desde plantilla</span>
+                                                    </div>
+                                                </button>
+                                            </li>
+
+                                        </ng-container>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                    <ul class="optimize-route-menu notifications" *ngIf="routePlanning.planningSession">
+                        <li class="">
+                            <button type="button" class="mr-2 btn btn-secondary btn-white-font" data-toggle="dropdown" aria-expanded="false" (click)="noneZoneSelected = checkNoneZoneSelected(routePlanning.deliveryZonesStatus)">
+                                <img class="ico-modify" style="margin-right: 5px; width: 20px;"
+                                    src="assets/icons/optimizar.svg">
+                                Optimizar
+                            </button>
+
+                            <div class="dropdown-menu notification-menu small" x-placement="bottom-start">
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="mr-1 btn btn-default btn-lg btn-block" (click)="optimize('all')">
+                                                {{ 'GENERAL.ALL' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mr-1 btn btn-default btn-lg btn-block" [disabled]="noneZoneSelected" (click)="optimize('selected')">
+                                                {{ 'GENERAL.SELECTED' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mr-1 btn btn-default btn-lg btn-block" (click)="automatic()">
+                                                Automático
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="optimize-route-menu notifications" *ngIf="(deliveryPointPendingCount$ | async ) && (deliveryPointPendingCount$ | async) > 0">
+                        <li class="">
+                            <button type="button" class="mr-2 btn btn-secondary btn-white-font" (click)="showDeliveryPointPending()">
+                                <img class="ico-modify" style="margin-right: 5px; width: 20px;"
+                                    src="assets/icons/buzon-pending.svg">
+                                Buzón pendientes ({{ (deliveryPointPendingCount$ | async) }})
+                            </button>
+                        </li>
+                    </ul>
+
+                    <ul class="optimize-route-menu notifications" *ngIf="routePlanning.planningSession">
+                        <li class="">
+                            <button type="button" class="mr-2 btn btn-primary" data-toggle="dropdown" aria-expanded="false" (click)="noneZoneSelected = checkNoneZoneSelected(routePlanning.deliveryZonesStatus)">
+                                <img class="ico-modify" style="margin-right: 5px; width: 19px;"
+                                    src="assets/icons/optimmanage2/indicador-gps-fijo.svg">
+                                Evaluar
+                            </button>
+
+                            <div class="dropdown-menu notification-menu small" x-placement="bottom-start">
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="mr-1 btn btn-default btn-lg btn-block" (click)="evalute('all')">
+                                                {{ 'GENERAL.ALL' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mr-1 btn btn-default btn-lg btn-block" [disabled]="noneZoneSelected" (click)="evalute('selected')">
+                                                {{ 'GENERAL.SELECTED' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="optimize-route-menu notifications" *ngIf="routePlanning.planningSession && mapStage === 'routes' || haveEvaluate( routePlanning.deliveryZonesStatus )">
+                        <li class="">
+                            <button type="button" class="mr-2 btn btn-primary" data-toggle="dropdown" aria-expanded="false" (click)="noneZoneSelected = checkNoneZoneSelected(routePlanning.deliveryZonesStatus)">
+                                <img class="ico-modify" style="margin-right: 5px; width: 29px;"
+                                    src="assets/icons/asignar.svg">
+                                Asignar
+                            </button>
+
+                            <div class="dropdown-menu notification-menu small" x-placement="bottom-start">
+                                <div class="content">
+                                    <ul>
+                                        <label class="divider-asign" *ngIf="haveEvaluate( routePlanning.deliveryZonesStatus )">
+                                            {{ 'GENERAL.EVALUATEDS' | translate }}
+                                        </label>
+
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block" *ngIf="haveEvaluate( routePlanning.deliveryZonesStatus )" (click)="asign_evaluteds('all')">
+                                                {{ 'GENERAL.ALL' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block" [disabled]="noneZoneSelected" (click)="asign_evaluteds('selected')" *ngIf="haveEvaluate( routePlanning.deliveryZonesStatus )">
+                                                {{ 'GENERAL.SELECTED' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+
+                                        <label class="divider-asign" *ngIf="haveOptimized( routePlanning.deliveryZonesStatus )">
+                                            {{ 'GENERAL.OPTIMIZEDS' | translate }}
+                                        </label>
+
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block" (click)="asign('all')" *ngIf="haveOptimized( routePlanning.deliveryZonesStatus )">
+                                                {{ 'GENERAL.ALL' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-lg btn-block" [disabled]="noneZoneSelected" (click)="asign('selected')" *ngIf="haveOptimized( routePlanning.deliveryZonesStatus )">
+                                                {{ 'GENERAL.SELECTED' | translate: "{gender: 'female', count: 2}" }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- <ul class="optimize-route-menu notifications pr-2"
+                        *ngIf="routePlanning && routePlanning.planningSession && (deliveryPointPendingCount$ | async ) && (deliveryPointPendingCount$ | async ) > 0"
+                    >
+                    <li class="">
+                        <button type="button" class="btn btn-danger" (click)="showDeliveryPointPending()">
+                            <img class="ico-modify" style="margin-right: 5px; width: 19px;"
+                                src="assets/icons/buzon-pending.svg">
+
+                            Búzon puntos pendientes ({{ (deliveryPointPendingCount$ | async ) }})
+                        </button>
+                    </li>
+                    </ul> -->
+                    <!-- && !autoSaveSession -->
+                    <ul class="optimize-route-menu notifications" *ngIf="routePlanning.planningSession">
+                        <li class="">
+                            <button type="button" class="btn btn-primary" (click)="saveRoute('all')">
+                                <img class="ico-modify" style="margin-right: 5px; width: 19px;"
+                                    src="assets/icons/optimmanage2/iconoGuardarblanco.svg">
+
+                                Guardar sesión
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- <div class="col-md-7 col-lg-7 d-none d-md-block p-0 m-0"> -->
+                <!-- Seleccionar todas las rutas -->
+                <!--  <button *ngIf="routePlanning.loadingPlanningSession" type="button"
+                        class="btn btn-loading float-left">
+                        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+                    </button> -->
+
+
+                <!-- <div *ngIf="routePlanning.planningSession && routePlanning.viewingMode === 0">
+                        <label class="round round-little m-0">
+                            <input type="checkbox" id="zoneId" (change)="onSelectAllChange($event.target, 0)" [checked]="allSelected(
+                                    routePlanning.deliveryZonesStatus,
+                                    routePlanning.routesStatus,
+                                    0
+                                )" />
+
+                            <label for="zoneId" style="top: 0;" #click_all_zones></label>
+                        </label>
+
+                        <label class="m-0 ml-3 point" (click)="click_all_zones.click()">
+                            {{ 'ROUTE_PLANNING.TOOLBAR.SELECT_ALL_ZONES' | translate }}
+                        </label>
+                    </div>
+
+                    <div *ngIf="routePlanning.planningSession && routePlanning.viewingMode === 1">
+                        <label class="round round-little m-0">
+                            <input type="checkbox" id="routeId" (change)="onSelectAllChange($event.target, 1)"
+                                [checked]="allSelected(
+                                    routePlanning.deliveryZonesStatus,
+                                    routePlanning.routesStatus,
+                                    1
+                                )" />
+
+                            <label for="routeId" style="top: 0;" #click_all_routes></label>
+                        </label>
+
+                        <label class="m-0 ml-3 point" (click)="click_all_routes.click()">
+                            {{ 'ROUTE_PLANNING.TOOLBAR.SELECT_ALL_ROUTES' | translate }}
+                        </label>
+                    </div> -->
+                <!-- </div> -->
+            </div>
+            <!-- </div> -->
+        </div>
+        <div class="col-md-2 col-lg-2 d-none d-md-block pt-1 mr-0 pr-0">
+            <div class="input-group float-right" *ngIf="routePlanning.planningSession">
+                <div class="input-group-prepend">
+                    <span class="input-group-text searchBar-icon" id="basic-addon1">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+
+                <input type="text" (keyup)="searchValue($event, inputFilter)" style="border-left: none;" class="form-control" [(ngModel)]="inputFilter" aria-describedby="basic-addon1">
+
+                <div id="list-example" class="list-group result-search" *ngIf="deliveryPoints && deliveryPoints.length > 0">
+                    <a class="list-group-item list-group-item-action pointer" (click)="selectDeliveryPoint(point)" *ngFor="let point of deliveryPoints">
+                        {{ point.name }}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-lg-2 d-none d-md-block pt-1">
+            <ng-container *ngIf="routePlanning.planningSession">
+                <button type="button" class="btn btn-dark ml-1 mr-1 float-right p-0" (click)="export()" style="width: 50px;">
+                    <img class="ico-modify" style="width: 25px;" src="assets/icons/export-route.svg">
+                </button>
+
+                <button type="button" class="btn btn-dark float-right p-0" (click)="print()" style="width: 50px;">
+                    <img class="ico-modify" style="width: 25px;" src="assets/icons/print-route.svg">
+                </button>
+            </ng-container>
+        </div>
+    </div>

@@ -1,0 +1,41 @@
+.user-documentation-form {
+    .title-user {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-user {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7F96E0;
+        color: white;
+        padding: 0.9rem;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+    }
+
+    .add-document{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #3B4FFF;
+    }
+
+}

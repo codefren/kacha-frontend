@@ -1,0 +1,187 @@
+.modal-add-template-delivery {
+    .title-modal {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px;
+    }
+    .title-infor {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #363740;
+    }
+    .modal-footer {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-header {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .modal-body {
+        padding: 1rem 15px;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+    .sub-title-modal {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .size-btn {
+        width: 151px;
+    }
+    .btn-outline-primary:not(:disabled):not(.disabled).active,
+    .show>.btn-outline-primary.dropdown-toggle {
+        color: #000;
+        border-radius: 5px !important;
+        background-color: #E9E9E9;
+        border-color: #E9E9E9;
+    }
+    .btn-outline-primary {
+        border-radius: 5px !important;
+        color: #080808;
+        border-color: #E9E9E9;
+        background: #E9E9E9;
+    }
+    .btn-outline-primary:hover {
+        border-radius: 5px !important;
+        color: #000;
+        background-color: #E9E9E9;
+        border-color: #E9E9E9;
+    }
+    .alert-style {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.2px;
+        a {
+            color: #FF8D24;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.2px;
+        }
+        a:hover {
+            text-decoration-line: underline;
+        }
+        img {
+            vertical-align: bottom !important;
+        }
+    }
+    .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #FFF5ED;
+        border-radius: 5px;
+        background: #FFF5ED;
+    }
+    .form-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+        opacity: 1 !important;
+    }
+    .style-input-check {
+        // height: 76px !important;
+        padding: 3px 0px 0px 16px !important;
+        font-weight: 400;
+        font-size: 16px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+        border: 1px solid #DFE1E8;
+        p {
+            color: #363740;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 0.2px;
+        }
+        .no-selecter {
+            color: #8590A5;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.2px;
+        }
+        .selecter-file-text {
+            color: #363740;
+            leading-trim: both;
+            text-edge: cap;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.2px;
+        }
+        .img-clear-file {
+            float: right;
+        }
+    }
+    .btn-load-file {
+        border-radius: 3px;
+        border: 1px solid #DFE1E8;
+        width: auto;
+        color: #363740;
+        text-align: center;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .btn-load-file:hover {
+        background: #eeefef;
+        text-decoration: none;
+        border: 1px solid #c7cbcb;
+    }
+    .btn-load-file:disabled {
+        opacity: 0.5 !important;
+        border: 1px solid #DFE1E8 !important;
+        background: rgba(216, 218, 226, 0.20);
+    }
+}

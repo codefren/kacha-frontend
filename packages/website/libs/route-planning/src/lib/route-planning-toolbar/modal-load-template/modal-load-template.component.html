@@ -1,0 +1,143 @@
+<div class="modal-load-template">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> Cargar desde plantilla </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 pl-xl-4 pr-xl-4">
+
+                <div class="alert alert-warning" role="alert">
+
+                    <label class="alert-style">
+
+                        <img src="assets/icons/error.svg"> Escoge entre las plantillas ya configuradas o haz clic en <a class="point" (click)="redirectPreferences()">configurar la plantilla</a> para crear una nueva.
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-5 col-md-6 col-12 pl-xl-4 pr-xl-3">
+
+                <ng-container *ngIf="!loadSelectList">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+    
+    
+    
+                        <select class="form-select form-control w-100" id="categoryId"  placeholder="Seleccione" [(ngModel)]="templateSeleterID">
+    
+                            <option value="">{{ 'GENERAL.SELECT' | translate }} </option>
+    
+                            <option *ngFor="let item of templateList" [value]="item.id"> {{ item.templateName }} </option>
+    
+                        </select>
+    
+                        <label for="type" class="mt-2 title-col"> Plantilla  <span class="asterisco"> *</span></label>
+
+                        </span>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="loadSelectList">
+
+                    <div class="fa-5x loading-size text-center">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+            </div>
+
+            <div class="col-xl-7 col-md-6 col-12 pl-xl-0 pr-xl-4">
+
+                <div class="style-input-check">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-xl-8 col-12">
+
+                            <p class="mb-0 mt-2">Cargar fichero Excel/CSV <span class="asterisco"> *</span></p>
+
+                            <ng-container *ngIf="!fileName">
+
+                                <p class="no-selecter mt-2 mb-2">
+
+                                    Nada seleccionado
+
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="fileName">
+
+                                <p class="selecter-file-text mt-2 mb-2">
+
+                                    {{ fileName }}
+
+                                    <img class="img-clear-file point" title="Eliminar" src="assets/icons/cerrar 4.svg" (click)="clearFile()">
+
+                                </p>
+
+                            </ng-container>
+
+                        </div>
+
+                        <div class="col-xl-4 col-12">
+
+                            <button class="btn btn-icon btn-icon-white btn-load-file" [disabled]="fileName" (click)="fileAddImage.click()">Cargar archivo</button>
+
+                        </div>
+
+                        <input type="file" hidden #fileAddImage accept=".csv,.xlsx, .xls, .ods" (change)="importTemplateActions($event.target.files[0])" />
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer mt-3">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-outline-primary mr-2 size-btn" (click)="close(false)"> Cancelar </button>
+
+                <button class="btn btn-primary mr-2 size-btn" [disabled]="!templateSeleterID || !fileLoad" (click)="create()"> Cargar rutas </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

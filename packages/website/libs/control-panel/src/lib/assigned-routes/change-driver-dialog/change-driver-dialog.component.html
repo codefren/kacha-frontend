@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-right pt-2 pr-4">
+            <i class="fas fa-times close-button" (click)="cancelSelection()"></i>
+        </div>
+        <div class="col-10 text-center">
+            <p class="title">{{ 'CONTROL_PANEL.CHANGE_DRIVER' | translate }}</p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="offset-md-1 col-md-10 col-12">
+            <h3 class="subtitle-general">{{ 'CONTROL_PANEL.DRIVERS_AVAILABLE' | translate }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-md-1 col-md-10 col-12 padding-special">
+            <ng-container *ngIf="(users | async).length > 0; then: driver; else: noDriver"></ng-container>
+
+            <ng-template #driver>
+                <div class="row mt-1" *ngFor="let v of users | async; let i = index">
+                    <div class="col-1 p-2">
+                        <div class="round round-little">
+                            <input type="radio" name="driver" [id]="v.id" (click)="selectedUser(v.id, v.name)">
+                            <label [for]="v.id" #clik_driver></label>
+                        </div>
+                    </div>
+                    <div class="col-10 p-2">
+                        <label class="point ml-2" [for]="v.id">
+                                    
+                                        {{
+                                            v.name === null
+                                                ? ' '
+                                                : v.name
+                                        }}
+                                        {{
+                                            v.surname === null
+                                                ? ' '
+                                                : v.surname
+                                        }}
+                                </label>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template #noDriver>
+                <span class="size-general-font">{{ 'GENERAL.NO_DRIVERS_AVAILABLE' | translate }}</span>
+            </ng-template>
+        </div>
+
+    </div>
+
+    <div class="row mt-4 pt-2 pb-3">
+        <div class="col-md-6 col-12 text-center text-md-right">
+            <button class="btn size-btn-modal  btn-cancel" (click)="cancelSelection()">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+        </div>
+        <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+            <button class="btn btn-primary size-btn-modal" (click)="addSelection()"> 
+                        {{ 'GENERAL.TO_ACCEPT' | translate }}
+                    </button>
+        </div>
+    </div>
+</div>

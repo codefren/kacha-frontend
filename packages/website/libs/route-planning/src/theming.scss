@@ -1,0 +1,69 @@
+@import './lib/route-planning-toolbar/route-planning-toolbar.theme';
+@import './lib/route-planning-sidenav/route-planning-sidenav.theme';
+@import './lib/route-planning-sidenav/zones/zones.theme';
+@import './lib/route-planning-sidenav/zones/zone/zone.theme';
+@import '../shared/src/lib/route-planning-actions/route-planning-actions.theme';
+@import '../shared/src/lib/route-planning-panel/route-planning-panel.theme';
+@import '../shared/src/lib/route-planning-info/route-planning-info.theme';
+@import '../shared/src/lib/route-planning-options/route-planning-options.theme';
+@import '../shared/src/lib/route-planning-options/zone-vehicles/zone-vehicles.theme';
+@import '../shared/src/lib/route-planning-options/zone-vehicles/add-vehicles-dialog/add-vehicles-dialog.theme';
+@import '../shared/src/lib/route-planning-options/route-delivery-schedule/route-delivery-schedule.theme';
+@import '../shared/src/lib/route-planning-table/route-planning-table.theme';
+@import '../shared/src/lib/route-planning-recalculate-route/route-planning-recalculate-route.theme';
+@import '../shared/src/lib/edit-delivery-point/edit-delivery-point.theme';
+@import '../shared/src/lib/route-planning-subzones/route-planning-subzones.theme';
+@import './lib/route-planning-sidenav/route-planning-map/route-planning-map.theme';
+@import '../shared/src/lib/export-dialog/export-dialog.theme';
+@import '../shared/src/lib/print-dialog/print-dialog.theme';
+@import '../shared/src/lib/route-planning-route-panel/route-planning-route-panel.theme';
+@import '../shared/src/lib/recalculate-route/recalculate-route.theme';
+@mixin route-planning-theming($theme, $typo) {
+    // **Theme**
+    // Shared
+    @include route-planning-actions-theme($theme);
+    @include route-planning-panel-theme($theme);
+    @include route-planning-info-theme($theme);
+    @include route-planning-options-theme($theme);
+    @include zone-vehicles-theme($theme);
+    @include add-vehicles-dialog-theme($theme);
+    @include route-delivery-schedule-theme($theme);
+    @include route-planning-table-theme($theme);
+    @include route-planning-recalculate-route-theme($theme);
+    @include edit-delivery-point-theme($theme);
+    @include route-planning-subzones-theme($theme);
+    // @include export-dialog-theme($theme);
+    @include print-dialog-theme($theme);
+    @include easyroute-route-panel-theme($theme);
+    @include recalculate-route-theme($theme);
+    // Route Planning
+    @include route-planning-toolbar-theme($theme);
+    @include route-planning-sidenav-theme($theme);
+    @include zones-theme($theme);
+    @include zone-theme($theme);
+    @include route-planning-map-theme($theme);
+    //---------------------------------------------------------------------------//
+    // **Typography**
+    // Shared
+    @include route-planning-actions-typography($typo);
+    @include route-planning-panel-typography($typo);
+    @include route-planning-info-typography($typo);
+    @include route-planning-options-typography($typo);
+    @include zone-vehicles-typography($typo);
+    @include add-vehicles-dialog-typography($typo);
+    @include route-delivery-schedule-typography($typo);
+    @include route-planning-table-typography($typo);
+    @include route-planning-recalculate-route-typography($typo);
+    @include edit-delivery-point-typography($typo);
+    @include route-planning-subzones-typography($typo);
+    //  @include export-dialog-typography($typo);
+    @include print-dialog-typography($typo);
+    @include easyroute-route-panel-typography($typo);
+    @include recalculate-route-typography($typo);
+    // Route Planning
+    @include route-planning-toolbar-typography($typo);
+    @include route-planning-sidenav-typography($typo);
+    @include zones-typography($typo);
+    @include zone-typography($typo);
+    @include route-planning-map-typography($typo);
+}

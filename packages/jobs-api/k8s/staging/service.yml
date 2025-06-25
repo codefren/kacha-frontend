@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: staging
+    release: staging
+  name: staging-jobs-api
+  namespace: jobs-api
+spec:
+  ports:
+  - name: web
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: staging
+    tier: web
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,16 @@
+FROM alpine:latest AS build
+
+COPY . /src
+WORKDIR /src
+
+RUN apk add --no-cache cmake make gcc g++ curl-dev rapidjson-dev && \
+    wget https://github.com/jpbarrette/curlpp/archive/v0.8.1.tar.gz && tar -xzf v0.8.1.tar.gz && \
+    cd curlpp-0.8.1 && mkdir build && cd build && cmake .. && make && make install && cd ../.. && \
+    rm -rf build && mkdir build && cd build && cmake .. && make && cp optimroute-engine-core /opt/optimroute-engine-core
+
+FROM alpine:latest
+COPY --from=build /opt/optimroute-engine-core /opt/optimroute-engine-core
+COPY --from=build /usr/local /usr/local
+RUN apk add --no-cache curl-dev gcc g++
+WORKDIR /opt
+ENTRYPOINT ["/opt/optimroute-engine-core"]

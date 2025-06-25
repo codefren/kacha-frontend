@@ -1,0 +1,133 @@
+.modal-header {
+    display: block;
+    padding: 1rem 1.5rem;
+}
+.modal-body {
+    padding: 1rem 1.5rem;
+}
+
+.modal-footer {
+    display: block;
+    padding: 1rem 1rem;
+    background-color: #F6F8FA !important;
+}
+
+.title-modal {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #363740;
+}
+
+.card-body {
+    background: #FFFFFF !important;
+    border: 1px solid #DFE1E8 !important;
+    border-radius: 12px !important;
+}
+
+.table thead th {
+    border-bottom: 1px solid #dee2e6;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 19px;
+    color: #9899AA;
+}
+
+.table tbody td {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #363740;
+}
+
+.text-optimized {
+    color: #3B4FFF !important;
+}
+
+.quantity-bold {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 29px;
+    align-items: center;
+
+    color: #000000;
+
+}
+
+.title-box {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    align-items: center;
+    color: #7E858E;
+}
+
+.box {
+    background: #F6F8FA;
+    border-radius: 3px;
+}
+
+.close-img {
+    cursor: pointer;
+}
+
+.text-evualuted {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    align-items: center;
+    color: #7E858E;
+}
+
+.evaluated-box {
+    background-color: #fff;
+    width: 100%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+
+    color: #7E858E;
+    padding: 8px;
+
+}
+
+.optimized-box {
+    background-color: #FFEEDE;
+    width: 100%;
+    padding: 8px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 29px;
+    align-items: center;
+
+    color: #FF8D24;
+
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, 
+.col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, 
+.col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, 
+.col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, 
+.col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, 
+.col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, 
+.col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, 
+.col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, 
+.col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, 
+.col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+

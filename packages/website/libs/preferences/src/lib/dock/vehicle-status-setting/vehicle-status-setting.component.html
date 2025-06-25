@@ -1,0 +1,124 @@
+<div class="vehicle-status">
+
+    <div class="card">
+
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <label class="title-road" for=""> {{'LOADING_DOCK.SETTING.TEMPERATURE' | translate }} </label>
+                    <p class="sub-title-road mt-1 mb-0"> {{'LOADING_DOCK.SETTING.MESSAGE_TEMPERATURE' | translate }} </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-4 col-12">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showMont point showKg" placeholder="-17" [(ngModel)]="companyPreferencesLoadingDock.minTemperature" (change)="changedUpdate = true" id="minTemperature" type="number"  (blur)="createConcept()" (keyup.enter)="createConcept()"/>
+
+                            <label for="first" class="mt-2 title-col"> {{'LOADING_DOCK.SETTING.MINIMUM_TEMPERATURE' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showMont point showKg" placeholder="-14"  [(ngModel)]="companyPreferencesLoadingDock.maxTemperature" (change)="changedUpdate = true" id="maxTemperature" type="number"  (blur)="createConcept()" (keyup.enter)="createConcept()"/>
+
+                            <label for="first" class="mt-2 title-col"> {{'LOADING_DOCK.SETTING.MAXIMUM_TEMPERATURE' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card pt-1 mt-2">
+
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <label class="title-road" for=""> {{'LOADING_DOCK.SETTING.PREDEFINED_ANSWERS_BY_BAD_STATE' | translate }} </label>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="">
+
+                        <div class="border-special">
+
+                            <div class="switch w-100">
+
+                                <label class="switch-width mb-0">
+
+                                    <input type="checkbox" [value]="companyPreferencesLoadingDock.activateAnswerAppForBadStatus" [checked]="companyPreferencesLoadingDock.activateAnswerAppForBadStatus" (change)="changeGeneral($event.target.checked, 'activateAnswerAppForBadStatus')"/>
+
+                                    <span class="lever lever-general switch-col-primary mt-2 mb-2 mr-2 ml-0"></span>
+
+                                    <span class="lever-text toogle-style"> {{'LOADING_DOCK.SETTING.ACTIVATE_PREDEFINED_ANSWERS' | translate}} </span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-3 mb-xl-0"> {{'LOADING_DOCK.SETTING.MESSAGE_PREDEFINED_ANSWERS' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <ng-container *ngIf="companyPreferencesLoadingDock && companyPreferencesLoadingDock.activateAnswerAppForBadStatus">
+                <div class="row pt-4">
+                    <div class="col-12">
+                        <table class="table table-striped table-responsive-lg table-responsive-md table-bordered mb-0" id="vehicleStatus" style="text-align: center ; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                    <th style="border-top-left-radius: 6px;" width="10%"> {{'LOADING_DOCK.SETTING.STATUS' | translate }} </th>
+                                    <th width="30%"> {{'LOADING_DOCK.SETTING.ORDER_APP' | translate }} </th>
+                                    <th> {{'LOADING_DOCK.SETTING.PREDEFINED_ANSWER' | translate }} </th>
+                                    <th width="5%"></th>
+                                    <th style="border-top-right-radius: 6px;" width="5%"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row pt-3 pb-3">
+                    <div class="col-12">
+                        <a class="add-expenses-type point" (click)="modalAddVehicleStatus()"> + {{ 'LOADING_DOCK.SETTING.ADD_PREDEFINED_ANSWER' | translate }} </a>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+</div>

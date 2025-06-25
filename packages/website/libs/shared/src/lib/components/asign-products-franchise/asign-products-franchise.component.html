@@ -1,0 +1,70 @@
+<div class="modal-add-product-to-franchise">
+    <section class="card">
+
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-4">
+                <i class="fas fa-times close-button point" (click)="activeModal.close(false)"></i>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <p class="title">{{ title }}</p>
+            </div>
+        </div>
+
+        <div class="card-body pt-0">
+            <div class="modal-wrapper pt-0">
+                <div class="modal-text">
+                    <div class="row text-center">
+                        <div class="col-10 offset-1">
+                            <p class="mb-0 select-franchises-text">
+                                {{ subTitle }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="overflow-container" style="max-height: 300px;overflow-y: auto;">
+                        <div class="row row-pad">
+                            <div class="offset-2 col-1">
+                                <div class="round round-little text-center">
+                                    <input type="checkbox" class="isActive" id="all" (change)="changeAll($event.target.checked)" />
+                                    <label for="all"></label>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <label for="all" class="text-mute">{{ 'PRODUCTS.SELECT_ALL' | translate }}</label>
+                            </div>
+
+                        </div>
+                        <div class="row row-pad" *ngFor="let franchise of franchises">
+                            <div class="offset-2 col-1">
+                                <div class="round round-little text-center">
+                                    <input type="checkbox" class="isActive" [id]="franchise.id" [checked]="isChecked(franchise.id)" (change)="selectedFranchise($event.target.checked, franchise.id)" />
+                                    <label [for]="franchise.id"></label>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <label class="text-mute" [for]="franchise.id">{{ franchise.name}}</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="activeModal.close(false)">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                <button class="btn btn-primary size-btn-modal modal-confirm" (click)="submit()" [disabled]="franchisesSelected &&  franchisesSelected.length === 0">
+                    {{ 'GENERAL.SEND' | translate }}
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

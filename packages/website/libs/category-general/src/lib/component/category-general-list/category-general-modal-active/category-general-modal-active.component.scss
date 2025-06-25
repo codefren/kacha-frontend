@@ -1,0 +1,31 @@
+.category-general-modal-active {
+    .pointer {
+        cursor: pointer;
+    }
+    p {
+        font-size: 24px;
+        font-weight: 300;
+    }
+    .btn {
+        width: 100%;
+        text-transform: uppercase;
+    }
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+    }
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+    }
+    .title {
+        color: #ff9e4d;
+    }
+    .parrafo {
+        font-size: 18px;
+        color: #1d1d1d;
+        font-weight: lighter;
+    }
+}

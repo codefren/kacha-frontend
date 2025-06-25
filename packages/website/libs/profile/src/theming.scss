@@ -1,0 +1,18 @@
+@import './lib/profile-invoicing/profile-invoicing.theme';
+@import './lib/profile-invoicing/my-invoices/my-invoices.theme';
+@import './lib/profile-invoicing/subscription-status/subscription-status.theme';
+@import './lib/profile.theme';
+
+@mixin profile-theming($theme, $typo) {
+    // Theme
+    @include profile-theme($theme);
+    @include profile-invoicing-theme($theme);
+    @include my-invoices-theme($theme);
+    @include subscription-status-theme($theme);
+
+    // Typography
+    @include profile-typography($typo);
+    @include profile-invoicing-typography($typo);
+    @include my-invoices-typography($typo);
+    @include subscription-status-typography($typo);
+}

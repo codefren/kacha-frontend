@@ -1,0 +1,81 @@
+<div id="modalForm ">
+    <section class="card">
+
+        <div class="col-md-12 col-12 text-right pt-2 ">
+            <i class="fas fa-times close-button point" (click)="closeModal(false)"></i>
+        </div>
+
+        <div class="container users-confirm-dialog">
+            <div class="row mt-3 justify-content-center">
+                <!-- CUANDO SE ACTIVA O INACTIVA UN USERS -->
+                <div class="col-8 text-center" *ngIf="info">
+                    <p class="parrafo m-0">
+                        {{ title | translate }}{{ user.name + ' ' + user.surname + '?' }}
+                    </p>
+                </div>
+                <div class="col-10 text-center mt-0" *ngIf="info">
+                    <p class="text-muted info">
+                        {{ info | translate }}
+                    </p>
+                </div>
+
+                <!-- CUANDO SE CREA UN USERS -->
+                <div class="col-8 text-center mt-0" *ngIf="body1">
+                    <p class="parrafo m-0">
+                        {{ body1 | translate }}
+                    </p>
+                    <p class="parrafo m-0">
+                        {{ body2 | translate }}
+                    </p>
+                    <p class="parrafo">
+                        <span class="color-price">{{ body3 }}€</span> {{'USERS.BODY_IVA_INCLUDED' | translate }}
+                    </p>
+                </div>
+                <div class="col-10 text-center plr-5" *ngIf="body1">
+                    <p class="parrafo m-0">
+                        {{ 'USERS.BODY_THE' | translate }} <u> {{ 'USERS.BODY_BILL' | translate }} </u> {{ 'USERS.BODY_FROM_YOUR_USER_PROFILE' | translate }}
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- BOTONES -->
+            <!--  <footer class="row justify-content-center pb-4">
+                <button type="button" class="btn btn-cancel  size-btn-modal mr-4"  *ngIf="!body1" (click)="closeModal(false)">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+                <button type="button" class="btn btn-primary size-btn-modal" *ngIf="!body1" (click)="closeModal(true)">
+                    {{ buttonAccept | translate }}
+                </button>
+                <button type="button" class="btn btn-primary size-btn-modal" *ngIf="body1" (click)="closeModal(true)">
+                    {{ buttonAccept | translate }}
+                </button>
+            </footer> -->
+
+            <div class="row mb-4 mt-3">
+                <div class="col-md-6 col-12 text-center text-md-right" *ngIf="!body1">
+                    <button type="button" class="btn size-btn-modal btn-cancel modal-dismiss" (click)="closeModal(false)">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+
+                <div class="col-12 text-center mt-2 mt-md-0" [ngClass]="{'col-md-6 text-md-left': !body1 }">
+                    <button type="button" class="btn btn-primary size-btn-modal modal-confirm" *ngIf="!body1" (click)="closeModal(true)">
+                        {{ buttonAccept | translate }}
+                    </button>
+
+                    <button type="button" class="btn btn-primary size-btn-modal modal-confirm" *ngIf="body1" (click)="closeModal(true)">
+                        {{ buttonAccept | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <!-- MENSAJE FINAL -->
+            <div class="col-12 text-center mt-0" *ngIf="body1">
+                <p class="text-center pr-5 pl-5 style-terns">
+                    {{ 'USERS.BODY_REGISTERING_NEW_USER_ACCEPT_THE' | translate }} <u> {{ 'MODULES.TERMS_AND_CONDITIONS' | translate }} </u> {{ 'MODULES.BY_POLPOO' | translate }}
+                </p>
+            </div>
+        </div>
+    </section>
+</div>

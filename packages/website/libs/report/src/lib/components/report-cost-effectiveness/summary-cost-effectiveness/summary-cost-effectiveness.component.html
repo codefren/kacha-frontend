@@ -1,0 +1,369 @@
+<div class="summary-cost-effectiveness">
+
+    <div class="row" *ngIf="productivityTotalized">
+<!-- 
+        <div class="col-xl-12 col-12">
+
+            <div class="row mb-3">
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3 pr-xl-2">
+
+                    <div class="card">
+
+                        <ng-container *ngIf="show">
+
+                            <div class="card-body big-body border-1">
+
+                                <div class="form-inline">
+
+                                    <img class="mr-2" src="assets/icons/report/cost/cost-no-delivery.svg" alt="">
+
+                                    <span class="title-cost-no-delivery-bold">Coste por no realizar servicios</span>
+
+                                </div>
+
+                                <div class="div">
+
+                                    <img class="flota-img" src="assets/icons/alert.svg">
+
+                                    <span class="pt-1 mb-1 span-cost-no-delivery">{{ formatEuro(productivityTotalized.facturacionNoRealizada > 0 ? (productivityTotalized.facturacionNoRealizada * 0.25) : 0 ) }}</span>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-1 pr-xl-2">
+
+                    <div class="card">
+
+                        <ng-container *ngIf="show">
+
+                            <div class="card-body big-body border-2">
+
+                                <div class="form-inline">
+
+                                    <span class="title-cost-no-delivery">Servicios no realizados</span>
+
+                                </div>
+
+                                <p class="style-card-lef pt-1 mb-1 mt-3">{{ productivityTotalized.pointNoDeliveried }}</p>
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-1 pr-xl-1">
+
+                    <div class="card">
+
+                        <ng-container *ngIf="show">
+
+                            <div class="card-body big-body border-3">
+
+                                <div class="form-inline">
+
+                                    <span class="title-cost-no-delivery">Facturación no realizada</span>
+
+                                </div>
+
+                                <div class="profile-name">
+
+                                    <p class="profile-menu text-no-wrap pt-1 mb-1 mt-3" [title]="formatEuro(productivityTotalized.facturacionNoRealizada)"> {{ formatEuro(productivityTotalized.facturacionNoRealizada) }} </p>
+
+                                </div>
+
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3 pl-xl-2 pr-xl-3">
+
+                    <div class="card">
+
+                        <ng-container *ngIf="show">
+
+                            <div class="card-body big-body">
+
+                                <div class="form-inline">
+
+                                    <img class="mr-2" src="assets/icons/report/cost/cost-desocupacion.svg" alt="">
+
+                                    <span class="title-cost-no-delivery-bold">Coste desocupación</span>
+
+                                </div>
+
+                                <p class="style-card-lef pt-1 mb-1 mt-2">{{ formatEuro(productivityTotalized.costDesocupacion === null ? 0 : productivityTotalized.costDesocupacion) }}</p>
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div> -->
+        <!-- <div class="col-xl-3 col-12 pl-3 pr-2">
+            
+            <div class="card">
+                <ng-container *ngIf="show">
+
+                    <div class="card-body">
+
+                        <img src="assets/icons/report/cost/arrowGren.svg">
+    
+                        <p class="style-rent pt-4 mb-1">+{{ decimal(productivityTotalized.youProductivity) }}</p>
+    
+                        <p class="title-final mb-0"> {{ 'REPORT.COST_EFFECTIVENESS.YOUR_PROFITABILITY' | translate }} </p>
+    
+                    </div>
+
+                </ng-container>
+                
+                <ng-container *ngIf="!show">
+
+                    <div class="fa-3x mb-2 text-center pt-5">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div> -->
+
+        <div class="col-xl-12 col-12">
+
+            <div class="row">
+
+                <!-- card viajes -->
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pr-xl-2">
+
+                    <div class="card">
+                        <ng-container *ngIf="show">
+                            <div class="card-body">
+
+                                <p class="style-card-lef pt-1 mb-1">{{ productivityTotalized.countRoutes }}</p>
+
+                                <p class="title-final mb-0"> {{'REPORT.COST_EFFECTIVENESS.ASSIGNED_TRIPS' | translate }} </p>
+
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-1 pr-xl-2">
+
+                    <div class="card">
+                        <ng-container *ngIf="show">
+                            <div class="card-body">
+
+                                <p class="style-card-lef pt-1 mb-1">{{ productivityTotalized.assignedTravels }}</p>
+
+                                <p class="title-final mb-0"> Total servicios </p>
+
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <!-- end card viajes -->
+
+                <!-- Tiempo servicio -->
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-1 pr-xl-2">
+
+                    <div class="card">
+                        <ng-container *ngIf="show">
+                            <div class="card-body">
+
+                                <p class="style-card-lef pt-1 mb-1">{{ dateFormatDetails(productivityTotalized.serviceTimeClient) }}</p>
+
+                                <p class="title-final mb-0"> {{'REPORT.COST_EFFECTIVENESS.SERVICE_TIME' | translate }} </p>
+
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <!-- end Tiempo servicio -->
+
+                <!-- Total retrasos -->
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-1 pr-xl-1">
+
+                    <div class="card">
+                        <ng-container *ngIf="show">
+                            <div class="card-body">
+
+                                <p class="style-card-lef pt-1 mb-1">{{ productivityTotalized.totalDelays }}</p>
+
+                                <p class="title-final mb-0"> {{'REPORT.COST_EFFECTIVENESS.TOTAL_DELAYS' | translate }} </p>
+
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+
+                        </ng-container>
+                    </div>
+
+                </div>
+
+                <!-- end Total retrasos -->
+
+                <!-- Total incidencias -->
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-2 pr-xl-2">
+
+                    <div class="card">
+                        <ng-container *ngIf="show">
+                            <div class="card-body">
+
+                                <p class="style-card-lef pt-1 mb-1">{{ productivityTotalized.totalIncidents }}</p>
+
+                                <p class="title-final mb-0"> {{'REPORT.COST_EFFECTIVENESS.TOTAL_INCIDENTS' | translate }} </p>
+
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="fa-3x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <!-- end Total incidencias -->
+
+                <!-- Total devoluciones -->
+
+                <div class="col-xl-2 col-12 mt-xl-0 mt-3 pl-xl-1">
+
+                    <div class="card">
+                        <ng-container *ngIf="show">
+                            <div class="card-body">
+
+                                <p class="style-card-lef pt-1 mb-1">{{ productivityTotalized.totalDevolutions }}</p>
+
+                                <p class="title-final mb-0"> {{'REPORT.COST_EFFECTIVENESS.TOTAL_RETURNS' | translate }} </p>
+
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!show">
+                            <div class="fa-3x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                </div>
+
+                <!-- end Total devoluciones -->
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="row mb-3 border-bottom">
+    <div class="col-3 text-center">
+        <h3 for="" class="ml-4 filter-title">{{ 'GENERAL.FILTER_NAME' | translate }}</h3>
+    </div>
+    <div class="col-9 text-right pt-3 pr-4">
+        <button class="btn clear" (click)="closeDialog()"> <i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<!-- Filtros -->
+<div class="row justify-content-around pb-2 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'USERS.SHOW' | translate }}</label>
+
+        <div class="input-group hack-select">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.showActive" class="form-control letter-app"
+                #showActive id="showActive">
+                <option value="">{{ 'USERS.ALL' | translate }}</option>
+                <option value="true">{{ 'USERS.ACTIVES' | translate }}</option>
+                <option value="false">{{ 'USERS.DEACTIVES' | translate }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Mostrar Rol -->
+<div class="row justify-content-around pb-4 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0" for="rol">{{ 'USERS.SHOW' | translate }} {{ 'USERS.ROLE' | translate }}</label>
+
+        <div class="text-center p-2" *ngIf="loading == 'loading'">
+            <div class="fa-3x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+        <div class="text-center p-2" *ngIf="loading == 'success' && profiles.length == 0">
+            <p class="text-center text-danger">{{ 'GENERAL.NO_STATUS_AVAILABLE' | translate }}</p>
+        </div>
+        <div class="input-group hack-select" *ngIf="loading == 'success' && profiles.length > 0">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.profileId" class="form-control letter-app"
+                #profileId id="profileId">
+                <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option *ngFor="let profile of profiles" [value]="profile.id">{{profile.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="loading == 'error'">
+            <p class="text-danger text-center pointer" (click)="getUserProfile()">
+                {{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' |
+                translate }}<ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!</p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-6 offset-3 col-md-6 text-center mt-4">
+        <button class="btn btn-primary btn-block" (click)="closeDialog()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 text-left ml-4 position-absolute bottom-0">
+        <a (click)="clearSearch()">Limpiar filtro</a>
+    </div>
+</div>

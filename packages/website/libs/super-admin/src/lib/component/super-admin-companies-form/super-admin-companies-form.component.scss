@@ -1,0 +1,28 @@
+.super-admin-companies-form {
+
+    .lines-conteiner{
+        border-bottom: 1px solid #adacad;
+    }
+    .no-selecter{
+        font-size: 15px;
+        color: #aeaeae;
+        font-family: Helvetica;
+    }
+
+    .selecter{
+        font-size: 15px;
+        color: #24397c;
+        font-weight: 600;
+        font-family: Helvetica;
+    }
+    
+    .col-selecter{
+        background: #f1f4ff;
+        height: 49px;
+        justify-content: center !important;
+    }
+
+    .point{
+        cursor: pointer;
+    }
+}

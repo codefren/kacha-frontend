@@ -1,0 +1,241 @@
+<div class="easyroute-clients-unlinked-form padding-body pt-0 bg-white2">
+    <div class="container ">
+
+        <div class="row pt-5 align-items-center justify-content-center mb-3 pb-3">
+            <div class="mr-3 return-left point" routerLink="/miwigo-unlinked">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0">
+                {{ 'CLIENTS.EDIT_PENDING_BINDINGS' | translate }}
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center mt-2">
+            <form class="font-general padding-form" style="width: 100%" *ngIf="user && deliveryPointLink">
+                <div class="row">
+                    <!-- row user data -->
+                    <div class="col-12 padding-col">
+                        <h3 class="subtitle-general">
+                            {{ 'USERS.USER_DATA' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="col-12 col-md-6 padding-col">
+                        <!-- name -->
+                        <div class="form-group form-row">
+                            <label for="name">  {{ 'GENERAL.NAME' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="name" *ngIf="user?.name != null" [value]="user?.name" />
+                            <input type="text" readonly class="form-control" id="name" *ngIf="user?.name == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                        <!-- SURNAME-->
+                        <div class="form-group form-row">
+                            <label for="surname"> {{ 'GENERAL.SURNAME' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="surname" *ngIf="user?.surname != null" [value]="user?.surname" />
+                            <input type="text" readonly class="form-control" id="surname" *ngIf="user?.surname == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-md-6 padding-col">
+                        <!-- phone -->
+                        <div class="form-group form-row">
+                            <label for="phone">  {{ 'GENERAL.PHONE_NUMBER' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="phone" *ngIf="user?.phone !=null" [value]="'+' + user?.phone" />
+                            <input type="text" readonly class="form-control" id="phone" *ngIf="user?.phone == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                        <!-- adrees -->
+                        <div class="form-group form-row">
+                            <label for="email"> {{ 'USERS.EMAIL' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="email" *ngIf="user?.email !=null" [value]="user?.email" />
+                            <input type="text" readonly class="form-control" id="email" *ngIf="user?.email == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+                    </div>
+
+                    <!-- end user data -->
+                </div>
+
+
+                <!-- row data clients -->
+                <div class="row mt-4">
+
+                    <div class="col-12 padding-col">
+                        <h3 class="subtitle-general">
+                            {{ 'CLIENTS.CLIENTS_FORMS.CLIENT_DATA' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="col-12 col-md-6 padding-col">
+                        <!-- name clients -->
+                        <div class="form-group form-row">
+                            <label for="delveryPointName"> {{ 'GENERAL.NAME' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="delveryPointName" *ngIf="user?.delveryPointName !=null" [value]="user?.delveryPointName" />
+                            <input type="text" readonly class="form-control" id="delveryPointName" *ngIf="user?.delveryPointName == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                        <!-- nif -->
+
+                        <div class="form-group form-row">
+                            <label for="deliveryPointNationalId"> {{ 'CLIENTS.CLIENTS_FORMS.NIF' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="deliveryPointNationalId" *ngIf="user?.deliveryPointNationalId !=null" [value]="user?.deliveryPointNationalId" />
+                            <input type="text" readonly class="form-control" id="deliveryPointNationalId" *ngIf="user?.deliveryPointNationalId == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                        <!-- city -->
+
+                        <div class="form-group form-row">
+                            <label for="deliveryPointCity">  {{ 'CLIENTS.CLIENTS_FORMS.CITY' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="deliveryPointCity" *ngIf="user?.deliveryPointCity !=null" [value]="user?.deliveryPointCity" />
+                            <input type="text" readonly class="form-control" id="deliveryPointCity" *ngIf="user?.deliveryPointCity == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 padding-col">
+                        <!-- addres -->
+
+                        <div class="form-group form-row">
+                            <label for="deliveryPointAdress"> {{ 'CLIENTS.CLIENTS_FORMS.ADRESS' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="deliveryPointAdress" *ngIf="user?.name != null" [value]="user?.deliveryPointAdress" />
+                            <input type="text" readonly class="form-control" id="deliveryPointAdress" *ngIf="user?.deliveryPointAdress == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                        <!-- email clients -->
+
+                        <div class="form-group form-row">
+                            <label for="deliveryPointEmail">  {{ 'CLIENTS.CLIENTS_FORMS.EMAIL' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="deliveryPointEmail" *ngIf="user?.deliveryPointEmail !=null" [value]="user?.deliveryPointEmail" />
+                            <input type="text" readonly class="form-control" id="deliveryPointEmail" *ngIf="user?.deliveryPointEmail == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                        <!-- postal code  -->
+                        <div class="form-group form-row">
+                            <label for="deliveryPointPostalCode">   {{ 'CLIENTS.CLIENTS_FORMS.POSTAL_CODE' | translate }} </label>
+                            <input type="text" readonly class="form-control" id="deliveryPointPostalCode" *ngIf="user?.deliveryPointPostalCode !=null" [value]="user?.deliveryPointPostalCode" />
+                            <input type="text" readonly class="form-control" id="deliveryPointPostalCode" *ngIf="user?.deliveryPointPostalCode == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- row buttons  -->
+                <div class="row mt-4">
+                    <div class="col-12 padding-col">
+                        <h3 class="subtitle-general">
+                            {{ 'CLIENTS.ASSIGN_CLIENT' | translate }}
+                        </h3>
+                    </div>
+                    <div class="col-12 col-md-6 padding-col">
+                        <div class="form-row form-group">
+                            <label for="deliveryPointAdress"> {{ 'CLIENTS.CLIENTS_INFO.ASSIGN_TO_CLIENT' | translate }} </label>
+
+                            <ng-container *ngIf="codeCLient.length > 0">
+                                <select class="form-control" id="id" disabled readonly>
+                                    <option *ngFor="let codeclient of codeCLient" readonly  [value]="codeclient.id">{{codeclient.name}} - {{codeclient.deliveryZoneId}} - {{codeclient.agent_user?.name}} {{codeclient.agent_user?.surname}}</option>
+                                </select>
+                            </ng-container>
+
+                            <div class="break-line d-flex flex-align" [ngClass]="{'col-md-12 mt-3 justify-content-center justify-content-md-start': codeCLient.length == 0 , 'col-lg-12 col-12 flex-row mt-1 justify-content-end p-0 responsive-button': codeCLient.length > 0 }">
+                                <button type="button" class="btn btn-cancel size-btn-form" [ngClass]="{'mr-lg-5': codeCLient.length == 0,'mr-1': codeCLient.length > 0  }" (click)="OnChangeCheckActive(user.id, true ,'linked')">{{ 'CLIENTS.CLIENTS_INFO.Search' | translate }}</button>
+                                <!--  <button type="button" *ngIf="codeCLient.length == 0" class="btn btn-cancel size-btn-form ml-lg-5 ml-5" (click)="openModalCreateDeliveryPoint(user.id)">{{ 'CLIENTS.CLIENTS_INFO.CREATE_NEW' | translate }}</button> -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- rechar o crear una vez este el cliente selecionado -->
+                    <div class="col-12 col-md-6 padding-col mt-lg-5 mt-3">
+                        <div class="row">
+                            <div class="col-sm-6 col-12 text-center mt-1" [ngClass]="{' mt-2': codeCLient.length  === 0, 'mt-1':codeCLient.length > 0 }">
+                                <button class="btn btn-cancel size-btn-form" type="button" (click)="confimationDeleteLinked(user.id , false, 'delete');">{{ 'CLIENTS.CLIENTS_INFO.TO_REFUSE' | translate }}</button>
+                            </div>
+                            <div class="col-sm-6 col-12 text-center mt-1" [ngClass]="{' mt-2': codeCLient.length  === 0, 'mt-1':codeCLient.length > 0 }">
+                                <button class="btn btn-primary size-btn-form" type="button" [disabled]="codeCLient.length == 0" (click)="confirmationUpdateLinked(user.id, true ,'update')">
+                                            {{ 'GENERAL.ACCEPT' | translate }}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- row new clients -->
+                <div class="row mt-4" *ngIf="codeCLient.length == 0">
+
+                    <div class="col-12 padding-col">
+                        <h3 class="subtitle-general">
+                            {{ 'CLIENTS.CLIENTS_FORMS.NEW_CLIENT' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+
+                            <div class="col-12 text-center mt-2 mb-2">
+                                <p class="title m-0">¿ Es un nuevo cliente?</p>
+
+                            </div>
+
+                            <div class="col-md-12 col-12 text-center mt-1" [ngClass]="{' mt-2': codeCLient.length  === 0, 'mt-1':codeCLient.length > 0 }">
+                                <button class="btn btn-primary size-btn-form" type="button" (click)="openModalCreateDeliveryPoint(user.id)">
+                                         {{ 'GENERAL.CREATE' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- row table client unlinked of nif -->
+
+                <div class="row mt-5">
+                    <div class="col-12 padding-col">
+                        <h3 class="subtitle-general">
+                            {{ 'GENERAL.LINKED_WITH_THIS_CIF/NIF' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="col-12 padding-col">
+                        <div class="card card-style-general">
+
+                            <h5 class="text-center" *ngIf="deliveryPointLink.length == 0">
+                                {{ 'GENERAL.THERE_ARE_NO_LINKS' | translate }}
+                            </h5>
+                            <div class="card-body p-0" *ngIf="deliveryPointLink.length > 0">
+                                <table class="table table-responsive-lg  table-bordered table-striped mb-0">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th class="text-center">{{ 'GENERAL.NAME' | translate }}</th>
+                                            <th class="text-center">{{ 'GENERAL.CIF/NIF' | translate }}</th>
+                                            <th class="text-center">{{ 'GENERAL.LINKED_USER' | translate }}</th>
+                                            <th class="text-center">{{ 'GENERAL.ADDRESS' | translate }}</th>
+                                            <th class="text-center">{{ 'GENERAL.EMAIL' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let deliveryPoint of deliveryPointLink">
+                                        <tr>
+                                            <td data-title="name" class="text-center">{{deliveryPoint.name}}</td>
+                                            <td data-title="nif" class="text-center">{{deliveryPoint.nif}}</td>
+                                            <td data-title="linkedUser" class="text-center">{{deliveryPoint.linkedUser}}</td>
+                                            <td data-title="linkedUser" class="text-center">{{deliveryPoint.linkedUser}}</td>
+                                            <td data-title="email" class="text-center">{{deliveryPoint.email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

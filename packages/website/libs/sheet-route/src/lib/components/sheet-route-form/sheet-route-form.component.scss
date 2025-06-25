@@ -1,0 +1,83 @@
+.sheet-route-form {
+    .btn-primary {
+        height: 45px;
+        background: #D8DAE2;
+        border-radius: 5px;
+    }
+    .btn-default {
+        background: #FFFFFF;
+        border-radius: 5px;
+        border-color: #fff;
+        height: 45px;
+    }
+    .alt-btn-default {
+        width: 134px;
+    }
+    .title-sheet {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .img-returns {
+        vertical-align: baseline;
+    }
+    .progress-bar {
+        background-color: #3B4FFF;
+    }
+    .title-route {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .style-info {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .name-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .no-selecter {
+        opacity: 0.65;
+        .title-selected {
+            font-weight: 500;
+        }
+    }
+    .progress {
+        height: 20px;
+    }
+    .title-selected {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .progress {
+        background-color: #e9ecef !important;
+    }
+}

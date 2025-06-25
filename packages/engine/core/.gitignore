@@ -1,0 +1,23 @@
+/bin
+/target
+/output
+.DS_Store
+
+# IntelliJ
+*.ipr
+*.iws
+*.iml
+.idea/
+
+# Eclipse
+.project
+.classpath
+/.settings/
+
+optimroute-engine-core.jar
+./jsprit-optimroute-1.8-SNAPSHOT-jar-with-dependencies.jar
+/build
+/jsprit-optimroute/target/
+/jsprit-optimroute/input/
+/jsprit-optimroute/logger.log
+*.8-SNAPSHOT-jar-with-dependencies.jar

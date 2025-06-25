@@ -1,0 +1,94 @@
+.easyroute-delivery-made {
+    .title-card {
+        color: #607d8b;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 5px;
+    }
+    .progress {
+        display: -ms-flexbox;
+        display: flex;
+        height: 26px;
+        overflow: hidden;
+        font-size: 12px;
+        background-color: #e9ecef;
+        border-radius: 0 !important;
+    }
+    .progress .progress-bar {
+        border-radius: 0px !important;
+    }
+    .overflow-scroos {
+        height: 600px;
+        overflow: auto;
+        box-sizing: border-box;
+        padding: 0 1rem;
+    }
+    .no-date {
+        height: 583px;
+    }
+    /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+    .overflow-scroos::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:vertical {
+        width: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-button:increment,
+    .overflow-scroos::-webkit-scrollbar-button {
+        display: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-thumb {
+        /* background-color: #797979;
+        border-radius: 20px;
+        border: 2px solid #f1f2f3; */
+        background-color: #79797900;
+        border-radius: 20px;
+        border: 2px solid #f1f2f300;
+    }
+    .overflow-scroos::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+    .total-point {
+        color: #7e7e7e;
+        font-size: 16px;
+    }
+    .total-cost {
+        color: #f88c24;
+        font-size: 16px;
+    }
+    .col-name {
+        line-height: 16px;
+    }
+    .name-zone {
+        color: #7e7e7e;
+        font-weight: inherit;
+        font-size: 14px !important;
+    }
+    .alt {
+        background: #0088cc;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .fa-10x {
+        font-size: 18em;
+    }
+    .value-bar {
+        opacity: 0.2;
+        border-radius: 0px !important;
+    }
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+        line-height: 1.3 !important;
+        border-radius: 2.25rem;
+        color: #607d8b;
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+    }
+    .hack-select:after {
+        right: 22px !important;
+    }
+}

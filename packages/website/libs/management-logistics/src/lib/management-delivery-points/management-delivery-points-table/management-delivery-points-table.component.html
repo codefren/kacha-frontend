@@ -1,0 +1,244 @@
+<!--
+    <div class="easyroute-management-delivery-points-table" fxLayout="column">
+        <div class="top-row" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="name">
+                <h2>{{ name }}</h2>
+            </div>
+            <div class="search" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                <div
+                    class="filter-fields"
+                    fxLayout="row"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="20px"
+                >
+                    <mat-form-field class="filter-input-form-field">
+                        <mat-select
+                            placeholder="Filter by"
+                            [(value)]="filter"
+                            (selectionChange)="filterValue = null"
+                            disableOptionCentering="true"
+                        >
+                            <mat-option [value]="filterNone"> None </mat-option>
+                            <mat-option *ngFor="let column of columns" [value]="column">
+                                {{ column.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="filter-value-input-form-field">
+                        <input
+                            matInput
+                            [disabled]="filter.name == 'none'"
+                            [type]="filter.type"
+                            [(ngModel)]="filterValue"
+                        />
+                    </mat-form-field>
+                </div>
+                <button
+                    mat-icon-button
+                    [disabled]="editingElementIndex != -1 || adding"
+                    (click)="newAddition()"
+                >
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="header-row row" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cell" fxFlex=""><span>Identifier</span></div>
+            <div class="cell" fxFlex=""><span>Name</span></div>
+            <div class="cell" fxFlex=""><span>Address</span></div>
+            <div class="cell" fxFlex=""><span>Service Time</span></div>
+            <div class="cell" fxFlex=""><span>Demand</span></div>
+            <div class="cell" fxFlex=""><span>Priority</span></div>
+            <div class="cell" fxFlex=""><span>Comments</span></div>
+        </div>
+        <div class="table-content" fxLayout="column">
+            <div
+                class="adding-row row"
+                *ngIf="adding"
+                fxLayout="row"
+                fxLayoutAlign="space-between center"
+            >
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="identifier" />
+                            <mat-error *ngIf="formGroup.get('identifier').invalid">
+                                {{ getErrorMessage(0) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="name" />
+                            <mat-error *ngIf="formGroup.get('name').invalid">
+                                {{ getErrorMessage(1) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="address" />
+                            <mat-error *ngIf="formGroup.get('address').invalid">
+                                {{ getErrorMessage(2) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="serviceTime" />
+                            <mat-error *ngIf="formGroup.get('serviceTime').invalid">
+                                {{ getErrorMessage(3) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="demand" />
+                            <mat-error *ngIf="formGroup.get('demand').invalid">
+                                {{ getErrorMessage(4) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input
+                                matInput
+                                type="number"
+                                [min]="1"
+                                [max]="3"
+                                formControlName="priority"
+                            />
+                            <mat-error *ngIf="formGroup.get('priority').invalid">
+                                {{ getErrorMessage(5) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxFlex="">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="comments" />
+                            <mat-error *ngIf="formGroup.get('comments').invalid">
+                                {{ getErrorMessage(6) }}
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="cell" fxLayout="row" fxLayoutAlign="end center">
+                    <button
+                        mat-icon-button
+                        [disabled]="!formIsCorrect()"
+                        (click)="confirmAddition()"
+                    >
+                        <mat-icon>done</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="adding = false">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="element-row"
+                fxLayout="row"
+                *ngFor="let element of filteredElements(); let i = index"
+                fxLayoutAlign="space-between center"
+            >
+                <div
+                    class="editing row"
+                    *ngIf="i == editingElementIndex"
+                    fxLayout="row"
+                    fxLayoutAlign="space-between center"
+                    fxFlex=""
+                >
+                    <div class="cell" fxFlex="">
+                        <form [formGroup]="formGroup">
+                            <mat-form-field>
+                                <input matInput type="text" formControlName="name" />
+                                <mat-error *ngIf="formGroup.get('name').invalid">
+                                    {{ getErrorMessage(0) }}
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="cell" fxFlex="">
+                        <form [formGroup]="formGroup">
+                            <mat-form-field>
+                                <input matInput type="number" formControlName="deliveryZone" />
+                                <mat-error *ngIf="formGroup.get('deliveryZone').invalid">
+                                    {{ getErrorMessage(1) }}
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="cell" fxFlex="">
+                        <form [formGroup]="formGroup">
+                            <mat-form-field>
+                                <input matInput type="capacity" formControlName="capacity" />
+                                <mat-error *ngIf="formGroup.get('capacity').invalid">
+                                    {{ getErrorMessage(2) }}
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="cell" fxLayout="row" fxLayoutAlign="end center">
+                        <button
+                            mat-icon-button
+                            [disabled]="!formIsCorrect()"
+                            (click)="confirmEdition()"
+                        >
+                            <mat-icon>done</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="editingElementIndex = -1">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div
+                    class="row"
+                    *ngIf="i != editingElementIndex"
+                    fxLayout="row"
+                    fxFlex=""
+                    fxLayoutAlign="space-between center"
+                >
+                    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="">
+                        <div class="cell" fxFlex="">
+                            <span>{{ element['identifier'] }}</span>
+                        </div>
+                        <div class="cell" fxFlex="">
+                            <span>{{ element['name'] }}</span>
+                        </div>
+                        <div class="cell" fxFlex="">
+                            <span>{{ element['address'] }}</span>
+                        </div>
+                    </div>
+                    <div class="cell" fxLayout="row" fxLayoutAlign="end center">
+                        <button
+                            mat-icon-button
+                            [disabled]="editingElementIndex != -1 || adding"
+                            (click)="editElement(i)"
+                        >
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button
+                            mat-icon-button
+                            [disabled]="editingElementIndex != -1 || adding"
+                            (click)="deleteElement(i)"
+                        >
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->

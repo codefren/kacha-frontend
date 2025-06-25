@@ -1,0 +1,53 @@
+<div class="optimroute-delivery-points">
+  <section class="card">
+      <header class="card-header card-header-color">
+          <h2 class="card-title card-title-custon text-center">Cambiar de ruta</h2>
+      </header>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <p>Nombre: <strong>{{deliveryPoint.name}}</strong> </p>
+            <p>Dirección: <strong>{{ deliveryPoint.address }}</strong></p>
+          </div>
+          <div class="col-6">
+            <p>Apertura: <strong>{{deliveryPoint.deliveryWindow.start | dayTime}}</strong> </p>
+            <p>Cierre: <strong>{{deliveryPoint.deliveryWindow.end | dayTime}}</strong> </p>
+          </div>
+        </div>
+        <div class=" form-group row">
+         <div class="col-6">
+            <label>Ruta Destino</label>
+              <select [(ngModel)]="_selectedZoneId" class="form-control" (ngModelChange)="zoneChanged()">
+                <option  *ngFor="let zone of (zoneOptim | keyvalue)"
+                  [value]="zone.value.id">
+                  {{ zone.value.name }}
+                </option>
+              </select>
+          </div>
+          <div class="col-6">
+            <label>Calculada Destino</label>
+             <select [(ngModel)]="_selectedRouteId" class="form-control">
+                <option
+                    *ngFor="let route of (zoneOptim[_selectedZoneId].routes | keyvalue)"
+                    [value]="route.value.id"
+                >
+                    {{ route.value.route.name }}
+                </option>
+            </select> 
+          </div>
+        </div>
+      </div>
+
+      <footer class="card-footer">
+          <div class="row">
+              <div class="col-md-6 col-6 text-center">
+                  <button type="button" class="btn btn-default modal-dismiss" (click)="closeDialog()">{{ 'GENERAL.CANCEL' | translate }}</button>
+              </div>
+              <div class="col-md-6 col-6 text-center">
+                  <button type="button" class="btn btn-dark modal-dismiss" (click)="changeRoute()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+              </div>
+          </div>
+      </footer>
+  </section>
+</div>

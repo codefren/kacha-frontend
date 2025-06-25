@@ -1,0 +1,22 @@
+<div class="modal-confirm">
+    <section class="card">
+
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-4">
+                <i class="fas fa-times close-button point" (click)="activeModal.close(false)"></i>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="modal-wrapper pt-0">
+                <div class="modal-text text-center parrafo">
+                    <p class="mb-0">{{ data.message }}</p>
+                </div>
+            </div>
+        </div>
+        <footer class="row justify-content-center pb-4">
+            <button type="button" class="btn btn-cancel  size-btn-modal mr-4" (click)="activeModal.close(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+            <button type="button" class="btn btn-primary size-btn-modal" (click)="activeModal.close(true)">{{ 'GENERAL.ACCEPT' | translate }}</button>
+        </footer>
+    </section>
+</div>

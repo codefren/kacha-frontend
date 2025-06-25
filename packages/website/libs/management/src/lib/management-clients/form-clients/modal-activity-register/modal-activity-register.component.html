@@ -1,0 +1,49 @@
+<div class="easyroute-modal-directions">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'DELIVERY_POINTS.ACTIVITY_REGISTER' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="activeModal.close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-12">
+                <p class="title-infor"> {{ 'DELIVERY_POINTS.ACTIVITY_REGISTER_MESSAGE' | translate }} </p>
+            </div>
+
+            <div class="col-12">
+
+                <table id="deliveryPointActivityRegister" style="width: 100%; text-align: center;" 
+                    class="table table-striped table-responsive-lg table-responsive-md  table-bordered mb-0">
+    
+                    <thead>
+                        <tr>
+                            <th style="border-top-left-radius: 6px !important;">{{ 'DELIVERY_POINTS.TYPE' | translate }}</th>
+    
+                            <th class="text-center">{{ 'GENERAL.MODIFIED_ON' | translate }}</th>
+
+                            <th class="text-center" style="border-top-right-radius: 6px;">{{ 'GENERAL.MODIFIED_BY' | translate }}</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody></tbody>
+    
+                </table>
+    
+            </div>
+        </div>
+
+    </div>
+
+</div>

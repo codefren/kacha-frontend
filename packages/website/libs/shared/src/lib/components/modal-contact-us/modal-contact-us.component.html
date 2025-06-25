@@ -1,0 +1,87 @@
+<div class="container p-0">
+    <ng-container *ngIf="typeForm === 1">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <span class="contract">Contratar:</span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <span class="name-plan">{{ data && data.name ? data.name : 'plan' }}</span>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="col-8 offset-2 text-center">
+                <span class="description-plan">Contacta con nosotros para activar
+                    el {{ data && data.name ? data.name : 'plan' }} o si te va mejor te llamamos.</span>
+            </div>
+        </div>
+    </ng-container>
+    <!-- <ng-container *ngIf="typeForm === 2">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <span class="name-plan">Quiero que me llameís</span>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="col-8 offset-2 text-center">
+                <span class="description-plan">Rellena el formulario con los datos de contacto para que nos comuniquemos contigo</span>
+            </div>
+        </div>
+    </ng-container> -->
+    <ng-container *ngIf="typeForm === 2">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <span class="name-plan">Mejorar plan</span>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="col-8 offset-2 text-center">
+                <span class="description-plan">Rellena el formulario con los datos de contacto para que nos comuniquemos contigo</span>
+            </div>
+        </div>
+    </ng-container>
+    <div class="bg-blue pb-3">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="row m-0">
+                    <div class="col-12 text-center pt-4">
+                        <span class="header-form">Rellena el formulario de contacto</span>
+                    </div>
+                </div>
+                <form [formGroup]="form" (submit)="sendContact()">
+                    <div class="form-row form-group mt-4">
+                        <input type="text" formControlName="name" placeholder="*Nombre" class="form-control" />
+                    </div>
+                    <div class="form-row form-group mt-4">
+                        <input type="text" formControlName="companyName" placeholder="*Nombre empresa"
+                            class="form-control" />
+                    </div>
+                    <div class="form-row form-group mt-4">
+                        <input type="text" formControlName="email" placeholder="*Correo electrónico"
+                            class="form-control" />
+                    </div>
+                    <div class="form-row form-group mt-4 mb-0">
+                        <input type="text" formControlName="phone" placeholder="*Teléfono" class="form-control" />
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <span class="conditions-plan">Al continuar, aceptas que tus datos sean tratados según la
+                                política de privacidad de Polpoo.</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 text-center">
+                            <button type="button" class="btn btn-cancel btn-lg" (click)="close()">Cancelar</button>
+                        </div>
+                        <div class="col-6 text-center">
+                            <button type="submit" class="btn btn-light btn-lg" [disabled]="!form.valid">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,131 @@
+.super-admin-list {
+    background-color: #ffffff;
+    height: 100%;
+    background: white;
+    .btn-large {
+        width: 209px;
+        height: 40px;
+        border-radius: 24px;
+    }
+    .title {
+        color: #24397C;
+        text-transform: initial;
+        font-size: 18px;
+    }
+    .group-btn {
+        //font-size: 16px;
+        font-weight: bolder;
+        width: 68%;
+        height: 41px;
+    }
+    .btn-franchise {
+        width: 209px;
+        height: 40px;
+        background-color: #24397c;
+        border-radius: 24px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+    .padding-label {
+        padding-left: 5rem;
+    }
+    .div:focus,
+    .div.focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(247, 247, 247, 0.25);
+    }
+    .btn-filter {
+        background-color: #b5b5b5;
+        border-radius: 20px;
+        width: 132px;
+        height: 40px;
+        font-size: 14px;
+        color: #ffffff;
+    }
+    .style-card {
+        height: 83px;
+        width: 119px;
+    }
+    .card {
+        height: 93px;
+        width: 150px;
+        background: #ffffff;
+    }
+    .card-franchise {
+        height: 93px !important;
+        width: 209px !important;
+    }
+    .margin-lateral {
+        margin-left: 20px !important;
+    }
+    .column+.column {
+        margin-left: 15px;
+    }
+    .column:last-child {
+        margin-left: 0;
+    }
+    .color-icon {
+        color: #c7c7c7;
+        font-size: 3em;
+    }
+    .color-alert {
+        color: #a0a0a0;
+        font-size: 11px;
+        margin: 0 0 2px;
+    }
+    .color-infor-card {
+        color: #24397c;
+    }
+    .space-paragran {
+        line-height: 17px;
+    }
+    .font-radio {
+        font-size: 11px !important;
+        color: #a0a0a0 !important;
+    }
+    .options {
+        // color: #1d1d1d;
+        line-height: 24px;
+        margin: 12px 0 -2px !important;
+        /* font-weight: lighter; */
+    }
+    .margin-container-div {
+        margin-top: -40px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        button {
+            width: 92% !important;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+        .group-btn {
+            width: 99%;
+            height: 10%;
+            border-radius: 18px;
+        }
+        div .text-right {
+            text-align: center !important;
+        }
+        .margin-container-div {
+            margin-top: 20%;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1024px) {
+        .group-btn {
+            width: 50%;
+        }
+        .margin-container-div {
+            margin-top: 6%;
+        }
+    }
+    @media screen and ( min-width: 1024px) and ( max-width: 1366px) {
+        .group-btn {
+            width: 50%;
+        }
+        .margin-container-div {
+            margin-top: 3%;
+        }
+    }
+}

@@ -1,0 +1,162 @@
+<div class="easyroute-modal-document">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center">
+
+                <label class="title-modal">{{ title }}</label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="activeModal.close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row" *ngIf="message">
+
+            <div class="col-12">
+
+                <p class="title-infor m-0"> {{ message }} </p>
+
+            </div>
+
+        </div>
+
+        <form [formGroup]="form" novalidate>
+            <div class="form-row mt-4 mb-3">
+    
+                <div class="col-12 col-xl-12">
+    
+                    <div class="form-group input-group m-0">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control point" id="email" type="text" formControlName="email" 
+                            placeholder="{{'NOTIFICATIONS.EXAMPLE' | translate}}"
+                            [ngClass]="{
+                                'form-control-danger':
+                                form.controls['email'].invalid &&
+                                    (form.controls['email'].dirty ||
+                                    form.controls['email'].touched)
+                            }"/>
+        
+                            <label for="first" class="mt-2 title-col"> {{'GENERAL.EMAIL' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                    <ng-container *ngFor="let validation of notificationMessages.email">
+                        <div class="w-100 text-left">
+                            <small class="form-control-feedback text-danger" *ngIf="
+                                            form
+                                        .get('email')
+                                        .hasError(validation.type) &&
+                                    (form.get('email').dirty ||
+                                    form.get('email').touched)
+                                ">
+                                {{ validation.message }}
+                            </small>
+                        </div>
+                    </ng-container>
+
+                    
+    
+                </div>
+    
+            </div>
+    
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'GENERAL.CLOSE' | translate }} </button>
+
+                <button class="btn btn-primary mr-2 size-btn" [disabled]="!form.valid" (click)="submit()"> {{ 'GENERAL.SEND' | translate }} </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+   <!--  <div class="row">
+        <div class="col-12 text-center pt-5">
+
+            <img class="icons-notification pb-2" src="assets/icons/optimmanage/send-mail.svg">
+
+            <p class="title">
+                {{ title }}
+            </p>
+
+        </div>
+    </div>
+
+    <form (submit)="submit()" [formGroup]="form" novalidate>
+        <div class="form-row padding-col">
+
+            <div class="col-12">
+
+                <div class="form-group" [ngClass]="
+                        { 'has-danger': form.controls['email'].invalid && 
+                            (form.controls['email'].dirty || 
+                            form.controls['email'].touched) 
+                        }">
+                    <label class="color-label" for="email">
+                        {{'NOTIFICATIONS.SENT_TO' | translate}}
+                    </label>
+                    <input type="text" class="form-control" id="email" formControlName="email" placeholder="{{'NOTIFICATIONS.EXAMPLE' | translate}}" [ngClass]="{
+                        'form-control-danger':
+                        form.controls['email'].invalid &&
+                            (form.controls['email'].dirty ||
+                            form.controls['email'].touched)
+                    }" />
+                    <ng-container *ngFor="let validation of notificationMessages.email">
+                        <div class="w-100 text-left">
+                            <small class="form-control-feedback text-danger" *ngIf="
+                                         form
+                                        .get('email')
+                                        .hasError(validation.type) &&
+                                    (form.get('email').dirty ||
+                                    form.get('email').touched)
+                        ">
+                        {{ validation.message }}
+                    </small>
+                        </div>
+                    </ng-container>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-4 pt-4 pb-4">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn btn-cancel size-btn-modal" type="button" (click)="close()">
+                    {{ 'GENERAL.CANCEL' | translate }}</button>
+            </div>
+            <div class="col-md-6 col-12 text-center mt-2 mt-md-0 text-md-left">
+                <button class="btn btn-primary size-btn-modal" type="submit" [disabled]="!form.valid">
+                    {{ 'GENERAL.SEND' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </form> -->
+
+</div>

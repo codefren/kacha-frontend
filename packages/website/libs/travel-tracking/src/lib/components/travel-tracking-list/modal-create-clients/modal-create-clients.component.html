@@ -1,0 +1,148 @@
+<div class="optimroute-delivery-points">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> Añadir cliente </label>
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="closeDialog(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 ml-xl-3">
+
+                <span class="sub-title-modal">
+
+                    Selecciona los clientes que quieres añadir y selecciona la ruta donde quieres añadirlo.          
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+        <div class="row" *ngIf="showRoutes">
+            <div class="col-12 ml-xl-3">
+
+                <!-- <p class="title-sub m-0"> Aplica el coste genérico de combustible por mes y vehículo. </p> -->
+
+
+                <div class="form-row align-items-center">
+
+
+
+                    <!-- zone select -->
+
+                    <div class="col-xl-4 col-12 mt-3">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+
+                                <select class="form-select form-control w-100" [(ngModel)]="zoneSelected" id="route"  placeholder="Seleccione">
+
+                                    <option [value]="''">Seleccione...</option>
+
+                                    <option *ngFor="let item of zones" [value]="item.id"> {{item.name }} </option>
+                                  
+
+                                </select>
+
+                                <label for="type" class="mt-2 title-col"> Ruta destino </label>
+                                
+                            </span>
+
+                        </div>
+                    </div>
+                    <!-- end zone select -->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row pt-2" *ngIf="next === 1 ">
+
+        <div class="col-12">
+
+            <div class="table-content table-responsive">
+
+                <table id="clients" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%;">
+
+                    <thead>
+
+                        <tr>
+                            <th style="border-left: 2px solid #7387c2 !important;" data-orderable="false">
+
+                                <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;" *ngIf="tabOption === 1">
+
+                                    <div class="round round-little">
+
+                                        <input type="checkbox" checked="" id="checkboxExample1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+
+                                        <label for="checkboxExample1" class="m-0"></label>
+
+                                    </div>
+
+                                </div>
+
+                            </th>
+
+                            <th>{{ 'TRAVEL_TRACKING.ORDER' | translate }}</th>
+
+                            <th>{{ 'TRAVEL_TRACKING.CLIENT_' | translate }}</th>
+
+                            <th>{{ 'DELIVERY_POINTS.ADDRESS' | translate }}</th>
+                            <!-- <th>{{ 'DELIVERY_ZONES.NAME' | translate }}</th> -->
+                            <th>{{ 'DELIVERY_POINTS.START' | translate }}</th>
+
+                            <th style="border-right: 2px solid #7387c2 !important;">{{ 'DELIVERY_POINTS.END' | translate }}</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-outline-primary mr-2 size-btn" (click)="closeDialog(false)"> Atrás </button>
+
+                <button class="btn btn-primary mr-2 size-btn" [disabled]="selected.length == 0 || zoneSelected === '' " (click)="submit(selected)"> Añadir cliente </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

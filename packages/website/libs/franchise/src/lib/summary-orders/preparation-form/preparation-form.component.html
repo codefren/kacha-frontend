@@ -1,0 +1,295 @@
+<div class="easyroute-preparation-form padding-body-orders pt-0 bg-white2">
+
+    <div class="container" *ngIf="orders">
+        <div class="row pt-4 align-items-center justify-content-center">
+            <div class="mr-3 return-left point" routerLink="/franchise/summary-orders">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0" *ngIf="orders.id > 0">
+                {{ 'FRANCHISE.SUMMARY_ORDERS.ORDER_DETAIL' | translate }}
+            </p>
+            <p class="title m-0" *ngIf="orders.id == 0">
+                {{ 'ORDERS.ORDERS_FORM.ORDERS_REGISTER' | translate }}
+            </p>
+
+        </div>
+        <div class="row justify-content-center mt-4" *ngIf="orders && orderForm">
+            <form [formGroup]="orderForm" class="padding-form" style="width: 100%" novalidate (ngSubmit)="createOrder()">
+
+                <!-- Datos (Nuevo Pedido) -->
+
+                <ng-container>
+
+                    <div class="container-special d-flex justify-content-center">
+                        <div class="row mb-5 width-select">
+                            <!-- Data delivery -->
+
+
+
+                            <div class="col-12 col-md-12">
+                                <h4 class="subtitle-detail">{{ 'ORDERS.ORDERS_DETAIL.DELIVERY_DATA' | translate }}</h4>
+                                <hr class="hr-secondary mb-2 mt-2" />
+                            </div>
+
+                            <div class="col-12 col-md-12 mt-2">
+                                <div class="lines-info-zone">
+                                    <label class="label-info" for="zone">
+                                            {{'CONFIGURATIONS.CODE' | translate }}
+                                        </label>
+                                    <p class="m-0 p-0 style-info-p"> {{ orders.code}} </p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-5 col-12 mt-2">
+
+                                <!-- code -->
+                                <!--  <div class="lines-info-zone">
+                                    <label class="label-info" for="zone">
+                                            {{'CONFIGURATIONS.CODE' | translate }}
+                                        </label>
+                                    <p class="m-0 p-0 style-info-p"> {{ orders.code}} </p>
+                                </div> -->
+
+                                <div class="lines-info-zone">
+                                    <label class="label-info" for="zone">
+                                            {{'ORDERS.ORDERS_DETAIL.ZONE' | translate }}
+                                        </label>
+                                    <p class="m-0 p-0 style-info-p" [title]="orders.company.company_zone && orders.company.company_zone.zone.name ? orders.company.company_zone.zone.name: 'no disponible'"> {{sliceStringZone (orders.company.company_zone && orders.company.company_zone.zone.name ? orders.company.company_zone.zone.name: 'no disponible')}} </p>
+                                </div>
+
+                                <div class="lines-info-zone mt-3">
+                                    <label class="label-info" for="rol">{{ 'ORDERS.ORDERS_DETAIL.ROLE' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">{{ orders.order_assigned && orders.order_assigned.user && orders.order_assigned.user.rol && orders.order_assigned.user.rol.name ? orders.order_assigned && orders.order_assigned.user && orders.order_assigned.user.rol
+                                        && orders.order_assigned.user.rol.name :'no disponible'}}</p>
+                                </div>
+
+                                <!-- riders -->
+                                <div class="lines-info-zone mt-3" *ngIf="orders.order_delivery_assigned">
+                                    <label class="label-info" for="rol">{{ 'ORDERS.ORDERS_DETAIL.ROLE' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">{{ orders.order_delivery_assigned && orders.order_delivery_assigned.user && orders.order_delivery_assigned.user.rol && orders.order_delivery_assigned.user.rol.name ? orders.order_delivery_assigned && orders.order_delivery_assigned.user
+                                        && orders.order_delivery_assigned.user.rol && orders.order_delivery_assigned.user.rol.name:'no disponible' }}</p>
+                                </div>
+
+
+                                <div class="lines-info-zone mt-3">
+                                    <label class="label-info" for="condifiton">{{ 'ORDERS.ORDERS_DETAIL.CONDITION' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">{{ orders.status ? orders.status: 'no disponible'}}</p>
+                                </div>
+
+                                <div class="lines-info-zone mt-3">
+                                    <label class="label-info" for="elevator">{{ 'ORDERS.ORDERS_DETAIL.ELEVATOR' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p" *ngIf="!orders.notElevator">Si</p>
+                                    <p class="m-0 p-0 style-info-p" *ngIf="orders.notElevator">No</p>
+                                </div>
+
+                            </div>
+                            <div class="offset-md-2 col-md-5 col-12 mt-2">
+                                <div class="lines-info-zone">
+                                    <label class="label-info" for="storneName">{{ 'ORDERS.ORDERS_DETAIL.NAME_STORE' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">{{ orders.company.name ? orders.company.name: 'no disponible'}}</p>
+                                </div>
+
+                                <div class="lines-info-zone mt-3">
+                                    <label class="label-info" for="detail_building_floor">{{ 'ORDERS.ORDERS_DETAIL.ASSIGNED' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">
+                                        {{ orders.order_assigned && orders.order_assigned.user.name ? orders.order_assigned.user.name :'no disponible'}} {{ orders.order_assigned && orders.order_assigned.user.surname ? orders.order_assigned.user.surname:''}}
+                                    </p>
+                                </div>
+
+                                <!-- rider assigned name -->
+                                <div class="lines-info-zone mt-3" *ngIf="orders.order_delivery_assigned">
+                                    <label class="label-info" for="detail_building_floor">{{ 'ORDERS.ORDERS_DETAIL.ASSIGNED' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">
+                                        {{ orders.order_delivery_assigned && orders.order_delivery_assigned.user.name ? orders.order_delivery_assigned.user.name :'no disponible'}} {{ orders.order_delivery_assigned && orders.order_delivery_assigned.user.surname ? orders.order_delivery_assigned.user.surname:''}}
+                                    </p>
+                                </div>
+
+                                <div class="lines-info-zone mt-3">
+                                    <label class="label-info" for="detail_postal_code">{{ 'ORDERS.ORDERS_DETAIL.DATE' | translate }}</label>
+                                    <p class="m-0 p-0 style-info-p">{{ formaDate(orders.orderDate) }}</p>
+                                </div>
+
+                            </div>
+                            <!-- end Data delivery -->
+
+                            <!-- table time -->
+
+                            <div class="col-12 col-md-12 mt-5">
+                                <h4 class="subtitle-detail">{{ 'ORDERS.ORDERS_DETAIL.PREPARATION_TIME' | translate }}</h4>
+                            </div>
+
+                            <div class="col-12">
+                                <table style="width: 100%; text-align: center p-0" class="table table-responsive-md  table-bordered table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.CHECK_IN_TIME' | translate }}
+                                            </th>
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.ASSIGNED_ORDERS' | translate }}
+                                            </th>
+                                            <!--  <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.END_OF_PREPARATION_TIME' | translate }}
+                                            </th> -->
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.TOTAL_TIME' | translate }}
+                                            </th>
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.ATTACHED_TICKET' | translate }}
+                                            </th>
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.TOTAL_TIME_2' | translate }}
+                                            </th>
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.RIDER_DELIVERY_TIME' | translate }}
+                                            </th>
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.DELIVERY_CONFIRMATION' | translate }}
+                                            </th>
+
+                                            <th class="text-center">
+                                                {{ 'FRANCHISE.SUMMARY_ORDERS.TOTAL_TIME_3' | translate }}
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngIf="orderTimeDetails">
+                                            <tr>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{orderTimeDetails.checkInTime }}
+                                                </td>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{ orderTimeDetails.assignedOrder ? orderTimeDetails.assignedOrder : '-'}}
+                                                </td>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{ timepress(orderTimeDetails.totalTimeOne)}}
+                                                </td>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{orderTimeDetails.attachedTicket ? orderTimeDetails.attachedTicket: '-'}}
+                                                </td>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{ timepress(orderTimeDetails.totalTimeTwo) }}
+                                                </td>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{ orderTimeDetails.deliveryStart ? orderTimeDetails.deliveryStart:'-'}}
+                                                </td>
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{ orderTimeDetails.deliveryConfirmation ?orderTimeDetails.deliveryConfirmation:'-' }}
+                                                </td>
+
+                                                <td data-title="name" class="text-center" style="font-weight: 600;">
+                                                    {{ timepress(orderTimeDetails.totalTimeThree) }}
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- end table time -->
+
+                            <!-- orders-table -->
+
+                            <div class="col-12 col-md-12 mt-3">
+                                <h4 class="subtitle-detail">{{ 'ORDERS.ORDERS_DETAIL.ORDER' | translate }}</h4>
+                                <hr class="hr-secondary mb-2 mt-2" />
+                            </div>
+
+                            <div class="col-12">
+                                <div *ngIf="orders.order_product">
+
+                                    <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                                    justify-content-sm-between padding-col padding-document-table">
+                                        <div class="col-md-10 col-12 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                                            <span class="pl-4">{{ 'ORDERS.ORDERS_DETAIL.ORDER' | translate }}</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-12 p-0">
+                                        <table id="document" style="width: 100%; text-align: center" class="table table-responsive-md p-0 table-bordered table-striped-doc mb-0">
+                                            <thead class="table-head toggle-directions">
+                                                <tr>
+                                                    <th>{{ 'GENERAL.CODE' | translate }}</th>
+                                                    <th width="30%">{{'ORDERS.ORDERS_DETAIL.PRODUCT' | translate }}</th>
+                                                    <th>{{'ORDERS.ORDERS_DETAIL.QUANTITY' | translate }}</th>
+                                                    <!--  <th>Ud</th> -->
+                                                    <th>{{ 'ORDERS.ORDERS_DETAIL.PRICE' | translate }}</th>
+                                                    <th style="border-right: 1px solid #7387c2 !important;">{{ 'ORDERS.ORDERS_DETAIL.CONDITION' | translate }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let module of orderProducts">
+                                                    <td data-title="name" class="text-center">
+                                                        <label for="code" *ngIf="!module.company_product">
+                                                                {{ module.company_product_price.company_product.code}}
+                                                            </label>
+                                                        <label for="code" *ngIf="module.company_product">
+                                                                {{ module.company_product?.code}}
+                                                            </label>
+
+                                                    </td>
+                                                    <td data-title="name" data-toggle="tooltip" data-placement="top" [title]="module.company_product ? module.company_product.name :module.company_product_price.company_product.name" class="text-center">
+
+                                                        <label for="code" *ngIf="!module.company_product">
+                                                                {{ sliceString (module.company_product_price.company_product.name)}}
+                                                            </label>
+                                                        <label for="code" *ngIf="module.company_product">
+                                                                {{ sliceString(module.company_product?.name) }}
+                                                            </label>
+                                                    </td>
+                                                    <td data-title="name" class="text-center">
+                                                        {{ module.quantity }}
+                                                    </td>
+                                                    <!--  <td data-title="name" class="text-center">
+                                                        {{ module.company_product_price.price | currency: 'EUR' }}
+                                                    </td> -->
+                                                    <td data-title="name" class="text-center">
+                                                        {{ module.price | currency: 'EUR'}}
+                                                    </td>
+                                                    <td data-title="name" class="text-center">
+
+                                                        <label for="condition" *ngIf="module.haveProduct == null">
+                                                              {{'ORDERS.ORDERS_DETAIL.NOT_SELECTED' | translate }}
+                                                            </label>
+                                                        <label for="condition" *ngIf="module.haveProduct == false">
+                                                                {{'ORDERS.ORDERS_DETAIL.UNDELIVERD' | translate }}
+                                                            </label>
+                                                        <label for="condition" *ngIf="module.haveProduct == true">
+                                                                {{'ORDERS.ORDERS_DETAIL.DELIVERED' | translate }}
+                                                            </label>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- end orders-table -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </ng-container>
+
+
+                <!-- Datos (Actualizar Pedido) -->
+
+                <!-- detail-order solo lectura -->
+                <ng-container *ngIf="orders.id">
+                    <easyroute-detail-page [orders]="orders"></easyroute-detail-page>
+                </ng-container>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>

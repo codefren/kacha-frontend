@@ -1,0 +1,153 @@
+<div class="easyroute-franchise-historial">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-5 text-center">
+                        <p class="title">{{ 'VEHICLE_MAINTENANCE.VEHICLE_MAINTENANCE' | translate }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- navs -->
+
+    <div class="row justify-content-center mb-1 mt-3">
+        <nav class="row p-0 m-0 group-btn">
+            <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='vehicle-maintenance' }" (click)="changePage( 'vehicle-maintenance' )">
+                <a class="text-center">{{ 'VEHICLE_MAINTENANCE.MAINT_VEHICLES' | translate }}</a>
+            </div>
+            <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='historial' }" (click)="changePage( 'historial' )">
+                <a class="text-center">{{ 'VEHICLE_MAINTENANCE.RECORD' | translate }}</a>
+            </div>
+
+        </nav>
+    </div>
+
+    <!-- end navs -->
+
+
+    <div class="row justify-content-center margin mb-4 mt-2">
+
+        <!-- driver -->
+        <div class="col-12 col-lg-2 col-md-12">
+
+            <ng-container *ngIf="load == 'loading'">
+                <div class="text-center p-2">
+                    <div class="fa-3x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="driverList.length > 0 && load == 'success'">
+                <div class="input-group">
+                    <label for="summary_shop">
+                            {{ 'VEHICLE_MAINTENANCE.DRIVER' | translate }}
+                        </label>
+                    <div class="input-group">
+                        <select class="form-control letter-app" (change)="changeDriver( $event.target.value )" id="drive">
+                                <option value="">{{ 'GENERAL.ALL_SELECT' | translate }}</option>
+                                <option 
+                                    *ngFor="let drive of driverList" 
+                                    [value]="drive.id"
+                                >
+                                {{ drive.name + ' ' + drive.surname }}
+                                </option>
+                            </select>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="driverList.length == 0 && load == 'success'">
+                <div class="text-center mt-4">
+                    <p class="text-center text-danger">{{ 'FRANCHISE.SUMMARY_ORDERS.NO_AVAILABLE_STATUS' | translate }}</p>
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="load == 'error'">
+                <p class="text-danger text-center pointer" (click)="getAllDriver()">
+                    {{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}
+                    <ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!
+                </p>
+            </ng-container>
+
+        </div>
+        <!-- end driver -->
+
+        <!-- vehicle -->
+
+        <div class="col-12 col-lg-2 col-md-12">
+
+            <ng-container *ngIf="loadVehicles == 'loading'">
+                <div class="text-center p-2">
+                    <div class="fa-3x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="VehicleList.length > 0 && loadVehicles == 'success'">
+                <div class="input-group">
+                    <label for="summary_shop">
+                            {{ 'VEHICLE_MAINTENANCE.VEHICLE' | translate }}
+                        </label>
+                    <div class="input-group">
+                        <select class="form-control letter-app" (change)="changeVehicle( $event.target.value )" id="vehicle">
+                                <option value="">{{ 'GENERAL.ALL_SELECT' | translate }}</option>
+                                <option 
+                                    *ngFor="let vehicle of VehicleList" 
+                                    [value]="vehicle.id"
+                                >
+                                    {{ vehicle.name }}
+                                </option>
+                            </select>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="VehicleList.length == 0 && loadVehicles == 'success'">
+                <div class="text-center mt-4">
+                    <p class="text-center text-danger">{{ 'FRANCHISE.SUMMARY_ORDERS.NO_AVAILABLE_STATUS' | translate }}</p>
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="loadVehicles == 'error'">
+                <p class="text-danger text-center pointer" (click)="getVehicle()">
+                    {{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}
+                    <ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!
+                </p>
+            </ng-container>
+
+        </div>
+        <!-- vehicle -->
+
+
+
+    </div>
+
+    <div class="col-12 p-0">
+
+        <div class="table-content mt-3">
+            <table class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%" id="manteanace">
+                <thead class="text-center">
+                    <tr>
+                        <th> {{ 'VEHICLE_MAINTENANCE.DRIVER' | translate }} </th>
+                        <th> {{ 'VEHICLE_MAINTENANCE.VEHICLE' | translate }} </th>
+                        <th> {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_DATE' | translate }} </th>
+                        <th> {{'VEHICLE_MAINTENANCE.VEHICLE_STATUS' | translate }} </th>
+                        <th> {{'VEHICLE_MAINTENANCE.PHOTO' | translate }}</th>
+                        <th> {{'VEHICLE_MAINTENANCE.VERIFIED_TOTALS' | translate }}</th>
+                        <th> {{'VEHICLE_MAINTENANCE.MAINTENANCE' | translate }}</th>
+                        <!--   <th width="100"></th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

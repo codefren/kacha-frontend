@@ -1,0 +1,51 @@
+.modal-check-cost {
+    .title-modal {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px;
+    }
+    .title-infor {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #363740;
+    }
+    .btn-primary:hover,
+    html .btn-primary.hover {
+        background-color: #374d96 !important;
+        border-color: #374d96 #374d96 #374d96 !important;
+        color: #ffffff;
+    }
+    .modal-footer {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+        color: #000;
+    }
+    .modal-header {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    /* .modal-body {
+        padding: 1rem 2rem;
+    } */
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+}

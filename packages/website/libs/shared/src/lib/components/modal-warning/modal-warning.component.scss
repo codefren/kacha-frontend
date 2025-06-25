@@ -1,0 +1,15 @@
+.font-general{
+    font-size: 14px;
+    width: 75%;
+}
+
+.form-control[readonly] {
+    background-color: transparent;
+    opacity: 1;
+}
+
+.form-control:focus {
+    border-color: #ced4da !important;
+    -webkit-box-shadow: 0 1px 1px transparent inset, 0 0 8px transparent !important;
+    box-shadow: 0 1px 1px transparent inset, 0 0 8px transparent !important;
+}

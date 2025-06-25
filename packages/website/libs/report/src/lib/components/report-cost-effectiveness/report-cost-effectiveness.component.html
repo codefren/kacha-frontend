@@ -1,0 +1,217 @@
+<div class="report-routes-list font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'REPORT.NAME'| translate }} | {{ 'REPORT.COST_EFFECTIVENESS.NAME' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <!-- type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" -->
+
+            <button class="mb-1 mt-xl-0 mt-1 mr-1 btn btn-default dropdown-toggle point" (click)="openDonwloadPdf()">
+
+                <img src="assets/icons/report/dowloadBlack.svg">
+
+                <label class="pl-2 title-descargar point"> {{ 'REPORT.COST_EFFECTIVENESS.DOWNLOAD_REPORTS' | translate }} </label>
+
+            </button>
+
+            <!--  <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openResumemPdf()">
+
+                    <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'REPORT.DOWNLOAD_REPORT' | translate }}
+
+                </a>
+
+                <a class="dropdown-item drop-title pt-3 pb-3 point  border-drop" (click)="openAllPdf()">
+
+                    <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'REPORT.DOWNLOAD_ALL' | translate }}
+
+                </a>
+
+                <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openModalFilters()">
+
+                    <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'REPORT.CUSTOM_DOWNLOAD' | translate }}
+
+                </a>
+
+
+
+            </div> -->
+
+
+        </div>
+
+    </div>
+
+
+    <!-- card general -->
+
+    <div class="row mt-3">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-body padding-card-general">
+
+                    <div class="row mb-4">
+
+                        <div class="col-xl-12 col-12 pl-3 mt-3" *ngIf="moduleCost()">
+
+                            <easyroute-annual-comparison></easyroute-annual-comparison>
+
+                        </div>
+
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-6 form-inline">
+                                        <span class="title-filter">Filtros</span>
+                                        <img src="assets/icons/report/cost/arrow-left.svg" alt="">
+                                    </div>
+                                    <div class="col-6 p-xl-0">
+                                        <div class="form-row pl-1 align-items-center justify-content-xl-end justify-content-center">
+
+
+                                            <!-- all route -->
+
+                                            <div class="col-12 col-xl-3 col-sm-4 point">
+
+                                                <ng-container *ngIf="showZones">
+
+                                                    <select id="deliveryZoneId" [value]="filter.values.deliveryZoneId" (change)="changeroutePlanningRouteId($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+                            
+                                                        <option value=""> {{ 'REPORT.COST_EFFECTIVENESS.ROUTE' | translate }} </option>
+                                
+                                                        <option *ngFor="let item of zones" [value]="item.name" > {{ item.name }} </option>
+                                
+                                                    </select>
+
+                                                </ng-container>
+
+                                                <ng-container *ngIf="!showZones">
+
+                                                    <div class="col-12 text-center mt-2">
+
+                                                        <div class="fa-4x">
+
+                                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </ng-container>
+
+                                            </div>
+
+                                            <!-- date -->
+                                            <div class="col-12 col-xl-4 col-sm-4">
+
+                                                <div class="input-group">
+
+                                                    <div class="dp-hidden position-absolute">
+
+                                                        <div class="input-group">
+
+                                                            <input name="datepicker" class="form-control  input-size date1 point" [placement]="placement" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden"
+                                                                [startDate]="fromDate!" tabindex="-1" />
+
+                                                            <ng-template #t let-date let-focused="focused">
+
+                                                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                                    {{ date.day }}
+                                                                </span>
+
+                                                            </ng-template>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="input-group">
+
+                                                        <input #dpFromDate class="form-control form-control-date" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                                                        <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+                                    
+                                                            <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                                
+                                                        </button>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+
+                        <div class="col-xl-4 col-12 pl-3 mt-3 pr-xl-2" *ngIf="moduleCost()">
+
+                            <easyroute-cost-comparison [filter]="filter.values"></easyroute-cost-comparison>
+
+                        </div>
+
+                        <!--  <div class="col-xl-4 col-12 mt-xl-3 mt-5 pl-xl-1 pr-xl-1">
+
+                            <easyroute-comparative-route-hours [filter]="filter.values"></easyroute-comparative-route-hours>
+
+                        </div> -->
+
+                        <div class="col-xl-4 col-12 mt-xl-3 mt-5 pl-xl-2">
+
+                            <easyroute-km-comparison [filter]="filter.values"></easyroute-km-comparison>
+
+                        </div>
+
+
+                        <div class="col-12 mt-3">
+
+                            <easyroute-summary-cost-effectiveness [filter]="filter.values"></easyroute-summary-cost-effectiveness>
+
+                        </div>
+
+                        <div class="col-xl-12 col-12 mt-xl-3 mt-5 pt-xl-0 pt-5" *ngIf="moduleCost()">
+
+                            <easyroute-route-cost-summary [filter]="filter.values"></easyroute-route-cost-summary>
+
+                        </div>
+
+                        <!-- <div class="col-xl-6 col-12 pl-3 pr-2 mt-3">
+
+                            <easyroute-type-routes [filter]="filter.values"></easyroute-type-routes>
+
+                        </div> -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end card general -->
+
+</div>

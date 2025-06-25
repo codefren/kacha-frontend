@@ -1,0 +1,137 @@
+.form-delivery-note-integration {
+    .title-left-sheet {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .title-toggle {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .sub-title-text {
+        color: #9899AA;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 127.5%;
+    }
+    .add-email {
+        color: #3B4FFF;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .title-road {
+        color: #363740 !important;
+        font-family: Roboto;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7F96E0;
+        padding: 0.9rem;
+        color: #FFF !important;
+        font-family: Roboto !important;
+        font-size: 16px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        // border-top: 1px solid #dee2e6 !important;
+    }
+    .label-add {
+        color: #3B4FFF;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .label-add:hover {
+        text-decoration: underline;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #3B4FFF;
+        }
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740 !important;
+        font-weight: bold !important;
+        opacity: 1.6 !important;
+        font-size: 14px !important;
+    }
+    .btn-primary {
+        height: 45px;
+        width: 156px;
+        border-radius: 5px;
+    }
+    .showNUmber {
+        background-image: url(/assets/icons/numberInput.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        border-width: 0px;
+        margin: 0;
+        height: 34px;
+        width: 23px;
+        cursor: pointer;
+    }
+    @media screen and (min-width: 932px) and (max-width:1625px) {
+        .has-float-label label,
+        .has-float-label>span {
+            font-size: 12px !important;
+        }
+    }
+}

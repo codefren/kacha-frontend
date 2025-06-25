@@ -1,0 +1,166 @@
+<div id="modalForm" class="easyroute-management-zone">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <p class="title">{{ titleTranslate | translate }}</p>
+        </div>
+
+        <form [formGroup]="FormGroup" class="padding-form">
+
+            <div class="form-row form-group" *ngIf="data.zone.id === null" [ngClass]="{ 
+                    'has-danger':
+                        FormGroup.controls['id'].invalid &&
+                        (FormGroup.controls['id'].dirty ||
+                            FormGroup.controls['id'].touched)
+                }">
+                <label for="id">
+                    {{ 'GENERAL.CODE' | translate }}
+               
+                </label>
+                <input type="text" class="form-control" id="id" placeholder="{{ 'GENERAL.CODE' | translate }}" formControlName="id" />
+
+                <ng-container *ngFor="let validation of deliveryZone_messages.id">
+                    <small class="form-control-feedback text-danger" *ngIf="
+                            FormGroup.get('id').hasError(validation.type) &&
+                            (FormGroup.get('id').dirty ||
+                                FormGroup.get('id').touched)
+                        ">
+                        {{ validation.message }}
+                    </small>
+                </ng-container>
+            </div>
+
+            <div class="form-row form-group" [ngClass]="{
+                    'has-danger':
+                        FormGroup.controls['name'].invalid &&
+                        (FormGroup.controls['name'].dirty ||
+                        FormGroup.controls['name'].touched)
+                }">
+                <label for="name">
+                    {{ 'DELIVERY_ZONES.NAME_' | translate }}
+                    <span class="asterisco"> *</span>
+                </label>
+                <input type="text" class="form-control" id="name" placeholder="{{ 'DELIVERY_ZONES.NAME_' | translate }}" formControlName="name" />
+
+                <ng-container *ngFor="let validation of deliveryZone_messages.name">
+                    <small class="form-control-feedback text-danger" *ngIf="
+                            FormGroup.get('name').hasError(validation.type) &&
+                            (FormGroup.get('name').dirty ||
+                                FormGroup.get('name').touched)
+                        ">
+                        {{ validation.message }}
+                    </small>
+                </ng-container>
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-6">
+                    <div class="form-group w-100" [ngClass]="{
+                        'has-danger':
+                            FormGroup.controls['order'].invalid &&
+                            (FormGroup.controls['order'].dirty ||
+                                FormGroup.controls['order'].touched)
+                    }">
+                        <label for="order">
+                            {{ 'DELIVERY_ZONES.ORDER' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <input type="number" class="form-control" id="order" placeholder="{{ 'DELIVERY_ZONES.ORDER' | translate }}" formControlName="order" />
+
+                        <ng-container *ngFor="let validation of deliveryZone_messages.order">
+                            <small class="form-control-feedback text-danger" *ngIf="
+                                    FormGroup.get('order').hasError(validation.type) &&
+                                    (FormGroup.get('order').dirty ||
+                                        FormGroup.get('order').touched)
+                                ">
+                                {{ validation.message }}
+                            </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group row" *ngIf="FormGroup.hasError('same')">
+                        <div class="col-sm-12">
+                            <small class="form-control-feedback text-danger">
+                                {{ 'DELIVERY_ZONES.FROM_NO_GREATER_TO' | translate }}
+                            </small>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group w-100" [ngClass]="{
+                            'has-danger':
+                                    FormGroup.controls['color'].invalid &&
+                                    (FormGroup.controls['color'].dirty ||
+                                        FormGroup.controls['color'].touched)
+                        }">
+                        <label for="color">
+                                {{ 'DELIVERY_ZONES.COLOR' | translate }}
+                                <span class="asterisco"> *</span>
+                            </label>
+
+                        <div class="hack-select">
+                            <input type="color" class="form-control input-color" id="color" placeholder="{{ 'DELIVERY_ZONES.COLOR' | translate }}" formControlName="color" />
+                        </div>
+                        <ng-container *ngFor="let validation of deliveryZone_messages.name">
+                            <small class="form-control-feedback text-danger" *ngIf="
+                                        FormGroup.get('color').hasError(validation.type) &&
+                                        (FormGroup.get('color').dirty ||
+                                            FormGroup.get('color').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                        </ng-container>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group form-row mt-4">
+                <div class="col-sm-12">
+                    <div class="switch w-100">
+                        <label class="d-flex flex-row justify-content-between">
+                            <span>
+                                {{ 'DELIVERY_ZONES.IGNORE_CAPACITY_LIMIT' | translate }}
+                                <span data-toggle="tooltip" class="info" data-placement="top" title="{{ 'DELIVERY_ZONES.MESSAGE_1' | translate }}">
+                                    <i class="fas fa-info-circle i-relative"></i>
+                                </span>
+                            </span>
+                            
+                            <input
+                                type="checkbox"
+                                formControlName="settingsIgnorecapacitylimit"
+                                class="mr-4"
+                            />
+                            <span class="lever switch-col-primary ml-4"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="closeDialog([false, null])">
+                {{ 'GENERAL.CANCEL' | translate }}
+            </button>
+            </div>
+
+            <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                <button class="btn btn-primary size-btn-modal modal-confirm" [disabled]="!FormGroup.valid" (click)="submit()">
+                    <span class="p-0 m-0" *ngIf="data.zone.id == null">{{ 'GENERAL.ADD' | translate }}</span>
+                    <span class="p-0 m-0" *ngIf="data.zone.companyId > 0">{{ 'GENERAL.SAVE' | translate }}</span>
+                 </button>
+            </div>
+        </div>
+
+    </div>
+</div>

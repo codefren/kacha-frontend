@@ -1,0 +1,63 @@
+<div class="modal-phone-company-partners">
+    <div class="row">
+        <div class="col-12 text-center mt-4">
+            <p class="title">
+                {{ 'DELIVERY_POINTS.ADD_PHONE' | translate }}
+            </p>
+        </div>
+    </div>
+    <form (submit)="submit()" [formGroup]="form">
+
+
+        <div class="form-row" [ngClass]="{
+            'has-danger':
+            form.controls['name'].invalid &&
+            (form.controls['name'].dirty ||
+            form.controls['name'].touched) }">
+            <div class="col-12 col-md-12 padding-col">
+                <label for="modal-name">{{ 'DELIVERY_POINTS.NAME_PHONE' | translate }}</label>
+                <input type="text" id="modal-name" placeholder="{{ 'DELIVERY_POINTS.NAME_PHONE' | translate }}" formControlName="name" class="form-control">
+                <ng-container *ngFor="let validation of directions_messages.name">
+                    <div class="w-100 text-left">
+                        <small class="form-control-feedback text-danger" *ngIf="form.get('name').hasError( validation.type ) && (form.get('name').dirty || form.get('name').touched)">
+                            {{ validation.message }}
+                        </small>
+                    </div>
+                </ng-container>
+            </div>
+
+
+        </div>
+        <div class="form-row" [ngClass]="{
+            'has-danger':
+            form.controls['phone'].invalid &&
+            (form.controls['phone'].dirty ||
+            form.controls['phone'].touched) }">
+            <div class="col-12 col-md-12 padding-col">
+                <label for="modal-phone">{{ 'DELIVERY_POINTS.TELEPHONE' | translate }}</label>
+                <input type="text" mask="999 999999999" prefix="+" placeholder="{{ 'DELIVERY_POINTS.TELEPHONE' | translate }}" id="modal-phone" formControlName="phone" class="form-control">
+                <ng-container *ngFor="let validation of directions_messages.phone">
+                    <div class="w-100 text-left">
+                        <small class="form-control-feedback text-danger" *ngIf="form.get('phone').hasError( validation.type ) && (form.get('phone').dirty || form.get('phone').touched)">
+                            {{ validation.message }}
+                        </small>
+                    </div>
+                </ng-container>
+            </div>
+
+
+        </div>
+
+        <div class="row pt-4 pb-3">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn btn-cancel size-btn-modal" type="button" (click)="close()">
+                    {{ 'GENERAL.CANCEL' | translate }}</button>
+            </div>
+            <div class="col-md-6 col-12 text-center mt-2 mt-md-0 text-md-left">
+                <button class="btn btn-primary size-btn-modal" type="submit" [disabled]="!form.valid">
+                    {{ 'GENERAL.ACCEPT' | translate }}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

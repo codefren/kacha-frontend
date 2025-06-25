@@ -1,0 +1,181 @@
+<div *ngIf="company && company.id > 0">
+
+    <div class="row justify-content-center mt-4 incident-form-partners" *ngIf="company && incidentForm && incidentMessages">
+        <form [formGroup]="incidentForm" class="padding-form" style="width: 100%" novalidate>
+            <div class="row mb-5">
+
+                <div class="col-12">
+                    <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                        {{'INCIDENTS.ERP_INFORMATION' | translate }}
+                    </h3>
+                </div>
+
+                <!-- erpName -->
+                <div class="col-12 col-md-5 pl-sm-4">
+                    <div class="form-row form-group mb-3" [ngClass]="{ 'has-danger': incidentForm.controls['erpName'].invalid && (incidentForm.controls['erpName'].dirty || incidentForm.controls['erpName'].touched) }">
+                        <label for="erpName">
+                            {{'INCIDENTS.ERP_NAME' | translate }}
+                            <span class="asterisco">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="erpName" autocomplete="off" formControlName="erpName" placeholder="{{'INCIDENTS.ERP_NAME' | translate }}"
+                            [ngClass]="{
+                        'form-control-danger':
+                        incidentForm.controls['erpName'].invalid &&
+                        (incidentForm.controls['erpName'].dirty ||
+                        incidentForm.controls['erpName'].touched)}" />
+
+                        <ng-container *ngFor="let validation of incidentMessages.erpName">
+                            <small class="form-control-feedback text-danger" *ngIf="incidentForm.get('erpName').hasError(validation.type) 
+                            && (incidentForm.get('erpName').dirty 
+                            || incidentForm.get('erpName').touched)">
+                                {{ validation.message }}
+                            </small>
+                        </ng-container>
+                    </div>
+                </div>
+                <!-- END erpName -->
+
+                <!-- erpResponsable -->
+                <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                    <div class="form-row form-group" [ngClass]="{ 'has-danger': incidentForm.controls['erpResponsable'].invalid && (incidentForm.controls['erpResponsable'].dirty || incidentForm.controls['erpResponsable'].touched) }">
+                        <label for="erpResponsable">
+                        {{ 'INCIDENTS.CONTACT_PERSON' | translate }}
+                        <span class="asterisco">*</span>
+                    </label>
+                        <input type="text" class="form-control" id="erpResponsable" autocomplete="off" formControlName="erpResponsable" placeholder="{{ 'INCIDENTS.CONTACT_PERSON' | translate }}"
+                            [ngClass]="{
+                        'form-control-danger':
+                        incidentForm.controls['erpResponsable'].invalid &&
+                        (incidentForm.controls['erpResponsable'].dirty ||
+                        incidentForm.controls['erpResponsable'].touched)}" />
+                        <ng-container *ngFor="let validation of incidentMessages.erpResponsable">
+                            <small class="form-control-feedback text-danger" *ngIf="incidentForm.get('erpResponsable').hasError(validation.type) 
+                            && (incidentForm.get('erpResponsable').dirty 
+                            || incidentForm.get('erpResponsable').touched)
+                             ">
+                                {{ validation.message }}
+                            </small>
+                        </ng-container>
+                    </div>
+                </div>
+                <!-- END erpResponsable -->
+
+
+                <!-- erpEmail -->
+                <div class="col-12 col-md-5 pl-sm-4">
+                    <div class="form-row form-group mt-4" [ngClass]="{ 'has-danger': incidentForm.controls['erpEmail'].invalid && (incidentForm.controls['erpEmail'].dirty || incidentForm.controls['erpEmail'].touched) }">
+                        <label for="erpEmail">
+                            {{ 'INCIDENTS.EMAIL' | translate }}
+                            <span class="asterisco">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="erpEmail" autocomplete="off" formControlName="erpEmail" placeholder="{{ 'INCIDENTS.EMAIL' | translate }}"
+                            [ngClass]="{
+                        'form-control-danger':
+                        incidentForm.controls['erpEmail'].invalid &&
+                        (incidentForm.controls['erpEmail'].dirty ||
+                        incidentForm.controls['erpEmail'].touched)}" />
+
+                        <ng-container *ngFor="let validation of incidentMessages.erpEmail">
+                            <small class="form-control-feedback text-danger" *ngIf="incidentForm.get('erpEmail').hasError(validation.type)
+                             && (incidentForm.get('erpEmail').dirty
+                            || incidentForm.get('erpEmail').touched)">
+                                {{ validation.message }}
+                            </small>
+                        </ng-container>
+                    </div>
+                </div>
+                <!-- END erpEmail -->
+
+                <!-- phoneErp -->
+                <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                    <div class="form-row form-group mt-4" [ngClass]="{ 'has-danger': incidentForm.controls['phoneErp'].invalid && (incidentForm.controls['phoneErp'].dirty || incidentForm.controls['phoneErp'].touched) }">
+                        <label for="url">
+                        {{ 'INCIDENTS.TELEPHONE' | translate }}
+                        <span class="asterisco">*</span>
+                    </label>
+                        <input type="text" class="form-control" id="phoneErp" autocomplete="off" prefix="+34" mask=" 0 00000000" formControlName="phoneErp"
+                            placeholder="{{ 'INCIDENTS.TELEPHONE' | translate }}" [ngClass]="{
+                        'form-control-danger':
+                        incidentForm.controls['phoneErp'].invalid &&
+                        (incidentForm.controls['phoneErp'].dirty ||
+                        incidentForm.controls['phoneErp'].touched)}" />
+                        <ng-container *ngFor="let validation of incidentMessages.phoneErp">
+                            <small class="form-control-feedback text-danger" *ngIf="incidentForm.get('phoneErp').hasError(validation.type) 
+                            && (incidentForm.get('phoneErp').dirty || 
+                            incidentForm.get('phoneErp').touched)
+                             ">
+                                {{ validation.message }}
+                            </small>
+                        </ng-container>
+                    </div>
+                </div>
+                <!-- end phoneErp -->
+
+                <!-- btn add incident -->
+                <div class="col-4 pl-sm-4 mt-4">
+                    <button type="button" class="btn btn-primary btn-incident size-btn-form modal-confirm point" title="{{ 'VEHICLES.BACK_TO_VEHICLE_LIST' | translate }}" (click)="addIncident()">
+                        {{'INCIDENTS.ADD_INCIDENT' | translate }}
+                    </button>
+                </div>
+                <!-- btn add incident -->
+
+
+                <!-- Hitorical incident datatables -->
+
+                <div class="col-12 mt-4 mb-3">
+                    <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                        {{'INCIDENTS.INCIDENT_HISTORY' | translate }}
+                    </h3>
+                </div>
+
+                <div class="col-12">
+
+                    <div class="table-content col-12 p-0">
+                        <table id="incidentHistory" style="width: 100%; text-align: center" class="table table-bordered table-historyIncident table-responsive-md  mb-0">
+                            <thead class="table-head toggle-directions">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>{{'INCIDENTS.CODE' |translate }}</th>
+                                    <th>{{'INCIDENTS.DATE' |translate }}</th>
+                                    <th style="vertical-align: inherit;">{{ 'INCIDENTS.HOUR' |translate }}</th>
+                                    <th style="vertical-align: inherit;">{{ 'INCIDENTS.TITLE' |translate }}</th>
+                                    <th style="vertical-align: inherit;">{{ 'INCIDENTS.DURATION' |translate }}</th>
+                                    <th style="vertical-align: inherit;">{{ 'INCIDENTS.SOLVED?' |translate }}</th>
+                                    <th style="vertical-align: inherit; border-right: 1px solid #7387c2 !important;">{{'INCIDENTS.SEE_DETAILS' |translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <!-- <h5 class="text-center data-avalilable" *ngIf="user.vehicleBreakdown.length == 0">
+                            {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                        </h5> -->
+                    </div>
+
+                </div>
+               
+
+                <!--End Hitorical incident datatables -->
+
+            </div>
+            <div class="row pt-sm-5">
+
+                <div class="col-sm-6 col-12 text-sm-right text-center mt-1">
+                    <button class="btn btn-cancel size-btn-form point" title="{{ 'COMPANIES.BACK_TO_THE_COMPANIES_LIST' | translate }}" routerLink="/partners-super-admin">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+                <div class="col-sm-6 col-12 text-sm-left text-center mt-1 pb-2">
+                    <button class="btn btn-primary size-btn-form modal-confirm point"  [disabled]="!isFormInvalid()" (click)="updateErpIncident([company.id, incidentForm.value])">
+                        <span *ngIf="company && company.id == 0">{{ 'GENERAL.CREATE' | translate }}</span>
+                        <span *ngIf="company && company.id > 0">{{ 'GENERAL.SAVE' | translate }}</span> 
+                    </button>
+                </div>
+    
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

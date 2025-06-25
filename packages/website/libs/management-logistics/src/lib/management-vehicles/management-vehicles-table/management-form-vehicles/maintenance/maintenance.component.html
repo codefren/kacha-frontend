@@ -1,0 +1,302 @@
+<div class="maintenance">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <form [formGroup]="maintenaceForm">
+
+                <div class="col-12 pt-3 pb-2">
+
+                    <p class="title-maintenance mb-1">Datos de mantenimiento</p>
+
+                    <p class="sub-title-maintenace">Configura los mantenimientos del vehículo y Polpoo te avisará cuando se acerque la fecha de alguna revisión.</p>
+
+                </div>
+
+                <!-- Complementos digitales -->
+                <div class="col-12">
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="card style-card">
+
+                                <div class="card-body">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-1 col-12 text-center p-xl-0">
+
+                                            <img class="img-anclar" src="assets/icons/service1.svg">
+
+                                        </div>
+
+                                        <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+
+                                            <p class="mb-0 title-left text-xl-left text-center">Complementos digitales</p>
+
+                                            <p class="mb-0 sub-title text-xl-left text-center">Asigna los complementos digitales al vehículo. Crearlos desde la pantalla <a class="link-config point" (click)="redirectSettingsVehicles('digitalAccessories')">"Complementos digitales"</a></p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row pt-3 pl-xl-2">
+
+                                        <div class="col-xl-4 col-12" [ngClass]="{'mt-3': c > 2}" *ngFor="let item of digitaAccesories; let c=index">
+
+                                            <div class="form-group input-group">
+
+                                                <span class="has-float-label w-100">
+
+                                                <input class="form-control point" [id]="item.name" [type]="item.type" [value]="getReturnValue(item)" [placeholder]="item.name" (change)="digitalComplement($event.target.value, item, c)"/>
+
+                                                <label for="first" class="mt-2 title-col"> {{ item.name }} </label>
+                                            </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Complementos digitales -->
+
+                <!-- Complementos materiales -->
+
+                <div class="col-12 pt-3">
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="card style-card">
+
+                                <div class="card-body">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-1 col-12 text-center p-xl-0">
+
+                                            <img class="img-anclar" src="assets/icons/service2.svg">
+
+                                        </div>
+
+                                        <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+
+                                            <p class="mb-0 title-left text-xl-left text-center">Complementos materiales</p>
+
+                                            <p class="mb-0 sub-title text-xl-left text-center">Asigna los complementos materiales al vehículo. crearlos desde la pantalla <a class="link-config point" (click)="redirectSettingsVehicles('materialAccessories')">"Complementos materiales"</a>.</p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row pt-3 pl-xl-2">
+
+                                        <div class="col-xl-4 col-12" [ngClass]="{'mt-3': d > 2}" *ngFor="let item of materialAccessories; let d=index">
+
+                                            <div class="form-group input-group">
+
+                                                <span class="has-float-label w-100">
+
+                                                <input class="form-control point" [id]="item.name" [type]="item.type" [value]="getReturnValueMaterial(item)" [placeholder]="item.name" (change)="materialComplement($event.target.value, item, c)" />
+
+                                                <label for="first" class="mt-2 title-col"> {{ item.name }} </label>
+                                            </span>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Complementos materiales -->
+
+                <!-- Revisiones obligatorias -->
+
+                <div class="col-12 pt-3">
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="card style-card">
+
+                                <div class="card-body">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-1 col-12 text-center p-xl-0">
+
+                                            <img class="img-anclar" src="assets/icons/service3.svg">
+
+                                        </div>
+
+                                        <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+
+                                            <p class="mb-0 title-left text-xl-left text-center"> Revisiones obligatorias </p>
+
+                                            <p class="mb-0 sub-title text-xl-left text-center">Asigna las revisiones obligatorias al vehículo. crearlos desde la pantalla <a class="link-config point" (click)="redirectSettingsVehicles('mandatoryReviews')">"Revisiones obligatorias"</a>.</p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row pt-3 pl-xl-2">
+
+                                        <div class="col-xl-4 col-12" [ngClass]="{'mt-3': m > 2}" *ngFor="let item of mandatoryReviews; let m = index">
+
+                                            <div class="form-group input-group">
+
+                                                <span class="has-float-label w-100">
+
+                                                <input class="form-control point" [id]="item.name" [type]="item.type" [value]="getReturnValueMandatory(item)" [placeholder]="item.name" (change)="mandatoryReviewss($event.target.value, item, m)"/>
+
+                                                <label for="first" class="mt-2 title-col"> {{ item.name }} </label>
+                                            </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Revisiones obligatorias -->
+
+                <!-- Suplementos -->
+
+                <div class="col-12 pt-3">
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="card style-card">
+
+                                <div class="card-body">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-1 col-12 text-center p-xl-0">
+
+                                            <img class="img-anclar" src="assets/icons/service4.svg">
+
+                                        </div>
+
+                                        <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+
+                                            <p class="mb-0 title-left text-xl-left text-center"> Suplementos </p>
+
+                                            <p class="mb-0 sub-title text-xl-left text-center">Asigna los suplementos exclusivos del vehículo. crearlos desde la pantalla <a class="link-config point" (click)="redirectSettingsVehicles('supplements')">"Suplementos"</a>.</p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row pl-3">
+                                        <div class="container-fluid" *ngIf="concepts.length>0">
+                                            <div class="row mt-3">
+                                                <label for="type" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> {{ 'PROVIDERS.CONCEPT' | translate }} </label>
+
+                                                <label for="first" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> Fecha revisión </label>
+
+                                                <label for="first" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> &nbsp; </label>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="container-fluid">
+
+                                            <ng-container *ngIf="concepts.length>0">
+
+                                                <ng-container formArrayName="concepts">
+                                                    <ng-container *ngFor="let concept of concepts.controls; let i = index;" [formGroup]="concept">
+
+                                                        <div class="row" [ngClass]="{'mt-3': i > 0}">
+
+                                                            <div class="form-group input-group col-xl-4 col-12 col-md-4 col-sm-4 m-0 mt-1">
+
+                                                                <select class="form-select form-control form-control-select" [id]="'itemSelect'+ i" formControlName="companySupplementId" (change)="changeSelect($event.target.value, concept, i, 'itemSelect'+ i)">
+
+                                                                    <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+
+                                                                    <option *ngFor="let s of suplementList" [value]="s.id" [disabled]="existConcept(s.id)">
+
+                                                                        {{ s.name }}
+
+                                                                    </option>
+
+                                                                </select>
+
+
+                                                            </div>
+
+
+
+                                                            <div class="form-group  col-xl-4 col-12 col-md-4 col-sm-4 m-0 mt-1">
+
+                                                                <div class="form-group form-row">
+
+                                                                    <input type="date" class="form-control form-control-input" id="date" formControlName="date" (change)="changeDate($event.target.value, concept, i)" autocomplete="off" />
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group  col-xl-4 col-12 col-md-4 col-sm-4 m-0 mt-1">
+                                                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteSupplement(concept,i)">
+                                                                <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                            </button>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+
+
+
+
+
+                                        </div>
+
+                                        <div class="form-group col-12 px-xl-7 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin p-xl-0">
+                                            <button type="button" class="btn btn-add-concept" (click)="addConcept()">
+                                                <label for="concept" class="add-supplement point">+ Añadir suplemento</label>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Suplementos -->
+
+            </form>
+        </div>
+
+    </div>
+
+</div>

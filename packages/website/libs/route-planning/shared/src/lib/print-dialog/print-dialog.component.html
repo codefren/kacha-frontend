@@ -1,0 +1,240 @@
+<div class="PrintDialogComponent">
+    <section class="modal-content">
+        <div class="row">
+
+            <div class="col-md-6 col-12" [ngClass]="{'no-routes':preparedRoutes?.length < 1 }">
+
+                <!-- Titulo -->
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-xl-6 col-12 text-xl-left text-center">
+            
+                            <label class="title-modal"> {{ 'GENERAL.PRINT_REPORT' | translate }} </label>
+            
+                        </div>
+            
+                        <div class="col-xl-6 col-12 text-xl-right text-center point">
+            
+                            <img src="assets/icons/close-cost.svg" (click)="closeDialog()">
+            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cuerpo -->
+                <div class="modal-body" [ngClass]="{'no-routes':(areRoutesEmpty() && typeRoute === 'isRoute') || (areEvaluatesEmpty() && typeRoute === 'isEvaluate')}">
+                    
+                    <!-- Mensaje -->
+                    <div class="row">
+
+                        <div class="col-12">
+            
+                            <p class="title-infor"> {{ 'ROUTE_PLANNING.TOOLBAR.MESSAGE' | translate }} </p>
+            
+                        </div>
+            
+                    </div>
+                    
+                    <!-- Seleccionar tipo de ruta -->
+                    <div class="row pb-3">
+
+                        <div class="col-xl-6 col-md-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+        
+                                    <select class="form-select form-control w-100" id="typeRoute" [(ngModel)]="typeRoute" placeholder="Seleccione"
+                                    (change)="changeRadioType($event.target.value)">
+        
+                                        <!-- <option value="">{{ 'COMPANIES.SELECT' | translate }}</option> -->
+                                        <option value="isEvaluate">{{ 'ROUTE_PLANNING.TOOLBAR.EVALUATED' | translate }}</option>
+                                        <option value="isRoute">{{ 'ROUTE_PLANNING.TOOLBAR.OPTIMIZED' | translate }}</option>
+        
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> {{ 'GENERAL.TYPE' | translate }} </label>
+        
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-md-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+        
+                                    <select class="form-select form-control w-100" id="typeRoute" [(ngModel)]="typeVersion" placeholder="Seleccione">
+        
+                                        <!-- <option value="">{{ 'COMPANIES.SELECT' | translate }}</option> -->
+                                        <option value="isExtensive">{{ 'ROUTE_PLANNING.TOOLBAR.VERSION_EXTENSIVE' | translate }}</option>
+                                        <option value="isSimple">{{ 'ROUTE_PLANNING.TOOLBAR.VERSION_SIMPLE' | translate }}</option>
+        
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> {{ 'GENERAL.VERSION' | translate }} </label>
+        
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Seleccionar las rutas -->
+                    <div class="row">
+                        <div class="col-md-12 col-12 p-0">
+                            <div class="print-dialog-content">
+                                <div class="row text-center mt-3" *ngIf="(areRoutesEmpty() && typeRoute === 'isRoute') || (areEvaluatesEmpty() && typeRoute === 'isEvaluate')">
+                                    <div class="col-md-12 col-12">
+                                        <span class="no-optimized-routes" *ngIf="(areRoutesEmpty() && typeRoute === 'isRoute')">{{ 'GENERAL.THERE_IS_NO_CALCULATED_ROUTE' | translate }}</span>
+                                        <span class="no-optimized-routes" *ngIf="(areEvaluatesEmpty() && typeRoute === 'isEvaluate')">{{ 'GENERAL.THERE_IS_NO_EVALUATED_ROUTE' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="(!areRoutesEmpty() && typeRoute == 'isRoute') || (!areEvaluatesEmpty() && typeRoute == 'isEvaluate')">
+                                    <section role="main" class="content-body section-help pt-3">
+                                        <div class="col-md-12 pl-0">
+                                            
+                                            <!-- Seleccionar optimizadas -->
+                                            <div class="accordion section-help" id="accordionExample" *ngIf="typeRoute == 'isRoute' && !areRoutesEmpty()" style="height: 350px;overflow: auto;">
+                                                <div class="row m-0">
+                                                    <div class="col-12 ion-text-left">
+                                                        <label style="font-size: 14px;"> {{ 'ROUTE_PLANNING.TOOLBAR.SELECT_ROUTES' | translate }}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-0 mt-3">
+                                                    <div class="col-12" [ngClass]="{'col-md-6': preparedRoutes?.length == 0, 'col-md-12': preparedRoutes?.length > 0}">
+                                                        <div class="row justify-content-start pr-3">
+
+                                                            <div class="col-2 pr-0">
+                                                                <div class="round text-center">
+                                                                    <input type="checkbox" class="isActive" id="all-routes" [checked]="isAllsZoneChecked()" (click)="checkAllRoutes($event.target.checked)" />
+                                                                    <label for="all-routes"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-10 pl-0 text-left">
+                                                                <label for="all-routes" class="pl-0">{{ 'GENERAL.ALL_' | translate }}</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-container *ngFor="let zone of (routes | keyvalue)">
+                                                    <div class="row m-0 mt-3">
+                                                        <div class="col-12" [ngClass]="{'col-md-6': preparedRoutes?.length == 0, 'col-md-12': preparedRoutes?.length > 0}">
+                                                            <div class="row justify-content-center pr-3">
+
+                                                                <div class="col-2 pr-0">
+                                                                    <div class="round text-center">
+                                                                        <input type="checkbox" class="isActive" [id]="zone.key" [checked]="isAllZoneChecked(zone.key)" (change)="checkAllZone(zone.key, $event.target.checked)" (click)="$event.stopPropagation()" />
+                                                                        <label [for]="zone.key"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-10 pl-0 text-left">
+                                                                    <label [for]="zone.key" class="pl-0">{{ zone.value.name }}</label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                            <!-- Seleccionar evaluadas -->
+                                            <div class="accordion section-help" id="accordionExample" *ngIf="typeRoute == 'isEvaluate' && !areEvaluatesEmpty()" style="height: 350px;overflow: auto;">
+                                                <div class="row m-0">
+                                                    <div class="col-12 ion-text-left">
+                                                        <label style="font-size: 14px;">{{ 'ROUTE_PLANNING.TOOLBAR.SELECT_ROUTES' | translate }}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-0 mt-3">
+                                                    <div class="col-12" [ngClass]="{'col-md-6': preparedRoutes?.length == 0, 'col-md-12': preparedRoutes?.length > 0}">
+                                                        <div class="row justify-content-start pr-3">
+                                                            <div class="col-2 pr-0">
+                                                                <div class="round text-center">
+                                                                    <input type="checkbox" class="isActive" id="all-routes" [checked]="isAllsZoneChecked()" (click)="checkAllRoutes($event.target.checked)" />
+                                                                    <label for="all-routes"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-10 pl-0 text-left">
+                                                                <label for="all-routes" class="pl-0">{{ 'GENERAL.ALL_' | translate }}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-container *ngFor="let zone of (evaluates | keyvalue)">
+                                                    <div class="row m-0 mt-3">
+                                                        <div class="col-12" [ngClass]="{'col-md-6': preparedRoutes?.length == 0, 'col-md-12': preparedRoutes?.length > 0}">
+                                                            <div class="row justify-content-center pr-3">
+                                                                <div class="col-2 pr-0">
+                                                                    <div class="round text-center">
+                                                                        <input type="checkbox" class="isActive" [id]="zone.key" [checked]="isAllZoneChecked(zone.key)" (change)="checkAllZone(zone.key, $event.target.checked)" (click)="$event.stopPropagation()" />
+                                                                        <label [for]="zone.key"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-10 pl-0 text-left">
+                                                                    <label [for]="zone.key" class="pl-0">{{ zone.value.name }}</label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+                                    </section>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Botones -->
+                <div class="modal-footer">
+
+                    <div class="row">
+                        <div class="col-12 text-xl-right text-center">
+                            <button class="btn btn-cancel size-btn-modal modal-dismiss mr-2" (click)="closeDialog()"> {{ 'GENERAL.CLOSE' | translate }} </button>
+            
+                            <button class="btn btn-primary size-btn-modal modal-confirm" [disabled]="preparedRoutes?.length == 0 || preparedRoutes == null" 
+                            (click)="download()" id="card-button" > {{ 'ORDERS.ORDERS_PRINT.PRINT' | translate }} </button>
+                        </div>
+            
+                    </div>
+            
+                </div>
+
+            </div>
+
+            <!-- Donde se genera el pdf -->
+            <div class="col-md-6 col-12 p-col9">
+                <div class="row h-100">
+                    <div class="col-md-12" *ngIf="preparedRoutes?.length > 0 && typeVersion == 'isExtensive'">
+                        
+                        <app-route-print-template [sumupPage]="sumupData" [routes]="preparedRoutes" 
+                            (pdfUpdated)="onPdfChange($event)" [preview]="true">
+                        </app-route-print-template>
+
+                    </div>
+
+                    <div class="col-md-12 p-0" *ngIf="preparedRoutes?.length > 0 && typeVersion == 'isSimple'">
+
+                        <easyroute-route-print-template-simple [routesSimple]="preparedRoutes" 
+                            (pdfUpdated)="onPdfChange($event)" [previewSimple]="true">
+                        </easyroute-route-print-template-simple>
+                      
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+</div>

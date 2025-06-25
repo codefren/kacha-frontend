@@ -1,0 +1,116 @@
+<div class="super-admin-companies-form  padding-body pt-0  bg-white2">
+    <div class="container">
+        <div class="row pt-5 align-items-center justify-content-center mb-5 pb-3">
+            <div class="mr-3 return-left point" routerLink="/super-admin/company">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0" *ngIf="company && company.id == 0">
+                {{ 'COMPANIES.ADD_COMPANY' | translate }}
+            </p>
+            <p class="title m-0" *ngIf="company && company.id > 0">
+                {{ 'COMPANIES.EDIT_COMPANY' | translate }}
+            </p>
+        </div>
+
+
+        <div class="row justify-content-center mt-2">
+
+            <div class="col-12 lines-conteiner">
+
+                <div class="row">
+
+                    <div class="col-4 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'companies'}" (click)="changePage('companies')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'companies'}">
+
+                          {{ 'COMPANIES.COMPANY_INFORMATION' | translate }}
+
+                        </label>
+                    </div>
+
+
+                    <ng-container *ngIf="company && !company.isPartnerType">
+
+                        <div class="col-4 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'rates'}" (click)="changePage('rates')">
+
+                            <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'rates'}">
+
+                                {{'COMPANIES.RATES_AND_MODULES' | translate}}
+
+                            </label>
+
+                        </div>
+
+                        <div class="col-4 text-center d-flex align-items-center flex-row justify-content-center" [ngClass]="{'col-selecter': default === 'incidents'}" *ngIf="company && company.id === 0">
+
+                            <label class="no-selecter d-flex flex-row justify-content-center align-items-end" [ngClass]="{'selecter': default === 'incidents'}">
+
+                                {{'COMPANIES.ERP_AND_INCIDENTS' | translate}}
+
+                            </label>
+
+                        </div>
+
+                        <div class="col-4 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'incidents'}" (click)="changePage('incidents')" *ngIf="company && company.id >0">
+
+                            <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'incidents'}">
+
+                                {{'COMPANIES.ERP_AND_INCIDENTS' | translate}}
+
+                            </label>
+
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 justify-content-center">
+
+                <ng-container *ngIf="default === 'companies'">
+
+                    <easyroute-companies-form [company]="company" (companies)="getData($event)"></easyroute-companies-form>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'rates'">
+
+                    <easyroute-rate-form [company]="company" (companies)="getData($event)"></easyroute-rate-form>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'incidents'">
+
+                    <ng-container *ngIf="company && company.id > 0">
+
+                        <easyroute-incident-form [company]="company" (companies)="getData($event)"></easyroute-incident-form>
+
+                    </ng-container>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="row pt-sm-5 pt-3">
+
+            <div class="col-sm-6 col-12 text-sm-right text-center mt-1">
+                <button class="btn btn-cancel size-btn-form point" title="{{ 'VEHICLES.BACK_TO_VEHICLE_LIST' | translate }}" routerLink="/super-admin">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+
+            </div>
+            <div class="col-sm-6 col-12 text-sm-left text-center mt-1 pb-2">
+                <button class="btn btn-primary size-btn-form modal-confirm point"  (click)="createCompany()">
+                    <span *ngIf="company && company.id == 0">{{ 'GENERAL.CREATE' | translate }}</span>
+                   <span *ngIf="company && company.id > 0">{{ 'GENERAL.SAVE' | translate }}</span> 
+                </button>
+            </div>
+
+        </div>
+        -->
+    </div>
+</div>

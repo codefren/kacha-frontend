@@ -1,0 +1,46 @@
+<div class="easyroute-login w-100" style="height: 100vh">
+
+    <section role="main" class="container mt-lg-5 pt-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12"><i class="point fas fa-arrow-left fa-2x" routerLink="/login"></i></div>
+                </div>
+                <div class="row p-4">
+                    <div class="col-12 margin p-0 text-center">
+                        <img src="assets/polpoo/login/login-logo.png" alt="logo" class="logo">
+                        <h2><b>{{ 'GENERAL.ACCOUNT_VERIFY' | translate }}</b></h2>
+
+                        <form>
+                            <div class="form-group mb-2">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ng-container *ngIf="loading == 'loading'">
+                                            <p class="text-center text-white processing"><i class="fa fa-spinner fa-spin"></i> Estamos verificando su cuenta, espero un momento por favor.</p>
+                                        </ng-container>
+                                        <ng-container *ngIf="loading == 'error'">
+                                            <p class="text-center text-danger">{{ message }}</p>
+                                        </ng-container>
+                                        <ng-container *ngIf="loading == 'success'">
+                                            <p class="text-center text-success">{{ message }}</p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row justify-content-center">
+                                <button type="submit" [disabled]="loading == 'loading'" routerLink="/login" class="button-signin btn btn-secondary btn-block mt-2 ">
+                                    <b>{{ 'GENERAL.TO_ACCESS' | translate }}</b>
+                                </button>
+                                <!-- <div class="col-4 offset-4">
+                                </div> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

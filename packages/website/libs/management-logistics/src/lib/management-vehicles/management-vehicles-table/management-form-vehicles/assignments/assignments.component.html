@@ -1,0 +1,399 @@
+<div class="assignments">
+    <div class="card">
+        <form *ngIf="assignmentsFormGroup" [formGroup]="assignmentsFormGroup">
+
+            <div class="card-body">
+                <div class="col-12">
+
+                    <p class="title-assi mb-1">Asignación</p>
+
+                    <p class="sub-title">Asigna y configura los atributos específicos a este vehículo.</p>
+
+                </div>
+
+
+                <div class="container-fluid pb-4">
+
+                    <!-- Datos del vehículo -->
+
+
+                    <div class="form-row mt-3">
+
+
+                        <!-- deliveryZoneId -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':assignmentsFormGroup.controls['deliveryZoneId'].invalid && (assignmentsFormGroup.controls['deliveryZoneId'].dirty || assignmentsFormGroup.controls['deliveryZoneId'].touched) }">
+                                <span class="has-float-label w-100">
+        
+                                    <select class="form-select form-control w-100" id="vehicleType" formControlName="deliveryZoneId" placeholder="Conductor asignado">
+        
+                                        <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+                                        <option
+                                            *ngFor="let item of zones | async"
+                                            [value]="item.id"
+                                            >
+                                        {{ item.name }}
+                                        </option>
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> Ruta asignada </label>
+        
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.deliveryZoneId">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                        assignmentsFormGroup
+                                                .get('deliveryZoneId')
+                                                .hasError(validation.type) &&
+                                            (assignmentsFormGroup.get('deliveryZoneId').dirty ||
+                                            assignmentsFormGroup.get('deliveryZoneId').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+                        <!-- end deliveryZoneId -->
+
+                        <!-- registration -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': assignmentsFormGroup.controls['deliveryLimit'].invalid && (assignmentsFormGroup.controls['deliveryLimit'].dirty || assignmentsFormGroup.controls['deliveryLimit'].touched)}">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="deliveryLimit" type="number" placeholder="{{ 'VEHICLES.DELIVERY_LIMIT' | translate }}" formControlName="deliveryLimit" [ngClass]="{'form-control-danger': assignmentsFormGroup.controls['deliveryLimit'].invalid && (assignmentsFormGroup.controls['deliveryLimit'].dirty || assignmentsFormGroup.controls['deliveryLimit'].touched) }" />
+        
+                                    <label for="first" class="mt-2 title-col">  {{ 'VEHICLES.DELIVERY_LIMIT' | translate }}</label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.deliveryLimit">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                        assignmentsFormGroup
+                                                    .get('deliveryLimit')
+                                                    .hasError(validation.type) &&
+                                                (assignmentsFormGroup.get('deliveryLimit').dirty ||
+                                                assignmentsFormGroup.get('deliveryLimit')
+                                                        .touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end registration -->
+
+
+
+
+
+
+                    </div>
+
+                    <!-- end Datos del vehículo -->
+                </div>
+
+            </div>
+
+            <!-- Parada por descanso -->
+
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+
+                <div class="col-12 pt-4">
+
+                    <p class="title-assi mb-1">Parada por descanso</p>
+
+                    <p class="sub-title">Puedes activar la opción de “parada obligatoria” e indicar cada cuantos km o horas debe realizar una parada y el tiempo que pernota por cada descanso.</p>
+
+                </div>
+
+                <div class="container-fluid">
+
+                    <!-- Parada por descanso -->
+
+
+                    <div class="form-row mt-3">
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="border-special">
+
+                                <div class="switch w-100">
+
+                                    <label class="switch-width mb-0">
+                
+                                        <input type="checkbox"  formControlName="stopRequired"
+                
+                                        (change)="changeStopRequired($event.target.checked)"/>
+                
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                
+                                        <span class="lever-text">Aplicar parada obligatoria</span>
+                
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row" formGroupName="vehicleStopType" *ngIf="assignmentsFormGroup && assignmentsFormGroup.controls['stopRequired'] && assignmentsFormGroup.controls['stopRequired'].value">
+                        <!-- stopTypeId -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+    
+                                <select class="form-select form-control w-100" id="vehicleType" formControlName="stopTypeId" (change)="changeValidation($event.target.value)">
+    
+                                    <option value=""> {{ 'COMPANIES.SELECT' | translate }} </option>
+
+                                    <option *ngFor="let item of BreakTime" [value]="item.id">
+                                    {{ item.name }}
+                                    </option>
+    
+                                </select>
+    
+                                <label for="type" class="mt-2 title-col">  {{ 'VEHICLES.SELECT_THE_TYPE_OF_STOP' | translate }} </label>
+    
+                            </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.stopTypeId">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                        assignmentsFormGroup
+                                            .get('vehicleStopType.stopTypeId')
+                                            .hasError(validation.type) &&
+                                        (assignmentsFormGroup.get('vehicleStopType.stopTypeId').dirty ||
+                                        assignmentsFormGroup.get('vehicleStopType.stopTypeId').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+
+
+
+                        </div>
+
+                        <!-- end stopTypeId -->
+
+                        <!-- stopTypeId ==1 -->
+
+                        <ng-container *ngIf="assignmentsFormGroup.value.vehicleStopType.stopTypeId ==1">
+
+                            <!-- amount -->
+
+                            <div class="col-xl-4 col-12 mt-3">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="amount" type="number"  placeholder="{{ 'VEHICLES.KM' | translate }}" formControlName="amount" autocomplete="off" 
+                                        onKeyPress="if(this.value.length==9) return false;" required autofocus step="0.01" />
+            
+                                        <label for="first" class="mt-2 title-col">    {{ 'VEHICLES.KM' | translate }} </label>
+
+                                    </span>
+
+                                    <ng-container *ngFor="let validation of vehicles_messages.amount">
+
+                                        <div class="w-100 text-left">
+
+                                            <small class="form-control-feedback text-danger" *ngIf="
+                                            assignmentsFormGroup
+                                                    .get('vehicleStopType.amount')
+                                                    .hasError(validation.type) &&
+                                                (assignmentsFormGroup.get('vehicleStopType.amount').dirty ||
+                                                assignmentsFormGroup.get('vehicleStopType.amount').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- end amount -->
+
+                            <!-- restAmount -->
+
+                            <div class="col-xl-4 col-12 mt-3">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+
+                                    <input class="form-control point" format="HH:mm" id="restAmount" type="time"  placeholder="{{ 'VEHICLES.BREAK_TIME' | translate }}" formControlName="restAmount" autocomplete="off" />
+        
+                                    <label for="first" class="mt-2 title-col">  {{ 'VEHICLES.BREAK_TIME' | translate }} </label>
+
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end restAmount -->
+
+                        </ng-container>
+
+                        <!-- end stopTypeId ==1 -->
+
+                        <!-- stopTypeId ==2 -->
+
+                        <ng-container *ngIf="assignmentsFormGroup.value.vehicleStopType.stopTypeId == 2">
+
+                            <div class="col-xl-4 col-12 mt-3">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+
+                                    <input class="form-control point" format="HH:mm" id="restAmount" type="time"  placeholder="{{ 'VEHICLES.HOURS_DRIVEN' | translate }}" formControlName="amount" autocomplete="off" />
+        
+                                    <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.HOURS_DRIVEN' | translate }} </label>
+
+                                </span>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-xl-4 col-12 mt-3">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+
+                                    <input class="form-control point" format="HH:mm" id="restAmount" type="time"  placeholder="{{ 'VEHICLES.BREAK_TIME' | translate }}" formControlName="restAmount" autocomplete="off" />
+        
+                                    <label for="first" class="mt-2 title-col">   {{ 'VEHICLES.BREAK_TIME' | translate }} </label>
+
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                        </ng-container>
+
+                        <!-- end stopTypeId ==2 -->
+
+
+
+                    </div>
+
+                    <!-- end Parada por descanso -->
+                </div>
+            </div>
+
+            <!-- end Parada por descanso -->
+
+            <!-- Especificación de servicios -->
+
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+                <div class="col-12 pt-4">
+
+                    <p class="title-assi mb-1"> {{ 'VEHICLES.SERVICE_TYPE.SPECIFICATION_OF_SERVICE' | translate }}</p>
+
+                    <p class="sub-title mb-0">Selecciona que tipo de servicios puede ofrecer este vehículo en concreto. Debes crearlas en la pantalla de <b class="point linkend" (click)="openServiceType('serviceSpecification')">especificación de servicios</b> para después poder
+                        seleccionarlas.
+                    </p>
+
+                </div>
+
+                <div class="form-row mt-2 pb-2">
+
+
+                    <ng-container *ngIf="showServiceType">
+
+                        <ng-container *ngIf="vehicleServiceType && vehicleServiceType.length > 0">
+
+                            <div class="col-12 pl-3 pr-4">
+
+                                <div class="row">
+
+                                    <div class="col-xl-4 col-12 pl-xl-3 p-xl-0 mt-3">
+
+                                        <div class="border-special">
+                                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+                                                <div class="round round-little margin-days round-1">
+                                                    <input type="checkbox" id="free" formControlName="free" [checked]="freeDisabled()" (click)="changeCleanLibre()" />
+                                                    <label for="free"></label>
+                                                </div>
+                                                <label for="free" title="{{ 'GENERAL.FREEE' | translate}}" class="label-check point pl-2">
+                                                    {{ 'GENERAL.FREEE' | translate}}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-3" formArrayName="vehicleServiceType" *ngFor="let filter of assignmentsFormGroup?.get('vehicleServiceType')?.controls; let g = index">
+                                        <div class="border-special">
+                                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+                                                <div class="round round-little margin-days round-1">
+                                                    <input type="checkbox" [formControlName]="g" [id]="vehicleServiceType[g].id" />
+                                                    <label [for]="vehicleServiceType[g].id"></label>
+                                                </div>
+                                                <label [title]="vehicleServiceType[g].name" [for]="vehicleServiceType[g].id" class="label-check point pl-2">
+                                                    {{ sliceString( vehicleServiceType[g].name ) }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </ng-container>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="!showServiceType">
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                            <div class="fa-5x mt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <!-- end Especificación de servicios -->
+
+
+            <div class="card-footer pt-3 pb-3" style="display: block;">
+                <div class="col-12 text-sm-left text-center">
+                    <button type="submit" class="btn btn-primary size-btn-form modal-confirm" [disabled]="!assignmentsFormGroup.valid || !assignmentsFormGroup.dirty" (click)="submit()">
+                        <span *ngIf="vehicles.id == 0">{{ 'GENERAL.ADD' | translate }}</span>
+                        <span *ngIf="vehicles.id > 0">{{ 'GENERAL.SAVE' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+.first-roardmap {
+    .title-road {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .switch label input[type=checkbox]:checked+.lever {
+        background-color: #29cc97 !important;
+    }
+    .border-bottom-road {
+        border: 1px solid #dee2e6 !important;
+        border-radius: 5px;
+    }
+    .toogle-style {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .border-col {
+        border: 1px solid #CDD4DA;
+        border-radius: 5px;
+    }
+    .fond-input {
+        background: #EFF0F4 !important;
+    }
+    .title-form-1 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        color: #363740;
+    }
+    .sub-title-form {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .form-control {
+        font-size: 14px !important;
+        border: 1px solid #ffffff00 !important;
+        padding: 0.5rem 0rem !important;
+    }
+    .label-info-form {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 19px;
+        align-items: center;
+        color: #363740;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #e9ecef12 !important;
+        opacity: 1;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        padding: 0.9rem;
+        font-size: 14px;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 19px;
+        align-items: center;
+        color: #363740;
+        font-size: 14px;
+    }
+    .table tbody {
+        border: 3px solid #F0F0F6;
+    }
+    .btn-default {
+        border: #ccc dashed !important;
+    }
+    .btn-outline-primary {
+        color: #24397C;
+        border-color: #24397C;
+    }
+    .btn-outline-primary:hover {
+        color: #fff !important;
+        background-color: #24397C !important;
+        border-color: #24397C !important;
+    }
+    .btn-outline-primary:not(:disabled):not(.disabled):active,
+    .btn-outline-primary:not(:disabled):not(.disabled).active,
+    .show>.btn-outline-primary.dropdown-toggle {
+        color: #fff !important;
+        background-color: #24397C !important;
+        border-color: #24397C !important;
+    }
+    .scrool-auto {
+        overflow-y: auto;
+        height: 593px;
+    }
+    .overflow-scroos {
+        height: 576px;
+        overflow-y: auto;
+        box-sizing: border-box;
+        padding: 0rem;
+    }
+    /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+    .overflow-scroos::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:vertical {
+        width: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-button:increment,
+    .overflow-scroos::-webkit-scrollbar-button {
+        display: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-thumb {
+        background-color: #9899AA;
+        border-radius: 20px;
+        border: 2px solid #9899AA;
+    }
+    .overflow-scroos::-webkit-scrollbar-track {
+        border-radiu .label-sub-none {
+            font-style: normal;
+            font-size: 15px;
+            line-height: 22px;
+            align-items: center;
+            color: #000000;
+            padding: 0.5rem 0rem !important;
+        }
+        .disables-text {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            align-items: center;
+            color: #9899AA !important;
+        }
+    }
+}

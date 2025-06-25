@@ -1,0 +1,1172 @@
+<div class="bg-white2 optimroute-product-form" *ngIf="products && category">
+    <div class="container">
+        <div class="row justify-content-center pt-5 align-items-center">
+            <div class="return-left mr-3 point" routerLink="/products">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0" *ngIf="products.id == 0">
+                {{ 'PRODUCTS.ADD_PRODUCT' | translate }}
+            </p>
+            <p *ngIf="products.id && products.id > 0" class="title m-0">
+                {{ 'PRODUCTS_GENERAL.PRODUCT_FORM.PRODUCTS_UPDATE' | translate }}
+            </p>
+        </div>
+        <p class="message text-center text-muted pt-4 m-0" *ngIf="!products.id && category.length == 0">
+            {{ 'PRODUCTS.MESSAGE_1' | translate }}
+            <span class="point" routerLink="/category/new">{{
+                'CONFIGURATIONS.CATEGORY.NAME' | translate
+            }}</span>
+        </p>
+        <div class="row justify-content-center">
+
+
+
+            <div class="col-12 lines-conteiner mt-5">
+                <div class="row">
+                    <div class="col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'product'}" (click)="changePage('product')">
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'product'}">
+                          Información de producto
+                        </label>
+                    </div>
+                    <div class="col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'promotion'}" (click)="changePage('promotion')">
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'promotion'}">
+                            Promoción y oferta
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <form [formGroup]="ProductForm" class="form-width-prod">
+
+                <ng-container *ngIf="default === 'product'">
+
+                    <div class="form-row justify-content-center mb-0 mt-3">
+                        <a class="link" (click)="showModalImgInfo()">{{ 'PRODUCTS.HOW_IMAGE' | translate }}</a>
+                    </div>
+                    <div class="row justify-content-center">
+
+                        <!-- <ng-container *ngIf="products.previousId">
+                            <div class="back point" title="Previo" (click)="previous(products.previousId)">
+                                <img src="assets/icons/optimmanage/previous.svg">
+                            </div>
+                        </ng-container> -->
+
+
+
+                        <ng-container *ngIf="products.previousId">
+                            <div class="col-xl-1 col-12 text-xl-left text-lg-left text-md-center text-center pt-xl-5 mt-3  point" title="Previo" (click)="previous(products.previousId)">
+                                <img src="assets/icons/optimmanage/previous.svg">
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!products.previousId">
+                            <div class="col-xl-1 col-12 text-left align-self-center">
+
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngFor="let card of [1, 2, 3, 4]; let i = index">
+                            <easyroute-image-view [image]="productImages[i]" [index]="i" [promotion]="false" (error)="imageError = $event" [state]="state" [delete]="true" (deleteImage)="deleteProductImage($event.id, $event.image)" (updateImage)="_handleReaderLoaded($event.image)"
+                                (changeMain)="selectMainImage($event)"></easyroute-image-view>
+                        </ng-container>
+                        <div class="col-12 text-center" *ngIf="imageError.length > 0">
+                            <span class="text-danger">{{ imageError }}</span>
+                        </div>
+
+                        <ng-container *ngIf="products.nextId">
+                            <div class="col-xl-1 col-12 text-xl-right text-lg-right text-md-center text-center  point pt-xl-5 mt-3 pl-xl-5" title="Siguiente" (click)="nextId(products.nextId)">
+                                <img src="assets/icons/optimmanage/Next.svg">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="!products.nextId">
+                            <div class="col-xl-1 col-12 text-right align-self-center">
+
+                            </div>
+                        </ng-container>
+
+
+                        <!-- <ng-container *ngIf="products.nextId">
+                            <div class="forward point" title="Siguiente" (click)="nextId(products.nextId)">
+                                <img src="assets/icons/optimmanage/Next.svg">
+                            </div>
+                        </ng-container> -->
+
+                    </div>
+
+                    <div class="row mt-5">
+
+
+                        <!-- code -->
+
+                        <div class="col-12 col-md-5 pr-sm-4">
+                            <div class="form-row form-group" [ngClass]="{
+                                'has-danger':
+                                    ProductForm.controls['code'].invalid &&
+                                    (ProductForm.controls['code'].dirty ||
+                                        ProductForm.controls['code'].touched)
+                            }">
+                                <label for="product_code">
+                                {{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}
+                                <!--  <span class="asterisco">*</span> -->
+                            </label>
+                                <input *ngIf="!products.id" type="text" class="form-control" id="product_code" formControlName="code" placeholder="{{
+                                    'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate
+                                }}" [ngClass]="{
+                                    'form-control-danger':
+                                        ProductForm.controls['code'].invalid &&
+                                        (ProductForm.controls['code'].dirty ||
+                                            ProductForm.controls['code'].touched)
+                                }" />
+                                <input *ngIf="products.id > 0" type="text" readonly class="form-control" id="product_code" autocomplete="off" formControlName="code" placeholder="{{
+                                    'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate
+                                }}" [ngClass]="{
+                                    'form-control-danger':
+                                        ProductForm.controls['code'].invalid &&
+                                        (ProductForm.controls['code'].dirty ||
+                                            ProductForm.controls['code'].touched)
+                                }" />
+                                <!--  <input type="text" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}" id="product_code" class="form-control" autocomplete="off" formControlName="code" /> -->
+                                <ng-container *ngFor="let validation of products_messages.code">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            ProductForm.get('code').hasError(
+                                                validation.type
+                                            ) &&
+                                            (ProductForm.get('code').dirty ||
+                                                ProductForm.get('code').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end code -->
+
+                        <!-- category -->
+
+                        <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                            <div class="form-row form-group" [ngClass]="{
+                                'has-danger':
+                                    ProductForm.controls['categoryId'].invalid &&
+                                    (ProductForm.controls['categoryId'].dirty ||
+                                        ProductForm.controls['categoryId'].touched)
+                            }">
+                                <label for="product_category">
+                                {{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CATEGORY' | translate }}
+                            </label>
+                                <ng-container *ngIf="loadingCompanyList == 'loading'">
+                                    <div class="col-12 text-center p-2">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="loadingCompanyList == 'error'">
+                                    <div class="col-12">
+                                        <p class="text-danger pointer" (click)="getCategory()">
+                                            {{ 'GENERAL.THERE_WAS' | translate }}
+                                            <ins>{{ 'GENERAL.HERE' | translate }}</ins
+                                        >!
+                                    </p>
+                                </div>
+                            </ng-container>
+                            <ng-container
+                                *ngIf="
+                                    category.length == 0 && loadingCompanyList == 'success'
+                                "
+                            >
+                                <div class="col-12 text-center p-2">
+                                    <p class="text-danger">
+                                        {{ 'PRODUCTS.NO_CATEGORY_REGISTERED' | translate }}
+                                    </p>
+                                </div>
+                            </ng-container>
+
+                            <ng-container
+                                *ngIf="
+                                    category.length > 0 && loadingCompanyList == 'success'
+                                "
+                            >
+                                <select
+                                    id="product_category"
+                                    class="form-control"
+                                    formControlName="categoryId"
+                                    (change)="getSubcategory($event.target.value, true)"
+                                >
+                                    <option value="">{{
+                                        'GENERAL.SELECT' | translate
+                                    }}</option>
+                                    <option
+                                        *ngFor="let categorylist of category"
+                                        [value]="categorylist.id"
+                                    >
+                                        {{ categorylist.name }}
+                                    </option>
+                                </select>
+                                <!-- <div class="hack-select"></div> -->
+
+                                <ng-container
+                                    *ngFor="let validation of products_messages.categoryId"
+                                >
+                                    <div class="w-100 text-left">
+                                        <small
+                                            class="form-control-feedback text-danger"
+                                            *ngIf="
+                                                ProductForm.get('categoryId').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (ProductForm.get('categoryId').dirty ||
+                                                    ProductForm.get('categoryId').touched)
+                                            "
+                                        >
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        </div>
+
+                        <!-- end category -->
+
+                        <!-- name -->
+
+                        <div class="col-12 col-md-5 pr-sm-4">
+                            <div class="form-row form-group" [ngClass]="{
+                                'has-danger':
+                                    ProductForm.controls['name'].invalid &&
+                                    (ProductForm.controls['name'].dirty ||
+                                        ProductForm.controls['name'].touched)
+                            }">
+                            <label for="product_name">
+                                {{ 'PRODUCTS_GENERAL.PRODUCT_FORM.NAME' | translate }}
+                                <span class="asterisco">*</span>
+                            </label>
+                            <input type="text" placeholder="{{
+                                    'PRODUCTS_GENERAL.PRODUCT_FORM.NAME' | translate
+                                }}" id="product_name" class="form-control" autocomplete="off" formControlName="name" />
+                            <ng-container *ngFor="let validation of products_messages.name">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            ProductForm.get('name').hasError(
+                                                validation.type
+                                            ) &&
+                                            (ProductForm.get('name').dirty ||
+                                                ProductForm.get('name').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                        </div>
+
+                        <!--end  name -->
+
+                        <!-- sub-category --> 
+
+                        <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                            <div
+                            class="form-row form-group"
+                            [ngClass]="{
+                                'has-danger':
+                                    ProductForm.controls['subCategoryId'].invalid &&
+                                    (ProductForm.controls['subCategoryId'].dirty ||
+                                        ProductForm.controls['subCategoryId'].touched),
+                                'mb-0': ProductForm.controls['categoryId'].value == 0
+                            }"
+                        >
+                            <ng-container
+                                *ngIf="
+                                    ProductForm.controls['categoryId'].value > 0 &&
+                                    subCategories
+                                "
+                            >
+                                <label for="product_subcategory">
+                                    {{ 'PRODUCTS.SUB_CATEGORIES' | translate }}
+                                </label>
+
+                                <div class="w-100">
+                                    <p
+                                        class="text-danger text-center"
+                                        *ngIf="
+                                            subCategories.length == 0 &&
+                                            loadingSubcategories == 'success'
+                                        "
+                                    >
+                                        {{
+                                            'PRODUCTS.DONT_EXIST_SUBCATEGORIES' | translate
+                                        }}
+                                    </p>
+                                </div>
+
+                                <select
+                                    id="product_subcategory"
+                                    formControlName="subCategoryId"
+                                    class="form-control"
+                                    (change)="getFilter($event.target.value, true)"
+                                    *ngIf="
+                                        subCategories.length > 0 &&
+                                        loadingSubcategories == 'success'
+                                    "
+                                >
+                                    <option value="">{{
+                                        'GENERAL.SELECT' | translate
+                                    }}</option>
+                                    <option
+                                        *ngFor="let subcategory of subCategories"
+                                        [value]="subcategory.id"
+                                    >
+                                        {{ subcategory.name }}
+                                    </option>
+                                </select>
+                                <!-- <div class="hack-select"></div> -->
+                                <ng-container
+                                    *ngFor="
+                                        let validation of products_messages.subCategoryId
+                                    "
+                                >
+                                    <div class="w-100 text-center">
+                                        <small
+                                            class="form-control-feedback text-danger"
+                                            *ngIf="
+                                                ProductForm.get('subCategoryId').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (ProductForm.get('subCategoryId').dirty ||
+                                                    ProductForm.get('subCategoryId')
+                                                        .touched)
+                                            "
+                                        >
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="loadingSubcategories == 'loading'">
+                                    <div class="col-12 text-center p-2">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="loadingSubcategories == 'error'">
+                                    <div class="col-12">
+                                        <p
+                                            class="text-danger pointer"
+                                            (click)="getCategory()"
+                                        >
+                                            {{ 'GENERAL.THERE_WAS' | translate }}
+                                            <ins>{{ 'GENERAL.HERE' | translate }}</ins
+                                            >!
+                                        </p>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        </div>
+
+                        <!--end  sub-category -->
+
+                        <!-- description -->
+
+                        <div class="col-12 col-md-5 pr-sm-4">
+                            <div class="form-row form-group" [ngClass]="{
+                                'has-danger':
+                                    ProductForm.controls['description'].invalid &&
+                                    (ProductForm.controls['description'].dirty ||
+                                        ProductForm.controls['description'].touched)
+                            }">
+                            <label for="product_description">
+                                {{
+                                    'PRODUCTS_GENERAL.PRODUCT_FORM.DESCRIPTION' | translate
+                                }}
+                            </label>
+                            <textarea class="form-control" placeholder="{{
+                                    'PRODUCTS_GENERAL.PRODUCT_FORM.DESCRIPTION' | translate
+                                }}" autocomplete="off" formControlName="description" id="product_description"></textarea>
+                            <ng-container *ngFor="let validation of products_messages.description">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            ProductForm.get('description').hasError(
+                                                validation.type
+                                            ) &&
+                                            (ProductForm.get('description').dirty ||
+                                                ProductForm.get('description').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                        </div>
+
+                        <!-- end description -->
+
+                        <!-- estimatedWeightPerUnit -->
+
+                        <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                            <div class="form-row form-group">
+                                <label for="estimatedWeightPerUnit"
+                                    >{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.ESTIMATEDWEIGHTPERUNIT' | translate }}
+                                </label>
+
+                                <input
+                                    type="number"
+                                    step="0.001"
+                                    id="estimatedWeightPerUnit"
+                                    class="form-control"
+                                    min="0"
+                                    max="999"
+                                    placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.ESTIMATEDWEIGHTPERUNIT' | translate }}"
+                                    autocomplete="off"
+                                    formControlName="estimatedWeightPerUnit"
+                                    onKeyPress="if(this.value.length==7) return false;"
+                                />
+                                <ng-container
+                                    *ngFor="let validation of products_messages.estimatedWeightPerUnit"
+                                >
+                                    <div class="w-100 text-left">
+                                        <small
+                                            class="form-control-feedback text-danger"
+                                            *ngIf="
+                                                ProductForm.get('estimatedWeightPerUnit').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (ProductForm.get('estimatedWeightPerUnit').dirty ||
+                                                    ProductForm.get('estimatedWeightPerUnit').touched)
+                                            "
+                                        >
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end estimatedWeightPerUnit -->
+
+                        <!-- origin -->
+
+                        <div class="col-12 col-md-5 pr-sm-4">
+                            <div class="form-row form-group">
+                                <label for="product_origin">
+                                    {{ 'PRODUCTS_GENERAL.PRODUCT_FORM.ORIGIN' | translate }}
+                                </label>
+                                <input type="text" placeholder="{{
+                                        'PRODUCTS_GENERAL.PRODUCT_FORM.ORIGIN' | translate
+                                    }}" id="product_origin" class="form-control" autocomplete="off" formControlName="origin" />
+                            </div>
+                        </div>
+
+                        <!-- end origin -->
+
+                        <!-- free field -->
+                        <div class="col-12 col-md-5  offset-md-2 pr-sm-4">
+                            <div class="form-row form-group" [ngClass]="{
+                                'has-danger':
+                                    ProductForm.controls['freeField'].invalid &&
+                                    (ProductForm.controls['freeField'].dirty ||
+                                        ProductForm.controls['freeField'].touched)
+                            }">
+                                <label for="freeField">{{ 'PRODUCTS.FREE_FIELD' | translate }}</label>
+                                <input id="freeField" placeholder="{{ 'PRODUCTS.FREE_FIELD' | translate }}" type="text" formControlName="freeField" class="form-control">
+                                <ng-container *ngFor="let validation of products_messages.freeField">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            ProductForm.get('freeField').hasError(
+                                                validation.type
+                                            ) &&
+                                            (ProductForm.get('freeField').dirty ||
+                                                ProductForm.get('freeField').touched)
+                                    
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- free field -->
+        
+                    </div>
+
+                    <hr class="hr-secondary mb-2" />
+
+                    <!-- Filters -->
+                    <div class="row padding-col">
+                        <label for="filterId" class="col-12 p-0">
+                            {{ 'GENERAL.FILTERS' | translate }}
+                        </label>
+                        <ng-container *ngIf="filters && filters.length > 0">
+                            <div class="col-12 col-md-4 pl-3 d-flex justify-content-between" formArrayName="filters" *ngFor="let filter of 
+                            ProductForm?.get('filters')
+                            ?.controls;
+                                let g = index
+                            ">
+                                <div class="row">
+                                    <div class="round-new-form ml-0">
+                                        <input
+                                            type="checkbox"
+                                            [formControlName]="g"
+                                            [id]="filters[g].id"
+                                        />
+                                        <label [for]="filters[g].id"></label>
+                                    </div>
+                                    <label [for]="filters[g].id" style="margin-left: 1.3rem;">
+                                        {{ sliceString( filters[g].name ) }}
+                                    </label>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container
+                            *ngIf="filterSubcategory == false && filters && filters.length == 0"
+                        >
+                            <p class="text-danger text-center mt-2">
+                                {{ 'PRODUCTS.DONT_EXIST_FILTERS' | translate }}
+                            </p>
+                        </ng-container>
+                    </div>
+
+                    <hr class="hr-secondary mb-2" />
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 pr-sm-5">
+                            <!-- destaced -->
+                            <div class="form-row">
+                                <div class="switch w-100 col-12">
+                                    <label class="switch-width">
+                                        {{ 'PRODUCTS.FEATURED' | translate }}
+                                        <input
+                                            type="checkbox"
+                                            formControlName="highlight"
+                                            (change)="changeHighlight($event.target.checked)"
+                                        />
+                                        <span class="lever switch-col-primary"></span>
+                                    </label>
+                                </div>
+
+                                <div class="col-12" *ngIf="ProductForm.get('highlight').value">
+                                    <label for="position_imp"
+                                        >{{ 'PRODUCTS.POSITION_BY_IMPORTANCE' | translate }}
+                                        <span class="asterisco">*</span>
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        step="0.1"
+                                        id="position_imp"
+                                        class="form-control"
+                                        min="0"
+                                        max="99999"
+                                        placeholder="{{ 'PRODUCTS.VALORATION' | translate }}"
+                                        autocomplete="off"
+                                        formControlName="valoration"
+                                    />
+                                    <ng-container
+                                        *ngFor="let validation of products_messages.valoration"
+                                    >
+                                        <div class="w-100 text-left">
+                                            <small
+                                                class="form-control-feedback text-danger"
+                                                *ngIf="
+                                                    ProductForm.get('valoration').hasError(
+                                                        validation.type
+                                                    ) &&
+                                                    (ProductForm.get('valoration').dirty ||
+                                                        ProductForm.get('valoration').touched)
+                                                "
+                                            >
+                                                {{ validation.message }}
+                                            </small>
+                                        </div>
+                                    </ng-container>
+                                    <!-- <div class="hack-input-time" [ngClass]="{ 'has-danger': ProductForm.controls['valoration'].invalid && (ProductForm.controls['valoration'].dirty || ProductForm.controls['valoration'].touched) }">
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <ng-container
+                                *ngIf="
+                                    companyParentId &&
+                                    companyParentId != null &&
+                                    companyParentId > 0
+                                "
+                            >
+                                <div class="form-row">
+                                    <label for="updatableFromCompanyParent">
+                                        {{ 'PRODUCTS.ALLOW_CHANGES_FROM_MAIN' | translate }}
+                                        <!-- <span data-toggle="tooltip" class="info" data-placement="top" title="{{ 'PRODUCTS.ALLOW_CHANGES_FROM_MAIN' | translate }}">
+                                            <i class="far fa-question-circle"></i>
+                                        </span> -->
+                                    </label>
+                                    <div class="round">
+                                        <input
+                                            type="checkbox"
+                                            id="updatableFromCompanyParent"
+                                            formControlName="updatableFromCompanyParent"
+                                        />
+                                        <label for="updatableFromCompanyParent"></label>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="col-12 col-sm-6 pr-sm-5">
+                            <!-- active -->
+                            <div class="form-row mb-0">
+                                <div class="switch w-100">
+                                    <label class="switch-width">
+                                        {{ 'GENERAL.ACTIVE' | translate }}
+                                        <input
+                                            type="checkbox"
+                                            formControlName="isActive"
+                                            (click)="changeActive()"
+                                        />
+                                        <span class="lever switch-col-primary"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- show-app -->
+                            <div class="form-row mb-0">
+                                <div class="switch w-100">
+                                    <label class="switch-width">
+                                        {{ 'PRODUCTS.SHOW_IN_APP' | translate }}
+                                        <input type="checkbox" formControlName="showInApp" />
+                                        <span class="lever switch-col-primary"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 border-bottom">
+                            <span style="font-weight: 600;">{{ 'PRODUCTS.PRICES_AND_FORMATS' | translate }}</span>
+                        </div>
+                    </div>
+
+                    <!-- tabla de medidas y precios -->
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div
+                                class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0"
+                            >
+                                <div class="col-md-2 col-2  p-0">
+                                    <select class="form-control" (change)="changeFilter($event.target.value)">
+                                        <option value="active">Mostrar activos</option>
+                                        <option value="inactive">Mostrar inactivos</option>
+                                        <option value="all">Todas</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-5 offset-5 offset-md-5 p-0 text-sm-right">
+                                    <button
+                                        class="btn btn-add card-button mt-2 mt-sm-0"
+                                        type="button"
+                                        title="{{ 'PRODUCTS_GENERAL.ADD_FORMAT' | translate }}"
+                                        (click)="searchMeasure()"
+                                    >
+                                        <label>{{ 'GENERAL.ADD' | translate }}</label>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <table
+                                class="table table-responsive-lg mb-0"
+                                *ngIf="productsPrice.length > 0"
+                            >
+                                <thead class="thead">
+                                    <tr>
+                                        <th class="text-center">Id</th>
+                                        <th class="text-center">
+                                            {{ 'GENERAL.NAME' | translate }}
+                                        </th>
+                                        <th>
+                                            {{ 'PRODUCTS_GENERAL.PRODUCT_FORM.LOTE' | translate }}
+                                        </th>
+                                        <th class="text-center p-0">Cantidad equivalente activa</th>
+                                        <th class="text-center p-0">Cantidad equivalente</th>
+                                        <th class="text-center">
+                                            STOCK
+                                        </th>
+                                        <th class="text-center">
+                                            {{
+                                                'PRODUCTS_GENERAL.PRODUCT_FORM.PRICE'
+                                                    | translate
+                                            }}
+                                        </th>
+                                        <th class="text-center">
+                                            {{
+                                                'PRODUCTS_GENERAL.PRODUCT_FORM.TAX' | translate
+                                            }}
+                                        </th>
+                                        <th class="text-center">
+                                            {{ 'PRODUCTS.EQUIVALENCE' | translate }}
+                                        </th>
+                                        <th class="text-center">
+                                            {{ 'PRODUCTS_GENERAL.PRINCIPAL_IN_THE_APP' | translate }}
+                                        </th>
+                                        <th class="text-center" *ngIf="products.id > 0">
+                                            {{ 'GENERAL.IS_ACTIVE' | translate }}
+                                        </th>
+                                        <th class="text-center">
+                                            {{ 'GENERAL.ACTIONS' | translate }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let proprice of productsPrice; let i = index"
+                                        [ngClass]="{
+                                            'bg-white': i % 2 == 0,
+                                            'bg-gray': i % 2 > 0
+                                        }"
+                                    >
+                                        <td data-title="Code" class="text-center">
+                                            {{ proprice.measure?.id }}
+                                        </td>
+                                        <td data-title="Company" class="text-center">
+                                            {{ proprice?.measure?.name }}
+                                        </td>
+                                        <td>
+                                            {{ proprice?.lotCode }} 
+                                        </td>
+                                        <td>
+                                            {{ proprice.measure.activateEquivalentAmount ? 'Si' : 'No' }}
+                                        </td>
+                                        <td> {{ proprice.measure.equivalentAmount ? proprice.measure.equivalentAmount : 0  }} </td>
+                                        <td class="input-table" *ngIf="products.id == 0">
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="0"
+                                                (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaQantity
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.quantity"
+                                            />
+                                        </td>
+                                        <td class="input-table" *ngIf="products.id > 0">
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="0"
+                                                [disabled]="disablePrice"
+                                                (change)="
+                                                    updatePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaQantity
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.quantity"
+                                            />
+                                        </td>
+
+                                        <td class="input-table" *ngIf="products.id == 0">
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="0"
+                                                (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaPrice
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.price"
+                                            />
+                                        </td>
+                                        <td class="input-table" *ngIf="products.id > 0">
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="0"
+                                                [disabled]="disablePrice"
+                                                (change)="
+                                                    updatePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaPrice
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.price"
+                                            />
+                                        </td>
+
+                                        <td
+                                            data-title="Company"
+                                            class="text-center"
+                                            *ngIf="products.id == 0"
+                                        >
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="1"
+                                                (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaTaxPercent
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.taxPercent"
+                                            />
+                                        </td>
+                                        <td
+                                            data-title="Company"
+                                            class="text-center"
+                                            *ngIf="products.id > 0"
+                                        >
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="1"
+                                                [disabled]="disablePrice"
+                                                (change)="
+                                                    updatePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaTaxPercent
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.taxPercent"
+                                            />
+                                        </td>
+
+                                        <td
+                                            data-title="Company"
+                                            class="text-center"
+                                            *ngIf="products.id == 0"
+                                        >
+                                            <input
+                                                class="input-table form-control"
+                                                type="number"
+                                                min="1"
+                                                [value]="proprice?.equivalencePercent"
+                                                (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaEquivalence
+                                                    )
+                                                "
+                                                [value]="proprice?.equivalencePercent || 0"
+                                            />
+                                        </td>
+                                        <td
+                                            data-title="Company"
+                                            class="text-center"
+                                            *ngIf="products.id > 0"
+                                        >
+                                            <input
+                                                class="input-table"
+                                                type="number"
+                                                min="1"
+                                                [disabled]="disablePrice"
+                                                (change)="
+                                                    updatePrice(
+                                                        $event.target.value,
+                                                        proprice,
+                                                        etiquetaEquivalence
+                                                    )
+                                                "
+                                                class="form-control"
+                                                [value]="proprice?.equivalencePercent"
+                                            />
+                                        </td>
+                                        <td *ngIf="products.id == 0" class="text-center">
+                                            <div class="round" style="margin-left: 31px !important;">
+                                                <input
+                                                    type="radio"
+                                                    [id]="'mainProprice' + proprice.id"
+                                                    [checked]="proprice.main" 
+                                                    (change)="activeMain(proprice,i)"
+                                                />
+                                                <label
+                                                    [for]="'mainProprice' + proprice.id"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td *ngIf="products.id > 0" class="text-center">
+                                            <div class="round" style="margin-left: 31px !important;">
+                                                <input
+                                                    type="radio"
+                                                    [id]="'mainProprice' + proprice.id"
+                                                    [checked]="proprice.main" 
+                                                    (change)="activeProductMain(proprice.main,proprice)"
+                                                />
+                                                <label
+                                                    [for]="'mainProprice' + proprice.id"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td *ngIf="products.id > 0" class="text-center">
+                                            <div class="round">
+                                                <input
+                                                    type="checkbox"
+                                                    [id]="'isActiveProprice' + proprice.id"
+                                                    [checked]="proprice.isActive"
+                                                    (click)="activeProductPrice(proprice)"
+                                                />
+                                                <label
+                                                    [for]="'isActiveProprice' + proprice.id"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td data-title="Open" class="text-center">
+                                            <div
+                                                *ngIf="products.id > 0"
+                                                class="editar point"
+                                                title="{{ 'GENERAL.DELETE' | translate }}"
+                                                (click)="deleteProdutPrice(proprice.id)"
+                                            >
+                                                <i class="far fa-times-circle fa-2x"></i>
+                                                <!--   <img class="icons-datatable point" src="assets/icons/optimmanage/trash-bin.svg"> -->
+                                            </div>
+                                            <div
+                                                *ngIf="products.id == 0"
+                                                class="editar point"
+                                                title="{{ 'GENERAL.DELETE' | translate }}"
+                                                (click)="deleteproductPriceTable(proprice.id)"
+                                            >
+                                                <i class="far fa-times-circle fa-2x"></i>
+                                                <!-- <img class="icons-datatable point" src="assets/icons/optimmanage/trash-bin.svg"> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h5
+                                class="text-center data-avalilable"
+                                *ngIf="productsPrice.length == 0"
+                            >
+                                {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                            </h5>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'promotion'">
+                    <div class="pl-0 pt-3">
+                        <div class="col-sm-12 subtitle-general pl-0 pt-3">
+                            <label class="mb-0">
+                                Promoción
+                            </label>
+                        </div>
+
+                        <div class="col-12 text-left pl-0 mt-2 mb-3">
+                            <label for="" class="schedule-default parrafo m-0">
+                                Al activar la promoción en este producto se destacará en la app con una etiqueta para que tus clientes lo vean antes.
+                            </label>
+                        </div>
+
+                        <div class="col-4 pl-1">
+                            <div class="form-row mb-0">
+                                <div class="switch w-100">
+                                    <label class="switch-width">
+                                        {{ 'PRODUCTS.PROMOTION' | translate }}
+                                        <input
+                                            type="checkbox"
+                                            formControlName="promotion"
+                                            (click)="changePromotion($event.target.checked)"
+                                        />
+                                        <span class="lever switch-col-primary"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 pl-1">
+                        <div
+                                class="form-row mb-0"
+                                *ngIf="ProductForm.get('promotion').value"
+                            >
+                                <div class="col-md-6 col-12 pr-sm-2 mb-1">
+                                    <!-- <label for="" class="font-general col-sm-2 col-6 mt-xs">
+                                        {{ 'CLIENTS.CLIENTS_FORMS.SINCE' | translate }}: 
+                                    </label> -->
+                                    <div class="input-group">
+                                        <input
+                                            class="form-control"
+                                            placeholder="{{ 'GENERAL.FROM' | translate }}"
+                                            autocomplete="off"
+                                            id="startPromotionDate"
+                                            formControlName="startPromotionDate"
+                                            ngbDatepicker
+                                            #d="ngbDatepicker"
+                                            readonly
+                                            id="startDemoDate"
+                                            [startDate]="dateNow"
+                                        />
+                                        <div class="input-group-append">
+                                            <button
+                                                [disabled]="promotionReadOnly"
+                                                class="btn btn-calendar calendar"
+                                                (click)="d.toggle()"
+                                                type="button"
+                                            >
+                                                <img
+                                                    class="icons-calendar point"
+                                                    src="assets/icons/optimmanage/calendar-outlines.svg"
+                                                    aria-hidden="true"
+                                                />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 pl-sm-2 mb-1">
+                                    <!-- <label for="" class="font-general col-sm-2 col-6 mt-xs">
+                                        {{ 'CLIENTS.CLIENTS_FORMS.UNTIL' | translate }}:
+                                    </label> -->
+                                    <div class="input-group">
+                                        <input
+                                            class="form-control"
+                                            placeholder="{{ 'GENERAL.TO' | translate }}"
+                                            autocomplete="off"
+                                            id="endPromotionDate"
+                                            formControlName="endPromotionDate"
+                                            ngbDatepicker
+                                            #b="ngbDatepicker"
+                                            readonly
+                                            id="startDemoDate"
+                                            [startDate]="dateNow"
+                                        />
+                                        <div class="input-group-append">
+                                            <button
+                                                class="btn btn-calendar calendar"
+                                                (click)="b.toggle()"
+                                                [disabled]="promotionReadOnly"
+                                                type="button"
+                                            >
+                                                <img
+                                                    class="icons-calendar point"
+                                                    src="assets/icons/optimmanage/calendar-outlines.svg"
+                                                    aria-hidden="true"
+                                                />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <ng-container
+                                        *ngFor="
+                                            let validation of products_messages.endPromotionDate
+                                        "
+                                    >
+                                        <div class="w-100 text-left">
+                                            <small
+                                                class="form-control-feedback text-danger"
+                                                *ngIf="
+                                                    ProductForm.get(
+                                                        'endPromotionDate'
+                                                    ).hasError(validation.type) &&
+                                                    (ProductForm.get('endPromotionDate')
+                                                        .dirty ||
+                                                        ProductForm.get('endPromotionDate')
+                                                            .touched)
+                                                "
+                                            >
+                                                {{ validation.message }}
+                                            </small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ng-container *ngIf="(productPreferences$ | async).allowDiscount">
+
+                            <div class="col-sm-12 subtitle-general pl-0 pt-3">
+                                <label class="mb-0">
+                                    Descuentos
+                                </label>
+                            </div>
+
+                            <div class="col-12 text-left pl-0 mt-2 mb-3">
+                                <label for="" class="schedule-default parrafo m-0">
+                                    Al activar el descuento permites que los comerciales a la hora de pasar un pedido, puedan aplicar un descuento a un producto concreto si lo ve necesario.
+                                </label>
+                            </div>
+                            <div class="col-4 pl-1">
+                                <div class="form-row mb-0">
+                                    <div class="switch w-100">
+                                        <label class="switch-width">
+                                            Aplicar descuento
+                                            <input
+                                                type="checkbox"
+                                                formControlName="allowDiscount"
+                                            />
+                                            <span class="lever switch-col-primary"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mt-3" *ngIf="ProductForm.controls['allowDiscount'].value && discount && discount.length > 0">
+                                <div class="col-3 pl-1" *ngFor="let item of discount">
+                                    <div class="row pl-0 ml-0">
+                                        <div class="round-new-form ml-0">
+                                            <input type="checkbox" [id]="'discount' + item.id" [value]="item.id" title="{{item.name}}"
+                                            [checked]="haveDiscount(item.id)" (change)="addDiscount(item.id)" />
+                                            <label [for]="'discount' + item.id"></label>
+                                        </div>
+                                        <label [title]="item.name" [for]="'discount' + item.id" style="margin-left: 1.3rem;">
+                                            {{ item.name | slice:0:25 }} {{ item.name.length > 25 ? '...' : '' }} ({{ item.discountPercent }}%)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <div class="row pt-5 pb-3">
+                    <div class="col-sm-6 col-12 text-center text-sm-right mt-1">
+                        <button
+                            class="btn btn-cancel size-btn-form"
+                            type="button"
+                            routerLink="/products"
+                        >
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-sm-6 col-12 text-center text-sm-left mt-1 pb-2">
+                        <button
+                            (click)="createProduct()"
+                            type="button"
+                            class="btn btn-primary size-btn-form"
+                            [disabled]="ProductForm.invalid || productsPrice.length === 0"
+                        >
+                            <span *ngIf="products.id == 0">{{
+                                'GENERAL.ADD' | translate
+                            }}</span>
+                            <span *ngIf="products.id > 0">{{
+                                'GENERAL.SAVE' | translate
+                            }}</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

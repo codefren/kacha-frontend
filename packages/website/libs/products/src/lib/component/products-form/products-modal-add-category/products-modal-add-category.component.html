@@ -1,0 +1,83 @@
+<div class="easyroute-products-modal-add-category">
+    <section class="card p-2">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right">
+                <i class="fas fa-times close-button" (click)="activeModal.close(false)"></i>
+            </div>
+            <div class="col-8 text-center mt-4">
+                <p class="title">{{ 'PRODUCTS.ADD_CATEGORY' | translate }}</p>
+                <hr class="line-primary" />
+              </div>       
+          </div> 
+
+        <div class="card-body">
+            <div class="modal-block">
+                <form [formGroup]="categoryForm">
+                    <div class="form-row">
+                        <label class="font-general col-4" for="name">
+                            {{ 'CONFIGURATIONS.NAME' | translate }}
+                            <span class="asterisco">* </span>
+                        </label>
+                        <div class="col-8">
+                            <div
+                                class="form-group"
+                                [ngClass]="{
+                                    'has-danger':
+                                        categoryForm.controls['name'].invalid &&
+                                        (categoryForm.controls['name'].dirty ||
+                                            categoryForm.controls['name'].touched)
+                                }"
+                            >
+                                <input
+                                    type="text"
+                                    id="name"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    formControlName="name"
+                                    [ngClass]="{
+                                        'form-control-danger':
+                                            categoryForm.controls['name'].invalid &&
+                                            (categoryForm.controls['name'].dirty ||
+                                                categoryForm.controls['name'].touched)
+                                    }"
+                                />
+                            </div>
+                            <ng-container *ngFor="let validation of category_messages.name">
+                                <small
+                                    class="form-control-feedback text-danger"
+                                    *ngIf="
+                                        categoryForm
+                                            .get('name')
+                                            .hasError(validation.type) &&
+                                        (categoryForm.get('name').dirty ||
+                                            categoryForm.get('name').touched)
+                                    "
+                                >
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="row justify-content-center pb-4">
+            <button
+                type="button"
+                class="btn btn-cancel size-btn-modal mr-4"
+                (click)="activeModal.close(false)"
+            >
+                {{ 'GENERAL.CANCEL' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary size-btn-modal"
+                (click)="activeModal.close(categoryForm.value)"
+                [disabled]="!categoryForm.valid"
+            >
+                {{ 'GENERAL.ACCEPT' | translate }}
+            </button>
+        </footer>
+    </section>
+</div>

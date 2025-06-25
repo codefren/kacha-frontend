@@ -1,0 +1,29 @@
+<div class="ErrorDialogComponent">
+    <section class="card">
+        <header class="card-header card-header-error">
+            <div class="float-left">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="float-right">
+                <i class="fas fa-times" (click)="onCancelClick()"></i>
+            </div>
+            <div class="float-none">
+                <h1 class="card-title">{{ errorTitle }}</h1>
+            </div>
+        </header>
+
+        <div class="card-body">
+            <div class="modal-block text-center">
+                <label [innerHTML]="errorDescription"></label>
+            </div>
+        </div>
+
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-dark modal-dismiss" (click)="onCancelClick()">Ok</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

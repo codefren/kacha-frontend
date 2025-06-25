@@ -1,0 +1,105 @@
+:host {
+    margin: auto 0;
+}
+
+
+
+.info-chip {
+    max-width: 450px;
+    border-radius: 20px;
+    cursor: help;
+    display: inline-flex;
+    flex-direction: row;
+    padding: 0 12px 0 0;
+    vertical-align: middle;
+    .info-chip-text {
+        font-size: 13px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &.unknown-color {
+        padding-left: 12px;
+        .info-chip-text {
+            font-weight: 500;
+        }
+    }
+    &.editable {
+        cursor: url(apps/easyroute/src/assets/images/color-brush.png), pointer;
+    }
+    .material-icon-container {
+        border-radius: 100%;
+        margin-right: 5px;
+        height: 100%;
+        &.mat-svg-icon svg {
+            height: 75%;
+            position: relative;
+            top: 10%;
+            width: 75%;
+        }
+    }
+
+    .progress {
+        margin-top: 8px;
+        margin-left: 8px;
+        width: 100px;
+        background-color: #F8F8FB;
+        .progress-bar {
+            color: #000 !important;
+        }
+        .progress-bar {
+            background-color: #84CA4C !important;
+        }
+        .progress-bar-red {
+            color: #ffffff !important;
+            background-color: #ea0000 !important;
+        }
+    }
+}
+
+.icon-middle {
+    width: 24px;
+    text-align: center;
+    align-self: center;
+}
+
+@mixin chip-sizer($size) {
+    height: $size;
+    line-height: $size;
+    .material-icon-container {
+        height: $size;
+        margin-right: 5px;
+        text-align: center;
+        width: $size;
+    }
+}
+
+.medium-size {
+    @include chip-sizer(32px);
+    min-width: 52px;
+}
+
+.small-size {
+    @include chip-sizer(24px);
+    span {
+        line-height: 24px !important;
+    }
+}
+
+.shadow {
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 14px 0 rgba(0, 0, 0, 0.12);
+}
+
+.bordered {
+    border-color: #c2c2c2;
+    border-style: solid;
+    border-width: thin;
+}
+
+.borderedNoRight {
+    border-right: 0px !important;
+}
+
+.ico-modify {
+    width: 20px !important;
+}

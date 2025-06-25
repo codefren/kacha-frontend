@@ -1,0 +1,228 @@
+<div class="loanding-dock main-container container-fluid p-0 pt-4 pb-4">
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title">
+                <img src="assets/icons/loadingDock/loading-dock.svg" class="header-brand-img" alt="Muelle">
+                <span class="ml-3">{{ 'LOADING_DOCK.NAME' | translate }} </span>
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end">
+
+                <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openPdf()">
+
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'GENERAL.DOWNLOAD_PDF' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openCsv()">
+
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'GENERAL.DOWNLOAD_EXCEL' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/setting.svg" class="pr-2"> {{ 'GENERAL.SETTING' | translate }}
+
+                    </a>
+
+                </div>
+
+                <button class="btn btn-primary btn-large ml-2" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}" (click)="forceFinished()">
+                    <img src="assets/icons/loadingDock/forceFinished.svg" class="pr-2">
+                    {{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row align-items-center mt-3 pl-4 pr-4">
+
+        <div class="col-xl col-md-6 col-12">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> <img src="assets/icons/loadingDock/downloader.svg" class="pr-2"> {{'LOADING_DOCK.UNLOADED_PACKAGES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.downloadPackage }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> <img src="assets/icons/loadingDock/loaded.svg" class="pr-2"> {{ 'LOADING_DOCK.LOADED_PACKAGES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.loadPackage }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'LOADING_DOCK.TOTAL_ROUTES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.totalRoute }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'LOADING_DOCK.FINISHED' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.totalFinish }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'LOADING_DOCK.SLOPES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.totalSlope }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'LOADING_DOCK.BAD_VEHICLE_CONDITION' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number  bad-color" *ngIf="totalizedDate"> {{ totalizedDate.totalVehicleBad }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'LOADING_DOCK.GOOD_VEHICLE_CONDITION' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.totalVehicleGood }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- table -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general mt-3">
+
+                <table class="table table-striped table-bordered table-responsive-lg mb-0" id="loadingDock" style="text-align: center; width: 100%;">
+
+                    <thead>
+                        <tr>
+                            <th>{{ 'LOADING_DOCK.CODE' |translate }}</th>
+                            <th>{{ 'LOADING_DOCK.ROUTE' |translate }}</th>
+                            <th>{{ 'LOADING_DOCK.ASSIGNED_TO' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.VEHICLE' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.UNLOADED_PACKAGES' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.LOADED_PACKAGES' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.VEHICLE_STATUS' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.TEMPERATURE' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.START_ROUTE' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.END_ROUTE' | translate }}</th>
+                            <th>{{ 'LOADING_DOCK.TIME_SPENT' | translate }}</th>
+                            <th>{{ 'SHEET_ROUTE.CONDITION' | translate }}</th>
+                            <th class="colorAccionDatatable widthAccionDatatable"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,134 @@
+.optimroute-manage-users-form {
+    .i-relative {
+        position: relative;
+        top: -5px;
+        right: 5px;
+        color: #aeaeae !important;
+    }
+    .switch-width {
+        width: 85%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    button {
+        border-radius: 20px;
+    }
+    .form-row+.form-row {
+        margin-top: 20px !important;
+    }
+    .title-page-user-form {
+        font-size: 18px;
+        font-weight: lighter;
+        color: #4c4c4c;
+    }
+    .btn-basic {
+        color: #4c4c4c;
+        background-color: #f2f2f2;
+        border: #f2f2f2 solid 1px;
+        font-weight: lighter;
+        border-radius: 0px;
+        text-transform: capitalize;
+        width: 350px;
+        border-radius: 15px;
+    }
+    button {
+        font-size: 18px;
+    }
+    /* select {
+        -webkit-appearance: none;
+        appearance: none;
+        line-height: 1.3 !important;
+    } */
+    .form-row>.col,
+    .form-row>[class*="col-"] {
+        padding-right: 3px !important;
+    }
+    .info {
+        i {
+            font-size: 10px;
+            // float: right;
+            padding-left: 0.5rem;
+            color: #4c4c4c;
+        }
+    }
+    .switch>label {
+        margin: 0;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .b-xs {
+            margin-bottom: 10px;
+        }
+        .mt-xs {
+            margin-top: 10px;
+        }
+        .btn-basic {
+            width: 100%;
+        }
+        .m-xs {
+            margin-bottom: 5px;
+        }
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) and ( orientation: landscape) {
+        .m-xs {
+            margin-bottom: 0;
+        }
+    }
+
+    .toggle-directions {
+        background: #444A60;
+        border-radius: 5px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397C;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+
+    .table-head {
+        background-color: #7288C4;
+        color: #ffffff;
+    }
+
+    .add-schedule {
+        text-decoration: underline;
+        color: #3F88B1;
+        cursor: pointer;
+        font-weight: bold;
+        letter-spacing: -1px;
+        font-size: 15px;
+    }
+
+    .schedule-title {
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+    .schedule-count {
+        color: #6B6B6B !important;
+        font-weight: bold;
+    }
+
+    .schedule-question {
+        color: #6B6B6B !important;
+        font-weight: bold;
+    }
+}

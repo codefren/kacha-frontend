@@ -1,0 +1,67 @@
+.modal-view-incident {
+    .style-text-area {
+        height: 160px !important;
+        background: #f6f6f6;
+        border: none;
+    }
+    .style-text-area-create {
+        height: 160px !important;
+    }
+    .margin-days {
+        margin-left: 0% !important;
+    }
+    /* .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #fdfdfd;
+        opacity: 1;
+    } */
+    .round-little label {
+        top: 7px;
+    }
+    .round input[type=checkbox]:checked+label {
+        background-color: #91d600;
+        border-color: #24397c;
+    }
+    .color-a-sync {
+        background-color: #24397c;
+        border: 1px solid #24397c;
+    }
+    .color-control-form-async {
+        border: 1px solid #24397c;
+    }
+    .color-label-info {
+        color: #818181 !important;
+        font-size: 12px !important;
+    }
+    .background-color-sync {
+        background-color: #eaefff;
+        opacity: 1;
+    }
+    .color-icon-sync {
+        color: #ffffff;
+        font-size: 1rem;
+    }
+    .color-card-solved {
+        background: #f1f4ff;
+    }
+    .tile-solved {
+        font-size: 18px !important;
+        color: #24397c !important;
+        font-weight: bold;
+        font-family: Helvetica;
+    }
+    .size-card {
+        height: 50px;
+    }
+    .color-title {
+        color: #030303 !important;
+    }
+    p {
+        font-size: 14px;
+        color: #030303;
+        font-weight: bold;
+    }
+    .label-info {
+        color: #8e8e8e !important;
+    }
+}

@@ -1,0 +1,836 @@
+<div class="accordion" *ngIf="routeId !== null && (route$ | async).deliveryPointsUnassigned &&(route$ | async).deliveryPointsUnassigned.length > 0" id="optimization-panel">
+    <div class="card mt-4 bg-color">
+        <div class="card-header point card-grey">
+            <div class="row p-0" data-toggle="collapse" data-target="#optimization">
+                <div class="col-6 p-0">
+                    <h4 class="title align-self-center">
+
+                        <span class="a-no-final">
+                            <img src="assets/icons/warning.svg">
+                            {{ 'ROUTE_PLANNING.DELIVERY_POINT_NOT_SERVED' | translate }}
+                        </span>
+                    </h4>
+                </div>
+                <div class="col-6 p-0">
+                    <h4 class="title align-self-center text-right a-final">
+                        <a class="point-no-asssinged" data-toggle="collapse" data-target="#optimization">
+                            {{ (route$ | async).deliveryPointsUnassigned.length }} puntos sin asignar
+                        </a>
+
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body collapse show" id="optimization">
+            <div class="easyroute-route-planning-table" *ngIf="routeId !== null && (route$ | async).deliveryPointsUnassigned &&(route$ | async).deliveryPointsUnassigned.length > 0">
+                <div class="table-header" fxLayout="row">
+                    <div class="mat-body-strong header-column column position">
+                        <span></span>
+                    </div>
+
+                    <div class="mat-body-strong header-column column delivery-points" fxLayout="row" fxLayoutAlign="center center">
+                        <img src="assets/icons/location.svg" title="Punto de entrega" />
+                    </div>
+
+                    <div class="mat-body-strong header-column column opening-time zone" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).allowDelayTime">
+                        <img src="assets/icons/allowed-delay.svg" title="Permite retraso en cliente" />
+                    </div>
+
+                    <div class="mat-body-strong header-column column opening-time zone" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).skill">
+                        <img src="assets/icons/skill.svg" title="Especificación de servicio" />
+                    </div>
+                    <div class="mat-body-strong header-column column opening-time zone population" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).routeSpecification">
+                        <img src="assets/icons/specification-route.svg" title="Especificación de ruta" />
+                    </div>
+                    <div class="mat-body-strong header-column column opening-time zone population" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || (zoneStatus$ | async ).evaluated || routeId !== null ) && (interferencePreferences$ | async).population">
+                        <img src="assets/icons/population-delivery.svg" title="Población" />
+                    </div>
+
+                    <div class="mat-body-strong header-column column opening-time zone" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || (zoneStatus$ | async ).evaluated || routeId !== null ) && (interferencePreferences$ | async).openTime">
+                        <img src="assets/icons/open-delivery.svg" title="Hora apertura" />
+                    </div>
+
+                    <div class="mat-body-strong header-column column closing-time zone" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || (zoneStatus$ | async ).evaluated || routeId !== null ) && (interferencePreferences$ | async).limitTime">
+                        <img src="assets/icons/close-delivery.svg" title="Hora límite" />
+                    </div>
+
+                    <div class="mat-body-strong header-column column delivery-time zone" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).deliverytime" title="{{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.DELIVERY_TIME.NAME' | translate }}">
+                        <img src="assets/icons/time-deliveried.svg" title="Hora de entrega" />
+                    </div>
+                </div>
+
+                <div *ngIf="routeId !== null">
+                    <div *ngFor="let item of (route$ | async).deliveryPointsUnassigned; let i = index; trackBy: trackById" class="table-element-1" fxLayout="row" [title]="item.name" (click)="changeRoute(item)" [ngClass]="{'isPending': item.fromPending }">
+                        <div class="column position">
+                            <span></span>
+                        </div>
+
+                        <!-- <div class="column position ">
+                            <span class="warn-text">{{ i + 1 }}</span>
+                        </div> -->
+
+                        <div class="column delivery-points">
+                            <app-info-chip class="line-spacing" size="s" [text]="i + 1" [color]="item.fromPending ? '#E91313' : zoneColor" [shadow]="true"></app-info-chip>
+
+                            <span class="pl-2 warn-text" [title]="item.name">
+                                {{ item.name }}
+                            </span>
+                        </div>
+
+
+                        <div class="column zone population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).skill">
+                            <span *ngIf="item.service && item.service.name" class="warn-text population" [title]="item.service.name">
+                                {{ item.service.name }}
+                            </span>
+
+                            <span *ngIf="!item.service"> - </span>
+                        </div>
+
+                        <div class="column zone population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null && (zoneStatus$ | async ) && (zoneStatus$ | async ).evaluated)
+                                && (interferencePreferences$ | async).skill">
+                            <span *ngIf="item.service && item.service.name" class="warn-text population" [title]="item.service.name">
+                                {{ item.service.name }}
+                            </span>
+
+                            <span *ngIf="!item.service"> - </span>
+                        </div>
+
+                        <div class="column zone opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).population">
+                            <span *ngIf="item.population" class="warn-text">
+                                {{ item.population }}
+                            </span>
+
+                            <span *ngIf="!item.population"> - </span>
+                        </div>
+
+                        <div class="column zone opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).openTime">
+                            <span *ngIf="!isFree(false, item.deliveryWindow.start)" class="warn-text">
+                                {{ item.deliveryWindow.start | dayTime }}
+                            </span>
+
+                            <span *ngIf="isFree(false, item.deliveryWindow.start)"> Libre </span>
+                        </div>
+
+                        <div class="column zone closing-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).limitTime">
+                            <span *ngIf="!isFree(true, item.deliveryWindow.end)" class="warn-text">
+                                {{ item.deliveryWindow.end | dayTime }}
+                            </span>
+
+                            <span *ngIf="isFree(true, item.deliveryWindow.end)"> Libre </span>
+                        </div>
+
+                        <div class="column zone delivery-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).deliverytime">
+                            <span class="warn-text">
+                                {{ item.serviceTime | duration }}
+                            </span>
+                        </div>
+
+                        <div class="column zone delivery-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).serviceCost">
+                            <span class="warn-text">
+                                {{ item.cost }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="separator">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="easyroute-route-planning-table">
+    <div class="table-header" fxLayout="row">
+        <div class="mat-body-strong header-column column position" fxLayout="row" fxLayoutAlign="center center">
+            <span></span>
+        </div>
+
+        <div class="warehouse-column column delivery-points" fxLayout="row" fxLayoutAlign="center center">
+            <img src="assets/icons/location.svg" title="Punto de entrega" />
+        </div>
+
+        <div class="mat-body-strong header-column column opening-time zone" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).allowDelayTime || closeComplete">
+            <img src="assets/icons/allowed-delay.svg" title="Permite retraso en cliente" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column opening-time population" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).skill || closeComplete">
+            <img src="assets/icons/skill.svg" title="Especificación de servicio" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column opening-time population" fxLayout="row" fxLayoutAlign="center center" *ngIf="(((zoneStatus$ | async ) && (zoneStatus$ | async ).evaluated ) || routeId === null ) && (interferencePreferences$ | async) && ((interferencePreferences$ | async).routeSpecification || closeComplete)">
+            <img src="assets/icons/specification-route.svg" title="Especificación de rutas" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column opening-time population" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || ( zoneStatus$ != null && (zoneStatus$ | async ) && (zoneStatus$ | async ).evaluated ) || routeId !== null ) && (interferencePreferences$ | async) && (interferencePreferences$ | async).population || closeComplete">
+            <img src="assets/icons/population-delivery.svg" title="Población" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column opening-time population" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || ( zoneStatus$ != null && (zoneStatus$ | async ) && (zoneStatus$ | async ).evaluated ) || routeId !== null ) && (interferencePreferences$ | async) && (interferencePreferences$ | async).postalCode || closeComplete">
+            <img src="assets/icons/population-delivery.svg" title="Código postal" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column opening-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || ( zoneStatus$ != null && (zoneStatus$ | async ) && (zoneStatus$ | async ).evaluated ) || routeId !== null ) && (interferencePreferences$ | async) && (interferencePreferences$ | async).openTime || closeComplete">
+            <img src="assets/icons/open-delivery.svg" title="Hora apertura" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column closing-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId === null || (zoneStatus$ | async ).evaluated || routeId !== null ) && (interferencePreferences$ | async).limitTime || closeComplete">
+            <img src="assets/icons/close-delivery.svg" title="Hora límite" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column demand" fxLayout="row" fxLayoutAlign="center center" *ngIf="routeId === null && ((interferencePreferences$ | async).demand || closeComplete)">
+            <img src="assets/icons/demand-delivery.svg" title="Carga" style="width: 28px;" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column demand" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).box || closeComplete">
+            <img src="assets/icons/box-delivery.svg" title="Capacidad" style="width: 28px;" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column demand" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).volumetric || closeComplete">
+            <img src="assets/icons/metro_cubico.svg" title="Metros cúbicos" style="width: 28px;" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column travel-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelTime || closeComplete">
+            <img src="assets/icons/travel-time-delivery.svg" title="Tiempo circulando" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column arrival-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).readyTime || closeComplete">
+            <img src="assets/icons/time-deliveried.svg" title="Hora de entrega" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column delay-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).customerWaitTime || closeComplete" title="{{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.DELAY_TIME.DESCRIPTION' | translate }}">
+            <img src="assets/icons/delay-time-delivery.svg" title="Retraso cliente" />
+
+        </div>
+
+        <div class="mat-body-strong zone header-column column vehicle-wait-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).vehicleWaitTime || closeComplete"
+            title="{{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.VEHICLE_WAIT_TIME.DESCRIPTION' | translate }}">
+            <img src="assets/icons/vehicle-wait-time-delivery.svg" title="Vehículo parado" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column demand" fxLayout="row" fxLayoutAlign="center center" *ngIf="routeId !== null &&( (interferencePreferences$ | async).demand || closeComplete)">
+            <img src="assets/icons/demand-delivery.svg" title="Carga" style="width: 28px;" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column delivery-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).deliverytime || closeComplete" title="{{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.DELIVERY_TIME.NAME' | translate }}">
+            <img src="assets/icons/delivery-time.svg" style="width: 30px;" title="Tiempo de entrega" />
+        </div>
+
+        <div class="mat-body-strong zone header-column column travel-distance" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelDistance || closeComplete">
+            <img src="assets/icons/travel-distance-delivery.svg" title="Kilometros" />
+
+        </div>
+
+        <div class="mat-body-strong zone header-column column wait-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).arrival || closeComplete" title="{{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.WAIT_TIME.DESCRIPTION' | translate }}">
+            <img src="assets/icons/diferencia-apertura-delivery.svg" title="Diferencia apertura" />
+        </div>
+        <div class="mat-body-strong zone header-column column wait-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).serviceCost || closeComplete" title="{{ 'Coste del servicio' | translate }}">
+            <img src="assets/icons/costes.svg" title="Costo de servicio" style="width: 27px;" />
+        </div>
+
+
+    </div>
+
+    <div class="table-element warehouse" fxLayout="row">
+        <div class="warehouse-column column position">
+            <span></span>
+        </div>
+
+        <!-- <div class="warehouse-column column position">
+            <span [style.color]="zoneColor">0</span>
+        </div> -->
+
+        <div class="warehouse-column column delivery-points">
+            <app-info-chip class="line-spacing" size="s" text="0" [color]="zoneColor" [shadow]="true"></app-info-chip>
+            <!-- <span [style.color]="zoneColor">0</span> -->
+
+            <span class="pl-2">
+                {{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.WAREHOUSE' | translate }}
+            </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).allowDelayTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).skill || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null ||  (zoneStatus$ | async ).evaluated ) && ((interferencePreferences$ | async).routeSpecification || closeComplete)">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).population || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).postalCode|| closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).openTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).limitTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).demand || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).box || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).volumetric || closeComplete">
+            <span> - </span>
+        </div>
+
+
+
+        <ng-container *ngIf="routeId !== null">
+            <div class="warehouse-column zone column arrival-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).readyTime || closeComplete">
+                <span *ngIf="routeId !== null">
+                    {{ (route$ | async).departureDayTime | dayTime }}
+                </span>
+
+                <span *ngIf="routeId === null">
+                    {{ (zoneState$ | async).departureDayTime | dayTime }}
+                </span>
+            </div>
+
+            <div class="warehouse-column zone column travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelTime || closeComplete">
+                <span> - </span>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="routeId === null">
+            <div class="warehouse-column zone column travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelTime || closeComplete">
+                <span> - </span>
+            </div>
+            <div class="warehouse-column zone column arrival-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).readyTime || closeComplete">
+                <span *ngIf="routeId !== null">
+                    {{ (route$ | async).departureDayTime | dayTime }}
+                </span>
+
+                <span *ngIf="routeId === null">
+                    {{ (zoneState$ | async).departureDayTime | dayTime }}
+                </span>
+            </div>
+
+
+        </ng-container>
+
+
+
+
+        <div class="warehouse-column zone column delay-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).customerWaitTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column  vehicle-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).vehicleWaitTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <!--  <div class="warehouse-column zone column demand" fxLayout="row" fxLayoutAlign="center start"
+            *ngIf="routeId !== null && (interferencePreferences$ | async).demand">
+            <span> - </span>
+        </div> -->
+
+        <div class="warehouse-column zone column delivery-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).deliverytime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelDistance || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).arrival || closeComplete">
+            <span> - </span>
+        </div>
+
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).serviceCost || closeComplete">
+            <span> - </span>
+        </div>
+        <!-- <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start"
+            [class.zone]="routeId === null"
+            *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).travelDistance">
+            <span> - </span>
+        </div>
+
+
+        <div class="warehouse-column zone column opening-time" fxLayout="row" fxLayoutAlign="center start"
+            [class.zone]="routeId === null"
+            *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).arrival">
+            <span> - </span>
+        </div> -->
+    </div>
+
+    <div *ngIf="routeId === null && (zoneState$ | async ) && (zoneState$ | async ).deliveryPoints && (zoneState$ | async ).deliveryPoints.length > 0 " cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of (zoneState$ | async).deliveryPoints; let i = index; trackBy: trackById" (click)="selectDeliveryPoint(item.id)" (mouseover)="changeHovered(item.id)" (mouseout)="changeHovered(-1)" [id]="getTableElementId(item.id)" class="table-element"
+            [class.isSelected]="item.id === (selectedPoint$ | async)" [class.hovered-from-map]="item.id === (hoveredPointId | async)" fxLayout="row" cdkDrag (cdkDragStarted)="dragElement()" (cdkDragReleased)="dropElement()" [title]="item.name" [ngClass]="{'isPending': item.fromPending, 'isPickup': item.deliveryType && item.deliveryType === 'pickup', 'isAfter': item.afterSession }">
+            <div class="column position" fxLayout="row" fxLayoutAlign="center center">
+                <button class="btn clear" style="padding:0px !important;" (click)="delete(item.id); $event.stopPropagation()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- <div class="column position">
+                <span>{{ i + 1 }}</span>
+            </div> -->
+
+            <div class="column delivery-points">
+                <app-info-chip class="line-spacing" size="s" [text]="i + 1" [color]="item.fromPending ? '#E91313' : zoneColor" [shadow]="true">
+                </app-info-chip>
+
+                <span class="help-cursor pl-2" [title]="item.name">
+                    {{ item.name }}
+                </span>
+            </div>
+
+
+            <div class="column zone opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).allowDelayTime || closeComplete">
+                <span *ngIf="item.allowDelayTime && item.companyPreferenceDelayTimeId !== null && item.companyPreferenceDelayTimeType && item.companyPreferenceDelayTimeType.name">
+                    {{ item.companyPreferenceDelayTimeType?.name }}
+                </span>
+
+                <span *ngIf="!(item.allowDelayTime && item.companyPreferenceDelayTimeId !== null && item.companyPreferenceDelayTimeType && item.companyPreferenceDelayTimeType.name)">
+                    -
+                </span>
+            </div>
+
+
+            <div class="column zone population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).skill || closeComplete">
+                <span *ngIf="item.service && item.service.name" class="population" [title]="item.service.name">
+                    {{ item.service.name }}
+                </span>
+
+                <span *ngIf="!item.service">
+                    -
+                </span>
+            </div>
+
+            <div class="column zone population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).routeSpecification || closeComplete">
+                <span *ngIf="item.deliveryZoneSpecification && item.deliveryZoneSpecification.name" class="population" [title]="item.deliveryZoneSpecification.name">
+                    {{ item.deliveryZoneSpecification.name }}
+                </span>
+
+                <span *ngIf="!item.service">
+                    -
+                </span>
+            </div>
+
+            <div class="column zone opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).population || closeComplete">
+                <span title="{{ item.population }}" *ngIf="item.population" class="population">
+                    {{ item.population }}
+                </span>
+
+                <span *ngIf="!item.population" class="population">
+                    -
+                </span>
+            </div>
+
+            <div class="column zone opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).postalCode || closeComplete">
+                <span title="{{ item.postalCode }}" *ngIf="item.postalCode" class="population">
+                    {{ item.postalCode }}
+                </span>
+
+                <span *ngIf="!item.postalCode" class="population">
+                    -
+                </span>
+            </div>
+
+            <div class="column zone opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).openTime || closeComplete">
+                <span *ngIf="!isFree(false, item.deliveryWindow.start)">
+                    {{ item.deliveryWindow.start | dayTime }}
+                </span>
+
+                <span *ngIf="isFree(false, item.deliveryWindow.start)">
+                    Libre
+                </span>
+            </div>
+
+            <div class="column zone closing-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).limitTime || closeComplete">
+                <span *ngIf="!isFree(true, item.deliveryWindow.end)">
+                    {{ item.deliveryWindow.end | dayTime }}
+                </span>
+
+                <span *ngIf="isFree(true, item.deliveryWindow.end)">
+                    Libre
+                </span>
+            </div>
+
+            <div class="column zone priority" fxLayout="row" fxLayoutAlign="center start" *ngIf="false">
+                <button [disabled]="item.priority === 0" [disableRipple]="true" mat-icon-button (click)="setPriority(item.id, item.priority - 1); $event.stopPropagation()">
+                    <mat-icon>remove</mat-icon>
+                </button>
+
+                <span class="priority-text">{{ item.priority }}</span>
+
+                <button [disabled]="item.priority === 3" [disableRipple]="true" mat-icon-button (click)="setPriority(item.id, item.priority + 1); $event.stopPropagation()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
+            <div class="column zone demand" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).demand || closeComplete">
+                <span class="demand-text">{{ (item.deliveryType && item.deliveryType === 'pickup' ? '-' : '') +
+                    ((managementPreferences$ | async).activateCubicMeterConverter && (managementPreferences$ |
+                    async).cubicMeterConverter > 0 ? parseFloat( item.demand / (managementPreferences$ | async).cubicMeterConverter) : item.demand) }}</span>
+            </div>
+
+
+            <div class="column zone demand" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).box || closeComplete">
+                <span class="demand-text"> {{ item.box }} </span>
+            </div>
+
+            <div class="column zone demand" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).volumetric || closeComplete">
+                <span class="demand-text"> {{ item.volumetric }} </span>
+            </div>
+
+            <div class="column zone travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).travelTime && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span *ngIf="i == 0">
+                    {{ (zoneState$ | async).travelTimeToFirst | duration }}
+                </span>
+
+                <span *ngIf="i != 0">
+                    {{ (zoneState$ | async).deliveryPoints[i - 1].travelTimeToNext | duration }}
+                </span>
+            </div>
+
+            <div class="column zone arrival-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).readyTime && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span>{{ item.arrivalDayTime | dayTime }}</span>
+            </div>
+
+            <div class="column zone delay-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).customerWaitTime && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span [class.warn-text]="item.delayTime >= 30">
+                    {{ (item.delayTime ? item.delayTime : 0 ) | duration }}
+                </span>
+            </div>
+
+            <div class="column zone vehicle-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).vehicleWaitTime && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span [class.warn-text]="item.vehicleWaitTime >= 30">
+                    {{ item.vehicleWaitTime | duration }}
+                </span>
+            </div>
+
+            <div class="column zone delivery-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).deliverytime && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span>
+                    {{ item.serviceTime | duration }}
+                </span>
+            </div>
+
+            <div class="column zone travel-distance" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).travelDistance && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span *ngIf="i == 0">
+                    {{ (zoneState$ | async).travelDistanceToFirst | distance }}
+                </span>
+
+                <span *ngIf="i != 0">
+                    {{ (zoneState$ | async).deliveryPoints[i - 1].travelDistanceToNext | distance }}
+                </span>
+            </div>
+
+            <div class="column zone customer-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).arrival && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span>
+                    {{ item.priority === 0 ? '-' : (item.customerWaitTime | duration) }}
+                </span>
+            </div>
+
+            <div class="column zone customer-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).serviceCost && (zoneStatus$ | async ).evaluated || closeComplete">
+                <span>
+                    {{ item.cost }}
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="routeId !== null && (route$ | async ) && (route$ | async ).deliveryPoints && (route$ | async ).deliveryPoints.length > 0" cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of (route$ | async).deliveryPoints; let i = index; trackBy: trackById" (click)="selectDeliveryPoint(item.id)" (mouseover)="changeHovered(item.id); highlightRoute(routeId)" (mouseout)="changeHovered(-1); highlightRoute(-1)" class="table-element"
+            [class.isSelected]="item.id === (selectedPoint$ | async)" [ngClass]="{'isPending': item.fromPending, 'isPickup': item.deliveryType && item.deliveryType === 'pickup', 'isAfter': item.afterSession }" [class.hovered-from-map]="item.id === (hoveredPointId | async)" fxLayout="row"
+            [title]="item.name" (cdkDragStarted)="dragElement()" (cdkDragReleased)="dropElement()" cdkDrag>
+            <!-- <div class="column position">
+                <span>{{ i + 1 }}</span>
+            </div> -->
+
+            <div class="column position">
+                <span></span>
+            </div>
+
+            <div class="column delivery-points">
+                <app-info-chip class="line-spacing" size="s" [text]="i + 1" [color]="item.fromPending ? '#E91313' : zoneColor" [shadow]="true">
+                </app-info-chip>
+
+                <span class="help-cursor pl-2" [title]="item.name">
+                    {{ item.name }}
+                </span>
+            </div>
+
+            <div class="column zone opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).allowDelayTime || closeComplete">
+                <span *ngIf="item.allowDelayTime && item.companyPreferenceDelayTimeId !== null && item.companyPreferenceDelayTimeType && item.companyPreferenceDelayTimeType.name">
+                    {{ item.companyPreferenceDelayTimeType?.name }}
+                </span>
+
+                <span *ngIf="!(item.allowDelayTime && item.companyPreferenceDelayTimeId !== null && item.companyPreferenceDelayTimeType && item.companyPreferenceDelayTimeType.name)">
+                    -
+                </span>
+            </div>
+
+            <div class="column zone population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).skill || closeComplete">
+                <span *ngIf="item.service && item.service.name" [title]="item.service.name" class="population">
+                    {{ item.service.name }}
+                </span>
+
+                <span *ngIf="!item.service"> - </span>
+            </div>
+
+            <div class="column zone population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).routeSpecification || closeComplete">
+                <span *ngIf="item.deliveryZoneSpecification && item.deliveryZoneSpecification.name" class="population" [title]="item.deliveryZoneSpecification.name">
+                    {{ item.deliveryZoneSpecification.name }}
+                </span>
+
+                <span *ngIf="!item.service">
+                    -
+                </span>
+            </div>
+
+
+            <div class="column zone opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).population || closeComplete">
+                <span *ngIf="item.population" class="population" title="{{ item.population }}">
+                    {{ item.population }}
+                </span>
+
+                <span *ngIf="!item.population"> - </span>
+            </div>
+
+            <div class="column zone opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).postalCode || closeComplete">
+                <span *ngIf="item.postalCode" class="population" title="{{ item.postalCode }}">
+                    {{ item.postalCode }}
+                </span>
+
+                <span *ngIf="!item.postalCode"> - </span>
+            </div>
+
+            <div class="column zone opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).openTime || closeComplete">
+                <span *ngIf="!isFree(false, item.deliveryWindow.start)">
+                    {{ item.deliveryWindow.start | dayTime }}
+                </span>
+
+                <span *ngIf="isFree(false, item.deliveryWindow.start)"> Libre </span>
+            </div>
+
+            <div class="column zone closing-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).limitTime || closeComplete">
+                <span *ngIf="!isFree(true, item.deliveryWindow.end)">
+                    {{ item.deliveryWindow.end | dayTime }}
+                </span>
+
+                <span *ngIf="isFree(true, item.deliveryWindow.end)"> Libre </span>
+            </div>
+
+            <div class="column zone travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).box || closeComplete">
+                <span>
+                    {{ item.box }}
+                </span>
+            </div>
+
+            <div class="column zone travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).volumetric || closeComplete">
+                <span>
+                    {{ item.volumetric }}
+                </span>
+            </div>
+
+            <div class="column zone travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).travelTime || closeComplete">
+                <span *ngIf="i == 0">
+                    {{ (route$ | async).travelTimeToFirst | duration }}
+                </span>
+
+                <span *ngIf="i != 0">
+                    {{ (route$ | async).deliveryPoints[i - 1].travelTimeToNext | duration }}
+                </span>
+            </div>
+
+
+
+            <div class="column zone arrival-time" fxLayout="row" fxLayoutAlign="center center" *ngIf="(interferencePreferences$ | async).readyTime || closeComplete">
+                <span>{{ item.arrivalDayTime | dayTime }}</span>
+            </div>
+
+            <div class="column zone delay-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).customerWaitTime || closeComplete">
+                <span [class.warn-text]="item.delayTime >= 30">
+                    {{ item.delayTime | duration }}
+                </span>
+            </div>
+
+            <div class="column zone vehicle-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).vehicleWaitTime || closeComplete">
+                <span [class.warn-text]="item.vehicleWaitTime >= 30">
+                    {{ item.vehicleWaitTime | duration }}
+                </span>
+            </div>
+
+            <div class="column zone delay-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).demand || closeComplete">
+                <span>
+                    {{ (item.deliveryType && item.deliveryType === 'pickup' ? '-' : '') + (managementPreferences$ |
+                    async).activateCubicMeterConverter && (managementPreferences$ | async).cubicMeterConverter > 0 ?
+                    parseFloat((managementPreferences$ | async).cubicMeterConverter / item.demand) : item.demand }}
+
+
+                </span>
+            </div>
+
+            <div class="column zone delivery-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).deliverytime || closeComplete">
+                <span>
+                    {{ item.serviceTime | duration }}
+                </span>
+            </div>
+
+            <div class="column zone travel-distance" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).travelDistance || closeComplete">
+                <span *ngIf="i == 0">
+                    {{ (route$ | async).travelDistanceToFirst | distance }}
+                </span>
+
+                <span *ngIf="i != 0">
+                    {{ (route$ | async).deliveryPoints[i - 1].travelDistanceToNext | distance }}
+                </span>
+            </div>
+
+            <div class="column zone customer-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).arrival || closeComplete">
+                <span>
+                    {{ item.priority === 0 ? '-' : (item.customerWaitTime | duration) }}
+                </span>
+            </div>
+
+            <div class="column zone customer-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).serviceCost || closeComplete">
+                <span>
+                    {{ item.cost }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-element warehouse" fxLayout="row">
+        <div class="warehouse-column column position">
+            <span></span>
+        </div>
+
+
+        <div class="warehouse-column last-warehouse-column column delivery-points">
+            <app-info-chip *ngIf="routeId !== null" class="line-spacing" size="s" [text]="(route$ | async).deliveryPoints.length + 1" [color]="zoneColor" [shadow]="true"></app-info-chip>
+
+            <app-info-chip *ngIf="routeId === null" class="line-spacing" size="s" [text]="(zoneState$ | async).deliveryPoints.length + 1" [color]="zoneColor" [shadow]="true">
+            </app-info-chip>
+
+            <span class="pl-2">
+                {{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.WAREHOUSE' | translate }}
+            </span>
+        </div>
+
+
+        <div class="warehouse-column zone last-warehouse-column column opening-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).allowDelayTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).skill || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column opening-time population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null ||  (zoneStatus$ | async ).evaluated ) && ((interferencePreferences$ | async).routeSpecification || closeComplete)">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).population || closeComplete">
+            <span> - </span>
+        </div>
+
+
+        <div class="warehouse-column zone last-warehouse-column column population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).postalCode || closeComplete">
+            <span> - </span>
+        </div>
+
+
+        <div class="warehouse-column zone last-warehouse-column column population" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId === null || routeId != null ||  (zoneStatus$ | async ).evaluated ) && (interferencePreferences$ | async).openTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column closing-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).limitTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column zone column" fxLayout="row" fxLayoutAlign="center start" *ngIf="routeId === null &&( (interferencePreferences$ | async).demand || closeComplete)">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column zone column" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).box || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column zone column" fxLayout="row" fxLayoutAlign="center start" *ngIf="(interferencePreferences$ | async).volumetric || closeComplete">
+            <span> - </span>
+        </div>
+
+
+
+
+        <div class="warehouse-column zone last-warehouse-column column travel-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelTime || closeComplete">
+            <span *ngIf="routeId !== null && ( route$ | async ) && ( route$ | async ).deliveryPoints && ( route$ | async ).deliveryPoints.length > 0">
+                {{ (route$ | async).deliveryPoints[(route$ | async).deliveryPoints.length - 1].travelTimeToNext |
+                duration }}
+            </span>
+
+            <span *ngIf="routeId == null && (zoneState$ | async) && (zoneState$ | async).deliveryPoints && (zoneState$ | async).deliveryPoints.length > 0">
+                {{ (zoneState$ | async).deliveryPoints[(zoneState$ | async).deliveryPoints.length - 1].travelTimeToNext
+                | duration }}
+            </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column arrival-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).readyTime || closeComplete">
+            <span *ngIf="routeId !== null">
+                {{ (route$ | async).depotArrivalDayTime | dayTime }}
+            </span>
+
+            <span *ngIf="routeId === null">
+                {{ (zoneState$ | async).depotArrivalDayTime | dayTime }}
+            </span>
+        </div>
+
+
+
+
+        <div class="warehouse-column zone last-warehouse-column column delay-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).customerWaitTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column vehicle-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).vehicleWaitTime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column vehicle-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null) && ((interferencePreferences$ | async).demand || closeComplete)">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column delivery-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).deliverytime || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column travel-distance" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).travelDistance || closeComplete">
+            <span *ngIf="routeId !== null && ( route$ | async ) && ( route$ | async ).deliveryPoints && ( route$ | async ).deliveryPoints.length > 0">
+                {{ (route$ | async).deliveryPoints[(route$ | async).deliveryPoints.length - 1].travelDistanceToNext |
+                distance }}
+            </span>
+
+            <span *ngIf="routeId === null && (zoneState$ | async) && (zoneState$ | async).deliveryPoints && (zoneState$ | async).deliveryPoints.length > 0">
+                {{ (zoneState$ | async).deliveryPoints[(zoneState$ | async).deliveryPoints.length -
+                1].travelDistanceToNext | distance }}
+            </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column customer-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).arrival || closeComplete">
+            <span> - </span>
+        </div>
+
+        <div class="warehouse-column zone last-warehouse-column column customer-wait-time" fxLayout="row" fxLayoutAlign="center start" *ngIf="(routeId !== null || (zoneStatus$ | async ).evaluated) && (interferencePreferences$ | async).serviceCost || closeComplete">
+            <span> - </span>
+        </div>
+    </div>
+</div>

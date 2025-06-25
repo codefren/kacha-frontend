@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-12 pl-4 pt-2 pb-2">
+        <img src="assets/icons/crossdocking.svg" alt="">
+        <span class="title pl-2"> Añadir Cross Doking</span>
+    </div>
+</div>
+<hr>
+<div class="row mt-2">
+    <div class="col-12 pl-4 pr-4 pt-2">
+        <p class="subtitle">Indica el importe del cross docking para que el coste se reparta entre los clientes.</p>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-12 pl-4 pr-4">
+        <div class="form-group input-group">
+            <span class="has-float-label w-100">
+                <input  class="form-control point ng-untouched ng-pristine ng-invalid" id="inputSalary" 
+                [max]="9999999" [min]="0" 
+                placeholder="0.00" type="number" [(ngModel)]="crossdocking">
+                <label  class="mt-2 title-col" for="salary"> Importe cross docking </label>
+                <ng-container *ngIf="validateCross()">
+                    <small class="form-control-feedback text-danger">
+                        <!-- <ng-container *ngIf="crossdocking > 99999999">
+                            El Importe cross docking no puede ser mayor a 999999999 
+                        </ng-container> -->
+                        <ng-container *ngIf="!crossdocking">
+                            El Importe cross docking no puede estar vacío
+                        </ng-container>
+                    </small>
+                </ng-container>
+            </span>
+
+        </div>
+    </div>
+</div>
+<hr class="mt-4">
+<div class="row mt-1 mb-1">
+    <div class="col-8 offset-4">
+        <div class="float-right">
+            <button class="btn btn-default btn-cross" (click)="close(false, 0)">Cerrar</button>
+            <button class="btn btn-primary btn-cross ml-2 mr-2" [disabled]="!(crossdocking >= 0) || !crossdocking || validateCross()" (click)="close(true ,crossdocking)">Añadir Cross Docking
+            </button>
+        </div>
+
+    </div>
+</div>

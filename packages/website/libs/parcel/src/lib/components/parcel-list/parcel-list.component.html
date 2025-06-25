@@ -1,0 +1,166 @@
+<div class="parcel-list main-container container-fluid p-0 pt-4 pb-4">
+
+    <!-- header -->
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title">
+                <img src="assets/icons/parcel.svg" class="header-brand-img img-providers" alt="Provider">
+                <span class="ml-3">{{ 'PARCEL.NAME' | translate }} </span>
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end">
+
+                <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openPdf()">
+
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_PDF' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openCsv()">
+
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_EXCEL' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cajas informativas -->
+    <div class="row align-items-center separatorButtonBox pl-4 pr-4">
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{'PARCEL.TOTAL_ROUTES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedData"> {{ totalizedData.totalRoute }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'PARCEL.VERIFIED_ROUTES' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedData"> {{ totalizedData.totalVerified }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'PARCEL.ROUTES_TO_VERIFY' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedData"> {{ totalizedData.totalPending }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general">
+                <table class="table table-striped table-bordered table-responsive-lg mb-0" id="parcelList" style="text-align: center; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>{{ 'PARCEL.ROUTE' | translate }}</th>
+                            <th>{{ 'PARCEL.EMPLOYEE' | translate }}</th>
+                            <!-- <th>{{ 'PARCEL.DATE_CHECK' | translate }}</th> -->
+                            <th>{{ 'PARCEL.TOTAL_PACKAGES' | translate }}</th>
+                            <th>{{ 'PARCEL.CONDITION' | translate }}</th>
+                            <th class="colorAccionDatatable widthAccionDatatable"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

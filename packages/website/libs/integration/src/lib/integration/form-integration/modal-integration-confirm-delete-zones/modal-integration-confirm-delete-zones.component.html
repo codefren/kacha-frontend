@@ -1,0 +1,20 @@
+<div class="easyroute-modal-integration-confirm-delete-zones">
+    <section class="card p-2">
+        <header>
+          <div class="row">
+            <div class="col-12 text-right">
+              <i class="fas fa-times close-button" (click)="closeDialog(false)"></i>
+            </div>
+          </div>
+        </header>
+
+        <div class="card-body p-3">
+          <p class="text-center">{{ 'INTEGRATION.DELETE_ZONE?' | translate }}</p>
+        </div>
+
+        <footer class="row justify-content-center pb-4">
+          <button type="button" class="btn btn-cancel size-btn-modal mr-4" (click)="closeDialog(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+          <button type="button" class="btn btn-primary size-btn-modal" (click)="closeDialog(true)">{{ 'GENERAL.ACCEPT' | translate }}</button>
+      </footer>
+    </section>
+</div>

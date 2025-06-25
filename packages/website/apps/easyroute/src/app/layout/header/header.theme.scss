@@ -1,0 +1,30 @@
+@mixin header-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-header {
+        .profile-menu-icon {
+            color: mat-color($primary, default-contrast);
+            opacity: 0.5;
+
+            &.selected {
+                opacity: 1 !important;
+            }
+        }
+    }
+
+    .logout {
+        color: mat-color($warn) !important;
+    }
+}
+
+@mixin header-typography($config) {
+    .easyroute-header {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

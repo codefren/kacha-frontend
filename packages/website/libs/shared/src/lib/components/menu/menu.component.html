@@ -1,0 +1,11 @@
+<header>
+    <div class="tabs tabs-bottom tabs-primary">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item" *ngFor="let item of getMenuItems()" routerLinkActive="active">
+                <a class="nav-link active" [routerLink]="item.route" data-toggle="tab">
+                    {{ item.name | translate }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>

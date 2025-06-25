@@ -1,0 +1,37 @@
+<mat-drawer-container
+    app-side-nav-theme
+    class="app-side-nav"
+    autosize
+    fxFlex=""
+    fxLayout="row"
+>
+    <mat-drawer [class.elevation]="hasElevation" #drawer mode="side" [(opened)]="opened">
+        <ng-content select="[app-sidenav-drawer-content]"></ng-content>
+    </mat-drawer>
+    <div class="drawer-content-placeholder" fxFlex="" fxLayout="row">
+        <ng-content select="[app-sidenav-main-content]"></ng-content>
+        <button
+            class="sidenav-button"
+            mat-mini-fab
+            *ngIf="foldable"
+            disableRipple="true"
+            (click)="changeState()"
+            style="top: 45px;"
+            fxFlexAlign="start"
+        >
+            <mat-icon>{{ sidenavExpansionIcon() }}</mat-icon>
+        </button>
+
+        <button
+            class="sidenav-button-complete"
+            mat-mini-fab
+            *ngIf="foldable"
+            disableRipple="true"
+            style="top: 45px;"
+            (click)="changeStateComplete()"
+            fxFlexAlign="start"
+        >
+            <mat-icon>{{ sidenavExpansionIconComplete() }}</mat-icon>
+        </button>
+    </div>
+</mat-drawer-container>

@@ -1,0 +1,61 @@
+.easyroute-create-zone-modal {
+    label,
+    form {
+        font-size: 16px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    [class^="col-"] { // busqueda por expresion regular 
+        padding: 0 15px;
+    }
+
+    .form-row+.form-row {
+        margin-top: 20px;
+    }
+    small {
+        font-size: 10.4px;
+    }
+    @media screen and ( min-width: 540px) {
+        .pad {
+            padding: 3rem 3rem;
+        }
+    }
+    .modal-dismiss {
+        margin-left: 1em;
+    }
+
+    .input-color {
+        padding: 0 !important;
+        border: none !important;
+    }
+    .input-color::-webkit-color-swatch-wrapper {
+        padding: 0 !important;
+        border: transparent !important;	
+    } 
+    .input-color::-webkit-color-swatch {
+        border-radius: 10px !important;	
+    }
+
+    .hack-select:after {
+        color: #fff;
+        top: 22%;
+        right: 15px;
+    }
+
+    .btn-sm {
+        border-radius: 50%;
+        border: none;
+    }
+    .w {
+        width: 35%;
+    }
+    .withdTo {
+        width: 70px;
+    }
+    #search-modal {
+        height: 34px !important;
+    }
+}

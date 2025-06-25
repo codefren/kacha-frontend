@@ -1,0 +1,47 @@
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <label for="" class="title-visits">Planificar visitas para el día:</label>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-10 offset-1 text-center">
+        <label for="" class="subtitle-visits">
+            Al seleccionar el día y los comerciales se cargarán todos los clientes que esten activos para este día.
+        </label>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-10 offset-1">
+        <div class="justify-content-center align-items-center">
+            <div class="m-1">
+                <label class="control-label col-especial m-0" for="dateFrom">
+                    {{ 'GENERAL.DATE' | translate }}
+                </label>
+                <div class="input-group">
+                    <input ngbDatepicker #f="ngbDatepicker" type="text" class="form-control class-input" readonly autocomplete="off" placeholder="Seleccione ..." [(ngModel)]="date" id="dateFrom" />
+                    <button class="btn btn-calendar calendar" (click)="f.toggle()" type="button">
+                        <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                            aria-hidden="true">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row mt-2">
+    <label class="col-lg-10 offset-1 control-label">Comerciales</label>
+    <div class="col-10 offset-1">
+        <select class="form-control" multiple="multiple" data-plugin-multiselect data-plugin-options='{ "maxHeight": 200, "allSelectedText": "todas", "nonSelectedText": "seleccione...", "selectAllName": true, "nSelectedText": "Seleccionadas", "includeSelectAllOption": true, "selectAllText": "Seleccionar todas" }'
+            id="commercials">
+            <option [value]="item.id" *ngFor="let item of commercials">{{ item.name }}</option>
+        </select>
+    </div>
+</div>
+<div class="row mt-4 mb-4">
+    <div class="col-5 offset-1">
+        <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="close(false)">Cancelar</button>
+    </div>
+    <div class="col-5 offset-1">
+        <button class="btn size-btn-modal btn-primary modal-dismiss" (click)="submit()">Aceptar</button>
+    </div>
+</div>

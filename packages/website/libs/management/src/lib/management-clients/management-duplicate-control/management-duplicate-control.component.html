@@ -1,0 +1,379 @@
+<div class="management-duplicate-control main-container container-fluid p-2 pt-4 pb-4">
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title point" (click)="redirectTo()">
+
+                <img class="pr-2 img-title" src="assets/icons/iconControl.svg">
+
+                <span> {{ 'CLIENTS.DUPLICATE_CONTROL.NAME' | translate }} </span>
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex form-row flex-row align-items-center justify-content-end">
+
+                <ng-container>
+
+                    <!-- btn create -->
+                    <button class="btn btn-primary btn-large ml-2 mt-xl-0 mt-2" 
+                        title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}" 
+                        *ngIf="tableDuplicate.length > 0"
+                        (click)="createDelivery()">
+
+                        <img src="assets/icons/addWrite.svg" class="pr-1 img-add-delivery">
+
+                        {{'CLIENTS.DUPLICATE_CONTROL.CREATE_PLANNED_DELIVERY' | translate }}
+                    </button>
+                    <!-- end btn create -->
+
+                    <!-- actiones -->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btn-large ml-2 btn-actios mt-xl-0 mt-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}">
+
+                            <img src="assets/icons/writeLoad.svg" class="img-load pr-1">
+
+                            {{ 'TRAVEL_TRACKING.ACTIONS' | translate }}
+
+                        </button>
+
+                        <button class="btn btn-secondary  size-open btn-large mt-xl-0 mt-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <img src="assets/icons/donwWrite.svg">
+
+                        </button>
+
+                        <form>
+                            <div class="form-group">
+                                <input #fileImportProductGlobal hidden type="file" class="form-control-file" accept=".json" (change)="
+                                    importProductGlobal(
+                                        $event.target.files[0]
+                                    );
+                                    $event.target.value = null
+                                " />
+                            </div>
+
+                            <input type="file" hidden #fileAddArch accept=".csv" (change)="importClient($event.target.files[0])" />
+                        </form>
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title border-drop  pt-3 pb-3 point" (click)="fileAddArch.click()">
+
+                                <img src="assets/icons/import.svg" class="pr-2"> {{ 'CLIENTS.DUPLICATE_CONTROL.LOAD_EXCEL' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="fileImportProductGlobal.click()">
+
+                                <img src="assets/icons/import.svg" class="pr-2"> {{ 'CLIENTS.DUPLICATE_CONTROL.LOAD_JSON' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="searchDuplicates()">
+
+                                <img src="assets/icons/refresh.svg" class="pr-2"> {{'CLIENTS.DUPLICATE_CONTROL.FIND_DUPLICATES' | translate }}
+
+                            </a>
+
+                        </div>
+                    </div>
+                    <!-- end actiones -->
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Cuadros informativos -->
+
+    <div class="row align-items-center mt-3 pl-4 pr-4">
+
+        <div class="col-xl col-md-6 col-12">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.DUPLICATE_CONTROL.DUPLICATES_DETECTED' | translate }} </p>
+
+                 <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.duplicatesDetected }} </p>
+                </ng-container>
+
+                 <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.DUPLICATE_CONTROL.NO_DUPLICITY' | translate }} </p>
+
+                 <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.noDuplicity }} </p>
+                </ng-container>
+
+                 <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+
+                <p class="p-title"> {{ 'CLIENTS.DUPLICATE_CONTROL.BELONG_TO_A_GROUP' | translate }} </p>
+
+                 <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalizedDate"> {{ totalizedDate.belongGroup }} </p>
+                </ng-container>
+
+                 <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end Cuadros informativos -->
+
+
+    <!-- table -->
+
+    <div class="row mt-3">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <ng-container *ngIf="!showTables && loading ==='process'">
+
+                        <div class="col-12 text-center">
+
+                            <div class="fa-10x mb-2 mt-3">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="showTables && loading ==='load' && tableDuplicate.length > 0">
+
+                        <ng-container *ngFor="let items of tableDuplicate; let o=index; trackBy: trackByItems">
+
+                            <div class="card-header" [ngClass]="{'mt-4': o > 0, 'no-group': items.group === 'no-group', 'with-group': items.group === 'with-group'}">
+
+                                <div class="row align-items-center pl-2 pr-2">
+
+                                    <div class="col-6">
+
+                                        <ng-container *ngIf="items.group != 'no-group' && items.group != 'with-group'">
+
+                                            <span class="title-tables"> {{ items.value.count }} {{ 'CLIENTS.DUPLICATE_CONTROL.DUPLICATES_' | translate }} </span>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="items.group === 'no-group'">
+
+                                            <span class="title-tables"> {{ 'CLIENTS.DUPLICATE_CONTROL.NO_DUPLICITY_CLIENT' | translate }} </span>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="items.group === 'with-group'">
+
+                                            <span class="title-tables"> {{ 'CLIENTS.DUPLICATE_CONTROL.CUSTOMER_BELONGING_TO_A_GROUP' | translate }} </span>
+
+                                        </ng-container>
+
+                                    </div>
+
+                                    <div class="col-6 text-xl-right text-center">
+
+                                        <ng-container *ngIf="items.group != 'no-group' && items.group != 'with-group'">
+    
+                                            <button class="btn btn-primary btn-style btn-size" 
+                                                [ngClass]="{'btn-no-selecter': desabledBotton(items.group)}" 
+                                                [disabled]="desabledBotton(items.group)" (click)="openMergeRecord(items.group)">
+            
+                                                <img [src]="desabledBotton(items.group) ? 'assets/icons/noselect.svg' : 'assets/icons/selecter.svg'">
+            
+                                                Combinar registro 
+            
+                                            </button>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="items.group === 'no-group'">
+    
+                                            <button class="btn btn-secondary btn-style btn-size" 
+                                                [ngClass]="{'btn-no-group-selecter': desabledBotton(items.group)}" 
+                                                [disabled]="desabledBotton(items.group)" (click)="openMergeRecord(items.group)">
+            
+                                                <img [src]="desabledBotton(items.group) ? 'assets/icons/noselectOrange.svg' : 'assets/icons/changeRegister.svg'">
+            
+                                                Combinar registro 
+            
+                                            </button>
+
+                                        </ng-container>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="table-content table-content-general">
+
+                                <table class="table table-striped table-responsive-lg mb-0">
+                                    <thead></thead>
+
+                                    <tbody>
+                                        <ng-container *ngIf="items.group != 'with-group'">
+
+                                            <tr *ngFor="let table of items.value.data; let i=index;trackBy: trackByItems">
+
+                                                <td>
+                                                    <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+                                                        <div class="round-style-cost  round-little-cost pb-3">
+                                                            <input type="checkbox" [id]="'group'+ items.group + i" (change)="changeSelecter($event.target.checked, table, i, items.group)">
+                                                            <label [for]="'group'+ items.group + i" class="m-0"></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="point">
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.name"> {{ table.name && table.name.length > 50 ? (table.name.substring(0,49) + '...') : table.name }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.phoneNumber"> {{ table.phoneNumber && table.phoneNumber.length > 10 ? (table.phoneNumber.substring(0,9) + '...') : table.phoneNumber }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.address">  {{ table.address && table.address.length > 100 ? (table.address.substring(0,99) + '...') : table.address }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.deliveryZoneId">  {{  table.deliveryZoneId && table.deliveryZoneId.length > 15 ? (table.deliveryZoneId.substring(0,14) + '...') : table.deliveryZoneId }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point">  {{ table.postalCode }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.population">  {{ table.population && table.population.length > 10 ? (table.population.substring(0,9) + '...') : table.population }} </label>
+                                                </td>
+    
+                                                <td *ngIf="items.group == 'with-group'">
+                                                    <span class="badge"> 3 </span>
+                                                </td>
+    
+                                            </tr>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="items.group === 'with-group'">
+                                            <tr *ngFor="let table of items.value; let i=index;trackBy: trackByItems">
+
+                                                <td class="point">
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.name"> {{ table.name && table.name.length > 50 ? (table.name.substring(0,49) + '...') : table.name }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.phoneNumber"> {{ table.phoneNumber && table.phoneNumber.length > 10 ? (table.phoneNumber.substring(0,9) + '...') : table.phoneNumber }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.address">  {{ table.address && table.address.length > 100 ? (table.address.substring(0,99) + '...') : table.address }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.deliveryZoneId">  {{ table.deliveryZoneId && table.deliveryZoneId.length > 15 ? (table.deliveryZoneId.substring(0,14) + '...') : table.deliveryZoneId }} </label>
+                                                </td>
+                                                <td>
+                                                    <label class="m-0 point"> {{ table.postalCode }} </label>
+                                                </td>
+                                                <td>
+                                                    <label [for]="'group'+ items.group + i" class="m-0 point" [title]="table.population">  {{ table.population && table.population.length > 10 ? (table.population.substring(0,9) + '...') : table.population }} </label>
+                                                </td>
+                                                <td>
+                                                    <span class="badge"> {{ table.count }} </span>
+                                                </td>
+
+                                            </tr>
+
+                                        </ng-container>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+
+                    </ng-container>
+
+
+                    <ng-container *ngIf="loading ==='error' && tableDuplicate.length === 0">
+
+                        <div class="col-xl-4 col-12 text-center offset-xl-4 text-center padding-special">
+
+                            <img src="assets/icons/noDuplicate.svg">
+
+                            <p class="no-data-duplicates ">No hay duplicados</p>
+
+                            <p class="sub-title-no-data-duplicate">Haz clic en buscar duplicados o carga un EXCEL <br/>desde el botón “Acciones” para que podamos <br/>analizarlo y crear una ruta.</p>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

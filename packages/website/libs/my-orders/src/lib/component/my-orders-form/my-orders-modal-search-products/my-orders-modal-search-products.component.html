@@ -1,0 +1,31 @@
+<div class="easyroute-my-orders-modal-search-products">
+    <section class="card">
+        <header class="card-header card-header-color">
+            <h2 class="card-title card-title-custon text-center">{{ 'ORDERS.ORDERS_LIST.SEARCH_PRODUCTS' | translate }}</h2>
+        </header>
+
+        <div class="card-body">
+            <table id="productsPrice" style="width: 100%" class="table table-bordered table-striped table-responsive-lg mb-0" style="text-align: center">
+                <thead>
+                    <tr>
+                        <th>{{ 'PRODUCTS_GENERAL.CODE_PRODUCTS' | translate }}</th>
+                        <th>{{ 'PRODUCTS_GENERAL.PRODUCTS_LIST.NAME' | translate }}</th>
+                        <th>{{'PRODUCTS_GENERAL.PRODUCTS_LIST.MEASURE' | translate }}</th>
+                        <th>{{ 'PRODUCTS_GENERAL.PRODUCTS_LIST.PRICE' | translate }} por</th>
+                        <th>{{ 'PRODUCTS_GENERAL.PRODUCTS_LIST.TAX' | translate }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-12 col-12 text-right">
+                    <button class="btn btn-default modal-dismiss" (click)="closemodal()">{{ 'GENERAL.CLOSE' | translate}}</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

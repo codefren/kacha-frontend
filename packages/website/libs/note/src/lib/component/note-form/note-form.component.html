@@ -1,0 +1,344 @@
+<div class="row easyroute-note-form bg-white2">
+    
+    <div class="container">
+        <div class="row pt-5 justify-content-center align-items-center">
+          <div class="return-left mr-3 point" routerLink="/note">
+            <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+          </div>
+          <ng-container *ngIf="notes">
+            <p class="title m-0" *ngIf="notes.id > 0"> {{ 'NOTES.NOTES_FORM.UPDATE_NOTES' | translate }}</p>
+            <p class="title m-0" *ngIf="notes.id == 0"> {{ 'NOTES.NOTES_FORM.ADD_NOTES' | translate }}</p>
+          </ng-container>
+          <i class="fas fa-share-alt icon point" (click)="shareNote()"></i>
+        </div>
+
+        <div class="row justify-content-center">
+          <form [formGroup]="noteForm" class="form-width" (ngSubmit)="createNote()" *ngIf="noteForm">
+            
+            <div class="row mt-5">
+                <div class="col-sm-6 col-12 pr-sm-4">
+                    <div 
+                      class="form-row form-group"
+                      [ngClass]="{ 'has-danger': noteForm.controls['name'].invalid && (noteForm.controls['name'].dirty || noteForm.controls['name'].touched) }"  
+                    >
+                      <label for="name">
+                        {{ 'NOTES.NOTES_FORM.TITLE' | translate }}
+                         <span class="asterisco">* </span>
+                      </label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        class="form-control" 
+                        autocomplete="off" 
+                        formControlName="name" 
+                        [ngClass]="{'form-control-danger': noteForm.controls['name'].invalid && (noteForm.controls['name'].dirty || noteForm.controls['name'].touched)}"
+                      />
+        
+                      <ng-container *ngFor="let validation of note_messages.name">
+                          <small 
+                              class="form-control-feedback text-danger" 
+                              *ngIf="noteForm.get('name').hasError(validation.type) && (noteForm.get('name').dirty || noteForm.get('name').touched)
+                          ">
+                              {{ validation.message }}
+                          </small>
+                      </ng-container>
+                    </div>  
+                </div>
+                <div class="col-sm-6 col-12 pl-sm-4">
+                    <div 
+                      class="form-row" 
+                      *ngIf="isAdmin()"
+                      [ngClass]="{'has-danger': noteForm.controls['userSellerId'].invalid && (noteForm.controls['userSellerId'].dirty || noteForm.controls['userSellerId'].touched)}"  
+                    >
+                        <label for="userSellerId">
+                          {{ 'NOTES.NOTES_FORM.TARGET_USER' | translate }}
+                          <span class="asterisco">* </span>
+                        </label>
+                    
+                        <ng-container *ngIf="loadingUSer == 'load'">
+                            <div class="col-12 text-center p-2">
+                                <div class="fa-2x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+        
+                        <ng-container *ngIf="loadingUSer == 'success'">
+                          <div class="col-12 text-center" *ngIf="users.length == 0">
+                              <p class="text-danger">No existen usuarios registrados</p>
+                          </div>
+                      
+                          <ng-container *ngIf="users.length > 0">
+                              <select class="form-control letter-app" autocomplete="off" formControlName="userSellerId">
+                                  <option value="">
+                                      {{ 'NOTES.NOTES_FORM.SELECT' | translate }}
+                                  </option>
+                                  <option *ngFor="let userlist of users" [value]="userlist.id">
+                                      {{ userlist.name }} {{ userlist.surname }}
+                                  </option>
+                              </select>
+                              <ng-container *ngFor="let validation of note_messages.userSellerId">
+                                <small 
+                                    class="form-control-feedback text-danger" 
+                                    *ngIf="noteForm.get('userSellerId').hasError(validation.type) && (noteForm.get('userSellerId').dirty || noteForm.get('userSellerId').touched)
+                                ">
+                                    {{ validation.message }}
+                                </small>
+                               </ng-container>
+                          </ng-container>
+                        </ng-container>
+        
+                        <ng-container *ngIf="loadingUSer == 'error'">
+                          <div class="col-12">
+                              <p class="text-danger pointer text-center" (click)="getUsers()">
+                                  {{ 'GENERAL.THERE_WAS' | translate }} <ins>{{ 'GENERAL.HERE' | translate }}</ins>!
+                              </p>
+                          </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+            
+
+              <div 
+                class="form-row mb-0"
+                [ngClass]="{'has-danger': noteForm.controls['description'].invalid && (noteForm.controls['description'].dirty || noteForm.controls['description'].touched)}"  
+              >
+                  <label for="description">
+                      {{ 'MYNOTES.MYNOTES_LIST.MESSAGE' | translate }} 
+                      <span class="asterisco">* </span>
+                  </label>
+                  <textarea 
+                      id="description" 
+                      class="form-control" 
+                      autocomplete="off" 
+                      formControlName="description" 
+                      [ngClass]="{'form-control-danger': noteForm.controls['description'].invalid && (noteForm.controls['description'].dirty || noteForm.controls['description'].touched)}"
+                  ></textarea>
+
+                  <ng-container *ngFor="let validation of note_messages.description">
+                      <small 
+                          class="form-control-feedback text-danger" 
+                          *ngIf="noteForm.get('description').hasError(validation.type) && (noteForm.get('description').dirty || noteForm.get('description').touched)"
+                      >
+                          {{ validation.message }}
+                      </small>
+                  </ng-container>
+                </div>
+
+                    <!-- shared-note-chips -->
+                <div 
+                    class="form-row justify-content-start" 
+                    *ngIf="salesmanSelected && salesmanSelected.length > 0"
+                >
+                    <span 
+                        class="badge badge badge-info" 
+                        *ngFor="let salesman of salesmanSelected"
+                    >
+                        <div class="d-flex flex-row h-100 justify-content-between align-items-center">
+                            <span *ngIf="(salesman.name + ' ' + salesman.surname).length <= 20">
+                                {{ salesman.name + ' ' + salesman.surname }}
+                            </span>
+                            <span *ngIf="(salesman.name + ' ' + salesman.surname).length > 20">
+                                {{ salesman.name + ' ' + salesman.surname | slice: 0:19 }}...
+                            </span>
+                            <span 
+                                class="point"
+                                data-role="remove" 
+                                (click)="eliminated(salesman.id)"
+                            ></span>
+                        </div>    
+                    
+                    </span>
+                        <!-- <div class="bootstrap-tagsinput"></div> -->
+                </div>
+
+              <!-- active & deleted -->
+              <div class="form-row mt-5">
+                <div class="col-12 col-sm-6">
+                  <div 
+                    class="form-group form-row justify-content-sm-end"
+                    [ngClass]="{'has-danger': noteForm.controls['isActive'].invalid && (noteForm.controls['isActive'].dirty || noteForm.controls['isActive'].touched)}"  
+                  >
+                    <label for="isActive">
+                      {{ 'GENERAL.IS_ACTIVE' | translate }} 
+                      <span class="asterisco">* </span>
+                    </label>
+                    <div class="switch">
+                        <label>
+                            <input 
+                                type="checkbox"
+                                id="isActive"
+                                [checked]="notes.isActive"
+                                [value]="notes.isActive"
+                                (click)="changeActive()"
+                            />
+                            <span class="lever switch-col-primary"></span>
+                        </label>
+                    </div>
+                    <ng-container *ngFor="let validation of note_messages.isActive">
+                        <small 
+                            class="form-control-feedback text-danger" 
+                            *ngIf="noteForm.get('isActive').hasError(validation.type) && (noteForm.get('isActive').dirty || noteForm.get('isActive').touched)"
+                        >
+                            {{ validation.message }}
+                        </small>
+                    </ng-container>
+            
+                  </div>
+
+                </div>
+                <div class="col-12 col-sm-6">
+
+                  <div 
+                    class="form-row form-group justify-content-start"
+                    [ngClass]="{'has-danger': noteForm.controls['isDeleted'].invalid && (noteForm.controls['isDeleted'].dirty || noteForm.controls['isDeleted'].touched)}"  
+                  >
+                    <label for="isDeleted">
+                        {{ 'NOTES.NOTES_FORM.DELETE' | translate }}
+                    </label>
+                    <div class="switch">
+                        <label>
+                            <input 
+                                type="checkbox"
+                                id="isDeleted"
+                                [checked]="notes.isDeleted"
+                                [value]="notes.isDeleted"
+                                (click)="changeIsDeleted()"
+                            />
+                            <span class="lever switch-col-primary"></span>
+                        </label>
+                    </div>
+        
+                    <ng-container *ngFor="let validation of note_messages.isDeleted">
+                        <small 
+                            class="form-control-feedback text-danger" 
+                            *ngIf="noteForm.get('isDeleted').hasError(validation.type) && (noteForm.get('isDeleted').dirty || noteForm.get('isDeleted').touched)"
+                        >
+                            {{ validation.message }}
+                        </small>
+                    </ng-container>
+                </div>
+
+                </div>
+              </div>
+            
+              <div class="row mt-5">
+                  <div class="col-12">
+                      <div class="card w-100 card-style-general">
+                          <header class="card-header card-header-tables">
+                              <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between">
+                                    <span>
+                                      {{ 'NOTES.SUB_NOTES.SUB_NOTES' | translate }}
+                                    </span>
+                                    <button 
+                                        type="button"
+                                        class="btn btn-add mt-2 mt-sm-0"
+                                        id="addToTable"    
+                                        (click)="searchSubNotes(NewSubnotes)"
+                                    >
+                                        {{ 'NOTES.NOTES_FORM.ADD_SUBNOTE' | translate }}
+                                  </button>
+                              </div>
+                          </header>
+                  
+                          <div class="card-body p-0">
+                              <ng-container *ngIf="subNotes.length == 0">
+                                  <h5 class="text-center p-2" style="color: #b4b4b4;">
+                                      {{ 'NOTES.NOTES_FORM.NO_SUB_NOTES_DATE_AVAILABLE' | translate }}
+                                  </h5>
+                              </ng-container>
+                  
+                              <ng-container *ngIf="subNotes.length > 0">
+                                  <table 
+                                      style="width: 100%; text-align: center"
+                                      class="table table-responsive-lg  table-bordered table-striped mb-0"
+                                  >
+                                      <thead>
+                                          <tr>
+                                              <th class="text-center">
+                                                  {{ 'NOTES.NOTES_FORM.TITLE' | translate }}
+                                              </th>
+                                              <th class="text-center">
+                                                  {{ 'NOTES.NOTES_FORM.MESSAGE' | translate }}
+                                              </th>
+                                              <th class="text-center">
+                                                  {{ 'NOTES.NOTES_FORM.CREATION_DATE' | translate  }}
+                                              </th>
+                                              <th class="text-center">
+                                                  {{ 'NOTES.NOTES_FORM.CREATED_BY' | translate }}
+                                              </th>
+                                              <th class="text-center">
+                                                  {{ 'GENERAL.ACTIONS' | translate }}
+                                              </th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let subnote of subNotes; let i = index">
+                                              <td data-title="Code" class="text-center">
+                                                  {{ subnote.title | slice: 0:9 }}
+                                                  {{ subnote.title.length > 9 ? '...' : '' }}
+                                              </td>
+                                              <td data-title="Company" class="text-center" [title]="subnote.description">
+                                                  {{ subnote.description | slice: 0:29 }}
+                                                  {{ subnote.description.length > 29 ? '...' : '' }}
+                                              </td>
+                                              <td data-title="Price" class="text-center">
+                                                  {{ subnote.created_at | date: 'dd/MM/yyyy hh:mm:ss'  }}
+                                              </td>
+                                              <td data-title="Change" class="text-center">
+                                                  {{ subnote.create_by_user?.name }}
+                                                  {{ subnote.create_by_user ?.surname }}
+                                              </td>
+                                              <td data-title="Open" class="d-flex justify-content-around flex-row">
+                                                  <span class="editar m-1" (click)="editSubNoteTable(subnote)">
+                                                      <img class="icons-datatable point" src="assets/icons/optimmanage/create-outline.svg">
+                                                  </span>
+
+                                                  <span class="trash m-1" (click)="deleteSubNoteTable(subnote.id)" *ngIf="notes.id > 0">
+                                                    <i class="far fa-times-circle fa-2x"></i>  
+                                                    <!-- <img class="icons-datatable point" src="assets/icons/optimmanage/trash-bin.svg"> -->
+                                                  </span>
+
+                                                  <span class="trash m-1" (click)="deleteSubNoteTable(i)" *ngIf="notes.id === 0">
+                                                    <i class="far fa-times-circle fa-2x"></i>   
+                                                    <!-- <img class="icons-datatable point" src="assets/icons/optimmanage/trash-bin.svg"> -->
+                                                  </span>
+
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </ng-container>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row text-center mt-5 mb-5">
+                  <div class="col-sm-6 col-12 mt-1 text-center text-sm-right">
+                      <button 
+                          class="btn btn-default btn-special-ipad btn-cancel size-btn-form" 
+                          type="button"
+                          routerLink="/note"
+                      >
+                          {{ 'GENERAL.CANCEL' | translate }}
+                      </button>
+                  </div>
+
+                  <div class="col-sm-6 col-12 mt-1 pb-2 text-center text-sm-left">
+                      <button 
+                          type="submit" 
+                          class="btn btn-primary btn-special-ipad size-btn-form" 
+                          [disabled]="!noteForm.valid"
+                      >
+                          <span *ngIf="notes.id">{{ 'GENERAL.SAVE' | translate }}</span>
+                          <span *ngIf="!notes.id">{{ 'GENERAL.ADD' | translate }}</span>
+                      </button>
+                  </div>
+              </div>
+          </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+.time-schedules {
+    .title-road {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #3B4FFF;
+        }
+    }
+    .has-float-label {
+        label {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px !important;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #363740;
+            opacity: 1;
+        }
+    }
+    .showMin {
+        background-image: url(/assets/icons/min.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .showSeg {
+        background-image: url(/assets/icons/min.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .showHour {
+        background-image: url(/assets/icons/h.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        background: none;
+    }
+    .padding-l-hidden {
+        margin-left: 70px;
+    }
+}

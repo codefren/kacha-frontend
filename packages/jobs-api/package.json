@@ -1,0 +1,81 @@
+{
+    "name": "@optimroute/jobs-api",
+    "version": "0.0.0",
+    "description": "Optimroute Task Api",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc -p tsconfig.build.json && cp tsconfig.json dist/",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "start": "node index.js",
+        "start:dev": "nodemon | pino-pretty -t 'dd/mm HH:MM:ss.l'",
+        "start:debug": "nodemon --config nodemon-debug.json | pino-pretty -t 'dd/mm HH:MM:ss.l'",
+        "start:prod": "node dist/src/main.js",
+        "lint": "tslint -p tsconfig.json",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "clean": "rm -rf dist"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/bull": "^3.5.14",
+        "@types/dotenv": "^6.1.1",
+        "@types/hapi__joi": "^15.0.1",
+        "@types/jest": "^24.0.13",
+        "@types/lodash": "^4.14.134",
+        "@types/lzma-native": "^4.0.0",
+        "@types/node": "^12.0.6",
+        "@types/pino": "^5.8.8",
+        "jest": "^24.8.0",
+        "nodemon": "^1.19.1",
+        "pino-pretty": "^3.1.0",
+        "prettier": "^1.18.0",
+        "ts-jest": "^24.0.2",
+        "ts-loader": "^6.0.2",
+        "ts-node": "^8.2.0",
+        "tslint": "^5.17.0",
+        "typescript": "^4.6.3",
+        "uWebSockets.js": "https://github.com/uNetworking/uWebSockets.js/archive/v20.10.0.tar.gz"
+    },
+    "dependencies": {
+        "@hapi/joi": "^15.0.3",
+        "@sentry/node": "^5.4.0",
+        "bull": "^3.10.0",
+        "dotenv": "^8.0.0",
+        "ioredis": "^4.9.5",
+        "joi": "^14.3.1",
+        "lodash": "^4.17.11",
+        "lzma-native": "^4.0.5",
+        "pino": "^5.12.6",
+        "rxjs": "^6.5.2",
+        "tsconfig-paths": "^3.8.0"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "./",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node",
+        "modulePaths": [
+            "<rootDir>"
+        ],
+        "coverageReporters": [
+            "json",
+            "lcov"
+        ],
+        "globals": {
+            "NODE_ENV": "test"
+        },
+        "bail": true
+    }
+}

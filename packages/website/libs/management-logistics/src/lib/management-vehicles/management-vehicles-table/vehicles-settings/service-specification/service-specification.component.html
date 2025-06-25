@@ -1,0 +1,58 @@
+<div class="service-specification">
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <label class="title-road" for=""> {{ 'VEHICLES.SPECS' | translate }} </label>
+
+            <p class="sub-title-road mt-1 mb-0"> {{'VEHICLES.THE_SERVICE_SPECIFICATIONS_ARE_THOSE_USED_THAT_A_VEHICLE_CAN_OFFER' | translate }} </p>
+
+        </div>
+
+
+    </div>
+
+    <!-- tables -->
+
+    <div class="row pt-4">
+
+        <div class="col-12">
+
+            <table class="table table-striped table-responsive-lg table-responsive-md  table-bordered mb-0 mt-4" id="vehiclesSettings" style="text-align: center ; width: 100%;">
+
+                <thead>
+
+                    <tr>
+
+                        <th width="15%" style="border-top-left-radius: 6px;"> {{'SHEET_ROUTE.CONDITION' | translate }} </th>
+
+                        <th width="15"> {{ 'VEHICLES.SERVICE_TYPE.CODE' | translate }} </th>
+
+                        <th class="text-left" width="70%"> {{'VEHICLES.SERVICE_TYPE.SPECIFICATION' | translate }} </th>
+
+                        <th> </th>
+
+                        <th style="border-top-right-radius: 6px;"></th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row pt-3 pb-3">
+        <div class="col-12">
+            <a class="add-expenses-type point" (click)="modalAddService()"> + Añadir especificación </a>
+        </div>
+    </div>
+
+    <!-- end tables -->
+</div>

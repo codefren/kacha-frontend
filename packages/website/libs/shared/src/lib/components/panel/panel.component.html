@@ -1,0 +1,49 @@
+<mat-expansion-panel
+    #panel
+    [disabled]="!isExpandable || disabled"
+    [expanded]="isExpandedLocal"
+    hideToggle="true"
+    class="app-panel"
+>
+    <mat-expansion-panel-header
+        class="app-panel-header"
+        [class.disabled]="disabled"
+        [class.expandable]="isExpandable && !disabled"
+        [class.primary]="color === 'primary'"
+        [class.accent]="color === 'accent'"
+        [class.warn]="color === 'warn'"
+        [attr.isExpandable]="isExpandable ? true : false"
+        collapsedHeight="48px"
+        expandedHeight="48px"
+        appDebounceClick
+        [debounceTime]="300"
+        (debounceClick)="toggleExpansion()"
+    >
+        <div
+            class="main-header"
+            fxLayout="row"
+            fxLayoutGap="12px"
+            fxFlex=""
+            [fxLayoutAlign]="isExpandable ? 'start center' : 'space-between center'"
+        >
+            <div *ngIf="isExpandable" class="expandable-icon" fxLayoutAlign="center center">
+                <mat-icon>{{ headerExpandIcon(panel.expanded) }}</mat-icon>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <div *ngIf="isExpandable" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-panel-title> {{ title | translate }} </mat-panel-title>
+                </div>
+                <ng-content select="[app-panel-header-left]"></ng-content>
+            </div>
+            <div fxFlex="" fxLayoutAlign="center center">
+                <mat-panel-title fxLayoutAlign="center" *ngIf="!isExpandable">{{
+                    title
+                }}</mat-panel-title>
+            </div>
+            <div fxLayoutAlign="end center">
+                <ng-content select="[app-panel-header-right]"></ng-content>
+            </div>
+        </div>
+    </mat-expansion-panel-header>
+    <div><ng-content></ng-content></div>
+</mat-expansion-panel>

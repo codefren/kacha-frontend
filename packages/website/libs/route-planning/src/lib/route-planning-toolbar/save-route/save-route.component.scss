@@ -1,0 +1,30 @@
+.easyroute-save-route {
+   label, form {
+       font-size: 16px;
+   } 
+
+   .form-row+ .form-row {
+       margin-top: 20px;
+   }
+
+   small {
+       font-size: 10.4px;
+   }
+
+   @media screen and ( min-width: 540px ) {
+       .pad-special {
+           padding: 3rem 3rem;
+       } 
+   }
+}
+
+.modal-dismiss {
+    margin-left: 1em;
+}
+
+.col-especial {
+    padding-right: 0px;
+    padding-left: 0px;
+    flex: 0 0 100%;
+    max-width: 100%;
+}

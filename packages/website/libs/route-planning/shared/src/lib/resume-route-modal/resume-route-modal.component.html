@@ -1,0 +1,374 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-xl-6 col-12 text-xl-left text-center">
+
+            <label class="title-modal"> Resumen global </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+            <img src="assets/icons/close-cost.svg">
+
+        </div>
+    </div>
+</div>
+
+<!-- Cajas informativas-->
+<div class="modal-body">
+
+    <div class="row align-items-center">
+
+        <!-- Total clientes -->
+
+        <div class="col-xl col-md-4 col-sm-4 col-12 mt-xl-0 mt-1" [ngClass]="{'col-md-4': !moduleCost(), 'col-sm-4': !moduleCost()}">
+
+            <div class="card box p-3">
+
+                <div class="row">
+
+                    <div class="col-12 mt-1 pl-2 pr-0">
+
+                        <span class="quantity-bold"> {{ zoneInfoChips.deliveryPoints }}</span>
+
+                    </div>
+
+                    <div class="col-12 pl-2 pr-0">
+
+                        <span class="title-box">Total clientes</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Total clientes -->
+
+        <!-- Total capacidad -->
+
+        <div class="col-xl col-md-4 col-sm-4 col-12 mt-xl-0 mt-1" [ngClass]="{'col-md-4': !moduleCost(), 'col-sm-4': !moduleCost()}">
+
+            <div class="card box p-3">
+
+                <div class="row">
+
+                    <div class="col-12 mt-1 pl-2 pr-0">
+
+                        <span class="quantity-bold">{{ zoneInfoChips.vehiclesCapacity }}</span>
+
+                    </div>
+
+                    <div class="col-12 pl-2 pr-0">
+
+                        <span class="title-box">Total capacidad</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Total capacidad -->
+
+        <!-- Total carga -->
+
+        <div class="col-xl col-md-4 col-sm-4 col-12 mt-xl-0 mt-1" [ngClass]="{'col-md-4': !moduleCost(), 'col-sm-4': !moduleCost()}">
+
+            <div class="card box p-3">
+
+                <div class="row">
+
+                    <div class="col-12 mt-1 pl-2 pr-0">
+
+                        <span class="quantity-bold">{{ zoneInfoChips.demand }}</span>
+
+                    </div>
+
+                    <div class="col-12 pl-2 pr-0">
+
+                        <span class="title-box">Total carga</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Total carga -->
+
+        <!-- total volumen -->
+
+        <div class="col-xl col-md-4 col-sm-4 col-12 mt-xl-0 mt-1" [ngClass]="{'col-md-4': !moduleCost(), 'col-sm-4': !moduleCost()}">
+
+            <div class="card box p-3">
+
+                <div class="row">
+
+                    <div class="col-12 mt-1 pl-2 pr-0">
+
+                        <span class="quantity-bold"> {{formatEuro(zoneInfoChips.volumetric)}}<!--  {{ zoneInfoChips.volumetric | number:'1.2' }} --></span>
+
+                    </div>
+
+                    <div class="col-12 pl-2 pr-0">
+
+                        <span class="title-box">Total volumen</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end total volument -->
+
+    </div>
+
+</div>
+
+<!--Evaluado/Optimizado-->
+<div class="modal-footer" *ngIf="(zoneInfoChips && zoneInfoChips.isEvaluated) || (routeInfoChips && routeInfoChips.time > 0)">
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <table style="width: 100%;" class="table table-striped table-responsive-lg table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th width="50%">Concepto</th>
+                                <th *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">Evaluadas</th>
+                                <th *ngIf="routeInfoChips && routeInfoChips.time > 0">Optimizadas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> Distancia recorrida </td>
+                                <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ zoneInfoChips.travelDistance / 1000 | number: '1.3' }} Km </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ routeInfoChips.travelDistance / 1000 | number: '1.3' }} Km </td>
+                            </tr>
+
+                            <tr>
+                                <td> Total vehículo </td>
+                                <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ zoneInfoChips.vehicles }}
+                                </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ routeInfoChips.vehicles }} </td>
+                            </tr>
+
+                            <tr>
+                                <td> Tiempo total </td>
+                                <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ zoneInfoChips.time | duration }} </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ convertSecondtoTimeAbsolute(routeInfoChips.time) }} </td>
+                            </tr>
+
+                            <tr>
+                                <td> Tiempo de retraso </td>
+                                <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ convertSecondtoTimeAbsolute(zoneInfoChips.delayTime) }} </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ convertSecondtoTimeAbsolute(routeInfoChips.delayTime) }} </td>
+                            </tr>
+
+                            <tr>
+                                <td> Tiempo de espera </td>
+                                <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ convertSecondtoTimeAbsolute(zoneInfoChips.vehicleWaitTime) }} </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ convertSecondtoTimeAbsolute(routeInfoChips.vehicleWaitTime) }} </td>
+                            </tr>
+
+                            <tr *ngIf="moduleCost()">
+                                <td> Total coste </td>
+                                <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ formatEuroCost(zoneInfoChips.costTotal) }} </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ formatEuroCost(zoneInfoChips.costTotal) }} </td>
+                                <!--  <td *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated"> {{ zoneInfoChips.costTotal | number:'1.2' }}€ </td>
+                                <td *ngIf="routeInfoChips && routeInfoChips.time > 0" class="text-optimized"> {{ routeInfoChips.costTotal | number:'1.2' }}€ </td> -->
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- <div class="row p-4">
+    <div class="col-11 pl-2">
+        <label class="title">Resumen global</label>
+    </div>
+    <div class="col-1">
+        <img src="assets/icons/close.svg" class="close-img" (click)="close()">
+    </div>
+</div> -->
+
+
+<!-- <div class="row pl-5 pr-5 pb-3">
+    <div class="col-4 pl-2 pr-0">
+        <div class="box p-4">
+            <div class="row">
+
+                <div class="col-12 mb-1 pl-2">
+                    <img src="assets/icons/client-resume.svg">
+                </div>
+                <div class="col-12 mt-1 pl-2 pr-0">
+                    <span class="quantity-bold">{{ zoneInfoChips.deliveryPoints }}</span>
+                </div>
+                <div class="col-12 pl-2 pr-0">
+                    <span class="title-box">Total clientes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 pr-0">
+        <div class="box p-4">
+            <div class="row">
+
+                <div class="col-12 mb-1 pl-2">
+                    <img src="assets/icons/box.svg">
+                </div>
+                <div class="col-12 mt-1 pl-2 pr-0">
+                    <span class="quantity-bold">{{ zoneInfoChips.vehiclesCapacity }}</span>
+                </div>
+                <div class="col-12 pl-2 pr-0">
+                    <span class="title-box">Total capacidad</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 pr-0">
+        <div class="box p-4">
+            <div class="row">
+
+                <div class="col-12 mb-1 pl-2">
+                    <img src="assets/icons/peso.svg">
+                </div>
+                <div class="col-12 mt-1 pl-2 pr-0">
+                    <span class="quantity-bold">{{ zoneInfoChips.demand }}</span>
+                </div>
+                <div class="col-12 pl-2 pr-0">
+                    <span class="title-box">Total peso carga</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!--Evaluado/Optimizado-->
+<!-- <div style="background-color: #F6F8FA;" *ngIf="(zoneInfoChips && zoneInfoChips.isEvaluated) || (routeInfoChips && routeInfoChips.time > 0)">
+    <div class="row p-5">
+        <div class="col-12 pl-2">
+            <span class="text-evualuted" *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">Evaluadas</span>
+            <span class="text-evualuted" *ngIf="(zoneInfoChips && zoneInfoChips.isEvaluated) && (routeInfoChips && routeInfoChips.time > 0)"> / </span>
+            <span class="text-optimized" *ngIf="(routeInfoChips && routeInfoChips.time > 0)">Optimizado</span>
+        </div>
+    </div>
+    <div class="row pl-5 pr-5 pb-3">
+        <div class="col-8 pr-0">
+            <div class="row evaluated-box" *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/distance-evaluated.svg" alt="">
+                    {{ zoneInfoChips.travelDistance / 1000 |  number: '1.3' }} Km
+                </div>
+            </div>
+            <div class="row optimized-box" *ngIf="routeInfoChips && routeInfoChips.time > 0">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/distance-optimized.svg" alt="">
+                    {{ routeInfoChips.travelDistance / 1000 |  number: '1.3' }} Km
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0">
+                    Distancia recorrida
+                </div>
+            </div>
+        </div>
+        <div class="col-4 pr-0">
+            <div class="row evaluated-box" *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/cart-evaluated.svg">
+                    {{ zoneInfoChips.vehicles }}
+                </div>
+            </div>
+            <div class="row optimized-box" *ngIf="routeInfoChips && routeInfoChips.time > 0">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/cart-optimized.svg">
+                    {{ routeInfoChips.vehicles }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0">
+                    Total vehículos
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pl-5 pr-5 pb-3">
+        <div class="col-4 pr-0">
+            <div class="row evaluated-box" *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/time-evaluated.svg">
+                    {{ zoneInfoChips.time | duration }}
+                </div>
+            </div>
+            <div class="row optimized-box" *ngIf="routeInfoChips && routeInfoChips.time > 0">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/time-optimized.svg">
+                    {{ convertSecondtoTimeAbsolute(routeInfoChips.time) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0">
+                    Tiempo total
+                </div>
+            </div>
+        </div>
+        <div class="col-4 pr-0">
+            <div class="row evaluated-box" *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/time-a-evaluated.svg">
+                    {{ convertSecondtoTimeAbsolute(zoneInfoChips.delayTime) }}
+                </div>
+            </div>
+            <div class="row optimized-box" *ngIf="routeInfoChips && routeInfoChips.time > 0">
+                <div class="col-12 p-0">
+                    <img src="assets/icons/time-a-optimized.svg">
+                    {{ convertSecondtoTimeAbsolute(routeInfoChips.delayTime) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0">
+                    Tiempo de retraso
+                </div>
+            </div>
+        </div>
+        <div class="col-4 pr-0">
+            <div class="row evaluated-box" *ngIf="zoneInfoChips && zoneInfoChips.isEvaluated">
+                <div class="col-12 p-0">
+                    {{ convertSecondtoTimeAbsolute(zoneInfoChips.vehicleWaitTime) }}
+                </div>
+            </div>
+            <div class="row optimized-box" *ngIf="routeInfoChips && routeInfoChips.time > 0">
+                <div class="col-12 p-0">
+                    {{ convertSecondtoTimeAbsolute(routeInfoChips.vehicleWaitTime) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0" >
+                    Tiempo de espera
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

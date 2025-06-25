@@ -1,0 +1,184 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+.easyroute-orders-list {
+    // background-color: #ffffff;
+    background: white;
+    height: 100%;
+    font-size: 12px;
+    border-radius: 4px;
+    .style-card {
+        height: 83px;
+        width: 119px;
+    }
+    .color-info {
+        font-size: 20px !important;
+        color: #000000 !important;
+        text-transform: initial !important;
+        font-weight: 700;
+    }
+    .color-infor-card {
+        // font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        text-align: center;
+    }
+    .card {
+        /*  height: 88px;
+        width: 156px; */
+        height: 79px;
+        width: 152px;
+        background: #ffffff;
+    }
+    .card-franchise {
+        height: 93px !important;
+        width: 209px !important;
+    }
+    .btn-refresh {
+        padding: 0.5rem 1.75rem;
+        border-radius: 4px;
+        border-color: #ccc !important;
+    }
+    .btn-print {
+        background-color: #b5b5b5;
+        border-radius: 20px;
+        font-size: 14px;
+        color: #ffffff;
+        padding: 8px;
+    }
+    .icon-print {
+        color: #d0d0d0;
+        font-size: 16px;
+    }
+    .btn-clear {
+        padding: 0.3rem 1.5rem;
+        border-radius: 4px;
+        border-color: #ccc !important;
+    }
+    .mt {
+        margin-top: 1.3rem !important;
+    }
+    .return {
+        padding: 1px 4px;
+        color: #908c8c;
+    }
+    .secondary {
+        padding: 0.47rem 1.5rem;
+    }
+    .space-button {
+        color: #ff9e4d;
+    }
+    .hr-secondary {
+        background-image: none;
+        background: #c1c1c1;
+    }
+    .colorStatus {
+        color: #afafaf;
+    }
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+        line-height: 1.3 !important;
+        border-radius: 10px;
+        padding: 10px 20px !important;
+        height: 48px !important;
+        font-size: 14px !important;
+    }
+    .fa-calendar-alt {
+        color: #ff9e4d;
+    }
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .btn-franchise {
+            font-size: 10px;
+        }
+        .btn-filter {
+            font-size: 10px;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+}
+
+.col-especial {
+    padding-right: 0px;
+    padding-left: 0px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    font-weight: lighter;
+}
+
+.btn-filter {
+    background-color: #b5b5b5;
+    border-radius: 20px;
+    width: 132px;
+    height: 40px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.colorLink {
+    color: #f89e4c !important;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.buttons-filter {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+}
+
+.btn-franchise {
+    background-color: #24397c;
+    border-radius: 24px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.style-fas {
+    /* padding-left: 9px !important;
+    color: #f89e4c !important; */
+    padding-left: 0px !important;
+    color: #f89e4c !important;
+    float: right;
+    padding-top: 4px;
+}
+
+.h2-table {
+    color: rgba(0, 0, 0, 0.87) !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+}
+
+.padding-header-sub {
+    padding: 8px;
+    color: rgba(0, 0, 0, 0.87) !important;
+    background: white;
+}

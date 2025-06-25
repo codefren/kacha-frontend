@@ -1,0 +1,73 @@
+<div id="modalForm">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                <p class="title">{{ 'CONFIGURATIONS.CATEGORY.EDIT_SIGNED_FILTER' | translate }}</p>
+
+            </div>
+        </div>
+
+        <form [formGroup]="filterForm">
+            <div class="row justify-content-center mt-4">
+                <div class="col-10">
+                    <div class="form-group row">
+                        <div class="col-sm-5 pl-0">
+                            <div class="form-row form-group" [ngClass]="{ 'has-danger': filterForm.controls['name'].invalid && (filterForm.controls['name'].dirty || filterForm.controls['name'].touched) }">
+                                <label for="code">
+                                {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}
+                            <span class="asterisco">* </span>
+                            </label>
+                                <input type="text" id="code" class="form-control" autocomplete="off" formControlName="name" [ngClass]="{'form-control-danger': filterForm.controls['name'].invalid && (filterForm.controls['name'].dirty || filterForm.controls['name'].touched)}" />
+
+                                <ng-container *ngFor="let validation of delivery_messages.name">
+                                    <small class="form-control-feedback text-danger" *ngIf="filterForm.get('name').hasError(validation.type) && (filterForm.get('name').dirty || filterForm.get('name').touched)
+                            ">
+                                {{ validation.message }}
+                            </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5 offset-md-2 pl-0">
+                            <div class="form-row form-group" [ngClass]="{ 'has-danger': filterForm.controls['name'].invalid && (filterForm.controls['name'].dirty || filterForm.controls['name'].touched) }">
+                                <label for="name">
+                                    {{ 'CONFIGURATIONS.MEASURE.NAME' | translate }}
+                                    <span class="asterisco">* </span>
+                                </label>
+                                <input type="text" id="name" class="form-control" autocomplete="off" formControlName="name" [ngClass]="{'form-control-danger': filterForm.controls['name'].invalid && (filterForm.controls['name'].dirty || filterForm.controls['name'].touched)}" />
+                                <ng-container *ngFor="let validation of delivery_messages.name">
+                                    <small class="form-control-feedback text-danger" *ngIf="filterForm.get('name').hasError(validation.type) && (filterForm.get('name').dirty || filterForm.get('name').touched)
+                                        ">
+                                            {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn  btn-cancel size-btn-modal modal-dismiss" (click)="closeDialog([false, null])">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn size-btn-modal modal-confirm" [disabled]="!filterForm.valid" (click)="createFilter()">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

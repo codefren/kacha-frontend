@@ -1,0 +1,44 @@
+@import 'shared/src/lib/common';
+
+mat-expansion-panel.app-panel {
+    border: 100px;
+    box-shadow: $shadow;
+    min-width: 300px !important;
+    width: inherit !important;
+
+    mat-expansion-panel-header {
+        max-height: 48px !important;
+
+        .mat-content {
+            height: 100%;
+        }
+
+        .mat-expansion-panel-header-title {
+            color: inherit;
+        }
+
+        ng-content {
+            color: inherit;
+        }
+    }
+
+    .mat-expansion-panel-header {
+        border-radius: inherit !important;
+        padding: 0;
+
+        &[isExpandable='true'] {
+            padding: 0 24px 0 0;
+
+            .expandable-icon {
+                box-shadow: 0 4px 12px -8px rgba(0, 0, 0, 0.2),
+                    0 8px 8px 0 rgba(0, 0, 0, 0.14), 0 20px 4px 0 rgba(0, 0, 0, 0.12);
+                height: 100%;
+                width: 32px;
+            }
+        }
+
+        &.mat-expanded {
+            border-radius: 0% !important;
+        }
+    }
+}

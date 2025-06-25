@@ -1,0 +1,9 @@
+<div
+    class="app-toolbar toolbar-container"
+    [class.primary]="color === 'primary'"
+    [class.accent]="color === 'accent'"
+    [class.warn]="color === 'warn'"
+    [class.elevation]="hasElevation"
+>
+    <ng-content></ng-content>
+</div>

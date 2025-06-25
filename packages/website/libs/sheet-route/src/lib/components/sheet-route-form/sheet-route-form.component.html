@@ -1,0 +1,162 @@
+<div class="sheet-route-form font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'SHEET_ROUTE.NAME' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+
+
+            <button class="mb-1 mt-xl-0 mt-1 mr-2 btn btn-default" (click)="openModalViewPdf()">
+
+                <img src="assets/icons/donwload.svg">
+
+            </button>
+
+            <!-- <button class="btn btn-primary">
+
+                <img src="assets/icons/text.svg">
+
+                {{ 'SHEET_ROUTE.CHECK_ROUTES' | translate }}
+
+            </button> -->
+        </div>
+
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0" *ngIf="roadMapData">
+
+            <div class="card">
+
+                <div class="card-body" style="display: block;">
+
+                    <p class="title-route mb-0"> {{'SHEET_ROUTE.ROUTE' | translate }} </p>
+
+                    <p class="sub-title mb-0"> {{ roadMapData.routeName }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'SHEET_ROUTE.PATH_COLOR' | translate }} </label>
+
+                    <div class="progress">
+
+                        <div class="progress-bar" role="progressbar" style="width: 100%" [ngStyle]="{'background-color':roadMapData.routeColor}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'SHEET_ROUTE.ASSIGNED_DRIVER' | translate }} </label>
+
+                    <p class="m-0 name-title ">{{ roadMapData.userDriver.name }} {{ roadMapData.userDriver.surname }}</p>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'SHEET_ROUTE.ARROVAL_DEPARTURE_TIME' | translate }} </label>
+
+                    <p class="m-0 name-title ">{{ returnsHour (roadMapData.driverStartTime) }} - {{ returnsHour(roadMapData.driverEndTime)}} </p>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'SHEET_ROUTE.VEHICLES' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{ roadMapData && roadMapData.vehicle && roadMapData.vehicle.name ? roadMapData && roadMapData.vehicle && roadMapData.vehicle.name:'No disponible'}} </p>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'SHEET_ROUTE.DELIVERY_NOTES' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{ roadMapData.totalDeliveryNotes }} </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12" *ngIf="roadMapData">
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'sheetRoute'}" (click)="changePage('sheetRoute')">
+
+                <label class="title-selected point" for=""> {{ 'SHEET_ROUTE.NAME' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'deliveryNotes'}" (click)="changePage('deliveryNotes')">
+
+                <label class="title-selected point" for=""> {{'SHEET_ROUTE.DELIVERY_NOTES' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'summary'}" (click)="changePage('summary')">
+
+                <label class="title-selected point" for=""> {{'SHEET_ROUTE.SUMMARY' | translate }} </label>
+
+            </button>
+
+            <ng-container *ngIf="select === 'sheetRoute'">
+
+                <easyroute-answers-form [roadMap]="roadMapData"></easyroute-answers-form>
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'deliveryNotes'">
+
+                <div class="card">
+
+                    <div class="card-body">
+                        <easyroute-delivery-notes [routePlanningRouteId]="routePlanningRouteId" [routeId]="routeId"></easyroute-delivery-notes>
+                    </div>
+                </div>
+
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'summary'">
+
+                <div class="card">
+
+                    <div class="card-body">
+                        <easyroute-summary [routePlanningRouteId]="routePlanningRouteId" [routeId]="routeId"></easyroute-summary>
+                    </div>
+                </div>
+
+
+
+            </ng-container>
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+
+</div>

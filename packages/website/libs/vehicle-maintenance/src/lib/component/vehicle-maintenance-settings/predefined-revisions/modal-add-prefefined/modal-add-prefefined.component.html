@@ -1,0 +1,117 @@
+<div class="modal-add-predifined">
+
+    <div class="row p-5">
+
+        <div class="col-xl-8 col-12 text-xl-left text-center">
+
+            <label class="title-modal"> {{ title }} </label>
+
+        </div>
+
+        <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="close()">
+
+            <img src="assets/icons/close1.svg">
+
+        </div>
+
+
+
+        <form [formGroup]="predefinedForm" class="padding-form" style="width: 100%" novalidate action="">
+
+            <!-- name -->
+
+            <div class="col-12 mt-2">
+
+                <div class="form-row mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control point" id="name" type="text" formControlName="name" placeholder="Escribir..."/>
+
+                            <label for="name" class="mt-2 title-col"> {{ 'GENERAL.NAME' | translate }} <span class="asterisco"> *</span> </label>
+
+                        </span>
+
+                        <ng-container *ngFor="let validation of predefine_messages.name">
+
+                            <div class="w-100 text-left">
+
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        predefinedForm.get('name').hasError(
+                                            validation.type
+                                        ) &&
+                                        (predefinedForm.get('name').dirty ||
+                                        predefinedForm.get('name').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- end name -->
+
+            <!-- active -->
+
+            <div class="col-12 mt-2">
+                <div class="switch w-100">
+
+                    <label class="switch-width mb-0">
+
+                        <input type="checkbox"  formControlName="activeByCompany"
+                        />
+
+                        <span class="lever lever-general switch-col-primary m-2"></span>
+
+                        <span class="lever-text style-toggle"> {{'VEHICLE_MAINTENANCE.SHOW' | translate }} </span>
+
+                    </label>
+
+                </div>
+            </div>
+
+            <!-- end active -->
+
+
+        </form>
+
+
+        <div class="col-12 mt-3">
+
+            <div class="form-row mt-2">
+
+                <ng-container *ngIf="actions === 'new'">
+
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!predefinedForm.valid" (click)="submit()">
+
+                        {{ 'SHEET_ROUTE.ADD' | translate }}
+
+                    </button>
+
+                </ng-container>
+
+                <ng-container *ngIf="actions != 'new'">
+
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!predefinedForm.valid" (click)="editSubmit()">
+
+                        {{'GENERAL.SAVE' | translate }}
+
+                    </button>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

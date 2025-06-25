@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+@mixin sidenav-theme($theme) {
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+
+    .app-side-nav[app-side-nav-theme] {
+        mat-drawer {
+            background-color: $background;
+            color: $foreground-text;
+        }
+
+        .drawer-content-placeholder {
+            background-color: $background;
+            color: $foreground-text;
+
+            .sidenav-button {
+                background-color: $background;
+                color: $foreground-text;
+            }
+
+            .sidenav-button-complete {
+                background-color: $background;
+            }
+        }
+    }
+}

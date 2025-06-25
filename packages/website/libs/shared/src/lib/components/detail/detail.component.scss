@@ -1,0 +1,37 @@
+.font-general{
+    font-size: 14px;
+    width: 75%;
+}
+
+#details > thead > th {
+    font-size: 12px !important;
+}
+
+.size{
+    height: 8.6rem !important;
+}
+
+.form-control[readonly] {
+    background-color: transparent;
+    opacity: 1;
+}
+
+.form-control:focus {
+    border-color: #ced4da !important;
+    -webkit-box-shadow: 0 1px 1px transparent inset, 0 0 8px transparent !important;
+    box-shadow: 0 1px 1px transparent inset, 0 0 8px transparent !important;
+}
+
+textarea {
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
+    border-color: #ced4da !important;
+    width: 100%;
+    color: #4c4c4c;
+    height: 138px;
+    resize: none;
+}
+
+textarea:focus, input:focus, input[type]:focus {
+    outline: 0 none;
+}

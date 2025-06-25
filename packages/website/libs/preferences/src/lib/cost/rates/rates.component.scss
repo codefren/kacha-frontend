@@ -1,0 +1,45 @@
+.rates-style {
+    .title-road {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #3B4FFF;
+        }
+    }
+    .add-expenses-type {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        align-items: center;
+        color: #3B4FFF;
+    }
+    .form-control-select,
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+}

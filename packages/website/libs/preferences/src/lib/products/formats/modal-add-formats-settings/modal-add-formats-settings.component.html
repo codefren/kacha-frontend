@@ -1,0 +1,246 @@
+<div class="modal-add-general-filters-settings">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ title }}</label>
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="row justify-content-center">
+
+                    <form [formGroup]="measureForm" class="form-widths font-general row" *ngIf="measure">
+
+                        <!-- codigo -->
+
+                        <div class="col-xl-6 col-md-6 col-12">
+
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': measureForm.controls['code'].invalid && (measureForm.controls['code'].dirty || measureForm.controls['code'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                        <ng-container *ngIf="!measure.id">
+                                            <input type="text" class="form-control form-input"  id="code" formControlName="code" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}"  [ngClass]="{'form-control-danger': measureForm.controls['code'].invalid && (measureForm.controls['code'].dirty || measureForm.controls['code'].touched) }"/>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="measure.id > 0" >
+                                            <input type="text" class="form-control form-input" readonly  id="code" formControlName="code" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}"  [ngClass]="{'form-control-danger': measureForm.controls['code'].invalid && (measureForm.controls['code'].dirty || measureForm.controls['code'].touched) }"/>
+                                        </ng-container>
+            
+                                        
+            
+                                        <label for="first" class="mt-2 title-col"> {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }} </label>
+            
+                                    </span>
+
+                                <ng-container *ngFor="let validation of measure_messages.code">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                    measureForm.get('code').hasError(validation.type) &&
+                                                    (measureForm.get('code').dirty ||
+                                                        measureForm.get('code').touched)
+                                                ">
+                                            {{ validation.message }}
+                                        </small>
+                                </ng-container>
+                            </div>
+
+                        </div>
+
+                        <!-- end codigo -->
+
+                        <!-- measure name -->
+
+                        <div class="col-xl-6 col-md-6 col-12">
+
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': measureForm.controls['name'].invalid && (measureForm.controls['name'].dirty || measureForm.controls['name'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                        <input type="text" class="form-control form-input"  id="name" formControlName="name" placeholder="Nombre formato"  [ngClass]="{'form-control-danger': measureForm.controls['name'].invalid && (measureForm.controls['name'].dirty || measureForm.controls['name'].touched) }"/>
+                                        
+                                        <label for="first" class="mt-2 title-col"> Nombre formato  <span class="asterisco">* </span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of measure_messages.name">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                measureForm.get('name').hasError(validation.type) &&
+                                                (measureForm.get('name').dirty ||
+                                                    measureForm.get('name').touched)
+                                            ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end measure name -->
+
+
+                        <div class="col-12 mt-3">
+
+                            <p class="title-settings-measure mb-0">Configuración</p>
+
+                            <p class="sub-title-measure mb-0">Al crear un formato por defecto vendra en estado "activo" pero puedes crearlos y desactivarlos solo para almacenar la información (si está desactivado no se podrá aplicar a un producto).</p>
+
+                        </div>
+
+                        <!-- Estado -->
+
+                        <div class="col-xl-6 col-md-6 col-12 mt-3">
+
+                            <div class="style-input-check">
+
+                                <p class="mb-0 mt-2">Estado</p>
+
+                                <div class="switch w-100 m-0">
+
+                                    <label class="switch-width mb-0">
+                                            <input type="checkbox"  id="isActive" formControlName="isActive"/>
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                                            <span class="style-span-toggle title-road"> 
+                                                Activar
+                                            </span>
+
+                                        </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- end descatado -->
+
+                        <!-- Permitir cantidades decimales -->
+                        <div class="col-xl-6 col-md-6 col-12 mt-3">
+
+                            <div class="style-input-check">
+
+                                <p class="mb-0 mt-2">Permitir cantidades decimales</p>
+
+                                <div class="switch w-100 m-0">
+
+                                    <label class="switch-width mb-0">
+                                            <input type="checkbox"  id="allow_float" formControlName="allowFloatQuantity"/>
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                                            <span class="style-span-toggle title-road"> 
+                                                Permitir
+                                            </span>
+
+                                        </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end Permitir cantidades decimales -->
+
+                        <!-- Asignar cantidad equivalente -->
+
+                        <div class="col-xl-6 col-md-6 col-12 mt-3">
+
+                            <div class="style-input-check">
+
+                                <p class="mb-0 mt-2">Asignar cantidad equivalente</p>
+
+                                <div class="switch w-100 m-0">
+
+                                    <label class="switch-width mb-0">
+
+                                        <input type="checkbox"  id="activateEquivalentAmount" formControlName="activateEquivalentAmount"/>
+
+                                        <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                        <span class="style-span-toggle title-road"> 
+                                            Asignar
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- end Asignar cantidad equivalente -->
+
+                        <!-- Cantidad equivalente (unidades) -->
+
+                        <ng-container *ngIf="measureForm.controls['activateEquivalentAmount'].value">
+
+                            <div class="col-xl-6 col-md-6 col-12 mt-3">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+    
+                                            <input type="text" class="form-control form-input"  id="equivalentAmount" formControlName="equivalentAmount" placeholder="Cantidad equivalente (unidades)" />
+                                            
+                                            <label for="first" class="mt-2 title-col"> Cantidad equivalente (unidades)  </label>
+
+                                    </span>
+
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="offset-xl-6 offset-md-6 col-xl-6 col-md-6 col-12 mt-3">
+
+                                <span class="sub-title-measure mt-3">Al asignar una cantidad equivalente estás indicando a cuantas unidades equivale este formato. Ejemplo: Pack de 10 = 10 unidades.</span>
+
+                            </div>
+
+                        </ng-container>
+
+
+
+                        <!-- end Cantidad equivalente (unidades) -->
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-outline-primary mr-2 size-btn" (click)="close(false)"> {{'GENERAL.CLOSE' | translate }} </button>
+
+
+                <button class="btn btn-primary mr-2 size-btn" [disabled]="measureForm && !measureForm.valid" (click)="createMeasure()">{{'GENERAL.SAVE' | translate}} </button>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

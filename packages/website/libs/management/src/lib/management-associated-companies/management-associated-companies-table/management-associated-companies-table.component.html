@@ -1,0 +1,67 @@
+<div class="associated-company-list bg-white">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'COMPANIES.ASSOCIATED_COMPANIES' | translate }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boton añadir -->
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-4 text-center">
+                <button class="btn btn-secondary btn-large" routerLink="new">
+                    {{ 'COMPANIES.ADD_COMPANY' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nombre y filtro -->
+    <div class="row justify-content-center align-items-end">
+        <!--  <div class="col-12 col-md-9 order-last order-md-first">
+            <span class="title-table">
+                {{ 'COMPANIES.ASSOCIATED_COMPANIES' | translate }}
+            </span>
+        </div>
+        <div class class="col-md-3 col-12 text-center mb-2 mb-md-0">
+            <button class="btn btn-filter  pr-2 ml-3" (click)="filterOpen()">
+                <i class="fas fa-sliders-h"></i>
+                {{ 'GENERAL.FILTERS' | translate  }}
+            </button>
+        </div> -->
+        <div class="col-12 col-md-9 col-xl-10 col-lg-9 mt-3 mt-md-0 order-last order-md-first">
+            <span class="title-table">
+                {{ 'COMPANIES.ASSOCIATED_COMPANIES' | translate }}
+            </span>
+        </div>
+        <div class class="col-md-3 col-xl-2 col-lg-3 col-12 text-center pl-1 pl-sm-1 pl-md-1 pl-lg-5 pl-xs-1 pl-xl-5">
+            <button class="btn btn-filter  pr-2 ml-3" (click)="filterOpen()">
+                <i class="fas fa-sliders-h"></i>
+                {{ 'GENERAL.FILTERS' | translate  }}
+            </button>
+        </div>
+    </div>
+
+    <div class="table-content mt-3">
+        <table class="table table-bordered table-striped mb-0" id="associated-companies" style="text-align: center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

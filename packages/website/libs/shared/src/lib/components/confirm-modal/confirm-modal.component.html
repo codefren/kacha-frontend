@@ -1,0 +1,27 @@
+<div>
+    <section class="card">
+        <header class="card-header card-header-color" *ngIf="title">
+            <h2 class="card-title card-title-custon text-center">{{ 'GENERAL.CONFIRM_REQUEST' | translate}}</h2>
+        </header>
+        <div class="card-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <div class="mb-0 text-center cssParrafo" [innerHtml]="message" [ngClass]="{'parrafo': cssParrafo, 'cssParrafo': !cssParrafo}"></div>
+                </div>
+            </div>
+        </div>
+        <footer class="card-footer">
+            <div class="row mb-3">
+                <div class="col-12 col-md-5 offset-md-1 col-5 text-center text-md-left" *ngIf="!card">
+                    <button type="button" class="btn btn-gray btn-block" (click)="activeModal.close(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+                </div>
+                <div class="col-md-5 col-5 text-center col-12 text-md-right mt-2 mt-md-0" *ngIf="!card">
+                    <button type="button" class="btn btn-primary btn-block" (click)="activeModal.close(true)">{{ 'GENERAL.ACCEPT' | translate }}</button>
+                </div>
+                <div class="col-md-6 offset-md-3 text-center" *ngIf="card && noDelete">
+                    <button type="button" class="btn btn-primary btn-block" (click)="activeModal.close(false)">{{ 'GENERAL.ACCEPT' | translate }}</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

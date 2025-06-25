@@ -1,0 +1,129 @@
+<div class="easyroute-delivery-made">
+    <div class="card">
+        <div class="card-body">
+            <div class="row  align-items-center">
+                <div class="col-xl-9 col-12 text-left mb-3">
+                    <label class="title-card" for="title-card"> {{'DASHBOARD.DELIVERY_MADE.NAME' | translate }} </label>
+                </div>
+                <div class="col-xl-3 col-12 text-right mb-3">
+                    <div class="input-group hack-select">
+                        <select class="form-control letter-app point" (change)="getAll($event.target.value)">
+
+                            <option value="sortAtoZAsc" selected> {{ 'DASHBOARD.DELIVERY_MADE.OF_MORE_LESS' | translate }}
+                            </option>
+
+                            <option value="sortAtoZDesc"> {{ 'DASHBOARD.DELIVERY_MADE.FROM_LESS_TO_MORE' | translate }}
+                            </option>
+
+                           
+
+                            <option value="leastToMostAsc"> {{ 'DASHBOARD.DELIVERY_MADE.SORT_FROM_A_TO_Z' | translate }}
+                            </option>
+
+                            <option value="leastToMostDesc">{{ 'DASHBOARD.DELIVERY_MADE.SORT_FROM_Z_TO_A' | translate }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 overflow-scroos" [ngClass]="{'no-date':deliveryMade && deliveryMade.length == 0}">
+
+                    <ng-container *ngIf="!show">
+
+                        <div class="col-12 mt-4 pt-4">
+
+                            <div class="fa-10x mb-2 mt-5 pt-5">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+
+                    </ng-container>
+
+                    <ng-container *ngIf="show">
+
+                        <ng-container *ngIf="deliveryMade && deliveryMade.length > 0">
+
+                            <ng-container *ngFor="let item of deliveryMade; let i = index;">
+
+                                <div class="row align-items-center pl-lg-2" [ngClass]="{'mt-3': i > 0}">
+
+                                    <div class="col-lg-10 col-12 p-lg-0">
+
+                                        <div class="progress light m-2" data-toggle="tooltip" data-html="true" [title]="showName(item.user)">
+
+                                            <!-- barra de estado actual -->
+
+                                            <div class="progress-bar" [style.background-color]="item.color" role="progressbar" aria-valuenow="60" aria-valuemin="item.pendingDeliveries" aria-valuemax="100" [style.width]="item.percentageRealized + '%'">
+
+                                            </div>
+                                            <div class="progress-bar value-bar" [style.background-color]="item.color" [style.width]="(100 - item.percentageRealized)  + '%'"></div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- info point -->
+
+                                    <div class="col-lg-2 col-12 p-0 align-items-baseline point" (click)="operRouter(item)">
+
+                                        <!-- <label class="text-left total-point pr-3"> {{ item.finishedDeliveries }}/{{ item.pendingDeliveries }} </label>
+
+                                        <label class="total-cost pr-3"> {{ item.amountTotal }}€ </label>
+
+                                        <i class="fas fa-chevron-right"></i> -->
+                                        <div class="row">
+                                            <div class="col-4 text-right pr-lg-1">
+                                                <label class="text-left total-point"> {{ item.finishedDeliveries }}/{{ item.totalDeliveryPoint }} </label>
+                                            </div>
+                                            <div class="col-4 text-center" *ngIf="showCosts">
+                                                <label class="total-cost"> {{ decimal(item.amountTotal) }}€ </label>
+                                            </div>
+                                            <div class="col-4 ttext-right">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- end info point -->
+
+                                    <!-- name route -->
+
+                                    <div class="col-12 text-left pl-lg-2 p-lg-0 col-name">
+
+                                        <label class="name-zone"> {{ item.name ? item.name :'No disponible' }} </label>
+
+                                    </div>
+
+                                    <!-- end name route -->
+
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="deliveryMade && deliveryMade.length == 0">
+
+                            <div class="col-12 mt-5 pt-5">
+                                <h1 class="mt-5 pt-5"> {{'DASHBOARD.DELIVERY_MADE.NO_DELIVERIES_TO_SHOW' | translate }} </h1>
+                            </div>
+                        </ng-container>
+
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

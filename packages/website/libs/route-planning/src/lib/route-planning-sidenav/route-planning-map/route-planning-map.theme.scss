@@ -1,0 +1,124 @@
+@import '~@angular/material/theming';
+@import 'shared/src/lib/common';
+@mixin route-planning-map-mat-color-styler($color) {
+    @include mat-color-styler($color, !important);
+    &.expandable:hover:not([aria-expanded='true']) {
+        background-color: mat-color($color, 600) !important;
+    }
+}
+
+
+/* .odd {
+    background-color: rgba(0, 0, 0, 0.05);
+} */
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin route-planning-map-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+    // Define any styles affected by the theme.
+    .easyroute-route-planning-map {
+        &.primary {
+            @include route-planning-map-mat-color-styler($primary);
+        }
+        &.accent {
+            @include route-planning-map-mat-color-styler($accent);
+        }
+        &.warn {
+            @include route-planning-map-mat-color-styler($warn);
+        }
+        .depot-header-container {
+            background-color: mat-color($primary);
+            color: white;
+            .close-button {
+                color: rgb(230, 230, 230);
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+        .view-toggle-overlay .view-toggle-container .view-toggle {
+            &.unchecked {
+                background-color: mat-color($accent, 50);
+                color: mat-color($accent, '50-contrast');
+            }
+            &.disabled-view {
+                opacity: 0.7;
+            }
+            &.mat-button-toggle-checked {
+                background-color: mat-color($primary, 300);
+                color: mat-color($primary, '300-contrast');
+            }
+            &:hover:not(.disabled-view) {
+                background-color: mat-color($primary, 200);
+                color: mat-color($accent, '200-contrast');
+            }
+        }
+        .multiple-selection-overlay-minimized {
+            background-color: #ff9e4d;
+            color: mat-color($accent, '300-contrast');
+            &:hover {
+                background-color: '#ff9e4d';
+                color: mat-color($accent, '200-contrast');
+            }
+        }
+        .multiple-selection-overlay {
+            .multiple-selection-header {
+                background-color: #ff9e4d;
+                color: mat-color($accent, '300-contrast');
+                &:hover {
+                    background-color: #ff9e4d;
+                    color: mat-color($accent, '200-contrast');
+                }
+            }
+            .toggle-route-colors {
+                background-color: mat-color($accent, 100);
+                color: mat-color($accent, '100-contrast');
+            }
+            .multiple-selection-container {
+                background-color: mat-color($accent, 50);
+            }
+            .multiple-selection-item {
+                border-color: mat-color($accent, 200) !important;
+                &.checked {
+                    background-color: mat-color($primary, 100);
+                    color: mat-color($accent, '100-contrast');
+                    &.route-item {
+                        background-color: mat-color($primary);
+                        color: mat-color($primary, default-contrast);
+                    }
+                }
+                &.orphan-route {
+                    background-color: mat-color($primary, 100) !important;
+                    color: mat-color($accent, '100-contrast') !important;
+                }
+            }
+        }
+        .recenter-button {
+            color: mat-color($primary);
+        }
+        .button-primary {
+            border-color: mat-color($accent);
+            color: mat-color($accent);
+            &.unchecked {
+                color: mat-color($accent, 200);
+            }
+        }
+    }
+}
+
+@mixin route-planning-map-typography($config) {
+    .easyroute-route-planning-map {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

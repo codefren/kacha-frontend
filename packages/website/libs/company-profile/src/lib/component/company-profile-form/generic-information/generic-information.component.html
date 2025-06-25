@@ -1,0 +1,458 @@
+<div class="row generic-information">
+
+    <div class="col-12">
+
+
+
+        <div class="card">
+            <form [formGroup]="companiesForm" *ngIf="companiesForm && isAdminAdministrative()">
+
+                <div class="card-body pb-5">
+
+                    <p class="title-row mb-1"> {{'COMPANY_PROFILE.COMPANY_DATA' | translate }} </p>
+
+                    <p class="sub-title"> {{'COMPANY_PROFILE.TEXT_1' | translate }} <br> <a routerLink="/management/associated-companies" class="color-link">
+                        {{ 'TEMPLATE.PROFILE_COMPANY_ASOCIATED_III' | translate }}
+                    </a> </p>
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="form-row">
+
+                                <!-- company_name -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': companiesForm.controls['name'].invalid && (companiesForm.controls['name'].dirty || companiesForm.controls['name'].touched )}">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-name" formControlName="name" type="text"
+
+                                        placeholder="{{ 'COMPANY_PROFILE.COMPANY_NAME' | translate }}"/>
+        
+                                        <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.COMPANY_NAME' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.name">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="
+                                                     companiesForm.get('name').hasError(
+                                                        validation.type
+                                                    ) &&
+                                                    (companiesForm.get('name').dirty ||
+                                                    companiesForm.get('name').touched)
+                                                ">
+                                                {{ validation.message }}
+                                            </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- end company_name -->
+
+                                <!-- NIF -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['nif'].invalid && (companiesForm.controls['nif'].dirty || companiesForm.controls['nif'].touched )}">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-nif" formControlName="nif" type="text"
+                                        placeholder="{{ 'COMPANY_PROFILE.NIF' | translate }}"/>
+        
+                                        <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.NIF' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.nif">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="
+                                            companiesForm.get('nif').hasError(
+                                                        validation.type
+                                                    ) &&
+                                                    (companiesForm.get('nif').dirty ||
+                                                    companiesForm.get('nif').touched)
+                                                ">
+                                                {{ validation.message }}
+                                            </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- END NIF -->
+
+                                <!-- TELEPHONE_CONTACT -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['phone'].invalid && (companiesForm.controls['phone'].dirty || companiesForm.controls['phone'].touched) }">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-phone-number" [formControl]="companiesForm.controls['phone']" mask="999 999999999" prefix="+" 
+                                        placeholder="{{ 'COMPANY_PROFILE.TELEPHONE_CONTACT' | translate }}"/>
+        
+                                        <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.TELEPHONE_CONTACT' | translate }} </label>
+
+                                    </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.phone">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('phone').hasError( validation.type ) && (companiesForm.get('phone').dirty || companiesForm.get('phone').touched )">
+                                                    {{ validation.message }}
+                                                    {{ validation.type === 'invalidPhone' ? ' ' + (profile.profile.country !== null ? profile.profile.country: 'España'): '' }}
+                                                </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- end TELEPHONE_CONTACT -->
+
+                                <!-- EMAIL -->
+
+                                <div class="col-xl-4 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['billingEmail'].invalid && (companiesForm.controls['billingEmail'].dirty || companiesForm.controls['billingEmail'].touched ) }">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-billEmail" formControlName="billingEmail" type="email" placeholder="{{ 'COMPANY_PROFILE.BILLING_MAIL' | translate }}"/>
+        
+                                        <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.BILLING_MAIL' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.billingEmail">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('billingEmail').hasError( validation.type ) && (companiesForm.get('billingEmail').dirty || companiesForm.get('billingEmail').touched)">
+                                                {{ validation.message }}
+                                            </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- END MAIL -->
+
+
+                                <!-- TYPE OF SERVICE -->
+
+                                <div class="col-xl-4 col-12 mt-3">
+
+                                    <div class="form-group input-group">
+                                        <span class="has-float-label w-100">
+                                            <select class="form-select form-control w-100" id="serviceTypeId" placeholder="Seleccione"
+                                                formControlName="serviceTypeId">
+                                                <option value="">Seleccione...</option>
+                                                <option [value]="item.id" class="form-select-option" *ngFor="let item of servicesType">{{ item.name }}</option>
+                                            </select>
+            
+                                            <label for="type" class="mt-2 title-col"> {{ 'COMPANIES.SERVICE_TYPE' | translate }} <span class="asterisco"> *</span></label>
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.serviceTypeId">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('serviceTypeId').hasError(validation.type) 
+                                                && (companiesForm.get('serviceTypeId').dirty 
+                                                || companiesForm.get('serviceTypeId').touched)">
+                                                    {{ validation.message }}
+                                                </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- END TYPE OF SERVICE -->
+
+                                <!-- CURRENCY -->
+
+                                <div class="col-xl-4 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['currencyId'].invalid && (companiesForm.controls['currencyId'].dirty || companiesForm.controls['currencyId'].touched) }">
+
+                                        <span class="has-float-label w-100">
+
+                                            <select class="form-select form-control w-100" id="company-currency" placeholder="Seleccione" formControlName="currencyId">
+
+                                                <option value="">{{ 'CLIENTS.CLIENTS_FORMS.SELECT' | translate }}</option>
+
+                                                <option [value]="currency.id" class="form-select-option" *ngFor="let currency of currencies">
+
+                                                    {{ currency.isoString + ' (' + currency.symbol + ')' }}
+
+                                                </option>
+
+                                            </select>
+            
+                                            <label for="type" class="mt-2 title-col"> {{ 'COMPANIES.CURRENCY' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+
+                                        <ng-container *ngFor="let validation of companiesMessages.currencyId">
+
+                                            <div class="w-100 text-left">
+
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('currencyId').hasError(validation.type) && (companiesForm.get('currencyId').dirty || companiesForm.get('currencyId').touched)">
+
+                                                    {{ validation.message }}
+
+                                                </small>
+
+                                            </div>
+
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- END CURRENCY -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer pb-5">
+
+                    <p class="title-row mt-4 mb-1"> {{'COMPANY_PROFILE.ADDRESS' | translate }} </p>
+
+                    <p class="sub-title"> {{'COMPANY_PROFILE.TEXT_2' | translate }} </p>
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="form-row">
+
+                                <!-- COUNTRY -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['country'].invalid && (companiesForm.controls['country'].dirty || companiesForm.controls['country'].touched) }">
+
+                                        <span class="has-float-label w-100">
+
+                                            <select class="form-select form-control w-100" id="serviceTypeId" placeholder="Seleccione" formControlName="country" (change)="changeCountry( $event.target.value )">
+
+                                                <option *ngFor="let country of countrys" class="form-select-option" [value]="country">{{ country }}</option>
+
+                                            </select>
+            
+                                            <label for="type" class="mt-2 title-col"> {{ 'GENERAL.COUNTRY' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+
+                                        <ng-container *ngFor="let validation of companiesMessages.country">
+
+                                            <div class="w-100 text-left">
+
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('country').hasError(validation.type) && (companiesForm.get('country').dirty || companiesForm.get('country').touched )">
+
+                                                    {{ validation.message }}
+
+                                                </small>
+
+                                            </div>
+
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- end COUNTRY -->
+
+                                <!-- ADDRESS -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['streetAddress'].invalid && (companiesForm.controls['streetAddress'].dirty || companiesForm.controls['streetAddress'].touched )}">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-address" formControlName="streetAddress" type="text"
+                                        placeholder="{{ 'COMPANY_PROFILE.ADDRESS' | translate }}"/>
+        
+                                        <label for="company-address" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.ADDRESS' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.streetAddress">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('streetAddress').hasError(validation.type) && (companiesForm.get('streetAddress').dirty || companiesForm.get('streetAddress').touched)">
+                                                {{ validation.message }}
+                                            </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- END NIF -->
+
+                                <!-- PROVINCE -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['province'].invalid && (companiesForm.controls['province'].dirty || companiesForm.controls['province'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-province" type="text" formControlName="province" placeholder="{{ 'COMPANY_PROFILE.PROVINCE' | translate }}"/>
+        
+                                        <label for="company-province" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.PROVINCE' | translate }} <span class="asterisco"> *</span> </label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.province">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('province').hasError( validation.type ) && (companiesForm.get('province').dirty || companiesForm.get('province').touched)">
+                                                {{ validation.message }}
+                                            </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- end TELEPHONE_CONTACT -->
+
+                                <!-- POPULATION -->
+
+                                <!--  <div class="col-xl-4 col-12 mt-3">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="population" type="text"
+                                        placeholder="{{ 'COMPANY_PROFILE.POPULATION' | translate }}"/>
+        
+                                        <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.POPULATION' | translate }} <span class="asterisco"> *</span></label>
+
+                                        </span>
+                                       
+                                    </div>
+
+                                </div> -->
+
+                                <!-- END POPULATION -->
+
+
+                                <!-- postalCode -->
+
+                                <div class="col-xl-4 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{ 'has-danger': companiesForm.controls['zipCode'].invalid && (companiesForm.controls['zipCode'].dirty || companiesForm.controls['zipCode'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" id="company-postal" type="text" formControlName="zipCode" placeholder="{{ 'COMPANY_PROFILE.POSTAL_CODE' | translate }}"/>
+        
+                                        <label for="name" class="mt-2 title-col"> {{ 'COMPANY_PROFILE.POSTAL_CODE' | translate }} <span class="asterisco"> *</span> </label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of companiesMessages.zipCode">
+                                            <div class="w-100 text-left">
+                                                <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('zipCode').hasError( validation.type ) && (companiesForm.get('zipCode').dirty || companiesForm.get('zipCode').touched )">
+                                                {{ validation.message }}
+                                            </small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                                <!-- end postalCode -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- btn -->
+
+                    <div class="row pt-3">
+                        <div class="col-xl-12 col-12 text-xl-left text-center mt-1 pb-2">
+                            <button type="button" [disabled]="!companiesForm.valid || !companiesForm.dirty" class="btn btn-primary" (click)="updateCompany()">
+                            <span >{{ 'GENERAL.SAVE' | translate }} </span>
+                           <!--  <span *ngIf="user.id > 0">{{ 'GENERAL.SAVE' | translate }}</span> -->
+                        </button>
+                        </div>
+                    </div>
+
+                    <!-- end btn -->
+                </div>
+            </form>
+
+            <!-- company hour -->
+            <div class="card-footer pb-5" *ngIf="ModuleCost()">
+
+                <p class="title-row mt-4 mb-1"> {{'COMPANY_PROFILE.EXTRA_HOUR_SLOTS' | translate }} </p>
+
+                <p class="sub-title"> {{'COMPANY_PROFILE.INDICATE_THE_MORNING_AND_NIGTH_TIME_SLOTS_ESTABLISHED_BY_YOUR_COMPANY' | translate }} </p>
+
+                <div class="row">
+
+                    <ng-container *ngIf="typeListHour">
+
+                        <div class="col-12">
+                            <div class="form-row">
+                                <label for="type" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> {{ 'COMPANY_PROFILE.GUY' | translate }} </label>
+
+                                <label for="first" class="mb-2 title-label col-xl-2 col-12 col-md-4 col-sm-4"> {{ 'COMPANY_PROFILE.TIME_FROM' | translate }} </label>
+
+                                <label for="first" class="mb-2 title-label col-xl-2 col-12 col-md-4 col-sm-4"> {{ 'COMPANY_PROFILE.TIME_UNTIL' | translate }} </label>
+                            </div>
+
+
+                            <div class="form-row" [ngClass]="{'mt-2': i> 0}" *ngFor="let item of typeListHour; let i=index">
+
+
+
+                                <!-- turno mañana -->
+                                <div class="form-group input-group col-xl-4 col-9 col-md-4 col-sm-4 m-0 mt-1">
+                                    <input class="form-control form-control-input" [value]="item.name" readonly type="text" placeholder="{{ 'COMPANY_PROFILE.MORNING_SHIFT' | translate }}" />
+                                </div>
+
+                                <div class="form-group input-group col-xl-2 col-9 col-md-4 col-sm-4 m-0 mt-1" [ngClass]="{'has-danger': !item.startTime}">
+                                    <input class="form-control form-control-input" id="timeStart" (change)="changeValue($event.target.value, item, 'timeStart', i)" type="time" [value]="secondToTime(item.startTime)" placeholder="{{ 'COMPANY_PROFILE.NIGHT_SHIFT' | translate }}" />
+                                </div>
+
+
+                                <div class="form-group input-group col-xl-2 col-9 col-md-4 col-sm-4 m-0 mt-1" [ngClass]="{'has-danger': !item.endTime}">
+                                    <input class="form-control form-control-input" id="timeEnd" (change)="changeValue($event.target.value, item, 'timeEnd', i)" type="time" [value]="secondToTime(item.endTime)" placeholder="{{ 'GENERAL.NAME' | translate }}" />
+                                </div>
+
+                                <!-- end turno mañana -->
+
+
+
+                            </div>
+
+
+                        </div>
+                    </ng-container>
+
+                </div>
+
+
+            </div>
+            <!-- end company hour -->
+
+        </div>
+
+
+
+    </div>
+
+</div>

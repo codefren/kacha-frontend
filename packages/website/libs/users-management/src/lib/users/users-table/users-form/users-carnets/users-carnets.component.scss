@@ -1,0 +1,93 @@
+.user-carnet-form {
+    .title-user {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-user {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .redirect {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        align-items: center;
+        color: #3B4FFF;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        /* border-radius: 5px 5px 0px 0px; */
+        border-radius: 5px;
+    }
+    .round-1 {
+        position: absolute;
+    }
+    .linkend {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        -webkit-text-decoration-line: underline;
+        text-decoration-line: underline;
+        color: #3B4FFF;
+    }
+    .label-check {
+        margin-top: 4px;
+    }
+    .has-float-label input,
+    .has-float-label select {
+        border: 0px solid #DFE1E8;
+        background: transparent;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740 !important;
+        opacity: 1 !important;
+        font-size: 14px !important;
+    }
+    .title-col {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        text-align: right;
+        letter-spacing: 0.2px;
+        color: #9899AA !important;
+    }
+    .text-danger {
+        color: #dc3545 !important;
+    }
+    hr {
+        margin-top: 0.2rem;
+        margin-bottom: 0.2rem;
+    }
+    .round input[type=checkbox]:checked+label {
+        background-color: #3B4FFF !important;
+        border-color: #3B4FFF !important;
+    }
+    .round-little label {
+        height: 16px !important;
+        width: 16px !important;
+        top: 7px !important;
+    }
+    .round-little label:after {
+        height: 5px !important;
+        left: 3px !important;
+        top: 3px !important;
+        width: 8px !important;
+    }
+    .btn-primary {
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,26 @@
+<section class="card">
+  <header class="card-header card-header-color">
+    <h4 class="card-title card-title-custon text-center">{{ 'NOTES.NOTES_FORM.SHARED' | translate }}</h4>
+  </header>
+  <div class="card-body">
+    <table class="table-font display nowrap table table-hover table-bordered" id="salesman" style="text-align: center ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'GENERAL.NAME' | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+  </div>
+  <footer class="card-footer">
+    <div class="row">
+        <div class="col-md-12 text-right">
+          <button type="button" class="btn btn-default" (click)="closemodal()">
+            {{ 'GENERAL.CLOSE' | translate }}
+          </button>
+        </div>
+    </div>
+  </footer>      
+</section>

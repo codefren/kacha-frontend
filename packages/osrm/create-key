@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PROJECT_ID=easyroute
+SA_NAME=osrm-maps
+SA_DISPLAY_NAME="OSRM Maps"
+SA_EMAIL=$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com
+KEY_FILE=service-account-key.json
+
+# Create a new GCP IAM service account
+gcloud iam service-accounts create $SA_NAME --display-name "$SA_DISPLAY_NAME"
+
+# Create and download a new key for the service account
+gcloud iam service-accounts keys create $KEY_FILE --iam-account $SA_EMAIL
+
+# Give the service account the "Storage Object Viewer" and "Storage Object Creator" IAM roles
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SA_EMAIL --role roles/storage.objectViewer
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SA_EMAIL --role roles/storage.objectCreator
+
+# Create a secret containing the service account key file
+kubectl create -n osrm secret generic osrm-storage-secret --from-file=$KEY_FILE

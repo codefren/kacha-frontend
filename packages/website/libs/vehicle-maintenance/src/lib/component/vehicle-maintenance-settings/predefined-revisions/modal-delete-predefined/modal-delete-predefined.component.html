@@ -1,0 +1,49 @@
+<div class="modal-delete-predefined">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ title }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="title-infor"> {{ Subtitle }} </p>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center p-xl-0">
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button [className]="cssStyle" (click)="donwloadFilter()"> {{ accept }} </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

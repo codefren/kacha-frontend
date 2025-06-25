@@ -1,0 +1,90 @@
+.predefined-revisions {
+    .title-revision {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 127.5%;
+        color: #9899AA;
+    }
+    .style-toggle {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .border-toogle {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #7387c2;
+        background-color: #7387c2;
+        color: white;
+        padding: 1.2rem;
+        font-size: 14px;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 19px;
+        align-items: center;
+        color: #363740;
+        font-size: 14px;
+    }
+    .table tbody {
+        border: 3px solid #F0F0F6;
+    }
+    .round label {
+        border-radius: 3px !important;
+    }
+    .border-col-tips {
+        border: 1px solid #CDD4DA;
+        border-radius: 5px;
+    }
+    .toggle-directions {
+        background: #444A60;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFFFFF;
+        }
+        .button-document {
+            border-radius: 3px;
+            width: 156px !important;
+            padding: 0 12px;
+            label {
+                color: #24397c !important;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+}

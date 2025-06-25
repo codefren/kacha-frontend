@@ -1,0 +1,610 @@
+<div class="easyroute-home p-4" *ngIf="companyPorfileTypeId">
+
+    <!-- cuadros informative -->
+    <div class="row align-items-center">
+
+        <!-- Planificador -->
+
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="companyPorfileTypeId >= 3 || companyPorfileTypeId == 1">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/route-planning">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/planner.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.PLANNING' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Seguimiento -->
+
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="companyPorfileTypeId >= 3 || companyPorfileTypeId == 1">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/travel-tracking">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/follow-up.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.FOLLOW_UP' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Clientes -->
+
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="companyPorfileTypeId >= 3 || companyPorfileTypeId == 2 || companyPorfileTypeId == 1">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/management/clients" [queryParams]="{option: 'orders'}">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/client.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.CLIENTS' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Informes -->
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="companyPorfileTypeId >= 3 || companyPorfileTypeId == 1">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/report">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/report.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.REPORTS' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Usuarios -->
+
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="isAdmin()">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/management/users">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/users.svg" alt="change" class="img-flud img-users" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.USERS' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Geolocalización -->
+
+        <!--   <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="companyPorfileTypeId >= 3 || companyPorfileTypeId == 1">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/company-profile">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/geolocation.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                   
+                    <h2 class="title">{{ 'HOME.COMPANY_PROFILE' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div> -->
+
+        <!-- Facturas -->
+
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="isAdmin()">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/profile/bills">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/bill.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.BILLS' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Vehículos -->
+
+        <div class="col-xl col-md-6 col-sm-3 col-6 mb-2 mb-xl-0 mb-lg-0 pb-xl-0 pb-lg-0 pr-xl-1" *ngIf="isAdmin()">
+
+            <div class="card card-left">
+
+                <div class="card-body card-body-informative point alt-height" routerLink="/management-logistics/vehicles">
+
+                    <div class="d-flex justify-content-center">
+
+                        <img src="assets/images/pages/home/vehicle.svg" alt="change" class="img-flud" />
+
+                    </div>
+
+                    <h2 class="title">{{ 'HOME.VEHICLES' | translate }} </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="row mt-3  font-row container-overflow">
+
+        <div class="col-xl-6 col-12 mb-3 pr-xl-1">
+            <div class="card card-infor-routes">
+                <div class="card-header border-bottom">
+
+                    <div class="row">
+
+                        <div class="col-xl-3 col-12 pr-xl-2 pl-xl-3">
+
+                            <div class="card border-infor">
+
+                                <p class="title-info mb-2 ml-3 mt-3"> {{ 'TRAVEL_TRACKING.FINISHED_ROUTES' | translate }} </p>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="number-style mb-2 ml-3" *ngIf="totalizedDate"> {{ totalizedDate.totalFinishedRoute }}/{{ totalizedDate.totalRoute }}</p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-3 col-12 pr-xl-2 pl-xl-3">
+
+                            <div class="card border-infor">
+
+                                <p class="title-info mb-2 ml-3 mt-3"> {{ 'TRAVEL_TRACKING.DELIVERIES_MANE' | translate }} </p>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="number-style mb-2 ml-3" *ngIf="totalizedDate"> {{ totalizedDate.TotalPointDelivered }}/{{ totalizedDate.TotalPoint }}</p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-3 col-12 pr-xl-2 pl-xl-2 mt-xl-0 mt-3">
+
+                            <div class="card border-infor">
+
+                                <p class="title-info mb-2 ml-3 mt-3"> {{'TRAVEL_TRACKING.RETURNS' | translate }} </p>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="number-style mb-2 ml-3" *ngIf="totalizedDate"> {{ totalizedDate.totalDevolution }} </p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-3 col-12 pr-xl-3 pl-xl-2 mt-xl-0 mt-3">
+
+                            <div class="card border-infor">
+
+                                <p class="title-info mb-2 ml-3 mt-3"> {{'TRAVEL_TRACKING.INCIDENTS' | translate }} </p>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="number-style mb-2 ml-3" *ngIf="totalizedDate"> {{ totalizedDate.totalIncident }} </p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body overflow-scroos">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-content table-content-general">
+
+                                <table class="table table-responsive-lg mb-0 table-home " id="travelTrackingHome" style="text-align: center; width: 100%;">
+
+                                    <thead hidden>
+
+                                        <tr>
+
+
+                                            <th></th>
+                                            <th class=" padding-travel" style="width: 20%"> {{ 'TRAVEL_TRACKING.ROUTE' |translate }}
+                                            </th>
+
+                                            <th class="" style="width: 20%"> {{ 'TRAVEL_TRACKING.PROCESS' |translate }} </th>
+
+                                            <th class="" style="width: 50%"> {{ 'TRAVEL_TRACKING.CONDITION' |translate }} </th>
+
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-12 mb-3">
+
+            <div class="row">
+
+                <!-- blog -->
+
+                <!--  <div class="col-xl-6 col-12 pr-xl-1">
+
+                    <div class="card">
+
+                        <div class="card-body size-card-noelty">
+
+                            
+
+                            <label class="title-novelty"> {{'HOME.LATEST_NEWS' | translate }} </label>
+
+
+
+                            <div class="justify-content-center">
+
+
+                                <div class="col-12 pt-2 p-0">
+
+
+
+                                    <div class="embed-responsive embed-responsive-16by9">
+
+                                        <iframe class="embed-responsive-item" height="315" frameborder="5" [src]="urlYoutube" allowfullscreen></iframe>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+
+                            <ng-container *ngIf="!showVIdeo">
+
+                                <div class="col-12 text-center mt-5 pt-3">
+                                    <div class="fa-7x">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+                                </div>
+
+
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                </div> -->
+
+                <div class="col-12 pr-xl-1">
+
+                    <div class="card">
+
+                        <div class="card-body pt-1 pb-1 pl-1 pr-1">
+
+                            <div class="row">
+
+                                <div class="col-6">
+
+                                    <div class="justify-content-center">
+
+                                        <div class="col-12 p-0">
+                                            <!-- 
+                                            <div class="embed-responsive embed-responsive-16by9">
+
+                                                <iframe class="embed-responsive-item" height="315" title="Descubre las mejoras" frameborder="5" [src]="videoLoaded" allowfullscreen></iframe>
+
+                                            </div> -->
+
+                                            <img class="img-size" src="assets/icons/controlar-demanda.svg">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+
+                                    <div class="row mt-4">
+
+                                        <div class="col-12">
+
+                                            <p class="title-novedades "> {{ 'HOME.NEWS' | translate }} </p>
+
+                                        </div>
+
+                                        <div class="col-12">
+
+                                            <p class="span-blod"> {{'HOME.NEW_POLPOO_FEATURE' | translate }} </p>
+
+                                        </div>
+
+                                        <div class="col-12">
+
+                                            <div class="div-end">
+
+                                                <p class="p-wiew-all mb-0 point" (click)="openModalNovelty()"> {{ 'HOME.READ_MORE' | translate }} </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- video polpo -->
+
+                <!--  <div class="col-xl-6 col-12 pr-xl-1">
+
+                    <div class="card">
+
+                        <div class="card-body pt-1 pb-1 pl-1 pr-1">
+
+                            <div class="justify-content-center">
+
+                                <div class="col-12 p-0">
+
+                                    <div class="embed-responsive embed-responsive-16by9">
+
+                                        <iframe class="embed-responsive-item" height="315" title="Descubre las mejoras" frameborder="5" [src]="videoLoaded" allowfullscreen></iframe>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div> -->
+
+                <!-- video polpoo -->
+
+
+                <!-- end blog -->
+
+                <!--  <div class="col-12 col-xl-6 pr-xl-1 mt-xl-0 mt-3">
+
+                    <div class="card">
+
+                        <div class="card card-css">
+
+
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="card-title"> NOVEDADES SEPTIEMBRE </p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="span-blod">Nuevas funciones de Polpoo</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="div-end">
+
+                                            <p class="p-wiew-all mb-0 point"> Leer más > </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div> -->
+
+            </div>
+
+            <div class="row mt-2">
+
+
+                <!-- polpo academy -->
+
+                <div class="col-12 pr-xl-1 mt-2">
+
+                    <div class="card card-css">
+
+                        <div class="card-body academy card-radios-academy">
+
+                            <p class="title-academy pt-2 mb-2">Academy</p>
+
+                            <div class="row">
+
+                                <div class="col-xl-7 col-12">
+
+                                    <p class="sub-title-academy mb-3"> {{'HOME.TRAIN_AT_ACADEMY' | translate }} </p>
+
+                                    <p class="text-description mb-2"> {{ 'HOME.ACCESS_THE_ACADEMY_NOW_AND_LEARN_HOW_GET_IT' | translate }} {{'HOME.THE_HIGHEST_PERFORMANCE_TO_PLATFOM' | translate }} </p>
+
+                                </div>
+
+                                <div class="col-xl-4 col-12 text-xl-right text-center">
+
+                                    <div class="float-start pt-3 mb-3">
+
+                                        <button class="btn btn-outline-primary modal-confirm" (click)="goToLinkAcademyHome(urlAcademy)">
+
+                                          <span> {{'HOME.ACCESS_THE_ACADEMY' | translate }} </span>
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end polpo academy -->
+
+
+                <!-- polpo web -->
+
+                <div class="col-12 pr-xl-1 mt-3">
+                    <div class="card card-css">
+
+                        <div class="card-body polpo-com card-radios-academy">
+
+                            <p class="title-academy pt-2 mb-2">WEB</p>
+
+                            <div class="row">
+                                <div class="col-xl-7 col-12">
+                                    <p class="sub-title-academy mb-3"> {{'HOME.MORE_ABOUT_POLPOO' | translate }} </p>
+
+                                    <p class="text-description mb-2"> {{'HOME.CLICK_THE_BUTTOM_TO_VISIT_OUR_WEBSITE_AND_GET' | translate }} {{'HOME.UP_TO_DATE_WITH_THE_FUNCTIONS_AND_MODULES_AVAILABLE' | translate }} </p>
+                                </div>
+                                <div class="col-xl-4 col-12 text-xl-right text-center">
+                                    <div class="float-start pt-3 mb-3">
+                                        <button class="btn btn-outline-primary modal-confirm" (click)="goToLinkAcademyHome(urlPolpoCom)">
+                                            <span> Visitar la página web </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end polpo web  -->
+            </div>
+
+        </div>
+
+    </div>

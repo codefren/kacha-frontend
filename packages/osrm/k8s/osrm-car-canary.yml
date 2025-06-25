@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: osrm-car-spain
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: osrm-car-spain
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osrm-car-spain-canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: osrm-car-spain
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: osrm-car-spain
+        track: canary
+    spec:
+      volumes:
+      - name: osrm-secret-volume
+        secret:
+          secretName: osrm-storage-secret
+      containers:
+      - name: osrm-backend-k8s
+        image: gcr.io/easyroute/osrm-backend-k8s/master:latest
+        env:
+        - name: OSRM_MODE
+          value: CREATE
+        - name: OSRM_PBF_URL
+          value: "https://download.geofabrik.de/europe/spain-latest.osm.pbf"
+        - name: OSRM_DATA_LABEL
+          value: spain-latest-car-11-03-2019
+        - name: OSRM_GRAPH_PROFILE
+          value: car
+        - name: OSRM_SA_KEY_PATH
+          value: "/etc/osrm-secret-volume/service-account-key.json"
+        - name: OSRM_PROJECT_ID
+          value: easyroute
+        - name: OSRM_GS_BUCKET
+          value: "gs://eu.artifacts.easyroute.appspot.com"
+        volumeMounts:
+        - name: osrm-secret-volume
+          readOnly: true
+          mountPath: /etc/osrm-secret-volume
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /nearest/v1/healthz/0,0
+            port: 5000
+          initialDelaySeconds: 30
+          timeoutSeconds: 1

@@ -1,0 +1,84 @@
+<div class="modal-change-company">
+
+    <div class="row pl-4 pr-4 mt-4">
+
+        <div class="col-xl-6 col-12 text-xl-left text-center">
+            <img src="assets/icons/iconMenu/SwitchAccount.svg">
+
+            <label class="title-route pl-3"> {{ 'GENERAL.SWITCH_ACCOUNT' | translate }} </label>
+        </div>
+        <div class="col-xl-6 col-12 text-xl-right text-center" (click)="closeModal()">
+            <img src="assets/icons/closeC.svg">
+        </div>
+
+        <!-- Buscar COMPANY -->
+
+        <div class="col-12 pt-4">
+            <div class="form-row mb-2">
+                <div class="col-12 p-xl-0">
+                    <div class="input-group">
+                        <input id="search" type="text" class="form-control 
+                        pull-right input-personalize-change" (keyup)="filterCompany($event.target.value)" placeholder="Buscar" style="max-width: initial;">
+                        <span class="input-group-append">
+                        <span class="input-group-text table-append">
+                            <img class="icons-search" src="assets/icons/searchChange.svg">
+                        </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- END BUSCAR -->
+
+        <li class="divider">
+        </li>
+
+        <!-- Mostrar listado -->
+
+        <div class="row m-0 search">
+
+
+            <ng-container *ngFor="let company of companiesFilter; let i=index">
+
+                <div class="col-12 mb-1 d-flex flex-row border-bottom-company">
+
+                    <div class="round round-little">
+
+                        <input [id]="'companyChange'+ i" type="checkbox" [readonly]="company.id === profile.company.id" [checked]="company.id === profile.company.id" (change)="changeCompanys($event.target.checked,i ,company)">
+
+                        <label [for]="'companyChange'+ i">
+    
+                        </label>
+                    </div>
+
+                    <label _ngcontent-qxn-c12="" class="label-check" [for]="'companyChange'+ i">  
+
+                        <div class="company-select"  [ngClass]="{'company-selected': company.id === profile.company.id}">
+
+                            
+                            <p class="company-menu  mb-0 text-no-wrap" [title] ="company.name">{{ company.name }}</p>
+
+                            <p class="company-address-menu mt-2 text-no-wrap" [title]="company.address"> {{ company.address }} </p>
+
+                        </div>
+                       
+                    </label>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+        <!-- end Mostart listado -->
+    </div>
+    <div class="row pb-3 mt-3 pl-4 pr-4">
+
+        <div class="col-xl-12 col-12 text-center text-md-right mt-2 mt-md-0" (click)="changeCompany(companySelect)">
+            <button type="button" [disabled]="!companySelect" class="btn btn-primary btn-block"> {{'GENERAL.CHANGES' | translate }} </button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="easyroute-my-note-modal-confirmation-sub-notes">
+  <section class="card">
+    <header class="card-header card-header-color">
+      <h2 class="card-title card-title-custon text-center">{{ 'GENERAL.CONFIRM_REQUEST' | translate }}</h2>
+    </header>
+    <div class="card-body">
+      <div class="modal-wrapper">
+          <div class="modal-text">
+              <p class="mb-0">{{ 'NOTES.DELETE_SUB_NOTES' | translate }}</p>
+          </div>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <div class="row d-flex flex-row justify-content-around">
+        <button type="button" class="btn btn-default modal-dismiss" (click)="activeModal.close(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+        <button type="button" class="btn btn-dark modal-confirm" (click)="activeModal.close(true)">{{ 'GENERAL.ACCEPT' | translate }}</button>
+      </div>
+    </footer>
+  </section>    
+</div>

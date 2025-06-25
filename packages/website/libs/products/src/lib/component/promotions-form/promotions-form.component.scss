@@ -1,0 +1,276 @@
+.optimroute-promotion-form {
+    background: white;
+    .promotion-images {
+        .card {
+            height: 120px;
+            width: 120px;
+            background: #eaeaea;
+            border-radius: 5px;
+        }
+        .card-franchise {
+            height: 93px !important;
+            width: 209px !important;
+        }
+        .margin-lateral {
+            margin-left: 0px !important;
+        }
+        .column+.column {
+            margin-left: 15px;
+        }
+        .column:last-child {
+            margin-left: 0;
+        }
+        .color-icon {
+            color: #c7c7c7;
+            font-size: 3em;
+        }
+        .color-alert {
+            color: #a0a0a0;
+        }
+        .img-upload {
+            max-width: 100%;
+            // max-height: 91px;
+            height: 100%;
+            border-radius: 4px;
+        }
+    }
+    .form-width-prod {
+        width: 100% !important;
+    }
+    .card-img {
+        height: 93px;
+        width: 180px;
+        background: #eaeaea;
+    }
+    .color-alert {
+        color: #a0a0a0;
+    }
+    .color-icon {
+        color: #c7c7c7;
+        font-size: 3em;
+    }
+    .card-img+.card-img {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .ajuste {
+        width: 105px;
+    }
+    .font-italic {
+        font-size: 12px;
+    }
+    .info {
+        i {
+            font-size: 10px;
+            float: right;
+            padding-left: 0.5rem;
+            color: #4c4c4c;
+        }
+    }
+    #product_category {
+        content: '\25BC';
+        text-decoration: solid;
+        text-decoration-color: #f2930a;
+    }
+    .images {
+        margin-top: 30px;
+    }
+    /* .form-row {
+        margin-bottom: 1rem;
+    } */
+    .label-check {
+        margin-left: 26px;
+    }
+    /*  .special-font {
+        font-size: 12px !important;
+    } */
+    .card-header {
+        background: #444a60;
+        padding: 15px 10px 10px 24px;
+        border-radius: 0 !important;
+        .row {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        span {
+            font-size: 14px !important;
+            margin: 0;
+            color: #fff;
+        }
+    }
+    .btn.btn-add {
+        float: right;
+        margin-top: -0.4rem;
+        label {
+            color: #24397c !important;
+            font-weight: bold;
+        }
+    }
+    .bg-gray {
+        background: #fafafa;
+    }
+    .bg-white {
+        background-color: white;
+    }
+    // buscara especificamente el segundo entre varios hermanos
+    // https://developer.mozilla.org/es/docs/Web/CSS/:nth-child
+    table td:nth-child(2) {
+        min-width: 150px;
+    }
+    table td {
+        border-top: none;
+        border-right: 1px solid #dee2e6;
+        border-bottom: none;
+        color: #4c4c4c;
+        .round {
+            margin-left: 7px
+        }
+        i {
+            color: #e91512;
+        }
+    }
+    table th {
+        background-color: #7387c2;
+        padding: 15px;
+        vertical-align: inherit !important;
+    }
+    .table-bordered th {
+        border-right: 2px solid rgba(255, 255, 255, 0) !important;
+    }
+    .thead>tr {
+        background-color: #737373 !important;
+        color: #fff !important;
+        border: none !important;
+    }
+    .card-img {
+        height: 93px;
+        width: 209px; // altura
+        background: #f9f9f9;
+        display: inline-block;
+    }
+    .card-img+.card-img {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .card-add {
+        background: black;
+        opacity: 0.3;
+        color: white;
+    }
+    .img-upload {
+        max-width: 100%;
+        // max-height: 91px;
+        height: 100%;
+        border-radius: 4px;
+    }
+    .show-background {
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        i {
+            color: transparent;
+        }
+    }
+    .show-background:hover {
+        background: rgba(0, 0, 0, 0.6);
+        transition: 0.3s ease background;
+        i {
+            color: white;
+        }
+    }
+    .colorLink {
+        color: #f89e4c !important;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    /* .switch-width {
+        width: 85%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    } */
+    .filter-class {
+        margin-left: 32px;
+    }
+    .round {
+        margin-left: 1rem;
+    }
+    .padding-col {
+        padding: 0 30px;
+    }
+    .style-card-app {
+        border: 1px solid #cbcbcb;
+    }
+    .card-title {
+        color: black;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .font-card {
+        font-size: 14px !important;
+    }
+    .btn-eye {
+        width: 40px;
+        height: 25px;
+        background-color: #eaeeff !important;
+    }
+    .fas-eye {
+        color: #7487c5 !important;
+    }
+    .img-arrow {
+        width: 23px;
+    }
+    .color-a-sync {
+        background-color: #24397c;
+        border: 1px solid #24397c;
+    }
+    .background-color-sync {
+        background-color: #eaefff;
+        opacity: 1;
+    }
+    .color-icon-sync {
+        color: #ffffff;
+        font-size: 1rem;
+    }
+    .color-card-solved {
+        background: #f1f4ff;
+    }
+    .color-control-form-async {
+        border: 1px solid #24397c;
+    }
+    .color-label-info {
+        color: #818181 !important;
+        font-size: 12px !important;
+    }
+    .editar {
+        margin-bottom: 0.5rem;
+    }
+    .no-margin {
+        margin-bottom: 8px !important;
+    }
+    @media screen and (min-width: 320px) and (max-width: 767px) {
+        .mt-xs {
+            margin-top: 10px;
+        }
+        .card-header {
+            padding: 12px 0;
+        }
+        .Ajuste-title {
+            width: 148px;
+        }
+        .form-width-prod {
+            width: 85% !important;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .card-button {
+            height: 40px !important;
+            border-radius: 25px !important;
+            width: 120px !important;
+        }
+        .padding-col {
+            padding: 0 15px !important;
+        }
+    }
+}

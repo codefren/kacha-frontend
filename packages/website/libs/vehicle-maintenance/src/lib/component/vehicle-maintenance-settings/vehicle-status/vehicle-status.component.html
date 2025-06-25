@@ -1,0 +1,146 @@
+<div class="vehicle-status">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <!-- showVerificationStateCheck -->
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" [checked]="companyPreferenceMaintenance.showVerificationStateCheck"
+                            (change)="changeCompanyPreferenceMaintenance('showVerificationStateCheck', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'VEHICLE_MAINTENANCE.ACTIVATE_THE_EVALUATION_OF_THE_VEHICLE_CONDITION_BY_THE_DRIVER' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'VEHICLE_MAINTENANCE.TEXT_1' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <!-- end showVerificationStateCheck -->
+
+            <!-- listado estado del vehículo  -->
+
+            <div class="row pl-xl-5 pr-xl-5 pb-3 mr-xl-4 ml-xl-2" *ngIf="companyPreferenceMaintenance.showVerificationStateCheck">
+
+                <ng-container *ngIf="!show">
+
+                    <div class="col-12 text-center mt-3 mb-3">
+
+                        <div class="fa-5x">
+
+                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                        </div>
+
+                    </div>
+
+                </ng-container>
+
+
+                <ng-container *ngIf="show">
+
+                    <div class="col-12 col-lg col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3" *ngFor="let item of MaintenanceVehicleStateType; let i =index">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" [checked]="showcheck(item.id)" (change)="changeMaintenaceVehicles(item,$event.target.checked)" [id]="'VehicleStateType'+ i" />
+
+                                    <label [for]="'VehicleStateType' + i"></label>
+
+                                </div>
+
+                                <label title="{{ 'COST.LOWER_SALARY' | translate }}" [for]="'VehicleStateType' + i" class="label-check point pl-2">
+    
+                                    {{ item.name }}
+    
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+            <!-- end listado estado del vehículo  -->
+
+        </div>
+
+    </div>
+
+    <!-- Permitir que el chófer adjunte fotos -->
+
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" [checked]="companyPreferenceMaintenance.allowImages"
+
+                            (change)="changeCompanyPreferenceMaintenance('allowImages', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'VEHICLE_MAINTENANCE.ALLOW_THE_DRIVER_TO_ATTACH_PHOTOS' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'VEHICLE_MAINTENANCE.TEXT_2' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- end Permitir que el chófer adjunte fotos -->
+
+
+
+</div>

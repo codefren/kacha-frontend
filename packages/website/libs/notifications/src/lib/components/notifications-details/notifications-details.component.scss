@@ -1,0 +1,289 @@
+.polpo-notifications-details {
+    .lines-row-notifications {
+        border-top: 1px solid #d4cece;
+        border-bottom: 1px solid #d4cece;
+    }
+    .lines-info {
+        border-top: 1px solid #d4cece;
+    }
+    .label-indicent {
+        color: #363740;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .span-nick {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .style-title-body {
+        /* font-size: 16px;
+        color: #575757; */
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .style-name {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .time-notification {
+        /* color: #9a9a9a;
+        font-size: 15px; */
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: right;
+        color: #363740;
+    }
+    .date-horse-incidenc {
+        font-size: 16px;
+        margin: 0 0 5px;
+        color: black !important;
+    }
+    .details-incident {
+        color: #afafaf;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 5px;
+    }
+    .title-header {
+        font-size: 16px;
+        color: #9899AA;
+        font-weight: 600;
+    }
+    .info-header {
+        font-size: 16px;
+        color: #9899AA;
+    }
+    .rounded-circle {
+        /*   max-height: 57px; */
+        width: 56px;
+    }
+    .breakdownTypeDetail {
+        font-size: 16px;
+        margin: 0 0 5px;
+        color: black !important;
+    }
+    .label-vinculate {
+        font-size: 16px;
+        color: black !important;
+    }
+    .btn-vinculate {
+        border-radius: 3px;
+        // width: 42%;
+    }
+    .title-nolvelty {
+        color: #24397c !important;
+        text-transform: initial !important;
+        font-size: 26px !important;
+        font-weight: bold;
+    }
+    .info-novelty {
+        font-size: 16px;
+        color: #000000;
+    }
+    .btn-nolvety {
+        background-color: #24397c;
+        border-color: #24397c #24397c #24397c;
+        color: #ffffff;
+        padding: 11px;
+        border-radius: 4px;
+    }
+    .card-header-1 {
+        background: #444A60;
+        padding: 15px 10px 10px 24px;
+        border-radius: 0 !important;
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+    }
+    table {
+        th {
+            background-color: #7387c2;
+            padding: 15px;
+            border-right: 2px solid #fff;
+            vertical-align: inherit !important;
+            color: #fff;
+        }
+    }
+    .border-Notes {
+        border: 1px solid #D9D9D9 !important;
+    }
+    .title-table-code {
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000000;
+    }
+    .deliveryNoteCode {
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        color: #363740 !important;
+    }
+    .codeStyle {
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        color: 363740 !important;
+    }
+    .size-table {
+        width: 50%;
+    }
+    .pl-5,
+    .px-5 {
+        padding-left: 3.5rem !important;
+    }
+    @media screen and ( min-width: 360px) and ( max-width: 767px) {
+        .size-table {
+            width: 100%;
+        }
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .size-table {
+            width: 100%;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .size-table {
+            width: 100%;
+        }
+    }
+    .style-title-update {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        align-items: center;
+        color: #363740;
+    }
+    .style-name-update {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        align-items: center;
+        color: #363740;
+    }
+    .line-bottom-update {
+        border-bottom: 1px solid #d4cece;
+    }
+    .content-polpoo {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .content-padding {
+        padding-left: 5rem !important;
+    }
+    .dataUpdate {
+        color: #3B4FFF !important;
+    }
+    .btn-primary {
+        border-radius: 5px !important;
+        width: 144px !important;
+        height: 40px !important;
+    }
+    .title-header-update {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #9899AA;
+    }
+    // new style
+    .card-header {
+        background: #ffffff;
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        border-bottom: 2px solid #EFF0F4;
+    }
+    .card-header+.card-body {
+        border-radius: 0px 0px 5px 5px;
+        background: #ffffff;
+    }
+    .btn-reSend {
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-radius: 5px;
+    }
+    .style-icon-resend {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .icons-notification {
+        width: 14px;
+        height: 20px;
+        vertical-align: sub;
+    }
+    .card-footer {
+        border-top: 2px solid #EFF0F4;
+    }
+    .title-date-incident {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .style-details-incident {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+        margin: 0 0 5px;
+    }
+    .paragrand-style {
+        font-size: 16px;
+        color: #363740;
+    }
+    .paragrnd-for {
+        font-size: 16px;
+        margin: 0 0 5px;
+        color: 363740 !important;
+    }
+    .border-contac {
+        border-radius: 0px 0px 5px 5px;
+    }
+    .style-code {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #363740;
+        margin: 0 0 5px;
+    }
+    .style-coment-app-end {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+        margin: 0 0 5px;
+    }
+}

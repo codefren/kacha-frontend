@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-right pt-2 pr-4">
+            <i class="fas fa-times close-button" (click)="closeDialog()"></i>
+        </div>
+        <div class="col-8 text-center">
+            <p class="title">{{ 'DELIVERY_POINTS.DELIVERY_DETAILS' | translate }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-3 justify-content-center">
+        <form [formGroup]="detailForm" class="font-general">
+            <div class="form-row form-group">
+                <div class="col-lg-6 col-md-12 col-12 pl-0 pr-0">
+                    <div class="col-md-12">
+                        <label for="dniDeliveryNote">
+                            <b>{{ 'DETAIL_CONTROL.DNI_ALBARAN' | translate }}</b>
+                        </label>
+                        <input type="text" id="dniDeliveryNote" readonly class="form-control" formControlName="dniDeliveryNote" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="observation" class="col-12 p-0">
+                            <b>{{ 'DETAIL_CONTROL.OBSERVATION' | translate }}</b>
+                        </label>
+                        <textarea name="observation" id="observation" rows="6" readonly formControlName="observation"></textarea>
+                        <!--  <input type="text" id="observation" readonly class="form-control size" formControlName="observation" /> -->
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-12 col-12 pl-0 pr-0">
+                    <div class="col-md-12">
+                        <label for="code">
+                            <b>{{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}</b>
+                        </label>
+                        <input type="text" id="nameDeliveryNote" readonly class="form-control" formControlName="nameDeliveryNote" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="deliveredBoxes">
+                                    <b>{{ 'DETAIL_CONTROL.RETURNED_BOXES' | translate }}</b>
+                                </label>
+                                <input type="text" id="deliveredBoxes" readonly class="form-control" formControlName="deliveredBoxes" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="devolutionDeliveryNote">
+                                    <b>{{ 'DETAIL_CONTROL.RETURN' | translate }}</b>
+                                </label>
+                                <input type="text" id="devolutionDeliveryNote" readonly class="form-control" formControlName="devolutionDeliveryNote" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="extraBoxes">
+                            <b>{{ 'DETAIL_CONTROL.EXTRA_BOXES' | translate }}</b>
+                        </label>
+                        <input type="text" id="extraBoxes" readonly class="form-control" formControlName="extraBoxes" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row p-2 mt-5">
+                <div class="col-12">
+                    <div class="table-content">
+                        <table id="details" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>{{ "PRODUCTS.CODE_PRODUCT" | translate }}</th>
+                                    <th>{{ "PRODUCTS.NAME_" | translate }}</th>
+                                    <th>{{ "PRODUCTS.QUANTITY" | translate }}</th>
+                                    <th>{{ "PRODUCTS.UD" | translate }}</th>
+                                    <th style="border-right: 1px solid #7387c2 !important;">{{ "PRODUCTS.PRICE" | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

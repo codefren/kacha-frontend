@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8 title-page">
+            <b>{{ 'INVOICING.PAY_PLATFORM' | translate}}</b>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-8 description-blue">
+            <p class="description-blue">{{ 'INVOICING.DESCRIPTION_FOR_STRIPE' | translate}}</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-8 subtitle-page border-bottom">
+            <b>{{ 'INVOICING.STRIPE' | translate}}</b>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-8 slogan-stripe">
+            <p>{{ 'INVOICING.STRIPE_SLOGAN' | translate}}</p><br>
+            <p>Millones de empresas de todos los tamaños, desde startups hasta grandes empresas, usan el software y las
+                API de Stripe para aceptar pagos, enviar transferencias y gestionar sus actividades comerciales en
+                Internet como por ejemplo:</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 slogan-stripe">
+            <img src="assets/polpoo/stripe.svg">
+        </div>
+    </div>
+    <div class="row mt-3 mb-5" *ngIf="!connected">
+        <div class="col-8 slogan-stripe text-justify">
+            Al darle al botón Conectar Stripe, serás redirigido a la página de Stripe para crear tu cuenta. Una vez
+            creada, la cuenta quedará vinculada con Polpoo para que puedas recibir los pagos de tus clientes de forma
+            automática.
+            Para más información: <a target="_blank" href="https://stripe.com/es-fr">https://stripe.com/es-fr</a>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="loaded && connected">
+        <div class="col-12">
+            <label> <b>Desconectar de Stripe Connect</b> </label>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-8 slogan-stripe text-justify">
+            <ng-container *ngIf="loaded">
+                <button class="btn btn-primary" [disabled]="!acceptTerms" *ngIf="!connected" (click)="createConnect()"> Conectar stripe </button>
+                <button class="btn btn-danger" *ngIf="connected" (click)="deleteConnect()"> Eliminar stripe </button>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row mt-4" *ngIf="!connected">
+        <div class="col-8 slogan-stripe text-justify">
+            <div class="form-group mb-2">
+                <div class="checkbox-custom checkbox-default">
+                    <input type="checkbox" id="terms" [(ngModel)]="acceptTerms">
+                    <label for="terms" class="aling-terms">
+                        Al utilizar el servicio aceptas que te apliquen las siguientes condiciones y reconoces y aceptas<br>
+                        <a target="_blank" [href]="URL_TERMS_CONDITIONS" class="link-terms">los términos y condiciones de Polpoo</a><br>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3"  *ngIf="!connected">
+        <div class="col-8 slogan-stripe text-justify">
+            <div class="form-group mb-2 ml-4">
+                <label for="terms" class="aling-terms">
+                    Condiciones económicas aplicada a cada pago procesado por la App:<br>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3"  *ngIf="!connected">
+        <div class="col-8 slogan-stripe text-justify">
+            <div class="form-group mb-2 ml-4">
+                <label for="terms" class="aling-terms">
+                    Stripe: 1.4% del valor de transacción + 0,25€ por transacción<br>
+                    Polpoo: 0.05% del valor de cada transacción.<br>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

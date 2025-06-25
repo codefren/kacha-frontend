@@ -1,0 +1,33 @@
+@import '../../../../../../../apps//easyroute/src/common.scss';
+
+.easyroute-modal-integration-add-points {
+
+    @media( max-width: 576px) {
+        h2 {
+            font-size: 17px;
+        }
+    }
+    
+    @media (min-width: 1200px) {
+        .modal-xl {
+            max-width: 1140px;
+        }
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    .btn-sm {
+        border-radius: 50%;
+        border: none;
+    }
+
+    .w {
+        width: 35%;
+    }
+
+    .withdTo {
+        width: 70px;
+    }
+}

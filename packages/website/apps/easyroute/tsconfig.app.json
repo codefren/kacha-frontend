@@ -1,0 +1,53 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc/apps/easyroute",
+        "types": []
+    },
+    "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
+    "include": [
+        "**/*.ts",
+        "../../libs/route-planning/src/index.ts",
+        "../../libs/management/src/index.ts",
+        "../../libs/help/src/index.ts",
+        "../../libs/profile/src/index.ts",
+        "../../libs/auth/src/index.ts",
+        "../../libs/preferences/src/index.ts",
+        "../../libs/users-management/src/index.ts",
+        "../../libs/login/src/index.ts",
+        "../../libs/control-panel/src/index.ts",
+        "../../libs/integration/src/index.ts",
+        "../../libs/note/src/index.ts",
+        "../../libs/my-note/src/index.ts",
+        "../../libs/category/src/index.ts",
+        "../../libs/category-general/src/index.ts",
+        "../../libs/products/src/index.ts",
+        "../../libs/measure/src/index.ts",
+        "../../libs/measure-general/src/index.ts",
+        "../../libs/orders/src/index.ts",
+        "../../libs/my-orders/src/index.ts",
+        "../../libs/home/src/index.ts",
+        "../../libs/miwigo-clients-unlinked/src/index.ts",
+        "../../libs/franchise/src/index.ts",
+        "../../libs/sub-category/src/index.ts",
+        "../../libs/category-filter/src/index.ts",
+        "../../libs/module/src/index.ts",
+        "../../libs/notifications/src/index.ts",
+        "../../libs/super-admin/src/index.ts",
+        "../../libs/vehicle-maintenance/src/index.ts",
+        "../../libs/bills/src/index.ts",
+        "../../libs/dashboard/src/index.ts",
+        "../../libs/providers/src/index.ts",
+        "../../libs/sheet-route/src/index.ts",
+        "../../libs/parcel/src/index.ts",
+        "../../libs/cost/src/index.ts",
+        "../../libs/report/src/index.ts",
+        "../../libs/loading-dock/src/index.ts",
+        "../../libs/company-profile/src/index.ts",
+        "../../libs/travel-tracking/src/index.ts",
+        "../../libs/partners-super-admin/src/index.ts",
+        "../../libs/chat/src/index.ts"
+
+
+    ]
+}

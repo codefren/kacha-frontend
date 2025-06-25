@@ -1,0 +1,97 @@
+.easyroute-login {
+    background-image: url("/assets/images/background/fondo-recover.svg");
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    .card {
+        background: #FFFFFF;
+        border: 1px solid #EFF0F4;
+        border-radius: 5px;
+    }
+    .bottom-0 {
+        bottom: 0;
+    }
+    .recover {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-align: center;
+        letter-spacing: 0.3px;
+        color: #363740;
+    }
+    .recover-text {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.3px;
+        color: #9FA2B4;
+    }
+    .recover-text-2 {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.3px;
+        color: #9899AA;
+    }
+    label {
+        font-weight: 500;
+        font-size: 16px !important;
+        line-height: 19px;
+        letter-spacing: 0.3px;
+        color: #8D91A5 !important;
+    }
+    .form-control {
+        height: 45px !important;
+        background: #F6F6FA;
+        border: 1px solid #EFF0F6;
+        border-radius: 5px !important;
+    }
+    /* .logo {
+        max-width: 50px;
+    } */
+    .button-signin {
+        box-shadow: none !important;
+        margin-top: 10vh;
+        border-radius: 25px;
+    }
+    span {
+        font-size: 1.3em;
+    }
+    .form-control:focus {
+        border-color: #fc792a !important;
+        box-shadow: none !important;
+    }
+    .btn-secondary {
+        text-transform: initial !important;
+        font-size: 14.4px !important;
+        background: #FF8D24;
+        border-radius: 5px;
+        height: 45px;
+        span{
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            letter-spacing: 0.2px;
+            color: #FFFFFF;
+        }
+    }
+    /* img {
+        width: 14rem;
+    } */
+  
+    // mobile
+    @media screen and ( min-width: 320px) and ( max-width: 768px) {
+      
+    }
+
+    // ipad
+    @media screen and ( min-width: 768px) and ( max-width: 1024px) {
+       
+    }
+
+    @media screen and ( max-width: 359px ) {
+        
+    }
+}

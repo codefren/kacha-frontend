@@ -1,0 +1,86 @@
+<div class="easyroute-dashboard-total-sale">
+
+    <div class="row">
+
+        <!-- lado derecho -->
+
+        <div class="col-xl-4 col-12 border-col text-left" style="margin-top: 2px;">
+
+
+
+            <!-- total-invoiced -->
+
+            <easyroute-total-invoiced [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-total-invoiced>
+
+            <!-- end total-invoiced -->
+
+            <!-- app invoiced -->
+
+            <easyroute-app-invoiced [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-app-invoiced>
+
+            <!-- end app invoiced -->
+
+            <!-- 4 cuadros inforamtivos -->
+
+            <div class="row mt-xl-2">
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-app-commission [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-app-commission>
+                </div>
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-sale-commission [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-sale-commission>
+                </div>
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-new-client [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-new-client>
+                </div>
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-total-orders [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-total-orders>
+                </div>
+            </div>
+
+            <!-- end 4 cuadros inforamtivos -->
+        </div>
+
+        <!-- end lado derecho -->
+
+
+        <!-- lado izquierdo -->
+
+
+        <div class="col-xl-8 col-12 text-rigth align-self-center">
+
+
+            <!-- summary-invoice -->
+
+            <easyroute-summary-invoice [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-summary-invoice>
+
+            <!-- end summary-invoice -->
+
+            <!-- cuadros donus -->
+
+            <div class="row">
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-app-commission-donus [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-app-commission-donus>
+                </div>
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-sale-commission-donus [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-sale-commission-donus>
+                </div>
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-new-client-donus [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-new-client-donus>
+                </div>
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-total-orders-donus [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-total-orders-donus>
+                </div>
+            </div>
+
+            <!-- end cuadros donus -->
+
+        </div>
+
+        <!-- end lado izquierdo -->
+
+
+    </div>
+
+
+
+</div>

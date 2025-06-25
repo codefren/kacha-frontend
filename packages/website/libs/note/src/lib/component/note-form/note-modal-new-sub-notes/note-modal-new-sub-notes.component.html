@@ -1,0 +1,89 @@
+<div class="easyroute-note-modal-new-sub-notes">
+    <form [formGroup]="subNoteForm" novalidate (ngSubmit)="createSubNote()">
+        <div id="modalForm">
+            <div class="col-md-12 col-12 text-right pt-2 ">
+                <button class="btn-transparent" type="button">
+                    <i class="fas fa-times close-button point" (click)="activeModal.close(false)"></i>
+                </button>
+            </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <p class="title">
+                        {{ 'NOTES.SUB_NOTES.SUB_NOTES' | translate }}
+                    </p>
+                    <!-- <div class="col-10 text-center">
+                    </div> -->
+                </div>
+
+                <div 
+                  class="form-row form-group"
+                  [ngClass]="{'has-danger': subNoteForm.controls['title'].invalid && (subNoteForm.controls['title'].dirty || subNoteForm.controls['title'].touched)}"    
+                >
+                    <label for="note-title">
+                        {{ 'NOTES.NOTES_FORM.TITLE' | translate }} 
+                        <span class="asterisco">* </span> 
+                    </label>
+                    <input 
+                        type="text" 
+                        id="note-title" 
+                        class="form-control" 
+                        autocomplete="off" 
+                        formControlName="title" 
+                        [ngClass]="{'has-danger': subNoteForm.controls['title'].invalid && (subNoteForm.controls['title'].dirty || subNoteForm.controls['title'].touched)}"
+                    />
+        
+                    <ng-container *ngFor="let validation of note_messages.title">
+                        <small 
+                            class="form-control-feedback text-danger" 
+                            *ngIf="subNoteForm.get('title').hasError(validation.type) && (subNoteForm.get('title').dirty || subNoteForm.get('title').touched)"
+                        >
+                            {{ validation.message }}
+                        </small>
+                    </ng-container>
+                </div>
+                <div 
+                  class="form-row form-group"
+                  [ngClass]="{'has-danger': subNoteForm.controls['description'].invalid && (subNoteForm.controls['description'].dirty || subNoteForm.controls['description'].touched)}"
+                >
+                    <label for="description" class="col-form-label col-6">
+                        {{ 'MYNOTES.MYNOTES_LIST.MESSAGE' | translate }} 
+                        <span class="asterisco">* </span>
+                    </label>
+                    <textarea 
+                        id="description" 
+                        class="form-control " 
+                        autocomplete="off" 
+                        formControlName="description" 
+                        [ngClass]="{'has-danger': subNoteForm.controls['description'].invalid && (subNoteForm.controls['description'].dirty || subNoteForm.controls['description'].touched)}"
+                    ></textarea>
+
+                    <ng-container *ngFor="let validation of note_messages.description">
+                        <small 
+                            class="form-control-feedback text-danger" 
+                            *ngIf="subNoteForm.get('description').hasError(validation.type) && (subNoteForm.get('description').dirty || subNoteForm.get('description').touched)"
+                        >
+                            {{ validation.message }}
+                        </small>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-md-6 col-12 mb-1 text-center text-md-right">
+                    <button type="button" class="btn btn-cancel size-btn-modal modal-dismiss" 
+                        (click)="activeModal.close(false)">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+
+                <div class="col-md-6 col-12 mb-1 text-center text-md-left">
+                    <button id="card-button" class="btn btn-primary size-btn-modal modal-confirm" 
+                        [disabled]="!subNoteForm.valid" type="submit">
+                        {{ 'GENERAL.SAVE' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

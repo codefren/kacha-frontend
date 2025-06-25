@@ -1,0 +1,203 @@
+<div class="modal-repostaje">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-6 text-xl-left text-left">
+
+                <label class="title-modal"> Repostaje </label>
+
+            </div>
+
+            <div class="col-xl-6 col-6 text-xl-right text-right point" (click)="close(false)">
+
+                <img src="assets/icons/travelIcons/close.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <ng-container *ngIf="!show">
+
+            <div class="row">
+
+                <div class="col-12 text-center">
+
+                    <div class="fa-8x mt-3">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="show">
+
+            <div class="row" [ngClass]="{'align-items-center': !data.urlImage}">
+
+                <div class="col-xl-6 col-sm-6 col-12 text-center">
+
+                    <ng-container *ngIf="!data.urlImage">
+
+                        <img src="assets/icons/noImgVehicle.svg" alt="">
+
+                    </ng-container>
+
+                    <ng-container *ngIf="data.urlImage">
+
+                        <img [src]="data.urlImage" alt="Ticket" class="img-size">
+
+                    </ng-container>
+
+                </div>
+
+                <div class="d-flex" style="height: 200px;">
+
+                    <div class="vr"></div>
+
+                </div>
+
+                <div class="col-xl-6 col-sm-6 col-12 pl-4 pr-4">
+
+                    <div class="form-row">
+
+                        <div class="col-xl-12 col-12 mt-xl-0 mt-sm-0 mt-3">
+
+                            <span class="date">Fecha: {{ getDate(data.createdAt) }} </span>
+
+                        </div>
+
+                        <div class="col-xl-12 col-12 mt-2">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="provider" type="text" placeholder="{{'TRAVEL_TRACKING.PROVIDER' | translate }}" [value]="data.provider.name"/>
+            
+                                    <label for="provider" class="mt-2 title-col"> {{'TRAVEL_TRACKING.PROVIDER' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-12 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="concept" type="text" placeholder="{{'TRAVEL_TRACKING.CONCEPT' | translate }}" [value]="data.providerTypeConcept.name"/>
+            
+                                    <label for="concept" class="mt-2 title-col"> {{'TRAVEL_TRACKING.CONCEPT' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="liters" type="text" placeholder="{{'TRAVEL_TRACKING.LITERS' | translate }}" [value]="formatEuroLtr(data.liter)"/>
+            
+                                    <label for="liters" class="mt-2 title-col"> {{'TRAVEL_TRACKING.LITERS' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="km" type="text" placeholder="{{'TRAVEL_TRACKING.KM' | translate }}" [value]="formatEuroKm(data.km)"/>
+            
+                                    <label for="km" class="mt-2 title-col"> {{'TRAVEL_TRACKING.KM' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-12 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="import" type="text" placeholder="{{'TRAVEL_TRACKING.AMOUNT' | translate }}" [value]="formatEuro(data.import)"/>
+            
+                                    <label for="import" class="mt-2 title-col"> {{'TRAVEL_TRACKING.AMOUNT' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row" *ngIf="show">
+
+            <div class="col-6 text-left mt-3">
+
+                <span class="footer">Mostrando {{ from }} de {{ until }}</span>
+
+            </div>
+
+            <div class="col-6 text-right">
+
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+                    <div class="btn-group me-2 mb-1" role="group" aria-label="Second group">
+
+                        <button type="button" class="btn btn-default" [disabled]="!prev" (click)="prevPage()">
+
+                            <img src="assets/icons/travelIcons/rihgt.svg">
+                            
+                        </button>
+
+                        <button type="button" class="btn btn-default">{{ current }}</button>
+
+                        <button type="button" class="btn btn-default" [disabled]="!next" (click)="nextPage()">
+                            <img src="assets/icons/travelIcons/arrow.svg">
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

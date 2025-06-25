@@ -1,0 +1,152 @@
+<div class="summary-data-update">
+
+    <div class="row" *ngIf="productivityTotalized">
+
+
+        <!-- Total actualizaciones -->
+
+        <div class="col-xl col-12 mt-xl-0 mt-3 pl-xl-2 pr-xl-2">
+
+            <div class="card">
+
+                <ng-container *ngIf="show">
+
+                    <div class="card-body">
+
+                        <img src="assets/icons/report/dataUpdate/blue.svg">
+
+                        <p class="style-card-lef pt-3 mb-1">{{ productivityTotalized.totalUpdates }}</p>
+
+                        <p class="title-final mb-0"> {{'REPORT.CLIENT_DATA_UPDATE.FULL_UPDATES' | translate }} </p>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="!show">
+
+                    <div class="fa-3x mb-2 text-center pt-5">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- end Total actualizaciones -->
+
+        <!-- Actualizaciones aceptadas -->
+
+        <div class="col-xl col-12 mt-xl-0 mt-3 pl-xl-2 pr-xl-2">
+
+            <div class="card">
+
+                <ng-container *ngIf="show">
+
+                    <div class="card-body">
+
+                        <img src="assets/icons/report/dataUpdate/greed.svg">
+
+                        <p class="style-card-lef pt-3 mb-1">{{ productivityTotalized.acceptedUpdates }}</p>
+
+                        <p class="title-final mb-0"> {{'REPORT.CLIENT_DATA_UPDATE.ACCEPTED_UPDATES' | translate }} </p>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="!show">
+
+                    <div class="fa-3x mb-2 text-center pt-5">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- end Actualizaciones aceptadas -->
+
+        <!-- Actualizaciones rechazadas -->
+
+        <div class="col-xl col-12 mt-xl-0 mt-3 pl-xl-2 pr-xl-2">
+
+            <div class="card">
+
+                <ng-container *ngIf="show">
+
+                    <div class="card-body">
+
+                        <img src="assets/icons/report/dataUpdate/red.svg">
+
+                        <p class="style-card-lef pt-3 mb-1">{{ productivityTotalized.rejectedUpdates }}</p>
+
+                        <p class="title-final mb-0"> {{'REPORT.CLIENT_DATA_UPDATE.REJECTED_UPDATES' | translate }} </p>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="!show">
+
+                    <div class="fa-3x mb-2 text-center pt-5">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- end Actualizaciones rechazadas -->
+
+        <!-- Pendientes de revisión -->
+
+        <div class="col-xl col-12 mt-xl-0 mt-3 pl-xl-2 pr-xl-2">
+
+            <div class="card">
+
+                <ng-container *ngIf="show">
+
+                    <div class="card-body">
+
+                        <img src="assets/icons/report/dataUpdate/yellow.svg">
+
+                        <p class="style-card-lef pt-3 mb-1"> {{ productivityTotalized.pendingReview }} </p>
+
+                        <p class="title-final mb-0"> {{ 'REPORT.CLIENT_DATA_UPDATE.PENDING_REVIEW' | translate }} </p>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="!show">
+
+                    <div class="fa-3x mb-2 text-center pt-5">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- end Pendientes de revisión -->
+
+    </div>
+
+</div>

@@ -1,0 +1,165 @@
+<div class="notices">
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                <input type="checkbox"  [checked]="companyPreferenceNotification.showReceiveExpirationNotices" 
+                                (change)="changeCompanyPreferenceNotification('showReceiveExpirationNotices', $event.target.checked)"/>
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                <span class="title-toggle toogle-style"> {{ 'NOTIFICATIONS.SETTINGS.RECEIVE_EXPIRATION_NOTICES' | translate }} </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'NOTIFICATIONS.SETTINGS.RECEIVE_EXPIRATION_NOTICES_MESSAGE' | translate }} </p>
+                </div>
+
+            </div>
+
+            <ng-container *ngIf="companyPreferenceNotification.showReceiveExpirationNotices">
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifyThirtyDaysBefore" [checked]="companyPreferenceNotification.notifyThirtyDaysBefore" 
+                                    (change)="changeCompanyPreferenceNotification('notifyThirtyDaysBefore', $event.target.checked)"/>
+
+                                    <label for="notifyThirtyDaysBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_THIRTY_DAYS_BEFORE' | translate }}" for="notifyThirtyDaysBefore" 
+                                    class="label-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_THIRTY_DAYS_BEFORE' | translate }}
+            
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifyFifteenDaysBefore" [checked]="companyPreferenceNotification.notifyFifteenDaysBefore" 
+                                    (change)="changeCompanyPreferenceNotification('notifyFifteenDaysBefore', $event.target.checked)"/>
+
+                                    <label for="notifyFifteenDaysBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_FIFTEEN_DAYS_BEFORE' | translate }}" for="notifyFifteenDaysBefore" class="label-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_FIFTEEN_DAYS_BEFORE' | translate }}
+            
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifySevenDaysBefore" [checked]="companyPreferenceNotification.notifySevenDaysBefore" 
+                                    (change)="changeCompanyPreferenceNotification('notifySevenDaysBefore', $event.target.checked)"/>
+
+                                    <label for="notifySevenDaysBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_SEVEN_DAYS_BEFORE' | translate }}" for="notifySevenDaysBefore" class="label-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_SEVEN_DAYS_BEFORE' | translate }}
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifyOneDayBefore" [checked]="companyPreferenceNotification.notifyOneDayBefore" 
+                                    (change)="changeCompanyPreferenceNotification('notifyOneDayBefore', $event.target.checked)"/>
+
+                                    <label for="notifyOneDayBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_A_DAY_BEFORE' | translate }}" for="notifyOneDayBefore" class="label-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_A_DAY_BEFORE' | translate }}
+                                </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+</div>

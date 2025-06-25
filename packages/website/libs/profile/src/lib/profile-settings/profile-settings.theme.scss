@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin user-profile-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+
+    // Define any styles affected by the theme.
+    app-user-profile {
+        background-color: $background !important;
+        color: $foreground-text !important;
+
+        &.primary {
+            background-color: mat-color($primary) !important;
+            color: mat-color($primary, default-contrast) !important;
+        }
+
+        &.accent {
+            background-color: mat-color($accent) !important;
+            color: mat-color($accent, default-contrast) !important;
+        }
+
+        &.warn {
+            background-color: mat-color($warn) !important;
+            color: mat-color($warn, default-contrast) !important;
+        }
+
+        .profile-key {
+            color: mat-color($app-foreground, secondary-text) !important;
+        }
+    }
+}
+
+@mixin user-profile-typography($config) {
+    app-user-profile {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

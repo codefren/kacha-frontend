@@ -1,0 +1,152 @@
+/* Add here all your CSS customizations */
+
+@import url(../css/spinners.css);
+@import url(../css/animate.css);
+
+/* Switch
+    ========================================================================== */
+.switch,
+.switch * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+
+.switch label {
+    cursor: pointer;
+}
+
+.switch label input[type='checkbox'] {
+    opacity: 0;
+    width: 0;
+    height: 0 !important;
+}
+
+.switch label input[type='checkbox']:checked + .lever {
+    background-color: rgba(255, 152, 0, 0.54);
+}
+
+.switch label input[type='checkbox']:checked + .lever:after {
+    background-color: #ff9e4d;
+    left: 24px;
+}
+
+.switch label .lever {
+    content: '';
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background-color: #B5B5B5;
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+}
+
+.switch label .lever:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 20.5px;
+    height: 20.5px;
+    background-color: #f1f1f1;
+    border-radius: 21px;
+    -webkit-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+    left: 2px;
+    top: 2px;
+    -webkit-transition: left 0.3s ease, background 0.3s ease, -webkit-box-shadow 0.1s ease;
+    transition: left 0.3s ease, background 0.3s ease, -webkit-box-shadow 0.1s ease;
+    -o-transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
+    transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
+    transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease,
+        -webkit-box-shadow 0.1s ease;
+}
+
+input[type='checkbox']:checked:not(:disabled) ~ .lever:active::after,
+input[type='checkbox']:checked:not(:disabled).tabbed:focus ~ .lever::after {
+    -webkit-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(38, 166, 154, 0.1);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(38, 166, 154, 0.1);
+}
+
+input[type='checkbox']:not(:disabled) ~ .lever:active:after,
+input[type='checkbox']:not(:disabled).tabbed:focus ~ .lever::after {
+    -webkit-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.switch input[type='checkbox'][disabled] + .lever {
+    cursor: default;
+}
+
+.switch label input[type='checkbox'][disabled] + .lever:after,
+.switch label input[type='checkbox'][disabled]:checked + .lever:after {
+    background-color: #bdbdbd;
+}
+
+.scale-up {
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    display: inline-block;
+    -webkit-transform-origin: right 0px;
+    -ms-transform-origin: right 0px;
+    transform-origin: right 0px;
+}
+
+.scale-up-left {
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    display: inline-block;
+    -webkit-transform-origin: left 0px;
+    -ms-transform-origin: left 0px;
+    transform-origin: left 0px;
+}
+
+.show > .scale-up {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: right 0px;
+    -ms-transform-origin: right 0px;
+    transform-origin: right 0px;
+}
+
+.show > .scale-up-left {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: left 0px;
+    -ms-transform-origin: left 0px;
+    transform-origin: left 0px;
+}
+
+.ngb-dp-weekday {
+    color: #5bc0de;
+    color: #0e0e0e;
+}
+.form-control {
+    font-size: 1rem;
+    font-weight: lighter;
+    color: #4c4c4c;
+    font-size: 14px !important;
+}
+.form-inline {
+    font-size: 16px;
+    font-weight: lighter;
+}
+span {
+    font-weight: lighter;
+}

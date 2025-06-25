@@ -1,0 +1,188 @@
+<div class="easyroute-vehicle-maintenance-bill">
+    <div class="card mt-2">
+        <div class="card-body px-5">
+            <p class="card-title">
+                {{ 'BILLS.CHARGE_BILLS' | translate }}
+            </p>
+
+            <div class="col-sm-12 pl-0 pt-3">
+                <label class="style-descrip">{{ 'BILLS.BY_ACTIVATING_COLLECTIONS_YOU_ALLOW_WORKRS_TO_COLLECT_THE_INVOICE_AMOUNT_FROM_THE_APP' | translate }}  </label>
+            </div>
+
+            <!--tootle showChargeInApp  -->
+            <div class="row mt-1">
+                <div class="col-xl-10 col-md-12 col-12 pb-2">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="switch w-100 col-12">
+                                <label class="switch-width">
+                                    <input type="checkbox"
+                                        [checked]="companyPreferenceBill.showChargeInApp"
+                                        (change)="changeCompanyPreferenceBill('showChargeInApp', $event.target.checked)"
+                                       />
+                                    <span class="lever switch-col-primary m-0"></span>
+
+                                    <span  class="pl-2 spand-toogle">
+                                        {{'BILLS.SHOW_CHARGES_IN_APP'
+                                        | translate }}
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end  showChargeInApp  -->
+
+            <!-- allowDriver && allowCommercial -->
+            <div class="row" *ngIf="companyPreferenceBill && companyPreferenceBill.showChargeInApp">
+
+                <ng-container *ngIf="!show">
+                    <div class="col-12 text-center mt-3 mb-3">
+                        <div class="fa-5x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </div>
+
+                </ng-container>
+                <ng-container *ngIf="show">
+                    <div class="col-lg-6 col-md-12 mb-1 d-flex flex-row">
+                        <div class="round round-little margin-days">
+                            <input type="checkbox" id="sunday-week" [checked]="companyPreferenceBill.allowDriver" (change)="changeCompanyPreferenceBill('allowDriver', $event.target.checked)" />
+                            <label for="sunday-week"></label>
+                        </div>
+                        <label for="sunday-week" class="label-check">
+                            {{ 'BILLS.ALLOW_IN_CHAUFFEUR' | translate }}
+                        </label>
+
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-1 d-flex flex-row">
+
+                        <div class="round round-little margin-days">
+                            <input type="checkbox" id="allowCommercial" [checked]="companyPreferenceBill.allowCommercial" (change)="changeCompanyPreferenceBill('allowCommercial', $event.target.checked)" />
+                            <label for="allowCommercial"></label>
+                        </div>
+                        <label for="allowCommercial" class="label-check">
+                            {{ 'BILLS.ALLOW_IN_COMMERCIAL' | translate }}
+                        </label>
+                    </div>
+                </ng-container>
+
+
+            </div>
+            <!-- end allowDriver && allowCommercial -->
+
+
+
+            <!-- cashCharge -->
+            <div class="col-sm-12 extra-campo  pl-0 pt-4">
+                <label class="sytle-eschedule mb-0">
+                        {{ 'BILLS.CASH_COLLECTION' | translate }}
+                </label>
+            </div>
+            <div class="col-sm-12 pl-0 pt-0">
+                <label class="style-descrip"> {{ 'BILLS.WHEN_ACTIVATING_THE_CASH_COLLECTION_THE_DRIVER_WILL' | translate }}  </label>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-xl-10 col-md-12 col-12 pb-2">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="switch w-100 col-12">
+                                <label class="switch-width">
+                                    <input type="checkbox"
+                                        [checked]="companyPreferenceBill.cashCharge"
+                                        (change)="changeCompanyPreferenceBill('cashCharge', $event.target.checked)"
+                                       />
+                                    <span class="lever switch-col-primary m-0"></span>
+
+                                    <span  class="pl-2 spand-toogle">
+                                         {{ 'BILLS.CASH_COLLECTION' | translate }}
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END cashCharge -->
+
+
+
+            <!-- cardCharge -->
+            <ng-container *ngIf="false">
+                <div class="col-sm-12 extra-campo  pl-0 pt-4">
+                    <label class="sytle-eschedule mb-0">
+                            {{ 'BILLS.CREDIT_CARD' | translate }}
+                    </label>
+                </div>
+                <div class="col-sm-12 pl-0 pt-0">
+                    <label class="style-descrip"> {{ 'BILLS.BY_ACTIVATING_THE_CARD_PAYMENT_WITH_THE_STORE_APP_CUSTOMERS_CAM_MAKE' | translate }} </label>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-xl-10 col-md-12 col-12 pb-2">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="switch w-100 col-12">
+                                    <label class="switch-width">
+                                        <input type="checkbox"
+                                            [checked]="companyPreferenceBill.cardCharge"
+                                            (change)="changeCompanyPreferenceBill('cardCharge', $event.target.checked)"
+                                        />
+                                        <span class="lever switch-col-primary m-0"></span>
+
+                                        <span  class="pl-2 spand-toogle">
+                                            {{ 'BILLS.CARD_PAYMENT_FROM_APP' | translate }}
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- end cardCharge -->
+
+            <!-- allowDontCharge -->
+
+            <div class="col-sm-12 extra-campo  pl-0 pt-4">
+                <label class="sytle-eschedule mb-0">
+                        {{ 'BILLS.AUTHORIZATION_NOT_TO_CHARGE' | translate }}
+                </label>
+            </div>
+            <div class="col-sm-12 pl-0 pt-0">
+                <label class="style-descrip"> {{ 'BILLS.BY_ACTIVATING_THE_OPTION' | translate }} "{{ 'BILLS.AUTORIZATION_NOT_TO' | translate }}" {{ 'BILLS.YOU_ALLOW_DRIVERS_NOT_TO_CHARGE_THE_AMOUNT_OF_THE_ORDER_BUT_THEY_ARE_FORCED_TO_INDICATE_WHO_ALLOW_IT' | translate }}  </label>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-xl-10 col-md-12 col-12 pb-2">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="switch w-100 col-12">
+                                <label class="switch-width">
+                                    <input type="checkbox"
+                                        [checked]="companyPreferenceBill.allowDontCharge"
+                                        (change)="changeCompanyPreferenceBill('allowDontCharge', $event.target.checked)"
+                                       />
+                                    <span class="lever switch-col-primary m-0"></span>
+
+                                    <span  class="pl-2 spand-toogle">
+                                         {{ 'BILLS.AUTHORIZATION_NOT_TO_CHARGE' | translate }}
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END allowDontCharge -->
+
+        </div>
+    </div>
+</div>

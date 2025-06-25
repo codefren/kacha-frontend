@@ -1,0 +1,28 @@
+<div id="modalComfirmFtp">
+    <section class="card category-list-modal-active">
+        <div class="card-body">
+            <div class="row justify-content-end mb-3">
+                <i class="fas fa-times mr-3 close-button" (click)="activeModal.close(false)"></i>
+            </div>
+
+            <div class="row m-3">
+                <div class="col text-center">
+                    <div class="title" *ngIf="data">Ticket</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-center">
+                    <img [src]="data.ticket" alt="Ticket" class="img-flud">
+                </div>
+            </div>
+
+            <div class="row m-3">
+                <div class="col text-center">
+                    <div class="title" *ngIf="data">{{ 'ORDERS.ORDERS_HISTORICAL.AMOUNT' | translate}}: {{ data.ticketTotal }} €</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

@@ -1,0 +1,100 @@
+<div class="bill-settings bg-white p-3">
+
+    <div class="row">
+
+        <!-- mini menu seleccionable -->
+
+        <div class="col-xl-3 col-12 ">
+
+            <label class="title-left-sheet  mt-2"> {{ 'BILLS.BILLING' | translate }} </label>
+
+            <ul class="list-group">
+
+                <li class="list-group-item point my-2">
+
+
+                    <ul class="sub-ul">
+
+                        <li class="list-group-item sub-li point my-2 " [ngClass]="{'background-selecter': select === 'controlOfInvoices'}" (click)="changePage('controlOfInvoices')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'controlOfInvoices'}">
+                               {{ 'BILLS.CONTROL_OF_INVOICES' | translate }}
+                            </label>
+                        </li>
+
+                        <li class="list-group-item sub-li point my-2" [ngClass]="{'background-selecter': select === 'notices'}" (click)="changePage('notices')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'notices'}">
+                                {{ 'BILLS.NOTICES' | translate }}
+                            </label>
+                        </li>
+
+
+
+                    </ul>
+                    <div class="point" (click)="retunrsList()">
+                        <img class="img-Returns point mr-1" src="assets/icons/retunrsBlue.svg">
+                        <label class="retursList point"> {{'SHEET_ROUTE.RETURN' | translate }} </label>
+                    </div>
+
+                </li>
+
+
+
+            </ul>
+        </div>
+
+        <!-- end mini menu seleccionable -->
+
+        <div class="d-flex" style="height: 200px;">
+
+            <div class="vr"></div>
+
+        </div>
+
+        <div class="col-xl-9 col-12">
+
+            <div class="row align-items-center">
+
+                <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                    <ng-container *ngIf="select === 'controlOfInvoices'">
+
+                        <label class="title-left-sheet" for=""> {{ 'BILLS.CONTROL_OF_INVOICES' | translate }}</label>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="select === 'notices'">
+
+                        <label class="title-left-sheet" for="">  {{ 'BILLS.NOTICES' | translate }} </label>
+
+                    </ng-container>
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class="col-12 p-0 mt-3">
+
+
+                <ng-container *ngIf="select === 'controlOfInvoices'">
+
+                    <easyroute-control-of-invoices></easyroute-control-of-invoices>
+
+                </ng-container>
+
+                <ng-container *ngIf="select === 'notices'">
+
+                    <easyroute-bill-notices></easyroute-bill-notices>
+
+                </ng-container>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

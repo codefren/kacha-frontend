@@ -1,0 +1,229 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card padding-body">
+            <div class="card-header general-panel">
+                <h2 class="general-h2">{{ 'PREFERENCES.OPTIMIZATION.NAME' | translate }}</h2>
+            </div>
+            <div class="card-body">
+
+                <div class="container mb-3 easyroute-optimization-preferences">
+                    <div class="row m-0">
+                        <div class="col-md-6 p-0">
+                            <div class="card border-shadow m-2">
+                                <header class="card-header card-panel text-center">
+                                    {{'PREFERENCES.OPTIMIZATION.MAP_POINTS.NAME' | translate}}
+                                </header>
+                                <div class="card-body font-card">
+                                    <div class="form-group row">
+                                        <label for="inputPassword" class="col-sm-6 col-form-label">
+                                                        {{'PREFERENCES.OPTIMIZATION.MAP_POINTS.WAREHOUSE_ADDRESS' | translate }}</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" [(ngModel)]="address" (change)="addressChanged = true" type="text" (blur)="updateWarehouse()" (keyup.enter)="updateWarehouse()" placeholder="{{
+                                                    'PREFERENCES.OPTIMIZATION.MAP_POINTS.WAREHOUSE_ADDRESS' | translate
+                                                }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPassword" class="col-sm-6 col-form-label p-3">{{
+                                                'PREFERENCES.OPTIMIZATION.MAP_POINTS.DISCHARGING_TIME' | translate
+                                            }}</label>
+                                        <div class="col-sm-3">
+                                            <input type="number" class="form-control" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="dischargingMinutes" (blur)="updateDefaultDischargingTime()" (keyup.enter)="updateDefaultDischargingTime()" (change)="dischargingMinutesChanged = true"
+                                                placeholder="{{'GENERAL.MINUTES' | translate}}" required autofocus>
+                                            <label class="size-secund text-center">Minutos</label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="number" class="form-control primary" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="dischargingSeconds" (blur)="updateDefaultDischargingTime()" (keyup.enter)="updateDefaultDischargingTime()" (change)="dischargingSecondsChanged = true"
+                                                placeholder="{{'GENERAL.SECONDS' | translate}}" required autofocus>
+                                            <label class="size-secund text-center">Segundos</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputPassword" class="col-sm-6 col-form-label p-3">{{
+                                                'PREFERENCES.OPTIMIZATION.MAP_POINTS.TIME_UPDATE_CONTROL_PANEL' | translate
+                                            }}</label>
+                                        <div class="col-sm-3">
+                                            <input type="number" class="form-control" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="refreshMinutesUpdate" (blur)="updateDefaultRefreshTime()" (keyup.enter)="updateDefaultRefreshTime()" (change)="refreshMinutesChangedUpdate = true"
+                                                placeholder="{{'GENERAL.MINUTES' | translate}}" required autofocus>
+                                            <label class="size-secund  p-0">Minutos</label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="number" class="form-control" id="inputPassword" min="0" max="59" [(ngModel)]="refreshSecondsUpdate" (blur)="updateDefaultRefreshTime()" (keyup.enter)="updateDefaultRefreshTime()" (change)="refreshSecondsChangedUpdate = true" placeholder="{{'GENERAL.SECONDS' | translate}}"
+                                                required autofocus>
+                                            <label class="size-secund">Segundos</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-form-label p-3">
+                                            <label>
+                                                {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.DRIVER_VERIFY_CLIENT_TIME' | translate }}
+                                            </label>
+                                            
+                                        </div>
+                                        <div class="col-form-label p-3 col-sm-6 text-right">
+                                            <div class="switch">
+                                                <label>
+                                                    <input type="checkbox" [checked]="(managementPreferences$ | async).driverVerifyClientTime" (change)="toggleManagementPreference('driverVerifyClientTime', $event.target.checked)"/>
+                                                        <span class="lever switch-col-primary"></span>
+                                                        No / Si
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPassword" class="col-sm-6 col-form-label p-3">{{
+                                                'PREFERENCES.OPTIMIZATION.MAP_POINTS.AUTOMATIC_ROUTE_END_TIME' | translate
+                                            }}</label>
+                                        <div class="col-sm-6">
+                                            <!--  -->
+                                            <div class="input-group">
+                                                <input type="time" class="form-control form-size" format="HH:mm" #timeInput value="{{ time | dayTime }}" (focusout)="updateAutomaticEndRouteTime($event.target.value)" />
+                                                <span class="input-group-prepend" (click)="clearAutomaticRouteEndTime(); timeInput.value = ''">
+                                                    <span class="input-group-text">
+                                                        <i class="fas fa-times" ></i>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPassword" class="col-sm-6 col-form-label p-3">{{
+                                                'PREFERENCES.OPTIMIZATION.ORDERS.MAX_ORDER_TIME' | translate
+                                            }}</label>
+                                        <div class="col-sm-6">
+                                            <!--  -->
+                                            <div class="input-group">
+                                                <input type="time" class="form-control form-size" format="HH:mm" #timeOrderMaxInput value="{{ timeOrderMax | dayTime }}" (focusout)="updateOrderMaxTime($event.target.value)" />
+                                                <span class="input-group-prepend" (click)="clearOrderMaxTime(); timeOrderMaxInput.value = ''">
+                                                    <span class="input-group-text">
+                                                        <i class="fas fa-times" ></i>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-8 p-3">
+                                            <p>
+                                                {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.NEXT_DAY' | translate }}
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-4 p-3 text-right">
+                                            <div class="switch">
+                                                <label>
+                                                <input type="checkbox" [checked]="(controlPanelPreferences$ | async).assignedNextDay"  (change)="toggleControlPanelPreference('assignedNextDay',$event.target.checked)"/>
+                                                    <span class="lever switch-col-primary"></span>
+                                                    No / Si
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 p-0">
+                            <div class="card border-shadow m-2">
+                                <header class="card-header card-panel text-center">
+                                    {{'PREFERENCES.OPTIMIZATION.DATA_SESSION.NAME' | translate}}
+                                </header>
+                                <div class="card-body font-card p-3">
+                                    <div class="row form-group">
+                                        <div class="col-sm-6 p-3">
+                                            <label>
+                                                {{ 'PREFERENCES.OPTIMIZATION.DATA_SESSION.SAVE_SESION_IN_LOAD_AUTO.NAME' | translate }}
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6 p-3 text-right">
+                                            <div class="switch">
+                                                <label>
+                                                    <input type="checkbox" [checked]="(optimizationPreferences$ | async).createSession.autoSaveSession" 
+                                                        (change)="toggleOptimizationPreference('autoSaveSession',$event.target.checked)"/>
+                                                    <span class="lever switch-col-primary text-center"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="card border-shadow m-2">
+                                <header class="card-header card-panel text-center">
+                                    {{'PREFERENCES.OPTIMIZATION.ORDERS.NAME' | translate}}
+                                </header>
+                                <div class="card-body font-card p-2">
+                                    <div class="card text-white mb-12" style="max-width: 32rem;">
+                                        <div class="card-body">
+                                            <p class="card-text"> Esta opción solo debe aplicarse a empresas que estén integradas por FTP/API</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 p-0">
+                                        <div class="form-group row">
+                                            <label for="inputPassword" class="col-sm-6 col-form-label p-3">{{
+                                                    'PREFERENCES.OPTIMIZATION.ORDERS.TINE_SEND_ORDERS_FOR_FTP' | translate
+                                                }}</label>
+                                            <div class="col-sm-6">
+                                                <!--  -->
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-size" format="HH:mm" #orderSyncTimeInput value="{{ orderSyncTime | dayTime }}" (focusout)="updateOrderSyncTime($event.target.value)" />
+                                                    <span class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-times" (click)="clearOrderSyncTime(); orderSyncTimeInput.value = ''"></i>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card border-shadow m-2">
+                                <header class="card-header card-panel text-center">
+                                    {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.TYPE_OF_USE.NAME' | translate}}
+                                </header>
+                                <div class="card-body font-card p-2">
+                                    <div class="card text-white mb-12" style="max-width: 32rem;">
+                                        <div class="card-body">
+                                            <p class="card-text"> {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.TYPE_OF_USE.WITH_THIS_PARAMETER_YOU_CAN_CONFIGURE' | translate}}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Type of use -->
+                                    <div class="container pb-1">
+                                        <div class="row">
+                                            <div class="col-sm-5 col-12">
+                                                <div class="radio-custom radio-primary">
+                                                    <input id="all" type="radio" name="all" [checked]="(interferencePreferences$ | async).optionMenu== 'all'" value="all" (change)="toggleInterfacePreference('optionMenu', $event.target.value)">
+                                                    <label for="all"> {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.TYPE_OF_USE.All_FEATURE' | translate }} </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm col-12">
+                                                <div class="radio-custom radio-primary">
+                                                    <input id="logistics" name="logistics" type="radio" [checked]="(interferencePreferences$ | async).optionMenu== 'logistics'" value="logistics" (change)="toggleInterfacePreference('optionMenu', $event.target.value)">
+                                                    <label for="logistics"> {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.TYPE_OF_USE.LOGISTICS' | translate }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm col-12">
+                                                <div class="radio-custom radio-primary">
+                                                    <input id="commercial" name="commercial" type="radio" [checked]="(interferencePreferences$ | async).optionMenu== 'commercial'" value="commercial" (change)="toggleInterfacePreference('optionMenu', $event.target.value)">
+                                                    <label for="commercial">{{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.TYPE_OF_USE.COMMERCIAL' | translate }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end ype of use -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

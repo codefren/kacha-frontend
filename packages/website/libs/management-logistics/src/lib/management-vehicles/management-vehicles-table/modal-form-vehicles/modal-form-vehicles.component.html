@@ -1,0 +1,332 @@
+<div class="easyroute-modal-form-vehicles">
+    <div id="modalEditFormVechicle">
+        <div class="col-md-12 col-12 text-right pt-2 ">
+            <i class="fas fa-times close-button point" (click)="activeModal.close([false, null])"></i>
+        </div>
+    
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10 text-center">
+                    <p class="title">
+                        {{ 'VEHICLES.EDIT_VEHICLE' | translate }}
+                    </p>
+                    <hr class="line-primary" />
+                </div>
+            </div>
+
+            <form [formGroup]="createVehicleFormGroup" class="font-general management-form-vehicles" >
+                <div class="row justify-content-center mt-5">
+                    <div class="col-10">
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['name'].invalid && (createVehicleFormGroup.controls['name'].dirty || createVehicleFormGroup.controls['name'].touched)}"
+                        >
+                            <label class="col-sm-6 font-general" for="name">
+                                {{ 'VEHICLES.VEHICLE_NAME' | translate }}
+                                <span class="asterisco"> *</span>
+                            </label>
+
+                            <div class="col-sm-6">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="name" 
+                                    autocomplete="off"
+                                    placeholder="{{ 'VEHICLES.VEHICLE_NAME' | translate }}" 
+                                    formControlName="name"
+                                />
+            
+                                <ng-container *ngFor="let validation of vehicles_messages.name">
+                                    <small 
+                                        class="form-control-feedback text-danger" 
+                                        *ngIf="createVehicleFormGroup.get('name').hasError(validation.type) && (createVehicleFormGroup.get('name').dirty || createVehicleFormGroup.get('name').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+            
+                        <div class="form-group row">
+                            <label class="col-sm-6 font-general" for="vehicleType">
+                                {{ 'VEHICLES.VEHICLE_TYPE' | translate }}
+                            </label>
+
+                            <div class="col-sm-6">
+                                <select class="form-control letter-app" formControlName="vehicleType">
+                                    <option value="0">{{ 'COMPANIES.SELECT' | translate }}</option>
+                                    <option *ngFor="let item of vehiclesType" [value]="item.id">
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+            
+                        <div class="form-group row" *ngIf="data.zone">
+                            <label for="deliveryZoneId" class="col-form-label font-general col-6">
+                                {{ 'VEHICLES.DELIVERY_ZONE' | translate }}
+                            </label>
+
+                            <div class="col-sm-6 p-0">
+                                <select class="form-control letter-app " formControlName="deliveryZoneId">
+                                    <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+                                    <option *ngFor="let item of data.zone" [value]="item.id">
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+            
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['capacity'].invalid && (createVehicleFormGroup.controls['capacity'].dirty || createVehicleFormGroup.controls['capacity'].touched)}"
+                        >
+                            <label for="capacity" class="col-sm-6 font-general">
+                                {{ 'VEHICLES.CAPACITY' | translate }}
+                            </label>
+
+                            <div class="col-sm-6">
+                                <input 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="capacity" 
+                                    min="0" 
+                                    placeholder="{{ 'VEHICLES.CAPACITY' | translate }}"
+                                    formControlName="capacity"
+                                />
+
+                                <ng-container *ngFor="let validation of vehicles_messages.capacity">
+                                    <small 
+                                        class="form-control-feedback text-danger" 
+                                        *ngIf="createVehicleFormGroup.get('capacity').hasError(validation.type) && (createVehicleFormGroup.get('capacity').dirty || createVehicleFormGroup.get('capacity').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+            
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['registration'].invalid && (createVehicleFormGroup.controls['registration'].dirty || createVehicleFormGroup.controls['registration'].touched)}"
+                        >
+                            <label for="registration" class="col-sm-6 font-general">
+                                {{ 'VEHICLES.PLATE' | translate }}
+                            </label>
+                        
+                            <div class="col-sm-6">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="registration" 
+                                    placeholder="{{ 'VEHICLES.PLATE' | translate }}"
+                                    formControlName="registration"
+                                />
+                        
+                                <ng-container *ngFor="let validation of vehicles_messages.registration">
+                                    <small 
+                                        class="form-control-feedback text-danger" 
+                                        *ngIf="createVehicleFormGroup.get('registration').hasError(validation.type) && (createVehicleFormGroup.get('registration').dirty || createVehicleFormGroup.get('registration').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['weightLimit'].invalid && (createVehicleFormGroup.controls['weightLimit'].dirty || createVehicleFormGroup.controls['weightLimit'].touched)}"
+                        >
+                            <label class="col-sm-6 font-general" for="weightLimit">
+                                {{ 'VEHICLES.WEIGHT_LIMIT' | translate }}
+                            </label>
+                        
+                            <div class="col-sm-6">
+                                <input 
+                                    type="number" 
+                                    class="form-control" 
+                                    min="0" 
+                                    id="weightLimit"
+                                    placeholder="{{ 'VEHICLES.WEIGHT_LIMIT' | translate }}" 
+                                    formControlName="weightLimit"
+                                />
+                        
+                                <ng-container *ngFor="let validation of vehicles_messages.weightLimit">
+                                    <small  
+                                    class="form-control-feedback text-danger" 
+                                    *ngIf="createVehicleFormGroup.get('weightLimit').hasError(validation.type) && (createVehicleFormGroup.get('weightLimit').dirty || createVehicleFormGroup.get('weightLimit').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['nextVehicleInspection'].invalid && (createVehicleFormGroup.controls['nextVehicleInspection'].dirty || createVehicleFormGroup.controls['nextVehicleInspection'].touched)}"
+                        >
+                            <label class="col-sm-6 font-general" for="nextVehicleInspection">
+                                {{ 'VEHICLES.CAR_INSPECTION' | translate }}
+                            </label>
+                        
+                            <div class="col-sm-6">
+                                <div class="input-group-append">
+                                    <input 
+                                        class="form-control" 
+                                        placeholder="{{ 'VEHICLES.CAR_INSPECTION' | translate }}" 
+                                        formControlName="nextVehicleInspection" 
+                                        ngbDatepicker 
+                                        #d="ngbDatepicker"
+                                        autocomplete="off" 
+                                        readonly 
+                                        id="nextVehicleInspection" 
+                                        [startDate]="dateNow"
+                                        (dateSelect)="startDateSelect($event)" 
+                                        [ngClass]="{'form-control-danger': createVehicleFormGroup.controls['nextVehicleInspection'].invalid && (createVehicleFormGroup.controls['nextVehicleInspection'].dirty || createVehicleFormGroup.controls['nextVehicleInspection'].touched)}"
+                                    />
+                            
+                                    <button class="btn btn-calendar calendar" (click)="d.toggle()" type="button">
+                                        <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                                    </button>
+                                </div>
+                            
+                                <ng-container *ngFor="let validation of vehicles_messages.nextVehicleInspection">
+                                    <div class="w-100 text-center">
+                                        <small 
+                                            class="form-control-feedback text-danger" 
+                                            *ngIf="createVehicleFormGroup.get('nextVehicleInspection').hasError(validation.type) && (createVehicleFormGroup.get('nextVehicleInspection').dirty || createVehicleFormGroup.get('nextVehicleInspection').touched)"
+                                        >
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['userId'].invalid && (createVehicleFormGroup.controls['userId'].dirty || createVehicleFormGroup.controls['userId'].touched)}"
+                        >
+                            <label class="col-sm-6 font-general" for="userId">
+                                {{ 'VEHICLES.DRIVER_ASSIGNED' | translate }}
+                                <span class="asterisco"> *</span>
+                            </label>
+                        
+                            <div class="col-sm-6">
+                                <select class="form-control letter-app " formControlName="userId">
+                                    <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+                                    <option *ngFor="let item of data.user | async" [value]="item.id">
+                                        {{ item.name + ' ' + item.surname }}
+                                    </option>
+                                </select>
+                        
+                                <ng-container *ngFor="let validation of vehicles_messages.userId">
+                                    <small 
+                                        class="form-control-feedback text-danger"
+                                        *ngIf="createVehicleFormGroup.get('userId').hasError(validation.type) && (createVehicleFormGroup.get('userId').dirty || createVehicleFormGroup.get('userId').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-5">
+                    <div class="col-10">
+                        <p class="title-page-vehicle-form line">
+                            {{ 'VEHICLES.WORK_TIME' | translate }}
+                        </p>
+                        
+                        <p class="text-center font-italic mb-4 text-muted parrafo">
+                            {{ 'VEHICLES.INFO_WORK_TIME' | translate }}
+                        </p>
+
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['deliveryWindowStart'].invalid && (createVehicleFormGroup.controls['deliveryWindowStart'].dirty || createVehicleFormGroup.controls['deliveryWindowStart'].touched)}"
+                        >
+                            <label class="col-sm-6 font-general" for="deliveryWindowStart">
+                                {{ 'GENERAL.START_TIME' | translate }}
+                            </label>
+                        
+                            <div class="col-sm-6">
+                                <input 
+                                    type="time" 
+                                    class="form-control" 
+                                    id="deliveryWindowStart" 
+                                    formControlName="deliveryWindowStart"
+                                    (change)="changetime($event, deliveryWIndowsStart)" 
+                                    placeholder="{{ 'GENERAL.START_TIME' | translate }}"
+                                />
+                        
+                                <ng-container *ngFor="let validation of vehicles_messages.deliveryWindowStart">
+                                    <small 
+                                        class="form-control-feedback text-danger" 
+                                        *ngIf="createVehicleFormGroup.get('deliveryWindowStart').hasError(validation.type) && (createVehicleFormGroup.get('deliveryWindowStart').dirty || createVehicleFormGroup.get('deliveryWindowStart').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div 
+                            class="form-group row"
+                            [ngClass]="{'has-danger': createVehicleFormGroup.controls['deliveryWindowEnd'].invalid && (createVehicleFormGroup.controls['deliveryWindowEnd'].dirty || createVehicleFormGroup.controls['deliveryWindowEnd'].touched)}"
+                        >
+                            <label class="col-sm-6 font-general" for="deliveryWindowEnd">
+                                {{ 'GENERAL.CLOSING_TIME' | translate }}
+                            </label>
+                        
+                            <div class="col-sm-6">
+                                <input 
+                                    type="time" 
+                                    class="form-control" 
+                                    id="deliveryWindowEnd" 
+                                    formControlName="deliveryWindowEnd"
+                                    (change)="changetime($event, deliveryWIndowsEnd)" 
+                                    placeholder="{{ 'GENERAL.CLOSING_TIME' | translate }}"
+                                />
+                        
+                                <ng-container *ngFor="let validation of vehicles_messages.deliveryWindowEnd">
+                                    <small 
+                                        class="form-control-feedback text-danger" 
+                                        *ngIf="createVehicleFormGroup.get('deliveryWindowEnd').hasError(validation.type) && (createVehicleFormGroup.get('deliveryWindowEnd').dirty || createVehicleFormGroup.get('deliveryWindowEnd').touched)"
+                                    >
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    
+            <div class="row justify-content-center mt-4 mb-4">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-md-6 col-6 text-center">
+                            <button class="btn btn-cancel modal-dismiss" (click)="activeModal.close([false, null])">
+                                {{ 'GENERAL.CANCEL' | translate }}
+                            </button>
+                        </div>
+    
+                        <div class="col-md-6 col-6 text-center">
+                            <button 
+                                class="btn btn-primary modal-dismiss"
+                                [disabled]="!createVehicleFormGroup.valid"
+                                (click)="submit()"
+                            >
+                                {{ 'GENERAL.ACCEPT' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

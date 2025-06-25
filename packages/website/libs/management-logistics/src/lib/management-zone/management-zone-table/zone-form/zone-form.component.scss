@@ -1,0 +1,281 @@
+.optimroute-zone-form {
+    .input-color {
+        padding: 0 !important;
+        border: none !important;
+    }
+    .input-color::-webkit-color-swatch-wrapper {
+        padding: 0 !important;
+        border: transparent !important;
+    }
+    .input-color::-webkit-color-swatch {
+        border-radius: 10px !important;
+    }
+    .hack-select:after {
+        color: #fff;
+        top: 22%;
+        right: 15px;
+    }
+    .lines-conteiner {
+        border-bottom: 1px solid #adacad;
+    }
+    .no-selecter {
+        font-size: 15px;
+        color: #aeaeae;
+        font-family: Helvetica;
+    }
+    .selecter {
+        font-size: 15px;
+        color: #24397c;
+        font-weight: 600;
+        font-family: Helvetica;
+    }
+    .col-selecter {
+        background: #f1f4ff;
+        height: 49px;
+        justify-content: center !important;
+    }
+    .point {
+        cursor: pointer;
+    }
+    .switch {
+        display: contents !important;
+        vertical-align: middle;
+        cursor: pointer;
+        margin: 3px 0;
+    }
+    .toggle-directions {
+        background: #444a60;
+        /* border-radius: 15px; */
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397c;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .color-icon-sync {
+        color: #ffffff;
+    }
+    .color-a-sync {
+        background-color: #24397c;
+        border: 1px solid #24397c;
+    }
+    .color-control-form-async {
+        border: 1px solid #24397c;
+    }
+    .background-color-sync {
+        background-color: #eaefff;
+        opacity: 1;
+    }
+    .color-label-async {
+        color: #24397c !important;
+    }
+    .color-label-info {
+        color: #818181 !important;
+        font-size: 12px !important;
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        padding: 14px;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        // border-top: 1px solid #dee2e6 !important;
+    }
+    .green {
+        color: #91d600;
+    }
+    .red {
+        color: #e92b11;
+    }
+    .round-new-form input[type=radio]:checked+label {
+        background-color: #91d600;
+        border-color: #89cb00;
+    }
+    .round label {
+        height: 22px !important;
+        width: 22px !important;
+    }
+    .round-little label {
+        border: 2px solid #6f6f6f !important;
+        top: 7px;
+    }
+    .round-little label:after {
+        height: 6px;
+        left: 4px;
+        top: 5px;
+        width: 10px;
+    }
+    .round-new-form label {
+        height: 20px;
+        width: 20px;
+    }
+    .color-title-service-type {
+        color: #404040 !important;
+    }
+    .phone-table td {
+        padding: 15px !important;
+    }
+    .phone-table thead th {
+        padding: 13px;
+    }
+    .toggle-directions-schedule {
+        background: #444A60;
+        //border-radius: 5px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397C;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .disabeld-col {
+        padding: 14px;
+    }
+    .add-schedule {
+        text-decoration: underline;
+        color: #3F88B1;
+        cursor: pointer;
+        font-weight: bold;
+        letter-spacing: -1px;
+        font-size: 15px;
+    }
+    .schedule-title {
+        font-weight: bold;
+        font-size: 17px;
+    }
+    .schedule-count {
+        color: #6B6B6B !important;
+        font-weight: bold;
+    }
+    .schedule-question {
+        color: #6B6B6B !important;
+        font-weight: bold;
+    }
+    .text-schedule {
+        font-size: 14px;
+        font-weight: lighter
+    }
+    .shedule-add {
+        color: #24397c !important;
+        font-size: 14px !important;
+        font-weight: bold;
+    }
+    .color-row-schedule {
+        background: #f8f8f8;
+    }
+    .title-schedule-client {
+        font-weight: 700;
+        font-size: 15px !important;
+    }
+    .days-style {
+        color: #5f5f5f !important;
+        font-weight: 600;
+    }
+    .open-style {
+        color: #5f5f5f !important;
+    }
+    .fas-close-shedule {
+        color: #b7b7b7;
+        font-size: 24px;
+        font-variant: all-petite-caps;
+    }
+    .position-label {
+        position: absolute;
+        bottom: 0;
+    }
+    .diabled-free {
+        background-color: #ffffff !important;
+    }
+    .schedule-default {
+        color: #000 !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+    }
+    .btn-schedule-apply {
+        width: 62%;
+        height: 48px;
+        border-radius: 9px;
+    }
+    .btn-schedule-no-apply {
+        background-color: #d0d0d0;
+        border-color: #d0d0d0;
+        color: #ffffff;
+    }
+    .style-select-default {
+        background: #cecece;
+        border-radius: 10px;
+        height: 36px;
+    }
+    .checkebox-style {
+        height: 18px !important;
+        width: 18px !important;
+        top: 2px;
+    }
+    .margin-true {
+        margin-left: 8px;
+    }
+    .true-little label {
+        border: 2px solid #6f6f6f !important;
+        top: 2px;
+    }
+    .true-little label:after {
+        height: 6px;
+        left: 4px;
+        top: 5px;
+        width: 10px;
+    }
+    .position-label-specification {
+        position: absolute;
+        bottom: 0px;
+    }
+    .error-selecter {
+        color: #d2322c !important;
+        font-size: 13px !important;
+        margin-top: 0px !important;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .btn-schedule-apply {
+            width: 99%;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .btn-schedule-apply {
+            width: 99%;
+        }
+    }
+}

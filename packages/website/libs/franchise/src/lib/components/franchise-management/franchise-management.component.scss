@@ -1,0 +1,198 @@
+@import '../../../../../../apps/easyroute/src/common';
+.optimroute-route-table {
+    height: 100%;
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: transparent;
+        opacity: 1;
+    }
+    .space-button {
+        color: #ff9e4d;
+    }
+    table th {
+        vertical-align: middle !important;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    font-size: 12px;
+    border-radius: 4px;
+    .top-row {
+        padding: 4px auto;
+        padding: 0 32px;
+    }
+    .listRoutes {
+        padding: 0px 10px;
+    }
+    .selected-chip {
+        background-color: #ff9e4d !important;
+        color: #fbf4ef;
+        font-weight: 800;
+    }
+    .selected-default {
+        color: #cecece;
+        font-weight: 800;
+    }
+    .selected {
+        background-color: #CACACA !important;
+    }
+    .info-route {
+        padding: 0px 0px 0px 0px;
+    }
+    .info-estate {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .info-route>span {
+        font-weight: bold;
+    }
+    .fa-calendar-alt {
+        color: #ff9e4d;
+    }
+    .selected-box:after {
+        content: "";
+    }
+    .chip {
+        margin: 4px;
+        background-color: #e0e0e0;
+        color: aliceblue;
+        font-weight: 900;
+        padding: 10px 14px;
+        border-radius: 16px;
+        font-size: 100%;
+    }
+    .point {
+        cursor: pointer;
+    }
+    .color-infor {
+        color: #cdcdcd;
+    }
+    .red {
+        color: red;
+    }
+    .green {
+        color: green;
+    }
+    .yellow {
+        color: #a9a944;
+    }
+    .font-butons {
+        font-size: 10px;
+    }
+    .notifications .notification-menu {
+        width: 216px !important;
+    }
+    .notifications>li {
+        float: right;
+        margin: -4px 10px 0 0;
+        position: relative;
+    }
+    .marginRow {
+        margin-top: -2px;
+    }
+    .btn {
+        padding: 0.37rem 0.75rem;
+        font-size: 13px;
+    }
+    .btn-no-radius {
+        border-radius: 0px !important;
+    }
+    .btnSpecial {
+        margin-left: 10px;
+    }
+    .notifications .notiSpecial:before {
+        bottom: 100% !important;
+        left: 7% !important;
+    }
+    .notiSpecial {
+        left: 51% !important;
+        -webkit-transform: translate3d(-50%, 42px, 0px) !important;
+        transform: translate3d(-50%, 42px, 0px) !important;
+    }
+    @media screen and ( width: 568px) {
+        .ul-special-movil {
+            margin-top: 0px !important;
+        }
+        .btnSpecial {
+            margin-left: 10px !important;
+            margin-top: 0.4rem !important;
+        }
+        .line-spacing-chip {
+            margin-top: 14vh !important;
+        }
+        .form-control {
+            width: 40% !important;
+        }
+    }
+    @media screen and ( max-width: 767px) {
+        .line-spacing-chip {
+            margin-top: 14vh;
+        }
+        .ul-special-movil {
+            margin-top: 5px;
+        }
+        .notifications .notification-menu:before {
+            bottom: 100% !important;
+            left: 8% !important;
+        }
+        .notifications>li .notiSpecial2 {
+            -webkit-transform: translate3d(-50%, 32px, 0px) !important;
+            transform: translate3d(-31%, 41px, 0px) !important;
+        }
+        .notifications>li .notiSpecial {
+            left: 50% !important;
+            -webkit-transform: translate3d(-50%, 54px, 0px) !important;
+            transform: translate3d(-50%, 42px, 0px) !important;
+        }
+        .notifications .notiSpecial:before {
+            bottom: 100% !important;
+            left: 5% !important;
+        }
+        .break-line {
+            margin-top: 20px;
+        }
+    }
+    @media screen and ( width: 720px) {
+        .line-spacing-chip {
+            margin-top: 4vh;
+        }
+    }
+    @media( max-width: 576px) {
+        .break-line {
+            margin-top: 20px;
+        }
+        .title {
+            font-size: 16px;
+        }
+        .m-bottom {
+            margin-bottom: 1rem;
+        }
+        .flex-align {
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .line-spacing-chip {
+            margin-top: 14vh;
+        }
+        .btn-special-movil {
+            margin-top: 0.4em;
+            margin-left: 0px;
+            padding: 0.37rem 0.75rem;
+            border-radius: 0.25rem;
+        }
+        .btn {
+            margin-top: 0.50rem;
+        }
+    }
+    @media( min-width: 577px) {
+        .flex-align {
+            justify-content: flex-end;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        .m-bottom {
+            margin-bottom: 0px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+<div class="calculation-period">
+
+    <div class="card">
+
+        <div class="card-body mt-3 p-xl-4">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'COST.CALCULATION_PERIOD' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'COST.INDICATES_THE_CUMULATIVE_CALCILATION_TIME_PERIOD_OF' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-xl-4 col-12">
+
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control showMont point" [(ngModel)]="calculationPeriod" (change)="changedUpdate = true" id="calculationPeriod" type="number" min="1" (blur)="createConcept()" (keyup.enter)="createConcept()" placeholder="0" />
+
+                            <label for="first" class="mt-2 title-col"> {{'COST.PERIOD' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

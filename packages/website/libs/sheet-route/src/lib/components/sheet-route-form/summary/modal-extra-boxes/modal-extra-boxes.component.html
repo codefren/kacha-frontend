@@ -1,0 +1,80 @@
+<div class="modal-extra-boxes">
+
+    <div class="row align-items-center mt-4 mb-3">
+
+        <div class="col-xl-12 col-12 pl-xl-5 text-xl-left text-center">
+
+            <label class="title-ticket">{{'SHEET_ROUTE.BONUS_BOXES' | translate }} ({{numberLength}})</label>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3 mb-4">
+
+        <div class="col-12 text-center pl-5 pr-5">
+
+
+            <ng-container *ngIf="showBoxes">
+
+                <table class="table table-striped table-bordered mb-0 mt-2" id="ExtraBoxes" style="text-align: center ; width: 100%;">
+
+                    <thead>
+
+                        <tr>
+                            <th>{{'SHEET_ROUTE.CLIENT' | translate }}</th>
+
+                            <th>{{ 'SHEET_ROUTE.BONUS_BOXES' |translate }}</th>
+
+
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        <ng-container *ngIf="extraBoxesList && extraBoxesList.length >0 ">
+                            <tr class="text-center" *ngFor="let box of extraBoxesList; let i=index">
+
+
+                                <td> {{ box.name }} </td>
+
+                                <td> {{ box.extraBoxes }} </td>
+
+
+
+                                <td title="Ir a"><img class="icons-datatable point" src="assets/icons/External_Link.svg" (click)="redirecto(box)"></td>
+
+                            </tr>
+                        </ng-container>
+
+                        <ng-container *ngIf="extraBoxesList && extraBoxesList.length == 0 ">
+                            <tr>
+                                <td colspan="7" class="center">
+
+                                    {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }} </td>
+                            </tr>
+
+                        </ng-container>
+                    </tbody>
+
+                </table>
+
+            </ng-container>
+
+
+            <ng-container *ngIf="!showBoxes">
+
+                <div class="fa-5x">
+
+                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+</div>

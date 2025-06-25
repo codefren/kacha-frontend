@@ -1,0 +1,112 @@
+.modal-accept-link {
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .title-infor {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 19px;
+        text-align: center;
+        color: #9899AA;
+    }
+    .modal-footer {
+        display: block;
+        padding: 0rem 2rem 2rem 2rem;
+        border: 0px;
+    }
+    .btn-primary {
+        border-radius: 5px;
+        color: #ffffff;
+    }
+
+    .btn-default {
+        background: #9899AA;
+        border-radius: 5px;
+        color: #ffffff;
+    }
+    .btn-primary:disabled {
+        background-color: #9899AA !important;
+        border-color: #9899AA #9899AA #9899AA !important;
+        border-radius: 5px;
+        color: #ffffff;
+    }
+    .modal-header {
+        display: block;
+        padding: 2rem 2rem 0rem 2rem;
+        border: 0px;
+    }
+    .modal-body {
+        padding: 1rem 2rem 1rem 2rem;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+
+    .form-control[readonly] {
+        background-color: #e9ecef00 !important;
+        opacity: 1;
+    }
+
+    /* .btn-primary:disabled {
+        background-color: #9899AA !important;
+        border-color: #9899AA #9899AA #9899AA;
+        opacity: 1;
+    } */
+
+
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+
+    .round-new-form input[type=radio]:checked+label {
+        background-color: #24397c;
+        border-color: #24397c;
+    }
+
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, 
+    .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, 
+    .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, 
+    .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, 
+    .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, 
+    .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, 
+    .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, 
+    .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, 
+    .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, 
+    .col-xl-12, .col-xl, .col-xl-auto {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .dataTables_filter {
+        button {
+            font-size: 16px;
+        }
+        .btn-sm {
+            border-radius: 50%;
+            border: none;
+        }
+        .w {
+            width: 35%;
+        }
+        .withdTo {
+            width: 70px;
+        }
+        #search {
+            height: 34px !important;
+        }
+    }
+
+}
+

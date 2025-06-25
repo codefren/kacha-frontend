@@ -1,0 +1,82 @@
+.optimroute-summary-orders {
+    input[readonly] {
+        background: white;
+    }
+    .color-info {
+        font-size: 20px !important;
+        color: #000000 !important;
+        text-transform: initial !important;
+        font-weight: 700;
+    }
+    .style-card {
+        height: 83px;
+        width: 119px;
+    }
+    .card {
+        /*  height: 88px;
+        width: 156px; */
+        height: 79px;
+        width: 152px;
+        background: #ffffff;
+    }
+    .card-franchise {
+        height: 93px !important;
+        width: 209px !important;
+    }
+    .margin-lateral {
+        margin-left: 20px !important;
+    }
+    .column+.column {
+        margin-left: 3px;
+    }
+    .column:last-child {
+        margin-left: 0;
+    }
+    .form-control {
+        padding: 10px 25px 10px 15px !important;
+        height: 48px !important;
+        font-size: 14px !important;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    select {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .btn-filter {
+        background-color: #b5b5b5;
+        border-radius: 20px;
+        width: 132px;
+        height: 40px;
+        font-size: 14px;
+        color: #ffffff;
+    }
+    @media screen and ( min-width: 768px) {
+        /*  .width-row {
+            width: 75%;
+        } */
+    }
+    green {
+        color: #91d600 !important;
+        border-color: #91d600 !important;
+    }
+    .yellow {
+        color: #a9a944 !important;
+        border-color: #a9a944 !important;
+    }
+    .blue {
+        color: blue !important;
+        border-color: blue !important;
+    }
+    .orange {
+        color: orange !important;
+        border-color: orange !important;
+    }
+    .gray {
+        color: #b5b5b5 !important;
+        border-color: #b5b5b5 !important;
+    }
+    .dataTable thead th {
+        vertical-align: inherit !important;
+    }
+}

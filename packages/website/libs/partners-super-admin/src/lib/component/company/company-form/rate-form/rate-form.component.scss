@@ -1,0 +1,108 @@
+form .input-group .form-control {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.toggle-directions {
+    background: #444A60;
+    i {
+        color: #fff;
+    }
+    span {
+        color: #fff;
+        font-size: 14px;
+    }
+    .button-document {
+        border-radius: 3px;
+        width: 156px !important;
+        padding: 0 12px;
+        label {
+            color: #24397c !important;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+    .toggle-pointer {
+        cursor: pointer;
+    }
+}
+
+.no-round {
+    border-radius: 5px !important;
+    height: 50px;
+}
+
+.show-directions {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.disabeld-col {
+    padding: 14px;
+}
+
+.padding-col {
+    padding: 6px;
+}
+
+.table thead th {
+    vertical-align: middle;
+    border-bottom: 2px solid #bec4ca;
+    background-color: #7387c2;
+    color: white;
+    width: 14%;
+    padding: 14px;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+    border: 0px solid #dee2e6;
+}
+
+table td {
+    color: #1d1d1d;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f1f4ff !important;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: #f1f4ff !important;
+}
+
+.title-multidelegation {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.2px;
+    color: #363740;
+}
+
+.text-multidelegation {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.2px;
+    color: #363740;
+}
+
+.lever-multidelegation {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px !important;
+    line-height: 19px;
+    letter-spacing: 0.2px;
+    color: #363740 !important;
+}
+
+.card-multidelegation {
+    background: #ffffff !important;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}

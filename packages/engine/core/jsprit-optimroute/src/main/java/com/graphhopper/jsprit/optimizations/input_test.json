@@ -1,0 +1,552 @@
+{
+	"options": {
+		"minVehicles": 0,
+		"useSkills": false,
+		"allowDelayTime": false,
+		"objectivePreferences": {
+			"costDuration": null,
+			"costDistance": null,
+			"costVehicleWaitTime": null
+		},
+		"maxDelayTime": null,
+		"optimizeFromIndex": null,
+		"ignoreCapacityLimit": null,
+		"explorationLevel": 1,
+		"forceDepartureTime": null,
+		"traffic": {
+			"range1": {
+				"active": true,
+				"increaseProportion": 0,
+				"timeInterval": {
+					"start": 21600,
+					"end": 36000
+				}
+			},
+			"range2": {
+				"active": true,
+				"increaseProportion": 0,
+				"timeInterval": {
+					"start": 36000,
+					"end": 43200
+				}
+			},
+			"range3": {
+				"active": true,
+				"increaseProportion": 0,
+				"timeInterval": {
+					"start": 43200,
+					"end": 50400
+				}
+			}
+		}
+	},
+	"deliveryPoints": [
+		{
+			"id": "depot",
+			"deliveryWindow": {
+				"start": null,
+				"end": null
+			},
+			"coordinates": {
+				"latitude": 41.2657231,
+				"longitude": 1.9736113
+			}
+		},
+		{
+			"id": "703669",
+			"name": "RESTAURANT ROCXI BEACH",
+			"deliveryWindow": {
+				"start": 28800,
+				"end": 50400
+			},
+			"coordinates": {
+				"latitude": 41.2657231,
+				"longitude": 1.9736113
+			},
+			"demand": 0,
+			"serviceTime": 365,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703670",
+			"name": "FEM UN CAFE",
+			"deliveryWindow": {
+				"start": 19800,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.3233391,
+				"longitude": 2.1001204
+			},
+			"demand": 0,
+			"serviceTime": 707,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703671",
+			"name": "REHMANS STORE S.L",
+			"deliveryWindow": {
+				"start": 25200,
+				"end": 54000
+			},
+			"coordinates": {
+				"latitude": 41.3072105,
+				"longitude": 1.9979028
+			},
+			"demand": 0,
+			"serviceTime": 875,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703672",
+			"name": "BABU YASIR, S.L.",
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.3165606,
+				"longitude": 2.027893
+			},
+			"demand": 0,
+			"serviceTime": 336,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703673",
+			"name": "ALI SUPERMERCADO",
+			"deliveryWindow": {
+				"start": 28800,
+				"end": 43200
+			},
+			"coordinates": {
+				"latitude": 41.40142,
+				"longitude": 2.00554
+			},
+			"demand": 1,
+			"serviceTime": 802,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703674",
+			"name": "BADAJOZ SUPERMECADO",
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 82800
+			},
+			"coordinates": {
+				"latitude": 41.3994135,
+				"longitude": 2.0046116
+			},
+			"demand": 0,
+			"serviceTime": 545,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703675",
+			"name": "CHUAUDEY SUPERMERCAT",
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 43200
+			},
+			"coordinates": {
+				"latitude": 41.3957545,
+				"longitude": 2.0085032
+			},
+			"demand": 0,
+			"serviceTime": 587,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703676",
+			"name": "MIKAEL, SUPERMERCAT",
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 43200
+			},
+			"coordinates": {
+				"latitude": 41.3999363,
+				"longitude": 2.0066069
+			},
+			"demand": 0,
+			"serviceTime": 453,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703677",
+			"name": "ONE STOP PANADERIA SUPERMERCADO",
+			"deliveryWindow": {
+				"start": 30600,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.3207444,
+				"longitude": 2.0139659
+			},
+			"demand": 0,
+			"serviceTime": 144,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703678",
+			"name": "AUTOSERVEI PANADERIA PAKI II",
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.3203275,
+				"longitude": 2.0084774
+			},
+			"demand": 0,
+			"serviceTime": 347,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703679",
+			"name": "MESA FLORIDO ANA MARIA",
+			"deliveryWindow": {
+				"start": 22800,
+				"end": 50400
+			},
+			"coordinates": {
+				"latitude": 41.3157833,
+				"longitude": 2.0230718
+			},
+			"demand": 0,
+			"serviceTime": 300,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703680",
+			"name": "ALI PANADERIA",
+			"deliveryWindow": {
+				"start": 23400,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.4208953,
+				"longitude": 1.9968321
+			},
+			"demand": 0,
+			"serviceTime": 668,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703681",
+			"name": "FRANKFURT\u00b4S MANSIS\/CHURRERIA",
+			"deliveryWindow": {
+				"start": 28800,
+				"end": 39600
+			},
+			"coordinates": {
+				"latitude": 41.3164963,
+				"longitude": 2.0869494
+			},
+			"demand": 0,
+			"serviceTime": 602,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703682",
+			"name": "ALIMENTACIO FORN DE PA",
+			"deliveryWindow": {
+				"start": 25200,
+				"end": 36000
+			},
+			"coordinates": {
+				"latitude": 41.4075389,
+				"longitude": 2.0227657
+			},
+			"demand": 1,
+			"serviceTime": 638,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703683",
+			"name": "FORN DE CAN COLL S.L",
+			"deliveryWindow": {
+				"start": 25200,
+				"end": 36000
+			},
+			"coordinates": {
+				"latitude": 41.3872106,
+				"longitude": 2.0080833
+			},
+			"demand": 0,
+			"serviceTime": 508,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703684",
+			"name": "BOTANIC PLAZA, S. L",
+			"deliveryWindow": {
+				"start": 39600,
+				"end": 45000
+			},
+			"coordinates": {
+				"latitude": 41.2795097,
+				"longitude": 1.9782835
+			},
+			"demand": 0,
+			"serviceTime": 656,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703685",
+			"name": "BOTANIC",
+			"deliveryWindow": {
+				"start": 39600,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.2662826,
+				"longitude": 1.9722863
+			},
+			"demand": 0,
+			"serviceTime": 151,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703686",
+			"name": "BRESSOL LA PINEDA",
+			"deliveryWindow": {
+				"start": 29700,
+				"end": 43200
+			},
+			"coordinates": {
+				"latitude": 41.3210392,
+				"longitude": 2.0198529
+			},
+			"demand": 0,
+			"serviceTime": 320,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703687",
+			"name": "BRESSOL LA MARINA",
+			"deliveryWindow": {
+				"start": 27000,
+				"end": 43200
+			},
+			"coordinates": {
+				"latitude": 41.3147487,
+				"longitude": 2.0239901
+			},
+			"demand": 0,
+			"serviceTime": 176,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703688",
+			"name": "BRESSOL LA GINESTA",
+			"deliveryWindow": {
+				"start": 27000,
+				"end": 43200
+			},
+			"coordinates": {
+				"latitude": 41.3126879,
+				"longitude": 2.0034326
+			},
+			"demand": 0,
+			"serviceTime": 431,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703689",
+			"name": "AUTOSERVEI PAKI",
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.3199173,
+				"longitude": 2.0112409
+			},
+			"demand": 0,
+			"serviceTime": 667,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703690",
+			"name": "EL RACONET DEL MOL\u00cd",
+			"deliveryWindow": {
+				"start": 23400,
+				"end": 32400
+			},
+			"coordinates": {
+				"latitude": 41.4138271,
+				"longitude": 2.0151253
+			},
+			"demand": 0,
+			"serviceTime": 1298,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703691",
+			"name": "FRANKFURT RUBEN\u00b4S",
+			"deliveryWindow": {
+				"start": 36000,
+				"end": 41400
+			},
+			"coordinates": {
+				"latitude": 41.3228058,
+				"longitude": 2.0876344
+			},
+			"demand": 0,
+			"serviceTime": 169,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		},
+		{
+			"id": "703692",
+			"name": "ABORIA TRADE,S.L.",
+			"deliveryWindow": {
+				"start": 41400,
+				"end": 46800
+			},
+			"coordinates": {
+				"latitude": 41.2658769,
+				"longitude": 1.9717545
+			},
+			"demand": 0,
+			"serviceTime": 660,
+			"priority": 2,
+			"leadTime": 0,
+			"allowedDelayTime": 0,
+			"orderId": null,
+			"skills": [],
+			"deliveryType": "shipment"
+		}
+	],
+	"vehicles": [
+		{
+			"id": 45876,
+			"name": "0400LGB",
+			"vehicleId": 298,
+			"capacity": 9,
+			"deliveryWindowStart": 18000,
+			"deliveryWindowEnd": 86340,
+			"skills": []
+		}
+	],
+	"refer": {
+		"id": 77418,
+		"entity": "deliveryZone",
+		"computationId": 44337
+	}
+}

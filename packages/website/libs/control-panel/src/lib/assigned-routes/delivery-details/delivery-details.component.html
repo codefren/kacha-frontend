@@ -1,0 +1,698 @@
+<div class="easyroute-delivery-details padding-body-orders pt-0 bg-white2">
+    <div class="" *ngIf="data">
+        <div class="row pt-5 align-items-center justify-content-center">
+            <!-- redirect  assigned-->
+            <ng-container *ngIf="redirecPage">
+                <div class="mr-3 return-left point" (click)="rediretcTo()">
+                    <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+                </div>
+            </ng-container>
+
+            <!-- redirect history -->
+            <ng-container *ngIf="!redirecPage">
+                <div class="mr-3 return-left point" routerLink="/control-panel/history">
+                    <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+                </div>
+            </ng-container>
+
+            <p class="title m-0">
+                {{ 'DELIVERY_POINTS.DELIVERY_DETAILS' | translate }}
+            </p>
+        </div>
+
+        <div class="row justify-content-center mt-4" *ngIf="detailForm">
+            <form [formGroup]="detailForm" class="padding-form" style="width: 100%" novalidate>
+                <!-- Datos  -->
+                <div class="container">
+                    <div class="row row-tabs">
+                        <div class="col-6 col-md-6 pt-3 pb-3 text-center" [ngClass]="{'column-tab': tabOption === 1 }" (click)="changeTab(1)">
+                            <label class="title-tab">Información de entrega</label>
+                            <!--  <h4 class="subtitle-detail">{{ 'ORDERS.ORDERS_DETAIL.ORDER' | translate }}</h4> -->
+                            <!-- <hr class="hr-secondary mb-2 mt-2" /> -->
+                        </div>
+                        <div class="col-6 col-md-6 pt-3 pb-3 text-center" [ngClass]="{'column-tab': tabOption === 2 }" (click)="changeTab(2)">
+                            <label class="title-tab">Detalle de entrega</label>
+                        </div>
+                    </div>
+
+                    <!--  -->
+
+
+
+                    <!-- finalizado -->
+
+                    <!--  <ng-container *ngIf="data && data.statusRouteDeliveryPointId === 3 || data && data.statusRouteDeliveryPointId === 1">
+
+                        <div class="form-row mt-3 mb-3">
+                            <div class="col-xl-3 col-12 mt-xl-0 mt-3">
+                                <div class="card">
+
+                                    <div class="card-body card-arrival p-3">
+
+
+                                        <p class="title-finishe"> Llegada estimada </p>
+
+
+
+
+
+
+
+                                        <p class="time-arrival mb-0"> {{dateFormat(data.arrivalTime)}} </p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-12 mt-xl-0 mt-3">
+                                <div class="card">
+
+                                    <div class="card-body card-arrival-finishi p-3">
+
+
+                                        <p class="title-finishe"> Llegada real </p>
+
+
+
+
+
+                                        <p class="time-arrival mb-0"> {{dateFormat(data.driverArrivalTime)}} </p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-12 mt-xl-0 mt-3">
+                                <div class="card">
+
+                                    <div class="card-body card-arrival p-3">
+
+
+                                        <p class="title-finishe"> Confirmación </p>
+
+
+
+
+
+                                        <p class="time-arrival mb-0"> {{dateFormat(data.signatureTime)}} </p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-12 mt-xl-0 mt-3">
+                                <div class="card">
+
+                                    <div class="card-body card-arrival p-3">
+
+
+                                        <p class="title-finishe"> Tiempo </p>
+
+
+
+
+
+                                        <p class="time-arrival mb-0"> {{showSecons(data.serviceTimeClient)}} </p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-container> -->
+
+                    <!-- end finalizado -->
+                    <div class="row mb-5">
+
+                        <ng-container *ngIf="tabOption === 1">
+
+                            <!-- posponet list -->
+
+                            <ng-container *ngIf="data && data.route_planning_route_delivery_movement && data.route_planning_route_delivery_movement.length > 0 ">
+
+                                <div id="scroller-wrapper" class="pl-3 pr-3 mt-4">
+                                    <div id="scroller">
+
+                                        <ng-container *ngFor="let item of data.route_planning_route_delivery_movement;  let first = first">
+
+                                            <div class="elem">
+
+
+                                                <div class="card size-card-test ml-3 mr-1">
+
+                                                    <div class="card-body card-arrival p-3" [ngClass]="{
+                                                        'postponed': item.statusRouteDeliveryPointId == 4, 
+                                                        'card-arrival-finishi': item.statusRouteDeliveryPointId == 3
+                                                    }">
+
+
+                                                        <div class="row">
+
+                                                            <div [ngClass]="{'col-6': item.statusRouteDeliveryPointId == 4, 'col-12':item.statusRouteDeliveryPointId != 4 }">
+
+                                                                <p class="title-arriva">{{ item.status_route_delivery_point.name }} </p>
+
+                                                            </div>
+
+                                                            <ng-container *ngIf="item.statusRouteDeliveryPointId == 4">
+                                                                <div class="col-6 text-right point" (click)="openModalPosponet(item)">
+
+                                                                    <img src="assets/icons/GroupPosponed.png">
+
+                                                                </div>
+                                                            </ng-container>
+
+
+
+                                                        </div>
+
+
+
+
+                                                        <p class="time-arrival mb-0"> {{ dateFormat(item.creationDate) }} </p>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+
+                                        </ng-container>
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <img class="mr-5 point" src="assets/icons/VectorIzqu.png" (click)="moveToLeft()">
+                                </div>
+                                <div class="forward">
+                                    <img class="mr-5 point" src="assets/icons/Vector Dere.png" (click)="moveToRight()">
+                                </div>
+
+                            </ng-container>
+
+
+
+
+
+                            <!-- end posponet list -->
+
+                            <div class="col-12 col-md-5 pr-sm-4">
+                                <div class="form-row form-group">
+                                    <label for="nameDeliveryNote">
+                                        <b> {{ 'DETAIL_CONTROL.NAME_ALBARAN' | translate }}</b>
+                                    </label>
+                                    <input type="text" id="nameDeliveryNote" readonly class="form-control" placeholder=" {{
+                                            'DETAIL_CONTROL.NAME_ALBARAN' | translate
+                                        }}" formControlName="name" />
+                                </div>
+                                <!--  <div class="form-row form-group">
+                                    <label for="dniDeliveryNote">
+                                        <b>{{ 'DETAIL_CONTROL.DNI' | translate }}</b>
+                                    </label>
+                                    <input type="text" id="dniDeliveryNote" readonly class="form-control" placeholder=" {{ 'DETAIL_CONTROL.DNI' | translate }}" formControlName="nif" />
+                                </div> -->
+                                <div class="form-row form-group">
+                                    <div class="col-md-12">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <label for="extraBoxes">
+                                                    <b>{{
+                                                        'DETAIL_CONTROL.STATE' | translate
+                                                        }}</b>
+                                                </label>
+                                                <input type="text" id="extraBoxes" readonly class="form-control" [ngClass]="{'border-color-finische':  data && data.status_route_delivery_point.id === 3}" placeholder="{{
+                                                        'DETAIL_CONTROL.STATE' | translate
+                                                    }}" [value]="data.status_route_delivery_point.name" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="deliveredBoxes">
+                                                    <b>{{
+                                                        'DETAIL_CONTROL.RETURN'
+                                                        | translate
+                                                        }}</b>
+                                                </label>
+                                                <input type="text" id="devolutionDeliveryNote" readonly placeholder="{{ 'DETAIL_CONTROL.RETURN' | translate }}" class="form-control" formControlName="devolutionDeliveryNote" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  <div class="form-row form-group">
+                                    <label for="devolutionDeliveryNote">
+                                        <b>{{ 'DETAIL_CONTROL.RETURN' | translate }}</b>
+                                    </label>
+                                    <input type="text" id="devolutionDeliveryNote" readonly placeholder="{{ 'DETAIL_CONTROL.RETURN' | translate }}" class="form-control" formControlName="devolutionDeliveryNote" />
+                                </div> -->
+                            </div>
+
+                            <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                                <div class="form-row form-group">
+                                    <label for="dniDeliveryNote">
+                                        <b>{{ 'DETAIL_CONTROL.DNI' | translate }}</b>
+                                    </label>
+                                    <input type="text" id="dniDeliveryNote" readonly class="form-control" placeholder=" {{ 'DETAIL_CONTROL.DNI' | translate }}" formControlName="nif" />
+                                </div>
+
+                                <div class="form-row form-group">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="deliveredBoxes">
+                                                    <b>{{
+                                                        'DETAIL_CONTROL.RETURNED_BOXES'
+                                                        | translate
+                                                        }}</b>
+                                                </label>
+                                                <input type="text" id="deliveredBoxes" readonly class="form-control" placeholder="{{
+                                                        'DETAIL_CONTROL.RETURNED_BOXES'
+                                                            | translate
+                                                    }}" formControlName="deliveredBoxes" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="extraBoxes">
+                                                    <b>{{
+                                                        'DETAIL_CONTROL.EXTRA_BOXES' | translate
+                                                        }}</b>
+                                                </label>
+                                                <input type="text" id="extraBoxes" readonly class="form-control" placeholder="{{
+                                                        'DETAIL_CONTROL.EXTRA_BOXES' | translate
+                                                    }}" formControlName="extraBoxes" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-12 mt-xl-4 mt-4">
+                                <!-- observation -->
+                                <div class="form-row form-group">
+                                    <div class="col-md-12 p-0">
+                                        <label for="observation" class="col-12 p-0">
+                                            <b>{{
+                                                'DETAIL_CONTROL.OBSERVATION' | translate
+                                                }}</b>
+                                        </label>
+                                        <textarea name="observation" class="text-infor" id="observation" rows="6" readonly placeholder="{{
+                                                'DETAIL_CONTROL.OBSERVATION' | translate
+                                            }}" formControlName="observation"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- END observation -->
+                            </div>
+
+                            <div class="col-12 mt-xl-3 pt-xl-2 mt-3 pt-3">
+                                <div class="form-row form-group">
+                                    <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                                    justify-content-sm-between padding-col padding-document-table">
+                                        <div class="col-md-10 col-12 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                                            <span class="pl-4">{{
+                                                'DEVOLUTION.LIST_DEVOLUTION' | translate
+                                                }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 p-0">
+                                        <table id="details_devolution" style="width: 100%; text-align: center" class="table  p-0 table-bordered table-striped-delivery mb-0">
+                                            <thead class="table-head toggle-directions">
+                                                <tr>
+                                                    <th>{{ 'DEVOLUTION.PRODUCTS' | translate }}</th>
+
+                                                    <th style="border-right: 1px solid #7387c2 !important;">
+                                                        {{ 'DEVOLUTION.QUANTITY' | translate }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-12 mt-5 mb-1">
+                                <h4 class="title-albaran">{{ 'DETAIL_CONTROL.ALBARAN' | translate }}</h4>
+                                <hr class="hr-secondary mb-2 mt-2" />
+                            </div>
+
+                            <ng-container *ngIf="data && !data.isMultiDeliveryNote">
+                                <!-- deliveryNoteCode -->
+                                <div class="col-12 col-md-5 pr-sm-4">
+                                    <div class="form-row form-group mt-4">
+                                        <label for="deliveryNoteCode">
+                                            <b>{{ 'DETAIL_CONTROL.SHOW_DELIVERY_NOTES' | translate }}</b>
+                                        </label>
+                                        <input type="text" id="deliveryNoteCode" readonly class="form-control" placeholder="  {{
+                                                'DETAIL_CONTROL.SHOW_DELIVERY_NOTES' | translate
+                                            }}" formControlName="deliveryNoteCode" />
+                                    </div>
+                                </div>
+
+                                <!-- end deliveryNoteCode -->
+
+                                <div class="col-12 col-md-7 pl-sm-4 align-middle mt-5">
+                                    <div class="mt-4 text-right">
+                                        <button class="btn btn-clear btn-download" (click)="download()">
+                                            <img class="mr-2" src="assets/icons/download-delivery-notes.svg" />
+                                            <label for="">Descargar</label>
+
+                                        </button>
+
+                                        <button class="btn btn-clear btn-download" (click)="printMulti()">
+                                            <img class="mr-2" src="assets/icons/print-delivery-note.svg" />
+                                            <label for="">Imprimir</label>
+
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- end deliveryNoteCode -->
+
+
+                                <div class="col-12 col-md-5 pr-sm-4">
+
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-7 col-md-6 col-12">
+                                            <label for="dniDeliveryNote">
+                                                    <b>{{ 'DETAIL_CONTROL.DNI_ALBARAN_SHORT' | translate }}</b>
+                                                </label>
+                                            <input type="text" id="dniDeliveryNote" readonly class="form-control" placeholder="  {{
+                                                        'DETAIL_CONTROL.DNI_ALBARAN' | translate
+                                                    }}" formControlName="dniDeliveryNote" />
+                                        </div>
+                                        <div class="col-xl-6 col-lg-5 col-md-6 col-12">
+                                            <label for="nameDeliveryNote">
+                                                    <b>{{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}</b>
+                                                </label>
+                                            <input type="text" id="nameDeliveryNote" readonly class="form-control" placeholder=" {{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}" formControlName="nameDeliveryNote" />
+                                        </div>
+                                    </div>
+
+                                    <!--  <div class="form-row form-group">
+                                        <label for="nameDeliveryNote">
+                                                <b>{{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}</b>
+                                            </label>
+                                        <input type="text" id="nameDeliveryNote" readonly class="form-control" placeholder=" {{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}" formControlName="nameDeliveryNote" />
+                                    </div> -->
+                                </div>
+
+                                <!-- nameDeliveryNote -->
+
+                                <div class="col-12 col-md-5 offset-md-2" *ngIf="data && data.status_route_delivery_point.id === 3 ||  data.signatureTime">
+                                    <div class="row">
+                                        <div class="col-xl-10 col-9">
+                                            <label for="deliveryOrderCode">
+                                                <b>{{ 'DETAIL_CONTROL.NUMBER_ORDER' | translate }}</b>
+                                            </label>
+                                            <input type="text" id="deliveryOrderCode" class="form-control" placeholder=" {{ 'DETAIL_CONTROL.NUMBER_ORDER' | translate }}" formControlName="deliveryOrderCode" />
+                                        </div>
+                                        <div class="col-xl-2 col-3 align-self-end">
+                                            <button type="button" class="btn btn-primary btn-save" [disabled]="detailForm && detailForm.controls['deliveryOrderCode'].invalid " (click)="saveNotMultiple()">
+                                                <img src="assets/icons/optimmanage/save.svg">
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end nameDeliveryNote -->
+
+                                <!-- tabal de productos -->
+
+                                <div class="col-12 mt-3">
+                                    <div class="form-row form-group">
+                                        <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                                        justify-content-sm-between padding-col padding-document-table">
+                                            <div class="col-md-10 col-12 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                                                <span class="pl-4">{{
+                                                    'ORDERS.ORDERS_DETAIL.ORDER' | translate
+                                                    }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 p-0">
+                                            <table id="details_assigned" style="width: 100%; text-align: center" class="table table-responsive-md p-0 table-bordered table-striped-delivery mb-0">
+                                                <thead class="table-head toggle-directions">
+                                                    <tr>
+                                                        <th>{{ 'PRODUCTS.CODE' | translate }}</th>
+                                                        <th>{{ 'PRODUCTS.NAME_' | translate }}</th>
+                                                        <th>
+                                                            {{ 'PRODUCTS.QUANTITY' | translate }}
+                                                        </th>
+                                                        <th>{{ "PRODUCTS.U_MEASURE" | translate }}</th>
+                                                        <th>{{ 'PRODUCTS.UD' | translate }}</th>
+                                                        <th style="border-right: 1px solid #7387c2 !important;">
+                                                            {{ 'PRODUCTS.PRICE' | translate }}
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end tabla de productos -->
+                            </ng-container>
+
+
+                            <ng-container *ngIf="data && data.isMultiDeliveryNote">
+
+                                <div class="col-12 col-md-5 pl-sm-4">
+                                    <div class="form-row form-group mt-4">
+                                        <label for="deliveryNotes">
+                                            <b>{{ 'DETAIL_CONTROL.SHOW_DELIVERY_NOTES' | translate }}</b>
+                                        </label>
+                                        <select class="form-control" id="deliveryNotes" (change)="changeDeliveryNote($event.target.value)">
+                                            <option [value]="deliveryNote.id"
+                                                *ngFor="let deliveryNote of deliveryNotes">
+                                                {{ deliveryNote.deliveryNoteCode }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-7 pl-sm-4 align-middle mt-5" *ngIf="deliveryNoteId">
+                                    <div class="mt-4 text-right">
+                                        <button class="btn btn-clear btn-download" (click)="download()">
+                                            <img class="mr-2" src="assets/icons/download-delivery-notes.svg" />
+                                            <label for="">Descargar</label>
+
+                                        </button>
+
+                                        <button class="btn btn-clear btn-download" (click)="print()">
+                                            <img class="mr-2" src="assets/icons/print-delivery-note.svg" />
+                                            <label for="">Imprimir</label>
+
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- dni && name albaran -->
+
+                                <div class="col-12 col-md-5 pl-sm-4">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-7 col-md-6 col-12">
+                                            <label for="deliveryNoteCode">
+                                                    <b>{{ 'DETAIL_CONTROL.DNI_ALBARAN_SHORT' | translate }}</b>
+                                                </label>
+                                            <input type="text" id="deliveryNoteCode" readonly class="form-control" placeholder="  {{
+                                                        'DETAIL_CONTROL.DNI_ALBARAN' | translate
+                                                    }}" formControlName="dniDeliveryNote" />
+                                        </div>
+                                        <div class="col-xl-6 col-lg-5 col-md-6 col-12">
+                                            <label for="nameDeliveryNote">
+                                                    <b>{{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}</b>
+                                                </label>
+                                            <input type="text" id="nameDeliveryNote" readonly class="form-control" placeholder=" {{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}" formControlName="nameDeliveryNote" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end dni && name albaran -->
+
+                                <!-- btn  deliveryNoteOrdercode-->
+
+                                <div class="col-12 col-md-5 offset-md-2" *ngIf="data && data.status_route_delivery_point.id === 3 || (deliveryNoteSelected  && deliveryNoteSelected.signatureTime)">
+                                    <div class="row">
+                                        <div class="col-xl-10 col-9">
+                                            <label for="nameDeliveryNote">
+                                                <b>{{ 'DETAIL_CONTROL.NUMBER_ORDER' | translate }}</b>
+                                            </label>
+                                            <input type="text" id="deliveryNoteOrdercode" class="form-control" placeholder=" {{ 'DETAIL_CONTROL.NUMBER_ORDER' | translate }}" formControlName="deliveryNoteOrderCode" />
+                                        </div>
+                                        <div class="col-xl-2 col-3 align-self-end">
+                                            <button type="button" class="btn btn-primary btn-save" [disabled]="detailForm && detailForm.controls['deliveryNoteOrderCode'].invalid " (click)="save()">
+                                                <img src="assets/icons/optimmanage/save.svg">
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- end deliveryNoteOrdercode -->
+
+                                <!-- <div class="col-12 col-md-5">
+                                    <div class="form-row form-group mt-4">
+                                        <label for="deliveryNoteCode">
+                                            <b>{{ 'DETAIL_CONTROL.DNI_ALBARAN' | translate }}</b>
+                                        </label>
+                                        <input type="text" id="deliveryNoteCode" readonly class="form-control" placeholder="  {{
+                                                'DETAIL_CONTROL.DNI_ALBARAN' | translate
+                                            }}" formControlName="dniDeliveryNote" />
+                                    </div>
+                                </div> -->
+                                <!--  <div class="col-12 col-md-5 offset-md-2">
+                                    <div class="form-row form-group mt-4">
+                                        <label for="nameDeliveryNote">
+                                            <b>{{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}</b>
+                                        </label>
+                                        <input type="text" id="nameDeliveryNote" readonly class="form-control" placeholder=" {{ 'DETAIL_CONTROL.ALBARAN_NAME' | translate }}" formControlName="nameDeliveryNote" />
+                                    </div>
+                                </div> -->
+                                <div class="col-12 mt-3">
+                                    <div class="form-row form-group">
+                                        <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                                        justify-content-sm-between padding-col padding-document-table">
+                                            <div class="col-md-10 col-12 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                                                <span class="pl-4">{{
+                                                    'ORDERS.ORDERS_DETAIL.ORDER' | translate
+                                                    }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 p-0">
+                                            <table id="details_assigned" style="width: 100%; text-align: center" class="table table-responsive-md p-0 table-bordered table-striped-delivery mb-0">
+                                                <thead class="table-head toggle-directions">
+                                                    <tr>
+                                                        <th>{{ 'PRODUCTS.CODE' | translate }}</th>
+                                                        <th>{{ 'PRODUCTS.NAME_' | translate }}</th>
+                                                        <th>
+                                                            {{ 'PRODUCTS.QUANTITY' | translate }}
+                                                        </th>
+                                                        <th>{{ "PRODUCTS.U_MEASURE" | translate }}</th>
+                                                        <th>{{ 'PRODUCTS.UD' | translate }}</th>
+                                                        <th>
+                                                            {{ 'PRODUCTS.PRICE' | translate }}
+                                                        </th>
+                                                        <th style="border-right: 1px solid #7387c2 !important;">
+                                                            {{ 'DELIVERY_POINTS.STATE' | translate }}
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </ng-container>
+                        <ng-container *ngIf="tabOption === 2">
+                            <!-- tabla de factura no cobradas -->
+                            <div class="col-12 mt-3">
+                                <div class="form-row form-group">
+                                    <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                                    justify-content-sm-between padding-col padding-document-table">
+                                        <div class="col-md-10 col-12 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                                            <span class="pl-4">{{
+                                                'BILLS.INVOICE_NOT_COLLECTED' | translate
+                                                }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 p-0">
+                                        <table id="listBill" style="width: 100%; text-align: center" class="table table-responsive-md p-0 table-bordered table-striped-delivery mb-0">
+                                            <thead class="table-head toggle-directions">
+                                                <tr>
+                                                    <th>{{ 'PRODUCTS.CODE' | translate }}</th>
+                                                    <th>{{ 'BILLS.DRIVER' | translate }}</th>
+                                                    <th>
+                                                        {{ 'BILLS.AUTORIZED_BY' | translate }}
+                                                    </th>
+                                                    <th>{{'BILLS.DATE' | translate }}</th>
+
+                                                    <th style="border-right: 1px solid #7387c2 !important;">
+                                                        {{ 'BILLS.DOWNLOAD' | translate }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end tabla factura no cobradas -->
+
+                            <ng-container *ngIf="valorations && valorations.length > 0">
+
+                                <div class="col-12 extra-campo pt-3">
+                                    <label class="subtitle-general mb-0 w-100">
+                                        {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_CHECK' | translate }}
+                                    </label>
+                                </div>
+
+                                <div class="col-12 mt-2">
+
+                                    <div class="form-group mt-3">
+                                        <p class="vehicle-maintenance-status" style="font-size: 55px !important;" for="maintenanceVehicleStateType">
+                                            {{ countValoration() }}/{{ valorations.length }}
+
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-row mt-4 mb-5 pb-5">
+                                        <div class="col-12 col-md-5 lines-for-col-top" [ngClass]="{'offset-md-2 lines-for-col-bottom': i % 2 > 0 }" *ngFor="let item of valorations; let i = index">
+
+                                            <div class="row mt-3">
+                                                <div class="col-2 text-center" *ngIf="showValoration(item.id) != undefined">
+                                                    <ng-container *ngIf="showValoration(item.id)">
+                                                        <img src="assets/icons/optimmanage/check-green.svg">
+                                                    </ng-container>
+                                                    <ng-container *ngIf="!showValoration(item.id)">
+                                                        <img src="assets/icons/optimmanage/x-roja.svg">
+                                                    </ng-container>
+                                                </div>
+
+                                                <div class=" text-left" [ngClass]="{'p-0 col-10': showValoration(item.id) != undefined ,'col-12':showValoration(item.id) === undefined }">
+                                                    <p [title]="item.name" class="font-checkd">
+                                                        <!-- {{ sliceString(item.name) }} -->
+                                                        {{ item.name }}
+                                                    </p>
+                                                </div>
+
+
+
+                                                <!-- end comments -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <!-- end check indicativos -->
+
+                                <!-- end check -->
+                            </ng-container>
+
+                        </ng-container>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

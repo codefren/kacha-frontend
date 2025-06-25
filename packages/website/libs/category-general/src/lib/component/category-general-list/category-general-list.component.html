@@ -1,0 +1,125 @@
+<div class="categori-list pt-0 padding-body">
+
+    <div class="">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'CONFIGURATIONS.CATEGORY.GENERAL_CATEGORIES' | translate }}</p>
+                <hr class="line-primary" />
+            </div>
+        </div>
+
+
+
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-sm-12 text-right">
+                        <p class="info-texto mr-4">
+                            {{ 'GENERAL.THESE_ARE_THE_CATEGORIES_THAT_YOUR_CLIENTS_WILL_SEE_FROM_THE_MOBILE' | translate }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-sm-12 text-left">
+                        <button class="btn btn-default btn-sm mt-1 ml-2 btn-block" (click)="newCategoryGeneral()">
+                            {{ 'CONFIGURATIONS.CATEGORY.ADD_CATEGORY' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-2 col-sm-12 text-left">
+                        <button class="btn btn-cancel btn-sm mt-1 ml-2  btn-block" (click)="newSubCategoryGeneral()">
+                            {{ 'CONFIGURATIONS.CATEGORY.ADD_SUB_CATEGORY' | translate }}
+                        </button>
+                    </div>
+                </div>
+                <!--    <hr class="line-grey" /> -->
+            </div>
+        </div>
+
+        <div class="container">
+            <hr class="hr-secondary mb-5">
+        </div>
+
+    </div>
+
+
+    <div class="line-spacing-chip"></div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 mt-3">
+            <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <!-- card category -->
+                <div class="card border mb-3">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="h2-table card-title m0">
+                            <span class="d accordion-toggle" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                {{ 'CONFIGURATIONS.CATEGORY.CATEGORIES' | translate }}
+                            </span>
+
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                        <div class="card-body p-0">
+                            <div class="col-12 p-0">
+                                <table id="category_general" style="width: 100%; text-align: center" class="table table-bordered table-striped table-responsive-lg mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>{{ 'CONFIGURATIONS.CODE' |translate }}</th>
+                                            <th>{{ 'CONFIGURATIONS.NAME' |translate }}</th>
+                                            <th>{{ 'CONFIGURATIONS.CATEGORY.CREATED_BY' | translate }}</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- SUb-categories -->
+                <div class="card border mb-3">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="h2-table card-title m0">
+                            <span class="d accordion-toggle" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                               {{ 'CONFIGURATIONS.CATEGORY.SUBCATEGORIES' | translate }}
+                            </span>
+
+                        </h2>
+                    </div>
+
+                    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
+                        <div class="card-body p-0">
+                            <div class="col-12 p-0">
+                                <table id="sub_category_general" style="width: 100%; text-align: center" class="table table-bordered table-striped table-responsive-lg mb-0">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th></th> -->
+                                            <th>ID</th>
+                                            <th>{{ 'CONFIGURATIONS.CODE' |translate }}</th>
+                                            <th>{{ 'CONFIGURATIONS.NAME' |translate }}</th>
+                                            <th>{{ 'CONFIGURATIONS.CATEGORY.CATEGORY' |translate }}</th>
+                                            <!-- <th>{{ 'CONFIGURATIONS.CATEGORY.CREATION_DATE' | translate }}</th> -->
+                                            <th>{{ 'CONFIGURATIONS.CATEGORY.CREATED_BY' | translate }}</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

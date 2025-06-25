@@ -1,0 +1,121 @@
+<div class="orders-modal-search-client">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-3">
+                <i class="fas fa-times close-button" (click)="closeDialog()"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ message }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!--filter general  -->
+        <div class="row pt-2 orders-modal-search-client pl-2">
+            <div class="col-md-4 col-6">
+                <div class="pt-2 mr-4 ml-4 custom-control-inline">
+                    <div class="round ">
+                        <input type="radio" name="checkAdd" id="web" (click)="onChangeShowActive('web')" />
+                        <label for="web" #web></label>
+                    </div>
+                    <p class="options pl-4" (click)="web.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.WEB' | translate }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-6">
+                <div class="pt-2 mr-4 ml-4 custom-control-inline">
+                    <div class="round ">
+                        <input type="radio" name="checkAdd" id="app" (click)="onChangeShowActive('app')" />
+                        <label for="app" #app></label>
+                    </div>
+                    <p class="options pl-4" (click)="app.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.APP' | translate }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-6">
+                <div class="pt-2 mr-4 ml-4 custom-control-inline">
+                    <div class="round ">
+                        <input type="radio" name="checkAdd" id="all" (click)="onChangeShowActive('all')" />
+                        <label for="all" #all></label>
+                    </div>
+                    <p class="options pl-4" (click)="all.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.ALL' | translate }}
+                    </p>
+                </div>
+            </div>
+            <!--  <div class="col-md-4 col-6">
+                <div class="pt-2 ml-4 custom-control-inline">
+                    <div class="round ">
+                        <input type="checkbox" name="checkAdd" id="evaluation" />
+                        <label for="evaluation" #evaluation></label>
+                    </div>
+                    <p class="options pl-4" (click)="evaluation.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.EVALUATION' | translate }}
+                    </p>
+                </div>
+            </div> -->
+            <!--  <div class="col-md-4 col-6">
+                <div class="pt-2  ml-4 custom-control-inline">
+                    <div class="round ">
+                        <input type="checkbox" name="checkAdd" id="optimized" />
+                        <label for="optimized" #optimized></label>
+                    </div>
+                    <p class="options pl-4" (click)="optimized.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.OPTIMIZED' | translate }}
+                    </p>
+                </div>
+            </div> -->
+            <!--  <div class="col-md-4 col-6">
+                <div class="pt-2 mr-4 ml-4 custom-control-inline">
+
+                    <div class="round">
+                        <input type="checkbox" name="checkAdd" id="all2" />
+                        <label for="all2" #all2></label>
+                    </div>
+                    <p class="options pl-4" (click)="all2.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.ALL' | translate }}
+                    </p>
+                </div>
+            </div> -->
+        </div>
+        <!-- end filter general -->
+
+        <!-- filter for route -->
+        <!--  <div class="row pt-2 pl-2">
+            <div class="col-12">
+                <label class="title-select ml-4">{{ 'ORDERS.SELECT_ROUTES' | translate }}</label>
+            </div>
+            <div class="col-md-12 col-12" *ngFor="let item of [0,1,2,3]; let i=index">
+                <div class="pt-2 mr-4 ml-4 custom-control-inline">
+                    <div class="round ">
+                        <input type="checkbox" name="checkAdd" [id]="i" />
+                        <label [for]="i" #app></label>
+                    </div>
+                    <p class="options pl-4" (click)="app.click()">
+                        {{ 'ORDERS.ORDERS_PRINT.ALL' | translate }}
+                    </p>
+                </div>
+            </div>
+        </div> -->
+        <!-- end filter for route -->
+
+        <!-- buttons -->
+        <div class="row mb-4 mt-3">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="activeModal.close(false)">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                <button class="btn btn-primary size-btn-modal modal-confirm" [disabled]="!selected" (click)="getPdfOrder(resource)">
+                    {{ 'ORDERS.ORDERS_PRINT.PRINT' | translate }}
+                </button>
+            </div>
+        </div>
+        <!-- end buttons -->
+    </div>
+</div>

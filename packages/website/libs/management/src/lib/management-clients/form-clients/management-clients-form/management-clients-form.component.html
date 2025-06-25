@@ -1,0 +1,378 @@
+<div class="easyroute-management-clients-form">
+    <section class="card">
+        <header class="card-header card-header-color">
+            <h2 class="card-title card-title-custon text-center">{{ 'DELIVERY_POINTS.POINT' | translate }}</h2>
+        </header>
+        <div class="card-body" *ngIf="deliveryZoneName_messages && FormGroup">
+            <form [formGroup]="FormGroup">
+                <div class="form-row">
+                    <div class="form-group col-md-3  mb-lg-0"
+                        [ngClass]="{'has-danger': FormGroup.controls['id'].invalid  && (FormGroup.controls['id'].dirty || FormGroup.controls['id'].touched)}">
+                        <label for="id"><span class="text-danger">*
+                            </span>{{ 'DELIVERY_POINTS.CLIENT_CODE' | translate }}</label>
+                        <input *ngIf="data.point.id > 0 || data.point.id !=''" type="text" readonly class="form-control"
+                            id="id" formControlName="id" placeholder="{{ 'DELIVERY_POINTS.CLIENT_CODE' | translate }}"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['id'].invalid  && (FormGroup.controls['id'].dirty || FormGroup.controls['id'].touched)}">
+                        <input *ngIf="data.point.id == 0" type="text" class="form-control" id="id" formControlName="id"
+                            placeholder="{{ 'DELIVERY_POINTS.CLIENT_CODE' | translate }}"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['id'].invalid  && (FormGroup.controls['id'].dirty || FormGroup.controls['id'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.id">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('id').hasError(validation.type) && (FormGroup.get('id').dirty || FormGroup.get('id').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-3  mb-lg-0">
+                        <div class="form-group"
+                            [ngClass]="{'has-danger': FormGroup.controls['deliveryZoneId'].invalid  && (FormGroup.controls['deliveryZoneId'].dirty || FormGroup.controls['deliveryZoneId'].touched)}">
+                            <label class="control-label letter-app" for="deliveryZoneId"><span class="text-danger">*
+                                </span>{{ 'DELIVERY_ZONES.ZONE' | translate }}</label>
+                            <div class="row">
+                                <ng-container *ngIf="!showSelect">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                        <div class="fa-3x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="showSelect">
+                                    <div class="col-12">
+                                        <select class="form-control letter-app" formControlName="deliveryZoneId">
+                                            <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                                            <option *ngFor="let zone of (zones | async)" [value]="zone.id">
+                                                {{ zone.name }}</option>
+                                        </select>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <ng-container *ngFor="let validation of deliveryZoneName_messages.deliveryZoneId">
+                                <small class="form-control-feedback text-danger"
+                                    *ngIf="FormGroup.get('deliveryZoneId').hasError(validation.type) && (FormGroup.get('deliveryZoneId').dirty || FormGroup.get('deliveryZoneId').touched)">
+                                    {{ validation.message }} </small>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 mb-2 mb-lg-0"
+                        [ngClass]="{'has-danger': FormGroup.controls['name'].invalid  && (FormGroup.controls['name'].dirty || FormGroup.controls['name'].touched)}">
+                        <label for="name"><span class="text-danger">*
+                            </span>{{ 'DELIVERY_POINTS.NAME_' | translate }}</label>
+                        <input type="text" class="form-control" id="name" formControlName="name"
+                            placeholder="{{ 'DELIVERY_POINTS.NAME_' | translate }}"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['name'].invalid  && (FormGroup.controls['name'].dirty || FormGroup.controls['name'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.name">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('name').hasError(validation.type) && (FormGroup.get('name').dirty || FormGroup.get('name').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+                    <div class="form-group col-md-3 mb-2 mb-lg-0"
+                        [ngClass]="{'has-danger': FormGroup.controls['nif'].invalid  && (FormGroup.controls['nif'].dirty || FormGroup.controls['nif'].touched)}">
+                        <label for="name">{{ 'DELIVERY_POINTS.NIF' | translate }}</label>
+                        <input type="text" class="form-control" id="nif" formControlName="nif"
+                            placeholder="{{ 'DELIVERY_POINTS.NIF' | translate }}"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['nif'].invalid  && (FormGroup.controls['nif'].dirty || FormGroup.controls['nif'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.nif">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('nif').hasError(validation.type) && (FormGroup.get('nif').dirty || FormGroup.get('nif').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-2 mt-2 mb-lg-0" [ngClass]="{'has-danger': FormGroup.controls['address'].invalid  
+                                    && (FormGroup.controls['address'].dirty 
+                                    || FormGroup.controls['address'].touched)
+                                    }">
+
+                        <label for="name"><span class="text-danger">* </span>
+                            {{ 'DELIVERY_POINTS.ADDRESS' | translate }} </label>
+
+                        <div class="row">
+                            <ng-container *ngIf="showAddress">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="address" formControlName="address"
+                                            placeholder="{{ 'DELIVERY_POINTS.ADDRESS' | translate }}" [ngClass]="{'form-control-danger': FormGroup.controls['address'].invalid  
+                                                        && (FormGroup.controls['address'].dirty 
+                                                        || FormGroup.controls['address'].touched)}">
+                                        <div class="input-group-append">
+                                            <a class="colorLink input-group-text" (click)="searchAddress()"
+                                                disabled="false" data-toggle="tooltip" data-placement="top"
+                                                title="¿Otras coordenadas?">
+                                                <i class="fas fa-sync"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <ng-container *ngFor="let validation of deliveryZoneName_messages.address">
+                                        <small class="form-control-feedback text-danger"
+                                            *ngIf="FormGroup.get('address').hasError(validation.type) && (FormGroup.get('address').dirty || FormGroup.get('address').touched)">
+                                            {{ validation.message }} </small>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!showAddress">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <div class="fa-3x">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-3 mb-2 mt-2 mb-lg-0" [ngClass]="{'has-danger': FormGroup.controls['coordinatesLatitude'].invalid  
+                                    && (FormGroup.controls['coordinatesLatitude'].dirty 
+                                    || FormGroup.controls['coordinatesLatitude'].touched)
+                                    }">
+                        <label for="coordinatesLatitude"><span class="text-danger">*
+                            </span>{{ 'DELIVERY_POINTS.LATITUDE' | translate }}</label>
+                        <input type="number" id="coordinatesLatitude" class="form-control" autocomplete="off"
+                            formControlName="coordinatesLatitude" placeholder="Ej: 10.4874486"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['coordinatesLatitude'].invalid  && (FormGroup.controls['coordinatesLatitude'].dirty || FormGroup.controls['coordinatesLatitude'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.coordinatesLatitude">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('coordinatesLatitude').hasError(validation.type) && (FormGroup.get('coordinatesLatitude').dirty || FormGroup.get('coordinatesLatitude').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+                    <div class="form-group col-md-3 mt-2 mb-2 mb-lg-0" [ngClass]="{'has-danger': FormGroup.controls['coordinatesLongitude'].invalid  
+                                    && (FormGroup.controls['coordinatesLongitude'].dirty 
+                                    || FormGroup.controls['coordinatesLongitude'].touched)
+                                    }">
+                        <label for="coordinatesLongitude"><span class="text-danger">*
+                            </span>{{ 'DELIVERY_POINTS.LENGTH' | translate }}</label>
+                        <input type="number" id="coordinatesLongitude" class="form-control" autocomplete="off"
+                            formControlName="coordinatesLongitude" placeholder="Ej: -66.4874486"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['coordinatesLongitude'].invalid  && (FormGroup.controls['coordinatesLongitude'].dirty || FormGroup.controls['coordinatesLongitude'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.coordinatesLongitude">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('coordinatesLongitude').hasError(validation.type) && (FormGroup.get('coordinatesLongitude').dirty || FormGroup.get('coordinatesLongitude').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-3 mb-1 mb-lg-0">
+                        <label for="name">{{ 'DELIVERY_POINTS.POSTAL_CODE' | translate }}</label>
+                        <input type="text" class="form-control" id="postalCode" formControlName="postalCode"
+                            placeholder="{{ 'DELIVERY_POINTS.POSTAL_CODE' | translate }}">
+                    </div>
+                    <div class="form-group col-md-3 mb-1 mb-lg-0"
+                        [ngClass]="{'has-danger': FormGroup.controls['province'].invalid  && (FormGroup.controls['province'].dirty || FormGroup.controls['province'].touched)}">
+                        <label for="name">{{ 'DELIVERY_POINTS.PROVINCE' | translate }}</label>
+                        <input type="text" class="form-control" id="province" formControlName="province"
+                            placeholder="{{ 'DELIVERY_POINTS.PROVINCE' | translate }}"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['province'].invalid  && (FormGroup.controls['province'].dirty || FormGroup.controls['province'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.province">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('province').hasError(validation.type) && (FormGroup.get('province').dirty || FormGroup.get('province').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+                    <div class="form-group col-md-3 mb-1 mb-lg-0" [ngClass]="{'has-danger': FormGroup.controls['email'].invalid  && 
+                            (FormGroup.controls['email'].dirty || 
+                            FormGroup.controls['email'].touched) ||
+                            focus}">
+                        <label for="name">{{ 'DELIVERY_POINTS.EMAIL' | translate }}</label>
+                        <input type="text" class="form-control" id="email" formControlName="email"
+                            (click)="changeEmailFocus()" placeholder="{{ 'DELIVERY_POINTS.EMAIL' | translate }}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.email">
+                            <small class="form-control-feedback text-danger" *ngIf="FormGroup.get('email').hasError(validation.type) 
+                                && (FormGroup.get('email').dirty 
+                                || FormGroup.get('email').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+                    <div class="form-group col-md-3 mb-1 mb-lg-0"
+                        [ngClass]="{'has-danger': FormGroup.controls['phoneNumber'].invalid  && (FormGroup.controls['phoneNumber'].dirty || FormGroup.controls['phoneNumber'].touched)}">
+                        <label for="name">{{ 'DELIVERY_POINTS.PHONE' | translate }}</label>
+                        <input type="text" class="form-control" mask="999999999999" prefix="+" id="phoneNumber"
+                            formControlName="phoneNumber" placeholder="{{ 'DELIVERY_POINTS.PHONE' | translate }}"
+                            [ngClass]="{'form-control-danger': FormGroup.controls['phoneNumber'].invalid  && (FormGroup.controls['phoneNumber'].dirty || FormGroup.controls['phoneNumber'].touched)}">
+                        <ng-container *ngFor="let validation of deliveryZoneName_messages.phoneNumber">
+                            <small class="form-control-feedback text-danger"
+                                *ngIf="FormGroup.get('phoneNumber').hasError(validation.type) && (FormGroup.get('phoneNumber').dirty || FormGroup.get('phoneNumber').touched)">
+                                {{ validation.message }} </small>
+                        </ng-container>
+                    </div>
+
+                    <div class="form-group col-md-3 mb-1 mb-lg-0  pt-3">
+                        <label class="control-label letter-app"
+                            for="companyAssociatedId">{{ 'COMPANIES.ASSOCIATED_COMPANIES' | translate }}</label>
+                        <div class="row">
+                            <ng-container *ngIf="!showcompanys">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <div class="fa-3x">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showcompanys">
+                                <div class="col-12">
+                                    <select class="form-control letter-app" formControlName="companyAssociatedId">
+                                        <option value="null">{{ 'COMPANIES.SELECT' | translate }}</option>
+                                        <option *ngFor="let item of associatedCompany" [value]="item.id">{{ item.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-row margin">
+                    <div class="col-md-6">
+                        <span class="col-md-12 mb-3 mb-lg-0 p-0">
+                            {{ 'DELIVERY_POINTS.DEFAULT_SCHEDULE' | translate }}</span>
+                        <br>
+                        <div class="row mt-1">
+                            <div class="form-group col-md-6 mb-6 mb-lg-0">
+                                <label for="name">{{ 'DELIVERY_POINTS.START' | translate }}</label>
+                                <input type="time" class="form-control" id="deliveryWindowStart"
+                                    formControlName="deliveryWindowStart"
+                                    placeholder="{{ 'DELIVERY_POINTS.START' | translate }}"
+                                    (change)="changetime($event, deliveryWIndowsStart)">
+                                <ng-container *ngFor="let validation of deliveryZoneName_messages.deliveryWindowStart">
+                                    <small class="form-control-feedback text-danger" *ngIf="FormGroup.get('deliveryWindowStart').hasError(validation.type) 
+                                        && (FormGroup.get('deliveryWindowStart').dirty 
+                                        || FormGroup.get('deliveryWindowStart').touched)">
+                                        {{ validation.message }}</small>
+                                </ng-container>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-6 mb-lg-0">
+                                <label for="name">{{ 'DELIVERY_POINTS.END' | translate }}</label>
+                                <input type="time" class="form-control" id="deliveryWindowEnd"
+                                    formControlName="deliveryWindowEnd"
+                                    placeholder="{{ 'DELIVERY_POINTS.END' | translate }}"
+                                    (change)="changetime($event ,deliveryWIndowsEnd)">
+                                <ng-container *ngFor="let validation of deliveryZoneName_messages.deliveryWindowEnd">
+                                    <small class="form-control-feedback text-danger" *ngIf="FormGroup.get('deliveryWindowEnd').hasError(validation.type) 
+                                        && (FormGroup.get('deliveryWindowEnd').dirty 
+                                        || FormGroup.get('deliveryWindowEnd').touched)">
+                                        {{ validation.message }}</small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <span class="col-md-12 mb-3 mb-lg-0 p-0">
+                            {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.DISCHARGING_TIME' | translate }}
+                        </span>
+                        <div class="row mt-1">
+                            <div class="form-group col-md-6 mb-3 mb-lg-0"
+                                [ngClass]="{'has-danger': FormGroup.controls['serviceTimeMinute'].invalid  && (FormGroup.controls['serviceTimeMinute'].dirty || FormGroup.controls['serviceTimeMinute'].touched)}">
+                                <label for="name"><span class="text-danger">*
+                                    </span>{{'GENERAL.MINUTES' | translate}}</label>
+                                <input class="form-control" id="serviceTimeMinute" type="number" min="0"
+                                    formControlName="serviceTimeMinute" placeholder="{{'GENERAL.MINUTES' | translate}}"
+                                    [ngClass]="{'form-control-danger': FormGroup.controls['serviceTimeMinute'].invalid  && (FormGroup.controls['serviceTimeMinute'].dirty || FormGroup.controls['serviceTimeMinute'].touched)}">
+                                <ng-container *ngFor="let validation of deliveryZoneName_messages.serviceTimeMinute">
+                                    <small class="form-control-feedback text-danger"
+                                        *ngIf="FormGroup.get('serviceTimeMinute').hasError(validation.type) && (FormGroup.get('serviceTimeMinute').dirty || FormGroup.get('serviceTimeMinute').touched)">
+                                        {{ validation.message }} </small>
+                                </ng-container>
+                            </div>
+                            <div class="form-group col-md-6 mb-3 mb-lg-0"
+                                [ngClass]="{'has-danger': FormGroup.controls['serviceTimeSeconds'].invalid  && (FormGroup.controls['serviceTimeSeconds'].dirty || FormGroup.controls['serviceTimeSeconds'].touched)}">
+                                <label for="name"><span class="text-danger">*
+                                    </span>{{'GENERAL.SECONDS' | translate}}</label>
+                                <input class="form-control" id="name" type="number" min="0"
+                                    formControlName="serviceTimeSeconds" [min]="0" [max]="24 * 60 - 1"
+                                    placeholder="{{'GENERAL.SECONDS' | translate}}"
+                                    [ngClass]="{'form-control-danger': FormGroup.controls['serviceTimeSeconds'].invalid  && (FormGroup.controls['serviceTimeSeconds'].dirty || FormGroup.controls['serviceTimeSeconds'].touched)}">
+                                <ng-container *ngFor="let validation of deliveryZoneName_messages.serviceTimeSeconds">
+                                    <small class="form-control-feedback text-danger"
+                                        *ngIf="FormGroup.get('serviceTimeSeconds').hasError(validation.type) && (FormGroup.get('serviceTimeSeconds').dirty || FormGroup.get('serviceTimeSeconds').touched)">
+                                        {{ validation.message }} </small>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row mt-2">
+                    <div class="col-md-12">
+                        <span class="col-md-12 mb-3 mb-lg-0 p-0">{{ 'DELIVERY_POINTS.LEAD_TIME' | translate }}:</span>
+                        <br>
+                        <p class="font-italic m-0">
+                            Este es el tiempo que le permite a este cliente que el vehículo esté esperando a que habrá
+                            en vez de ir a hacer otros clientes.
+                        </p>
+                        <div class="row mt-2">
+                            <div class="form-group col-md-3 mb-3 mb-lg-0">
+                                <label for="name">{{'GENERAL.HOURS' | translate}}</label>
+                                <input class="form-control" id="hours" type="number" min="0" max="23"
+                                    formControlName="hours" placeholder="{{'GENERAL.HOURS' | translate}}">
+                            </div>
+                            <div class="form-group col-md-3 mb-3 mb-lg-0">
+                                <label for="name">{{'GENERAL.MINUTES' | translate}}</label>
+                                <input type="number" class="form-control" id="minutes" min="0" max="59"
+                                    formControlName="minutes" placeholder="{{'GENERAL.MINUTES' | translate}}">
+                            </div>
+                            <div class="form-group col-md-3 mb-3 mb-lg-0">
+                                <label for="name">{{'GENERAL.SECONDS' | translate}}</label>
+                                <input type="number" class="form-control" id="name" min="0" max="59"
+                                    formControlName="seconds" placeholder="{{'GENERAL.SECONDS' | translate}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="col-md-12">
+                        <span class="col-md-12 mb-3 mb-lg-0 p-0">{{ 'DELIVERY_POINTS.DELAY_TIME' | translate }}:</span>
+                        <br>
+                        <p class="font-italic m-0">
+                            Este es el tiempo que permite que le llegue mas tarde de la hora máxima de entrega.
+                        </p>
+                        <div class="row mt-2">
+                            <div class="form-group col-md-3 mb-3 mb-lg-0">
+                                <label for="name">{{'GENERAL.HOURS' | translate}}</label>
+                                <input class="form-control" id="hours" type="number" min="0" max="23"
+                                    formControlName="hours_delay" placeholder="{{'GENERAL.HOURS' | translate}}">
+                            </div>
+                            <div class="form-group col-md-3 mb-3 mb-lg-0">
+                                <label for="name">{{'GENERAL.MINUTES' | translate}}</label>
+                                <input type="number" class="form-control" id="minutes" min="0" max="59"
+                                    formControlName="minutes_delay" placeholder="{{'GENERAL.MINUTES' | translate}}">
+                            </div>
+                            <div class="form-group col-md-3 mb-3 mb-lg-0">
+                                <label for="name">{{'GENERAL.SECONDS' | translate}}</label>
+                                <input type="number" class="form-control" id="name" min="0" max="59"
+                                    formControlName="seconds_delay" placeholder="{{'GENERAL.SECONDS' | translate}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+
+                    <div class="form-group col-sm-9 col-12">
+                        <div class="form-check checkbox-custom chekbox-primary">
+                            <input type="checkbox" formControlName="sendDeliveryNoteMail" id="sendDeliveryNoteMail"
+                                class="chk-col-light-blue" (change)="changeSendDeliveryNoteMail($event.target.checked)">
+                            <label for="sendDeliveryNoteMail">
+                                {{ 'DELIVERY_POINTS.END_DELIVERY_NOTE_EMAIL' | translate }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-6 col-6 text-center">
+                    <button class="btn btn-default modal-dismiss"
+                        (click)="closeDialog([false, null])">{{ 'GENERAL.CANCEL' | translate }}</button>
+                </div>
+                <div class="col-md-6 col-6 text-center">
+                    <button class="btn btn-dark modal-confirm" [disabled]="!FormGroup.valid"
+                        (click)="submit()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

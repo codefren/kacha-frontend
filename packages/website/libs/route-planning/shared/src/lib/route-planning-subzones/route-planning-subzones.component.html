@@ -1,0 +1,29 @@
+<div
+    fxLayout="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap="4px"
+    class="easyroute-route-planning-subzones p-3"
+    [ngClass]="{'isOptimized': isOptimized}"
+>
+    <div class="row pr-0" style="width: 100%;">
+        <div class="col-9">
+            <h3>Esta multiruta engloba las rutas siguientes:</h3>
+        </div>
+        <div class="col-3 text-right pr-0">
+            <button class="btn link split-zones pr-0" (click)="splitAll()">Separar todas</button>
+        </div>
+    </div>
+    
+    <mat-chip-list class="subzones-chip-list" fxLayout="row wrap" fxLayoutGap="5px">
+        <mat-chip
+            [ngClass]="{'MatOptimized': isOptimized, 'notOptimized':!isOptimized }"
+            *ngFor="let subzone of (subZones | keyvalue); trackBy: trackById"
+            [selectable]="false"
+            [removable]="true"
+            (removed)="removeSubzone(subzone.value.id)"
+        >
+            {{ subzone.value.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+</div>

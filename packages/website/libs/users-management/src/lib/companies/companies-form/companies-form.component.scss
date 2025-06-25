@@ -1,0 +1,60 @@
+.companies-form {
+    .modal-dismiss {
+        margin-left: 1em;
+    }
+    .text-white {
+        color: white !important;
+    }
+    .toggle-directions {
+        background: #444A60;
+        //border-radius: 15px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397C;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .disabeld-col {
+        padding: 14px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        width: 14%;
+        padding: 14px;
+    }
+    .table th,
+    .table td {
+        vertical-align: middle;
+        border: 0px solid #dee2e6;
+    }
+    table td {
+        color: #1d1d1d;
+        font-weight: lighter;
+        font-size: 14px;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f1f4ff !important;
+    }
+    .date-size {
+        font-size: 12px;
+    }
+}

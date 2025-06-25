@@ -1,0 +1,133 @@
+<div class="storage">
+
+    <div class="card">
+
+        <div class="card-body p-xl-4">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <p class="sub-title-storage mb-2">Tiempo de almacenamiento</p>
+
+                    <p class="text-information-storage">Selecciona cuanto tiempo quieres que permanezcan los chats en la bandeja de entrada. Al pasar esos días esos chats serán eliminados del histórico de Polpoo.</p>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xl-4 col-12 padding-l-hidden">
+
+                    <div class="border-special mb-3">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="radio" id="one" value="1" name="storageDay" [checked]="companyPreferenceChat.storageDay == 1" (change)="changeCompanyPreferenceChat('storageDay', $event.target.value)" />
+
+                                <label for="one"></label>
+
+                            </div>
+
+                            <label title="{{ 'CHAT.SETTING.ONE_DAY' | translate }}" for="one" class="label-check point pl-2">
+        
+                                {{ 'CHAT.SETTING.ONE_DAY' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 padding-l-hidden">
+
+                    <div class="border-special mb-3">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="radio" id="two" value="2" name="storageDay" [checked]="companyPreferenceChat.storageDay == 2" (change)="changeCompanyPreferenceChat('storageDay', $event.target.value)" />
+
+                                <label for="two"></label>
+
+                            </div>
+
+                            <label title="{{ 'CHAT.SETTING.TWE_DAYS' | translate }}" for="two" class="label-check point pl-2">
+        
+                                {{ 'CHAT.SETTING.TWE_DAYS' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-4 col-12 padding-l-hidden">
+
+                    <div class="border-special mb-3">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="radio" id="seven" value="7" name="storageDay" [checked]="companyPreferenceChat.storageDay == 7" (change)="changeCompanyPreferenceChat('storageDay', $event.target.value)" />
+
+                                <label for="seven"></label>
+
+                            </div>
+
+                            <label title="{{ 'CHAT.SETTING.SEVEN_DAYS' | translate }}" for="seven" class="label-check point pl-2">
+        
+                                {{ 'CHAT.SETTING.SEVEN_DAYS' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-4 col-12 padding-l-hidden">
+
+                    <div class="border-special mb-3">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="radio" id="thirty" value="30" name="storageDay" [checked]="companyPreferenceChat.storageDay == 30" (change)="changeCompanyPreferenceChat('storageDay', $event.target.value)" />
+
+                                <label for="thirty"></label>
+
+                            </div>
+
+                            <label title="{{ 'CHAT.SETTING.THIRTY_DAYS' | translate }}" for="thirty" class="label-check point pl-2">
+        
+                                {{ 'CHAT.SETTING.THIRTY_DAYS' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

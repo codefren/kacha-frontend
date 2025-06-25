@@ -1,0 +1,403 @@
+<div class="row justify-content-center mt-4" *ngIf="company && rateForm && rateMessages">
+    <form [formGroup]="rateForm" class="padding-form" style="width: 100%" novalidate>
+
+        <div class="row mb-3">
+
+            <div class="col-12">
+                <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                    {{ 'RATES_AND_MODULES.RATE' | translate}}
+                </h3>
+            </div>
+
+            <!-- SELECCION DE Tarifa -->
+            <div class="col-12 col-md-5 pl-sm-4">
+                <div class="form-row form-group mb-4">
+                    <label>Tarifa aplicada</label>
+
+                    <ng-container *ngIf="!loadingRate">
+                        <div class="text-center p-2">
+                            <div class="fa-3x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="packList.length > 0 && loadingPack">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <select class="form-control letter-app" id="companyProfileTypeId" formControlName="rateId" (change)="changeRate($event.target.value)">
+                                    <option [value]="0">{{ 'Seleccione...' }}</option>
+                                    <option *ngFor="let rate of rates" [value]="rate.id">
+                                        {{ rate.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="loadingPack == 'error'">
+                        <div class="row mt-5 justify-content-center align-items-center h-100">
+
+                            <p class="text-danger text-center pointer" (click)="getPack()">
+                                {{ 'RATES_AND_MODULES.THERE_WAS' | translate }}
+                                <ins>{{ 'RATES_AND_MODULES.HERE' | translate }}</ins>!
+                            </p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <!-- Maximo de usuarios y boton para agregar más -->
+
+            <div class="col-12 col-md-3 offset-md-1 pl-sm-4">
+                <div class="form-row form-group">
+                    <label for="vehicles">
+                        {{'RATES_AND_MODULES.MAXIMUM_USERS' | translate}}
+                    </label>
+                    <input type="number" class="form-control" id="users" disabled="true" formControlName="maxUser" placeholder="0" />
+                </div>
+            </div>
+            <div class="col-12 col-md-3 pl-sm-4 align-self-md-center">
+                <button class="btn btn-primary no-round btn-block" (click)="addAditionalUser()" [disabled]="!(+rateForm.get('rateId').value > 0)">+ Añadir usuario</button>
+            </div>
+            <!--FIn-->
+
+            <!-- SETUP -->
+            <div class="col-12 col-md-4 pl-sm-4">
+                <div class="form-row form-group mt-4 mb-4">
+                    <label for="setupPrice">
+                        Set Up
+                    </label>
+                    <input type="number" disabled="true" min="0" max="999999" disabled="true" class="form-control" formControlName="setupPrice" />
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 pl-sm-4">
+                <div class="form-row form-group mt-4">
+                    <label for="suplementarySetup">
+                        Suplemento Set Up
+                    </label>
+                    <input type="number" min="0" max="999999" class="form-control" id="suplementarySetup" formControlName="suplementarySetup" (focusout)="changeTotalPrice($event.target.value)" />
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 pl-sm-4">
+                <div class="form-row form-group mt-4">
+                    <label for="setupPriceIva">
+                        {{'RATES_AND_MODULES.TOTAL_IVA' | translate}}
+                    </label>
+                    <input type="number" class="form-control" id="setupPriceIva" disabled="true" formControlName="setupPriceIva" placeholder="{{'RATES_AND_MODULES.TOTAL_IVA' | translate}}" />
+                </div>
+            </div>
+
+            <!--END SETUP -->
+
+            <!-- Montly-->
+            <div class="col-12 col-md-4 pl-sm-4">
+                <div class="form-row form-group mt-4 mb-4">
+                    <label for="stripeMonthlyPrice">
+                        Cuota mensual
+                    </label>
+                    <input type="number" disabled="true" min="0" max="999999" disabled="true" class="form-control" formControlName="stripeMonthlyPrice" />
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 pl-sm-4">
+                <div class="form-row form-group mt-4">
+                    <label for="suplementaryMonthly">
+                        Suplemento cuota mensual
+                    </label>
+                    <input type="number" min="0" max="999999" class="form-control" id="suplementaryMonthly" formControlName="suplementaryMonthly" (focusout)="changeMontlyTotalPrice($event.target.value)" />
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 pl-sm-4">
+                <div class="form-row form-group mt-4">
+                    <label for="stripeMonthlyPriceIva">
+                        {{'RATES_AND_MODULES.TOTAL_IVA' | translate}}
+                    </label>
+                    <input type="number" class="form-control" id="stripeMonthlyPriceIva" disabled="true" formControlName="stripeMonthlyPriceIva" placeholder="{{'RATES_AND_MODULES.TOTAL_IVA' | translate}}" />
+                </div>
+            </div>
+
+            <!--END Montly -->
+
+            <div class="col-12 col-md-5 pl-sm-4">
+                <div class="form-row form-group mb-4 mt-4">
+                    <label for="companyProfileTypeId">{{ 'RATES_AND_MODULES.PACK' | translate}}</label>
+
+                    <ng-container *ngIf="loadingPack == 'loading'">
+                        <div class="text-center p-2">
+                            <div class="fa-3x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="packList.length > 0 && loadingPack == 'success'">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <select class="form-control letter-app" id="companyProfileTypeId" formControlName="companyProfileTypeId">
+                                    <option value>{{ 'RATES_AND_MODULES.SELECT_PACK' | translate }}</option>
+                                    <option *ngFor="let pack of packList" [value]="pack.id">
+                                        {{ pack.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="packList.length == 0 && loadingPack == 'success'">
+                        <div class="row justify-content-center align-items-center h-100">
+                            <p class="m-0 text-danger">{{ 'RATES_AND_MODULES.NO_PACK_AVAILABLE' | translate }}</p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="loadingPack == 'error'">
+                        <div class="row mt-5 justify-content-center align-items-center h-100">
+
+                            <p class="text-danger text-center pointer" (click)="getPack()">
+                                {{ 'RATES_AND_MODULES.THERE_WAS' | translate }}
+                                <ins>{{ 'RATES_AND_MODULES.HERE' | translate }}</ins>!
+                            </p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Módulos -->
+        <div class="row mb-3" *ngIf="company && company.id > 0 && modules && modules.length > 0">
+
+            <div class="col-12">
+                <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                    {{ 'COMPANIES.MODULES.MODULES' | translate}}
+                </h3>
+            </div>
+
+            <div class="col-12 pr-sm-4 pl-sm-4">
+                <div class="form-row">
+                    <div class="col-12 pl-3 mt-3 toggle-directions">
+                        <div class="row">
+                            <div class="col-md-12 d-flex align-items-center toggle-pointer disabeld-col  w-100">
+                                <span class="ml-4">  {{ 'COMPANIES.MODULES.MODULES' | translate }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-0" *ngIf="modules && modules.length > 0">
+                        <table style="width: 100%; text-align: center p-0" class="table table-responsive-lg table-module table-bordered table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        {{ 'COMPANIES.MODULES.NAME_MODULE' | translate }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ 'COMPANIES.MODULES.AMOUNT' | translate }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ 'COMPANIES.MODULES.IS_ACTIVE' | translate }}
+                                    </th>
+                                    <!-- <th class="text-center">
+                                        {{ 'COMPANIES.MODULES.PAYED' | translate }}
+                                    </th> -->
+                                    <th class="text-center" style="border-right: 1px solid #7387c2 !important;">
+                                        {{ 'COMPANIES.MODULES.ACTIONS' | translate }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container>
+                                    <tr *ngFor="let module of modules ; let i = index">
+                                        <td data-title="name" class="text-center">
+                                            {{ module.name }}
+                                        </td>
+                                        <td [ngClass]="{'text-center': true}">
+                                            <!--  {{ showInfoImport(module.import) }} -->
+                                            <p [innerHTML]="module.import ? module.import:'-'"></p>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="justify-content-center row reset" *ngIf="module.company_module.length > 0 &&
+                                                module.company_module[0]?.isActive">
+                                                <div class="success-chip">
+                                                    <i class="fas fa-check mt-2" title="Activo" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="justify-content-center row reset" *ngIf="module.company_module.length == 0 ||
+                                            !module?.company_module[0]?.isActive">
+                                                <div class="times-chip">
+                                                    <i class="fas fa-times mt-2"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <!-- <td class="text-center">
+                                            <div class="justify-content-center row reset" *ngIf="module.company_module.length > 0 &&
+                                                module.company_module[0]?.payed">
+                                                <div class="success-chip">
+                                                    <i class="fas fa-check mt-2" title="Activo" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="justify-content-center row reset" *ngIf="module.company_module.length == 0 ||
+                                            !module.company_module[0]?.payed">
+                                                <div class="times-chip">
+                                                    <i class="fas fa-times mt-2"></i>
+                                                </div>
+                                            </div>
+                                        </td> -->
+                                        <td class="text-center">
+                                            <button type="button" style="border-radius: 3px" class="btn btn-link btn-default btn-sm" (click)="OnChangeActiveModule(i, module)" *ngIf="
+                                                module.company_module.length > 0 &&
+                                                module.company_module[0]?.isActive &&
+                                                !module.company_module[0]?.payed
+                                            ">
+                                                {{ 'GENERAL.DEACTIVATE' | translate }}
+                                            </button>
+
+                                            <button type="button" style="border-radius: 3px" class="btn btn-link button-active-user btn-sm" (click)="OnChangeActiveModule(i, module)" *ngIf="
+                                                module.company_module.length > 0 &&
+                                                !module.company_module[0]?.isActive &&
+                                                !module.company_module[0]?.payed
+                                            ">
+                                                {{ 'GENERAL.ACTIVATE' | translate }}
+                                            </button>
+
+                                            <button type="button" style="border-radius: 3px" class="btn btn-link button-active-user btn-sm editar" (click)="OnCreateCompanyModule(i, module)" *ngIf="module.company_module.length == 0">
+                                                {{ 'GENERAL.ACTIVATE' | translate }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <ng-container *ngIf="modules && modules.length == 0">
+                                    <tr>
+                                        <td colspan="7" class="center">
+                                            {{ 'COMPANIES.MODULES.NO_MODULES_AVAILABLE' | translate }} </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Ocultar funciones de multidelegación -->
+
+        <div class="row mb-3" *ngIf="company && company.id > 0 && company.multiStore">
+
+            <div class="col-12 pt-3">
+
+                <div class="card pl-1 pr-1">
+
+                    <div class="card-body card-multidelegation">
+
+                        <div class="row">
+
+                            <div class="col-12">
+
+                                <p class="title-multidelegation mb-2"> {{'COMPANIES.HIDE_MULTIDELEGATION_FUNCTIONS' | translate }} </p>
+
+                                <p class="text-multidelegation">{{'COMPANIES.HIDE_MULTIDELEGATION_TEXT' | translate }}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="switch w-100">
+
+                                <label class="switch-width lever-multidelegation">
+    
+                                        <input
+                                            type="checkbox"
+                                            formControlName="hideMultidelegation"
+                                            (change)="changeHideMultidelegation($event)"
+                                        />
+    
+                                        <span class="lever switch-col-primary"></span>
+    
+                                        {{ 'COMPANIES.HIDE_MULTIDELEGATION_FUNCTIONS' | translate }}
+    
+                                    </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Document -->
+
+        <div class="row mb-3" *ngIf="company && company.id > 0">
+
+            <div class="col-12 mt-4">
+                <h3 class="subtitle-general pb-2 d-flex flex-row justify-content-between align-items-end">
+                    {{'RATES_AND_MODULES.DOCUMENT.DOCUMENTATION' | translate }}
+                </h3>
+            </div>
+
+            <div class="col-12 pr-sm-4 pl-sm-4">
+                <div class="form-row">
+
+                    <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                justify-content-sm-between padding-col padding-document-table">
+                        <div class="col-md-6 col-6 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                            <span class="pl-4">{{'RATES_AND_MODULES.DOCUMENT.DOCUMENTATION' | translate }}</span>
+                        </div>
+                        <div class="col-md-6 col-6 col-sm-5 d-flex flex-sm-row flex-column align-items-center justify-content-sm-end mb-1 mt-1">
+                            <button class="btn btn-add card-button mt-2 mt-sm-0 toggle-pointer button-document" type="button" (click)="addDocument()" title="{{'RATES_AND_MODULES.DOCUMENT.ADD_DOCUMENT' | translate }}">
+                                    <label>{{'RATES_AND_MODULES.DOCUMENT.ADD_DOCUMENT' | translate }}</label>
+                                </button>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-0">
+                        <table id="document" style="width: 100%; text-align: center;" class="table p-0 table-bordered table-striped-doc mb-0">
+                            <thead class="table-head toggle-directions">
+                                <tr>
+                                    <th>id</th>
+                                    <th width="50%">{{'RATES_AND_MODULES.DOCUMENT.DOCUMENT_NAME' | translate }}</th>
+                                    <th width="30%">{{'RATES_AND_MODULES.DOCUMENT.UPLOAD_DATE' | translate }}</th>
+                                    <th width="20%" style="vertical-align: inherit; border-right: 1px solid #7387c2 !important;">{{'GENERAL.ACTIONS' |translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row pt-sm-5">
+
+            <div class="col-sm-6 col-12 text-sm-right text-center mt-1">
+                <button class="btn btn-cancel size-btn-form point" title="{{ 'COMPANIES.BACK_TO_THE_COMPANIES_LIST' | translate }}" routerLink="/super-admin/company">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+            </div>
+            <div class="col-sm-6 col-12 text-sm-left text-center mt-1 pb-2">
+                <button class="btn btn-primary size-btn-form modal-confirm point" [disabled]="isFormInvalid()" (click)="createData()">
+                    <span *ngIf="company && company.id == 0">{{ 'GENERAL.CREATE' | translate }}</span>
+                    <span *ngIf="company && company.id > 0">{{ 'GENERAL.SAVE' | translate }}</span> 
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+</div>

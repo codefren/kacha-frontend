@@ -1,0 +1,13 @@
+@mixin button-icon-styles() {
+    .app-button-icon-directive-parent {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-button-icon-directive-icon {
+        font-size: 1.4em;
+        margin-left: -3px;
+        margin-right: 8px;
+    }
+}

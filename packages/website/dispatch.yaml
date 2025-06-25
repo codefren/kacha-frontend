@@ -1,0 +1,21 @@
+dispatch:
+    - url: 'staging.core.rs-easyroute.com/*'
+      service: staging
+    - url: 'www.staging.core.rs-easyroute.com/*'
+      service: staging
+    - url: 'staging.core.optimroute.com/*'
+      service: staging
+    - url: 'core.rs-easyroute.com/*'
+      service: default
+    - url: 'www.core.rs-easyroute.com/*'
+      service: default
+    - url: 'core.optimroute.com/*'
+      service: default
+    - url: 'www.core.optimroute.com/*'
+      service: default
+    - url: 'www.dev.core.rs-easyroute.com/*'
+      service: development
+    - url: 'dev.core.rs-easyroute.com/*'
+      service: development
+    - url: 'dev.core.optimroute.com/*'
+      service: development

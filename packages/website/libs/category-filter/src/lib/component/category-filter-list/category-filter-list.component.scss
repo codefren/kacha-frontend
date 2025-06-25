@@ -1,0 +1,82 @@
+.category-filter {
+    background-color: #ffffff;
+    height: 100%;
+    background: white;
+    .btn-large {
+        width: 209px;
+        height: 40px;
+        border-radius: 24px;
+    }
+    .title {
+        color: #24397C;
+        text-transform: initial;
+        font-size: 18px;
+    }
+    .group-btn {
+        font-weight: bolder;
+        width: 36%;
+        height: 41px;
+    }
+    .btn-franchise {
+        width: 209px;
+        height: 40px;
+        background-color: #24397c;
+        border-radius: 24px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+    .div:focus,
+    .div.focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(247, 247, 247, 0.25);
+    }
+    .padding-label {
+        padding-left: 5rem;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        button {
+            width: 92% !important;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+        .group-btn {
+            width: 99%;
+        }
+        div .text-right {
+            text-align: center !important;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .group-btn {
+            width: 50%;
+        }
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+}

@@ -1,0 +1,14 @@
+@import 'shared/src/lib/common';
+@import '~@angular/material/theming';
+
+.app-toolbar {
+    &.toolbar-container {
+        padding: 10px;
+        position: relative;
+        z-index: 10;
+
+        &.elevation {
+            @include mat-elevation(2);
+        }
+    }
+}

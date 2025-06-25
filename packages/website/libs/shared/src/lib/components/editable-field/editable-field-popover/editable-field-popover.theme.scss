@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+
+@mixin editable-field-popover-theme($theme) {
+    $app-background: map-get($theme, background);
+    $background-default: mat-color($app-background, background);
+
+    app-editable-field-popover {
+        background-color: $background-default !important;
+    }
+}
+
+@mixin editable-field-popover-typography($config) {
+}

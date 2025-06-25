@@ -1,0 +1,291 @@
+.driver-app {
+    .title-road {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #3B4FFF;
+        }
+    }
+    //new
+    .border-card-options {
+        border-radius: 5px;
+        border: 1px solid #DFE1E8;
+    }
+    .title-infor-app {
+        color: #9899AA;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 127.5%;
+    }
+    .switch-1 {
+        margin: 0px 0px 0px 3px !important;
+    }
+    .img-size-app {
+        width: 104px;
+        height: 72px;
+    }
+    .card-footer-signature {
+        border: 1px solid #D9DBE3;
+        .style-check-requerid {
+            color: #363740;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.2px;
+        }
+        .label-check {
+            margin-left: 1.3rem !important;
+        }
+    }
+    .pl-4 {
+        padding-left: 2rem !important;
+    }
+    .padding-col-download {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .toogle-style {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .border-col {
+        border: 1px solid #CDD4DA;
+        border-radius: 5px;
+    }
+    .fond-input {
+        background: #EFF0F4 !important;
+    }
+    .title-form-1 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        color: #363740;
+    }
+    .sub-title-form {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .add-expenses-type {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        align-items: center;
+        color: #3B4FFF;
+    }
+    .switch label input[type=checkbox]:checked+.lever {
+        background-color: #29cc97 !important;
+    }
+    .title-card-info {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .title-tootlge {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .card-body-color {
+        background: #EFF0F4;
+        border-radius: 5px;
+    }
+    .img-show {
+        width: 100%;
+    }
+    .text-legend {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #717B82;
+    }
+    .img-money {
+        float: right;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .round-1 {
+        position: absolute;
+    }
+    .showMint {
+        background-image: url("/assets/icons/settingsTravel/min.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .color-body-card {
+        background: #EFF0F4;
+        border-radius: 5px;
+    }
+    .no-img {
+        width: 211px;
+        border-radius: 5px;
+    }
+    $backgroundCard: #314684;
+    $light: #fff;
+    $errorColor: #d2322d;
+    .error-schedule {
+        border-color: $errorColor !important;
+    }
+    .card-body {
+        .card-title {
+            color: $backgroundCard !important;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .card-description {
+            color: gray !important;
+            line-height: 18px;
+        }
+    }
+    .card-header {
+        background: #444A60;
+        padding: 15px 10px 10px 24px;
+        border-radius: 0 !important;
+        .row {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        span {
+            font-size: 14px !important;
+            margin: 0;
+            font-style: normal;
+            font-weight: bold;
+            line-height: 15px;
+            color: #FFFFFF;
+        }
+    }
+    .switch label input[type=checkbox]:checked+.lever {
+        background-color: #29cc97 !important;
+    }
+    .border-bottom-road {
+        border: 1px solid #dee2e6 !important;
+        border-radius: 5px;
+    }
+    .round label {
+        border-radius: 3px !important;
+    }
+    .border-col-tips {
+        border: 1px solid #CDD4DA;
+        border-radius: 5px;
+    }
+    .style-children-check {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+        margin-left: 1.9rem !important;
+    }
+    .showHour {
+        background-image: url(/assets/icons/horas.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .padding-l-hidden {
+        margin-left: 70px;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+        opacity: 1 !important;
+    }
+    .style-card-settings {
+        border-radius: 5px;
+        border: 1px solid #DFE1E8;
+    }
+    .title-radios-actios {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .sub-title-radios-actios {
+        color: #9899AA;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .showM {
+        background-image: url(/assets/icons/m.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .add-state-albaran {
+        color: #314684 !important;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .title-add-check {
+        margin: 0;
+        color: black !important;
+        font-size: 15px !important;
+    }
+    .style-radios-border {
+        border-radius: 50% !important;
+    }
+}

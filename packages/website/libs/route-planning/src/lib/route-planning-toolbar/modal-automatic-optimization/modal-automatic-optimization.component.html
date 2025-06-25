@@ -1,0 +1,100 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-12">
+            <label class="title">Optimización automática</label>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <label class="subtitle">Con la opción de rutas conjuntas organizamos y optimizamos todos tus puntos de
+                reparto en menos de un minuto</label>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <label class="col-lg-12 control-label">Selecciona las zonas</label>
+        <div class="col-lg-12">
+            <select class="form-control" multiple="multiple" data-plugin-multiselect
+                data-plugin-options='{ "maxHeight": 200, "allSelectedText": "todas", "nonSelectedText": "seleccione...", "selectAllName": true, "nSelectedText": "Seleccionadas", "includeSelectAllOption": true, "selectAllText": "Seleccionar todas" }'
+                id="zones">
+                <option [value]="item.id" *ngFor="let item of zones">{{ item.name }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row p-3 mt-2">
+        <div class="col-6 p-3" [ngClass]="{'vehicle-selected': vehicleType === 1, 'vehicle-no-selected': vehicleType !== 1}" (click)="changeVehicleType(1)">
+            <span>Vehículos del mapa</span>
+        </div>
+        <div class="col-6 p-3" [ngClass]="{'vehicle-selected': vehicleType === 2, 'vehicle-no-selected': vehicleType !== 2}" (click)="changeVehicleType(2)">
+            <span>Todos los vehículos</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-lg-12 control-label">Selecciona los vehículos</label>
+        <div class="col-lg-12" *ngIf="vehicleType === 2">
+            <select class="form-control" multiple="multiple" data-plugin-multiselect 
+                data-plugin-options='{ "maxHeight": 200, "allSelectedText": "todos", "nonSelectedText": "seleccione...", "selectAllName": true, "nSelectedText": "Seleccionados", "includeSelectAllOption": true, "selectAllText": "Seleccionar todos" }'
+                id="vehicles">
+                    <option [value]="item.id" *ngFor="let item of vehicles">{{ item.name }}</option>
+            </select>
+        </div>
+        <div class="col-lg-12" *ngIf="vehicleType === 1">
+            <select class="form-control" multiple="multiple" data-plugin-multiselect 
+                data-plugin-options='{ "maxHeight": 200, "allSelectedText": "todos", "nonSelectedText": "seleccione...", "selectAllName": true, "nSelectedText": "Seleccionados", "includeSelectAllOption": true, "selectAllText": "Seleccionar todos" }'
+                id="vehicles">
+                    <option [value]="item.id" *ngFor="let item of vehiclesZone">{{ item.name }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <div class="col-lg-12 col-md-12 p-0">
+            <div class="row">
+                <div class="col-2  d-flex flex-row align-items-center">
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="capacity" [(ngModel)]="settings.ignoreCapacityLimit"/>
+                            <span class="lever switch-col-primary"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-8 text-left">
+                    <label for="capacity">
+                        Ignorar límite de capacidad
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <div class="col-lg-12 col-md-12 p-0">
+            <div class="row">
+                <div class="col-2  d-flex flex-row align-items-center">
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="skills" [(ngModel)]="settings.useSkills"/>
+                            <span class="lever switch-col-primary"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-8 text-left">
+                    <label for="skills">
+                        Usar especificaciones de servicio
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <div class="col-md-6 col-12 text-center text-md-right">
+            <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="close()">
+                {{ 'GENERAL.CANCEL' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 col-12 mt-2 mt-md-0 text-center text-md-left">
+            <button class="btn btn-primary size-btn-modal modal-dismiss"
+                 (click)="submit()">
+                {{ 'GENERAL.ACCEPT' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

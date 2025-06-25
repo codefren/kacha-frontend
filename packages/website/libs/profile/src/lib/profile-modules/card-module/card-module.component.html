@@ -1,0 +1,67 @@
+<div class="easyroute-card-module">
+  <div class="card mb-5 p-3">
+    <div class="card-header text-center pb-1">
+      <img [src]="module.urlImage" *ngIf="module.id !== 2" alt="change" class="img-flud"/>
+
+      <img [src]="module.urlImage" *ngIf="module.id == 2" alt="change" class="img-flud img-render"/>
+    </div>
+    
+    <div class="card-body pt-0">
+      <h2 class="title">{{ module.name }}</h2>
+
+      <p *ngIf="module.company_module.length == 0 && module.soon" class="soon">¡PROXIMAMENTE!</p>
+
+      <p class="sytle-description">   
+        <ng-container *ngIf="!readMore">
+          {{ module.description | slice: 0: 214 }} <span *ngIf="countCaracter">...</span> <br/> <br/>
+          <a class="read-more point" *ngIf="countCaracter" (click)="openModuleModalModules(module)">{{ 'MODULES.READ_MORE' | translate }}</a>
+        </ng-container>
+      </p>
+
+      <ng-container *ngIf="module.company_module.length == 0 && !module.soon">
+        <p class="text-secondary m-0 mb-2">
+          <span class="color-span">{{ module.price }}€</span> 
+          + iva
+        </p>
+      </ng-container>
+    </div>
+
+    <div class="card-footer text-muted pt-0">
+      <div class="text-center">
+        <!-- button adquired module -->
+        <button 
+          *ngIf="module.company_module.length > 0" 
+          class="btn btn-success btn-lg ml-2 w-button" 
+          disabled
+        >
+          {{ 'COMPANIES.MODULES.HIRED_MODULE' | translate }}
+        </button>
+        
+        <!-- buy module -->
+        <ng-container *ngIf="module.company_module.length == 0 && !module.soon">
+          <button 
+            class="btn btn-primary btn-lg" 
+            [disabled]="company?.subscriptions.length == 0" 
+            (click)="openModalModules(module)"
+          >
+            {{ 'MODULES.CONTRACT' | translate }}
+          </button>
+        </ng-container>
+
+        <!-- buy module proximamente -->
+        <ng-container *ngIf="module.company_module.length == 0 && module.soon">
+          <button 
+            class="btn btn-cancel btn-lg" 
+            disabled
+          >
+            {{ 'MODULES.CONTRACT' | translate }}
+          </button>
+        </ng-container>
+      
+      </div>
+    </div>
+
+  </div>  
+  
+</div>
+

@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "label": "scsslint",
+            "script": "lint:styles:fix",
+            "presentation": {
+                "reveal": "never"
+            }
+        }
+    ]
+}

@@ -1,0 +1,917 @@
+<div class="productos-settings">
+
+    <!-- datos almacenados -->
+
+    <div class="card">
+
+        <div class="card-body pl-4 pr-xl-5">
+
+            <div class="row pt-2">
+
+                <div class="col-xl-12 col-12">
+
+                    <label class="title-products-settings"> {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.NAME' | translate }} </label>
+
+                    <p class="sub-title-products-settgins mt-1"> Estos campos se actualizarán de manera automática siempre y cuando estén activos. En caso de estar activos cada vez que se haga una modificación desde productos esos campos se actualizarán en gestión.En caso de no estar cargados serán
+                        modificados temporalmente. </p>
+
+                </div>
+
+            </div>
+
+            <!-- productos -->
+
+            <div class="row mb-4 mt-2">
+
+                <div class="col-12 mb-2">
+
+                    <label class="title-products-settings"> {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.PRODUCTS' | translate }} </label>
+
+                </div>
+
+                <!-- name -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-name" [checked]="(productPreferences$ | async).updateProductName" (change)="toggleProductGeneral('updateProductName',$event.target.checked)" />
+
+                                <label for="products-name"></label>
+
+                            </div>
+
+                            <label title="{{ 'GENERAL.NAME' | translate }}" for="products-name" class="label-check point style-general-label">
+        
+                                {{ 'GENERAL.NAME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end name -->
+
+                <!-- description -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-description" [checked]="(productPreferences$ | async).updateProductDescription" (change)="toggleProductGeneral('updateProductDescription',$event.target.checked)" />
+
+                                <label for="products-description"></label>
+
+                            </div>
+
+                            <label title="{{ 'GENERAL.DESCRIPTION' | translate }}" for="products-description" class="label-check point style-general-label">
+        
+                                {{ 'GENERAL.DESCRIPTION' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end description -->
+
+                <!-- categoria -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-categories" [checked]="(productPreferences$ | async).updateProductCategory" (change)="toggleProductGeneral('updateProductCategory',$event.target.checked)" />
+
+                                <label for="products-categories"></label>
+
+                            </div>
+
+                            <label title="{{ 'GENERAL.CATEGORIES' | translate }}" for="products-categories" class="label-check point style-general-label">
+        
+                                {{ 'GENERAL.CATEGORIES' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end categoria -->
+
+                <!-- subCategoria -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-subcategories" [checked]="(productPreferences$ | async).updateProductSubCategory" (change)="toggleProductGeneral('updateProductSubCategory',$event.target.checked)" />
+
+                                <label for="products-subcategories"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.PRODUCTS.SUBCATEGORIES'| translate }}" for="products-subcategories" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.PRODUCTS.SUBCATEGORIES'| translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- subCategoria -->
+
+                <!-- filtros -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-filters" [checked]="(productPreferences$ | async).updateProductFilters" (change)="toggleProductGeneral('updateProductFilters',$event.target.checked)" />
+
+                                <label for="products-filters"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.FILTERS' | translate }}" for="products-filters" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.FILTERS' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end filtros -->
+
+                <!-- mostar productos en app -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-showApp" [checked]="(productPreferences$ | async).updateProductShowInApp" (change)="toggleProductGeneral('updateProductShowInApp',$event.target.checked)" />
+
+                                <label for="products-showApp"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.PRODUCTS.SHOW_IN_APP' | translate }}" for="products-showApp" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.PRODUCTS.SHOW_IN_APP' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end mostar productos en app -->
+
+                <!-- promoción -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-promotion" [checked]="(productPreferences$ | async).updateProductPromotion" (change)="toggleProductGeneral('updateProductPromotion',$event.target.checked)" />
+
+                                <label for="products-promotion"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.PROMOTION'| translate }}" for="products-promotion" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.PROMOTION'| translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end promoción -->
+
+                <!-- destacados -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-featured" [checked]="(productPreferences$ | async).updateProductHighlight" (change)="toggleProductGeneral('updateProductHighlight',$event.target.checked)" />
+
+                                <label for="products-featured"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.FEATURED'| translate }}" for="products-featured" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.FEATURED'| translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end destacados -->
+
+                <!-- imágenes -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-photos" [checked]="(productPreferences$ | async).updateProductImages" (change)="toggleProductGeneral('updateProductImages',$event.target.checked)" />
+
+                                <label for="products-photos"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.PRODUCTS.PHOTOS' | translate }}" for="products-photos" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.PRODUCTS.PHOTOS' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end imágenes -->
+
+                <!-- precio -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="product-price" [checked]="(productPreferences$ | async).updateProductPrice" (change)="toggleProductGeneral('updateProductPrice',$event.target.checked)" />
+
+                                <label for="product-price"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.PRICE' | translate }}" for="product-price" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.PRICE' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end precio -->
+
+                <!-- cantidad -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-quantity" [checked]="(productPreferences$ | async).updateProductQuantity" (change)="toggleProductGeneral('updateProductQuantity',$event.target.checked)" />
+
+                                <label for="products-quantity"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.PRODUCTS.QUANTITY' | translate }}" for="products-quantity" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.PRODUCTS.QUANTITY' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- end cantidad -->
+
+                <!-- activo -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-active" [checked]="(productPreferences$ | async).updateProductIsActive" (change)="toggleProductGeneral('updateProductIsActive', $event.target.checked)" />
+
+                                <label for="products-active"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.ACTIVE' | translate }}" for="products-active" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.ACTIVE' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end activo -->
+
+            </div>
+            <!-- end productos -->
+
+        </div>
+
+        <!-- categories -->
+
+        <div class="card-footer pl-4 pr-xl-5">
+            <div class="row mb-4 mt-2">
+
+                <div class="col-12 mb-2">
+
+                    <label class="title-products-settings"> {{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.NAME' | translate }} </label>
+
+                </div>
+
+                <!-- categories name -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="category-name" [checked]="(productPreferences$ | async).updateCategoryName" (change)="toggleProductGeneral('updateCategoryName',$event.target.checked)" />
+
+                                <label for="category-name"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}" for="category-name" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end categories name -->
+
+                <!-- categories imagenes -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="category-images" [checked]="(productPreferences$ | async).updateCategoryImages" (change)="toggleProductGeneral('updateCategoryImages',$event.target.checked)" />
+
+                                <label for="category-images"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.IMAGES' | translate }}" for="category-images" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.IMAGES' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end categories imagenes -->
+
+                <!-- categoria active -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="category-active" [checked]="(productPreferences$ | async).updateCategoryIsActive" (change)="toggleProductGeneral('updateCategoryIsActive',$event.target.checked)" />
+
+                                <label for="category-active"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.ACTIVE' | translate }}" for="category-active" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.ACTIVE' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end categoria active -->
+
+            </div>
+        </div>
+
+        <!-- end categoires -->
+
+        <!-- sub categories -->
+
+        <div class="card-footer pl-4 pr-xl-5">
+
+            <div class="row mb-4 mt-2">
+
+                <div class="col-12 mb-2">
+
+                    <label class="title-products-settings"> {{ 'PREFERENCES.OPTIMIZATION.SUBCATEGORIES.NAME' | translate }} </label>
+
+                </div>
+
+                <!-- Sub categories name -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="subcategory-name" [checked]="(productPreferences$ | async).updateSubCategoryName" (change)="toggleProductGeneral('updateSubCategoryName',$event.target.checked)" />
+
+                                <label for="subcategory-name"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME'| translate }}" for="subcategory-name" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME'| translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end categories name -->
+
+                <!-- subCategories active -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="products-subcategory-active" [checked]="(productPreferences$ | async).updateSubCategoryIsActive" (change)="toggleProductGeneral('updateSubCategoryIsActive',$event.target.checked)" />
+
+                                <label for="products-subcategory-active"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.ACTIVE' | translate }}" for="products-subcategory-active" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.ACTIVE' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end subCategories active -->
+
+            </div>
+        </div>
+
+        <!-- end sub categories -->
+
+        <!-- filtros -->
+
+        <div class="card-footer pl-4 pr-xl-5">
+
+            <div class="row mb-4 mt-2">
+
+                <div class="col-12 mb-2">
+
+                    <label class="title-products-settings"> {{ 'PREFERENCES.OPTIMIZATION.FILTERS.NAME' | translate }} </label>
+
+                </div>
+
+                <!-- filters name -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="filter-name" [checked]="(productPreferences$ | async).updateFilterName" (change)="toggleProductGeneral('updateFilterName', $event.target.checked)" />
+
+                                <label for="filter-name"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.OPTIMIZATION.FILTERS._NAME' | translate }}" for="filter-name" class="label-check point style-general-label">
+        
+                                {{ 'PREFERENCES.OPTIMIZATION.FILTERS._NAME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end filter name -->
+
+                <!-- filter active -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="filter-active" [checked]="(productPreferences$ | async).updateFilterIsActive" (change)="toggleProductGeneral('updateFilterIsActive',$event.target.checked)" />
+
+                                <label for="filter-active"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.FILTERS.IsActive' | translate }}" for="filter-active" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.FILTERS.IsActive' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end filter active -->
+
+            </div>
+        </div>
+
+        <!-- end filtros -->
+
+        <!-- formatos -->
+        <div class="card-footer pl-4 pr-xl-5">
+
+            <div class="row mb-4 mt-2">
+
+                <div class="col-12 mb-2">
+
+                    <label class="title-products-settings"> {{ 'PREFERENCES.OPTIMIZATION.MEASURE.NAME' | translate }} </label>
+
+                </div>
+
+                <!-- filters name -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="measure-name" [checked]="(productPreferences$ | async).updateMeasureName" (change)="toggleProductGeneral('updateMeasureName', $event.target.checked)" />
+
+                                <label for="measure-name"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.MEASURE._NAME' | translate }}" for="measure-name" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.MEASURE._NAME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end filter name -->
+
+                <!-- filter active -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="filter-active" [checked]="(productPreferences$ | async).updateFilterIsActive" (change)="toggleProductGeneral('updateFilterIsActive',$event.target.checked)" />
+
+                                <label for="filter-active"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.OPTIMIZATION.FILTERS.IsActive' | translate }}" for="filter-active" class="label-check point style-general-label">
+        
+                                {{'PREFERENCES.OPTIMIZATION.FILTERS.IsActive' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end filter active -->
+
+            </div>
+        </div>
+        <!-- end formatos -->
+    </div>
+
+    <!-- end datos almacenados -->
+
+    <!-- stock -->
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row p-2 p-md-0">
+
+                <div class="col-xl-12 col-md-12 col-12">
+
+                    <div class="form-group">
+
+                        <div class="form-row">
+
+                            <div class="switch w-100 col-12 mb-0">
+
+                                <label class="switch-width">
+
+                                    <input type="checkbox" [checked]="(productPreferences$| async).useStock" (change)="toggleProductGeneral('useStock',$event.target.checked)"/>
+
+                                    <span class="lever lever-general switch-col-primary m-2" ></span>
+
+                                    <span class="title-toggle toogle-style stock-label">
+                                        Activar el control de stock
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Al activar la opción a la hora de realizar un pedido se tendrá en cuenta la cantidad en stock del producto. En caso de no haber cantidad suficiente, no se podrá añadir ese producto en el pedido. </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- end stock -->
+
+    <!-- Permitir aplicar descuentos a productos -->
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row p-2 p-md-0">
+
+                <div class="col-xl-12 col-md-12 col-12">
+
+                    <div class="form-group">
+
+                        <div class="form-row">
+
+                            <div class="switch w-100 col-12 mb-0">
+
+                                <label class="switch-width">
+
+                                    <input type="checkbox"  [checked]="( productPreferences$ | async).allowDiscount"
+                                    (change)="toggleProductGeneral('allowDiscount',$event.target.checked)"/>
+
+                                    <span class="lever lever-general switch-col-primary m-2" ></span>
+
+                                    <span class="title-toggle toogle-style stock-label">
+                                        Permitir aplicar descuentos a productos
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Al activar la opción los comerciales podrán asignar un descuento a la hora de pasar un pedido pero solo aquellos productos que se les haya permitido. </p>
+                </div>
+
+                <ng-container *ngIf="( productPreferences$ | async).allowDiscount">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 mt-4 mb-2 pl-xl-4 pr-xl-4">
+                                <div class="form-group">
+
+                                    <label class="title-descuento" for="priceHourDriver">
+                                        <b>Tipos de descuento</b>
+                                    </label>
+
+                                    <p class="form-label" for="priceHourDriver">
+                                        Escribe los distintos descuentos
+                                    </p>
+
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-12 mb-2">
+                                            <label class="size-secund text-center size-label-input">{{
+                                                'PREFERENCES.MANAGEMENT.DATA_USAGE_OF_DOWNLOAD_TIMES.NAME_DELAY_TIME'|
+                                                translate }}</label>
+                                        </div>
+
+                                        <div class="col-md-5 col-sm-12 mb-2">
+                                            <label class="size-secund text-center size-label-input">{{
+                                                'GENERAL.DISCOUNT'|
+                                                translate}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <ng-container *ngFor="let item of discount; let i = index">
+                                            <div class="col-md-5 col-sm-12" [ngClass]="{'mt-3': i > 0}">
+                                                <input type="text" class="form-control form-input size-input " id="name" [value]="item.name" (change)="addOthersDiscount($event.target.value, item, 'name')" placeholder="{{'PREFERENCES.MANAGEMENT.DATA_USAGE_OF_DOWNLOAD_TIMES.WRITE' | translate }}" required
+                                                />
+                                            </div>
+
+                                            <div class="col-md-5 col-sm-12" [ngClass]="{'mt-3': i > 0}">
+                                                <input type="number" class="form-control primary form-input size-input " id="minutes" type="number" min="0" [value]="item.discountPercent" (focusout)="
+                                                addOthersDiscount($event.target.value, item, 'discountPercent')
+                                                    " placeholder="{{
+                                                        'GENERAL.DISCOUNT'
+                                                            | translate
+                                                    }}" required />
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="row mt-1 pt-1 pb-4 ">
+                                        <div class="col-12 mt-1 pl-3 pr-5">
+                                            <a class="add-others" (click)="addOtherDiscount()">Añadir otro</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- end Permitir aplicar descuentos a productos -->
+
+    <!-- Permitir la regulación de precios automática -->
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row p-2 p-md-0">
+
+                <div class="col-xl-12 col-md-12 col-12">
+
+                    <div class="form-group">
+
+                        <div class="form-row">
+
+                            <div class="switch w-100 col-12 mb-0">
+
+                                <label class="switch-width">
+
+                                    <input type="checkbox" [checked]="( productPreferences$ | async).equivalentFormatCalculatePrice"
+                                    (change)="toggleProductGeneral('equivalentFormatCalculatePrice',$event.target.checked)"/>
+
+                                    <span class="lever lever-general switch-col-primary m-2" ></span>
+
+                                    <span class="title-toggle toogle-style stock-label">
+                                        Permitir la regulación de precios automática
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Al activar la opción cuando se modifique su valor hará el recálculo de manera automática de los distintos formatos dentro de cada producto. </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- end Permitir la regulación de precios automática -->
+
+</div>

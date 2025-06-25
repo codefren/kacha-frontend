@@ -1,0 +1,631 @@
+<div class="franchise-product">
+    <div class="card">
+
+        <div class="card-body pl-4 pr-4">
+
+            <div class="row pt-2">
+
+                <div class="col-12">
+
+                    <p class="sub-title-user-storage mb-2">{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.NAME' | translate }}</p>
+
+                    <p class="text-information-storage">Estos campos se actualizarán de manera automática siempre y cuando estén activos. En caso de estar activos cada vez que se haga una modificación desde productos esos campos se actualizarán en gestión.En caso de no estar cargados serán
+                        modificados temporalmente.</p>
+                </div>
+
+            </div>
+
+            <!-- PRODUCTS -->
+            <div class="row">
+                <div class="col-12 mt-1">
+                    <p class="sub-title-user-storage mb-1">{{ 'PREFERENCES.OPTIMIZATION.PRODUCTS.PRODUCTS' | translate }}</p>
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(franchisePreferences$ | async)
+                                    .products.updateProductName" (change)="toggleProduct(
+                                    'updateProductName',
+                                    $event.target.checked
+                                )" id="franchise-products-name" />
+                                <label for="franchise-products-name"></label>
+
+                            </div>
+
+                            <label title="{{ 'GENERAL.NAME' | translate }}" for="franchise-products-name" class="label-check point">
+        
+                                {{ 'GENERAL.NAME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                (franchisePreferences$ | async)
+                                    .products
+                                    .updateProductDescription
+                            " (change)="
+                                toggleProduct(
+                                    'updateProductDescription',
+                                    $event.target.checked
+                                )
+                            " id="franchise-products-description" />
+                                <label for="franchise-products-description"></label>
+                            </div>
+                            <label for="franchise-products-description" class="label-check">
+                                {{ 'GENERAL.DESCRIPTION' | translate }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                (franchisePreferences$ | async)
+                                    .products.updateProductCategory
+                            " (change)="
+                                toggleProduct(
+                                    'updateProductCategory',
+                                    $event.target.checked
+                                )
+                            " id="franchise-products-categories" />
+                                <label for="franchise-products-categories"></label>
+                            </div>
+                            <label for="franchise-products-categories" class="label-check">
+                                {{ 'GENERAL.CATEGORIES' | translate }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                (franchisePreferences$ | async)
+                                    .products
+                                    .updateProductSubCategory
+                                    " (change)="
+                                        toggleProduct(
+                                            'updateProductSubCategory',
+                                            $event.target.checked
+                                        )
+                                    " id="franchise-products-subcategories" />
+                                <label for="franchise-products-subcategories"></label>
+                            </div>
+                            <label for="franchise-products-subcategories" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.SUBCATEGORIES'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                        (franchisePreferences$ | async)
+                                            .products.updateProductFilters
+                                    " (change)="
+                                        toggleProduct(
+                                            'updateProductFilters',
+                                            $event.target.checked
+                                        )
+                                    " id="franchise-products-filter" />
+                                <label for="franchise-products-filter"></label>
+                            </div>
+                            <label for="franchise-products-filter" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.FILTERS'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateProductShowInApp
+                                " (change)="
+                                    toggleProduct(
+                                        'updateProductShowInApp',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-products-show" />
+                                <label for="franchise-products-show"></label>
+                            </div>
+                            <label for="franchise-products-show" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.SHOW_IN_APP'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                        (franchisePreferences$ | async)
+                                            .products.updateProductPromotion
+                                    " (change)="
+                                        toggleProduct(
+                                            'updateProductPromotion',
+                                            $event.target.checked
+                                        )
+                                    " id="franchise-products-promotion" />
+                                <label for="franchise-products-promotion"></label>
+                            </div>
+                            <label for="franchise-products-promotion" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.PROMOTION'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateProductHighlight
+                                " (change)="
+                                    toggleProduct(
+                                        'updateProductHighlight',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-products-featured" />
+                                <label for="franchise-products-featured"></label>
+                            </div>
+                            <label for="franchise-products-featured" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.FEATURED'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateProductImages
+                                " (change)="
+                                    toggleProduct(
+                                        'updateProductImages',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-products-photos" />
+                                <label for="franchise-products-photos"></label>
+                            </div>
+                            <label for="franchise-products-photos" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.PHOTOS'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateProductPrice
+                                " (change)="
+                                    toggleProduct(
+                                        'updateProductPrice',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-products-price" />
+                                <label for="franchise-products-price"></label>
+                            </div>
+                            <label for="franchise-products-price" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.PRICE'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="( franchisePreferences$| async).products.updateProductQuantity" (change)="toggleProduct('updateProductQuantity', $event.target.checked)" id="franchise-products-quantity" />
+                                <label for="franchise-products-quantity"></label>
+                            </div>
+                            <label for="franchise-products-quantity" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.QUANTITY'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+                                <input type="checkbox" [checked]="
+                                (franchisePreferences$ | async)
+                                    .products.updateProductIsActive
+                                " (change)="
+                                    toggleProduct(
+                                        'updateProductIsActive',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-products-active" />
+                                <label for="franchise-products-active"></label>
+                            </div>
+                            <label for="franchise-products-active" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.PRODUCTS.ACTIVE'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CATEGORIAS -->
+        <div class="card-footer pl-0">
+            <div class="row pl-4 pr-xl-4">
+                <div class="col-12">
+                    <p class="sub-title-user-storage mb-1">
+                        {{ 'PREFERENCES.OPTIMIZATION.CATEGORIES.NAME' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                (franchisePreferences$ | async)
+                                    .products.updateCategoryName
+                                " (change)="
+                                    toggleProduct(
+                                        'updateCategoryName',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-category-name" />
+                                <label for="franchise-category-name"></label>
+                            </div>
+                            <label for="franchise-category-name" class="label-check">
+                                {{
+                                'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                (franchisePreferences$ | async)
+                                    .products.updateCategoryImages
+                                    " (change)="
+                                        toggleProduct(
+                                            'updateCategoryImages',
+                                            $event.target.checked
+                                        )
+                                    " id="franchise-category-images" />
+                                <label for="franchise-category-images"></label>
+                            </div>
+                            <label for="franchise-category-images" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.CATEGORIES.IMAGES'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateCategoryIsActive
+                                " (change)="
+                                    toggleProduct(
+                                        'updateCategoryIsActive',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-category-active" />
+                                <label for="franchise-category-active"></label>
+                            </div>
+                            <label for="franchise-category-active" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.CATEGORIES.ACTIVE'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBCATEGORIAS -->
+        <div class="card-footer pl-0">
+            <div class="row pl-4 pr-xl-4">
+                <div class="col-12">
+                    <p class="sub-title-user-storage mb-2">
+                        {{ 'PREFERENCES.OPTIMIZATION.SUBCATEGORIES.NAME' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-xl-4 col-12 mt-xl-1 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateSubCategoryName
+                                " (change)="
+                                    toggleProduct(
+                                        'updateSubCategoryName',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-subcategory-name" />
+                                <label for="franchise-subcategory-name"></label>
+                            </div>
+                            <label for="franchise-subcategory-name" class="label-check">
+                                {{
+                                'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-xl-1 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products
+                                        .updateSubCategoryIsActive
+                                " (change)="
+                                    toggleProduct(
+                                        'updateSubCategoryIsActive',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-subcategory-active" />
+                                <label for="franchise-subcategory-active"></label>
+                            </div>
+                            <label for="franchise-subcategory-active" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.CATEGORIES.ACTIVE'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="card-footer pl-0">
+            <div class="row pl-4 pr-xl-4">
+                <div class="col-12">
+                    <p class="sub-title-user-storage mb-2">
+                        {{ 'PREFERENCES.OPTIMIZATION.FILTERS.NAME' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-xl-4 col-12 mt-xl-1 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateFilterName
+                                " (change)="
+                                    toggleProduct(
+                                        'updateFilterName',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-filter-name" />
+                                <label for="franchise-filter-name"></label>
+                            </div>
+                            <label for="franchise-filter-name" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.FILTERS._NAME'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-12 mt-xl-1 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="
+                                    (franchisePreferences$ | async)
+                                        .products.updateFilterIsActive
+                                " (change)="
+                                    toggleProduct(
+                                        'updateFilterIsActive',
+                                        $event.target.checked
+                                    )
+                                " id="franchise-filter-active" />
+                                <label for="franchise-filter-active"></label>
+                            </div>
+                            <label for="franchise-filter-active" class="label-check">
+                                {{
+                                'PREFERENCES.OPTIMIZATION.FILTERS.IsActive'
+                                | translate
+                                }}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

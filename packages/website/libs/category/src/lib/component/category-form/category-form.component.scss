@@ -1,0 +1,103 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+.category-form {
+
+    $backgroundCards: #eaeaea; 
+
+    .ajuste {
+        width: 105px;
+    }
+    .label-check {
+        margin-left: 26px;
+    }
+    .font-italic {
+        font-size: 12px;
+    }
+    .info {
+        i {
+            font-size: 10px;
+            float: right;
+            padding-left: 0.5rem;
+            color: #4c4c4c;
+        }
+    }
+    .color-icon {
+        color: #c7c7c7;
+        font-size: 3em;
+    }
+
+    .svg-text {
+        color: #c7c7c7;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+
+    .color-alert {
+        color: #a0a0a0;
+    }
+    .card-img {
+        height: 113px;
+        width: 241px;
+        background: $backgroundCards;
+        display: inline-block;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+    .img-load {
+        height: 100%;
+        max-width: 100%;
+    }
+    .style-subtitle-sub {
+        font-size: 14px;
+        color: black;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .toggle-directions {
+        background: #444A60;
+        //border-radius: 15px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397C;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .disabeld-col {
+        padding: 14px;
+    }
+    .table thead th {
+        width: 20% !important;
+        padding: 14px !important;
+        // color: #24397c !important;
+    }
+
+    .group-btn {
+        width: 15%;
+    }
+
+    .card-svg {
+        height: 120px;
+        width: 120px;
+        background: $backgroundCards;
+    }
+
+    @media screen and ( max-width: 768px ) {
+        .group-btn {
+            width: 40%;
+        }   
+    }
+}

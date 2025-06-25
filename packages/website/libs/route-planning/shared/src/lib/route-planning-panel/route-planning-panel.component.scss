@@ -1,0 +1,177 @@
+@import 'shared/src/lib/common';
+.easyroute-route-planning-panel:first-child {
+    border-top: none;
+}
+
+easyroute-route-planning-panel {
+    border: 100px;
+    border-radius: 0px;
+    // box-shadow: $shadow;
+    min-width: 600px;
+    width: 600px;
+    .header-info {
+        width: 100%;
+        //width: calc(100% - 64px);
+    }
+    // .zone-content {
+    //     padding: 12px;
+    // }
+    .mat-content {
+        height: 100%;
+    }
+    .margin-rigth {
+        margin-right: 8px;
+    }
+    .accordion .card {
+        /* descomentar en caso que no funcione este el border de los card en los */
+        //border-top: 1px solid #d8d8d8 !important;
+        border-bottom: 1px solid #d8d8d8 !important;
+    }
+    .route-planning-panel-header {
+        box-shadow: $shadow;
+        height: auto !important;
+        // max-height: 80px !important;
+        min-height: 102px;
+        padding: 0 !important;
+        &[hasOptimization='true'] {
+            min-height: 130px;
+            .main-panel-header {
+                min-height: 130px;
+            }
+        }
+        .main-panel-header {
+            min-height: 102px;
+        }
+        .left-header-title {
+            height: 100%;
+        }
+        .expand-icon {
+            // box-shadow: 0 4px 12px -8px rgba(0, 0, 0, 0.2), 0 8px 8px 0 rgba(0, 0, 0.14, 0.14), 0 20px 4px 0 rgba(0, 0, 0, 0.12);
+            height: 100%;
+            padding-top: 18px;
+            text-align: center;
+            width: 44px;
+            mat-icon {
+                margin: 0 auto;
+            }
+        }
+        .header-title-container {
+            height: 100%;
+            margin: 12px 0 0;
+            max-width: none !important;
+            overflow-x: hidden;
+            padding-left: 12px;
+            overflow-y: hidden;
+            .header-title-line {
+                height: 36px;
+                .header-identifier {
+                    width: fit-content;
+                }
+                .header-title {
+                    -webkit-line-clamp: 1;
+                    margin: auto 0;
+                    overflow-x: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: -webkit-fill-available;
+                }
+                .subheader-identifier {
+                    .small-size {
+                        width: 18px;
+                        height: 18px;
+                        line-height: 18px;
+                        padding-left: 0px !important;
+                    }
+                }
+                .subheader-title {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 15px;
+                    line-height: 18px;
+                    /* identical to box height */
+                    align-items: center;
+                    color: #000000;
+                }
+            }
+        }
+    }
+    .mat-expansion-panel-header {
+        border-radius: inherit !important;
+        &.mat-expanded {
+            border-radius: 0% !important;
+        }
+    }
+    .mat-expansion-panel-body {
+        padding: 0 !important;
+    }
+    .disabled {
+        pointer-events: auto;
+    }
+    .card-header {
+        padding: 0px;
+    }
+    .btn-secondary {
+        border: 1px solid #F89703;
+        font-size: 14px;
+        padding: 4px;
+        width: 86px !important;
+        font-weight: lighter !important;
+        color: #ffffff; //#908c8c;
+        border-radius: 5px;
+        .fa-plus {
+            font-size: 10px;
+            color: #ffffff;
+        }
+    }
+    .btn-add-grey {
+        background: #24397c;
+        border-radius: 2px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 18px;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        height: 35px;
+    }
+}
+
+.buttonToggle {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: stretch center;
+    align-items: stretch;
+    -webkit-box-shadow: 9px 0px 5px -8px rgba(0, 0, 0, 1);
+    height: 102px;
+    text-align: center;
+    width: 44px;
+}
+
+.NameZone {
+    display: flex;
+    top: 23px;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+    box-shadow: none;
+}
+
+.title-route {
+    padding-left: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+    align-items: center;
+    color: #000000;
+}
+
+.title-routes {
+    font-size: 18px;
+    font-weight: 600;
+    padding-left: 8px;
+    line-height: 20px;
+}

@@ -1,0 +1,30 @@
+<easyroute-sidenav
+    class="easyroute-route-planning-sidenav"
+    [hasElevation]="true"
+    [foldable]="planningSession$ | async"
+    fxFlex=""
+    fxLayout="row"
+    [opened]="sidenavOpened$ | async"
+>
+    <div fxLayout="row" app-sidenav-drawer-content>
+        <easyroute-zones
+            [routePlanning]="routePlanning$ | async"
+            fxLayout="row"
+            fxFlex=""
+        ></easyroute-zones>
+    </div>
+    <div app-sidenav-main-content fxFlex="">
+       <easyroute-route-planning-map
+            [zoneStatus]="zoneStatus$ | async"
+            [routesStatus]="routeStatus$ | async"
+            [routePlanning]="routePlanning$ | async"
+            [vehicles]="vehicles$ | async"
+            [zones]="zones$ | async"
+            [routeGeometries]="routeGeometries ? routeGeometries : null"
+            [selectedPoint]="selectedPoint$ | async"
+            [hoveredPoint]="hoveredPoint$ | async"
+            [highlightedRoute]="highlightedRoute$ | async"
+            [showSelected]="showSelected$ | async"
+        ></easyroute-route-planning-map>
+    </div>
+</easyroute-sidenav>

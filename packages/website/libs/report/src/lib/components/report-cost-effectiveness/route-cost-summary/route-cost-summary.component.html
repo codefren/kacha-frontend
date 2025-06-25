@@ -1,0 +1,165 @@
+<div class="route-cost-summary">
+
+    <div class="card">
+        <ng-container *ngIf="show">
+            <div class="card-body">
+                <p class="title-radial pt-3"> {{'REPORT.COST_EFFECTIVENESS.ROUTE_COST_SUMMARY' | translate }} </p>
+
+                <div class="row" *ngIf="productivityRouteCostSummary">
+                    <div class="col-12">
+                        <div class="overflow-scroos pl-lg-0  mt-3 mb-2 align-items-center">
+                            <table class="table table-hover table-responsive-md table-striped" id="summary" style="text-align: center; width: 100%" data-searching="false" data-ordering="false">
+
+                                <thead>
+                                    <tr>
+
+                                        <th class="text-center text-md-left  title-list"> {{'REPORT.COST_EFFECTIVENESS.ROUTE' | translate }} </th>
+
+                                        <th class="text-center text-md-left title-list"> {{'REPORT.COST_EFFECTIVENESS.INVOICED' | translate }} </th>
+
+                                        <th class="text-center text-md-left  title-list"> {{'REPORT.COST_EFFECTIVENESS.PLANNED_KM' | translate }}</th>
+
+                                        <th class="text-center text-md-left  title-list"> {{ 'REPORT.COST_EFFECTIVENESS.KM_EXECUTED' | translate }}</th>
+
+                                        <th class="text-center text-md-left  title-list"> {{ 'REPORT.COST_EFFECTIVENESS.KM_DIFFERENCE' | translate }}</th>
+
+                                        <th class="text-center text-md-left" scope="col-lg-2 col"> {{'REPORT.COST_EFFECTIVENESS.PLANNED_COST' | translate }} </th>
+
+                                        <th class="text-center text-md-left" scope="col-lg-2 col">{{'REPORT.COST_EFFECTIVENESS.EXECUTED_COST' | translate }}</th>
+
+                                        <th class="text-center text-md-left" scope="col-lg-2 col">{{'REPORT.COST_EFFECTIVENESS.DIFERENCE_COST' | translate }}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngIf="productivityRouteCostSummary.length > 0">
+
+                                        <tr *ngFor="let item of productivityRouteCostSummary; let i=index">
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label>{{ item.nameRoute }}</label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="label-exit" for="exit">{{ decimal(item.totalBill) }}</label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="label-name" for="name">{{ km(item.totalKmPlanned) }}</label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="label-name" for="name" [ngClass]="{
+
+                                                    'color-red-parcen': +item.realKmTotal > +item.totalKmPlanned,
+
+                                                    'color-green-parcen': +item.realKmTotal < +item.totalKmPlanned,
+
+                                                    'color-blue-parcen': +item.realKmTotal == +item.totalKmPlanned
+
+                                                  
+
+                                                }">{{ km(item.realKmTotal) }}</label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="label-name" for="name" [ngClass]="{
+
+                                                    'color-red-parcen': +item.realKmTotal > +item.totalKmPlanned,
+
+                                                    'color-green-parcen': +item.realKmTotal < +item.totalKmPlanned,
+
+                                                    'color-blue-parcen': +item.realKmTotal == +item.totalKmPlanned
+
+                                                    
+
+                                                }">{{ km(item.diffKm) }}</label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="label-exit">{{ decimal(item.totalPlanned) }} </label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="total" for="total" [ngClass]="{
+
+                                                        'color-red-parcen': +item.totalExecuted > +item.totalPlanned,
+
+                                                        'color-blue-parcen': +item.totalExecuted == +item.totalPlanned,
+
+                                                        'color-green-parcen': +item.totalExecuted < +item.totalPlanned
+
+                                                    }">
+                                                        {{ decimal(item.totalExecuted) }}
+                                                </label>
+
+                                            </td>
+
+                                            <td class="text-center text-md-left pl-1">
+
+                                                <label class="total" for="total" [ngClass]="{
+
+                                                        'color-red-parcen': +item.totalExecuted > +item.totalPlanned,
+
+                                                        'color-blue-parcen': +item.totalExecuted == +item.totalPlanned,
+
+                                                        'color-green-parcen': +item.totalExecuted < +item.totalPlanned 
+
+                                                    }">
+                                                        {{ decimal(item.difference) }}
+                                                </label>
+
+                                            </td>
+                                        </tr>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="productivityRouteCostSummary.length == 0">
+
+                                        <tr class="center">
+
+                                            <td colspan="9" class="center pt-5" style="border-bottom: 0px solid #ececec !important;">
+
+                                                {{ 'ORDERS.ORDERS_FORM.NO_CUSTOMER_DATA_AVALILABLE' | translate }} </td>
+
+                                        </tr>
+
+                                    </ng-container>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="!show">
+
+            <div class="fa-10x mb-2 text-center pt-5">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+
+        </ng-container>
+
+    </div>
+</div>

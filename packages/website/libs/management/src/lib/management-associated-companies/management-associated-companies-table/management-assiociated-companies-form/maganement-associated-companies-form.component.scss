@@ -1,0 +1,73 @@
+.easyroute-management-associated-companies-form {
+    overflow-y: hidden;
+    background-color: #ffffff;
+    .form-row {
+        margin-bottom: 20px !important;
+    }
+    .images {
+        margin-top: 30px;
+    }
+    .title-info {
+        font-size: 12px;
+        color: #a9a7a9;
+    }
+    .card-img {
+        height: 120px;
+        width: 120px;
+        background: #eaeaea;
+        border-radius: 10px;
+        border: none;
+        display: inline-block;
+    }
+    .card-img+.card-img {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .card-add {
+        background: black;
+        opacity: 0.3;
+        color: white;
+    }
+
+    .color-icon {
+        color: #c7c7c7;
+        font-size: 2.5em;
+    }
+
+    .color-alert {
+        color: #a0a0a0;
+    }
+
+    .img-load {
+        max-width: 100%;
+        // max-height: 91px;
+        height: 100%;
+        border-radius: 4px;
+    }
+    .padding-form {
+        padding: 20px;
+    }
+    .form-control:not(.form-control-sm):not(.form-control-lg) {
+        font-size: 16px;
+        font-weight: lighter;
+        color: #4c4c4c;
+    }
+    /* select {
+        -webkit-appearance: none;
+        appearance: none;
+        line-height: 1.3 !important;
+    } */
+
+    .padding-col {
+        padding: 0 50px !important;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .padding-form {
+            padding: 0;
+        }
+
+        .padding-col {
+            padding: 0 25px !important;
+        }
+    }
+}

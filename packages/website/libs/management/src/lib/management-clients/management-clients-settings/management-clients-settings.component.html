@@ -1,0 +1,107 @@
+<div class="client-settings bg-white p-3">
+
+    <div class="row">
+
+        <!-- mini menu seleccionable -->
+        <div class="col-xl-3 col-12 ">
+
+            <label class="title-left  mt-2"> {{ 'PREFERENCES.CLIENTS' | translate }} </label>
+
+            <ul class="list-group">
+                <li class="list-group-item point my-2 pl-0">
+                    <ul class="sub-ul">
+                        <li class="list-group-item sub-li point my-2 " [ngClass]="{'background-selecter': select === 'time_specification'}" (click)="changePage('time_specification')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'time_specification'}">
+                               {{ 'DELIVERY_POINTS.SETTINGS.TIME_SPECIFICATION' | translate }}
+                            </label>
+                        </li>
+
+                        <li class="list-group-item sub-li point my-2" [ngClass]="{'background-selecter': select === 'download_times'}" (click)="changePage('download_times')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'download_times'}">
+                                {{ 'DELIVERY_POINTS.SETTINGS.DOWNLOAD_TIMES' | translate }}
+                            </label>
+                        </li>
+                        <li class="list-group-item sub-li point my-2" [ngClass]="{'background-selecter': select === 'delays'}" (click)="changePage('delays')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'delays'}">
+                                {{ 'DELIVERY_POINTS.SETTINGS.DELAYS' | translate }}
+                            </label>
+                        </li>
+                        <li class="list-group-item sub-li point my-2" [ngClass]="{'background-selecter': select === 'storage_data'}" (click)="changePage('storage_data')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'storage_data'}">
+                                {{ 'DELIVERY_POINTS.SETTINGS.USE_AND_STORAGE_OF_DATA' | translate }}
+                            </label>
+                        </li>
+                        <li class="list-group-item sub-li point my-2" [ngClass]="{'background-selecter': select === 'data_update'}" (click)="changePage('data_update')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'data_update'}">
+                                {{ 'DELIVERY_POINTS.SETTINGS.DATA_UPDATE' | translate }}
+                            </label>
+                        </li>
+                    </ul>
+
+                    <div class="point" (click)="retunrsList()">
+                        <img class="img-Returns point mr-1" src="assets/icons/retunrsBlue.svg">
+                        <label class="retursList point"> {{'SHEET_ROUTE.RETURN' | translate }} </label>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <!-- end mini menu seleccionable -->
+        <div class="d-flex" style="height: 200px;">
+            <div class="vr"></div>
+        </div>
+
+        <div class="col-xl-9 col-12">
+
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                    <ng-container *ngIf="select === 'time_specification'">
+                        <label class="title-left" for=""> {{ 'DELIVERY_POINTS.SETTINGS.TIME_SPECIFICATION' | translate }} </label>
+                    </ng-container>
+
+                    <ng-container *ngIf="select === 'download_times'">
+                        <label class="title-left" for="">  {{ 'DELIVERY_POINTS.SETTINGS.DOWNLOAD_TIMES' | translate }} </label>
+                    </ng-container>
+
+                    <ng-container *ngIf="select === 'delays'">
+                        <label class="title-left" for="">  {{ 'DELIVERY_POINTS.SETTINGS.DELAYS' | translate }} </label>
+                    </ng-container>
+
+                    <ng-container *ngIf="select === 'storage_data'">
+                        <label class="title-left" for="">  {{ 'DELIVERY_POINTS.SETTINGS.USE_AND_STORAGE_OF_DATA' | translate }} </label>
+                    </ng-container>
+                    <ng-container *ngIf="select === 'data_update'">
+                        <label class="title-left" for="">  {{ 'DELIVERY_POINTS.SETTINGS.DATA_UPDATE' | translate }} </label>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="col-12 p-0 mt-3">
+
+                <ng-container *ngIf="select === 'time_specification'">
+                    <easyroute-managenent-clients-service-type-table></easyroute-managenent-clients-service-type-table>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'download_times'">
+                    <easyroute-download-times></easyroute-download-times>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'delays'">
+                    <easyroute-delays></easyroute-delays>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'storage_data'">
+                    <easyroute-use-and-storage></easyroute-use-and-storage>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'data_update'">
+                    <easyroute-data-update></easyroute-data-update>
+                </ng-container>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

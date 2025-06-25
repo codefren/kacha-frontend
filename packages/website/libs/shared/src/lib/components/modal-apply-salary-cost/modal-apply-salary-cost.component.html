@@ -1,0 +1,121 @@
+<div class="modal-salary-cost">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'USERS.APPLY_SALARY_COST' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 ml-xl-3">
+
+                <span class="title-sub">
+
+                    {{ 'USERS.APPLY_SALARY_COST_MESSAGE' | translate }}         
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <form [formGroup]="userSalaryCostForm" class="form-width-prod" *ngIf="conceptUserSalaryCost">
+
+            <div class="form-width-prod">
+
+                <div class="card style-card">
+
+                    <div class="card-body p-3 modalScrollAuto">
+
+                        <ng-container *ngIf="!showUsers">
+                            <div class="col-12 text-center">
+                                <div class="fa-6x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="showUsers">
+
+                            <div class="row mt-2">
+
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> DNI </label>
+
+                                <label for="first" class="mb-2 title-label col-xl col-12 col-md col-sm">{{ 'USERS.GROSS_SALARY' | translate }} <span class="red">*</span> </label>
+
+                                <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+
+                            </div>
+                            
+                            <ng-container *ngIf="conceptUserSalaryCost.length > 0">
+                                <ng-container formArrayName="conceptUserSalaryCost">
+                                    <ng-container *ngFor="let userSalaryItem of conceptUserSalaryCost.controls; let p = index;" [formGroup]="userSalaryItem">
+
+                                        <div class="form-row" [ngClass]="{'mt-2' : i > 0}">
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                <input class="form-control form-control-input" readonly formControlName="nationalId" placeholder="DNI" />
+
+                                            </div>
+                                           
+                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                <input class="form-control form-control-input" type="number" formControlName="grossSalary" 
+                                                value="0" min="0"  max="99999999" onKeyPress="if(this.value.length==8) return false;" placeholder="0" />
+                                            </div>
+
+                                            <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteUserSalaryCost(userSalaryItem, p)">
+                                                    <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+
+                    </div>
+                    
+                </div>
+                    
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary mr-2" [disabled]="!validateImport() || !userSalaryCostForm.valid" 
+                    (click)="submit()"> {{ 'USERS.APPLY_SALARY' | translate }}  </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

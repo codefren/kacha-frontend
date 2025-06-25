@@ -1,0 +1,143 @@
+<div class="super-admin-list bg-white">
+
+    <div class="row justify-content-start">
+        <div class="d-flex flex-column margin-lateral justify-content-around column pl-2">
+            <div class="card point">
+                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                    <p class="m-0 p-0 color-infor-card space-paragran">{{ 'USERS.NAME' | translate }}</p>
+                    <p class="m-0 p-0 mb-3 color-infor-card space-paragran">{{ 'USERS.SUBSCRIBED' | translate }}</p>
+                    <ng-container *ngIf="showCode">
+                        <p class="m-0 p-0 title space-paragran" style="font-size: 20px !important;" *ngIf="AdminSubscriptionResume">
+                            {{AdminSubscriptionResume.usersActive}}
+                        </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showCode">
+                        <div class="fa-2x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </ng-container>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex flex-column  justify-content-around column ml-4">
+            <div class="card point">
+                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                    <p class="m-0 p-0 color-infor-card space-paragran">{{ 'USERS.SHARED' | translate }}</p>
+                    <p class="m-0 p-0 color-infor-card mb-3 space-paragran">{{ 'USERS.MONTHLY' | translate }}</p>
+                    <ng-container *ngIf="showCode">
+                        <p class="m-0 p-0 title space-paragran" style="font-size: 20px !important;" *ngIf="AdminSubscriptionResume">
+                            {{AdminSubscriptionResume.amount}}€
+                        </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showCode">
+                        <div class="fa-2x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container margin-container-div">
+
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <p class="title">{{ 'MENU.SUPER_ADMIN' | translate }}</p>
+            </div>
+        </div>
+
+        <!-- navs donde como va ir-->
+        <div class="row justify-content-center mb-3">
+            <nav class="row p-0 m-0 group-btn">
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='start' }" (click)="changePage( 'start' )">
+                    <a class="text-center">{{ 'COMPANIES.START' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='company' }" (click)="changePage( 'company' )">
+                    <a class="text-center">{{ 'COMPANIES.NAME' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='user' }" (click)="changePage( 'user' )">
+                    <a class="text-center">{{ 'USERS.NAME' | translate }}</a>
+                </div>
+                <!--  <div class="col-md col point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='partners' }" (click)="changePage( 'partners' )">
+                    <a class="text-center">{{ 'PARTNERS.NAME' | translate }}</a>
+                </div> -->
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='novelty' }" (click)="changePage( 'novelty' )">
+                    <a class="text-center">{{ 'WHATS_NEW.NAME' | translate }}</a>
+                </div>
+                <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='invoice' }" (click)="changePage( 'invoice' )">
+                    <a class="text-center">{{ 'INVOICES.NAME' | translate }}</a>
+
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- botones -->
+    <div class="row justify-content-center align-items-end">
+        <div class="col-md-4 col-12 mb-1">
+        </div>
+        <div class="col-md-4 col-12 text-center mb-1">
+            <button class="btn btn-secondary mt-sm-1 ml-sm-2 btn-large " style="text-transform: initial;" routerLink="new">
+                {{ 'COMPANIES.ADD_COMPANY' | translate }}
+            </button>
+        </div>
+
+        <div class class="col-md-4 col-12 pr-lg-4 text-right  mb-1">
+            <button class="btn btn-filter  pr-2 ml-3" (click)="filterOpen()">
+                <i class="fas fa-sliders-h"></i>
+                {{ 'GENERAL.FILTERS' | translate  }}
+            </button>
+        </div>
+        <!-- se show only companyParentId  es false-->
+        <!-- <div class="col-md-4 col-12 pr-lg-4 text-right  mb-1" *ngIf="!showSentProductFranshise()"></div>
+
+        <div class="col-md-4 col-12 pr-lg-4 text-right  mb-1" *ngIf="showSentProductFranshise()">
+            <button class="btn btn-franchise btn-primary mt-sm-1 ml-sm-2 btn-large" style="text-transform: initial;" (click)="openModalFranchise()">
+                {{ 'PRODUCTS.SEND_TO_FRANCHISES' | translate }}
+            </button>
+        </div> -->
+    </div>
+
+
+    <div class="table-content mt-3">
+        <table style="width: 100%;" class="table table-striped table-bordered table-responsive-lg mb-0" id="company" style="text-align: center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{{ 'GENERAL.COMPANY' | translate }}</th>
+                    <th>Partners</th>
+                    <th>{{ 'USERS.NATIONALID' | translate }}</th>
+                    <th>{{ 'GENERAL.STREET_ADDRESS' | translate }}</th>
+                    <th>{{ 'GENERAL.PROVINCE' | translate }}</th>
+                    <th>{{ 'GENERAL.POSTAL_CODE' | translate }}</th>
+                    <th>{{ 'COMPANIES.BILLING_EMAIL' | translate }}</th>
+                    <th>{{ 'COMPANIES.CREAT_AT' | translate }}</th>
+                    <th>{{ 'COMPANIES.CREATED_BY' | translate }}</th>
+                    <th>{{ 'COMPANIES.SUBCRIBED' | translate }}</th>
+                    <th>{{ 'COMPANIES.COMPANY_USERS' | translate }}</th>
+                    <th>{{ 'COMPANIES.COMPANY_AVAIBLE' | translate }}</th>
+
+                    <th>{{ 'COMPANIES.ASSIGNED_DELIVERY_POINT' | translate }}</th>
+                    <th>{{ 'COMPANIES.DELIVERY_NOTE_COUNT' | translate }}</th>
+
+                    <th>{{ 'COMPANIES.MONTHLY_FEE' | translate }}</th>
+                    <th>{{ 'COMPANIES.IS_DEMO' | translate }}</th>
+                    <th>{{ 'COMPANIES.IS_ACTIVE' | translate }}</th>
+                    <!-- <th>{{ 'COMPANIES.AUTONOMOUS' | translate }}</th>
+                    <th>{{ 'GENERAL.PROMOTION_COVID' | translate }}</th> -->
+                    <th>{{ 'USERS.LAST_CONNECTION' | translate }}</th>
+                    <th>{{ 'USERS.LAST_CONNECTION_IP' | translate }}</th>
+                    <th>{{ 'COMPANIES.PLAN' | translate }}</th>
+                    <th>{{ 'COMPANIES.COMPANIES' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

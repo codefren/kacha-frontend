@@ -1,0 +1,247 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card padding-body">
+            <div class="card-header general-panel">
+                <h2 class="general-h2">{{ 'PREFERENCES.MANAGEMENT.NAME' | translate }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="container easyroute-interface-preferences">
+                    <div class="row m-0 text-center">
+                        <div class="col-3"></div>
+                        <div class="col-md-6 col-lg-6 col-xl-6 p-0">
+                            <div class="card border-shadow m-2">
+                                <header class="card-header card-panel text-center">
+                                    {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.NAME' | translate}}
+                                </header>
+                                <div class="card-body font-card">
+                                    <div class="card text-white mb-12" style="max-width: 32rem;">
+                                        <div class="card-body">
+                                            <p class="text-justify"> Estos son los campos que se actualizarán de manera automática siempre y cuando estén activos, en caso de estar activos cada vez que se haga una modificación desde planificación de rutas esos campos se actualizarán
+                                                en gestión. En caso de no estar marcados los campos serán modificados temporalmente.</p>
+                                        </div>
+                                    </div>
+                                    <hr class="m-3">
+                                    <div class="text-left">
+                                        <h4 class="subtitle">
+                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.NAME' | translate }}
+                                        </h4>
+                                    </div>
+                                    <!-- list zone -->
+                                    <div class="row">
+                                        <!-- derecha -->
+                                        <div class="col-md-6 p-0 text-left">
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label class="p-0">
+                                                    <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneNameOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneNameOnOpt', $event.target.checked)"/>
+                                                        <span class="lever switch-col-primary"></span>
+                                                        {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_NAME' | translate }}
+                                                </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneDeliveryStartOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneDeliveryStartOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_HOUR_FROM' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneIgnoreCapacityLimitOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneIgnoreCapacityLimitOnOpt', $event.target.checked)"/>
+                                                        <span class="lever switch-col-primary"></span>
+                                                        {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.IGNORED_LIMIT_CAPACITY' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneForceDepartureTimeOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneForceDepartureTimeOnOpt', $event.target.checked)"/>
+                                                        <span class="lever switch-col-primary"></span>
+                                                        {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.FORCED_EXIT' | translate }}
+                                                        
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="switch">
+                                                        <label class="position">
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneUseAllVehiclesOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneUseAllVehiclesOnOpt', $event.target.checked)"/>
+                                                        <span class="lever switch-col-deep-purple"></span>
+                                                        {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.FORCED_USE_ALL_VEHICLES' | translate }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateOptimizationParametersCostDistance" (change)="toggleManagementPreference('updateOptimizationParametersCostDistance', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.COST_DISTANCE' | translate }}
+                                                        </label>
+                                                </div>
+                                            </div> -->
+                                            <!--                                             <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateOptimizationParametersCostDuration" (change)="toggleManagementPreference('updateOptimizationParametersCostDuration', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.COST_DURATION' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateOptimizationParametersExplorationLevel" (change)="toggleManagementPreference('updateOptimizationParametersExplorationLevel', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.EXPLORATION_LEVEL' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div> -->
+                                            <!-- end derecha -->
+                                        </div>
+
+                                        <div class="col-md-6 p-0  text-left">
+                                            <!-- izquierda -->
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneColorOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneColorOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.COLOR' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneDeliveryEndOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneDeliveryEndOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_HOUR_TO' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label><input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneMaxDelayTimeOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneMaxDelayTimeOnOpt', $event.target.checked)"/><span class="lever switch-col-primary"></span>
+                                                        {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.MAX_DELAY_TIME' | translate }}
+                                                        </label>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateOptimizationParametersCostVehicleWaitTime" (change)="toggleManagementPreference('updateOptimizationParametersCostVehicleWaitTime', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.COST_VEHICLE_WAIT_TIME' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div> -->
+
+                                        </div>
+                                    </div>
+                                    <!-- end zone -->
+                                    <hr class="m-0">
+                                    <div class="text-left">
+                                        <h4 class="subtitle">
+                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.NAME' | translate }}
+                                        </h4>
+                                    </div>
+                                    <div class="row">
+                                        <!-- derecha -->
+                                        <div class="col-md-6 p-0 text-left">
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryPointDeliveryStartOnOpt" (change)="toggleManagementPreference('updateDeliveryPointDeliveryStartOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.UPDATE_OPENING_TIME' | translate }}
+                                                        </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                            <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryPointZoneIdOnOpt" (change)="toggleManagementPreference('updateDeliveryPointZoneIdOnOpt', $event.target.checked)"/>
+                                                                <span class="lever switch-col-primary"></span>
+                                                                {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.ZONE' | translate }}
+                                                        </label>
+                                                </div>
+                                            </div>
+                                            <!--  <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryPointDelayTimeOnOpt" (change)="toggleManagementPreference('updateDeliveryPointDelayTimeOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.DELAY_TIME' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <!-- end derecha -->
+                                        <div class="col-md-6 p-0  text-left">
+                                            <!-- izquierda -->
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryPointDeliveryEndOnOpt" (change)="toggleManagementPreference('updateDeliveryPointDeliveryEndOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.UPDATE_CLOSING_TIME' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).activateAvgCalcServiceTime" (change)="toggleManagementPreference('activateAvgCalcServiceTime', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.ACTIVATE_AVG_CALC_SERVICE_TIME' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!--                                             <div class="p-0 col-sm-12">
+                                                <div class="switch">
+                                                    <label>
+                                                        <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryPointLeadTimeOnOpt" (change)="toggleManagementPreference('updateDeliveryPointLeadTimeOnOpt', $event.target.checked)"/>
+                                                            <span class="lever switch-col-primary"></span>
+                                                            {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.LEAD_TIME' | translate }}
+                                                    </label>
+                                                </div>
+                                            </div> -->
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group row pt-4">
+                                        <label for="inputPassword" class="col-sm-6 col-form-label p-3">{{
+                                                'PREFERENCES.OPTIMIZATION.ORDERS.MIN_AVG_SERVICE_TIME' | translate
+                                            }}</label>
+                                        <div class="col-sm-3">
+                                            <input type="number" class="form-control" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="minAvgServiceTimeMinutes" (blur)="updateMinAvgServiceTime()" (keyup.enter)="updateMinAvgServiceTime()" placeholder="{{'GENERAL.MINUTES' | translate}}"
+                                                required autofocus>
+                                            <label class="size-secund text-center">Minutos</label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="number" class="form-control primary" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="minAvgServiceTimeSeconds" (blur)="updateMinAvgServiceTime()" (keyup.enter)="updateMinAvgServiceTime()" placeholder="{{'GENERAL.SECONDS' | translate}}"
+                                                required autofocus>
+                                            <label class="size-secund text-center">Segundos</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

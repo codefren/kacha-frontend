@@ -1,0 +1,45 @@
+@import '../../../../../../apps/easyroute/src/common';
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fafafa00 !important;
+}
+
+.btn {
+    width: 40%;
+}
+
+.btn-cancel {
+    color: white;
+    background-color: #cdcdcf;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: helvetica;
+}
+
+.btn-primary {
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: helvetica;
+}
+
+.round label {
+    background-color: #fff;
+    border: 1px solid #cdcdcf;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 20px;
+}
+
+@media screen and ( max-width: 767px ) {
+    .container {
+        .padding-special {
+            padding: 0 40px;
+        }
+    }
+}

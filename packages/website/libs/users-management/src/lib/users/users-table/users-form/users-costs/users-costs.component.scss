@@ -1,0 +1,160 @@
+.user-costs-form {
+    .title-costs {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-costs {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .style-card {
+        border: 1px solid #DFE1E8;
+        border-radius: 5px;
+        .card-body {
+            background: #F9F9FC;
+        }
+        .title-left {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+        .sub-title {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #9899AA;
+        }
+    }
+    .title-label {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740 !important;
+    }
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .add-concept {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px !important;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #3B4FFF !important;
+    }
+    .total-cost {
+        background: #F4F7FF;
+        border: 1px solid #9B9DBA;
+    }
+    .form-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        /*  background-position: right .75rem center !important; */
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .form-control-select,
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .redirect {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        align-items: center;
+        color: #3B4FFF;
+        text-decoration: underline !important;
+    }
+    .showHour {
+        background-image: url("/assets/images/pages/users/hora.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .showDay {
+        background-image: url("/assets/images/pages/users/dia.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+        background: #ffffff;
+    }
+    /* .switch {
+        display: inline-block;
+        cursor: pointer;
+        margin: 0px 0px 2px;
+    }
+    .switch-width {
+        display: block;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    } */
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .round-1 {
+        position: absolute;
+    }
+    .round input[type=checkbox]:checked+label {
+        background-color: #29cc97;
+        border-color: #24397c;
+    }
+    .title-rounder {
+        font-style: normal;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740 !important;
+    }
+    .false-pred {
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 19px !important;
+        /* identical to box height */
+        letter-spacing: 0.2px !important;
+        color: #9899AA !important;
+    }
+}

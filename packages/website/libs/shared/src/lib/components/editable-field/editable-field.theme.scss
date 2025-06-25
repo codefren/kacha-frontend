@@ -1,0 +1,54 @@
+@import '~@angular/material/theming';
+@import 'shared/src/lib/common';
+
+@mixin editable-field-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+    $background-default: mat-color($app-background, background);
+    $foreground-default: mat-color($app-foreground, text);
+
+    .app-editable-field-element[app-editable-field-element-theme]:hover {
+        background-color: $background-default;
+        border-color: $border-light;
+        color: $foreground-default;
+
+        &.primary {
+            background-color: mat-color($primary, default, 0.04);
+
+            mat-icon {
+                color: mat-color($primary);
+            }
+        }
+
+        &.accent {
+            background-color: mat-color($accent, default, 0.04);
+
+            mat-icon {
+                color: mat-color($accent);
+            }
+        }
+
+        &.warn {
+            background-color: mat-color($warn, default, 0.04);
+
+            mat-icon {
+                color: mat-color($warn);
+            }
+        }
+    }
+}
+
+@mixin editable-field-typography($config) {
+    .app-editable-field-element {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

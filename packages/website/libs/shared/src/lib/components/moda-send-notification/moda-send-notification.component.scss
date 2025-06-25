@@ -1,0 +1,81 @@
+.easyroute-modal-document {
+    /* .color-label {
+        color: #24397c !important;
+    }
+    .padding-col {
+        padding: 0 50px !important;
+    }
+    .custom-file-label::after {
+        padding: 12px 0.75rem !important;
+        color: #ffffff !important;
+        content: "Cargar archivo";
+        background-color: #ff9800 !important;
+        border-radius: 0 10px 10px 0;
+        height: 47px !important;
+    }
+    .custom-file-label {
+        border-radius: 10px !important;
+        height: 48px !important;
+        padding: 12px 20px;
+        margin-top: 0px !important;
+    }
+    .colorDataNull {
+        color: #b5b7b9 !important;
+    }
+    .colorFileData {
+        color: #4c4c4c !important;
+    } */
+
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .title-infor{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px !important;
+        width: 20% !important;
+    }
+    .modal-footer {
+        display: block;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-header {
+        display: block;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+    .btn-default{
+        border-radius: 5px;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #F9F9FC;
+        opacity: 1;
+    }
+    .has-float-label textarea {
+        height: 186px !important;
+        line-height: 20px !important;
+        padding-top: 3rem !important;
+    }
+}

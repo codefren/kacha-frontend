@@ -1,0 +1,38 @@
+@import '~@angular/material/theming';
+
+@mixin route-planning-toolbar-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-route-planning-toolbar[easyroute-route-planning-toolbar-theme] {
+        .app-toolbar.toolbar-container {
+            background-color: mat-color($accent, 50) !important;
+            color: mat-color($accent, '50-contrast') !important;
+        }
+
+        .add-input-button,
+        .export-button,
+        .print-button {
+            mat-icon {
+                color: white;
+            }
+        }
+    }
+
+    .mat-menu-panel {
+        button mat-icon {
+            color: mat-color($primary);
+        }
+    }
+}
+
+@mixin route-planning-toolbar-typography($config) {
+    .easyroute-route-planning-toolbar[easyroute-route-planning-toolbar-theme] {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

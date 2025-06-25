@@ -1,0 +1,105 @@
+<div class="rates-style">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'COST.RATES_TABLES' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'COST.CREATE_THE_FARE_LINES_TO_LATER_ASSIGN_THEM_TO_EACH_AUTONOMOUS_DRIVER' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row mt-3" *ngIf="rateData && rateData.length > 0">
+
+                <div class="col-xl col-12 col-md-4 col-sm-4">
+
+                    <label for="type" class="mb-2 title-road "> {{ 'COST.CONCEPT' | translate }} </label>
+
+                </div>
+
+                <div class="col-xl col-12 col-md-4 col-sm-4">
+
+                    <label for="first" class="mb-2 title-road "> {{'COST.AMOUNT_PER_DAY' | translate }} </label>
+
+                </div>
+
+
+
+                <div class="col-xl col-2 p-xl-0">
+
+                    <label for="first" class="mb-2 title-road col-xl col-12 col-md-4 col-sm-4"> </label>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="row mt-1" *ngFor="let rate of rateData; let i = index;" [ngClass]="{'pb-4': rateData.length >= 6 && i == (rateData.length - 1)}">
+
+                <div class="col-xl col-12 mt-1 pl-3">
+
+                    <div class="orm-group input-group">
+
+                        <input class="form-control form-control-input" type="text" [(ngModel)]="rate.name" placeholder="Escribir..." (change)="changeConceptItem(rate)">
+
+                    </div>
+
+                </div>
+                <div class="col-xl col-12 mt-1 pl-3">
+
+                    <div class="orm-group input-group">
+
+                        <input class="form-control form-control-input" type="number" placeholder="0,00€" min="0" [(ngModel)]="rate.price" (change)="changeConceptItem(rate)">
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl col-12 p-xl-0">
+
+                    <div class="form-group  input-group m-0 mt-1">
+
+                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="delete(rate, i)">
+            
+                                <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+            
+                            </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="row pt-3 pb-3">
+                <div class="col-12">
+                    <a class="add-expenses-type point" (click)="addRates()"> {{ 'COST.ADD_FEE' | translate }} </a>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>

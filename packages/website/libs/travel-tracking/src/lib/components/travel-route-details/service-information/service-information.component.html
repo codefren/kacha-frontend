@@ -1,0 +1,217 @@
+<div class="service-information">
+    <div class="card">
+
+        <form *ngIf="detailForm" [formGroup]="detailForm">
+        
+            <!-- Tiempos de servicio -->
+            <div class="card-body pb-4">
+                <div class="col-12 col-xl-12 col-md-12 pt-3">
+
+                    <p class="title-generic mb-1">{{'TRAVEL_TRACKING.DETAILS.SERVICE_TIMES' | translate }}</p>
+
+                    <p class="sub-title" [ngClass]="{'mb-0': dataDetail && dataDetail.route_planning_route_delivery_movement && dataDetail.route_planning_route_delivery_movement.length > 0}">{{'TRAVEL_TRACKING.DETAILS.MESSAGE_SERVICE_TIMES' | translate }}</p>
+
+                </div>
+
+                <ng-container *ngIf="dataDetail && dataDetail.route_planning_route_delivery_movement && dataDetail.route_planning_route_delivery_movement.length > 0">
+                    <div class="col-12">
+
+                        <div class="row align-items-center">
+                            <div id="scroller-wrapper" class="pl-3 pr-3 mt-4">
+                                <div id="scroller" class="items point">
+
+                                    <ng-container *ngFor="let item of dataDetail.route_planning_route_delivery_movement;  let i = index">
+                                        <div class="elem">
+                                            <div class="card" [ngClass]="{'size-card-test-2': i != 0, 'size-card-test': i == 0, 'card-arrival-2': i != 0, 'card-arrival': i == 0}"
+                                            [style.z-index]="(100 - i)">
+
+                                                <div class="card-body p-3" style="background: transparent;">
+                                                    <div class="row mt-2">
+                                                        <div [ngClass]="{'col-6': item.statusRouteDeliveryPointId == 4, 'col-12':item.statusRouteDeliveryPointId != 4, 'padding-left-special': i != 0}">
+                                                            <p class="title-arriva mb-0">{{ item.status_route_delivery_point.name }} </p>
+                                                            <p class="time-arrival mb-0"> {{ dateFormat(item.creationDate) }} </p>
+                                                        </div>
+
+                                                        <ng-container *ngIf="item.statusRouteDeliveryPointId == 4">
+                                                            <div class="col-6 point d-flex justify-content-center item-align-center" (click)="openModalPosponet(item)">
+
+                                                                <img style="width: 25px;" src="assets/icons/travelIcons/addLoad.svg">
+
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+
+            <!-- Datos de entrega -->
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+                <div class="col-12 col-xl-12 col-md-12 pt-3">
+
+                    <p class="title-generic mb-1">{{'TRAVEL_TRACKING.DETAILS.DELIVERY_DATA' | translate }}</p>
+
+                    <p class="sub-title">{{'TRAVEL_TRACKING.DETAILS.MESSAGE_DELIVERY_DATA' | translate }}</p>
+
+                </div>
+
+                <div class="col-12 col-xl-12 col-md-12">
+                    <div class="row">
+                        
+                        <!-- Cajas devueltas -->
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 pr-xl-0 mb-2">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control" id="deliveredBoxes"
+                                            formControlName="deliveredBoxes" readonly
+                                            type="text" placeholder="{{'DETAIL_CONTROL.RETURNED_BOXES' | translate}}"/>
+
+                                        <label for="first" class="mt-2 title-col"> 
+                                            {{ 'DETAIL_CONTROL.RETURNED_BOXES' | translate }}
+                                        </label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 pr-xl-0 mb-2">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control" id="devolutionBoxes"
+                                            formControlName="devolutionBoxes" readonly
+                                            type="text" placeholder="{{'DETAIL_CONTROL.DEVOLUTION_BOXES' | translate}}"/>
+
+                                        <label for="first" class="mt-2 title-col"> 
+                                            {{ 'DETAIL_CONTROL.DEVOLUTION_BOXES' | translate }}
+                                        </label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <!-- Cajas extra -->
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 pr-xl-0 mb-2">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control" id="extraBoxes"
+                                        formControlName="extraBoxes" readonly
+                                        type="text" placeholder="{{'DETAIL_CONTROL.EXTRA_BOXES' | translate}}"/>
+
+                                    <label for="first" class="mt-2 title-col"> 
+                                        {{ 'DETAIL_CONTROL.EXTRA_BOXES' | translate }}
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Devoluciones -->
+                        <div class="col-xl-3 col-md-6 col-sm-12 col-12 mb-2">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control" id="devolutionDeliveryNote"
+                                        formControlName="devolutionDeliveryNote" readonly
+                                        type="text" placeholder="{{ 'DETAIL_CONTROL.RETURN' | translate }}"/>
+
+                                    <label for="first" class="mt-2 title-col"> 
+                                        {{ 'DETAIL_CONTROL.RETURN' | translate }}
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <!-- Observaciones -->
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12 mb-2">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control" id="observation"
+                                        formControlName="observation" readonly
+                                        type="text" placeholder="{{ 'DETAIL_CONTROL.RETURN' | translate }}"/>
+
+                                    <label for="first" class="mt-2 title-col"> 
+                                        {{ 'DETAIL_CONTROL.OBSERVATION' | translate }}
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Listado de productos -->
+                        <div class="col-12 mt-xl-2 pt-xl-2 mt-3 pt-3">
+                            <div class="form-row form-group">
+                                <div class="col-12">
+                                    <table id="details_devolution" style="width: 100%; text-align: center" class="table table-bordered table-striped-delivery mb-0">
+                                        <thead class="table-head toggle-directions">
+                                            <tr>
+                                                <th style="border-top-left-radius: 6px !important;">
+                                                    {{ 'TRAVEL_TRACKING.DETAILS.DEVOLUTION_PRODUCT' | translate }}
+                                                </th>
+
+                                                <th style="border-top-right-radius: 6px; border-right: 0px solid #7387c2 !important;">
+                                                    {{ 'DEVOLUTION.QUANTITY' | translate }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valoración -->
+            <div class="card-footer pt-3 pb-5" style="display: block;" *ngIf="valorations && valorations.length > 0">
+                <div class="col-12 extra-campo pt-3">
+                    <label class="subtitle-general mb-0 w-100">
+                        {{ 'VEHICLE_MAINTENANCE.MAINTENANCE_CHECK' | translate }}
+                    </label>
+                </div>
+
+                <div class="col-12 mt-2">
+                    <div class="form-group mt-3">
+                        <p class="vehicle-maintenance-status" style="font-size: 55px !important;" for="maintenanceVehicleStateType">
+                            {{ countValoration() }}/{{ valorations.length }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-row mt-4">
+                        <div class="col-12 col-md-5 lines-for-col-top" 
+                            [ngClass]="{'offset-md-2 lines-for-col-bottom': i % 2 > 0 }" 
+                            *ngFor="let item of valorations; let i = index">
+                            <div class="row mt-3">
+                                <div class="col-2 text-center" *ngIf="showValoration(item.id) != undefined">
+                                    <ng-container *ngIf="showValoration(item.id)">
+                                        <img src="assets/icons/optimmanage/check-green.svg">
+                                    </ng-container>
+                                    <ng-container *ngIf="!showValoration(item.id)">
+                                        <img src="assets/icons/optimmanage/x-roja.svg">
+                                    </ng-container>
+                                </div>
+
+                                <div class=" text-left" [ngClass]="{'p-0 col-10': showValoration(item.id) != undefined ,'col-12':showValoration(item.id) === undefined }">
+                                    <p [title]="item.name" class="font-checkd">
+                                        {{ item.name }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

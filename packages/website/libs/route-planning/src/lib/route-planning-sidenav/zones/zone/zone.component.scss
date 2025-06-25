@@ -1,0 +1,81 @@
+.easyroute-zone {
+    margin-bottom: 5px;
+    .no-calculated-route {
+        padding: 16px 0;
+        text-align: center;
+    }
+
+    .route-planning-routes-pagination {
+        margin: -8px 12px;
+    }
+
+    editable-zone-color {
+        align-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    /* Make an input blend into its parent */
+    input.inline-edit {
+
+        background-color: inherit;
+        /* Eliminate borders and padding */
+        border: none;
+        // color: inherit;
+        cursor: text;
+
+        /* Inherit the parent element's typography */
+        //font: inherit;
+        //font-size: inherit;
+        line-height: inherit;
+        margin: 0;
+        padding: 0;
+        text-align: inherit;
+
+        /* Seems to help alignment in headers */
+        vertical-align: top;
+    }
+
+    /* Add interaction cues on hover and focus */
+    input.inline-edit:hover,
+    input.inline-edit:focus {
+        // /* Change the background to a light yellow */
+        background-color: #fff;
+
+        // /* A subtle transition never hurts */
+        -webkit-transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        -ie-transition: background-color 0.5s;
+        transition: background-color 0.5s;
+    }
+
+    // TODO: Remove the following rule in order to activate again the evaluation polyline button
+    .display-evaluation-container {
+        // display: none !important;
+    }
+
+    .mat-expansion-panel-header {
+        .switch-button {
+            display: none;
+        }
+
+        &:hover {
+            .switch-button {
+                display: block;
+            }
+        }
+    }
+
+    mat-icon {
+        color: #FF8D24 !important;
+    }
+
+    .mat-checkbox-background {
+        background-color: #FF8D24 !important;
+        border-radius: 50%;
+    }
+    .mat-checkbox-frame {
+        border-width: 0px;
+        border-style: none;
+    }
+}

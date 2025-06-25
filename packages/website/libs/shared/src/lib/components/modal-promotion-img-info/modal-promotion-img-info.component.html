@@ -1,0 +1,24 @@
+<div class="easyroute-modal-promotion-info-images">
+    <section class="card p-2">
+        <div class="row justify-content-center mt-4">
+            <p class="title mt-3 pr-3 pr-md-0">{{ title }}</p>
+            <i class="point fas fa-times fa-2x" (click)="activeModal.close()"></i>
+        </div>
+
+        <div class="card-body">
+            <div class="modal-block mt-0" [ngClass]="{'ajust': type === 'list'}">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img class="img-info" *ngIf="type === 'showPromotionCountDown'" src="assets/images/pages/products/previsualizacion3.png">
+                        <img class="img-info" *ngIf="type === 'showPromotionHome'" src="assets/images/pages/products/previsualizacion.png" alt="imagen">
+                        <img class="img-info" *ngIf="type === 'showPromotionHomes'" src="assets/images/pages/products/previsualizacion2.png">
+                        <img class="img-info" *ngIf="type === 'showPromotionTopCategoryList'" src="assets/images/pages/products/previsualizacion8.png" alt="imagen">
+                        <img class="img-info" *ngIf="type === 'showPromotionBetweenProducts'" src="assets/images/pages/products/previsualizacion7.png" alt="" alt="imagen">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>

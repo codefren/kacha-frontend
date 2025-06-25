@@ -1,0 +1,34 @@
+FROM node:10-alpine as build
+
+COPY . /src
+WORKDIR /src
+
+RUN apk add git jq &&\
+    yarn bootstrap &&\
+    yarn isolate -w @optimroute/engine -o dist &&\
+    cd dist &&\
+    yarn install &&\
+    yarn build &&\
+    yarn remove $(cat package.json | jq -r '.devDependencies | keys | join(" ")')
+
+RUN apk add --no-cache cmake make gcc g++ curl-dev rapidjson-dev && \
+    cd /src/packages/engine/core && \
+    wget https://github.com/jpbarrette/curlpp/archive/v0.8.1.tar.gz && tar -xzf v0.8.1.tar.gz && \
+    cd curlpp-0.8.1 && mkdir build && cd build && cmake .. && make && make install && cd ../.. && \
+    rm -rf build && mkdir build && cd build && cmake .. && make && cp optimroute-engine-core /opt/optimroute-engine-core
+
+FROM node:10-alpine
+
+COPY --from=build /opt/optimroute-engine-core /opt/optimroute-engine-core
+COPY --from=build /usr/local/lib64 /usr/local/lib64
+COPY --from=build /usr/local/include /usr/local/include
+COPY --from=build /src/dist/dist /opt/app
+COPY --from=build /src/dist/node_modules /opt/app/node_modules
+
+WORKDIR /opt/app
+
+RUN apk add curl-dev rapidjson-dev && npm install pm2 -g
+
+ENV EXECUTABLE_PATH /opt/optimroute-engine-core
+
+ENTRYPOINT ["pm2-runtime", "src/main.js"]

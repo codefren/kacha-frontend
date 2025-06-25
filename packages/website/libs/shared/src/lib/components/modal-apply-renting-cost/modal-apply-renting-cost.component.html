@@ -1,0 +1,150 @@
+<div class="modal-renting-cost">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'VEHICLES.APPLY_RENTING_COST' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 ml-xl-3">
+
+                <span class="title-sub">
+
+                    {{ 'VEHICLES.APPLY_RENTING_COST_MESSAGE' | translate }}         
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <form [formGroup]="vehicleRetingCostForm" class="form-width-prod" *ngIf="conceptVehicleRentingCost">
+
+            <div class="form-width-prod">
+
+                <div class="card style-card">
+
+                    <div class="card-body p-3 modalScrollAuto">
+
+                        <ng-container *ngIf="!showVehicles">
+                            <div class="col-12 text-center">
+                                <div class="fa-6x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="showVehicles">
+
+                            <div class="row mt-2">
+
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm">Matrícula </label>
+
+                                <label for="first" class="mb-2 title-label col-xl col-12 col-md col-sm">Coste Renting <span class="red">*</span> </label>
+
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> Fecha adquisición </label>
+
+                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> Fecha limite contrato </label>
+
+                                <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+
+                            </div>
+                            
+                            <ng-container *ngIf="conceptVehicleRentingCost.length > 0">
+                                <ng-container formArrayName="conceptVehicleRentingCost">
+                                    <ng-container *ngFor="let vehicleRentingItem of conceptVehicleRentingCost.controls; let p = index;" [formGroup]="vehicleRentingItem">
+
+                                        <div class="form-row" [ngClass]="{'mt-2' : p > 0}">
+
+                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                <input class="form-control form-control-input" readonly formControlName="registration" placeholder="Matrícula" />
+
+                                            </div>
+                                           
+                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                <input class="form-control form-control-input" type="number" formControlName="acquisitionShare" 
+                                                    value="0" min="0" max="999999" onKeyPress="if(this.value.length==6) return false;" placeholder="0" />
+                                            </div>
+
+                                            <div class="form-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                <div class="input-group">
+                                                    <input ngbDatepicker #f="ngbDatepicker" type="text"
+                                                        class="form-control form-control-date size-date" autocomplete="off"
+                                                        formControlName="acquisitionDateCost" readonly
+                                                        placeholder="Seleccione..." id="'acquisitionDateCost'+p" />
+                            
+                                                    <button class="btn btn-calendar calendar" (click)="f.toggle()" type="button">
+                                                        <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                <div class="input-group">
+                                                    <input ngbDatepicker #g="ngbDatepicker" type="text"
+                                                        class="form-control form-control-date size-date" autocomplete="off"
+                                                        formControlName="endDate" readonly
+                                                        placeholder="Seleccione..." id="'endDate'+p" />
+                            
+                                                    <button class="btn btn-calendar calendar" (click)="g.toggle()" type="button">
+                                                        <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteVehicleRentingCost(vehicleRentingItem, p)">
+                                                    <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+
+                    </div>
+                    
+                </div>
+                    
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary mr-2" [disabled]="!validateImport() || !vehicleRetingCostForm.valid" 
+                    (click)="submit()"> {{ 'VEHICLES.APPLY_RENTING' | translate }}  </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

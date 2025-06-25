@@ -1,0 +1,274 @@
+<div class="delivery-note-bills">
+
+    <div class="card">
+
+        <form *ngIf="detailBills" [formGroup]="detailBills">
+
+            <!-- Botones del albarán simple -->
+
+            <div class="card-body pb-4">
+
+                <div class="col-12">
+
+                    <div class="row">
+
+                        <div class="col-12 col-xl-8 col-md-6 pt-3">
+
+                            <p class="title-generic mb-1">{{'TRAVEL_TRACKING.DETAILS_BILLS.INVOICE_DETAILS' | translate }}</p>
+
+                            <p class="sub-title m-0">{{'TRAVEL_TRACKING.DETAILS_BILLS.VIEW_THE_DETAILS_OF_PRODUCTS_DELIVERED' | translate }}</p>
+
+                        </div>
+
+                        <div class="col-12 col-xl-4 col-md-6 pt-3 d-flex justify-content-end">
+
+                            <!--  <button class="mb-2 mt-xl-0 mt-3 mr-2 pl-3 pr-3 btn btn-default alt-btn-default" (click)="downloadBills(dataShowList.archiveUrl)">
+                                
+                                <img class="mr-2" src="assets/icons/pdf1.svg" />
+
+                                <label class="title-selected point" for=""> {{'TRAVEL_TRACKING.DETAILS.DOWNLOAD' | translate }}  </label>
+                                
+                            </button> -->
+
+                            <button class="mb-2 mt-xl-0 mt-3 mr-2 pl-3 pr-3 btn btn-default alt-btn-default" [disabled]="!dataShowList" (click)="openPrint()">
+
+                                <img class="mr-2" src="assets/icons/print-delivery-note.svg" />
+
+                                <label class="title-selected point" for=""> {{'TRAVEL_TRACKING.DETAILS.PRINT' | translate }} </label>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Detalle de albaran simple -->
+            <div class="card-footer pt-3 pb-5" style="display: block;" *ngIf="billList.length > 0">
+                <div class="col-12">
+                    <div class="row">
+                        <!-- Albaranes -->
+
+                        <div class="col-xl-4 col-md-3 col-sm-4 col-12 pr-xl-0 mt-2">
+
+                            <div class="row">
+                                <div class="col-xl-6 col-12">
+                                    <div class="form-group input-group">
+                                        <span class="has-float-label w-100">
+                                                <input class="form-control" id="countBills" formControlName="countBills"
+                                                     readonly
+                                                    type="text" placeholder="{{'TRAVEL_TRACKING.DETAILS_BILLS.BILLS' | translate }}"/>
+            
+                                                <label for="countBills" class="mt-2 title-col"> 
+                                                    {{'TRAVEL_TRACKING.DETAILS_BILLS.BILLS' | translate }}
+                                                </label>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-12 pl-xl-0">
+                                    <div class="form-group input-group">
+                                        <span class="has-float-label w-100">
+                                            <select class="form-select form-control w-100" id="invoice"  formControlName="invoice"
+                                                (change)="changeDeliveryNoteBills($event.target.value)">
+                                                <option [value]="item.code" class="form-select-option" *ngFor="let item of billList" >
+                                                   {{ item.code }}
+                                                </option>
+                                                <!-- <option value="00098355 ABb" class="form-select-option" >
+                                                    00098355 ABB
+                                                </option> -->
+                                            </select>
+                                            <label for="type" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.DETAILS_BILLS.SHOW_INVOICE' | translate }} </label>
+                                        </span>
+                                    </div>
+                                    <!-- <div class="form-group input-group">
+                                        <span class="has-float-label w-100">
+                                                <input class="form-control" id="deliveryNoteCode"
+                                                     readonly
+                                                    type="text" placeholder="{{ 'TRAVEL_TRACKING.DETAILS_BILLS.SHOW_INVOICE' | translate }}"/>
+            
+                                                <label for="first" class="mt-2 title-col"> 
+                                                    {{ 'TRAVEL_TRACKING.DETAILS_BILLS.SHOW_INVOICE' | translate }}
+                                                </label>
+                                            </span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <!-- Nombre albaran -->
+                        <div class="col-xl-2 col-md-4 col-sm-6 col-12 pr-xl-0 mt-2 mt-xl-3">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control" id="amount"
+                                             readonly formControlName="amount"
+                                            type="text" placeholder="{{ 'TRAVEL_TRACKING.DETAILS_BILLS.AMOUNT' | translate }}"/>
+    
+                                        <label for="amount" class="mt-2 title-col"> 
+                                            {{ 'TRAVEL_TRACKING.DETAILS_BILLS.AMOUNT' | translate }}
+                                        </label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <!-- Documento identificación -->
+                        <div class="col-xl-2 col-md-4 col-sm-6 col-12 pr-xl-0 mt-2 mt-xl-3">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control" id="PaymentMethod"
+                                            readonly formControlName="PaymentMethod"
+                                            type="text" placeholder="{{ 'TRAVEL_TRACKING.DETAILS_BILLS.PAYMENT_METHOD' | translate }}"/>
+    
+                                        <label for="PaymentMethod" class="mt-2 title-col"> 
+                                            Método pago app
+                                        </label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <!-- Documento identificación -->
+                        <div class="col-xl-2 col-md-4 col-sm-6 col-12 pr-xl-0 mt-2 mt-xl-3">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control" id="PaymentMethod"
+                                            readonly [value]="bill ? bill.descriptionBill : ''"
+                                            type="text"/>
+    
+                                        <label for="PaymentMethod" class="mt-2 title-col"> 
+                                            Forma pago
+                                        </label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <!-- Documento identificación -->
+                        <div class="col-xl-2 col-md-4 col-sm-6 col-12 pr-xl-0 mt-2 mt-xl-3">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control" id="PaymentMethod"
+                                            readonly [value]="bill && bill.billPaymentStatusId ? 
+                                                (bill.billPaymentStatusId === 1 ? 'Por cobrar' : 
+                                                (bill.billPaymentStatusId === 2 ? 'Cobrado'  : 
+                                                (bill.billPaymentStatusId === 3 ? 'No firmada': 'Firmada'))) 
+                                                : ''"
+                                            type="text"/>
+    
+                                        <label for="PaymentMethod" class="mt-2 title-col"> 
+                                            Estado
+                                        </label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <!-- Número pedido -->
+                        <div class="col-xl-4 col-md-4 col-sm-6 col-12 pr-xl-0 mt-2 mt-xl-3" *ngIf="dataShowList">
+                            <div class="form-group input-group" style="display: block;">
+                                <span class="has-float-label w-100">
+                                        <input class="form-control radiusDeliveryOrderCode" id="deliveryOrderCode" #inputOrderCode
+                                           
+                                            type="text" placeholder="{{ 'TRAVEL_TRACKING.DETAILS_BILLS.ORDER_NO' | translate }}" [value]="deliveryNote && deliveryNote.deliveryNoteOrderCode ? deliveryNote.deliveryNoteOrderCode : ''"/>
+    
+                                        <label for="first" class="mt-2 title-col"> 
+                                            {{ 'TRAVEL_TRACKING.DETAILS_BILLS.ORDER_NO' | translate }}
+                                        </label>
+                                    </span>
+                                <span class="has-float-label w-100 has-float-primary">
+                                        <button type="button" class="btn btn-primary btn-save" 
+                                            
+                                            style="vertical-align: text-bottom;" 
+                                            (click)="saveNotMultiple(inputOrderCode.value)">
+                                            <img src="assets/icons/optimmanage/save.svg">
+                                        </button>
+                                    </span>
+                            </div>
+                        </div>
+                        <!-- TABLE DE FACTURAS -->
+                        <!-- END TABLA DE FACTURAS -->
+                    </div>
+                </div>
+                <!-- Tabla de pedido -->
+                <div class="col-xl-12 col-12 pr-xl-0 mt-2 mt-xl-3" *ngIf="dataShowList && dataShowList.routePlanningRouteDeliveryNoteId && dataShowList.routePlanningRouteDeliveryNoteId > 0">
+                    <div class="form-row form-group">
+                        <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                        justify-content-sm-between padding-col padding-document-table">
+                            <div class="col-md-10 col-12 col-sm-7 d-flex align-items-center toggle-pointer p-0">
+                                <span class="pl-4">{{
+                                    'ORDERS.ORDERS_DETAIL.ORDER' | translate
+                                    }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 p-0">
+                            <table id="details_assigned" style="width: 100%; text-align: center" class="table table-responsive-md p-0 table-bordered table-striped-delivery mb-0">
+                                <thead class="table-head toggle-directions">
+                                    <tr>
+                                        <th style="border-left: 1px solid #7387c2 !important;">{{ 'PRODUCTS.CODE' | translate }}</th>
+                                        <th>{{ 'PRODUCTS.NAME_' | translate }}</th>
+                                        <th>
+                                            {{ 'PRODUCTS.QUANTITY' | translate }}
+                                        </th>
+                                        <th>{{ "PRODUCTS.U_MEASURE" | translate }}</th>
+                                        <th>{{ 'PRODUCTS.UD' | translate }}</th>
+                                        <th>
+                                            {{ 'PRODUCTS.PRICE' | translate }}
+                                        </th>
+                                        <th style="border-right: 1px solid #7387c2 !important;">
+                                            {{ 'DELIVERY_POINTS.STATE' | translate }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Facturas -->
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+                <div class="col-12 pt-3">
+
+                    <p class="title-generic mb-1">{{'TRAVEL_TRACKING.DETAILS_BILLS.UNCOLLECTED_BILLS' | translate }}</p>
+
+                    <p class="sub-title">{{'TRAVEL_TRACKING.DETAILS.MESSAGE_BILLS' | translate }}</p>
+
+                </div>
+
+                <div class="col-12 mt-xl-2 pt-xl-2 mt-3 pt-3">
+                    <div class="form-row form-group">
+                        <div class="col-12">
+                            <table id="listBill" style="width: 100%; text-align: center" class="table table-bordered table-striped-delivery mb-0">
+                                <thead class="table-head toggle-directions">
+                                    <tr>
+                                        <th style="border-top-left-radius: 6px !important;">{{ 'PRODUCTS.CODE' | translate }}</th>
+                                        <th>{{ 'GENERAL.STATUS' | translate }}</th>
+
+                                        <th>{{ 'BILLS.DRIVER' | translate }}</th>
+                                        <th>
+                                            {{ 'BILLS.AUTORIZED_BY' | translate }}
+                                        </th>
+                                        <th>{{'BILLS.DATE' | translate }}</th>
+
+                                        <th style="border-top-right-radius: 6px; border-right: 0px solid #7387c2 !important;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </form>
+
+    </div>
+</div>

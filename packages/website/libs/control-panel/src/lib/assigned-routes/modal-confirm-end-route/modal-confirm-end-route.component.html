@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-right pt-2 pr-4">
+            <i class="fas fa-times close-button" (click)="closeDialog(false)"></i>
+        </div>
+        <!-- <div class="col-10 text-center">
+            <p class="title">{{ 'CONTROL_PANEL.END_ROUTE' | translate | uppercase }}</p>
+            <hr class="line-primary" />
+        </div> -->
+    </div>
+
+    <div class="row mt-2 pt-2">
+        <div class="offset-md-1 col-md-10 col-12">
+            <h3 class="text-center size-general-font">{{ 'CONTROL_PANEL.ARE_YOU_SURE_YOU_END_THE_ROUTE' | translate }}</h3>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-3 pb-3">
+        <div class="col-md-6 col-12 text-md-right text-center">
+            <button class="btn btn-cancel size-btn-modal " (click)="closeDialog(false)">
+                {{ 'GENERAL.CANCEL' | translate }}
+            </button>
+        </div>
+        <div class="col-md-6 col-12 text-center mt-2 mt-md-0 text-md-left">
+            <button class="btn btn-primary size-btn-modal" (click)="closeDialog(true)"> 
+                {{ 'GENERAL.END' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

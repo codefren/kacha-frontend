@@ -1,0 +1,902 @@
+{
+    "options": {
+        "minVehicles": 0,
+        "objectivePreferences": {
+            "costDuration": 25,
+            "costDistance": 25,
+            "costVehicleWaitTime": 75
+        },
+        "maxDelayTime": null,
+        "optimizeFromIndex": null,
+        "ignoreCapacityLimit": null,
+        "explorationLevel": 9,
+        "forceDepartureTime": false,
+        "useSkills": false,
+        "traffic": {
+            "range1": {
+                "active": true,
+                "increaseProportion": 0,
+                "timeInterval": {
+                    "start": 21600,
+                    "end": 36000
+                }
+            },
+            "range2": {
+                "active": true,
+                "increaseProportion": 0,
+                "timeInterval": {
+                    "start": 36000,
+                    "end": 43200
+                }
+            },
+            "range3": {
+                "active": true,
+                "increaseProportion": 0,
+                "timeInterval": {
+                    "start": 43200,
+                    "end": 50400
+                }
+            }
+        }
+    },
+    "deliveryPoints": [
+        {
+            "id": "depot",
+            "deliveryWindow": {
+                "start": null,
+                "end": null
+            },
+            "coordinates": {
+                "latitude": 41.3246811,
+                "longitude": 2.0372949
+            }
+        },
+        {
+            "id": "265696",
+            "name": "HOSPITASTA,M (9727)",
+            "deliveryWindow": {
+                "start": 27000,
+                "end": 32400
+            },
+            "coordinates": {
+                "latitude": 41.3753707,
+                "longitude": 2.1205336
+            },
+            "demand": 100,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4],
+            "deliveryType": "pickup"
+        },
+        {
+            "id": "26569000",
+            "name": "HOSPITASTA,M (9727)",
+            "deliveryWindow": {
+                "start": 27000,
+                "end": 32400
+            },
+            "coordinates": {
+                "latitude": 41.3753707,
+                "longitude": 2.1205336
+            },
+            "demand": 100,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4],
+            "deliveryType": "pickup"
+        },
+        {
+            "id": "265697",
+            "name": "VANESA HERNANDEZ VILLANUEVA (9715)",
+            "deliveryWindow": {
+                "start": 18000,
+                "end": 22500
+            },
+            "coordinates": {
+                "latitude": 41.3752938,
+                "longitude": 2.1206336
+            },
+            "demand": 100,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4],
+            "deliveryType": "shipment"
+        },
+        {
+            "id": "265698",
+            "name": "JOAQUIN CODINA APARICIO (9730)",
+            "deliveryWindow": {
+                "start": 18000,
+                "end": 22500
+            },
+            "coordinates": {
+                "latitude": 41.3752938,
+                "longitude": 2.1206336
+            },
+            "demand": 0,
+            "serviceTime": 120,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265699",
+            "name": "M JOSE CARRASCO PEREA (9720)(LLAVE)",
+            "deliveryWindow": {
+                "start": 18000,
+                "end": 22500
+            },
+            "coordinates": {
+                "latitude": 41.3752938,
+                "longitude": 2.1206336
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265700",
+            "name": "KEBAB ESTRELLA BRILLANTE (8300)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14400,
+                "end": 46800
+            },
+            "coordinates": {
+                "latitude": 41.3748914,
+                "longitude": 2.1210598
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265701",
+            "name": "DONER REY (2222)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14520,
+                "end": 24300
+            },
+            "coordinates": {
+                "latitude": 41.3736283,
+                "longitude": 2.1193842
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265702",
+            "name": "M TERESA VILLALBA GUERRERO (2201)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14400,
+                "end": 18000
+            },
+            "coordinates": {
+                "latitude": 41.347267,
+                "longitude": 2.0781582
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265703",
+            "name": "DESEMCARN S.A. (1471)",
+            "deliveryWindow": {
+                "start": 11700,
+                "end": 27900
+            },
+            "coordinates": {
+                "latitude": 41.3825916,
+                "longitude": 2.0688462
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265704",
+            "name": "COM A CASA -ESPLUGUES (8724)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14400,
+                "end": 28800
+            },
+            "coordinates": {
+                "latitude": 41.3758711,
+                "longitude": 2.081244
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 10,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265705",
+            "name": "ALI MARATAB S.C.P. -DONER CAMELIAS (2368)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14400,
+                "end": 18000
+            },
+            "coordinates": {
+                "latitude": 41.364524,
+                "longitude": 2.084364
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 1,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265706",
+            "name": "M.CARMEN CASTELLNOU (2227)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14400,
+                "end": 32400
+            },
+            "coordinates": {
+                "latitude": 41.3699082,
+                "longitude": 2.1012398
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265707",
+            "name": "REDOM MU\u00d1OZ SUSANA (2502)(LLAVE)",
+            "deliveryWindow": {
+                "start": 14400,
+                "end": 24300
+            },
+            "coordinates": {
+                "latitude": 41.3706272,
+                "longitude": 2.1072065
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265708",
+            "name": "FRANCISCO MARTINEZ GONZALEZ (3047)",
+            "deliveryWindow": {
+                "start": 18300,
+                "end": 22500
+            },
+            "coordinates": {
+                "latitude": 41.3701567,
+                "longitude": 2.1079076
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265709",
+            "name": "ROSTISSERIA EL SURTIDOR (3197)",
+            "deliveryWindow": {
+                "start": 19800,
+                "end": 21600
+            },
+            "coordinates": {
+                "latitude": 41.3624797,
+                "longitude": 2.1090991
+            },
+            "demand": 0,
+            "serviceTime": 300,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265710",
+            "name": "RODRIGUEZ DOMINGUEZ MARIA JOSEFA (3026)",
+            "deliveryWindow": {
+                "start": 20700,
+                "end": 23400
+            },
+            "coordinates": {
+                "latitude": 41.3585415,
+                "longitude": 2.099061
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265711",
+            "name": "A.B.C. DISTRIBUCI\u00d3N Y GESTI\u00d3N SL (2428)",
+            "deliveryWindow": {
+                "start": 23400,
+                "end": 27000
+            },
+            "coordinates": {
+                "latitude": 41.366597,
+                "longitude": 2.0878697
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265712",
+            "name": "POLLERIA JUAN (2743)",
+            "deliveryWindow": {
+                "start": 19800,
+                "end": 24300
+            },
+            "coordinates": {
+                "latitude": 41.3626616,
+                "longitude": 2.0828673
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265713",
+            "name": "M.DOLORES ANGUERA MOLINA (8750)",
+            "deliveryWindow": {
+                "start": 21600,
+                "end": 24300
+            },
+            "coordinates": {
+                "latitude": 41.361509,
+                "longitude": 2.074732
+            },
+            "demand": 0,
+            "serviceTime": 180,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265714",
+            "name": "RACO DEL AVIRAM (8751)",
+            "deliveryWindow": {
+                "start": 21600,
+                "end": 27000
+            },
+            "coordinates": {
+                "latitude": 41.361509,
+                "longitude": 2.074732
+            },
+            "demand": 0,
+            "serviceTime": 180,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265715",
+            "name": "XARCUTERIA MOLINER (3019)",
+            "deliveryWindow": {
+                "start": 21600,
+                "end": 25200
+            },
+            "coordinates": {
+                "latitude": 41.3544396,
+                "longitude": 2.0707559
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265716",
+            "name": "CARNICERIA-POLLERIA LOURDES (2221)",
+            "deliveryWindow": {
+                "start": 21600,
+                "end": 25800
+            },
+            "coordinates": {
+                "latitude": 41.3665338,
+                "longitude": 2.0554325
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265717",
+            "name": "SUPERSERVEI ELENA, S.L. (9690)",
+            "deliveryWindow": {
+                "start": 24600,
+                "end": 29700
+            },
+            "coordinates": {
+                "latitude": 41.384871,
+                "longitude": 2.076643
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265718",
+            "name": "MESON A CASA DA VEIGUELA (7725)",
+            "deliveryWindow": {
+                "start": 39600,
+                "end": 43200
+            },
+            "coordinates": {
+                "latitude": 41.3770111,
+                "longitude": 2.0883895
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265719",
+            "name": "FATIMA RONCERO CORRALES (3112)",
+            "deliveryWindow": {
+                "start": 28800,
+                "end": 33300
+            },
+            "coordinates": {
+                "latitude": 41.3625598,
+                "longitude": 2.0991718
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265720",
+            "name": "POLLASTRES A L,AST LUCENA (3111)",
+            "deliveryWindow": {
+                "start": 28800,
+                "end": 36000
+            },
+            "coordinates": {
+                "latitude": 41.3618976,
+                "longitude": 2.0992463
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265721",
+            "name": "RESTAURANTE A COMER (1968)",
+            "deliveryWindow": {
+                "start": 34200,
+                "end": 38700
+            },
+            "coordinates": {
+                "latitude": 41.3630154,
+                "longitude": 2.1112176
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265722",
+            "name": "BODEGA MONTFERRY (2114)",
+            "deliveryWindow": {
+                "start": 28800,
+                "end": 34200
+            },
+            "coordinates": {
+                "latitude": 41.3631729,
+                "longitude": 2.1246854
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265723",
+            "name": "REY DONNER KEBAD (2292)(LLAVE)",
+            "deliveryWindow": {
+                "start": 28800,
+                "end": 45000
+            },
+            "coordinates": {
+                "latitude": 41.3633836,
+                "longitude": 2.1286863
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265724",
+            "name": "CARNS I XARCU BACARDI (2302)",
+            "deliveryWindow": {
+                "start": 30600,
+                "end": 36000
+            },
+            "coordinates": {
+                "latitude": 41.3633818,
+                "longitude": 2.1285685
+            },
+            "demand": 0,
+            "serviceTime": 300,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265725",
+            "name": "FRANKFURT M (2336)",
+            "deliveryWindow": {
+                "start": 25200,
+                "end": 39600
+            },
+            "coordinates": {
+                "latitude": 41.3593211,
+                "longitude": 2.1255085
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265726",
+            "name": "LUISA MARTOS ROLDAN (614)",
+            "deliveryWindow": {
+                "start": 32400,
+                "end": 37800
+            },
+            "coordinates": {
+                "latitude": 41.3545535,
+                "longitude": 2.11316
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265727",
+            "name": "ANA ANGUITA FUSALBA (8656)",
+            "deliveryWindow": {
+                "start": 28800,
+                "end": 36900
+            },
+            "coordinates": {
+                "latitude": 41.3811798,
+                "longitude": 2.0462666
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265728",
+            "name": "ROST. COM A CASA-II ST. FELIU (8621)",
+            "deliveryWindow": {
+                "start": 32400,
+                "end": 39600
+            },
+            "coordinates": {
+                "latitude": 41.3865286,
+                "longitude": 2.0532545
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265729",
+            "name": "ROSTISSERIA TASTAOLLETES (7715)",
+            "deliveryWindow": {
+                "start": 34200,
+                "end": 43200
+            },
+            "coordinates": {
+                "latitude": 41.3846324,
+                "longitude": 2.0442358
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265730",
+            "name": "MARIA GUERRERO -ROSTISSERIA EIXAMPLE-1 (2273)(LLAVE)",
+            "deliveryWindow": {
+                "start": 27000,
+                "end": 30600
+            },
+            "coordinates": {
+                "latitude": 41.3646368,
+                "longitude": 2.0537855
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265731",
+            "name": "MARIA GUERRERO -ROST, EIXAMPLE-2 (2210)(LLAVE)",
+            "deliveryWindow": {
+                "start": 27000,
+                "end": 39600
+            },
+            "coordinates": {
+                "latitude": 41.3680895,
+                "longitude": 2.0577917
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265732",
+            "name": "BODEGA PAQUI (1218)",
+            "deliveryWindow": {
+                "start": 32400,
+                "end": 39600
+            },
+            "coordinates": {
+                "latitude": 41.3289574,
+                "longitude": 2.0990083
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265733",
+            "name": "RESTAURANTE RAMBLA (2840)",
+            "deliveryWindow": {
+                "start": 32400,
+                "end": 37800
+            },
+            "coordinates": {
+                "latitude": 41.3318493,
+                "longitude": 2.0954363
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265734",
+            "name": "LA BOTIGUETA DE LA HAMBURGUESA (3505)",
+            "deliveryWindow": {
+                "start": 32400,
+                "end": 36000
+            },
+            "coordinates": {
+                "latitude": 41.3280651,
+                "longitude": 2.1013253
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265735",
+            "name": "SUPER GALL (1970)",
+            "deliveryWindow": {
+                "start": 34200,
+                "end": 36000
+            },
+            "coordinates": {
+                "latitude": 41.3216296,
+                "longitude": 2.0993539
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265736",
+            "name": "CORTIJO DEL PRAT S.L. (1917)",
+            "deliveryWindow": {
+                "start": 34200,
+                "end": 37800
+            },
+            "coordinates": {
+                "latitude": 41.3217872,
+                "longitude": 2.0906567
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        },
+        {
+            "id": "265737",
+            "name": "LA ROSTISSERIA (1944)",
+            "deliveryWindow": {
+                "start": 33300,
+                "end": 39600
+            },
+            "coordinates": {
+                "latitude": 41.3258372,
+                "longitude": 2.0928266
+            },
+            "demand": 0,
+            "serviceTime": 240,
+            "priority": 2,
+            "leadTime": 0,
+            "allowedDelayTime": 0,
+            "orderId": null,
+            "skills": [2,4]
+        }
+    ],
+    "vehicles": [
+        {
+            "id": 17624,
+            "name": "IVECO 4312KZF",
+            "capacity": 100,
+            "deliveryWindowStart": 10800,
+            "deliveryWindowEnd": 86340,
+            "skills": [
+                2,4
+            ]
+        },
+        {
+            "id": 17625,
+            "name": "Encava",
+            "capacity": 50,
+            "deliveryWindowStart": 0,
+            "deliveryWindowEnd": 86340,
+            "skills": [
+                4
+            ]
+        }
+    ],
+    "refer": {
+        "id": 21295,
+        "entity": "deliveryZone",
+        "computationId": 17009
+    }
+}

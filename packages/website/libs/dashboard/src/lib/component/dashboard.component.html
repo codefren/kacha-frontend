@@ -1,0 +1,234 @@
+<div class="easyroute-dashboard padding-body pt-0">
+
+    <div class="row text-center align-items-center justify-content-center mt-4 mb-1">
+        <div class="col-xl-6 col-lg-6 col-12 pl-0">
+            <div class="row">
+                <div class="col-xl-2  col-lg-3 col-12 text-xl-right text-lg-left text-md-center text-center">
+                    <button type="button" class="btn-select btn btn-outline-primary no-select" [ngClass]="{'select': default === 'route'}" (click)="changePage('route')">Rutas</button>
+                </div>
+                <!--  <div class="col-xl-2 col-lg-4 col-12 mt-lg-0 mt-xl-0 mt-2" *ngIf="validateDirector()">
+                    <button type="button" class="btn-select btn btn-outline-primary no-select" [ngClass]="{'select': default === 'sales'}" (click)="changePage('sales')">Ventas</button>
+                </div> -->
+                <!-- <div class="col-lg-2 col-12 mt-lg-0">
+                    <button type="button" class="btn-select btn btn-outline-primary no-select" [ngClass]="{'select': default === 'cost'}" (click)="changePage('cost')">Costes</button>
+                </div> -->
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-6 col-lg-6 col-12 p-xl-0 mt-xl-0 mt-lg-0 mt-3">
+
+            <div class="row  justify-content-xl-end justify-content-md-end justify-content-center">
+
+
+                <ng-container *ngIf="default ==='sales' && validateDirector()">
+
+                    <!-- commercial  -->
+
+                    <div class="col-xl-4 col-lg-6 col-12" *ngIf="validateAgenteCommercial()">
+
+                        <div class="col-12 text-center" *ngIf="loadingUserList == 'loading'">
+                            <div class="fa-3x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center" *ngIf="loadingUserList == 'success' && commercialUser.length == 0">
+                            <p class="text-center text-danger">
+                                {{ 'COMMERCIAL.DONT_EXIST_COMMERCIAL' | translate }}</p>
+                        </div>
+
+                        <ng-container *ngIf="loadingUserList == 'success' && commercialUser.length > 0">
+
+                            <div class="input-group hack-select borde-commercial">
+                                <!--  <img src="assets/icons/commercial.svg"> -->
+                                <button class="btn calendar">
+                                    <img class="point" src="assets/icons/commercial.svg"
+                                        aria-hidden="true">
+                                </button>
+                                <select class="form-control form-control-sale letter-app point select-commercial padding-commercial" (change)="selectComercial($event.target.value)">
+                                       
+            
+                                        <option value=""> Todos </option>
+                                        <option *ngFor="let commercelist of commercialUser"
+                                            [value]="commercelist.id">
+                                            {{ commercelist.name }}
+                                            {{ commercelist.surname }}
+                                        </option>
+            
+                                        
+                                    </select>
+                            </div>
+                        </ng-container>
+
+
+
+
+                    </div>
+
+                    <!-- end commercial -->
+
+                    <!-- select dias -->
+
+                    <div class="col-xl-4 col-lg-6 col-12 mt-xl-0 mt-2 mb-2">
+                        <!-- select mes dias semanas -->
+
+                        <div class="input-group hack-select">
+                            <select class="form-control form-control-sale letter-app point select-style" [(ngModel)]="value" (change)="getAll($event.target.value)">
+                                <option value="null"> Seleccione </option> 
+                                <option value="day"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.DAY' | translate }} </option>
+        
+                                    <option value="week" selected> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.WEEK' | translate }} </option> 
+                                    
+        
+                                    <option value="month"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.MONTH' | translate }} </option>
+        
+                                    
+                                </select>
+                        </div>
+
+
+                    </div>
+
+                    <!-- end select dias -->
+                </ng-container>
+
+                <div class="col-xl-4 col-lg-6 col-12">
+                    <!-- btn -->
+
+                    <ng-container *ngIf="default === 'route'">
+                        <button type="button" class="btn btn-light color-conten">
+    
+                            <div class="input-group">
+    
+                                <img class="point pl-2 pr-2 point" src="assets/icons/optimmanage/calendar.svg"
+                                    aria-hidden="true" (click)="f.toggle()">
+    
+                                <img class="size-arrow point" (click)="lessDate()" src="assets/icons/optimmanage/arrowleft.svg"
+                                    aria-hidden="true">
+                                <div class="w-input">
+                                    <input ngbDatepicker #f="ngbDatepicker" type="text"
+                                        class="form-control class-input text-center" readonly autocomplete="off"
+                                        [formControl]="dateSearchFrom" placeholder="00/00/0000"
+                                        (dateSelect)="changeDate('date', $event)" id="dateFrom" />
+                                </div>
+    
+                                <img class="size-arrow point" (click)="addDate()" src="assets/icons/optimmanage/arrowrigth.svg"
+                                    aria-hidden="true">
+                            </div>
+    
+                        </button>
+                    </ng-container>
+
+                    <ng-container *ngIf="default ==='sales'">
+
+
+                        <button type="button" class="btn btn-light color-conten">
+
+                            <ng-container *ngIf="value ==='day'" >
+                                
+                                <div class="input-group">
+    
+                                    <img class="point pl-2 pr-3 point" src="assets/icons/optimmanage/calendar.svg"
+                                        aria-hidden="true" (click)="f.toggle()">
+        
+                                    <img class="size-arrow point" (click)="lessDate()" src="assets/icons/optimmanage/arrowleft.svg"
+                                        aria-hidden="true">
+                                    <div class="w-input">
+                                        <input ngbDatepicker #f="ngbDatepicker" type="text"
+                                            class="form-control class-input text-center" readonly autocomplete="off"
+                                            [formControl]="dateSearchFrom" placeholder="00/00/0000"
+                                            (dateSelect)="changeDate('date', $event)" id="dateFrom" />
+                                    </div>
+        
+                                    <img class="size-arrow point" (click)="addDate()" src="assets/icons/optimmanage/arrowrigth.svg"
+                                        aria-hidden="true">
+                                </div>
+                            </ng-container>
+
+
+                            <ng-container *ngIf="value ==='week' || value === 'month'" >
+
+                                <div class="input-group">
+    
+                                    <img class="point pl-2 pr-2 point" src="assets/icons/optimmanage/calendar.svg"
+                                        aria-hidden="true" (click)="f.toggle();">
+        
+                                    <img class="size-arrow point"  src="assets/icons/optimmanage/arrowleft.svg"
+                                        aria-hidden="true">
+    
+    
+                                  <!--   <div class="hidden position-absolute">
+                                        <div class="input-group">
+                                            <input name="datepicker" id="ngbDatepicker" class="form-control" ngbDatepicker #f="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event,  f)" [displayMonths]="1" [dayTemplate]="t" outsideDays="visibled"  tabindex="-1">
+                                          
+                                        </div>
+                                    </div> -->
+                                       
+                                    <div class="w-input">
+                                       
+                                        <input ngbDatepicker id="ngbDatepicker" #f="ngbDatepicker" type="text"
+                                            class="form-control class-input text-center" readonly autocomplete="off"
+                                            [autoClose]="'outside'" (dateSelect)="onDateSelection($event, f)" [autoClose]="outside" [displayMonths]="1" [dayTemplate]="t" outsideDays="visibled" 
+                                            [formControl]="dateSearchFrom" placeholder="00/00/0000" 
+                                             />
+                                             <ng-template #t let-date let-focused="focused">
+                                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                    {{ date.day }}
+                                                </span>
+                                            </ng-template>
+                                    </div>
+                                    
+        
+                                    <img class="size-arrow point" src="assets/icons/optimmanage/arrowrigth.svg"
+                                        aria-hidden="true">
+                                </div>
+                                <!-- <pre>From date model: {{ fromDate | json }}</pre>
+                                <pre>To date model: {{ toDate | json }}</pre> -->
+                            </ng-container>
+                           
+                          
+                    </button>
+
+                    </ng-container>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <ng-container *ngIf="default === 'route'">
+            <div class="col-12">
+                <easyroute-routes [date]="date" [updateNumber]="updateNumber"></easyroute-routes>
+            </div>
+        </ng-container>
+
+
+        <!-- <ng-container *ngIf="default ==='cost'">
+                <div class="col-12 p-0">
+                    <easyroute-cost></easyroute-cost>
+                </div>
+            </ng-container> -->
+        <ng-container *ngIf="default ==='sales'">
+            <div class="col-12 p-xl-0">
+                <easyroute-sales [date]="date" [filterSelect]="filterSelect" [commercialId]="commercialId" [dateFrom]="dateFrom" [dateTo]="dateTo"></easyroute-sales>
+            </div>
+        </ng-container>
+
+
+
+    </div>
+
+</div>
+
+<!-- <ng-container *ngIf="validateAgenteCommercial()">
+    <easyroute-total-sale-agent-commercial></easyroute-total-sale-agent-commercial>
+</ng-container> -->

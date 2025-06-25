@@ -1,0 +1,139 @@
+.optimroute-promotion-list {
+    background: white;
+    height: 100%;
+    //usar cuando esten los demas botones con funcion
+    .group-btn {
+        /*  width: 14%; */
+        font-weight: bolder;
+        width: 36%;
+        height: 41px;
+    }
+    .btn-primary {
+        width: 225px;
+        height: 40px;
+    }
+    .btn-filter {
+        background-color: #b5b5b5;
+        border-radius: 20px;
+        width: 132px;
+        height: 40px;
+        font-size: 14px;
+        color: #ffffff;
+    }
+    html .btn-secondary:focus,
+    html .btn-secondary.focus {
+        -webkit-box-shadow: 0 0 0 3px #f3ad47;
+        box-shadow: 0 0 0 3px #5a7be6;
+    }
+    .btn-add-product {
+        width: 225px;
+        height: 40px;
+    }
+    .padding-label {
+        padding-left: 5rem;
+    }
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 5px;
+        /*  padding: 10px 20px;
+        height: 48px !important; */
+        font-size: 14px !important;
+        color: #808080;
+        option {
+            color: #808080;
+        }
+    }
+    .hack-select:after {
+        /* color: #808080; */
+        top: 22%;
+        right: 15px;
+    }
+    .style-card {
+        height: 83px;
+        width: 119px;
+    }
+    .color-info {
+        font-size: 20px !important;
+        color: #000000 !important;
+        text-transform: initial !important;
+        font-weight: 700;
+    }
+    .color-infor-card {
+        // font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        text-align: center;
+    }
+    .card {
+        /*  height: 88px;
+        width: 156px; */
+        height: 79px;
+        width: 152px;
+        background: #ffffff;
+    }
+    .card-franchise {
+        height: 93px !important;
+        width: 209px !important;
+    }
+    @media screen and (min-width: 320px) and (max-width: 767px) {
+        button {
+            width: 99% !important;
+            font-size: 13px;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+        .group-btn {
+            width: 100%;
+            // height: 41px;
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1366px) {
+        button {
+            width: 97% !important;
+        }
+        .btn-franchise {
+            font-size: 10px;
+        }
+        .btn-filter {
+            font-size: 10px;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+        .group-btn {
+            width: 50%;
+        }
+    }
+    .w-20 {
+        width: 20%;
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+}

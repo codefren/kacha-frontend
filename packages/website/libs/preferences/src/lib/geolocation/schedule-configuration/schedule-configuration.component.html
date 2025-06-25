@@ -1,0 +1,434 @@
+<div class="schedule-configuration">
+    <form [formGroup]="form" *ngIf="form" (submit)="submit()">
+        <div class="card">
+            <div class="card-body pl-4 pr-xl-5">
+                <div class="col-12">
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label class="title-road" for=""> Geolocalización por tiempo </label>
+                            <p class="sub-title-road mt-1 mb-0"> Delimita que tiemo geolocalizarás a los usuarios a través de la app de Polpoo por cada día de la semana. </p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-12 col-xl-6 col-lg-6">
+                            <!-- Lunes -->
+                            <div class="form-row border-special pt-1 pb-1">
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input
+                                                    type="checkbox"
+                                                    (change)="activeDay($event.target.checked, 'startTimeMonday', 'endTimeMonday')" formControlName="activeMonday" id="activeMonday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.MONDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeMonday'] && form.controls['activeMonday'].value">
+
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-12">
+
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeMonday').value" format="HH:mm" (change)="
+                                                        changeStartValue(
+                                                            'activeMonday',
+                                                            'startTimeMonday',
+                                                            'endTimeMonday'
+                                                        )
+                                                    " #startTimeMondayInput formControlName="startTimeMonday" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeMonday').value" format="HH:mm" #endTimeMondayInput formControlName="endTimeMonday" />
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeMonday', 'endTimeMonday')">
+
+                                    </div>
+
+                                </ng-container>
+                            </div>
+
+                            <!-- Martes -->
+                            <div class="form-row border-specification pt-1 pb-1">
+
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input
+                                                    type="checkbox"
+                                                    (change)="activeDay($event.target.checked, 'startTimeTuesday', 'endTimeTuesday')" formControlName="activeTuesday" id="activeTuesday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.TUESDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeTuesday'] && form.controls['activeTuesday'].value">
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="
+                                                        !form.get('activeTuesday').value
+                                                    " (change)="
+                                                        changeStartValue(
+                                                            'activeTuesday',
+                                                            'startTimeTuesday',
+                                                            'endTimeTuesday'
+                                                        )
+                                                    " format="HH:mm" #startTimeTuesdayInput formControlName="startTimeTuesday" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" format="HH:mm" [readOnly]="
+                                                        !form.get('activeTuesday').value
+                                                    " #endTimeTuesdayInput formControlName="endTimeTuesday" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeTuesday', 'endTimeTuesday')">
+
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                            <!-- Miercoles -->
+                            <div class="form-row border-specification pt-1 pb-1">
+
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input
+                                                    type="checkbox"
+                                                    (change)="activeDay($event.target.checked, 'startTimeWednesday', 'endTimeWednesday')" formControlName="activeWednesday" id="activeWednesday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.WEDNESDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeWednesday'] && form.controls['activeWednesday'].value">
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="
+                                                        !form.get('activeWednesday').value
+                                                    " format="HH:mm" (change)="
+                                                        changeStartValue(
+                                                            'activeWednesday',
+                                                            'startTimeWednesday',
+                                                            'endTimeWednesday'
+                                                        )
+                                                    " #startTimeWednesdayInput formControlName="startTimeWednesday" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="
+                                                        !form.get('activeWednesday').value
+                                                    " format="HH:mm" #endTimeWednesdayInput formControlName="endTimeWednesday" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeWednesday', 'endTimeWednesday')">
+
+                                    </div>
+                                </ng-container>
+
+                            </div>
+
+                            <!-- Jueves -->
+                            <div class="form-row border-specification pt-1 pb-1">
+
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input type="checkbox" (change)="activeDay($event.target.checked, 'startTimeThursday', 'endTimeThursday')" 
+                                                formControlName="activeThursday" id="activeThursday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.THURSDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeThursday'] && form.controls['activeThursday'].value">
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeThursday').value" format="HH:mm" (change)="changeStartValue('activeThursday', 'startTimeThursday', 'endTimeThursday')" #startTimeThursdayInput formControlName="startTimeThursday"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeThursday').value" format="HH:mm" #endTimeThursdayInput formControlName="endTimeThursday" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeThursday', 'endTimeThursday')">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- Viernes -->
+                            <div class="form-row border-specification pt-1 pb-1">
+
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input type="checkbox" (change)="activeDay($event.target.checked, 'startTimeFriday', 'endTimeFriday')" 
+                                                formControlName="activeFriday" id="activeFriday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.FRIDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeFriday'] && form.controls['activeFriday'].value">
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeFriday').value" format="HH:mm" #startTimeFridayInput (change)="changeStartValue(
+                                                'activeFriday', 'startTimeFriday', 'endTimeFriday' )" formControlName="startTimeFriday" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeFriday').value" format="HH:mm" #endTimeFridayInput formControlName="endTimeFriday" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeFriday', 'endTimeFriday')">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- Sabado -->
+                            <div class="form-row border-specification pt-1 pb-1">
+
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input type="checkbox" (change)="activeDay($event.target.checked, 'startTimeSaturday', 'endTimeSaturday')" 
+                                                formControlName="activeSaturday" id="activeSaturday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.SATURDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeSaturday'] && form.controls['activeSaturday'].value">
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="
+                                                        !form.get('activeSaturday').value
+                                                    " format="HH:mm" (change)="
+                                                        changeStartValue(
+                                                            'activeSaturday',
+                                                            'startTimeSaturday',
+                                                            'endTimeSaturday'
+                                                        )
+                                                    " #startTimeSaturdayInput formControlName="startTimeSaturday" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="
+                                                        !form.get('activeSaturday').value
+                                                    " format="HH:mm" #endTimeSaturdayInput formControlName="endTimeSaturday" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeSaturday', 'endTimeSaturday')">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- Domingo -->
+                            <div class="form-row border-specification border-end pt-1 pb-1">
+
+                                <div class="col-lg-4 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                <input type="checkbox" (change)="activeDay($event.target.checked, 'startTimeSunday', 'endTimeSunday')" 
+                                                formControlName="activeSunday" id="activeSunday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style">
+                                                    {{ 'CLIENTS.CLIENTS_FORMS.SUNDAY' | translate }}
+                                                </span>  
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="form && form.controls['activeSunday'] && form.controls['activeSunday'].value">
+                                    <div class="col-lg-7 col-12 mt-2 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeSunday').value" format="HH:mm" (change)="
+                                                        changeStartValue(
+                                                            'activeSunday',
+                                                            'startTimeSunday',
+                                                            'endTimeSunday'
+                                                        )
+                                                    " #startTimeSundayInput formControlName="startTimeSunday" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-12">
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control form-input border-form" [readOnly]="!form.get('activeSunday').value" format="HH:mm" #endTimeSundayInput formControlName="endTimeSunday" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+
+                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours('startTimeSunday', 'endTimeSunday')">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-footer pt-4 pb-4">
+                <!-- <div class="col-sm-6 text-center mt-1">
+                <button class="btn btn-cancel size-btn-form" type="button" [disabled]="!form.dirty" (click)="load()">
+                {{ 'GENERAL.CANCEL' | translate }}
+            </button>
+            </div>
+            -->
+                <div class="col-sm-6 text-xl-left mt-1">
+                    <button class="btn btn-primary size-btn-form" type="submit" [disabled]="!form.valid || !form.dirty">
+                {{ 'GENERAL.SAVE' | translate }}
+            </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

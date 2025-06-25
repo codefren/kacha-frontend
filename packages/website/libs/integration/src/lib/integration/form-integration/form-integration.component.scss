@@ -1,0 +1,53 @@
+.toggle-directions {
+    background: #444A60;
+    border-radius: 15px;
+
+    h4 {
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .btn-blank {
+        background: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        color: #24397C;
+        font-weight: bold;
+    }
+
+    .toggle-pointer{
+        cursor: pointer;
+    }
+
+    .btn-blank {
+        background: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        color: #24397C;
+        font-weight: bold;
+    }
+}
+
+.table {
+    padding: 1px;
+}
+
+.table thead th {
+    vertical-align: middle;
+    border-bottom: 2px solid #bec4ca;
+    background-color: #7387c2;
+    color: white;
+}
+
+.table td {
+    padding: 5px !important;
+    vertical-align: baseline !important;
+}
+
+.btn-cancel {
+    width: 12rem;
+}
+
+.btn-primary{
+    width: 12rem;
+}

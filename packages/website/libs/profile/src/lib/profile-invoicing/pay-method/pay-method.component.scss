@@ -1,0 +1,47 @@
+@import '../../../../../../apps/easyroute/src/common';
+.easyroute-pay-method {
+    .title-page-methods {
+        font-size: 15px;
+        color: #000000;
+    }
+    .line {
+        border-bottom: 1px solid #c6c7c9;
+    }
+
+    .card {
+        .add-another-card {
+            background: #e5e5e5 !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        p {
+            font-size: 15px;
+            margin: 0;
+        }
+    }
+
+    .size-btn-form {
+        width: 15rem;
+    }
+
+    .round input[type='checkbox']:checked + label {
+        background-color: #91d600;
+        border-color: #91d600;
+        height: 15px;
+        width: 15px;
+    }
+
+    .round input[type='checkbox']:checked + label:after {
+        opacity: 0;
+    }
+
+    .round label {
+        border: 1px solid #c6c6c6;
+        height: 15px;
+        width: 15px;
+    }
+
+    .icons-datatable {
+        width: 15px;
+    }
+}

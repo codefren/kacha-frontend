@@ -1,0 +1,180 @@
+<div class="client-setting-form pt-4 pb-4">
+    <form *ngIf="pointSettingForm && deliveryZoneName_messages" [formGroup]="pointSettingForm">
+
+        <!-- Este cliente requiere recargo de equivalencia -->
+        <div class="col-xl-12 col-12">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" formControlName="showDeliveryNotePrice"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> {{ 'DELIVERY_POINTS.SHOW_DELIVERY_NOTE_WITH_PRICE' |translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'DELIVERY_POINTS.SHOW_DELIVERY_NOTE_WITH_PRICE_MESSAGE' | translate }} </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-3 mb-4 p-0"></div>
+
+        <!-- Este cliente requiere recargo de equivalencia -->
+        <div class="col-xl-12 col-12">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" formControlName="sendDeliveryNoteMail"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> {{ 'DELIVERY_POINTS.END_DELIVERY_NOTE_EMAIL' |translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'DELIVERY_POINTS.IF_YOU_ACTIVATE_THIS_OPTION_THE_EQUIVALENT' | translate }} </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-3 mb-4 p-0"></div>
+
+
+        <!-- Activar direccion de factura -->
+        <div class="col-xl-12 col-12">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" formControlName="useBillingAddress"
+                                    (change)="changeAddres($event.target.checked)" />
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> {{ 'DELIVERY_POINTS.ACTIVATE_SHIPPING_ADDRESS' | translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'DELIVERY_POINTS.ACTIVATE_BILLING_MESSAGE' | translate }} </p>
+                </div>
+
+                <ng-container *ngIf="showUseBillingAddress">
+                    <div class="col-12">
+
+                        <div class="row mt-1 pl-xl-5 ml-xl-3">
+
+                            <div class="col-xl-4 col-12 padding-col-download">
+                                <div class="form-group input-group" [ngClass]="{
+                                    'form-control-danger':pointSettingForm.controls['billingAddress'].invalid 
+                                    && (pointSettingForm.controls['billingAddress'].dirty 
+                                    || pointSettingForm.controls['billingAddress'].touched)}">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" id="billingAddress" formControlName="billingAddress" placeholder="{{
+                                            'DELIVERY_POINTS.BILLING_ADDRESS'
+                                                    | translate
+                                            }}"  />
+            
+                                        <label for="quantityDelayModifySchedule" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.BILLING_ADDRESS' | translate }} </label>
+            
+                                    </span>
+
+                                    <ng-container *ngFor="let validation of deliveryZoneName_messages.billingAddress">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                pointSettingForm
+                                                    .get('billingAddress')
+                                                    .hasError(validation.type) &&
+                                                (pointSettingForm.get('billingAddress').dirty ||
+                                                    pointSettingForm.get('billingAddress')
+                                                        .touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </ng-container>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-3 mb-4 p-0"></div>
+
+        <!-- Este cliente requiere recargo de equivalencia -->
+        <div class="col-xl-12 col-12">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" formControlName="equivalence"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> {{ 'DELIVERY_POINTS.EQUIVALENCE' | translate }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'DELIVERY_POINTS.IF_YOU_ACTIVATE_THIS_OPTION_THE_EQUIVALENT' | translate }} </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-3 mb-4 p-0"></div>
+
+    </form>
+
+    <!-- Vinculaciones app -->
+    <div class="col-xl-12 col-12">
+
+        <easyroute-clients-linked-table *ngIf="deliveryPointId && pointSettingForm && deliveryZoneName_messages" [deliveryPointId]="deliveryPointId">
+        </easyroute-clients-linked-table>
+
+    </div>
+
+
+    <!-- linea divisoria -->
+    <div class="card-footer mb-3 p-0"></div>
+
+    <!-- Botón -->
+    <div class="row container-fluid m-0">
+        <div class="col-sm-6 col-12 text-sm-left text-center mt-1 pb-2">
+            <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="pointSettingForm && !pointSettingForm.valid || pointSettingForm && !pointSettingForm.dirty">
+                  <span *ngIf="point && point.id === ''">{{ 'GENERAL.ADD_' | translate }}</span>
+                  <span *ngIf="point && point.id !== ''">{{ 'GENERAL.SAVE' | translate }}</span>
+              </button>
+        </div>
+    </div>
+</div>

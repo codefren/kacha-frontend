@@ -1,0 +1,7 @@
+.active-dialog-module {
+    @media screen and ( min-width: 320px ) and ( max-width: 576px ) and ( orientation: portrait ) {
+        h2 {
+            font-size: 18px;
+        }
+    }
+}

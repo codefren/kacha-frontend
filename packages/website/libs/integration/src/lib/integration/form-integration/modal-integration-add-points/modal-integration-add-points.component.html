@@ -1,0 +1,46 @@
+<div class="modal-xl easyroute-modal-integration-add-points">
+    <section class="card p-2">
+
+        <div class="row justify-content-center">
+          <div class="col-12 text-right">
+            <i class="fas fa-times close-button" (click)="modalDismiss()"></i>
+          </div>
+          <div class="col-8 text-center">
+            <p class="title">{{ 'INTEGRATION.ADD_CLIENTS' | translate }}</p>
+          </div>    
+        </div>
+    </section>
+
+    <div class="table-content">
+      <table id="clients" style="width: 100%" class="table table-bordered table-striped mb-0" style="text-align: center">
+        <thead class="thead-new">
+            <tr>
+                <th>{{ 'DELIVERY_POINTS.ID' | translate }}</th>
+                <th>{{ 'DELIVERY_POINTS.NAME_' | translate }}</th>
+                <th>{{ 'DELIVERY_POINTS.PROVINCE' | translate }}</th>
+                <th>{{ 'DELIVERY_ZONES.NAME' | translate }}</th>
+                <th>{{ 'DELIVERY_POINTS.START' | translate }}</th>
+                <th>{{ 'DELIVERY_POINTS.END' | translate }}</th>
+                <th>
+                  <div class="row p-0 justify-content-center backgroundColorRow">
+                    <div class="round round-little">
+                      <input type="checkbox" checked="" id="checkboxExample1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+                      <label for="checkboxExample1" class="m-0"></label>
+                    </div>
+                  </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <footer class="row m-3">
+      <div class="col-12 col-md-6 text-center text-md-right">
+        <button class="btn btn-cancel size-btn-modal" (click)="modalDismiss()">{{ 'GENERAL.CANCEL' | translate  }}</button>
+      </div>
+      <div class="col-12 col-md-6 text-center text-md-left mt-2 mt-md-0">
+        <button class="btn btn-primary size-btn-modal" [disabled]="selected.length == 0" (click)="closeModal()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+      </div>
+    </footer>
+</div>

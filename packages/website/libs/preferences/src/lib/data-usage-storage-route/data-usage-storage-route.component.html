@@ -1,0 +1,318 @@
+<div class="use-and-storage-route">
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <p class="title-client mb-4">Datos de rutas</p>
+
+                    <p class="sub-title-user-storage mb-2"> {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.NAME' | translate }}</p>
+
+                    <p class="text-information-storage">{{ 'DESCRIPTIONS.USE_STORE_DATA' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+
+                <!-- useDeliveryZonePersistedName -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="data-persisted-name" [checked]="(managementPreferences$ | async).useDeliveryZonePersistedName" (change)="toggleManagementPreference('useDeliveryZonePersistedName',$event.target.checked)" />
+
+                                <label for="data-persisted-name"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.NAME' | translate }}" for="data-persisted-name" class="label-check point">
+
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.NAME' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- useDeliveryZonePersistedDeliveryStart -->
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).useDeliveryZonePersistedDeliveryStart" (change)="toggleManagementPreference('useDeliveryZonePersistedDeliveryStart',$event.target.checked )" id="data-hour-from" />
+
+                                <label for="data-hour-from"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.HOUR_FROM' | translate }}" for="data-hour-from" class="label-check point">
+
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.HOUR_FROM' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- useDeliveryZonePersistedDeliveryEnd -->
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryZonePersistedDeliveryEnd" (change)="toggleManagementPreference('useDeliveryZonePersistedDeliveryEnd',$event.target.checked )" id="data-persisted-end" />
+
+                                <label for="data-persisted-end"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.HOUR_TO' | translate }}" for="data-persisted-end" class="label-check point">
+
+                                {{'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.HOUR_TO' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- useDeliveryZonePersistedIgnoreCapacityLimit -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).useDeliveryZonePersistedIgnoreCapacityLimit" (change)="toggleManagementPreference('useDeliveryZonePersistedIgnoreCapacityLimit',$event.target.checked)" id="data-capacity-limit" />
+
+                                <label for="data-capacity-limit"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.IGNORED_LIMIT_CAPACITY' | translate }}" for="data-capacity-limit" class="label-check point">
+
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.IGNORED_LIMIT_CAPACITY' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- useDeliveryZonePersistedOrder -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryZonePersistedOrder" (change)="toggleManagementPreference('useDeliveryZonePersistedOrder',$event.target.checked)" id="data-persisted-order" />
+
+                                <label for="data-persisted-order"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.ORDER' | translate }}" for="data-persisted-order" class="label-check point">
+
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.ZONE.ORDER' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <div class="row mt-3">
+
+                <div class="col-12">
+
+                    <p class="sub-title-user-storage mb-2">Actualización de datos almacenados</p>
+
+                    <p class="text-information-storage">Estos son los terminos que se actualizarán de manera automática siempre y cuando estén activos, en caso de estar activos cada vez que se haga una modificación desde planificación de rutas esos campos se actualizarán en la ruta. En
+                        caso de no estar marcados los campos serán modificados temporalmente.</p>
+                </div>
+
+            </div>
+            <div class="row mb-4">
+
+                <!-- updateDeliveryZoneNameOnOpt -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="routes-name" [checked]="(managementPreferences$ | async).updateDeliveryZoneNameOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneNameOnOpt',$event.target.checked)" />
+
+                                <label for="routes-name"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_NAME' | translate }}" for="routes-name" class="label-check point">
+
+                                {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_NAME' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- updateDeliveryZoneDeliveryStartOnOpt -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryZoneDeliveryStartOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneDeliveryStartOnOpt',$event.target.checked )" id="routes-update-hour-from" />
+
+                                <label for="routes-update-hour-from"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_HOUR_FROM' | translate }}" for="routes-update-hour-from" class="label-check point">
+
+                                {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_HOUR_FROM' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- updateDeliveryZoneDeliveryEndOnOpt -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneDeliveryEndOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneDeliveryEndOnOpt',$event.target.checked)" id="routes-update-hour-to" />
+
+                                <label for="routes-update-hour-to"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_HOUR_TO' | translate }}" for="routes-update-hour-to" class="label-check point">
+
+                                {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.UPDATE_HOUR_TO' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- updateDeliveryZoneIgnoreCapacityLimitOnOpt -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).updateDeliveryZoneIgnoreCapacityLimitOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneIgnoreCapacityLimitOnOpt',$event.target.checked )" id="routes-limit-capacity" />
+
+                                <label for="routes-limit-capacity"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.IGNORED_LIMIT_CAPACITY' | translate }}" for="routes-limit-capacity" class="label-check point">
+
+                                {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.IGNORED_LIMIT_CAPACITY' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- updateDeliveryZoneColorOnOpt -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryZoneColorOnOpt" (change)="toggleManagementPreference('updateDeliveryZoneColorOnOpt',$event.target.checked)" id="routes-color" />
+
+                                <label for="routes-color"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.COLOR' | translate }}" for="routes-color" class="label-check point">
+
+                                {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.ZONE.COLOR' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

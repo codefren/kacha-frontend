@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+
+@mixin menu-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .app-menu {
+        .mat-tab-links {
+            background-color: mat-color($primary, 300) !important;
+
+            a.mat-tab-link {
+                color: mat-color($primary, '300-contrast') !important;
+            }
+        }
+
+        &.main-menu {
+            .mat-tab-links {
+                background-color: mat-color($primary) !important;
+
+                a.mat-tab-link {
+                    color: mat-color($primary, default-contrast) !important;
+                }
+            }
+        }
+    }
+}
+
+@mixin menu-typography($config) {
+    .app-menu {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

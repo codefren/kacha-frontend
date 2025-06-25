@@ -1,0 +1,164 @@
+.schedule-configuration {
+    .title-left-sheet {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .card {
+        background: transparent;
+        box-shadow: none;
+        border-radius: 5px !important;
+    }
+    .title-road {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740 !important;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #3B4FFF;
+        }
+    }
+    .switch label input[type=checkbox]:checked+.lever {
+        background-color: #29cc97 !important;
+    }
+    .toogle-style {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .border-col {
+        border: 1px solid #CDD4DA;
+        border-radius: 5px;
+    }
+    .fond-input {
+        background: #EFF0F4 !important;
+    }
+    .title-form-1 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        color: #363740;
+    }
+    .sub-title-form {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .border-specification {
+        border-right: 1px solid #CECECE;
+        border-left: 1px solid #CECECE;
+        border-bottom: 1px solid #CECECE;
+    }
+    .border-end {
+        border-radius: 0px 0px 5px 5px;
+    }
+    .border-form {
+        font-weight: 400;
+        line-height: 19px;
+        color: #7E7E7E;
+        border: 1px solid #DFE1E8;
+        border-radius: 5px !important;
+    }
+    .img-delete {
+        width: 32px;
+    }
+    .border-end {
+        border-radius: 0px 0px 5px 5px;
+    }
+    .contenedor-imagenes {
+        display: flex;
+    }
+    .contenedor-imagenes img:first-child {
+        margin-right: 1px;
+    }
+    .shedule-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 5px !important;
+        height: 43px !important;
+    }
+    .days-style {
+        color: #5f5f5f !important;
+        font-weight: 600;
+    }
+    /* .error-selecter {
+        color: #d2322c !important;
+        font-size: 13px !important;
+        margin-top: 0px !important;
+    } */
+    .border-schedule {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .size-no-selecter {
+        height: 43px !important;
+    }
+    .position-label {
+        position: absolute;
+        bottom: 0;
+    }
+    .position-label-specification {
+        position: absolute;
+        bottom: 0px;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740 !important;
+        opacity: 1 !important;
+        font-size: 14px !important;
+    }
+    .btn-primary {
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #f4f7ff;
+        opacity: 1;
+    }
+    .title-copy {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: #3B4FFF;
+    }
+}

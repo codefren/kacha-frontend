@@ -1,0 +1,46 @@
+<div class="easyroute-dashboard">
+
+    <div class="row text-center mb-1">
+
+        <div class="col-12">
+            <easyroute-summary [date]="date" [updateNumber]="updateNumber"></easyroute-summary>
+        </div>
+
+
+        <div class="col-xl-8 col-12 mt-4">
+            <easyroute-delivery-made [date]="date"  [updateNumber]="updateNumber"></easyroute-delivery-made>
+        </div>
+        <div class="col-xl-4 col-12 mt-4">
+
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <easyroute-total-clients [date]="date"  [updateNumber]="updateNumber"></easyroute-total-clients>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <easyroute-total-billing [date]="date"  [updateNumber]="updateNumber"></easyroute-total-billing>
+                </div>
+
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mt-3">
+                        <easyroute-schedule-control [date]="date"  [updateNumber]="updateNumber"></easyroute-schedule-control>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+</div>

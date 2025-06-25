@@ -1,0 +1,46 @@
+@mixin optimization-parameters-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+
+    .easyroute-ordered-optimization-parameters {
+        .optimization-parameters-container .title {
+            color: mat-color($primary);
+        }
+
+        .optimization-parameters-list-outer {
+            background-color: mat-color($accent, 100);
+
+            .optimization-parameter {
+                &.disabled {
+                    background-color: mat-color($accent, 200) !important;
+                    color: mat-color($accent, '200-contrast') !important;
+                }
+
+                &.enabled {
+                    background-color: mat-color($primary, 200) !important;
+                    color: mat-color($primary, '200-contrast') !important;
+                }
+            }
+        }
+    }
+
+    .easyroute-free-optimization-parameters {
+    }
+}
+
+@mixin optimization-parameters-typography($config) {
+    .easyroute-optimization-parameters {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

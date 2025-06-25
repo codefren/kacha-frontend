@@ -1,0 +1,602 @@
+<div class="order-setting">
+
+    <!-- Horarios -->
+    <div class="card">
+        <div class="card-body pl-4 pr-xl-5">
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="title-road" for="">  {{ 'CLIENTS.CLIENTS_FORMS.SCHEDULES' | translate }} </label>
+                    <p class="sub-title-road mt-1 mb-1"> Indica la hora máxima en la que se aceptarán pedidos de los clientes. En caso de hacer un pedido más tarde de esta hora, se añadirá para el próximo día y por otro lado indica la hora en la que se enviarán todos los pedidos que se hayan
+                        procesados al RP. En caso de recibir un pedido más tarde de esa hora, se añadirá para el próximo día. </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="time" class="form-control form-input" format="HH:mm" #timeOrderMaxInput value="{{ timeOrderMax | dayTime }}" (focusout)="
+                                updateOrderMaxTime(
+                                    $event.target.value
+                                )
+                            " />
+
+                            <label for="first" class="mt-2 title-road"> {{ 'PREFERENCES.OPTIMIZATION.ORDERS.MAX_ORDER_TIME' | translate }} </label>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="time" class="form-control form-input" format="HH:mm" #orderSyncTimeInput value="{{
+                                orderSyncTime | dayTime
+                            }}" (focusout)="
+                                updateOrderSyncTime(
+                                    $event.target.value
+                                )
+                            " />
+
+                            <label for="first" class="mt-2 title-road"> {{ 'PREFERENCES.OPTIMIZATION.ORDERS.TINE_SEND_ORDERS_FOR_FTP' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modificar el estado del pedido automáticamente -->
+    <div class="card mt-3">
+        <div class="card-body pl-4 pr-xl-5">
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="title-road" for=""> {{ 'PREFERENCES.OPTIMIZATION.ORDERS.MODIFY_STATE_ORDER' | translate }} </label>
+                    <p class="sub-title-road mt-1 mb-0"> {{ 'PREFERENCES.OPTIMIZATION.ORDERS.MESSAGE_1' | translate }} </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+    
+                                <input type="number" class="form-control showMint form-input" id="inputPassword" type="number" min="0" max="59" [(ngModel)]="orderSyncEachTime" (blur)="updateOrderSyncEachTime()" (keyup.enter)="
+                                    updateOrderSyncEachTime()
+                                " placeholder="{{
+                                    'GENERAL.MINUTES' | translate
+                                }}" required />
+                                    
+                                <label for="first" class="mt-2 title-road"> Enviar auto. todos los pedidos cada: </label>
+                            </span>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Permitir pedidos para el mismo día -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="
+                                                (
+                                                    ordersPreferences$
+                                                    | async
+                                                ).acceptSameDay
+                                            " (change)="
+                                                toggleOrdersPreferences(
+                                                    'acceptSameDay',
+                                                    $event.target
+                                                        .checked
+                                                )
+                                            " />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road"> 
+                                    {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.ACCEPT_SAME_DAY' | translate }} 
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción permites recibir pedidos para el mismo día en el que se ha emitido.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Utilizar día siguiente por defecto -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="switch w-100">
+                        <label class="switch-width mb-0">
+                            <input type="checkbox" [checked]="
+                                (
+                                    ordersPreferences$
+                                    | async
+                                ).assignedNextDay
+                            " (change)="
+                                toggleOrdersPreferences(
+                                    'assignedNextDay',
+                                    $event.target
+                                        .checked
+                                )
+                            " />
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+                            <span class="title-toggle title-road"> 
+                                {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.NEXT_DAY' | translate }} 
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción se asignarán los pedidos para el siguiente día y no para el mismo día.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Días de despacho de pedidos -->
+    <div class="card mt-3">
+        <div class="card-body pl-4 pr-xl-5">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <p class="title-road">{{ 'PREFERENCES.OPTIMIZATION.ORDERS.ORDER_FULFILLMENT_DAYS' | translate }}</p>
+
+                </div>
+            </div>
+
+            <div class="row mb-4">
+
+                <!-- Lunes -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="monday-week" [checked]="
+                                            (
+                                                ordersPreferences$
+                                                | async
+                                            )
+                                                .activeMonday
+                                        " (change)="
+                                            toggleOrdersPreferences(
+                                                'activeMonday',
+                                                $event
+                                                    .target
+                                                    .checked
+                                            )
+                                        " />
+                                <label for="monday-week"></label>
+                            </div>
+                            <label for="monday-week" class="label-check">
+                                {{
+                                'CLIENTS.CLIENTS_FORMS.MONDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Martes -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="tuesday-week" [checked]="
+                                        (
+                                            ordersPreferences$
+                                            | async
+                                        )
+                                            .activeTuesday
+                                    " (change)="
+                                        toggleOrdersPreferences(
+                                            'activeTuesday',
+                                            $event
+                                                .target
+                                                .checked
+                                        )
+                                    " />
+                                <label for="tuesday-week"></label>
+                            </div>
+                            <label for="tuesday-week" class="label-check">{{
+                                'CLIENTS.CLIENTS_FORMS.TUESDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Miercoles -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="wednesday-week" [checked]="
+                                        (
+                                            ordersPreferences$
+                                            | async
+                                        )
+                                            .activeWednesday
+                                    " (change)="
+                                        toggleOrdersPreferences(
+                                            'activeWednesday',
+                                            $event
+                                                .target
+                                                .checked
+                                        )
+                                    " />
+                                <label for="wednesday-week"></label>
+                            </div>
+                            <label for="wednesday-week" class="label-check">
+                                {{
+                                'CLIENTS.CLIENTS_FORMS.WEDNESDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Jueves -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="thursday-week" [checked]="
+                                        (
+                                            ordersPreferences$
+                                            | async
+                                        )
+                                            .activeThursday
+                                    " (change)="
+                                        toggleOrdersPreferences(
+                                            'activeThursday',
+                                            $event
+                                                .target
+                                                .checked
+                                        )
+                                    " />
+                                <label for="thursday-week"></label>
+                            </div>
+                            <label for="thursday-week" class="label-check">
+                                {{
+                                'CLIENTS.CLIENTS_FORMS.THURSDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Viernes -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="friday-week" [checked]="
+                                        (
+                                            ordersPreferences$
+                                            | async
+                                        )
+                                            .activeFriday
+                                    " (change)="
+                                        toggleOrdersPreferences(
+                                            'activeFriday',
+                                            $event
+                                                .target
+                                                .checked
+                                        )
+                                    " />
+                                <label for="friday-week"></label>
+                            </div>
+                            <label for="friday-week" class="label-check">{{
+                                'CLIENTS.CLIENTS_FORMS.FRIDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Sabado -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="saturday-week" type="checkbox" [checked]="
+                                        (
+                                            ordersPreferences$
+                                            | async
+                                        )
+                                            .activeSaturday
+                                    " (change)="
+                                        toggleOrdersPreferences(
+                                            'activeSaturday',
+                                            $event
+                                                .target
+                                                .checked
+                                        )
+                                    " />
+                                <label for="saturday-week"></label>
+                            </div>
+                            <label for="saturday-week" class="label-check">
+                                {{
+                                'CLIENTS.CLIENTS_FORMS.SATURDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Domingo -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="sunday-week" [checked]="
+                                        (
+                                            ordersPreferences$
+                                            | async
+                                        )
+                                            .activeSunday
+                                    " (change)="
+                                        toggleOrdersPreferences(
+                                            'activeSunday',
+                                            $event
+                                                .target
+                                                .checked
+                                        )
+                                    " />
+                                <label for="sunday-week"></label>
+                            </div>
+                            <label for="sunday-week" class="label-check">
+                                {{
+                                'CLIENTS.CLIENTS_FORMS.SUNDAY'
+                                | translate
+                                }}
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Bloquear la modificación de precios -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" id="updateLastPriceOnOrder" [checked]="
+                                    (
+                                        appPreferences$
+                                        | async
+                                    ).updateLastPriceOnOrder
+                                    " (change)="
+                                    toggleAppPreference(
+                                        'updateLastPriceOnOrder',
+                                        $event.target.checked
+                                    )
+                                " />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road"> 
+                                    Bloquear la modificación de precios
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Si activas esta opción, no dejarás que los comerciales modifiquen el precio de los productos desde la app.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Permitir envío de pedidos a SFTP del dÍa -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="switch w-100">
+                        <label class="switch-width mb-0">
+                            <input type="checkbox" [checked]="
+                                (
+                                    ordersPreferences$
+                                    | async
+                                ).sendOnlyBeforeDay
+                            " (change)="
+                                toggleOrdersPreferences(
+                                    'sendOnlyBeforeDay',
+                                    $event.target
+                                        .checked
+                                )
+                            " />
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+                            <span class="title-toggle title-road"> 
+                                Permitir envío de pedidos a SFTP del día
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción, configuras que solo los pedidos del día entrados por la aplicación o por la parte de pedidos sean los que se envíen por SFTP dejando el resto pendiente para el envió en el día pertinente.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Activar modificación de estado de cliente de manera automática -->
+    <div class="card-body pr-xl-5">
+        <div class="row">
+            <div class="col-xl-12 col-12">
+                <div class="">
+                    <div class="switch w-100">
+                        <label class="switch-width mb-0">
+                            <input type="checkbox"
+                                [checked]="( ordersPreferences$ | async).changeAutomaticClientStatus"
+                                (change)="toggleOrdersPreferences('changeAutomaticClientStatus',$event.target.checked)" />
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+                            <span class="title-toggle title-road"> 
+                                Activar modificación de estado de cliente de manera automática
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <p class="sub-title-road mt-1 pl-xl-5 ml-xl-4">Al activar esta opción podrás configurar el tiempo máximo que un cliente puede pasar sin realizar un pedido, si transcurre ese tiempo y el cliente no ha realizado ningún pedido pasará del estado cliente(activo) a perdido(inactivo).</p>
+            </div>
+
+        </div>
+
+        <div class="row pb-3 pl-xl-5 ml-xl-2" *ngIf="(ordersPreferences$ | async).changeAutomaticClientStatus">
+
+            <div class="col-xl-4 col-md-6 col-12">
+
+                <div class="form-group input-group">
+
+                    <span class="has-float-label w-100">
+
+                        <input type="number" class="form-control primary form-input" [(ngModel)]="changeMaxTime" id="inputPassword" (blur)="updateChangeMaxTime()" (keyup.enter)="
+                                        updateChangeMaxTime()" type="number" min="1" max="9999" placeholder="Ingrese su tiempo máximo (días)" required />
+
+                        <label for="first" class="mt-2 title-col"> Tiempo máximo (días) </label>
+
+                    </span>
+
+                </div>
+                <ng-container *ngIf="changeMaxTime === 0">
+                    <span class="text-danger">El tiempo maximo no puede ser menor o igual a 0</span>
+
+                </ng-container>
+                <ng-container *ngIf="changeMaxTime > 9999">
+                    <span class="text-danger">El tiempo maximo no puede ser mayor a 99999</span>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

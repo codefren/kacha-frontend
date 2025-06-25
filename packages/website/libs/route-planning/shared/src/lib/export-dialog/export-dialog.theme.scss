@@ -1,0 +1,23 @@
+/* @mixin export-dialog-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn); 
+    .export-dialog {
+        .export-dialog-title {
+             background-color: mat-color($primary);
+        }
+        .no-optimized-routes {
+             color: mat-color($warn);
+        }
+    }
+}
+
+@mixin export-dialog-typography($config) {
+    .export-dialog {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+} */

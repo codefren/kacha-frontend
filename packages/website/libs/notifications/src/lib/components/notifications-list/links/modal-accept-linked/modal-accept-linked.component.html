@@ -1,0 +1,146 @@
+<div class="modal-accept-link">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-8 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'NOTIFICATIONS.ACCEPT_LINK' | translate }} </label>
+
+            </div>
+            <div class="col-xl-4 col-4 text-right">
+                <img src="assets/icons/close-cost.svg" class="point" (click)="activeModal.close(false)">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <form class="font-general padding-form" style="width: 100%" *ngIf="user">
+
+            <div class="row">
+                
+                <!-- name -->
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input type="text" readonly class="form-control" id="name" *ngIf="user?.name != null" [value]="user?.name"/>
+                            <input type="text" readonly class="form-control" id="name" *ngIf="user?.name == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                            <label for="first" class="mt-2 title-col"> {{ 'GENERAL.NAME' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- surname-->
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input type="text" readonly class="form-control" id="surname" *ngIf="user?.surname != null" [value]="user?.surname" />
+                            <input type="text" readonly class="form-control" id="surname" *ngIf="user?.surname == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                            <label for="first" class="mt-2 title-col"> {{ 'GENERAL.SURNAME' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- phone-->
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input type="text" readonly class="form-control" id="phone" *ngIf="user?.phone !=null" [value]="'+' + user?.phone" />
+                            <input type="text" readonly class="form-control" id="phone" *ngIf="user?.phone == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                            <label for="first" class="mt-2 title-col"> {{ 'GENERAL.PHONE_NUMBER' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- adrees -->
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input type="text" readonly class="form-control" id="email" *ngIf="user?.email !=null" [value]="user?.email" />
+                            <input type="text" readonly class="form-control" id="email" *ngIf="user?.email == null" value="{{ 'GENERAL.NOT_AVAILABLE' | translate}}" />
+                            <label for="first" class="mt-2 title-col"> {{ 'USERS.EMAIL' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Radios -->
+                <div class="col-12 col-md-6 mt-2" *ngFor="let item of [1]; let i=index;">
+                    <div class="border-special" >
+                        <div class="row pl-4 pt-2 pb-0">
+                            <div class="round round-little">
+                                <input type="radio" (change)="changeAcceptLink($event.target.value)" [id]="'acceptLikn' + item" 
+                                    style="height: 30px !important;" [value]="item" name="acceptLikn"/>
+                                <label [for]="'acceptLikn' + item"></label>
+                            </div>
+                            <label title="{{ 'NOTIFICATIONS.EXISTING_CUSTOMER' | translate}}" [for]="'acceptLikn' + item"  *ngIf="item == 1"
+                            style="margin-left: 1.3rem; margin-top: 0.3rem;" class="point">
+                                {{ 'NOTIFICATIONS.EXISTING_CUSTOMER' | translate}}
+                            </label>
+                            <!-- <label title="{{ 'NOTIFICATIONS.ADD_NEW_CUSTOMER' | translate}}" [for]="'acceptLikn' + item" *ngIf="item == 2"
+                            style="margin-left: 1.3rem; margin-top: 0.3rem;" class="point">
+                                {{ 'NOTIFICATIONS.ADD_NEW_CUSTOMER' | translate}}
+                            </label> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-container *ngIf="linkSelect == 1">
+
+                <div class="row pt-3">
+
+                    <div class="col-12">
+    
+                        <div class="table-content">
+    
+                            <table id="clientsModal" class="table table-accept-linked table-striped mb-0" 
+                            style="text-align: center; width: 100%">
+    
+                                <thead class="thead-new">
+                                    <tr>
+                                        <th style="border-left: 1px solid #7387c2 !important;"></th>
+                                        <th class="text-left">{{ 'TRAVEL_TRACKING.CODE' | translate }}</th>
+                                        <th class="text-left">{{ 'GENERAL.NAME' | translate }}</th>
+                                        <th class="text-left" style="border-right: 2px solid #7387c2 !important;">{{ 'TRAVEL_TRACKING.ADDRESS' | translate }}</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody></tbody>
+    
+                            </table>
+    
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </ng-container>
+
+        </form>
+        
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="title-infor mb-1"> {{'NOTIFICATIONS.ACCEPT_LINK_MESSAGE' | translate }}</p>
+
+            </div>
+
+            <div class="col-12 text-xl-center text-center">
+                <button [className]="cssStyle" (click)="sendData(linkSelect, client.id)" [disabled]="linkSelect == 0 || client && client.id == 0"
+                > 
+                    {{ 'NOTIFICATIONS.ACCEPT_LINK'| translate }} 
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,144 @@
+<div class="easyroute-modal-document">
+    <div class="row">
+        <div class="col-12 text-center pt-4">
+            <p class="title">
+                {{ title }}
+            </p>
+        </div>
+    </div>
+
+    <form (submit)="submit()" [formGroup]="form" novalidate>
+        <div class="form-row padding-col">
+            <div class="col-12">
+                <div class="form-group" [ngClass]="{
+                    'has-danger':
+                     form.controls['date']
+                    .invalid &&
+                     (form.controls['date']
+                    .dirty ||
+                    form.controls['date']
+                        .touched)}">
+                    <label for="date"> {{ 'RATES_AND_MODULES.DOCUMENT.UPLOAD_DATE_' | translate }}
+                        <span class="asterisco">*</span>
+                    </label>
+                    <div class="input-group">
+                        <div class="w-100 input-group-append">
+                            <input ngbDatepicker #d="ngbDatepicker" type="text" id="date" class="form-control" autocomplete="off" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}" formControlName="date" [minDate]="min" [ngClass]="{
+                          'form-control-danger':
+                          form.controls[
+                                  'date'
+                              ].invalid &&
+                              (form.controls[
+                                  'date'
+                              ].dirty ||
+                              form.controls[
+                                      'date'
+                                  ].touched)
+                      }" />
+                            <button class="btn btn-calendar calendar" (click)="d.toggle()" type="button">
+                                <img class="icons-calendar point"
+                                    src="assets/icons/optimmanage/calendar-outlines.svg"
+                                    aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>
+                    <!--  <ng-container *ngFor="
+                        let validation of document_messages.date
+                    ">
+                        <div class="w-100 text-center">
+                            <small class="form-control-feedback text-danger" *ngIf="
+                                 form
+                                .get('date')
+                                .hasError(validation.type) &&
+                            (form.get('date')
+                                .dirty ||
+                                form.get(
+                                    'date'
+                                ).touched)
+                        ">
+                                {{ validation.message }}</small>
+                        </div>
+                    </ng-container> -->
+                </div>
+            </div>
+
+            <div class="col-12">
+
+                <div class="form-group" [ngClass]="
+                        { 'has-danger': form.controls['name'].invalid && 
+                            (form.controls['name'].dirty || 
+                            form.controls['name'].touched) 
+                        }">
+                    <label for="name">
+                        {{'RATES_AND_MODULES.DOCUMENT.DOCUMENT_NAME' | translate}}
+                    </label>
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{'RATES_AND_MODULES.DOCUMENT.DOCUMENT_NAME' | translate}}" [ngClass]="{
+                        'form-control-danger':
+                        form.controls['name'].invalid &&
+                            (form.controls['name'].dirty ||
+                            form.controls['name'].touched)
+                    }" />
+
+                    <!-- <ng-container *ngFor="let validation of document_messages.name">
+                        <small class="form-control-feedback text-danger" *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)
+                    ">
+                        {{ validation.message }}
+                    </small>
+                    </ng-container> -->
+                </div>
+
+            </div>
+
+            <div class="col-12">
+
+                <div class="form-group" [ngClass]="
+                        { 'has-danger': form.controls['document'].invalid && 
+                            (form.controls['document'].dirty || 
+                            form.controls['document'].touched) 
+                        }">
+                    <label for="document">
+                        {{'RATES_AND_MODULES.DOCUMENT.DOCUMENT' | translate}}
+                    </label>
+
+
+
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="document" formControlName="document" (change)="fileChange($event.target.files[0])" accept=".pdf, .txt, .doc, .odt, .docx, .xls, .xlsx, .png, .jpg, .jpeg" placeholder="{{'RATES_AND_MODULES.DOCUMENT.FILE_UPLOAD' | translate}}"
+                            [ngClass]="{
+                                'form-control-danger':
+                                form.controls['document'].invalid &&
+                                    (form.controls['document'].dirty ||
+                                    form.controls['document'].touched)
+                            }">
+                        <label class="custom-file-label colorDataNull" for="document" *ngIf="fileData === null">{{'RATES_AND_MODULES.DOCUMENT.FILE_UPLOAD' | translate}}</label>
+                        <label class="custom-file-label colorFileData" for="document" *ngIf="fileData != null">
+                            {{ fileData.name }}
+                        </label>
+                    </div>
+
+                    <!-- <ng-container *ngFor="let validation of document_messages.document">
+                        <small class="form-control-feedback text-danger" *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)
+                    ">
+                        {{ validation.message }}
+                    </small>
+                    </ng-container> -->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-4 pt-4 pb-4">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn btn-cancel size-btn-modal" type="button" (click)="close()">
+                    {{ 'GENERAL.CANCEL' | translate }}</button>
+            </div>
+            <div class="col-md-6 col-12 text-center mt-2 mt-md-0 text-md-left">
+                <button class="btn btn-primary size-btn-modal" type="submit" [disabled]="!form.valid">
+                    {{ 'GENERAL.SAVE' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

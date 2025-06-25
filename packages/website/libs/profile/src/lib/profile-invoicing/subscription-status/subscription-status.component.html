@@ -1,0 +1,233 @@
+<div class="easyroute-suscription-status mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="title-page-subscription-status-demo" *ngIf="inDemo && !isSubscribed">
+                    <!-- {{ 'INVOICING.SUBSCRIPTION_STATUS.NAME' | translate }} -->
+                    Te quedan <b>{{ dayDemo }} días</b> de prueba
+                </p>
+                <p class="title-page-subscription-status" *ngIf="isSubscribed">
+                    {{ 'INVOICING.SUBSCRIPTION_STATUS.NAME' | translate }}
+                </p>
+            </div>
+        </div>
+        <div class="row mt-4 text-center align-items-end" *ngIf="plans && inDemo && !isSubscribed">
+            <ng-container *ngFor="let plan of plans let i = index">
+                <div class="col-md-5 col-xl-3 col-12 m-2 card-price"
+                    [ngClass]="{'selected-plans': profile && profile.company && profile.company.companyProfileTypeId === +plan.id}">
+                    <div class="bg-white pt-4 pb-4 rounded-lg shadow d-flex flex-column text-center">
+                        <div class="row">
+                            <div class="col-8 offset-2 text-center"
+                                [style.borderColor]="profile.company.companyProfileTypeId === +plan.id ? plan.color : '#767676'">
+                                <div style="display: inline-grid;">
+                                    <img [src]="profile.company.companyProfileTypeId === +plan.id ? '/assets/icons/software.svg' : '/assets/icons/software-1.svg'"
+                                        class="icon-software text-left">
+                                    <h3 class="font-weight-bold name-plan pb-4 mt-0"
+                                        [style.color]="profile.company.companyProfileTypeId === +plan.id ? plan.color : '#767676'">
+                                        {{ plan.name }}
+
+                                    </h3>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-12 p-2 description col">
+                                <p class="m-0" [innerHTML]="plan.description">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12 text-center">
+                                <p class="link-view-more" (click)="viewMorePlan(plan)">Ver más</p>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <button *ngIf="profile.company.companyProfileTypeId !== +plan.id && !canSuscribe"
+                                class="btn size-btn-modal mt-auto align-content-center" [style.backgroundColor]="'#FFF'"
+                                [style.color]="plan.color" (click)="changePlan(plan.id, plan.name )">
+                                {{ 'PLANS.TEST' | translate }}
+                            </button>
+                            <button class="btn size-btn-modal mt-auto align-content-center"
+                                *ngIf="profile.company.companyProfileTypeId === +plan.id"
+                                [style.backgroundColor]="'#FFF'" [style.borderColor]="plan.color"
+                                [style.borderWidth]="'1px'" [style.borderRadius]="'0.5rem'"
+                                [style.borderStyle]="'solid'" [style.color]="'#000'">
+                                {{ 'PLANS.CURRENT_PLAN' | translate }}
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+        <div *ngIf="!inDemo && !isSubscribed" class="row mt-4 text-center align-items-end">
+            <ng-container *ngFor="let plan of plans let i = index">
+                <div class="col-md-5 col-xl-3 col-12 card-price">
+                    <div class="bg-white pt-4 pb-4 rounded-lg shadow d-flex flex-column text-center">
+                        <div class="row">
+                            <div class="col-8 offset-2 text-center"
+                                [style.borderColor]="profile.company.companyProfileTypeId === +plan.id ? plan.color : '#767676'">
+                                <div style="display: inline-grid;">
+                                    <img [src]="profile.company.companyProfileTypeId === +plan.id ? '/assets/icons/software.svg' : '/assets/icons/software-1.svg'"
+                                        class="icon-software text-left">
+                                    <h3 class="font-weight-bold name-plan pb-4 mt-0" [style.color]="'#767676'">
+                                        {{ plan.name }}
+
+                                    </h3>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-12 p-2 description col">
+                                <p class="m-0" [innerHTML]="plan.description">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12 text-center">
+                                <p class="link-view-more" (click)="viewMorePlan(plan)">Ver más</p>
+                            </div>
+                        </div>
+                        <div class="mt-auto" *ngIf="profile.company.companyProfileTypeId === +plan.id">
+                            <span class="plan-actually">{{ 'PLANS.CURRENT_PLAN' | translate }}</span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div *ngIf="!inDemo && !isSubscribed" class="row mt-4">
+            <div class="col-xl-9">
+                <div class="bg-white-finish">
+                    <div class="row">
+                        <div class="col-2 text-right">
+                            <img src="assets/icons/plan-icon.png">
+                        </div>
+                        <div class="col-10">
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <span class="plan-expired-title">Tu período de prueba ha finalizado</span>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-8 offset-2 text-center">
+                                    <span class="plan-expired-description">Si quieres seguir disfrutando del software
+                                        ponte en contacto con nosostros o deja que un comercial te llame</span>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-8 offset-2 text-center">
+                                    <button class="btn btn-primary" (click)="contactModal(1)">¿Te llamamos?</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 text-center" *ngIf="subscriptionData && subscriptionData.pack && isSubscribed">
+            <div class="col-xl-3 col-sm-6">
+                <section class="card p-2 p-md-0" [style.border]="'2px'" [style.borderStyle]="'solid'"
+                    [style.borderColor]="subscriptionData.pack.color" [style.borderRadius]="'5px'">
+                    <div class="card-body">
+                        <div class="mt-4 mb-4">
+                            <div class="number-total" [style.color]="subscriptionData.pack.color">
+                                {{ subscriptionData.pack.name }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="text-center">
+                            Pack contratado
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <section class="card p-2 p-md-0">
+                    <div class="card-body">
+                        <div class="mt-4 mb-4">
+                            <div class="number-total">
+                                {{ subscriptionData.maxUsers }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="text-center">
+                            Máximo usuarios
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 mt-0 mt-md-3 mt-xl-0 mb-2 mb-md-1 mb-xl-0">
+                <section class="card p-2 p-md-0">
+                    <div class="card-body">
+                        <div class="mt-4 mb-4">
+                            <div class="number-total">
+                                {{ subscriptionData.activeUsers }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="text-center">
+                            Usuarios activos
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 mt-0 mt-md-3 mt-xl-0 mb-2 mb-md-1 mb-xl-0">
+                <section class="card p-2 p-md-0">
+                    <div class="card-body">
+                        <div class="mt-4 mb-4">
+                            <div class="number-total">
+                                {{ subscriptionData.monthlyPrice + subscriptionData.pack.currencySymbol }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="text-center">
+                            Cuota mensual
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row text-left mt-2">
+            <div class="col mb-3">
+                <p *ngIf="!isSubscribed && !canSuscribe && inDemo" class="add-plan" (click)="contactModal(1)">
+                    Contratar pack <i class="fas fa-chevron-right"></i>
+                </p>
+                <a class="a-plan" *ngIf="isSubscribed" (click)="contactModal(2)">
+                    {{ 'PLANS.IMPROVE_YOUR_PLAN' | translate }}
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="!isSubscribed && canSuscribe">
+            <div class="col text-md-left text-center">
+                <button class="btn btn-primary size-btn-form" (click)="subscribe()" [disabled]="cards.length === 0">
+                    {{ 'INVOICING.SUBSCRIPTION_STATUS.SUBSCRIBE' | translate }}
+                </button>
+                <p *ngIf="cards.length === 0" class="pt-4">
+                    * Debe agregar un método de pago para suscribirse.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

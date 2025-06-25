@@ -1,0 +1,146 @@
+<div class="easyroute-zone">
+    <easyroute-route-planning-panel [sidenavWidth]="widthSidenav" [title]="zone.name" [hasOptimization]="zoneStatus.optimized && zone.optimization?.solution != null" [atRouteStage]="mapStage === 'routes'" [useRouteColors]="useRouteColors"
+        [zone]="zone" [routeId]="getCurrentRouteId()" [routeName]="(zone.optimization?.solution?.routes)[currentRoute].name" [isPointsDisabled]="viewingMode === 1" [isSettingsDisabled]="viewingMode === 1" [isRoutesDisabled]="viewingMode === 0" [isRoutesSettingsDisabled]="viewingMode === 0"
+        [isExpanded]="zoneStatus.expanded" [isPointsExpanded]="zoneStatus.expandedPoints" [isSettingsExpanded]="zoneStatus.expandedSettings" [isRoutesExpanded]="zoneStatus.expandedRoutes" [isRoutesSettingsExpanded]="zoneStatus.expandedRoutesSettings" (routeColorChangedEvent)="updateRouteColor($event)"
+        (hoverEvent)="onHoveredChange($event)"
+        [routesStatus]="routesStatus"
+        [zoneStatus]="zoneStatus"
+        [highlightedRoute]="highlightedRoute"
+        (expandEvent)="onExpandedChange($event)" (expandRoutesEvent)="onExpandedRoutesChange($event)" (expandSettingsEvent)="onExpandedSettingsChange($event)" (expandPointsEvent)="onExpandedPointsChange($event)" (expandRoutesSettingsEvent)="onExpandedRoutesSettingsChange($event)"
+        [editableHeader]="true">
+
+        <div editable-zone-name (click)="$event.stopPropagation()">
+            <input (keydown)="onZoneNameKeyPress($event); $event.stopPropagation()" (blur)="discardName()" class="inline-edit mat-h2" [id]="'zoneNameInput_' + zone.id" #i [(ngModel)]="zoneName" type="text" style="min-width: 545px;" />
+        </div>
+
+        <app-editable-field editable-zone-color (confirm)="confirmColor()" (cancel)="discardColor()">
+            <app-info-chip content [shadow]="true" size="s" [text]="" help="Haz click para editar el color de la ruta" [color]="zone.color" class="header-identifier" [editable]="true"></app-info-chip>
+            <div form>
+                <mat-form-field>
+                    <input #i matInput [(ngModel)]="zoneColor" type="color" />
+                </mat-form-field>
+            </div>
+        </app-editable-field>
+        <easyroute-route-planning-actions route-planning-actions color="primary" [zoneId]="zone.id" [routesCount]="
+                zoneStatus.optimized ? zone.optimization.solution.routes.length : 0
+            " [vehiclesCount]="(zoneInfoChips$ | async).vehicles"
+            [hasEnoughCapacity]=" zone.settings.ignoreCapacityLimit || (zoneInfoChips$ | async).demand <= (zoneInfoChips$ | async).vehiclesCapacity"
+            [hasEnoughVolumen]=" zone.settings.ignoreCapacityLimit || (zoneInfoChips$ | async).volumetric <=(zoneInfoChips$ | async).vehiclesVolumen"
+            [deliveryPointsCount]="zone.deliveryPoints.length"></easyroute-route-planning-actions>
+        <easyroute-route-planning-info route-planning-info-chips [zoneInfoChips]="zoneInfoChips$ | async"
+                                [showRouteDeliveryPointsAmount]="false"
+                                [ignoreCapacityLimit]="zone.settings.ignoreCapacityLimit"
+                                [routeInfoChips]="(routesInfoChips$ | async) || null"
+                                [zoneId]="zone.id"
+                                [showRouteChips]="zoneStatus.optimized && zone.optimization.solution !== null"
+                                [showErrorMaxDelayTime]="showErrorMaxDelay"
+                                [zone]="zone">
+        </easyroute-route-planning-info>
+        <easyroute-route-planning-options route-planning-options [zoneId]="zone.id" [useOrderedParameters]="false"></easyroute-route-planning-options>
+        <div route-planning-options-switch fxLayout="column" fxLayoutAlign="center">
+            <button mat-flat-button class="switch-button" (click)="toggleSwitchViewMode(0)" color="primary">
+                {{ 'ROUTE_PLANNING.ZONE.NAVIGATION_BUTTONS.TO_ZONES' | translate }}
+            </button>
+        </div>
+        <easyroute-route-planning-table route-planning-delivery-points [zoneId]="zone.id"></easyroute-route-planning-table>
+        <div route-planning-points-switch fxLayout="column" fxLayoutAlign="center">
+            <button mat-flat-button class="switch-button" (click)="toggleSwitchViewMode(0)" color="primary" z>
+                {{ 'ROUTE_PLANNING.ZONE.NAVIGATION_BUTTONS.TO_ZONES' | translate }}
+            </button>
+        </div>
+        <div class="display-evaluation-container" route-planning-delivery-points-options (click)="$event.stopPropagation()" *ngIf="zoneStatus.evaluated">
+            <button mat-icon-button (click)="showZoneGeometry(); $event.stopPropagation()" title="{{ 'ROUTE_PLANNING.ZONE.DISPLAY_TITLE' | translate }}" [disabled]="viewingMode === 1" class="button-primary">
+                <mat-icon>directions</mat-icon>
+            </button>
+        </div>
+        <div route-planning-routes-switch fxLayout="column" fxLayoutAlign="center">
+            <button mat-flat-button class="switch-button" (click)="toggleSwitchViewMode(1)" color="primary">
+                {{ 'ROUTE_PLANNING.ZONE.NAVIGATION_BUTTONS.TO_ROUTES' | translate }}
+            </button>
+        </div>
+
+        <easyroute-route-planning-options *ngIf="
+                zoneStatus.optimized &&
+                zone.optimization.solution.routes !== null &&
+                zone.optimization.solution.routes.length >= 1
+            " route-planning-calculated-routes-settings [zoneId]="zone.id" [routeId]="getCurrentRouteId()">
+        </easyroute-route-planning-options>
+
+        <div *ngIf="
+                zoneStatus.optimized &&
+                zone.optimization.solution.routes !== null &&
+                zone.optimization.solution.routes.length >= 1
+            " route-planning-calculated-routes-settings-right></div>
+
+        <div route-planning-calculated-routes *ngIf="!zoneStatus.optimized" class="no-calculated-route">
+            <span>{{
+                'ROUTE_PLANNING.ZONE.CALCULATED_ROUTES.NO_CALCULATED_ROUTE' | translate
+            }}</span>
+        </div>
+
+
+        <div route-planning-routes-settings-switch fxLayout="column" fxLayoutAlign="center">
+            <button mat-flat-button class="switch-button" (click)="toggleSwitchViewMode(1)" color="primary">
+                {{ 'ROUTE_PLANNING.ZONE.NAVIGATION_BUTTONS.TO_ROUTES' | translate }}
+            </button>
+        </div>
+
+        <div
+            route-planning-calculated-routes-options
+            *ngIf="zoneStatus.optimized && zone.optimization.solution.routes !== null"
+            class="route-planning-calculated-routes-toolbar"
+            fxLayout="row"
+            fxLayoutGap="6px"
+            fxLayoutAlign="end center"
+            (click)="$event.stopPropagation()"
+        >
+            <div
+                class="route-planning-routes-pagination"
+                fxLayoutGap="6px"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                (click)="$event.stopPropagation()"
+            >
+                <mat-progress-spinner
+                    *ngIf="
+                        routesStatus[getCurrentRouteId()] &&
+                        routesStatus[getCurrentRouteId()].evaluating
+                    " [diameter]="20" mode="indeterminate" color="accent">
+                </mat-progress-spinner>
+                <button
+                    mat-icon-button
+                    (click)="showRouteGeometry()"
+                >
+                    <mat-icon>directions</mat-icon>
+                </button>
+                <!-- <button
+                    mat-icon-button
+                    (click)="switchRoute(false); $event.stopPropagation()"
+                    class="button-accent"
+                    [class.unchecked]="currentRoute === 0"
+                    [disabled]="currentRoute === 0"
+                >
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <span class="button-accent">{{ currentRoute + 1 }}</span>
+                <button mat-icon-button (click)="switchRoute(true); $event.stopPropagation()" class="button-accent" [class.unchecked]="
+                        currentRoute === zone.optimization.solution.routes.length - 1
+                    " [disabled]="
+                        currentRoute === zone.optimization.solution.routes.length - 1
+                    ">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button> -->
+            </div>
+
+            <mat-checkbox (change)="toggleSelectRoute()" class="button-accent" [checked]="
+                    routesStatus !== null
+                        ? getCurrentRouteId() && routesStatus[getCurrentRouteId()]
+                            ? routesStatus[getCurrentRouteId()].selected
+                            : false
+                        : false
+                " [disabled]="viewingMode === 0">
+            </mat-checkbox>
+
+        </div>
+    </easyroute-route-planning-panel>
+</div>

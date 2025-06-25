@@ -1,0 +1,25 @@
+
+.switch{
+    float: right;
+}
+
+i {
+    font-size: 13px;
+    z-index: 10000;
+}
+
+.fa-info-circle {
+    padding-right: 0.2rem;
+    position: absolute;
+    float: right;
+}
+
+.fa-info-circle:before {
+    background: #fff;
+    color: #b4b4b4;
+    border-radius: 10px;
+}
+
+.resume-spam {
+    font-size: 10px;
+}

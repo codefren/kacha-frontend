@@ -1,0 +1,30 @@
+@mixin route-planning-options-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+
+    .easyroute-route-planning-options {
+        background-color: mat-color($accent, 50);
+        color: mat-color($primary, '50-contrast');
+
+        h4 {
+            color: mat-color($accent, '50');
+        }
+    }
+}
+
+@mixin route-planning-options-typography($config) {
+    .easyroute-route-planning-options {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

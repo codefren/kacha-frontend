@@ -1,0 +1,681 @@
+<div class="user-costs-form pt-4 pb-4">
+    <div class="row container-fluid m-0">
+
+
+        <div class="col-12 col-lg-12">
+            <p class="mb-0 title-costs"> {{ 'USERS.COSTS.FIXED_USER_COSTS' | translate }} </p>
+            <p class="mb-0 sub-title-costs"> {{ 'USERS.COSTS.FIXED_USER_COSTS_MESSAGE' | translate }} </p>
+        </div>
+        <ng-container *ngIf="userTypeSelect && userTypeSelect == 1 || !userTypeSelect">
+            <!-- Salario -->
+            <div class="col-12 mt-4">
+
+                <div class="card style-card">
+
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-xl-1 col-12 text-center p-xl-0">
+                                <img class="img-anclar" src="assets/images/pages/users/salary.svg">
+                            </div>
+
+                            <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                <p class="mb-0 title-left text-xl-left text-center">{{ 'USERS.COSTS.SALARY' | translate }}</p>
+
+                                <p class="mb-0 sub-title text-xl-left text-center">{{ 'USERS.COSTS.SALARY_MESSAGE' | translate }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row pt-3 pl-xl-2">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group input-group">
+                                    <span class="has-float-label w-100">
+                                        <input class="form-control point"  #inputSalary id="inputSalary" type="number" placeholder="0.00" min="1" 
+                                        max="9999999" onKeyPress="if(this.value.length==8) return false;" [(ngModel)]="salary" 
+                                        (change)="changedUpdate = true"  (blur)="validateInput(inputSalary.value, 'grossSalary')"
+                                        (blur)="validateInput(inputSalary.value, 'grossSalary')"/>
+                                        <label for="salary" class="mt-2 title-col"> {{ 'USERS.COSTS.GROSS_SALARY' | translate }} </label>
+                                    </span>
+                                </div>
+                                <ng-container *ngIf="salary > 9999999">
+                                    <small class="form-control-feedback text-danger">
+                                        {{
+                                        'GENERAL.THE_AMOUNT_CANNONT_BE_GREATER_THAN'
+                                        | translate
+                                        }}
+                                    </small>
+                                </ng-container>
+                            </div>
+
+                            <!-- <div class="col-xl-4 col-12 mt-xl-0 mt-2">
+                                <div class="form-group input-group">
+                                    <span class="has-float-label w-100">
+                                        <input class="form-control point" #inputSegurity id="segurity" type="number" min="1" max="9999999" onKeyPress="if(this.value.length==8) return false;"  placeholder="0.00€" [(ngModel)]="segurity" (change)="changedUpdate = true" (blur)="validateInput(inputSegurity.value, 'socialSecurity')"
+                                        (blur)="validateInput(inputSegurity.value, 'socialSecurity')"/>
+                                        <label for="segurity" class="mt-2 title-col"> {{ 'USERS.COSTS.SOCIAL_SECURITY' | translate }} </label>
+                                    </span>
+                                </div>
+                                <ng-container *ngIf="segurity > 9999999">
+                                    <small class="form-control-feedback text-danger">
+                                        {{
+                                        'GENERAL.THE_AMOUNT_CANNONT_BE_GREATER_THAN'
+                                        | translate
+                                        }}
+                                    </small>
+                                </ng-container>
+                            </div> -->
+
+                            <!-- <div class="col-xl-4 col-12 mt-xl-0 mt-2">
+                                <div class="form-group input-group">
+                                    <span class="has-float-label w-100">
+                                        <input class="form-control point total-cost" id="total-cost" type="number" [(ngModel)]="total_cost" disabled/>
+                                        <label for="total-cost" class="mt-2 title-col"> {{ 'USERS.COSTS.TOTAL_COMPANY_COST' | translate }} </label>
+                                    </span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Horas extras -->
+            <div class="col-12 mt-4">
+                <div class="form-width-prod">
+                    <div class="card style-card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-xl-1 col-12 text-center p-xl-0">
+                                    <img class="img-anclar" src="assets/images/pages/users/extra-hours.svg">
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                    <p class="mb-0 title-left text-xl-left text-center"> {{ 'USERS.COSTS.EXTRA_HOURS' | translate }} </p>
+
+                                    <p class="mb-0 sub-title text-xl-left text-center"> {{ 'USERS.COSTS.EXTRA_HOURS_MENSSAGE' | translate }} </p>
+                                </div>
+                            </div>
+
+                            <div class="row pl-2">
+                                <div class="container-fluid">
+                                    <div class="row mt-3">
+                                        <label for="type" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> {{ 'USERS.COSTS.EXTRA_HOUR' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> {{ 'USERS.COSTS.AMOUNT' | translate }} </label>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="form-row" *ngFor="let item of overtimeType; let i = index;">
+
+                                        <div class="form-group col-xl-4 col-12 col-md-4 col-sm-6 m-0 mt-2">
+                                            <div class="border-special">
+                                                <div class="switch w-100">
+                                                    <label class="switch-width mb-0">
+                                                        <input type="checkbox" id="allowMorningShift" 
+                                                            [checked]="checkedOverTime(item)"
+                                                            (change)="changeActive($event.target.checked, item)"/>
+                                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                                                        <span class="lever-text" *ngIf="item.frequencyId == 2"> Hora extra ({{ item.name }})</span>
+                                                        <span class="lever-text" *ngIf="item.frequencyId == 1">{{ item.name }}</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group input-group col-xl-4 col-12 col-md-4 col-sm-6 m-0 mt-2">
+                                            <input class="form-control form-control-input " [ngClass]="{'showHour': i <= 1, 'showDay': i > 1 }" type="number" (focusout)="changeValue($event.target.value, item)" [value]="getValueOverTime(item)" placeholder="Importe" min="0" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Otros gastos mensuales -->
+            <div class="col-12 mt-4">
+                <form [formGroup]="otherMonthlyExpensesForm" class="form-width-prod" *ngIf="conceptOtherMonthlyExpenses">
+                    <div class="card style-card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-xl-1 col-12 text-center p-xl-0">
+                                    <img class="img-anclar" src="assets/images/pages/users/extra-costs.svg">
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                    <p class="mb-0 title-left text-xl-left text-center"> {{ 'USERS.COSTS.OTHER_MONTHLY_EXPENSES' | translate }} </p>
+
+                                    <p class="mb-0 sub-title text-xl-left text-center"> {{ 'USERS.COSTS.OTHER_MONTHLY_EXPENSES_MENSSAGE' | translate }}
+                                        <a (click)="redirectProviders()" class="redirect point">{{'USERS.COSTS.PROVIDER' | translate }}</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row pl-2">
+                                <div class="container-fluid" *ngIf="conceptOtherMonthlyExpenses.length > 0">
+                                    <div class="row mt-3">
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.TYPE' | translate }} </label>
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.PROVIDER' | translate }} </label>
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.CONCEPT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm"> {{ 'USERS.COSTS.AMOUNT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm" *ngIf="companyPreferenceCoste.allowApplyAnnualCost"> {{ 'USERS.COSTS.TYPE_PAYMENT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+
+                                    <ng-container *ngIf="conceptOtherMonthlyExpenses.length > 0">
+
+                                        <ng-container formArrayName="conceptOtherMonthlyExpenses">
+
+                                            <ng-container *ngFor="let conceptOtherMonthlyExpense of conceptOtherMonthlyExpenses.controls; let p = index;" [formGroup]="conceptOtherMonthlyExpense">
+
+                                                <div class="form-row" [ngClass]="{'mt-3': p > 0}">
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                        <ng-container *ngIf="showProvidersType">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeId" (change)="changeSelectProviderType($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+                                                                        
+                                                                     <option *ngFor="let X of providerTypeList" [value]="X.id">
+
+                                                                        {{ X.name }}
+
+                                                                    </option>
+
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showProvidersType">
+
+                                                            <div class="col-12 text-center mt-2">
+
+                                                                <div class="fa-4x">
+
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                        <ng-container *ngIf="showProviders">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerId" (change)="changeSelectProvider($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of providerList[conceptOtherMonthlyExpenses.controls[p].get('providerTypeId').value]" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showProviders">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                        <ng-container *ngIf="showConcept">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeConceptId" (change)="changeSelectConcept($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of conceptList[conceptOtherMonthlyExpenses.controls[p].get('providerId').value]" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showConcept">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-container>
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                        <input class="form-control form-control-input" type="number" formControlName="price" (change)="changeImporteProvider($event.target.value, conceptOtherMonthlyExpense, p)" placeholder="Importe" />
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1" *ngIf="companyPreferenceCoste.allowApplyAnnualCost">
+
+                                                        <ng-container *ngIf="showConcept">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="paymentType" (change)="changeSelectConcept($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option value="1">
+                                                                    Mensual
+                                                                </option>
+
+                                                                <option value="2">
+                                                                    Anual
+                                                                </option>
+    
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showConcept">
+
+                                                            <div class="col-12 text-center mt-2">
+
+                                                                <div class="fa-4x">
+
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteOtherMonthlyExpense(conceptOtherMonthlyExpense,p)">
+                                                        <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                    </button>
+                                                    </div>
+                                                </div>
+
+                                            </ng-container>
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                    <div class="col-12 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin p-0">
+                                        <button type="button" class="btn btn-add-concept p-0" (click)="addConceptOtherMonthlyExpenses()">
+                                        <label for="concept" class="add-concept point">{{'USERS.COSTS.ADD_MONTHLY_EXPENDITURE' | translate }}</label>
+                                    </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </ng-container>
+
+
+
+        <!-- tarifas -->
+
+        <ng-container *ngIf="userTypeSelect && userTypeSelect == 2">
+
+            <div class="col-12 mt-4">
+
+                <form [formGroup]="rateForm" class="form-width-prod" *ngIf="rate">
+
+                    <div class="card style-card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-xl-1 col-12 text-center p-xl-0">
+
+                                    <img class="img-anclar" src="assets/images/pages/users/rates.svg">
+
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+
+                                    <p class="mb-0 title-left text-xl-left text-center"> {{ 'USERS.COSTS.FEE' | translate }} </p>
+
+
+                                    <p class="mb-0 sub-title text-xl-left text-center"> {{ 'USERS.COSTS.ASSIGN_THE_CORRESPONDING_RATES_THAT_YOU_HAVE_CREATED_FROM' | translate }}
+
+                                        <a (click)="redirect('costRates')" class="redirect point">{{'USERS.COSTS.SETTINGS_RATES' | translate }}</a>
+
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row pl-2">
+
+                                <div class="container-fluid" *ngIf="rate.length > 0">
+
+                                    <div class="row mt-3">
+
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.CONCEPT' | translate }} </label>
+
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.AMOUNT_PER_DAY' | translate }} </label>
+
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.DEFAULT_RATE' | translate }} </label>
+
+                                        <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; &nbsp; </label>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+
+                                    <ng-container *ngIf="rate.length > 0">
+
+                                        <ng-container formArrayName="rate">
+
+                                            <ng-container *ngFor="let rate of rate.controls; let r = index;" [formGroup]="rate">
+
+                                                <div class="form-row" [ngClass]="{'mt-2': r > 0}">
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                        <ng-container *ngIf="showRatesType">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ r" formControlName="companyFeeCostId" (change)="changeSelectRateType($event.target.value, rate, r, 'itemSelect'+ r)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of rateConceptList" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showRatesType">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <!-- precio disabled -->
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                        <input class="form-control form-control-input" readonly type="number" formControlName="price" placeholder="0,00€" />
+
+                                                    </div>
+
+                                                    <!-- end precio disabled -->
+
+                                                    <!-- predeterminado -->
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                        <div class="border-special w-100">
+
+                                                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                                <div class="round round-little margin-days round-1">
+
+                                                                    <input type="checkbox" formControlName="predetermined" [id]="'check'+ r" (change)="changePredetermine(rate.value, r)" />
+
+                                                                    <label [for]="'check'+ r"></label>
+
+                                                                </div>
+
+                                                                <label title="Predeterminada" [for]="'check'+ r" class="label-check title-rounder point pl-2" [ngClass]="{'false-pred': rate.value.predetermined === false}">
+    
+                                                                    Predeterminada
+    
+                                                                </label>
+
+                                                            </div>
+
+
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                    <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+
+                                                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteRate(rate,r)" *ngIf="rate.value.predetermined === false">
+    
+                                                        <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                    </button>
+                                                    </div>
+                                                </div>
+
+                                            </ng-container>
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                    <div class="col-12 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin p-0">
+                                        <button type="button" class="btn btn-add-concept p-0" (click)="addRates()">
+                                        <label for="concept" class="add-concept point">{{'USERS.COSTS.ADD_FEE' | translate }}</label>
+                                    </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- Otros gastos mensuales -->
+            <div class="col-12 mt-4">
+                <form [formGroup]="otherMonthlyExpensesForm" class="form-width-prod" *ngIf="conceptOtherMonthlyExpenses">
+                    <div class="card style-card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-xl-1 col-12 text-center p-xl-0">
+                                    <img class="img-anclar" src="assets/images/pages/users/extra-costs.svg">
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                    <p class="mb-0 title-left text-xl-left text-center"> {{ 'USERS.COSTS.OTHER_MONTHLY_EXPENSES' | translate }} </p>
+
+                                    <p class="mb-0 sub-title text-xl-left text-center"> {{ 'USERS.COSTS.OTHER_MONTHLY_EXPENSES_MENSSAGE' | translate }}
+                                        <a (click)="redirectProviders()" class="redirect point">{{'USERS.COSTS.PROVIDER' | translate }}</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row pl-2">
+                                <div class="container-fluid" *ngIf="conceptOtherMonthlyExpenses.length > 0">
+                                    <div class="row mt-3">
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.TYPE' | translate }} </label>
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.PROVIDER' | translate }} </label>
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.CONCEPT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm"> {{ 'USERS.COSTS.AMOUNT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm" *ngIf="companyPreferenceCoste.allowApplyAnnualCost"> {{ 'USERS.COSTS.TYPE_PAYMENT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+
+                                    <ng-container *ngIf="conceptOtherMonthlyExpenses.length > 0">
+
+                                        <ng-container formArrayName="conceptOtherMonthlyExpenses">
+
+                                            <ng-container *ngFor="let conceptOtherMonthlyExpense of conceptOtherMonthlyExpenses.controls; let p = index;" [formGroup]="conceptOtherMonthlyExpense">
+
+                                                <div class="form-row" [ngClass]="{'mt-3': p > 0}">
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                        <ng-container *ngIf="showProvidersType">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeId" (change)="changeSelectProviderType($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+                                                                        
+                                                                     <option *ngFor="let X of providerTypeList" [value]="X.id">
+
+                                                                        {{ X.name }}
+
+                                                                    </option>
+
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showProvidersType">
+
+                                                            <div class="col-12 text-center mt-2">
+
+                                                                <div class="fa-4x">
+
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                        <ng-container *ngIf="showProviders">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerId" (change)="changeSelectProvider($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of providerList[conceptOtherMonthlyExpenses.controls[p].get('providerTypeId').value]" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showProviders">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                        <ng-container *ngIf="showConcept">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeConceptId" (change)="changeSelectConcept($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of conceptList[conceptOtherMonthlyExpenses.controls[p].get('providerId').value]" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showConcept">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-container>
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                        <input class="form-control form-control-input" type="number" formControlName="price" (change)="changeImporteProvider($event.target.value, conceptOtherMonthlyExpense, p)" placeholder="Importe" />
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1" *ngIf="companyPreferenceCoste.allowApplyAnnualCost">
+
+                                                        <ng-container *ngIf="showConcept">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="paymentType" (change)="changeSelectConcept($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option value="1">
+                                                                    Mensual
+                                                                </option>
+
+                                                                <option value="2">
+                                                                    Anual
+                                                                </option>
+    
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showConcept">
+
+                                                            <div class="col-12 text-center mt-2">
+
+                                                                <div class="fa-4x">
+
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteOtherMonthlyExpense(conceptOtherMonthlyExpense,p)">
+                                                        <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                    </button>
+                                                    </div>
+                                                </div>
+
+                                            </ng-container>
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                    <div class="col-12 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin p-0">
+                                        <button type="button" class="btn btn-add-concept p-0" (click)="addConceptOtherMonthlyExpenses()">
+                                        <label for="concept" class="add-concept point">{{'USERS.COSTS.ADD_MONTHLY_EXPENDITURE' | translate }}</label>
+                                    </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </ng-container>
+
+
+
+    </div>
+</div>

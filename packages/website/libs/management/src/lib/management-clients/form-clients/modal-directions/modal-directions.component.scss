@@ -1,0 +1,75 @@
+.easyroute-modal-directions {
+    /* .padding-col {
+        padding: 0 25px !important;
+    } */
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .title-infor{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px !important;
+    }
+    .modal-footer {
+        display: block;
+       /*  padding: 1rem 2rem; */
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-header {
+        display: block;
+        /* padding: 1rem 2rem; */
+    }
+    /* .modal-body {
+        padding: 1rem 2rem;
+    } */
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+    .btn-default{
+        border-radius: 5px;
+    }
+    .has-float-label input,
+    .has-float-label select {
+        font-size: 14px !important;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        font-size: 14px !important;
+        color: #363740 !important;
+        opacity: 1;
+    }
+    .has-float-label label::after{
+        background: transparent !important;
+    }
+    .has-float-primary {
+        background-color: #24397c;
+        border-color: #24397c #24397c #24397c;
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+    }
+    .radiusDeliveryOrderCode {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+}

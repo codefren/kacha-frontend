@@ -1,0 +1,82 @@
+.easyroute-clients-unlinked-form {
+    overflow-y: hidden;
+    background-color: #ffffff;
+    .form-row {
+        margin-bottom: 20px !important;
+    }
+    .padding-form {
+        padding: 20px;
+    }
+    .w-r {
+        width: 25%;
+    }
+    .btn-default {
+        text-transform: uppercase;
+        width: 15rem;
+        background: #c1c1c1;
+        color: white;
+        font-size: 16px;
+    }
+    .form-control:not(.form-control-sm):not(.form-control-lg) {
+        font-size: 16px;
+        font-weight: lighter;
+        color: #4c4c4c;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #e9ecef00 !important;
+        opacity: 1;
+    }
+    form label {
+        font-size: 16px;
+        font-weight: lighter;
+        /*  color: #4c4c4c; */
+    }
+    .time-charge {
+        font-weight: bolder !important;
+    }
+    button {
+        border-radius: 15px;
+    }
+    /*    .thead>tr {
+        background-color: #737373 !important;
+        color: #fff !important;
+        border: none !important;
+        font-size: 12px;
+        font-weight: lighter;
+    } */
+    .table td {
+        color: #1d1d1d;
+        font-weight: lighter;
+        font-size: 14px;
+    }
+    .table-bordered td {
+        border: 1px solid #e6e7e8e0 !important;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+    }
+    .card-style-general {
+        border: 1px solid #d7dce1;
+    }
+    @media screen and ( min-width: 360px) and ( max-width: 767px) {
+        /*  button {
+            width: 100%;
+        } */
+        .padding-form {
+            padding: 0;
+        }
+        .w-r {
+            width: 100%;
+        }
+        .responsive-button {
+            justify-content: center !important;
+        }
+        .size-btn-form {
+            width: 9rem !important;
+        }
+    }
+}

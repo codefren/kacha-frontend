@@ -1,0 +1,270 @@
+<div class="optimroute-notifications-list p-3 bg-white">
+
+    <!-- header -->
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-6">
+
+            <div class="page-title">
+
+                <ng-container *ngIf="selectTap === 'polpoo'">
+
+                    <span>{{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }} </span>
+
+                </ng-container>
+
+                <ng-container *ngIf="selectTap === 'link'">
+
+                    <span>Vinculaciones</span>
+
+                </ng-container>
+
+                <ng-container *ngIf="selectTap === 'notices'">
+
+                    <span>Avisos</span>
+
+                </ng-container>
+
+                <ng-container *ngIf="selectTap === 'delete'">
+
+                    <span>Papelera</span>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end">
+
+                <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop p-0" aria-labelledby="dropdownMenuButton">
+
+                    <div class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/setting.svg" class="pr-2"> {{ 'NOTIFICATIONS.SETTING' | translate }}
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+        <!-- Lado izquierdo -->
+        <div class="col-xl-3 col-12">
+
+            <div class="card">
+
+                <div class="card-body card-body pb-xl-3 pt-xl-3" style="display: block;">
+
+                    <ul class="sub-ul p-0 m-0">
+
+                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': selectTap === 'polpoo'}" (click)="changePage('polpoo')">
+
+                            <label class="title-selct point" [ngClass]="{'title-no-select': selectTap != 'polpoo'}">
+
+                                Notificaciones Polpoo
+                              
+                            </label>
+
+                            <ng-container *ngIf="!showCountNotification">
+
+                                <span class="fa-2x style-fast">
+                                    
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    
+                                </span>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="showCountNotification">
+
+                                <span class="badge badge-selected" [ngClass]="{'badge-no-selected': selectTap != 'polpoo'}">
+                                    
+                                    <ng-container *ngIf="polpooNotificationsCount < 100" >
+
+                                        {{ polpooNotificationsCount }}
+
+                                    </ng-container>
+    
+                                    <ng-container *ngIf="polpooNotificationsCount > 100">
+
+                                        +99
+
+                                    </ng-container>
+                                    
+                                </span>
+
+                            </ng-container>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <ul class="sub-ul p-0 m-0">
+
+                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': selectTap === 'link'}" (click)="changePage('link')">
+
+                            <label class="title-selct point" [ngClass]="{'title-no-select': selectTap != 'link'}">
+
+                                Vinculaciones
+                                
+                            </label>
+
+                            <ng-container *ngIf="!showCountNotification">
+
+                                <span class="fa-2x style-fast">
+                                    
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    
+                                </span>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="showCountNotification">
+
+                                <span class="badge badge-selected" [ngClass]="{'badge-no-selected': selectTap != 'link'}">
+                                    
+                                    <ng-container *ngIf="linksCount < 100" >
+
+                                        {{ linksCount }}
+
+                                    </ng-container>
+    
+                                    <ng-container *ngIf="linksCount > 100">
+
+                                        +99
+
+                                    </ng-container>
+                                    
+                                </span>
+
+                            </ng-container>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <ul class="sub-ul p-0 m-0">
+
+                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': selectTap === 'notices'}" (click)="changePage('notices')">
+
+                            <label class="title-selct point" [ngClass]="{'title-no-select': selectTap != 'notices'}">
+
+                                Avisos
+
+                            </label>
+
+                            <ng-container *ngIf="!showCountNotification">
+
+                                <span class="fa-2x style-fast">
+                                    
+                                     <i class="fas fa-circle-notch fa-spin"></i>
+                                    
+                                </span>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="showCountNotification">
+
+                                <span class="badge badge-selected" [ngClass]="{'badge-no-selected': selectTap != 'notices'}">
+                                    
+                                    <ng-container *ngIf="noticesCount < 100" >
+
+                                        {{ noticesCount }}
+
+                                    </ng-container>
+    
+                                    <ng-container *ngIf="noticesCount > 100">
+
+                                        +99
+
+                                    </ng-container>
+                                    
+                                </span>
+
+                            </ng-container>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="card-footer pb-2" style="display: block;">
+
+                    <ul class="sub-ul p-0 m-0">
+
+                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': selectTap === 'delete'}" (click)="changePage('delete')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': selectTap != 'delete'}">
+                                Papelera
+                            </label>
+                            <!-- <span class="badge-selected" [ngClass]="{'badge-no-selected': selectTap != 'delete'}">100</span> -->
+                            <img class="point img-trash pr-2 img-trash" src="assets/icons/transNotiTAp.svg" *ngIf="selectTap != 'delete'">
+                            <img class="point img-trash pr-2 img-trash" src="assets/icons/trashBlue.svg" *ngIf="selectTap === 'delete'">
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Lado derecho -->
+
+        <div class="col-xl-9 col-12 pl-xl-0 mt-xl-0 mt-3">
+
+            <div class="row align-items-center">
+
+                <div class="col-12">
+
+                    <ng-container *ngIf="selectTap === 'polpoo'">
+
+                        <easyroute-polpoo-notifications></easyroute-polpoo-notifications>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="selectTap === 'link'">
+
+                        <easyroute-links></easyroute-links>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="selectTap === 'notices'">
+
+                        <easyroute-notices-details></easyroute-notices-details>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="selectTap === 'delete'">
+
+                        <easyroute-notifications-list-deleted></easyroute-notifications-list-deleted>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

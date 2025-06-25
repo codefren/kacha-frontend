@@ -1,0 +1,71 @@
+<div class="staff">
+
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'COST.ADDITIONAL_COST' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'COST.CREATE_THE_CONCEPT_OF_ADDITIONAL_COST_AS_EXTRAS_THAT_HAVE' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row pt-4" *ngIf="costData && costData.length > 0">
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'COST.CONCEPT' | translate }} </label>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-1" *ngFor="let per of costData; let i = index;" [ngClass]="{'pb-4': costData.length >= 6 && i == (costData.length - 1)}">
+
+                <div class="col-xl-4 col-9 mt-1 pl-3">
+
+                    <div class="orm-group input-group">
+
+                        <input class="form-control form-control-input" type="text" [(ngModel)]="per.name" (focusout)="changeConceptItem(per)">
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-2 p-xl-0">
+
+                    <div class="form-group  input-group col-xl-4 col-3 col-md-4 col-sm-4 m-0 mt-1">
+
+                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="delete(per, i)">
+        
+                            <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+        
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row pt-3 pb-3">
+                <div class="col-12">
+                    <a class="add-expenses-type point" (click)="addOthers()"> {{ 'COST.ADD_CONCEPT' | translate }} </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>

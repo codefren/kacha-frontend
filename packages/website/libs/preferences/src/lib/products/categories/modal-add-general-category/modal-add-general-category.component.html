@@ -1,0 +1,414 @@
+<div class="modal-add-general-category">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ title }}</label>
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12" [ngClass]="{'col-xl-4':category && category.id > 0 }">
+
+                <div class="images mt-1" *ngIf="category">
+
+                    <!-- list toggles -->
+
+                    <nav class="row p-0 m-0 group-btn mb-3">
+
+                        <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center option-no-selecter" [ngClass]="{'option-selected' : !list }" (click)="changeList( false )">
+
+                            <a class="text-center">{{ 'CONFIGURATIONS.CATEGORY.PHOTO' | translate }}</a>
+
+                        </div>
+
+                        <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center option-no-selecter" [ngClass]="{'option-selected' : list }" (click)="changeList( true )">
+
+                            <a class="text-center">{{ 'CONFIGURATIONS.CATEGORY.LIST' | translate }}</a>
+
+                        </div>
+
+                    </nav>
+
+                    <!-- photo -->
+
+                    <ng-container *ngIf="!list">
+
+                        <div class="pl-0 pr-0 d-flex flex-row justify-content-center w-100">
+
+                            <div class="card border card-img point" *ngFor="let card of category.images; let i = index" (click)="fileAddProduct.click()">
+
+                                <div class="w-100 h-100 show-background point" *ngIf="category && category.images === null && !cardImageBase64">
+
+                                    <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+
+                                        <i class="color-icon fas fa-trash fa-2x"></i>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="w-100 h-100 text-center">
+
+                                    <img [src]="convertToSafeUrl( cardImageBase64 )" alt="" *ngIf="cardImageBase64" class="img-flud img-render img-upload img-load" alt="Project" />
+
+                                    <img #urlLogo [src]="convertToSafeUrl( card.urlimage + '?' + date.getTime())" alt="" *ngIf="
+                                            category.images !== null && !cardImageBase64
+                                        " class="img-flud img-render img-upload img-load" alt="Project1" />
+                                </div>
+                                <input type="file" accept=".jpg, .png, .jpeg" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                            </div>
+
+
+
+                            <div class="card size-img  point" (click)="fileAddProduct.click()" *ngIf="category && category.images === null || category.images.length == 0">
+
+
+                                <img src="assets/icons/categoryLis.svg">
+
+                                <input type="file" accept=".jpg, .png, .jpeg" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <p class=" mb-2 mt-3 color-alert" *ngIf="category && category.images === null || category.images.length ==0">Maximo 1Mb</p>
+                            <p class="text-danger mb-0 font-text-p" *ngIf="imageError.length > 0">{{ imageError }}</p>
+                        </div>
+
+                        <div class="form-row justify-content-center mb-0 mb-3 mt-3">
+
+                            <div class="col-12 text-center">
+
+                                <div class="card">
+
+                                    <div class="card-body style-open-modal-product">
+
+                                        <!-- <a class="link" (click)="showModalImgInfo()"> {{ 'PRODUCTS.HOW_IMAGE' | translate }} </a> -->
+
+                                        <label class="style-open-exmaple-load" (click)="showModalImgInfo()">¿Cómo subir la imagen? </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </ng-container>
+
+                    <!-- List svg -->
+                    <ng-container *ngIf="list">
+
+
+                        <div class="form-row justify-content-center">
+                            <div class="card border card-svg point" *ngFor="let card of category.list; let i = index" (click)="fileAddProduct.click()">
+                                <div class="w-100 h-100 show-background point" *ngIf="category && category.list === null && !cardSvgBase64">
+                                    <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                        <i class="color-icon fas fa-trash fa-2x"></i>
+                                    </div>
+                                </div>
+                                <div class="w-100 h-100 text-center">
+                                    <img [src]="convertToSafeUrl( cardSvgBase64 )" alt="" *ngIf="cardSvgBase64" class="img-flud img-render img-upload img-load" alt="Project" />
+                                    <img #urlLogo [src]="convertToSafeUrl( card.urlimage )" alt="" *ngIf="
+                                            category.list !== null && !cardSvgBase64
+                                        " class="img-flud img-render img-upload img-load" alt="Project1" />
+                                </div>
+                                <input type="file" accept=".svg" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                            </div>
+
+                            <div class="card card-svg  point" (click)="fileAddProduct.click()" *ngIf="category && category.list === null || category.list.length == 0">
+
+                                <img src="assets/icons/categoryS.svg">
+
+                                <input type="file" accept=".svg" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <p class=" mb-2 mt-3 color-alert" *ngIf="category && category.list === null || category.list.length == 0">Maximo 1Mb</p>
+                            <p class="text-danger mb-0 font-text-p" *ngIf="imageError.length > 0">{{ imageError }}</p>
+                        </div>
+
+                        <div class="form-row justify-content-center mb-0 mb-3 mt-3">
+
+                            <div class="col-12 text-center">
+
+                                <div class="card">
+
+                                    <div class="card-body style-open-modal-product">
+
+                                        <!-- <a class="link" (click)="showModalImgInfo()"> {{ 'PRODUCTS.HOW_IMAGE' | translate }} </a> -->
+
+                                        <label class="style-open-exmaple-load" (click)="showModalImgInfo()"> ¿Cómo subir la imagen? </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </ng-container>
+                </div>
+
+                <div class="row justify-content-center">
+
+                    <form [formGroup]="categoryForm" class="form-widths font-general" *ngIf="category">
+
+                        <!-- codigo -->
+
+                        <div class="col-xl-12 col-md-6 col-12 padding-col-download">
+
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': categoryForm.controls['code'].invalid && (categoryForm.controls['code'].dirty || categoryForm.controls['code'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                        <ng-container *ngIf="!category.id">
+                                            <input type="text" class="form-control form-input"  id="code" formControlName="code" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}"  [ngClass]="{'form-control-danger': categoryForm.controls['code'].invalid && (categoryForm.controls['code'].dirty || categoryForm.controls['code'].touched) }"/>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="category.id > 0" >
+                                            <input type="text" class="form-control form-input" readonly  id="code" formControlName="code" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}"  [ngClass]="{'form-control-danger': categoryForm.controls['code'].invalid && (categoryForm.controls['code'].dirty || categoryForm.controls['code'].touched) }"/>
+                                        </ng-container>
+            
+                                        
+            
+                                        <label for="first" class="mt-2 title-col"> {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }} </label>
+            
+                                    </span>
+
+                                <ng-container *ngFor="let validation of category_messages.code">
+                                    <small class="form-control-feedback text-danger" *ngIf="categoryForm.get('code').hasError(validation.type) && (categoryForm.get('code').dirty || categoryForm.get('code').touched)
+                                        ">
+                                            {{ validation.message }}
+                                        </small>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end codigo -->
+
+                        <!-- category name -->
+
+                        <div class="col-xl-12 col-md-6 col-12 padding-col-download mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{ 'has-danger': categoryForm.controls['name'].invalid && (categoryForm.controls['name'].dirty || categoryForm.controls['name'].touched) }">
+
+                                <span class="has-float-label w-100">
+
+                                        <input type="text" class="form-control form-input" spellcheck="true" autocomplete="off" formControlName="name" id="name"  placeholder="Nombre categoría"  [ngClass]="{'form-control-danger': categoryForm.controls['name'].invalid && (categoryForm.controls['name'].dirty || categoryForm.controls['name'].touched) }"/>
+                                        
+                                        <label for="first" class="mt-2 title-col"> Nombre categoría <span class="asterisco">* </span> </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of category_messages.name">
+
+                                    <small class="form-control-feedback text-danger" *ngIf="categoryForm.get('name').hasError(validation.type) && (categoryForm.get('name').dirty || categoryForm.get('name').touched)
+                                        ">
+                                            {{ validation.message }}
+                                    </small>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end category name -->
+
+                        <!-- estado -->
+
+                        <div class="col-12 mt-3">
+
+                            <div class="style-input-check">
+
+                                <p class="mb-0 mt-2">Estado <span class="asterisco">* </span></p>
+
+                                <div class="switch w-100 m-0">
+
+                                    <label class="switch-width mb-0">
+                                            <input type="checkbox"  id="isActive" [checked]="category.isActive" [value]="category.isActive" (click)="changeActive()"/>
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                                            <span class="style-span-toggle title-road"> 
+                                                Activar
+                                            </span>
+
+                                            <ng-container *ngFor="let validation of category_messages.isActive">
+                                                <small class="form-control-feedback text-danger" *ngIf="
+                                                    categoryForm.get('isActive').hasError(validation.type) &&
+                                                        (categoryForm.get('isActive').dirty ||
+                                                        categoryForm.get('isActive').touched)
+                                                    ">
+                                                    {{ validation.message }}
+                                                </small>
+                                            </ng-container>
+                                        </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- end estado -->
+
+                        <!-- destacado -->
+
+                        <div class="col-12 mt-3">
+
+                            <div class="style-input-check">
+
+                                <p class="mb-0 mt-2">Destacado</p>
+
+                                <div class="switch w-100 m-0">
+
+                                    <label class="switch-width mb-0">
+                                            <input type="checkbox"  id="highlight" [checked]="category.highlight" [value]="category.highlight" (click)="changeHighlight()"/>
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                                            <span class="style-span-toggle title-road"> 
+                                                Destacar categoría
+                                            </span>
+
+                                            <ng-container *ngFor="let validation of category_messages.highlight">
+                                                <small class="form-control-feedback text-danger" *ngIf="
+                                                    categoryForm.get('highlight').hasError(validation.type) &&
+                                                        (categoryForm.get('highlight').dirty ||
+                                                        categoryForm.get('highlight').touched)
+                                                    ">
+                                                    {{ validation.message }}
+                                                </small>
+                                            </ng-container>
+                                        </label>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="categoryForm.get('highlight').value">
+
+                                <div class="form-group input-group mt-3 mb-2" [ngClass]="{ 'has-danger': categoryForm.controls['valoration'].invalid && (categoryForm.controls['valoration'].dirty || categoryForm.controls['valoration'].touched) }">
+
+                                    <span class="has-float-label w-100">
+    
+                                            <input type="number" class="form-control form-input" [min]="1" [max]="99999" placeholder="{{ 'PRODUCTS.POSITION_BY_IMPORTANCE' | translate }}" autocomplete="off" formControlName="valoration" />
+                                            
+                                            <label for="first" class="mt-2 title-col"> {{ 'PRODUCTS.POSITION_BY_IMPORTANCE' | translate }}  </label>
+    
+                                    </span>
+
+                                    <ng-container *ngFor="let validation of category_messages.valoration">
+
+                                        <div class="w-100 text-center">
+
+                                            <small class="form-control-feedback text-danger" *ngIf="categoryForm.get('valoration').hasError(validation.type) && (categoryForm.get('valoration').dirty || categoryForm.get('valoration').touched)">
+
+                                                   {{ validation.message }}
+
+                                               </small>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+
+
+                            </ng-container>
+
+                        </div>
+
+                        <!-- end descatado -->
+
+                    </form>
+                </div>
+
+            </div>
+
+            <ng-container *ngIf="category && category.id > 0">
+
+                <div class="d-flex" style="height: 200px;">
+
+                    <div class="vr"></div>
+
+                </div>
+
+                <div class="col-xl-8 col-12 mt-xl-0 mt-2">
+
+                    <div class="col-12 p-xl-0">
+
+                        <p class="title-sub-category mb-2">Subcategorías asignadas</p>
+
+                        <p class="sub-title-sub-category mb-0">Este es el listado de subcategorías asignadas a esta categoría. Para cambiarlo debes ir a dicha subcategoría.</p>
+
+                    </div>
+
+                    <ng-container *ngIf="category && category.id > 0">
+
+                        <div class="col-12 mt-4 p-xl-0" *ngIf="toggleCategory">
+
+                            <table id="subcategory" class="table table-striped table-responsive-lg mb-0 mt-3 table-bordered-sub-category" style="text-align: center ; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left" style="border-top-left-radius: 6px;">{{ 'CONFIGURATIONS.CODE' |translate }}</th>
+                                        <th class="text-left">Subcategorías</th>
+                                        <th [width]="5" class="text-center"></th>
+                                        <th [width]="5" class="text-center" style="border-top-right-radius: 6px;"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                    </ng-container>
+
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-outline-primary mr-2 size-btn" (click)="close(false)"> {{'GENERAL.CLOSE' | translate }} </button>
+
+
+                <button class="btn btn-primary mr-2 size-btn" [disabled]="categoryForm && !categoryForm.valid" (click)="createCategory()">{{'GENERAL.SAVE' | translate}} </button>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

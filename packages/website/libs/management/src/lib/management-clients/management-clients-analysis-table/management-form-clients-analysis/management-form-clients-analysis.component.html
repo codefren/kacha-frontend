@@ -1,0 +1,255 @@
+<div class="form-clients-analysis font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'CLIENTS.CLIENTS_ANALYSIS.CUSTOMER_ANALYSIS' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <button class="mb-1 mt-xl-0 mt-1 btn btn-default" (click)="openModalViewPdf()">
+
+                <img src="assets/icons/donwload.svg">
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0" *ngIf="clientAnalysisData">
+
+            <div class="card">
+
+                <!-- img client -->
+
+                <div class="card-body">
+
+
+                    <div class="row">
+
+
+                        <div class="col-12">
+
+                            <p class="title-img"> {{ 'GENERAL.CUSTOMER_PHOTO' | translate }} </p>
+
+                        </div>
+
+                        <ng-container *ngFor="let item of [0,1,2,3]; let i= index">
+
+                            <!-- 1 posición -->
+
+                            <div class="col-12 text-center" *ngIf="i ==0">
+
+
+                                <!-- si no hay nada -->
+
+                                <div class="card">
+
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="size-img point" src="assets/icons/img1.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <!-- end si no hay nada -->
+
+                                    <!-- si hay imagen -->
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <!-- para eliminar -->
+
+                                        <div class="size-hover1 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                        <!-- para eliminar -->
+
+                                        <img class="size-load point" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+                                </div>
+
+                                <!-- en si hay imagenes -->
+
+                            </div>
+
+                            <!-- end 1 posición -->
+
+                            <!-- 2 posición -->
+
+                            <div class="col-4 mt-2" *ngIf="i ==1">
+
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="img-2 point" src="assets/icons/img2.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <img class="size-load2" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                        <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+
+                            </div>
+
+                            <!-- end 2 posición -->
+
+                            <!-- 3 posición -->
+
+                            <div class="col-4 mt-2" *ngIf="i ==2">
+
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="img-2 point" src="assets/icons/img2.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <img class="size-load2" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                        <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- end 3 posición -->
+
+                            <!-- 4 posición -->
+
+                            <div class="col-4 mt-2" *ngIf="i ==3">
+
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="img-2 point" src="assets/icons/img2.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <img class="size-load2" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                        <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- end 4 posición -->
+
+                            <!-- input hidden type file -->
+
+                            <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChangeEvent($event ,franchiseImages[i])" />
+
+                            <!-- end input hidden type file -->
+                        </ng-container>
+
+                        <div class="col-12 text-center mt-3" *ngIf="imageError.length > 0">
+                            <span class="text-danger">{{ imageError }}</span>
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+                <!-- end img client -->
+
+                <div class="card-footer" style="display: block;">
+                </div>
+
+                <div class="card-body pt-xl-0" style="display: block;">
+
+                    <p class="title-route mb-0"> {{'CLIENTS.CLIENT' | translate }} </p>
+
+                    <p class="sub-title mb-0"> {{ clientAnalysisData.name }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'CLIENTS.CLIENTS_ANALYSIS.TYPOLOGY' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{ clientAnalysisData.companyPreferenceDelayTimeId ? clientAnalysisData.company_preference_delay_time_type.name:'' }} </p>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'CLIENTS.CLIENTS_ANALYSIS.ADDRESS' | translate }} </label>
+
+                    <p class="m-0 name-title ">{{ clientAnalysisData.address }}</p>
+
+                </div>
+
+                <!-- <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'CLIENTS.CLIENTS_ANALYSIS.ACERAGE_COST' | translate }} </label>
+
+                    <p class="m-0 name-title ">{{ clientAnalysis.id }}€ </p>
+
+                </div> -->
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12 mt-xl-0 mt-3" *ngIf="clientAnalysisData">
+
+            <easyroute-service-registration [clientAnalysis]="clientAnalysisData" (filterDate)="getData($event)" [idClient]="idClient" [filterYear]="filterYear"></easyroute-service-registration>
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+
+</div>

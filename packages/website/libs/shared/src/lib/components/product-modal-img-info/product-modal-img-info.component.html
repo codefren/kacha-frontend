@@ -1,0 +1,51 @@
+<div class="easyroute-products-modal-info-images">
+    <section class="card p-2">
+        <div class="row justify-content-center mt-4">
+            <p class="title mt-3 pr-3 pr-md-0">{{ title }}</p>
+            <i class="point fas fa-times fa-2x" (click)="activeModal.close()"></i>
+        </div>
+
+        <div class="card-body">
+            <div class="modal-block mt-0" [ngClass]="{'ajust': type === 'list'}">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img *ngIf="type === 'promotion'" src="assets/images/pages/products/2.1cuadrado.svg">
+                        <img *ngIf="type === 'products'" src="assets/images/pages/products/grande.svg" alt="imagen">
+                        <img *ngIf="type === 'categories'" src="assets/images/pages/products/3-1Cuadrado.svg" alt="imagen">
+                        <img *ngIf="type === 'list'" src="assets/images/pages/products/grande.svg" alt="" alt="imagen">
+                    </div>
+                    <div class="col-12 text-center mt-1" *ngIf="message">
+                        <label class="info-size">{{ 'GENERAL.RECOMMENDED_SIZE_ZONE' |translate }}</label>
+                    </div>
+
+                    <div class="col-12">
+                        <p *ngIf="type !== 'list'">
+                            {{ 'PRODUCTS.EXPLAIN_IMAGE' | translate }} <br>
+                            {{ 'PRODUCTS.EXPLAIN_IMAGE_2' | translate }}:
+                        </p>
+                        <p *ngIf="type === 'list'">
+                            {{ 'PRODUCTS.EXPLAIN_SVG' | translate }} <br>
+                            {{ 'PRODUCTS.EXPLAIN_IMAGE_2' | translate }}:
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 text-center text-md-right mt-4 mt-md-0 pr-md-4">
+                        <img src="assets/images/pages/products/round1.svg" alt="imagen">
+                    </div>
+                    <div class="col-12 col-md-6 text-center text-md-left pl-md-4 mt-4 mt-md-0">
+                        <img *ngIf="type === 'promotion'" src="assets/images/pages/products/2.1Circulo.svg" />
+                        <img *ngIf="type === 'products'" src="assets/images/pages/products/round2.svg" alt="imagen">
+                        <img *ngIf="type === 'categories'" src="assets/images/pages/products/3.1Circulo.svg" alt="imagen">
+                        <img *ngIf="type === 'list'" src="assets/images/pages/products/round2.svg" alt="imagen">
+                    </div>
+                    <div class="col-12" *ngIf="type === 'list'">
+                        <p class="text-center mb-0 description">
+                            {{ 'PRODUCTS.MESSAGE_SVG' | translate }} <br>
+                            {{ 'PRODUCTS.MESSAGE_SVG_2' | translate }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>

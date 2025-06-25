@@ -1,0 +1,110 @@
+<div class="form-clients-analysis font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-12 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'PARCEL.NAME' | translate }} </label>
+
+        </div>
+
+        <!--  <div class="col-xl-6 col-12 text-right">
+
+
+
+            <button class="mb-1 mt-xl-0 mt-1 btn btn-default" (click)="openModalViewPdf()">
+
+                <img src="assets/icons/donwload.svg">
+
+            </button>
+
+
+        </div>
+ -->
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0" *ngIf="parcelData">
+
+            <div class="card">
+
+
+                <div class="card-body" style="display: block;">
+
+                    <p class="title-route mb-0"> {{ 'PARCEL.CONDITION' | translate }} </p>
+
+                    <ng-container *ngIf="parcelData.statusRouteId === 3">
+
+                        <p class="realice mb-0"> {{'PARCEL.DOME' | translate }} </p>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="parcelData.statusRouteId === 2">
+
+                        <p class="no-realice mb-0"> {{ 'PARCEL.EARRIGN' | translate }} </p>
+
+                    </ng-container>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'PARCEL.ROUTE' | translate }} </label>
+
+                    <p class="m-0 name-title"> {{ parcelData.name_route }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{ 'PARCEL.EMPLOYEE' | translate }} </label>
+
+                    <p class="m-0 name-title"> {{ parcelData.driver_name }} </p>
+
+                </div>
+
+                <!--  <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> Fecha verificación </label>
+
+                    <p class="m-0 name-title">00/00/0000</p>
+
+                </div> -->
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{ 'PARCEL.TOTAL_PACKAGES' | translate }} </label>
+
+                    <p class="m-0 total-albaran">{{ parcelData.total_verified }}/{{ parcelData.total_package }} </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12 mt-xl-0 mt-3" *ngIf="parcelData">
+
+            <!--   <easyroute-service-registration [clientAnalysis]="clientAnalysisData" (filterDate)="getData($event)" [idClient]="idClient"></easyroute-service-registration> -->
+
+            <easyroute-package-list [routeId]="routeId"></easyroute-package-list>
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+
+</div>

@@ -1,0 +1,171 @@
+<div class="edit-delivery-point">
+    <div class="delivery-point-name">
+        <h3>
+            <b>{{ (deliveryPoint$ | async).name }}</b>
+        </h3>
+    </div>
+    <div class="delivery-point-content">
+        <!--
+                <div class="changeVehicle">
+                    <h4 class="first-title">
+                        {{ 'ROUTE_PLANNING.ZONE.EDIT_DELIVERY_POINT.CHANGE_VEHICLE' | translate }}
+                    </h4>
+                    <div class="container">
+                        <div fxLayout="row wrap" fxLayoutWrap fxLayoutGap="8px">
+                            <button
+                                mat-button
+                                *ngFor="let v of vehicles; let i = index"
+                                [class.active]="i == activeVehicle"
+                                (click)="activeVehicle = i"
+                            >
+                                {{ v.name }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <mat-divider></mat-divider>
+        -->
+        <div class="change-order">
+            <h4 class="change-order-title" *ngIf="mode === 'zone'">
+                <b>
+                    {{
+                        'ROUTE_PLANNING.ZONE.EDIT_DELIVERY_POINT.CHANGE_LOCATION_ZONE'
+                            | translate
+                    }}
+                </b>
+            </h4>
+            <h4 class="change-order-title" *ngIf="mode === 'route'">
+                <b>
+                    {{
+                        'ROUTE_PLANNING.ZONE.EDIT_DELIVERY_POINT.CHANGE_LOCATION_ROUTE'
+                            | translate
+                    }}
+                </b>
+            </h4>
+            <div
+                class="change-order-container"
+                fxLayout="row"
+                fxLayoutAlign="space-around center"
+            >
+                <mat-form-field class="zone-selection-mat-form-field">
+                    <mat-label>Ruta Destino</mat-label>
+
+                    <mat-select
+                        [(ngModel)]="_selectedZoneId"
+                        (selectionChange)="zoneChanged()"
+                    >
+                        <mat-option
+                            *ngFor="let zone of (zones | keyvalue)"
+                            [value]="zone.value.id"
+                        >
+                            {{ zone.value.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field
+                    *ngIf="mode === 'route'"
+                    class="route-selection-mat-form-field"
+                >
+                    <mat-label>Ruta Destino</mat-label>
+                    <mat-select [(ngModel)]="_selectedRouteId">
+                        <mat-option
+                            *ngFor="let route of (zones[_selectedZoneId].routes | keyvalue)"
+                            [value]="route.value.id"
+                        >
+                            {{ route.value.route.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="position-selection-mat-form-field">
+                    <input
+                        placeholder="Posición Destino"
+                        matInput
+                        [(ngModel)]="_order"
+                        type="number"
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="change-delivery-window" fxLayout="column">
+            <h4 class="change-delivery-window-title">
+                <b>
+                    {{
+                        'ROUTE_PLANNING.ZONE.EDIT_DELIVERY_POINT.CHANGE_DELIVERY_WINDOW.NAME'
+                            | translate
+                    }}
+                </b>
+            </h4>
+            <div
+                fxLayout="row"
+                fxLayoutAlign="space-evenly center"
+                fxLayoutGap="24px"
+                class="time-input-containers"
+            >
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    class="time-input-container"
+                >
+                    <div fxFlex="" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-checkbox
+                            fxFlex=""
+                            [(ngModel)]="_isOpeningTimeNotFree"
+                            color="primary"
+                            >{{
+                                'ROUTE_PLANNING.ZONE.EDIT_DELIVERY_POINT.CHANGE_DELIVERY_WINDOW.OPENING_TIME'
+                                    | translate
+                            }}</mat-checkbox
+                        >
+                    </div>
+                    <div fxFlex="" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-checkbox
+                            fxFlex=""
+                            color="primary"
+                            [(ngModel)]="_isClosingTimeNotFree"
+                            >{{
+                                'ROUTE_PLANNING.ZONE.EDIT_DELIVERY_POINT.CHANGE_DELIVERY_WINDOW.CLOSING_TIME'
+                                    | translate
+                            }}</mat-checkbox
+                        >
+                    </div>
+                </div>
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start center"
+                    class="time-input-container"
+                >
+                    <div fxFlex="" fxLayout="row" fxLayoutAlign="center center">
+                        <mat-form-field>
+                            <input
+                                [disabled]="!_isOpeningTimeNotFree"
+                                matInput
+                                class="app-input-time"
+                                type="time"
+                                [(ngModel)]="_openingTime"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="" fxLayout="row" fxLayoutAlign="center center">
+                        <mat-form-field fxFlex="">
+                            <input
+                                [disabled]="!_isClosingTimeNotFree"
+                                matInput
+                                class="app-input-time"
+                                type="time"
+                                [(ngModel)]="_closingTime"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="action-buttons" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-raised-button (click)="closeDialog()">
+            {{ 'GENERAL.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button (click)="accept()" color="primary">
+            {{ 'GENERAL.ACCEPT' | translate }}
+        </button>
+    </div>
+</div>

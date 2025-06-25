@@ -1,0 +1,73 @@
+$white-transparency: rgba(255, 255, 255, 0.2);
+$dark-transparency: rgba(0, 0, 0, 0.15);
+$lighter-transparency: 0.12;
+$shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.16);
+$border-light: rgba(0, 0, 0, 0.12);
+$not-expandable-panel-width: 500px;
+@mixin mat-color-styler($palette, $important: '') {
+    background-color: mat-color($palette) $important;
+    color: mat-color($palette, default-contrast) $important;
+}
+
+.card-panel {
+    text-align: center;
+    background-color: #ff9e4d;
+    color: #fcf1de;
+    font-weight: 800;
+}
+
+.point {
+    cursor: pointer;
+}
+
+.card-header-color {
+    background: #ff9e4d;
+    border-radius: 5px 5px 0 0 !important;
+    border-bottom: 1px solid #dadada;
+    padding: 16px;
+    position: relative;
+}
+
+.card-title-custon {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0;
+    text-transform: none;
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif !important;
+}
+
+.border-shadow {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.dataTables_wrapper {
+    padding: 0 !important;
+}
+
+/* .label-search {
+    label {
+        width: 50% !important;
+    }
+} */
+
+@media (max-width: 576px) {
+    .pag-spacing {
+        label {
+            margin-top: 15px;
+        }
+    }
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    margin-left: 0.5em;
+    display: table !important;
+    width: auto;
+}
+
+.color-icon-primary {
+    color: #fd7e14;
+}

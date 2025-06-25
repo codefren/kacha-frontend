@@ -1,0 +1,41 @@
+.modal-extra-boxes {
+    border-radius: 0px !important;
+    .title-ticket {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        /* identical to box height */
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .img-ticket {
+        border-radius: 5px;
+        max-width: 431px;
+        margin: 0 auto;
+    }
+    .btn-default {
+        width: 95px;
+        height: 40px;
+        background: #FFFFFF;
+        border: 1px solid #D8DAE2;
+        border-radius: 3px;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7F96E0;
+        color: white;
+        padding: 0.9rem;
+        font-weight: bold !important;
+        font-size: 16px !important;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        // border-top: 1px solid #dee2e6 !important;
+    }
+}

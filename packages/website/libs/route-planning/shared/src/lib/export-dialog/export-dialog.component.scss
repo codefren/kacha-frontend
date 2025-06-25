@@ -1,0 +1,93 @@
+.ExportDialogComponent {
+    .modal-content {
+        background-color: transparent !important;
+        border: none !important;
+    }
+    //new style
+    .modal-header {
+        display: block !important;
+    }
+    .modal-footer {
+        display: block;
+        //padding: 1rem 2rem;
+    }
+    .round-new-form input[type=radio]:checked+label {
+        background-color: #24397c;
+        border-color: #24397c;
+    }
+    .title-modal {
+        /* color: rgb(3, 3, 3);
+    font-size: 18px;
+    font-weight: bold; */
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .title-info {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        color: #000000;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .btn-cancel {
+        border-radius: 5px !important;
+        width: 74px !important;
+    }
+    .btn-primary {
+        border-radius: 5px !important;
+        width: 110px !important;
+    }
+    .btn-primary-donwnload {
+        width: 128px !important;
+    }
+    .lines-conteiner {
+        border-bottom: 1px solid #DDDEEA;
+    }
+    .no-selecter {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .selecter {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #5478EA;
+    }
+    .col-selecter {
+        //background: #f1f4ff;
+        height: 49px;
+        justify-content: center !important;
+        border-bottom: 2px solid #5478EA !important;
+    }
+    .point {
+        cursor: pointer;
+    }
+    .modal-p-b {
+        padding: 3px 17px 0px 17px;
+    }
+}

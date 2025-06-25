@@ -1,0 +1,64 @@
+.generic-information {
+    .title-row {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        /* identical to box height */
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #9899AA;
+    }
+    .btn-primary {
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+    }
+    .form-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .form-control-select,
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .color-link {
+        color: rgba(59, 79, 255, 1) !important;
+        text-decoration: revert;
+    }
+    .title-label {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .has-danger .form-control {
+        border-color: #d2322d !important;
+        -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%) !important;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%) !important;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #ffffff;
+        opacity: 1;
+    }
+}

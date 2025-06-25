@@ -1,0 +1,137 @@
+<div class="easyroute-dashboard-total-sale padding-body pb-0 mb-3 pt-0 h-100">
+
+    <div class="row text-center row-test justify-content-center">
+
+        <!-- lado derecho -->
+
+        <div class="col-xl-4 col-12 border-col text-left mt-2 order-2 order-xl-1">
+
+            <!-- date -->
+
+            <label class="mt-4 date-style mb-4 pb-2"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.TODAY' | translate }} - {{ getDay() }} </label>
+
+            <!-- End date -->
+
+            <!-- total-invoiced -->
+
+            <easyroute-total-invoiced [date]="date" [filterSelect]="filterSelect"></easyroute-total-invoiced>
+
+            <!-- end total-invoiced -->
+
+            <!-- app invoiced -->
+
+            <easyroute-app-invoiced [date]="date" [filterSelect]="filterSelect"></easyroute-app-invoiced>
+
+            <!-- end app invoiced -->
+
+            <!-- 4 cuadros inforamtivos -->
+
+            <div class="row mt-xl-2">
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-app-commission [date]="date" [filterSelect]="filterSelect"></easyroute-app-commission>
+                </div>
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-sale-commission [date]="date" [filterSelect]="filterSelect"></easyroute-sale-commission>
+                </div>
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-new-client [date]="date" [filterSelect]="filterSelect"></easyroute-new-client>
+                </div>
+                <div class="col-xl-6 col-md-6 col-12">
+                    <easyroute-total-orders [date]="date" [filterSelect]="filterSelect"></easyroute-total-orders>
+                </div>
+            </div>
+
+            <!-- end 4 cuadros inforamtivos -->
+        </div>
+
+        <!-- end lado derecho -->
+
+
+        <!-- lado izquierdo -->
+
+
+        <div class="col-xl-8 col-12 text-rigth order-1 order-xl-2">
+
+
+            <div class="row mt-4 align-items-center pb-3">
+                <div class="col-6 text-left">
+
+                    <label class="label-resumen"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.SUMMARY' | translate }} </label>
+                </div>
+                <div class="col-xl-6 col-12 text-right">
+                    <div class="row justify-content-xl-end justify-content-center">
+                        <div class="col-xl-5 col-lg-6 col-8 mt-xl-0 mt-lg-0 mt-3 text-center">
+
+                            <div class="input-group input-date">
+                                <button class="btn calendar" (click)="f.toggle()" type="button">
+                                    <img class="point" src="assets/icons/dateSummary.svg"
+                                        aria-hidden="true">
+                                </button>
+                                <input ngbDatepicker #f="ngbDatepicker" type="text" class="form-control" readonly autocomplete="off" placeholder="00/00/0000" [formControl]="dateSearchFrom" (dateSelect)="changeDate('date', $event)" />
+
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-6 col-8 mt-xl-0 mt-lg-0 mt-2">
+
+                            <div class="input-group hack-select">
+                                <select class="form-control letter-app point select-style" [(ngModel)]="filterSelect" (change)="getAll($event.target.value)">
+
+                                    <option value="null"> Seleccione </option> 
+
+                                    <option value="day"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.DAY' | translate }} </option>
+        
+                                    <option value="week" selected> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.WEEK' | translate }} </option> 
+                                    
+        
+                                    <option value="month"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.MONTH' | translate }} </option>
+        
+                                   
+        
+                                  
+        
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <!-- summary-invoice -->
+
+            <easyroute-summary-invoice [date]="date" [filterSelect]="filterSelect"></easyroute-summary-invoice>
+
+            <!-- end summary-invoice -->
+
+            <!-- cuadros donus -->
+
+            <div class="row">
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-app-commission-donus [date]="date" [filterSelect]="filterSelect"></easyroute-app-commission-donus>
+                </div>
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-sale-commission-donus [date]="date" [filterSelect]="filterSelect"></easyroute-sale-commission-donus>
+                </div>
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-new-client-donus [date]="date" [filterSelect]="filterSelect"></easyroute-new-client-donus>
+                </div>
+                <div class="col-xl-3 col-md-6 col-12">
+                    <easyroute-total-orders-donus [date]="date" [filterSelect]="filterSelect"></easyroute-total-orders-donus>
+                </div>
+            </div>
+
+            <!-- end cuadros donus -->
+
+        </div>
+
+        <!-- end lado izquierdo -->
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,99 @@
+<!-- CONTAINER -->
+<div class="main-container container-fluid provider pt-4 pb-4 p-2">
+
+    <!-- Parte superior -->
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+            <div class="page-title">
+                <img src="assets/images/provider.svg" class="header-brand-img img-providers" alt="Provider">
+                <span class="ml-3">{{ 'PROVIDERS.NAME' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6">
+            <div class="d-flex flex-row align-items-center justify-content-end">
+                <!-- <button type="button" class="btn btn-icon btn-icon-white">
+                    <img src="assets/images/question_mark.svg" class="header-brand-img" alt="?">
+                </button> -->
+
+                <div class="btn-group mr-2 ml-2">
+                    <button type="button" class="btn btn-icon btn-icon-white dropdown-toggle pl-2 pr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/images/tres_point.svg" class="header-brand-img" alt="#">
+                    </button>
+                    <div class="dropdown-menu p-2">
+                        <!-- <a class="dropdown-item border-drop drop-title  pt-3 pb-3 point" (click)="openPdf()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_PDF' | translate }}
+
+                        </a>
+
+                        <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openCsv()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_EXCEL' | translate }}
+
+                        </a> -->
+
+                        <a class="dropdown-item drop-title pt-2 pb-3 point" (click)="dowloadProvider()">
+                            <img src="assets/images/nube.svg" class="pr-2"> {{ 'PROVIDERS.DOWNLOAD_PROVIDER' | translate }}
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="list-item-button point">
+                    <button type="button" class="btn btn-secondary" routerLink="new">
+                        <img src="assets/images/plus_white.svg" class="header-brand-img" alt="info">
+                        {{ 'PROVIDERS.CREATE_PROVIDER' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Cajas informativas -->
+    <div class="row align-items-center separatorButtonBox pl-4 pr-4">
+
+        <ng-container *ngFor="let item of totalesInformative; let i = index">
+            <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+                <div class="card card-left p-3">
+                    <p class="p-title"> {{item.name }} </p>
+
+                    <ng-container *ngIf="showInfoDetail">
+                        <p class="p-sub-number">{{ item.total }}</p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showInfoDetail">
+                        <div class="fa-2x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+
+    <!-- Tabla -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general">
+                <table class="table table-striped table-bordered table-responsive-lg mb-0" id="providers" style="text-align: center; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>{{ 'PROVIDERS.TYPE' | translate }}</th>
+                            <th>{{ 'PROVIDERS.PROVIDER' | translate }}</th>
+                            <th>{{ 'PROVIDERS.ASSIGNED' | translate }}</th>
+                            <th>{{ 'PROVIDERS.CONTACT_PERSON' | translate }}</th>
+                            <th>{{ 'PROVIDERS.PHONE' | translate }}</th>
+                            <th>{{ 'PROVIDERS.STATUS' | translate }}</th>
+                            <th style="border-right: 1px solid #7387c2 !important;" class="widthAccionDatatable"> </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

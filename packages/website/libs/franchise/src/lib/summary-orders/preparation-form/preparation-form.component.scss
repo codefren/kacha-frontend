@@ -1,0 +1,179 @@
+.easyroute-preparation-form {
+    .padding-body-orders {
+        padding: 20px !important;
+    }
+    .lines-info-zone {
+        border-bottom: 1px solid #d6d7dc;
+    }
+    .style-info-p {
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: lighter;
+        line-height: 23px;
+    }
+    .label-info {
+        color: #000000 !important;
+        font-weight: 600;
+    }
+    .subtitle-detail {
+        font-weight: bold;
+    }
+    .switch {
+        display: contents !important;
+        vertical-align: middle;
+        cursor: pointer;
+        margin: 3px 0;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        //  width: 14%;
+        padding: 14px;
+    }
+    .table th,
+    .table td {
+        vertical-align: middle;
+        border: 0px solid #dee2e6;
+    }
+    table td {
+        color: #1d1d1d;
+        font-weight: lighter;
+        font-size: 14px;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f1f4ff !important;
+    }
+    tbody tr:nth-of-type(odd) {
+        background-color: #ffffff !important;
+    }
+    .toggle-directions {
+        background: #444A60;
+        //border-radius: 15px;
+        border-top-right-radius: 7px;
+        border-top-left-radius: 7px;
+        padding: 16px !important;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397C;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .icon-delect {
+        color: red;
+        font-size: 21px
+    }
+    .disabeld-col {
+        padding: 14px;
+    }
+    .green {
+        color: #91D600;
+    }
+    .red {
+        color: #E92B11;
+    }
+    .style-tfoot {
+        background-color: #f1f4ff;
+        padding: 1%;
+    }
+    .card-title {
+        a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #4c4c4c;
+            ;
+        }
+    }
+    .btn.btn-add {
+        float: right;
+        margin-top: -0.4rem;
+    }
+    .padding-header-sub {
+        padding: 8px;
+        color: rgba(0, 0, 0, 0.87) !important;
+        background: white;
+    }
+    .col-especial {
+        padding-right: 0px;
+        padding-left: 0px;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .input-table {
+        text-align: center;
+    }
+    .modal-block-warning .fa,
+    .modal-block-warning .fab,
+    .modal-block-warning .fal,
+    .modal-block-warning .far,
+    .modal-block-warning .fas {
+        color: #0088cc !important;
+    }
+    .print {
+        text-align: -webkit-right;
+        font-size: 2em;
+        color: #000000;
+        cursor: pointer;
+    }
+    .margin-span {
+        margin-left: 1.5rem;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #ffffff !important;
+        opacity: 1;
+    }
+    //general phone
+    @media screen and (min-width: 360px) {
+        .margin-span {
+            margin-left: 0.5rem;
+        }
+        .width-select {
+            width: 100% !important;
+        }
+    }
+    //pixel
+    @media screen and (min-width: 411px) and (max-width: 731px) and (orientation: portrait) {
+        .margin-span {
+            margin-left: 0.5rem;
+        }
+        .width-select {
+            width: 100% !important;
+        }
+    }
+    //iphone 8
+    @media screen and (min-width: 414px) and (max-width: 736px) and (orientation: portrait) {
+        .margin-span {
+            margin-left: 0.5rem;
+        }
+        .width-select {
+            width: 100% !important;
+        }
+    }
+    @media screen and ( min-width: 767px) {
+        .container-special {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .width-select {
+            width: 78% !important;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+<div class="optimroute-delivery-points">
+    <div id="modalMultipleDeliveryPoint">
+        <div class="col-md-12 col-12 text-right pt-2 ">
+            <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10 text-center">
+                    <p class="title">
+                        {{ 'ROUTE_PLANNING.ZONE.SETTINGS.MULTIPLE_DELIVERY_POINTS.MOVE_CLIENTS' | translate }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label col-especial m-0" for="">
+                                {{ 'ROUTE_PLANNING.ZONE.SETTINGS.MULTIPLE_DELIVERY_POINTS.DESTINY_ZONE' | translate }}
+                            </label>
+        
+                            <div class="input-group hack-select">
+                                <select class="form-control letter-app" [(ngModel)]="zoneIdDestiny">
+                                    <option [value]="zone.value.id" *ngFor="let zone of zones | keyvalue">{{ zone.value.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <label class="control-label col-especial m-0">
+                                {{ 'ROUTE_PLANNING.ZONE.SETTINGS.MULTIPLE_DELIVERY_POINTS.DESTINY_ORDER' | translate }}
+                            </label>
+                            
+                            <div class="input-group">
+                                <input type="number" class="form-control" step="1" [(ngModel)]="order" onkeypress="return event.charCode >= 48"
+                                    min="1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center pt-4">
+            <div class="col-11 text-left">
+                {{ 'ROUTE_PLANNING.ZONE.SETTINGS.MULTIPLE_DELIVERY_POINTS.MOVE_CLIENTS' | translate }}
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-12">
+                <div class="table-content">
+                    <table id="deliveryPointsMoveMultiple" class="table table-bordered table-striped mb-0"
+                        style="text-align: center; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>{{ 'DELIVERY_POINTS.ORDER' | translate }}</th>
+                                <th>{{ 'DELIVERY_POINTS.NAME_' | translate }}</th>
+                                <th>{{ 'DELIVERY_POINTS.ADDRESS' | translate }}</th>
+                                <th>{{ 'DELIVERY_POINTS.START' | translate }}</th>
+                                <th>{{ 'DELIVERY_POINTS.END' | translate }}</th>
+                                <th style="border-right: 1px solid #7387c2 !important;">
+                                    <div class="row justify-content-center align-items-center" style="background-color: transparent;">
+                                        <div class="round round-little">
+                                            <input [(ngModel)]="selectAll" checked="" type="checkbox" id="checkboxExample1" (change)="selectAllFunc()"/>
+                                            <label for="checkboxExample1"></label>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center mt-4 mb-4">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-md-6 col-12 text-center mb-2 mb-md-2 text-md-right">
+                            <button class="btn btn-cancel size-btn-modal modal-dismiss" (click)="closeDialog(false)">
+                                {{ 'GENERAL.CANCEL' | translate }}
+                            </button>
+                        </div>
+            
+                        <div class="col-md-6 col-12 text-center text-md-left">
+                            <button class="btn btn-primary size-btn-modal modal-dismiss" [disabled]="zoneId === zoneIdDestiny || selected.length === 0 || order <= 0" (click)="close()">
+                                {{ 'GENERAL.ACCEPT' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

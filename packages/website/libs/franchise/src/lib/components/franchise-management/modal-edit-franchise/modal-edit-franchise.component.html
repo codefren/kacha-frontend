@@ -1,0 +1,273 @@
+<div class="col-md-12 col-12 text-right pt-2 ">
+    <i class="fas fa-times close-button" (click)="closeDialog(false)"></i>
+</div>
+<div class="easyroute-edit-franchise padding-body">
+
+    <div class="container">
+
+
+        <!-- array-img -->
+        <div class="d-none d-sm-block">
+            <div class="pl-0 pr-0 d-flex flex-row justify-content-center w-100">
+                <div class="card border point" *ngFor="let card of [1, 2, 3, 4]; let i = index" (click)="fileFranchise.click()">
+                    <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center" *ngIf="!franchise.images[i]">
+                        <i class="fas fa-camera fa-2x"></i>
+                    </div>
+                    <div class="text-center w-100 h-100" *ngIf="franchise.images[i]">
+                        <img [src]="franchise.images[i].urlimage" class="img-upload">
+                    </div>
+                    <input type="file" hidden #fileFranchise (change)="fileChangeEvent( $event, franchise.images[i] ? franchise.images[i].id : card )" />
+                </div>
+            </div>
+        </div>
+
+        <!-- resolution xs -->
+        <div class="d-block d-sm-none">
+            <div class="pl-0 pr-0 d-flex flex-row justify-content-center w-100">
+                <div class="card border point" *ngFor="let card of [1, 2]; let i = index" (click)="fileFranchise.click()">
+                    <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center" *ngIf="!franchise.images[i]">
+                        <i class="fas fa-camera fa-2x"></i>
+                    </div>
+                    <div class="w-100 h-100 text-center" *ngIf="franchise.images[i]">
+                        <img [src]="franchise.images[i].urlimage" class="img-upload">
+                    </div>
+                    <input type="file" hidden #fileFranchise (change)="fileChangeEvent( $event, franchise.images[i] ? franchise.images[i].id : card )" />
+                </div>
+            </div>
+            <div class="mt-2 pl-0 pr-0 d-flex flex-row justify-content-center w-100">
+                <div class="card border point" *ngFor="let card of [3, 4]; let i = index" (click)="fileFranchise.click()">
+                    <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center" *ngIf="!franchise.images[ i + 2 ]">
+                        <i class="fas fa-camera fa-2x"></i>
+                    </div>
+                    <div *ngIf="franchise.images[ i + 2 ]" class="text-center w-100 h-100">
+                        <img [src]="franchise.images[ i + 2 ].urlimage" class="img-upload">
+                    </div>
+                    <input type="file" hidden #fileFranchise (change)="fileChangeEvent( $event, franchise.images[ i + 2 ] ? franchise.images[ i + 2 ].id : card )" />
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <p class="font-italic mb-2 mt-3 font-text-p">{{ 'FRANCHISE.SIZE_IMG' | translate }}</p>
+            <p class="text-danger mb-0 font-text-p" *ngIf="imageError.length > 0">{{ imageError }}</p>
+        </div>
+
+        <!-- end array-img -->
+        <h3 class="subtitle-general">{{ 'GENERAL.INFO' | translate }}</h3>
+
+        <form class="padding-form" [formGroup]="franchiseForm" (ngSubmit)="submit()" *ngIf="franchiseForm">
+
+            <div class="form-row">
+                <label for="franchise_name" class="col-form-label col-6">
+                     {{ 'FRANCHISE.INTERNAL_NAME' | translate }}:
+                 </label>
+                <div class="col-6">
+                    <div class="form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['name'].invalid && ( franchiseForm.controls['name'].dirty || franchiseForm.controls['name'].touched) }">
+                        <input type="text" formControlName="name" class="form-control" placeholder="{{ 'GENERAL.NAME' | translate }}" id="franchise_name" />
+                        <ng-container *ngFor="let validation of franchiseMessages.name">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('name').hasError( validation.type ) && (franchiseForm.get('name').dirty || franchiseForm.get('name').touched)">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="franchise_cif" class="col-form-label col-6">
+                     {{ 'FRANCHISE.CIF' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['nif'].invalid && ( franchiseForm.controls['nif'].dirty || franchiseForm.controls['nif'].touched) }">
+                        <input type="text" formControlName="nif" class="form-control" placeholder="{{ 'FRANCHISE.CIF' | translate }}" id="franchise_cif" />
+                        <ng-container *ngFor="let validation of franchiseMessages.nif">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('nif').hasError( validation.type ) && (franchiseForm.get('nif').dirty || franchiseForm.get('nif').touched)">
+                                     {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="franchise_address" class="col-form-label col-6">
+                     {{ 'DELIVERY_POINTS.ADDRESS' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['streetAddress'].invalid && ( franchiseForm.controls['streetAddress'].dirty || franchiseForm.controls['streetAddress'].touched) }">
+                        <input type="text" formControlName="streetAddress" class="form-control" placeholder="{{ 'DELIVERY_POINTS.ADDRESS' | translate }}" id="franchise_address" />
+                        <ng-container *ngFor="let validation of franchiseMessages.streetAddress">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('streetAddress').hasError( validation.type ) && (franchiseForm.get('streetAddress').dirty || franchiseForm.get('streetAddress').touched)">
+                                    {{ validation.message }}
+                               </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="franchise_phone" class="col-form-label col-6">
+                    {{ 'DELIVERY_POINTS.PHONE' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['phone'].invalid && ( franchiseForm.controls['phone'].dirty || franchiseForm.controls['phone'].touched) }">
+                        <input type="text" formControlName="phone" class="form-control" prefix="+" mask="000 00000000" placeholder="{{ 'DELIVERY_POINTS.PHONE' | translate }}" id="franchise_phone" />
+                        <ng-container *ngFor="let validation of franchiseMessages.phone">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('phone').hasError( validation.type ) && (franchiseForm.get('phone').dirty || franchiseForm.get('phone').touched)">
+                                         {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label class="col-form-label col-6" for="franchise_billing_email">
+                    {{ 'GENERAL.BILLING_EMAIL' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['email'].invalid && ( franchiseForm.controls['email'].dirty || franchiseForm.controls['email'].touched) }">
+                        <input type="text" formControlName="email" class="form-control" placeholder="{{ 'GENERAL.BILLING_EMAIL' | translate }}" id="franchise_billing_email" />
+                        <ng-container *ngFor="let validation of franchiseMessages.email">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('email').hasError( validation.type ) && (franchiseForm.get('email').dirty || franchiseForm.get('email').touched)">
+                                     {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="franchise_responsableName" class="col-form-label col-6">
+                    {{ 'FRANCHISE.RESPONSABLE' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['responsableName'].invalid && ( franchiseForm.controls['responsableName'].dirty || franchiseForm.controls['responsableName'].touched) }">
+                        <input type="text" formControlName="responsableName" class="form-control" placeholder="{{ 'FRANCHISE.RESPONSABLE' | translate }}" id="franchise_responsableName" />
+                        <ng-container *ngFor="let validation of franchiseMessages.responsable">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('responsableName').hasError( validation.type ) && (franchiseForm.get('responsableName').dirty || franchiseForm.get('responsableName').touched)">
+                                     {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label class="col-form-label col-sm-6 col-12" for="franchise_schedule_start">
+                    {{ 'FRANCHISE.SCHEDULE' | translate }}:
+                </label>
+                <div class="col-md-6 col-12">
+
+                    <div class="d-flex flex-lg-row flex-column justify-content-start">
+
+                        <label class="col-form-label mr-3">De:</label>
+                        <div class="w-30 form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['scheduleStart'].invalid && ( franchiseForm.controls['scheduleStart'].dirty || franchiseForm.controls['scheduleStart'].touched) }">
+                            <input id="franchise_schedule_start" formControlName="scheduleStart" type="time" class="form-control" (change)="changetime($event, 'scheduleStart')" />
+                            <ng-container *ngFor="let validation of franchiseMessages.scheduleStart">
+                                <div class="w-100 text-center">
+                                    <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('scheduleStart').hasError( validation.type ) && (franchiseForm.get('scheduleStart').dirty || franchiseForm.get('scheduleStart').touched)">
+                                         {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <label class="col-form-label ml-3 mr-3">A:</label>
+                        <div class="w-30 form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['scheduleEnd'].invalid && ( franchiseForm.controls['scheduleEnd'].dirty || franchiseForm.controls['scheduleEnd'].touched) }">
+                            <input type="time" formControlName="scheduleEnd" class="form-control" class="form-control" (change)="changetime($event, 'scheduleEnd')" />
+                            <ng-container *ngFor="let validation of franchiseMessages.scheduleEnd">
+                                <div class="w-100 text-center">
+                                    <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('scheduleEnd').hasError( validation.type ) && (franchiseForm.get('scheduleEnd').dirty || franchiseForm.get('scheduleEnd').touched)">
+                                         {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="franchise_is_active_app" class="col-form-label col-6">
+                      {{ 'FRANCHISE.ACTIVE_APP' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="switch">
+                        <label>
+                            <input id="franchise_is_active_app" type="checkbox" formControlName="activeInApp" />
+                            <span class="lever switch-col-primary"></span>
+                         </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="franchise_receiveProductsFromCompanyParent" class="col-form-label col-6">
+                      {{ 'FRANCHISE.PRODUCTS_TO_FRANCHISE' | translate }}:
+                </label>
+                <div class="col-6">
+                    <div class="switch">
+                        <label>
+                            <input id="franchise_receiveProductsFromCompanyParent" (change)="viewChange()" type="checkbox" formControlName="receiveProductsFromCompanyParent" />
+                            <span class="lever switch-col-primary"></span>
+                         </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="productReceptionTimeFromCompanyParent" class="col-form-label col-6">
+                    {{ 'FRANCHISE.TIME_PRODUCTS_TO_FRANCHISE' | translate }}:
+               </label>
+                <div class="w-30 form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['productReceptionTimeFromCompanyParent'].invalid && ( franchiseForm.controls['productReceptionTimeFromCompanyParent'].dirty || franchiseForm.controls['productReceptionTimeFromCompanyParent'].touched) }">
+                    <input id="productReceptionTimeFromCompanyParent" formControlName="productReceptionTimeFromCompanyParent" type="time" class="form-control" (change)="changetime($event, 'productReceptionTimeFromCompanyParent')" />
+                    <ng-container *ngFor="let validation of franchiseMessages.productReceptionTimeFromCompanyParent">
+                        <div class="w-100 text-center">
+                            <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('productReceptionTimeFromCompanyParent').hasError( validation.type ) && (franchiseForm.get('productReceptionTimeFromCompanyParent').dirty || franchiseForm.get('productReceptionTimeFromCompanyParent').touched)">
+                                 {{ validation.message }}
+                            </small>
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <label for="productReceptionEachTimeFromCompanyParent" class="col-form-label col-6">
+                    {{ 'FRANCHISE.INTERVAL_PRODUCTS_TO_FRANCHISE' | translate }}:
+               </label>
+                <div class="w-30 form-group" [ngClass]="{ 'has-danger': franchiseForm.controls['productReceptionEachTimeFromCompanyParent'].invalid && ( franchiseForm.controls['productReceptionEachTimeFromCompanyParent'].dirty || franchiseForm.controls['productReceptionEachTimeFromCompanyParent'].touched) }">
+                    <input id="productReceptionEachTimeFromCompanyParent" formControlName="productReceptionEachTimeFromCompanyParent" type="time" step='3600' class="form-control" (change)="changetime($event, 'productReceptionEachTimeFromCompanyParent')" />
+                    <ng-container *ngFor="let validation of franchiseMessages.productReceptionEachTimeFromCompanyParent">
+                        <div class="w-100 text-center">
+                            <small class="form-control-feedback text-danger" *ngIf="franchiseForm.get('productReceptionEachTimeFromCompanyParent').hasError( validation.type ) && (franchiseForm.get('productReceptionEachTimeFromCompanyParent').dirty || franchiseForm.get('productReceptionEachTimeFromCompanyParent').touched)">
+                                 {{ validation.message }}
+                            </small>
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="w-100 d-flex flex-row justify-content-center">
+                <button [disabled]="franchiseForm.invalid" class="btn btn-primary size-btn-modal">
+                     {{ 'GENERAL.SAVE' | translate }}
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

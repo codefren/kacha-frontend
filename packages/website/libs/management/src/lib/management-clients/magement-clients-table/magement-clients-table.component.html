@@ -1,0 +1,287 @@
+<div class="optimroute-clients-list main-container container-fluid pt-4 pb-4 p-2">
+
+    <!-- header -->
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title mr-3">
+                <img alt="cost" class="header-brand-img" src="assets/icons/client.svg">
+                <span class="ml-3"> {{ 'PREFERENCES.CLIENTS' | translate }} </span>
+            </div>
+
+            <!-- <div class="progress">
+                <div class="progress-bar progress-bar-striped " role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+
+                    <span class="pl-2">
+                        Faltan 8 clientes 
+                        <img alt="progress" class="header-brand-img img-progress" src="assets/icons/info-white.svg"
+                        data-toggle="tooltip" data-html="true" data-placement="bottom" data-tooltip-custom-classes="tooltip-inner-2" role="tooltip"
+                        title="<p class='title-top mb-2 mt-3'>Perfil actualizado</p>  <p class='sub-title-top'>Una vez tengas todos los clientes con sus datos actualizados, podrás activar la opción de optimización automática de manera segura ya que los datos serán 100% fiables.</p>">
+                    </span>
+
+                </div>
+            </div> -->
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex form-row flex-row align-items-center justify-content-end">
+
+                <button class="btn btn-icon btn-icon-white dropdown-toggle p-2 mt-xl-0 mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                    <!-- Descargar -->
+
+                    <a class="dropdown-item drop-title border-botton border-drop pt-3 pb-3 point" (click)="openModalDonwload()">
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'DELIVERY_POINTS.DOWNLOAD_CLIENT' | translate }}
+                    </a>
+
+                    <!-- Importar cliente -->
+                    <a class="dropdown-item border-botton drop-title border-drop pt-3 pb-3 point" (click)="fileImportDeliveriPoint.click()">
+                        <img src="assets/icons/import.svg" class="pr-2 size-import"> {{ 'DELIVERY_POINTS.IMPORT_CLIENTS' | translate }}
+                    </a>
+
+                    <input type="file" hidden #fileImportDeliveriPoint accept=".xlsx, .xls" (change)="importDeliveriPointExcel($event.target.files[0])" />
+
+                    <!-- Exportar cliente -->
+                    <!--  <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="export()">
+                        <img src="assets/icons/optimmanage/exportar_black.svg" class="pr-2 size-import"> {{ 'DELIVERY_POINTS.EXPORT_CLIENTS' | translate }}
+                    </a> -->
+
+                    <!-- Analisis de cliente -->
+                    <a class="dropdown-item border-botton drop-title border-drop pt-3 pb-3 point" routerLink="/management/clients/analysis">
+                        <img src="assets/icons/analisysClient.svg" class="pr-2 size-import"> {{ 'CLIENTS.CLIENTS_ANALYSIS.CLIENTS_ANALYSIS' | translate }}
+                    </a>
+
+                    <!-- Control de duplicados -->
+                    <ng-container *ngIf="allowCompanyPreferenceDuplicate && allowCompanyPreferenceDuplicate.allowCombiningRecords">
+                        <a class="dropdown-item border-botton drop-title border-drop pt-3 pb-3 point" routerLink="/management/client-duplicate-control">
+                            <img src="assets/icons/control.svg" class="pr-2 size-import"> {{ 'CLIENTS.CLIENTS_ANALYSIS.DUPLICATE_CONTROL' | translate }}
+                        </a>
+                    </ng-container>
+
+
+                    <!-- Actualización de datos -->
+                    <a class="dropdown-item drop-title border-botton pt-3 pb-3 point" (click)="openUpdateData()" *ngIf="multivalidation()">
+                        <img src="assets/icons/update.svg" class="pr-2 size-import"> Actualización de datos
+                    </a>
+                    <!-- end Actualización de datos -->
+
+                    <!-- Configuración -->
+                    <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+                        <img src="assets/icons/setting.svg" class="pr-2 size-import"> {{ 'GENERAL.SETTING' | translate }}
+                    </a>
+
+                </div>
+
+                <button class="btn btn-secondary ml-2" title="{{ 'DELIVERY_POINTS.ADD_CLIENT' | translate }}" routerLink="new">
+                    <img src="assets/icons/plus.svg" class="pr-2">
+                    {{ 'DELIVERY_POINTS.ADD_CLIENT' | translate }}
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Cajas informativas -->
+    <div class="row align-items-center separatorButtonBox pl-4 pr-4">
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{'PREFERENCES.TOTAL_CUSTOMERS' | translate }} </p>
+
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number" *ngIf="informativeClientSummary"> {{ informativeClientSummary.totalClient }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> Clientes con ruta </p>
+                <ng-container *ngIf="showInfoDetail">
+                    <p *ngIf="informativeClientSummary">
+                        <span class="p-sub-number"> {{ informativeClientSummary.clientsWithRoutes }} </span>
+                        <span class="p-sub"> - {{ informativeClientSummary.clientsWithoutRoutes }}</span>
+                    </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> Con coordenadas </p>
+                <ng-container *ngIf="showInfoDetail">
+                    <p *ngIf="informativeClientSummary">
+                        <span class="p-sub-number"> {{ informativeClientSummary.clientsWithCoordinate }} </span>
+                        <span class="p-sub"> - {{ informativeClientSummary.clientsWithoutCoordinate }}</span>
+                    </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+            <div class="card card-left p-3">
+                <p class="p-title"> Con hora verificada </p>
+                <ng-container *ngIf="showInfoDetail">
+                    <p *ngIf="informativeClientSummary">
+                        <span class="p-sub-number"> {{ informativeClientSummary.clientsNotVerified }} </span>
+                        <span class="p-sub"> - {{ informativeClientSummary.clientsVerified }}</span>
+                    </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+            <div class="card card-center p-3">
+                <p class="p-title"> Activos </p>
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number" *ngIf="informativeClientSummary"> {{ informativeClientSummary.totalActive }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+            <div class="card card-center p-3">
+                <p class="p-title"> Inactivos </p>
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number" *ngIf="informativeClientSummary"> {{ informativeClientSummary.totalInactive }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-2 col-sm-2 col-12 mt-xl-0 mt-1">
+            <div class="card card-center p-3">
+                <p class="p-title"> Grupos </p>
+                <ng-container *ngIf="showInfoDetail">
+                    <p class="p-sub-number" *ngIf="informativeClientSummary"> {{ informativeClientSummary.totalGroup }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showInfoDetail">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general">
+                <table id="clients" style="width: 100%; text-align: center" class="table table-bordered table-striped mb-0">
+                    <thead id="thead-1">
+                        <tr>
+                            <th></th>
+                            <th></th>
+
+                            <th>{{ 'DELIVERY_POINTS.CODE' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.TYPE' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.NAME_' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.ADDRESS' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.POSTAL_CODE' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.PROVINCE' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.PHONE' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.EMAIL' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.START' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.END' | translate }}</th>
+
+                            <th>{{ 'DELIVERY_POINTS.KEY_OPEN' | translate }}</th>
+
+                            <th>{{ 'DELIVERY_POINTS.DEMAND' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.SERVICE_TIME' | translate }}</th>
+                            <!-- <th>{{ 'DELIVERY_POINTS.FILL_PROFILE' | translate }}</th> -->
+
+                            <th>{{ 'DELIVERY_ZONES.NAME' | translate }}</th>
+                            <th>{{ 'Asignado' }}</th>
+                            <th>{{ 'DELIVERY_POINTS.COORDINATES' | translate }}</th>
+                            <th>{{ 'DELIVERY_POINTS.VERIFIED_BY_DRIVER' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <thead class="thead-cost hidden" id="thead-2">
+                        <tr>
+
+                            <th class="changeRegister1">
+
+                                <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+
+                                    <div class="round-style-client round-little-cost">
+
+                                        <input type="checkbox" checked="" id="checkboxDriverCost1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+
+                                        <label for="checkboxDriverCost1" class="m-0"></label>
+
+                                    </div>
+
+                                </div>
+
+                            </th>
+
+                            <th class="text-left point changeRegister" colspan="19">
+
+                                <button class="btn btn-primary" type="button" (click)="registerRecord()">
+                                    <img class="img-option pr-1" src="assets/icons/changeRegister.svg"> Combinar registro
+                                </button>
+
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

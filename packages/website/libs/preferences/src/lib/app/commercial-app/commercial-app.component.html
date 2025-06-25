@@ -1,0 +1,44 @@
+<div class="comercial-app">
+
+    <div class="card mt-3">
+
+        <div class="card-body pl-xl-4 pr-xl-5">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async) .driverVerifyClientTime" (change)="toggleManagementPreference( 'driverVerifyClientTime', $event.target.checked )"/>
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                <span class="title-toggles title-road"> 
+
+                                    {{ 'Bloquear fecha de entrega' }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="messages-style mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">
+                        {{ 'Al activar esta opción no dejarás que los comerciales modifiquen la fecha de entrega del pedido que están generando a través de la app.'}}
+                    </p>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

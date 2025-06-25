@@ -1,0 +1,183 @@
+.client-general-form {
+    .title-user {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-user {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .form-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .form-control-select,
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .has-float-label input,
+    .has-float-label select {
+        font-size: 14px !important;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        font-size: 14px !important;
+    }
+
+    .has-float-label label::after{
+        background: transparent !important;
+    }
+    .has-float-primary {
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        border: 1px solid #DFE1E8;
+    }
+    .radiusDeliveryOrderCode {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 0px solid #bec4ca;
+        background-color: #7387c2;
+        padding: 0.9rem;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 19px !important;
+        color: #FFFFFF;
+    }
+    .add-document {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #3B4FFF;
+    }
+    .color-label-info {
+        color: #818181 !important;
+        font-size: 12px !important;
+    }
+
+    .border-rol {
+        width: 260px;
+        height: 117px;
+        border: 1px solid #DFE1E8;
+    }
+
+    .color-tootle {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px !important;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #363740 !important;
+    }
+    .title-role {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        color: #A0A5BA !important;
+    }
+
+    .btn-primary {
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+    }
+
+    .btn-basic {
+        color: #4c4c4c;
+        background-color: #f2f2f2;
+        border: #f2f2f2 solid 1px;
+        font-weight: lighter;
+        text-transform: capitalize;
+        width: 350px;
+        border-radius: 15px;
+        font-size: 18px;
+    }
+
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .switch {
+        display: inline-block;
+        cursor: pointer;
+        margin: 3px 0px;
+    }
+    .switch-width {
+        display: block;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .has-float-label label, .has-float-label > span {
+        color: #363740 !important;
+        opacity: 1 !important;
+        font-size: 14px !important;
+    }
+
+    .has-float-eye {
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        border: 1px solid #DFE1E8;
+    }
+
+    .has-float-primary {
+        background-color: #24397c;
+        border-color: #24397c #24397c #24397c;
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        .btn-primary {
+            height: 40px;
+            width: 100%;
+            border-radius: 5px;
+        }
+    }
+
+    .title-road {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+   
+}

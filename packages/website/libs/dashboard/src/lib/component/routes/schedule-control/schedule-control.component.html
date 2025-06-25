@@ -1,0 +1,219 @@
+<div class="easyroute-delivery-made">
+    <div class="row">
+        <div class="col-lg-12 col-12 p-lg-0">
+            <div class="card" style="min-height: 405px;">
+                <div class="card-body">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-8 col-12 text-left mb-3">
+                            <label class="title-card" for="title-card"> {{ 'DASHBOARD.SCHEDULE_CONTROL.NAME' | translate
+                                }} </label>
+                        </div>
+
+                        <div class="col-lg-4 col-12 text-right mb-3">
+
+
+                            <!-- <select class="custom-select text-left" (change)="getAll($event.target.value)">
+
+                                <option value="null" selected> {{ 'DASHBOARD.SCHEDULE_CONTROL.ALL' | translate }} </option>
+
+                                <option value="true"> {{ 'DASHBOARD.SCHEDULE_CONTROL.FINISCHED' | translate }} </option>
+
+                                <option value="false">{{ 'DASHBOARD.SCHEDULE_CONTROL.CAST_IN' | translate }} </option>
+
+                            </select> -->
+
+                            <div class="input-group hack-select">
+                                <select class="form-control letter-app point" id="statusOrderId"
+                                    (change)="getAll($event.target.value)">
+
+                                    <option value="null" selected> {{ 'DASHBOARD.SCHEDULE_CONTROL.ALL' | translate }}
+                                    </option>
+
+                                    <option value="true"> {{ 'DASHBOARD.SCHEDULE_CONTROL.FINISCHED' | translate }}
+                                    </option>
+
+                                    <option value="false">{{ 'DASHBOARD.SCHEDULE_CONTROL.CAST_IN' | translate }}
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!--       <div class="col-lg-6 col-3 text-left">
+                            <label for="user" class="title-list">
+                                Usuarios
+                            </label>
+
+                        </div>
+                        <div class="col-lg-2 col-3">
+                            <label for="exit" class="title-list">
+                                Salida
+                            </label>
+
+                        </div>
+                        <div class="col-lg-2 col-3">
+                            <label class="title-list">
+                                llegada
+                            </label>
+
+                        </div>
+                        <div class="col-lg-2 col-3">
+                            <label class="title-list">
+                                Total
+                            </label>
+
+                        </div>
+
+
+
+                    </div> -->
+
+
+                        <!--  <div class="row overflow-scroos p-lg-0 mt-3 mb-2 align-items-center">
+
+                        <ng-container *ngFor="let item of [0,1,2,3,4,5,6,7,8,9,10,11]; let i = index;">
+
+                            <div class="col-lg-6 col-3 text-left border-bottom-line">
+                                <div class="row pl-lg-2">
+                                    <div class="col-lg-2 col-12 text-center no-selecter" [ngClass]="{'selecter': i > 0}">
+                                        <img class="img-avatar" src="assets/icons/optimmanage/userSchedule.svg">
+                                    </div>
+                                    <div class="col-lg-10 col-12">
+                                        <label class="label-name" for="name">Antonio Rodriguez</label>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-3 border-bottom-line mt-2 mb-2">
+                                <label class="label-exit" for="exit"> 7:15</label>
+                            </div>
+                            <div class="col-lg-2 col-3 border-bottom-line mt-2 mb-2">
+                                <label class="label-exit" *ngIf="i == 0"> --- </label>
+                                <label class="label-select" *ngIf="i > 0"> 17:02 </label>
+                            </div>
+                            <div class="col-lg-2 col-3 border-bottom-line mt-2 mb-2">
+                                <label class="total" for="total"> 3:00h</label>
+                            </div>
+
+
+
+                        </ng-container>
+
+
+
+                    </div> -->
+
+
+
+
+
+
+                    </div>
+
+
+
+                    <div class="overflow-scroos pl-lg-0  mt-3 mb-2 align-items-center">
+
+                        <ng-container *ngIf="!show">
+
+                            <div class="col-12 text-center">
+
+                                <div class="fa-4x mb-2 mt-4">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </div>
+
+
+                        </ng-container>
+
+                        <ng-container *ngIf="show">
+                            <table class="table table-hover table-responsive-md"
+                                style="text-align: center; width: 100%">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th class="text-center text-md-left pl-lg-3 title-list"> {{
+                                            'DASHBOARD.SCHEDULE_CONTROL.USERS' | translate }} </th>
+
+                                        <th class="text-center text-md-left pl-lg-3 title-list"> </th>
+
+                                        <th class="title-list" scope="col-lg-2 col"> {{
+                                            'DASHBOARD.SCHEDULE_CONTROL.EXIT' | translate }} </th>
+
+                                        <th class="title-list" scope="col-lg-2 col"> {{
+                                            'DASHBOARD.SCHEDULE_CONTROL.ARRIVAL' | translate }} </th>
+
+                                        <th class="title-list" scope="col-lg-2 col">{{
+                                            'DASHBOARD.SCHEDULE_CONTROL.TOTAL' | translate }}</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngIf="timeControl.length > 0">
+                                        <tr *ngFor="let item of timeControl; let i = index;">
+
+                                            <td class="p-0" style="width: 20px !important;">
+                                                <div class="no-selecter p-0"
+                                                    [ngClass]="{'selecter': item.driverStartTime && item.totalHour >0 }"
+                                                    style="width: 44px; margin:0 auto;">
+                                                    <img class="img-avatar"
+                                                        src="assets/icons/optimmanage/userSchedule.svg">
+                                                </div>
+
+                                            </td>
+                                            <td class="text-left">
+                                                <label class="label-name" for="name">{{ item.name }} {{ item.surname
+                                                    }}</label>
+                                            </td>
+                                            <td>
+                                                <label class="label-exit" for="exit"> {{ FormatDate
+                                                    (item.driverStartTime) }}</label>
+                                            </td>
+                                            <td>
+
+                                                <label class="label-exit"
+                                                    [ngClass]="{'label-select': item.driverStartTime && item.totalHour >0 }">
+                                                    {{ FormatDate (item.arrivalTime) }} </label>
+                                            </td>
+                                            <td>
+                                                <label class="total" for="total"
+                                                    [ngClass]="{'label-select': item.driverStartTime && item.totalHour >0 }">
+                                                    {{total (item.totalHour )}}</label>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="timeControl.length == 0">
+                                        <tr class="center">
+                                            <td colspan="7" class="center pt-5"
+                                                style="border-bottom: 0px solid #ececec !important;">
+                                                {{ 'ORDERS.ORDERS_FORM.NO_CUSTOMER_DATA_AVALILABLE' | translate }} </td>
+                                        </tr>
+                                    </ng-container>
+
+                                </tbody>
+                            </table>
+
+
+                        </ng-container>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>

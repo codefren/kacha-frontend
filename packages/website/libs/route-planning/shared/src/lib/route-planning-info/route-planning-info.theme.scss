@@ -1,0 +1,18 @@
+@mixin route-planning-info-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-route-planning-info {
+    }
+}
+
+@mixin route-planning-info-typography($config) {
+    .easyroute-route-planning-info {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

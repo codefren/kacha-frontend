@@ -1,0 +1,1056 @@
+<div class="delivery-note">
+
+    <!--  Activar carga de albaranes y facturas automática  -->
+    <div class="card">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <!-- activar carga de albarares -->
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" id="activateSendDeliveryNotes" [checked]="companyPreferenceALbaran.activateSendDeliveryNotes" (change)="changeCompanyPreferencealabaran('activateSendDeliveryNotes', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'TRAVEL_TRACKING.ACTIVATE_AUTOMATIC_LOADING_OF_DELIVERY_NOTES' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+                <!-- end activar cargar de albaranes -->
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'TRAVEL_TRACKING.TEXT_5' | translate }} </p>
+
+                </div>
+
+                <!-- tootle -->
+
+                <ng-container *ngIf="companyPreferenceALbaran.activateSendDeliveryNotes">
+
+                    <!-- activateSendDeliveryNotesEvery -->
+
+                    <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="activateSendDeliveryNotesEvery" [checked]="companyPreferenceALbaran.activateSendDeliveryNotesEvery" (change)="changeCompanyPreferencealabaran('activateSendDeliveryNotesEvery', $event.target.checked)" />
+
+                                    <label for="activateSendDeliveryNotesEvery"></label>
+
+                                </div>
+
+                                <label title="{{ 'TRAVEL_TRACKING.ACTIVATE_TEMPORARY_IMPORT' | translate }}" for="activateSendDeliveryNotesEvery" class="label-check point pl-2">
+
+                                   {{'TRAVEL_TRACKING.ACTIVATE_TEMPORARY_IMPORT' | translate }}
+
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end activateSendDeliveryNotesEvery -->
+
+                    <ng-container *ngIf="companyPreferenceALbaran.activateSendDeliveryNotesEvery">
+
+                        <div class="col-12 mt-3 padding-l-hidden-2">
+
+                            <div class="row">
+
+                                <!-- timeSendDeliveryNotes -->
+
+                                <div class="col-xl-4 col-12">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point showHour" id="Hour" type="time" min="0" max="59" placeholder="0" [value]="showTime(companyPreferenceALbaran.timeSendDeliveryNotes)" (focusout)="addOthers($event.target.value,companyPreferenceALbaran, 'timeSendDeliveryNotes')" required/>
+
+                                            <label for="first" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.AUTO_SEND_TIME' | translate }} </label>
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- end timeSendDeliveryNotes -->
+
+                                <!-- timeSendDeliveryNotesEvery -->
+
+                                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control showMint point" id="minutes" min="0" max="59" placeholder="0" [value]="showNUmber(companyPreferenceALbaran.timeSendDeliveryNotesEvery)" (focusout)="addOthers($event.target.value, companyPreferenceALbaran, 'timeSendDeliveryNotesEvery')"/>
+
+                                            <label for="first" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.SEND_TEMPORARY_IMPORT_EVERY' | translate }} </label>
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                                <!-- end timeSendDeliveryNotesEvery -->
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--  Carga automática de albaranes y facturas a rutas asignadas  -->
+    <div class="card mt-3">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" id="activateAutomaticDeliveryNotesAssignedRoute"
+                            [checked]="companyPreferenceALbaran.activateAutomaticDeliveryNotesAssignedRoute"
+                            (change)="changeCompanyPreferencealabaran('activateAutomaticDeliveryNotesAssignedRoute', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'ALBARAN.AUTOMATIC_LOADING_OF_DELIVERY_NOTES_TO_ASSIGNED_ROUTES' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'ALBARAN.TEXT_1' | translate }} </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Compartir información de empresa -->
+    <div class="card mt-3" *ngIf="showSharedInformation">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" id="shareCompanyInformation"
+                            [checked]="companyPreferenceALbaran.shareCompanyInformation"
+                            (change)="changeCompanyPreferencealabaran('shareCompanyInformation', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'ALBARAN.SHARE_COMPANY_INFORMATION' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'ALBARAN.SHARE_COMPANY_INFORMATION_TEXT' | translate }} </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card mt-3">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" id="deliveryNoteIntegrationWithoutProducts"
+                            [checked]="companyPreferenceALbaran.deliveryNoteIntegrationWithoutProducts"
+                            (change)="changeCompanyPreferencealabaran('deliveryNoteIntegrationWithoutProducts', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'ALBARAN.DELIVERY_NOTE_WITHOUT_PRODUCTOS' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'ALBARAN.DELIVERY_NOTE_WITHOUT_PRODUCTOS_TXT' | translate }} </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!--  Campos a mostrar en el albarán y factura  -->
+    <div class="card mt-3">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{'TRAVEL_TRACKING.FIELDS_TO_SHOW_ON_THE_DELIVERY_NOTE_AND_INVOICE' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'TRAVEL_TRACKING.FIELDS_TO_SHOW_ON_THE_DELIVERY_NOTE_AND_INVOICE_MESSAGE' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-4">
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showCode" [checked]="companyPreferenceALbaran.showCode" (change)="changeCompanyPreferenceShowData('showCode', $event.target.checked)" />
+
+                                <label for="showCode"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.CODE' | translate }}" for="showCode" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.CODE' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showQuantityUnit" [checked]="companyPreferenceALbaran.showQuantityUnit" (change)="changeCompanyPreferenceShowData('showQuantityUnit', $event.target.checked)" />
+
+                                <label for="showQuantityUnit"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.QUANTITY_UNIT' | translate }}" for="showQuantityUnit" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.QUANTITY_UNIT' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showMiddleUnit" [checked]="companyPreferenceALbaran.showMiddleUnit" (change)="changeCompanyPreferenceShowData('showMiddleUnit', $event.target.checked)" />
+
+                                <label for="showMiddleUnit"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.UNIT_OF_MEASURE' | translate }}" for="showMiddleUnit" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.UNIT_OF_MEASURE' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showDescription" [checked]="companyPreferenceALbaran.showDescription" (change)="changeCompanyPreferenceShowData('showDescription', $event.target.checked)" />
+
+                                <label for="showDescription"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.DESCRIPTION' | translate }}" for="showDescription" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.DESCRIPTION' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showGrossWeight" [checked]="companyPreferenceALbaran.showGrossWeight" (change)="changeCompanyPreferenceShowData('showGrossWeight', $event.target.checked)" />
+
+                                <label for="showGrossWeight"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.GROSS_WEIGHT' | translate }}" for="showGrossWeight" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.GROSS_WEIGHT' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showTare" [checked]="companyPreferenceALbaran.showTare" (change)="changeCompanyPreferenceShowData('showTare', $event.target.checked)" />
+
+                                <label for="showTare"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.TARE' | translate }}" for="showTare" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.TARE' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showNet" [checked]="companyPreferenceALbaran.showNet" (change)="changeCompanyPreferenceShowData('showNet', $event.target.checked)" />
+
+                                <label for="showNet"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.NET' | translate }}" for="showNet" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.NET' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showKgsUnit" [checked]="companyPreferenceALbaran.showKgsUnit" (change)="changeCompanyPreferenceShowData('showKgsUnit', $event.target.checked)" />
+
+                                <label for="showKgsUnit"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.KGS_UNIT' | translate }}" for="showKgsUnit" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.KGS_UNIT' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showPrice" [checked]="companyPreferenceALbaran.showPrice" (change)="changeCompanyPreferenceShowData('showPrice', $event.target.checked)" />
+
+                                <label for="showPrice"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.PRICE' | translate }}" for="showPrice" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.PRICE' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showDiscount" [checked]="companyPreferenceALbaran.showDiscount" (change)="changeCompanyPreferenceShowData('showDiscount', $event.target.checked)" />
+
+                                <label for="showDiscount"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.DISCOUNT' | translate }}" for="showDiscount" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.DISCOUNT' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showAmount" [checked]="companyPreferenceALbaran.showAmount" (change)="changeCompanyPreferenceShowData('showAmount', $event.target.checked)" />
+
+                                <label for="showAmount"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.AMOUNT' | translate }}" for="showAmount" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.AMOUNT' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="showProvider" [checked]="companyPreferenceALbaran.showProvider" (change)="changeCompanyPreferenceShowData('showProvider', $event.target.checked)" />
+
+                                <label for="showProvider"></label>
+
+                            </div>
+
+                            <label title="{{ 'TRAVEL_TRACKING.PROVIDER' | translate }}" for="showProvider" class="label-check point pl-2">
+
+                                {{'TRAVEL_TRACKING.PROVIDER' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Configuración del albarán -->
+    <div class="card mt-3">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'TRAVEL_TRACKING.CONFIGURATION_OF_THE_DELIVERY_NOTES' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'TRAVEL_TRACKING.TEXT_6' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-4">
+
+                <div class="col-12">
+
+                    <div class="card">
+
+                        <div class="card-body color-body-card">
+
+                            <form *ngIf="deliveryNoteForm" class="font-general padding-form" style="width: 100%" [formGroup]="deliveryNoteForm">
+
+
+                                <div class="row">
+
+                                    <!-- img -->
+                                    <div class="col-xl-3 col-12">
+
+                                        <label class="title-road" for=""> {{ 'TRAVEL_TRACKING.COMPANY_LOGO' | translate }} </label>
+
+                                        <div class="card mt-3">
+
+                                            <ng-container *ngIf="!imgLoad">
+
+                                                <img class="no-img point" src="assets/icons/settingsTravel/noImg.svg" (click)="fileAddImage.click()">
+
+                                            </ng-container>
+
+                                            <ng-container *ngIf="imgLoad">
+
+                                                <div class="size-hover1 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                                    <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage()"></i>
+
+                                                </div>
+
+                                                <img class="size-load point" [src]="imgLoad" (click)="fileAddImage.click()">
+
+                                            </ng-container>
+
+                                        </div>
+
+
+                                        <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChangeEvent($event)" />
+
+                                        <!-- error -->
+
+                                        <div class="col-12 text-center mt-3" *ngIf="imageError.length > 0">
+
+                                            <span class="text-danger">{{ imageError }}</span>
+
+                                        </div>
+
+                                        <!-- end error -->
+
+                                    </div>
+                                    <!-- end img -->
+
+                                    <!-- form -->
+
+                                    <div class="col-xl-8 col-12 mt-xl-0 mt-4">
+
+                                        <label class="title-road" for=""> {{ 'TRAVEL_TRACKING.COMPANY_INFORMATION' | translate }} </label>
+
+                                        <div class="row">
+
+                                            <!-- Compañia -->
+
+                                            <div class="col-xl-6 col-12 mt-3">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="name" formControlName="name" type="text"  placeholder="{{ 'TRAVEL_TRACKING.COMPANY' | translate }}"/>
+
+                                                    <label for="name" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.COMPANY' | translate }} </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.name">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('name').hasError(validation.type)
+                                                        && (deliveryNoteForm.get('name').dirty
+                                                        || deliveryNoteForm.get('name').touched)">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end Compañia -->
+
+                                            <!-- NIF -->
+
+                                            <div class="col-xl-6 col-12 mt-3">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="nif" formControlName="nif"   type="text" placeholder="Nif"/>
+
+                                                    <label for="nif" class="mt-2 title-col"> NIF </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.nif">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('nif').hasError(validation.type)
+                                                        && (deliveryNoteForm.get('nif').dirty
+                                                        || deliveryNoteForm.get('nif').touched)">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end nif -->
+
+                                            <!-- País -->
+
+                                            <div class="col-xl-6 col-12 mt-3">
+                                                <div class="form-group input-group">
+                                                    <span class="has-float-label w-100">
+                                                        <select class="form-select form-control w-100" id="country" placeholder="Seleccione"
+                                                            formControlName="country" (change)="changeCountry('country',$event.target.value)">
+                                                            <option value="">Seleccione...</option>
+                                                            <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
+                                                        </select>
+
+                                                        <label for="type" class="mt-2 title-col"> {{ 'GENERAL.COUNTRY' | translate }} </label>
+                                                    </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.country">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('country').hasError(validation.type)
+                                                            && (deliveryNoteForm.get('country').dirty
+                                                            || deliveryNoteForm.get('country').touched)">
+                                                                {{ validation.message }}
+                                                            </small>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <!-- end País -->
+
+                                            <!-- Dirección -->
+
+                                            <div class="col-xl-6 col-12 mt-3">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="streetAddress" formControlName="streetAddress"  type="text" placeholder="{{ 'TRAVEL_TRACKING.DIRECTION' | translate }}"/>
+
+                                                    <label for="streetAddress" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.DIRECTION' | translate }} </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.streetAddress">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('streetAddress').hasError(validation.type)
+                                                        && (deliveryNoteForm.get('streetAddress').dirty
+                                                        || deliveryNoteForm.get('streetAddress').touched)">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end Dirección -->
+
+                                            <!-- Provincia -->
+
+                                            <div class="col-xl-6 col-12 mt-3">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="province" placeholder="Provincia" formControlName="province"   type="text" placeholder="{{'TRAVEL_TRACKING.PROVINCE' | translate }}"/>
+
+                                                    <label for="province" class="mt-2 title-col"> {{'TRAVEL_TRACKING.PROVINCE' | translate }} </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.province">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('province').hasError(validation.type)
+                                                        && (deliveryNoteForm.get('province').dirty
+                                                        || deliveryNoteForm.get('province').touched)">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end Provincia -->
+
+                                            <!-- Código postal -->
+
+                                            <div class="col-xl-6 col-12 mt-3">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="zipCode" formControlName="zipCode"  placeholder="{{'TRAVEL_TRACKING.POSTAL_CODE' | translate }}"  type="text"/>
+
+                                                    <label for="zipCode" class="mt-2 title-col"> {{'TRAVEL_TRACKING.POSTAL_CODE' | translate }} </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.zipCode">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('zipCode').hasError(validation.type)
+                                                        && (deliveryNoteForm.get('zipCode').dirty
+                                                        || deliveryNoteForm.get('zipCode').touched)">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end Código postal -->
+
+                                            <!-- Corre de facturación -->
+
+                                            <div class="col-xl-6 col-12 mt-3 mb-xl-4">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="billingEmail" type="billingEmail" formControlName="billingEmail"   placeholder="{{ 'TRAVEL_TRACKING.BILLING_RUN' | translate }}"/>
+
+                                                    <label for="billingEmail" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.BILLING_RUN' | translate }} </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.billingEmail">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('billingEmail').hasError(validation.type)
+                                                    && (deliveryNoteForm.get('billingEmail').dirty
+                                                    || deliveryNoteForm.get('billingEmail').touched)">
+                                                        {{ validation.message }}
+                                                    </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end Corre de facturación -->
+
+                                            <!-- Teléfono -->
+
+                                            <div class="col-xl-6 col-12 mt-3 mb-xl-4">
+
+                                                <div class="form-group input-group">
+
+                                                    <span class="has-float-label w-100">
+
+                                                    <input class="form-control point" id="phone"  mask="999 999999999" prefix="+" [formControl]="deliveryNoteForm.controls['phone']"
+                                                    type="text" placeholder="teléfono" />
+
+                                                    <label for="phone" class="mt-2 title-col"> {{ 'TRAVEL_TRACKING.PHONE' | translate }} </label>
+
+                                                </span>
+                                                    <ng-container *ngFor="let validation of deliveryNoteMessages.phone">
+                                                        <div class="w-100 text-left">
+                                                            <small class="form-control-feedback text-danger" *ngIf="deliveryNoteForm.get('phone').hasError(validation.type)
+                                                    && (deliveryNoteForm.get('phone').dirty
+                                                    || deliveryNoteForm.get('phone').touched)">
+                                                        {{ validation.message }}
+                                                    </small>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- end Teléfono -->
+
+                                        </div>
+
+                                    </div>
+                                    <!-- end form -->
+
+                                    <!-- btn -->
+                                    <div class="col-11 mt-xl-0 mt-4 text-xl-right text-center">
+                                        <button class="btn btn-primary radios-border" type="button" [disabled]="deliveryNoteForm && !deliveryNoteForm.valid || deliveryNoteForm && !deliveryNoteForm.dirty" (click)="updateCompanyPreferenceAlbaran()"> {{'GENERAL.SAVE' | translate }} </button>
+                                    </div>
+                                    <!-- end btn -->
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row mt-4">
+
+                <div class="col-12">
+
+                    <div class="card">
+
+                        <div class="card-body color-body-card">
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <label class="title-road" for=""> {{ 'TRAVEL_TRACKING.ADDITIONAL_LINES' | translate }} </label>
+
+                                    <p class="sub-title-road mt-1 mb-0"> {{ 'TRAVEL_TRACKING.TEXT_7' | translate }} </p>
+
+                                    <p class="sub-title-road mt-4 mb-0"> {{'TRAVEL_TRACKING.TEXT_8' | translate }} </p>
+
+                                </div>
+
+
+                                <div class="col-12 mt-4">
+
+                                    <div class="card mt-3">
+
+                                        <div class="card-header">
+
+                                            <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+
+                                                <div class="col-md-10 col-7 p-0">
+
+                                                    <span> {{'TRAVEL_TRACKING.DELIVERY_NOTE_' | translate }} </span>
+
+                                                </div>
+
+                                                <div class="col-md-2 col-5 p-0 text-sm-right">
+
+                                                    <button class="btn btn-add card-button mt-2 mt-sm-0" type="button" (click)="addLine()" [disabled]="deliveryNotesLines.length >= 10" title="{{'TRAVEL_TRACKING.ADD_LINES' | translate }}">
+
+                                                        <label> {{'TRAVEL_TRACKING.ADD_LINES' | translate }} </label>
+
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card-body p-0">
+
+                                            <table class="table table-responsive-lg" *ngIf="deliveryNotesLines && deliveryNotesLines.length > 0">
+
+                                                <thead class="thead">
+
+                                                    <tr>
+
+                                                        <th class="text-center"> {{'TRAVEL_TRACKING.ORDER' | translate }} </th>
+
+                                                        <th class="text-center"> {{'TRAVEL_TRACKING.OUTSTANDING' | translate }} </th>
+
+                                                        <th class="text-center"> {{'TRAVEL_TRACKING.TEXT' | translate }} </th>
+
+                                                        <th class="text-center"> {{'TRAVEL_TRACKING.COLOR_CODE' | translate }} </th>
+
+                                                        <th class="text-center"> {{'TRAVEL_TRACKING.REMOVE' | translate }} </th>
+
+                                                    </tr>
+
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr *ngFor="let item of deliveryNotesLines; let i = index;" [ngClass]="{'bg-white': i % 2 == 0, 'bg-gray': i % 2 > 0 }">
+
+                                                        <td style="width: 10%;">
+
+                                                            <input type="number" class="form-control" min="1" (focusout)="handleChange( 'order', $event.target.value, item )" [value]="item.order">
+
+                                                        </td>
+
+                                                        <td class="row justify-content-center">
+
+                                                            <div class="round">
+
+                                                                <input type="checkbox" [id]="'isActiveSchedule' + item.id" (change)="highlightActive( $event.target.checked, item )" [checked]="item.highlight" />
+
+                                                                <label [for]="'isActiveSchedule'+ item.id"></label>
+
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td style="width: 50%;">
+
+                                                            <input type="text" class="form-control" [maxLength]="100" (focusout)="handleChange( 'description', $event.target.value, item )" [value]="item.description">
+
+                                                        </td>
+
+                                                        <td style="width: 15%;">
+
+                                                            <input type="color" class="form-control" (change)="handleChange( 'color', $event.target.value, item )" [value]="item.color">
+
+                                                        </td>
+
+                                                        <td class="row justify-content-center aling-vertical-delete">
+
+                                                            <img src="assets/icons/delete-icon.svg" class="pointer" (click)="deleteLine(item)">
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+
+                                            <div class="row" *ngIf="deliveryNotesLines && deliveryNotesLines.length === 0">
+
+                                                <div class="col-12 text-center">
+
+                                                    <h4> {{'TRAVEL_TRACKING.THERE_ARE_NO_RECORDS' | translate }}</h4>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

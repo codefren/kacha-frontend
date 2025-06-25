@@ -1,0 +1,48 @@
+@mixin zone-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-zone {
+        .primary {
+            color: mat-color($primary);
+        }
+
+        .accent {
+            color: mat-color($accent);
+        }
+
+        .button-primary {
+            border-color: mat-color($primary);
+            color: mat-color($primary);
+
+            &.unchecked {
+                color: mat-color($accent, 200);
+            }
+        }
+
+        .button-accent {
+            border-color: #FF8D24;
+            color: #FF8D24;
+
+            &.unchecked {
+                color: #FF8D24;
+            }
+        }
+
+        .no-calculated-route {
+            background-color: mat-color($accent, 50);
+            color: mat-color($warn);
+        }
+    }
+}
+
+@mixin zone-typography($config) {
+    .easyroute-zone {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

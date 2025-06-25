@@ -1,0 +1,613 @@
+package com.graphhopper.jsprit.optimroute.vrp;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+
+import com.graphhopper.jsprit.analysis.toolbox.GraphStreamViewer;
+import com.graphhopper.jsprit.analysis.toolbox.GraphStreamViewer.Label;
+import com.graphhopper.jsprit.core.algorithm.VehicleRoutingAlgorithm;
+import com.graphhopper.jsprit.core.algorithm.box.Jsprit;
+import com.graphhopper.jsprit.core.algorithm.recreate.InsertionData;
+import com.graphhopper.jsprit.core.algorithm.recreate.listener.BeforeJobInsertionListener;
+import com.graphhopper.jsprit.core.algorithm.recreate.listener.InsertionListener;
+import com.graphhopper.jsprit.core.algorithm.state.InternalStates;
+import com.graphhopper.jsprit.core.algorithm.state.StateId;
+import com.graphhopper.jsprit.core.algorithm.state.StateManager;
+import com.graphhopper.jsprit.core.algorithm.state.StateUpdater;
+import com.graphhopper.jsprit.core.analysis.SolutionAnalyser;
+import com.graphhopper.jsprit.core.problem.Capacity;
+import com.graphhopper.jsprit.core.problem.JobActivityFactory;
+import com.graphhopper.jsprit.core.problem.Location;
+import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
+import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem.FleetSize;
+import com.graphhopper.jsprit.core.problem.constraint.ConstraintManager;
+import com.graphhopper.jsprit.core.problem.constraint.HardActivityConstraint;
+import com.graphhopper.jsprit.core.problem.constraint.HardRouteConstraint;
+import com.graphhopper.jsprit.core.problem.constraint.ServiceDeliveriesFirstConstraint;
+import com.graphhopper.jsprit.core.problem.constraint.SoftActivityConstraint;
+import com.graphhopper.jsprit.core.problem.constraint.SoftRouteConstraint;
+import com.graphhopper.jsprit.core.problem.constraint.ConstraintManager.Priority;
+import com.graphhopper.jsprit.core.problem.cost.VehicleRoutingTransportCosts;
+import com.graphhopper.jsprit.core.problem.cost.WaitingTimeCosts;
+import com.graphhopper.jsprit.core.problem.driver.Driver;
+import com.graphhopper.jsprit.core.problem.job.Job;
+import com.graphhopper.jsprit.core.problem.job.Service;
+import com.graphhopper.jsprit.core.problem.misc.JobInsertionContext;
+import com.graphhopper.jsprit.core.problem.solution.SolutionCostCalculator;
+import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
+import com.graphhopper.jsprit.core.problem.solution.route.VehicleRoute;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.ActivityVisitor;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.End;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.Start;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
+import com.graphhopper.jsprit.core.problem.vehicle.Vehicle;
+import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl;
+import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl.Builder;
+import com.graphhopper.jsprit.core.reporting.SolutionPrinter;
+import com.graphhopper.jsprit.core.problem.vehicle.VehicleType;
+import com.graphhopper.jsprit.core.problem.vehicle.VehicleTypeImpl;
+import com.graphhopper.jsprit.core.util.Solutions;
+import com.graphhopper.jsprit.core.util.VehicleRoutingTransportCostsMatrix;
+import com.graphhopper.jsprit.optimroute.vrp.VrpInput.DeliveryPoint;
+import com.graphhopper.jsprit.optimroute.vrp.VrpInput.VehicleInput;
+import com.graphhopper.jsprit.core.problem.cost.TransportDistance;
+import com.graphhopper.jsprit.core.problem.cost.VehicleRoutingActivityCosts;
+import com.graphhopper.jsprit.util.MatrixManager;
+import com.graphhopper.jsprit.util.MatrixManager.Costs;
+import com.graphhopper.jsprit.util.MatrixManager.DistanceCostFromTo;
+import com.graphhopper.jsprit.util.ProgressListener;
+import com.graphhopper.jsprit.core.problem.solution.route.state.RouteAndActivityStateGetter;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity.JobActivity;
+
+
+/**
+ * VrpAlgorithm
+ */
+public class VrpAlgorithm {
+
+    public VehicleRoutingProblemSolution run(VrpInput input) throws IOException {
+
+        VehicleRoutingProblem.Builder vrpInitialSolutionBuilder = VehicleRoutingProblem.Builder.newInstance();
+
+        // Location Depot
+
+        Location depotLocation = Location.newInstance(
+
+                input.deliveryPoints.get(0).coordinates.latitude,
+
+                input.deliveryPoints.get(0).coordinates.longitude);
+
+        final int WEIGHT_INDEX = 0;
+
+        for (int i = 0; i < input.vehicles.size(); i++) {
+
+            VehicleInput vehicleInput = input.vehicles.get(i);
+
+            VehicleTypeImpl.Builder vehicleTypeBuilder = VehicleTypeImpl.Builder.newInstance("vehicleType" + i)
+
+            .setCostPerDistance(input.options.objectivePreferences.costDistance / 10)
+
+            .setCostPerTransportTime(input.options.objectivePreferences.costDuration / 10)
+
+            .setCostPerWaitingTime( (input.options.objectivePreferences.costVehicleWaitTime / 10) * 2 ); 
+
+
+            // Add Capacity
+
+            vehicleTypeBuilder.addCapacityDimension(WEIGHT_INDEX, vehicleInput.capacity);
+
+            VehicleType vehicleType = vehicleTypeBuilder.build();
+
+            Builder vehicleBuilder = VehicleImpl.Builder.newInstance("vehicle" + i);
+
+            double vehicleDeliveryWindowStart = vehicleInput.deliveryWindowStart;
+
+            double vehicleDeliveryWindowEnd = vehicleInput.deliveryWindowEnd == 0 ? 86399
+                    : vehicleInput.deliveryWindowEnd;
+
+            vehicleBuilder.setType(vehicleType);
+
+            vehicleBuilder.setLatestArrival(vehicleDeliveryWindowEnd);
+
+            if (input.options.optimizeFromIndex > 1) {
+
+                vehicleBuilder.setStartLocation(Location.newInstance(
+                        input.deliveryPoints.get(input.options.optimizeFromIndex - 1).coordinates.latitude,
+                        input.deliveryPoints.get(input.options.optimizeFromIndex - 1).coordinates.longitude));
+
+                Double earliestStartFromIndex = VrpInput.calculateEarliestStartFromIndex(input,
+                        vehicleDeliveryWindowStart);
+
+                vehicleBuilder.setEarliestStart(earliestStartFromIndex);
+
+                if (earliestStartFromIndex >= vehicleDeliveryWindowEnd) {
+
+                    throw new VrpException("403", "El tiempo de llegada del vehiculo debe ser mayor al de inicio.");
+                }
+
+            } else {
+
+                vehicleBuilder.setStartLocation(depotLocation);
+
+                vehicleBuilder.setEarliestStart(vehicleDeliveryWindowStart);
+
+            }
+
+            vehicleBuilder.setEndLocation(depotLocation);
+
+            VehicleImpl vehicle = vehicleBuilder.build();
+
+            vrpInitialSolutionBuilder.addVehicle(vehicle);
+
+        }
+        // Array from names to compare with index and matrix
+
+        String[] servicesName = new String[input.deliveryPoints.size()];
+
+        servicesName[0] = depotLocation.getId();
+
+        for (int i = 1; i < input.deliveryPoints.size(); i++) {
+
+            DeliveryPoint deliveryPoint = input.deliveryPoints.get(i);
+
+            Location location = Location.newInstance(deliveryPoint.coordinates.latitude,
+                    deliveryPoint.coordinates.longitude);
+
+            String name = deliveryPoint.id;
+
+            servicesName[i] = location.getId();
+
+            double deliveryWindowStart = deliveryPoint.deliveryWindow.start > 0 ? deliveryPoint.deliveryWindow.start
+                    : 0;
+
+            deliveryWindowStart = deliveryWindowStart - deliveryPoint.leadTime;
+
+            double deliveryWindowEnd = deliveryPoint.deliveryWindow.end > 0 ? deliveryPoint.deliveryWindow.end : 86399;
+
+            deliveryWindowEnd = deliveryPoint.allowedDelayTime > 0 ? deliveryWindowEnd + deliveryPoint.allowedDelayTime
+                    : deliveryWindowEnd;
+
+
+            Service service = Service.Builder.newInstance(name)
+
+                    .addSizeDimension(WEIGHT_INDEX,
+                            input.options.ignoreCapacityLimit == false ? deliveryPoint.demand : 0)
+
+                    .setLocation(location)
+
+                    .addTimeWindow(deliveryWindowStart, deliveryWindowEnd)
+
+                    .setServiceTime(deliveryPoint.serviceTime)
+
+                    .setName(location.getId())
+
+                    .setPriority(deliveryPoint.priority)
+
+                    .build();
+
+            if (input.options.optimizeFromIndex > 1) {
+
+                if (i >= input.options.optimizeFromIndex) {
+
+                    vrpInitialSolutionBuilder.addJob(service);
+
+                }
+
+            } else {
+
+                vrpInitialSolutionBuilder.addJob(service);
+            }
+
+        }
+
+        // Build transport cost matrix
+
+        VehicleRoutingTransportCostsMatrix.Builder costMatrixBuilder = VehicleRoutingTransportCostsMatrix.Builder
+                .newInstance(false);
+
+        // Cost Matrix
+
+        MatrixManager matrixManager = new MatrixManager();
+
+        DistanceCostFromTo distanceCostFromTos = matrixManager.getRelationalCostDeliveryPoints(input.matrix.distances,
+                servicesName);
+
+        DistanceCostFromTo durationsCostFromTos = matrixManager.getRelationalCostDeliveryPoints(input.matrix.durations,
+                servicesName);
+
+        // Costs distance
+
+        for (int i = 0; i < input.deliveryPoints.size(); i++) {
+
+            for (int j = 0; j < distanceCostFromTos.costs[i].length; j++) {
+
+                Costs cost = distanceCostFromTos.costs[i][j];
+
+                costMatrixBuilder.addTransportDistance(cost.from, cost.to, cost.cost);
+
+            }
+
+        }
+
+        // Costs durations
+
+        for (int i = 0; i < input.deliveryPoints.size(); i++) {
+
+            for (int j = 0; j < durationsCostFromTos.costs[i].length; j++) {
+
+                Costs cost = durationsCostFromTos.costs[i][j];
+
+                costMatrixBuilder.addTransportTime(cost.from, cost.to, cost.cost);
+
+            }
+
+        }
+        // Construct the algorithm
+        VehicleRoutingTransportCostsMatrix costs = costMatrixBuilder.build();
+                
+        vrpInitialSolutionBuilder.setRoutingCost(costs).setFleetSize(FleetSize.FINITE);
+
+        // WaitingTimeCosts activityCosts = new WaitingTimeCosts();
+
+        // vrpInitialSolutionBuilder.setActivityCosts(activityCosts);
+
+        VehicleRoutingProblem problem = vrpInitialSolutionBuilder.build();
+        
+        StateManager stateManager = new StateManager(problem);
+
+        stateManager.addStateUpdater(new JobsInRouteMemorizer(stateManager));
+
+        ConstraintManager constraintManager = new ConstraintManager(problem, stateManager);
+
+        // constraintManager.addConstraint(new TestSoftConstraint(costs)); // example softconstraint call
+        
+        // constraintManager.addConstraint(new TwentyOneBeforeThirteenConstraint(stateManager)); // example softconstraint call
+
+        // final RewardAndPenaltiesThroughSoftConstraints contrib = new RewardAndPenaltiesThroughSoftConstraints(problem);
+
+        SolutionCostCalculator costCalculator = new SolutionCostCalculator() {
+				
+            @Override
+            public double getCosts(VehicleRoutingProblemSolution solution) {
+                
+                SolutionAnalyser analyser = new SolutionAnalyser(problem, solution, problem.getTransportCosts());
+                
+                double costs = analyser.getDistance() 
+                + analyser.getWaitingTime()
+                + (solution.getUnassignedJobs().size() * 500.);
+
+                int deliveryPoinNears = 0;
+                if(solution.getUnassignedJobs().size() == 0 ) {
+
+                    for(VehicleRoute route : solution.getRoutes()){
+                    
+                        List<TourActivity> activities = route.getActivities();
+    
+                        int i = 0;
+    
+                        for (TourActivity currentAct : activities) {
+                            
+                            if(i < activities.size() - 1) {
+                                
+                                TourActivity nextAct = activities.get(i + 1);
+
+                                // if(currentAct.getLocation().equals(nextAct.getLocation())) {
+                                    
+                                //     costs-=1000; 
+                                                                    
+                                // }
+                                
+                                if(i > 0) {
+                                
+                                    TourActivity prevAct = activities.get(i - 1);
+    
+                                    // if(currentAct.getLocation().equals(prevAct.getLocation())) {
+                                        
+                                    //     costs-=1000; 
+                                                                            
+                                    // }
+                                    
+                                    if(currentAct.getLocation().equals(prevAct.getLocation()) && currentAct.getLocation().equals(nextAct.getLocation())) {
+
+                                        costs-=1000; 
+                                    }
+                                }
+
+
+
+                            }
+
+
+                            i++;
+                        }
+                        
+                    }
+                }
+                
+                return costs;
+            }
+            
+        };
+        // constraintManager.addConstraint(new OnTheSameUbicationHardConstraint(),Priority.HIGH); // example softconstraint call
+
+        // VehicleRoutingAlgorithm algorithm = Jsprit.createAlgorithm(problem);
+
+        int maxIterations = input.options.explorationLevel * 1000;
+
+        VehicleRoutingAlgorithm vra = Jsprit.Builder.newInstance(problem)
+        //.setStateAndConstraintManager(stateManager, constraintManager)
+        .setObjectiveFunction(costCalculator)
+        //.addCoreStateAndConstraintStuff(true)
+        .buildAlgorithm();
+                
+        vra.setMaxIterations(maxIterations);
+
+        vra.addListener(new ProgressListener(maxIterations));
+
+        Collection<VehicleRoutingProblemSolution> solutions = vra.searchSolutions();
+        
+        VehicleRoutingProblemSolution bestSolution = Solutions.bestOf(solutions);
+        // Output XMl
+
+        // new
+        // VrpXMLWriter(problem,solutions).write("output/problem-with-solution.xml");
+
+        // SolutionPrinter.print(problem, bestSolution, SolutionPrinter.Print.VERBOSE);
+
+        // // Plot
+
+        // new Plotter(problem, bestSolution).plot("output/plot.png", "simple example");
+
+        // // GraphStreamViewer
+
+        // new GraphStreamViewer(problem, bestSolution).setGraphStreamFrameScalingFactor(1.5).labelWith(Label.JOB_NAME).setRenderDelay(200).display();
+        
+        return bestSolution;
+
+    }
+
+    static class TestSoftConstraint implements SoftActivityConstraint {
+
+        private VehicleRoutingTransportCosts routingCosts;
+
+        private WaitingTimeCosts activityCosts;
+
+        public TestSoftConstraint(VehicleRoutingTransportCosts routingCosts) {
+            super();
+            this.routingCosts = routingCosts;
+            this.activityCosts = activityCosts;
+        }
+
+        @Override
+        public double getCosts(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct, TourActivity nextAct, double prevActDepTime) {
+            
+            double totalPenalty = 0.0;
+            VehicleRoute route = iFacts.getRoute();
+            List<TourActivity> tourActivities = route.getActivities();
+
+            if (!(nextAct instanceof End)) {
+                boolean actAfterNew = false;
+                for (TourActivity tourActivity : tourActivities) {
+                    
+                    if(newAct.getLocation().equals(nextAct.getLocation())) {
+                        
+                        return -10;
+                    }
+
+
+                }
+            }
+
+            return totalPenalty;
+
+            
+        }
+
+    }
+    static class WaitingTimeCosts implements VehicleRoutingActivityCosts {
+
+        public double getActivityCost(TourActivity tourAct, double arrivalTime, Driver driver, Vehicle vehicle) {
+            if (vehicle != null) {
+                double waiting = vehicle.getType().getVehicleCostParams().perWaitingTimeUnit * Math.max(0., tourAct.getTheoreticalEarliestOperationStartTime() - arrivalTime);
+                double servicing = vehicle.getType().getVehicleCostParams().perServiceTimeUnit * getActivityDuration(tourAct,arrivalTime,driver,vehicle);
+                return waiting + servicing;
+                //return 0;
+
+            }
+            return 0;
+        }
+    
+        public double getActivityDuration(TourActivity tourAct, double arrivalTime, Driver driver, Vehicle vehicle) {
+            return tourAct.getOperationTime();
+        }
+    
+    }
+    static class OnTheSameUbicationHardConstraint implements HardActivityConstraint {
+        private StateManager stateManager;
+        
+        public OnTheSameUbicationHardConstraint(StateManager stateManager) {
+                super();
+                this.stateManager = stateManager;
+        }
+
+        @Override
+        public ConstraintsStatus fulfilled(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct,
+                TourActivity nextAct, double prevActDepTime) {
+                    
+                    VehicleRoute route = iFacts.getRoute();
+                    List<TourActivity> tourActivities = route.getActivities();
+                    if (!(nextAct instanceof End)) {
+                        boolean actAfterNew = false;
+
+                        for (TourActivity tourActivity : tourActivities) {
+                            
+                            if(iFacts.getJob().getId() == "1" ) {
+
+                                if(newAct.getIndex() == 1 && nextAct.getIndex() != 2) {
+                                    return ConstraintsStatus.NOT_FULFILLED;
+                                }
+                                if(newAct.getIndex() == 2 && nextAct.getIndex() != 3) {
+                                    return ConstraintsStatus.NOT_FULFILLED;
+                                }
+                            }
+                            
+        
+                        }
+                    }
+                    return ConstraintsStatus.FULFILLED;
+                   
+                    
+        }
+
+
+    } 
+    
+	static class TwentyOneBeforeThirteenConstraint implements SoftRouteConstraint {
+
+		private StateManager stateManager;
+		
+		public TwentyOneBeforeThirteenConstraint(StateManager stateManager) {
+			super();
+			this.stateManager = stateManager;
+		}
+
+		@Override
+		public double getCosts(JobInsertionContext insertionContext) {
+
+            if(insertionContext.getJob().getId().equals("2")){
+                
+                VehicleRoute route = stateManager.getProblemState(stateManager.createStateId("3"), VehicleRoute.class);
+                
+				if(route==null){
+					return 0.;
+				}
+				if(route!=null){
+					if(route==insertionContext.getRoute()){
+						return -10.;
+					}
+					else return 0.;
+				}
+			}
+			return 0;
+		}
+    }
+	static class JobsInRouteMemorizer implements StateUpdater, ActivityVisitor {
+
+		private StateManager stateManager;
+		private VehicleRoute route;
+		
+		
+		public JobsInRouteMemorizer(StateManager stateManager) {
+			super();
+			this.stateManager = stateManager;
+		}
+
+		@Override
+		public void begin(VehicleRoute route) {
+			this.route=route;
+		}
+
+		@Override
+		public void visit(TourActivity activity) {
+			if(activity instanceof JobActivity){
+				String jobId = ((JobActivity) activity).getJob().getId();
+
+                stateManager.putProblemState(stateManager.createStateId(jobId), VehicleRoute.class, route);
+
+			}
+			
+		}
+
+		@Override
+		public void finish() {}
+		
+    }
+	static class RewardAndPenaltiesThroughSoftConstraints {
+		private VehicleRoutingProblem vrp;
+
+		public RewardAndPenaltiesThroughSoftConstraints(VehicleRoutingProblem vrp) {
+			super();
+			this.vrp = vrp;
+		}
+		
+		public double getCosts(VehicleRoute route) {
+            
+            boolean serves2 = route.getTourActivities().servesJob(getJob("2"));
+			boolean serves3 = route.getTourActivities().servesJob(getJob("3"));
+            if(serves2 && serves3) {
+                return 0;
+            }
+            return 0;
+		}
+		
+		private Job getJob(String string) {
+			return vrp.getJobs().get(string);
+		}
+
+    }
+    
+    public void analisysSolution(VehicleRoutingProblem problem, VehicleRoutingProblemSolution bestSolution) {
+        SolutionAnalyser analyser = new SolutionAnalyser(problem, bestSolution, problem.getTransportCosts());
+        for (VehicleRoute route : bestSolution.getRoutes()) {
+            System.out.println("------");
+            System.out.println("vehicleId: " + route.getVehicle().getId());
+            System.out.println("vehicleCapacity: " + route.getVehicle().getType().getCapacityDimensions() + " maxLoad: " + analyser.getMaxLoad(route));
+            System.out.println("totalDistance: " + analyser.getDistance(route));
+            System.out.println("waitingTime: " + analyser.getWaitingTime(route));
+            System.out.println("load@beginning: " + analyser.getLoadAtBeginning(route));
+            System.out.println("load@end: " + analyser.getLoadAtEnd(route));
+            System.out.println("operationTime: " + analyser.getOperationTime(route));
+            System.out.println("serviceTime: " + analyser.getServiceTime(route));
+            System.out.println("transportTime: " + analyser.getTransportTime(route));
+            System.out.println("transportCosts: " + analyser.getVariableTransportCosts(route));
+            System.out.println("fixedCosts: " + analyser.getFixedCosts(route));
+            System.out.println("capViolationOnRoute: " + analyser.getCapacityViolation(route));
+            System.out.println("capViolation@beginning: " + analyser.getCapacityViolationAtBeginning(route));
+            System.out.println("capViolation@end: " + analyser.getCapacityViolationAtEnd(route));
+            System.out.println("timeWindowViolationOnRoute: " + analyser.getTimeWindowViolation(route));
+            System.out.println("skillConstraintViolatedOnRoute: " + analyser.hasSkillConstraintViolation(route));
+
+            System.out.println("dist@" + route.getStart().getLocation().getId() + ": " + analyser.getDistanceAtActivity(route.getStart(), route));
+            System.out.println("timeWindowViolation@" + route.getStart().getLocation().getId() + ": " + analyser.getTimeWindowViolationAtActivity(route.getStart(), route));
+            for (TourActivity act : route.getActivities()) {
+                System.out.println("--");
+                System.out.println("actType: " + act.getName() + " demand: " + act.getSize());
+                System.out.println("dist@" + act.getLocation().getId() + ": " + analyser.getDistanceAtActivity(act, route));
+                System.out.println("load(before)@" + act.getLocation().getId() + ": " + analyser.getLoadJustBeforeActivity(act, route));
+                System.out.println("load(after)@" + act.getLocation().getId() + ": " + analyser.getLoadRightAfterActivity(act, route));
+                System.out.println("transportCosts@" + act.getLocation().getId() + ": " + analyser.getVariableTransportCostsAtActivity(act, route));
+                System.out.println("capViolation(after)@" + act.getLocation().getId() + ": " + analyser.getCapacityViolationAfterActivity(act, route));
+                System.out.println("timeWindowViolation@" + act.getLocation().getId() + ": " + analyser.getTimeWindowViolationAtActivity(act, route));
+                System.out.println("skillConstraintViolated@" + act.getLocation().getId() + ": " + analyser.hasSkillConstraintViolationAtActivity(act, route));
+            }
+            System.out.println("--");
+            System.out.println("dist@" + route.getEnd().getLocation().getId() + ": " + analyser.getDistanceAtActivity(route.getEnd(), route));
+            System.out.println("timeWindowViolation@" + route.getEnd().getLocation().getId() + ": " + analyser.getTimeWindowViolationAtActivity(route.getEnd(), route));
+        }
+
+        System.out.println("-----");
+        System.out.println("aggreate solution stats");
+        System.out.println("total freight moved: " + Capacity.addup(analyser.getLoadAtBeginning(), analyser.getLoadPickedUp()));
+        System.out.println("total no. picks at beginning: " + analyser.getNumberOfPickupsAtBeginning());
+        System.out.println("total no. picks on routes: " + analyser.getNumberOfPickups());
+        System.out.println("total picked load at beginnnig: " + analyser.getLoadAtBeginning());
+        System.out.println("total picked load on routes: " + analyser.getLoadPickedUp());
+        System.out.println("total no. deliveries at end: " + analyser.getNumberOfDeliveriesAtEnd());
+        System.out.println("total no. deliveries on routes: " + analyser.getNumberOfDeliveries());
+        System.out.println("total delivered load at end: " + analyser.getLoadAtEnd());
+        System.out.println("total delivered load on routes: " + analyser.getLoadDelivered());
+        System.out.println("total tp_distance: " + analyser.getDistance());
+        System.out.println("total tp_time: " + analyser.getTransportTime());
+        System.out.println("total waiting_time: " + analyser.getWaitingTime());
+        System.out.println("total service_time: " + analyser.getServiceTime());
+        System.out.println("total operation_time: " + analyser.getOperationTime());
+        System.out.println("total twViolation: " + analyser.getTimeWindowViolation());
+        System.out.println("total capViolation: " + analyser.getCapacityViolation());
+        System.out.println("total fixedCosts: " + analyser.getFixedCosts());
+        System.out.println("total variableCosts: " + analyser.getVariableTransportCosts());
+        System.out.println("total costs: " + analyser.getTotalCosts());
+    }
+}

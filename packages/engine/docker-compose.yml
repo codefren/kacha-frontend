@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  engine:
+    build:
+      context: ../..
+      dockerfile: packages/engine/Dockerfile
+    environment:
+      - REDIS_URL=redis://core.polpoo.com:6379/0
+      - OSRM_HOST=https://dev.osrm.polpoo.com
+    # depends_on:
+    #     - redis
+    # redis:
+    #     image: redis:4.0.5-alpine
+    #     command: ['redis-server', '--appendonly', 'yes']
+    #     hostname: redis
+    #     volumes:
+    #         - redis-data:/data
+    # osrm:
+    #   image: peterevans/osrm-backend-k8s
+    #   hostname: osrm
+    #   environment:
+    #     - OSRM_MODE=RESTORE
+    #     - OSRM_DATA_LABEL=spain-latest-car-11-03-2019
+    #     - OSRM_SA_KEY_PATH="/etc/osrm-service-account-key.json"
+    #     - OSRM_PROJECT_ID=easyroute
+    #     - OSRM_GS_BUCKET="gs://eu.artifacts.easyroute.appspot.com"
+    #   volumes:
+    #     - ${HOME}/.gcloud-osrm-service-account-key.json:/etc/osrm-service-account-key.json
+    # volumes:
+    #     redis-data:

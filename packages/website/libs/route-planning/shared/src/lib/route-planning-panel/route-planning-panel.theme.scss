@@ -1,0 +1,27 @@
+@mixin route-planning-panel-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-route-planning-panel {
+        mat-expansion-panel-header.route-planning-panel-header {
+            background-color: white;
+            color: black;
+        }
+
+        .zone-content {
+            background-color: white;
+            color: black;
+        }
+    }
+}
+
+@mixin route-planning-panel-typography($config) {
+    .easyroute-route-planning-panel {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

@@ -1,0 +1,311 @@
+<div class="provider-form bg-white p-3" *ngIf="providers">
+
+    <!-- Parte superior -->
+    <div class="d-flex row align-items-center justify-content-between pl-2 pr-2">
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+            <div class="page-title point" (click)="redirectProviders()">
+                <img src="assets/images/return.svg" class="header-brand-img img-return" alt="Return">
+                <span class="ml-3">{{ 'PROVIDERS.NAME' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6">
+            <div class="d-flex flex-row align-items-center justify-content-end">
+                <div class="list-item-button point">
+                    <button type="button" class="btn btn-primary" [disabled]="!providerForm.valid || disabledCompany()" (click)="save()">
+                        {{ 'GENERAL.SAVE' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Cuerpo -->
+    <div class="container-fluid p-2 mt-3">
+        <form [formGroup]="providerForm" class="form-width-prod">
+
+            <div class="row pl-2 pr-2">
+                <div class="col-xl-3 col-12 mt-1">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="border-bottom p-4">
+                                <label class="style-info-1">{{ 'PROVIDERS.STATUS_PROVIDER' | translate }}</label>
+                                <div class="border-special">
+                                    <div class="switch w-100">
+                                        <label class="switch-width mb-0">
+                                            <input type="checkbox" checked formControlName="isActive"/>
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                                            <span class="lever-text">{{ 'GENERAL.ACTIVATE' | translate }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom p-4">
+                                <label class="style-info-1">ID</label>
+                                <p class="m-0 name-title ">#{{providers.id}}</p>
+                            </div>
+                            <div class="border-bottom p-4">
+                                <label class="style-info-1">{{ 'GENERAL.CREATION_DATE' | translate }}</label>
+                                <p class="m-0 name-title" *ngIf="createdAt">{{createdAt}}</p>
+                                <p class="m-0 name-title" *ngIf="!createdAt">00/00/0000</p>
+                            </div>
+                            <div class="p-4">
+                                <label class="style-info-1">{{ 'GENERAL.CREATED_BY' | translate }}</label>
+                                <p class="m-0 name-title" *ngIf="providers.createdByUserData">{{providers.createdByUserData.name}} {{providers.createdByUserData.surname}}</p>
+                                <p class="m-0 name-title" *ngIf="!providers.createdByUserData || !providers.createdByUserData.name">Nombre y Apellidos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-9 col-12 mt-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="mb-0 title-provider"> {{'PROVIDERS.DATA_PROVIDER' | translate }} </p>
+                                    <p class="mb-0 sub-title-provider"> {{'PROVIDERS.TEXT_DATA_PROVIDER' | translate }} </p>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="form-row mt-3">
+                                        <div class="col-xl-4 col-12 mt-3">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <input class="form-control point" id="provider" type="text"
+                                                        placeholder="{{ 'PROVIDERS.PROVIDER' | translate }}" formControlName="name"/>
+
+                                                    <label for="first" class="mt-2 title-col"> {{ 'PROVIDERS.PROVIDER' | translate }} <span class="asterisco"> *</span></label>
+                                                </span>
+                                                <ng-container *ngFor="let validation of provider_messages.name">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                providerForm.get('name').hasError(
+                                                                    validation.type
+                                                                ) &&
+                                                                (providerForm.get('name').dirty ||
+                                                                providerForm.get('name').touched)
+                                                            ">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 mt-3">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <select class="form-select form-control w-100" id="type" placeholder="Seleccione"
+                                                        formControlName="providerTypeId"  (change)="changeProviderType($event)">
+                                                        <option value="0">Seleccione...</option>
+                                                        <option *ngFor="let type of providerType" [value]="type.id">{{ type.name }}</option>
+                                                    </select>
+
+                                                    <label for="type" class="mt-2 title-col"> {{ 'PROVIDERS.TYPE' | translate }} </label>
+                                                </span>
+                                                <ng-container *ngFor="let validation of provider_messages.providerTypeId">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                providerForm.get('providerTypeId').hasError(
+                                                                    validation.type
+                                                                ) &&
+                                                                (providerForm.get('providerTypeId').dirty ||
+                                                                providerForm.get('providerTypeId').touched)
+                                                            ">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 mt-3">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <select class="form-select form-control w-100" id="type" placeholder="Seleccione" formControlName="providerAssigmentTypeId">
+                                                        <option value="0">Seleccione...</option>
+                                                        <option *ngFor="let assign of assigned" [value]="assign.id" >{{assign.name}}</option>
+                                                    </select>
+
+                                                    <label for="first" class="mt-2 title-col"> {{ 'PROVIDERS.ASSIGN' | translate }} </label>
+                                                </span>
+                                                <ng-container *ngFor="let validation of provider_messages.providerAssigmentTypeId">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                providerForm.get('providerAssigmentTypeId').hasError(
+                                                                    validation.type
+                                                                ) &&
+                                                                (providerForm.get('providerAssigmentTypeId').dirty ||
+                                                                providerForm.get('providerAssigmentTypeId').touched)
+                                                            ">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 mt-2">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <input class="form-control point" id="contact_person" type="text"
+                                                        placeholder="{{ 'PROVIDERS.CONTACT_PERSON_' | translate }}" formControlName="contactPerson"/>
+
+                                                    <label for="first" class="mt-2 title-col"> {{ 'PROVIDERS.CONTACT_PERSON_' | translate }} </label>
+                                                </span>
+                                                <ng-container *ngFor="let validation of provider_messages.contactPerson">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                providerForm.get('contactPerson').hasError(
+                                                                    validation.type
+                                                                ) &&
+                                                                (providerForm.get('contactPerson').dirty ||
+                                                                providerForm.get('contactPerson').touched)
+                                                            ">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 mt-2">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <input class="form-control point" id="phone" type="text"
+                                                        placeholder="{{ 'PROVIDERS.PHONE' | translate }}" formControlName="phoneNumber"/>
+
+                                                    <label for="first" class="mt-2 title-col"> {{ 'PROVIDERS.PHONE' | translate }} </label>
+                                                </span>
+                                                <ng-container *ngFor="let validation of provider_messages.phoneNumber">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                providerForm.get('phoneNumber').hasError(
+                                                                    validation.type
+                                                                ) &&
+                                                                (providerForm.get('phoneNumber').dirty ||
+                                                                providerForm.get('phoneNumber').touched)
+                                                            ">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-12 mt-2">
+                                            <div class="form-group input-group">
+                                                <span class="has-float-label w-100">
+                                                    <input class="form-control point" id="email" type="email"
+                                                        placeholder="{{ 'PROVIDERS.EMAIL' | translate }}" formControlName="email"/>
+
+                                                    <label for="first" class="mt-2 title-col"> {{ 'PROVIDERS.EMAIL' | translate }} </label>
+                                                </span>
+                                                <ng-container *ngFor="let validation of provider_messages.email">
+                                                    <div class="w-100 text-left">
+                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                providerForm.get('email').hasError(
+                                                                    validation.type
+                                                                ) &&
+                                                                (providerForm.get('email').dirty ||
+                                                                providerForm.get('email').touched)
+                                                            ">
+                                                            {{ validation.message }}
+                                                        </small>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-1" *ngIf="this.providers.id">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="mb-0 sub-title-provider"> {{'PROVIDERS.TEXT2_DATA_PROVIDER' | translate }} </p>
+                                </div>
+
+                                <ng-container *ngIf="concepts.length > 0">
+
+                                    <div class="container-fluid">
+                                        <div class="form-row mt-3">
+                                            <label for="type" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> {{ 'PROVIDERS.CONCEPT' | translate }} </label>
+
+                                            <label for="first" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> {{ 'PROVIDERS.IMPORT' | translate }} </label>
+
+                                            <label for="first" class="mb-2 title-label col-xl-4 col-12 col-md-4 col-sm-4"> &nbsp; </label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="container-fluid">
+                                        <ng-container formArrayName="concepts">
+                                            <ng-container *ngFor="let concept of concepts.controls; let i = index;" [formGroup]="concept">
+                                                <div class="form-row" [ngClass]="{'mt-3': i > 0}">
+                                                    <div class="form-group input-group col-xl-4 col-12 col-md-4 col-sm-4 m-0 mt-1">
+                                                        <ng-container *ngIf="providerForm.controls['providerTypeId'].value == 1">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ i" formControlName="providerTypeGenericConceptId" (change)="changeSelect($event.target.value, concept, i)">
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+                                                                <option *ngFor="let X of conceptList" [value]="X.id" [disabled]="existConcept(X.id)">
+                                                                    {{X.name}}
+                                                                </option>
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="providerForm.controls['providerTypeId'].value != 1">
+                                                            <div class="form-group input-group">
+                                                                <input class="form-control form-control-input" type="text" formControlName="name" (focusout)="changeName($event.target.value, concept, i)" />
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl-4 col-12 col-md-4 col-sm-4 m-0 mt-1">
+                                                        <input class="form-control form-control-input" type="number" formControlName="price" (change)="changeImporte($event.target.value, concept, i)" placeholder="{{ 'GENERAL.NAME' | translate }}" />
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl-4 col-12 col-md-4 col-sm-4 m-0 mt-1">
+                                                        <button type="button" class="btn btn-icon btn-icon-gray" [disabled]="disabledCompany()" (click)="deleteComponent(concept,i)">
+                                                            <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                        </button>
+                                                        <ng-container *ngIf="ModuleCost()">
+
+                                                            <ng-container *ngIf="providerForm.get('providerTypeId').value == 1">
+                                                                <button type="button" class="btn btn-icon add-concept btn-icon-gray ml-2 size-btn" (click)="OpenModalAddCost(concept.value)">
+                                                                    <!-- <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate"> -->
+                                                                    + Añadir coste
+                                                                </button>
+                                                            </ng-container>
+
+                                                        </ng-container>
+                                                    </div>
+
+                                                </div>
+                                            </ng-container>
+                                        </ng-container>
+
+                                    </div>
+                                </ng-container>
+
+                                <div class="col-12 px-xl-7 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin" *ngIf="this.providers.id">
+                                    <button type="button" class="btn btn-add-concept" (click)="addConcept()" [disabled]="providerForm.controls['providerTypeId'].value == 0 || disabledCompany()">
+                                        <label for="concept" class="add-concept point">{{'PROVIDERS.ADD_CONCEPT' | translate }}</label>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

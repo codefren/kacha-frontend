@@ -1,0 +1,39 @@
+@import '~@angular/material/theming';
+
+@import 'shared/src/lib/common';
+
+@mixin set-color($color) {
+    color: mat-color($color);
+}
+
+@mixin route-planning-actions-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-route-planning-actions {
+        button {
+            &.primary {
+                @include set-color($primary);
+            }
+
+            &.accent {
+                @include set-color($accent);
+            }
+
+            &.warn {
+                @include set-color($warn);
+            }
+        }
+    }
+}
+
+@mixin route-planning-actions-typography($config) {
+    .easyroute-route-planning-actions {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

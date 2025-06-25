@@ -1,0 +1,175 @@
+<div class="modal-form-field" *ngIf="ExpenseTypeForm">
+
+    <div class="row p-5">
+
+        <div class="col-xl-6 col-12 text-xl-left text-center">
+
+            <label class="title-modal"> Tipo de gasto </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+            <img src="assets/icons/close1.svg">
+
+        </div>
+
+
+        <!-- type -->
+        <form [formGroup]="ExpenseTypeForm" class="padding-form" style="width: 100%" novalidate action="">
+
+            <div class="col-12 mt-2">
+
+                <div class="form-row mt-3">
+
+                    <ng-container *ngIf="showProvidersType">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+                              
+                                <select class="form-select form-control w-100 point" formControlName="expenseTypeId" (change)="changeForm($event)" id="expenseTypeId" placeholder="Seleccione">
+    
+                                <option value="">{{ 'SHEET_ROUTE.SELECT' | translate }}...</option>
+    
+                                <option [value]="item.id" *ngFor="let item of providersType" >{{item.name}}</option>
+    
+                               <!--  <option value="2">Kilometraje</option> -->
+                                
+                            </select>
+        
+                            <label for="type" class="mt-2 title-col label-style-select"> {{'SHEET_ROUTE.TYPE' | translate }} </label>
+            
+                            </span>
+
+                        </div>
+
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="!showProvidersType">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <!-- end type -->
+
+            <!-- providerList -->
+
+            <div class="col-12 mt-2">
+                <div class="form-row mt-2">
+
+                    <ng-container *ngIf="showProviders">
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+            
+                               
+                                <select class="form-select form-control w-100 point" formControlName="providerId" (change)="changeFormSupplier($event)" id="supplier" placeholder="Seleccione">
+    
+                                <option value="">{{ 'SHEET_ROUTE.SELECT' | translate }}...</option>
+    
+                                <option [value]="item.id" *ngFor="let item of providerList" >{{item.name}}</option>
+    
+    
+                            </select>
+        
+                            <label for="type" class="mt-2 title-col label-style-select"> {{ 'SHEET_ROUTE.SUPPLIER' | translate }} </label>
+            
+                            </span>
+
+                        </div>
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="!showProviders">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <!-- end providerList -->
+
+            <!-- concepto -->
+
+            <div class="col-12 mt-2">
+
+                <div class="form-row mt-2">
+
+                    <ng-container *ngIf="showConcept">
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+            
+                                <select class="form-select form-control w-100 point" id="providerTypeConceptId" formControlName="providerTypeConceptId" placeholder="Seleccione">
+    
+                                <option value="">{{ 'SHEET_ROUTE.SELECT' | translate }}...</option>
+    
+                                <option [value]="item.id" *ngFor="let item of concepList" > {{item.name}} </option>
+    
+    
+                            </select>
+        
+                            <label for="type" class="mt-2 title-col label-style-select"> {{ 'SHEET_ROUTE.CONCEPTS' | translate }} </label>
+            
+                            </span>
+
+                        </div>
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="!showConcept">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <!-- end concepto -->
+        </form>
+
+
+
+        <div class="col-12 mt-3">
+            <div class="form-row mt-2">
+                <ng-container *ngIf="actions === 'new'">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!ExpenseTypeForm.valid" (click)="submit()">
+                        {{ 'SHEET_ROUTE.ADD' | translate }}
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="actions != 'new'">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!ExpenseTypeForm.valid" (click)="submit()">
+                        {{'GENERAL.SAVE' | translate }}
+                    </button>
+                    <button class="btn btn-outline-primary btn-block" type="button" (click)="deleteForm()">
+                        {{ 'GENERAL.DELETE' | translate }}
+                    </button>
+                </ng-container>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

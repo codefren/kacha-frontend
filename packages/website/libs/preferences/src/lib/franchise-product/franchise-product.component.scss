@@ -1,0 +1,38 @@
+.franchise-product {
+    .title-client {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-user-storage {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .text-information-storage {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .card-body {
+        padding: 1.85rem;
+    }
+    .card-footer {
+        border-top: 2px dashed #D9DBE3;
+        flex: 1 1 auto;
+        padding: 1.5rem 0 1.85rem;
+    }
+}

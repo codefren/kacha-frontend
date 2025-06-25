@@ -1,0 +1,23 @@
+@mixin my-invoices-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .easyroute-my-invoices {
+        color: mat-color($accent);
+
+        h4 {
+            color: mat-color($primary);
+        }
+    }
+}
+
+@mixin my-invoices-typography($config) {
+    .easyroute-my-invoices {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

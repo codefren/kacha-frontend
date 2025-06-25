@@ -1,0 +1,238 @@
+ <div class="easyroute-parameters">
+    
+    <div class="accordion">
+
+        <div class="card m-4">
+           <div class="card-header point card-grey" id="optimization-panel">
+               <div class="row">
+                   <div class="col-12">
+                       <h4 class="title">
+                           <a
+                            aria-expanded="true" 
+                            data-toggle="collapse" 
+                            data-target="#optimization"
+                           >
+                               {{ 'ROUTE_PLANNING.ZONE.SETTINGS.PARAMETERS_TO_OPTIMIZE.NAME' | translate }}
+                           </a>
+                       </h4>
+                   </div>
+               </div>
+           </div>
+           <div class="card-body collapse show" id="optimization">
+               <ng-container *ngFor="let param of _freeParameters; let i = index">
+                   <div class="row">
+                       <div class="col-12">
+                           <h4>{{ getParamName(param.name) | translate }}</h4> 
+                       </div>
+                       <div class="col-12">
+                           <span class="description">"{{ getParamDescription( param.name ) | translate }}"</span>
+                           <div class="form-group row mt-1 range">
+                               <div class="col-1 text-center">
+                                   <label>{{ param.value }}</label>
+                               </div>
+                               <div class="col-sm-11">
+                                   <input type="range" 
+                                       class="custom-range" 
+                                       id="customRange1"
+                                       [(ngModel)]="_freeParameters[i].value"
+                                       (change)="updateSliderValue(i)"
+                                       min="0"
+                                       max="100"
+                                       step="5">
+                                      
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <hr class="separator">
+               </ng-container>
+               
+               <div class="row">
+                   <div class="col-12">
+                       <h4>{{ 'ROUTE_PLANNING.ZONE.SETTINGS.EXPLORATION_LEVEL' | translate }}</h4>
+                   </div>
+                   <div class="col-12">
+                       <span class="description">"{{ 'ROUTE_PLANNING.ZONE.SETTINGS.EXPLORATION_LEVEL_MESSAGE' | translate }}"</span>
+                       <div class="form-group mt-1 row range">
+                           <div class="col-1 text-center">
+                               <label>{{ planningDeliveryZone.settings.explorationLevel ? planningDeliveryZone.settings.explorationLevel : 1 }}</label>
+                           </div>
+                           <div class="col-11">
+                               <input type="range" 
+                                   class="custom-range" 
+                                   id="customRange1"
+                                   [value]="planningDeliveryZone.settings.explorationLevel ? planningDeliveryZone.settings.explorationLevel : 1"
+                                   (change)="updateExplorationLevel($event.target.value)"
+                                   min="1"
+                                   max="10"
+                               >
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <hr class="separator">
+          <!--  <div class="row">  COMENTAR AQUI
+                    <div class="col-6">
+                       <span>{{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.IGNORE_CAPACITY_LIMIT' | translate }}</span>
+                   </div>
+                   <div class="col-6">
+                       <div class="switch float-right">
+                           <label>
+                               <input type="checkbox" 
+                                   [checked]="planningDeliveryZone.settings.ignoreCapacityLimit"  
+                                   (change)="toggleIgnoreCapacityLimit($event.target.checked)"/>
+                                   <span class="lever switch-col-primary"></span>
+                                   {{ '' }}
+                           </label>
+                       </div>
+                   </div>
+               </div> -->
+            <!--    <div class="row">
+                   <div class="col-5 d-flex" style="align-items: center;">
+                       <span>{{ 'DELIVERY_POINTS.CLIENT_DELAY' | translate }}</span>
+                   </div>
+                   <div class="col-7 float-right">
+                       <div class="float-right form-inline">
+                           <div class="mr-2">
+                               <label class="col-form-label" for="formGroupExampleInput">{{'GENERAL.HOURS' | translate}}</label>
+                               <input class="form-control" type="number" min="0"
+                                   max="23" (change)="changeMaxDelayTime($event)" [(ngModel)]="dischargingHours"
+                                   placeholder="{{'GENERAL.HOURS' | translate}}" autocomplete="off"/>
+                           </div>
+                           <div class="mr-2">
+                               <label class="col-form-label" for="formGroupExampleInput">{{'GENERAL.MINUTES' | translate}}</label>
+                               <input class="form-control" type="number" min="0"
+                                   max="59" [(ngModel)]="dischargingMinutes" (change)="changeMaxDelayTime($event)"
+                                   placeholder="{{'GENERAL.MINUTES' | translate}}" autocomplete="off"/>
+                           </div>
+                           <div>
+                               <label class="col-form-label" for="formGroupExampleInput">{{'GENERAL.SECONDS' | translate}}</label>
+                               <input class="form-control" type="number" min="0"
+                                   max="59" [(ngModel)]="dischargingSeconds" (change)="changeMaxDelayTime($event)"
+                                   placeholder="{{'GENERAL.SECONDS' | translate}}" autocomplete="off"/>
+                           </div>  
+                       </div>
+                   </div>
+               </div> -->
+       
+           </div>
+       </div>
+    </div>
+ </div>
+
+ <!-- <mat-divider></mat-divider>
+ 
+ <div class="easyroute-client-parameters">
+        <div class="accordion">
+          <div class="card m-4">
+            
+            <div class="card-header card-grey point" id="optimization-client-panel">
+              <div class="row">
+                <div class="col-12">
+                  <h4 class="title">
+                    <a aria-expanded="true" data-toggle="collapse" data-target="#optimization-client">
+                      {{ 'ROUTE_PLANNING.ZONE.SETTINGS.CUSTOMER_PARAMETERS' | translate }}
+                    </a>
+                  </h4>
+                </div>
+              </div>
+            </div>
+      
+            <div class="card-body collapse show" id="optimization-client">
+                
+                <div class="row">
+                  <div class="col-6 d-flex flex-column justify-content-center">
+                    <span>{{ 'DELIVERY_POINTS.CLIENT_DELAY' | translate }}</span>
+                  </div>
+                  <div class="col-6 form-inline d-flex flex-row justify-content-end">
+                    <div class="mr-2">
+                      <label for="hours" class="col-form-label">{{ 'GENERAL.HOURS' | translate }}</label>
+                      <input 
+                        id="hours" 
+                        type="number" 
+                        min="0" 
+                        max="23" 
+                        class="form-control"
+                        autocomplete="off"
+                        [(ngModel)]="dischargingHours"
+                        (change)="changeMaxDelayTime($event)"
+                        placeholder="{{'GENERAL.HOURS' | translate}}" 
+                      />
+                    </div>
+                    <div class="mr-2">
+                      <label for="minutes" class="col-form-label">{{ 'GENERAL.MINUTES' | translate }}</label>
+                      <input 
+                        type="number" 
+                        id="minutes" 
+                        min="0" 
+                        max="59" 
+                        class="form-control" 
+                        autocomplete="off"
+                        [(ngModel)]="dischargingMinutes"
+                        (change)="changeMaxDelayTime($event)"
+                        placeholder="{{'GENERAL.MINUTES' | translate}}" 
+                      />
+                    </div>
+                    <div>
+                      <label for="seconds" class="col-form-label">{{ 'GENERAL.SECONDS' | translate }}</label>
+                      <input 
+                        type="number" 
+                        id="seconds"
+                        min="0"
+                        max="59"
+                        class="form-control"
+                        autocomplete="off"
+                        [(ngModel)]="dischargingSeconds"
+                        (change)="changeMaxDelayTime($event)"
+                        placeholder="{{'GENERAL.SECONDS' | translate}}" 
+                      />
+                    </div>
+                  </div>
+                </div>-->
+      
+               <!--  <hr class="separator">   ESPERA APERTURA
+                <div class="row">
+                  <div class="col-6 d-flex flex-column justify-content-center">
+                    <span>
+                      {{ 'ROUTE_PLANNING.ZONE.SETTINGS.WAIT_FOR_OPENING' | translate }}
+                    </span>
+                  </div>
+                  <div class="col-6 form-inline d-flex flex-row justify-content-end">
+                    <div class="mr-2">
+                        <label for="hours" class="col-form-label">{{ 'GENERAL.HOURS' | translate }}</label>
+                        <input 
+                          id="hours" 
+                          type="number" 
+                          min="0" 
+                          max="23" 
+                          class="form-control" 
+                        />
+                      </div>
+                      <div class="mr-2">
+                        <label for="minutes" class="col-form-label">{{ 'GENERAL.MINUTES' | translate }}</label>
+                        <input 
+                          type="number" 
+                          id="minutes" 
+                          min="0" 
+                          max="59" 
+                          class="form-control" 
+                        />
+                      </div>
+                      <div>
+                        <label for="seconds" class="col-form-label">{{ 'GENERAL.SECONDS' | translate }}</label>
+                        <input 
+                          type="number" 
+                          id="seconds"
+                          min="0"
+                          max="59"
+                          class="form-control"
+                        />
+                      </div>
+                  </div>
+                </div>
+            </div>
+      
+          </div>
+        </div>
+      </div> -->
+      

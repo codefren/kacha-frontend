@@ -1,0 +1,200 @@
+<div class="row easyroute-notifications-preferences">
+    <div class="col-12">
+        <div class="card padding-body">
+            <div class="card-header general-panel">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-left">
+                        <ng-container *ngIf="orders">
+                            <h2 class="general-h2" *ngIf="orders.id == 0">{{ 'ORDERS.ORDERS_FORM.MY_ORDERS_REGISTER' | translate }}</h2>
+                            <h2 class="general-h2" *ngIf="orders.id && orders.id > 0">{{ 'ORDERS.ORDERS_FORM.MY_ORDERS_UPDATE' | translate }}</h2>
+                        </ng-container>
+
+                    </div>
+                    <div class="col-md-6 col-6 text-right">
+                        <button class="btn btn-default btn-sm" title="{{ 'ORDERS.ORDERS_FORM.MY_ORDERS_RETURN_TO' | translate }}" routerLink='/my-orders'>
+                        <i class="fas fa-undo addVehicleIcon pr-1"></i> {{ 'GENERAL.RETURN' | translate }} </button>
+                    </div>
+                </div>
+            </div>
+            <!-- form -->
+            <div class="card-body">
+                <div *ngIf="orderForm">
+                    <form [formGroup]="orderForm" novalidate (ngSubmit)="createOrder()">
+                        <div class="col-12">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="input-group" [ngClass]="{'has-danger': orderForm.controls['orderDate'].invalid  && (orderForm.controls['orderDate'].dirty || orderForm.controls['orderDate'].touched)}">
+                                            <label class="control-label col-especial" for="orderDate">{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}</label>
+                                            <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}" formControlName="orderDate" ngbDatepicker #d="ngbDatepicker" autocomplete="off" [minDate]="dateNow" [startDate]="dateNow" id="date" [ngClass]="{'form-control-danger': orderForm.controls['orderDate'].invalid  && (orderForm.controls['orderDate'].dirty || orderForm.controls['orderDate'].touched)}">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-dark calendar" (click)="d.toggle()" type="button">
+                                                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <ng-container *ngFor="let validation of ordersMessages.orderDate">
+                                            <small class="form-control-feedback text-danger" *ngIf="orderForm.get('orderDate').hasError(validation.type) && (orderForm.get('orderDate').dirty || orderForm.get('orderDate').touched)"> {{ validation.message }} </small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Card clients -->
+                        <div class="col-12">
+                            <div class="card card-style-general">
+                                <div class="card-header general-panel-table">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6 text-left">
+                                            <h2 class="general-h2-table ">{{ 'CLIENTS.CLIENTS' | translate }}
+                                            </h2>
+                                        </div>
+                                        <div class="col-md-6 col-6 text-right" *ngIf="orders.id ==0">
+                                            <button class="btn btn-default btn-sm" type="button" title="Buscar clientes" (click)="searchClient()">
+                                              <i class="fas fa-plus addVehicleIcon pr-1"></i> {{ 'GENERAL.ADD' | translate }} </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h5 class="text-center" *ngIf="clients.length == 0"> {{ 'ORDERS.ORDERS_FORM.NO_CUSTOMER_DATA_AVALILABLE' | translate }}</h5>
+                                <div class="card-body p-0" *ngIf="clients.length > 0">
+                                    <table class="table table-responsive-lg  table-bordered table-striped mb-0">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="text-center">{{ 'CLIENTS.CODE_CLIENTS' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.NAME' | translate }}</th>
+                                                <th class="text-center">{{'GENERAL.NIF' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.ADDRESS' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.EMAIL' | translate }}</th>
+                                                <th class="text-center" *ngIf="orders.id == 0">{{ 'GENERAL.ACTIONS' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let client of clients">
+                                            <tr>
+                                                <td data-title="Code" class="text-center">{{client.id}}</td>
+                                                <td data-title="Company" class="text-center">{{client.name}}</td>
+                                                <td data-title="Price" class="text-center" *ngIf="client.nif != null">{{client.nif}}</td>
+                                                <td data-title="Price" class="text-center" *ngIf="client.nif == null">{{ 'GENERAL.NOT_AVAILABLE' | translate }}</td>
+                                                <td data-title="Change" class="text-center ">{{client.address}}</td>
+                                                <td data-title="Change %" class="text-center">{{client.email}}</td>
+                                                <td data-title="Open" class="text-center" *ngIf="orders.id == 0"><button class="btn btn-default rounded-button editar btn-datatable" title="Eliminar" (click)="deleteCLientsTable(client.id)"><i class="fas fa-trash"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <!-- card products -->
+                        <div class="col-12">
+                            <div class="card card-style-general">
+                                <div class="card-header general-panel-table">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6 text-left">
+                                            <h2 class="general-h2-table ">{{ 'PRODUCTS_GENERAL.PRODUCTS' | translate }}
+                                            </h2>
+                                        </div>
+                                        <div class="col-md-6 col-6 text-right">
+                                            <button class="btn btn-default btn-sm" type="button" [disabled]="clientId === ''" title="Buscar productos" (click)="searchProducts()">
+                                              <i class="fas fa-plus addVehicleIcon pr-1"></i> {{ 'GENERAL.ADD' | translate }} </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="orderProducts.length == 0">
+                                    <h5 class="text-center"> {{ 'ORDERS.ORDERS_FORM.NO_PRODUCTS_DATE_AVAILABLE' | translate }}</h5>
+                                </ng-container>
+                                <div class="card-body p-0" *ngIf="orderProducts.length > 0">
+                                    <table class="table table-responsive-lg  table-bordered table-striped mb-0">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="text-center">{{ 'GENERAL.NAME' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.MEASURE' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.UNIT_PRICE' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.LAST_PRICE' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.PRICE' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.TAX' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.QUANTITY' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.SUBTOTAL' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.TOTAL' | translate }}</th>
+                                                <th class="text-center">{{ 'GENERAL.ACTIONS' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let prod of orderProducts">
+                                            <tr>
+                                                <td data-title="Company" class="text-center">{{prod.company_product_price.company_product.name}}</td>
+                                                <td data-title="Company" class="text-center">{{prod.measure.name}}</td>
+                                                <td data-title="Company" class="text-center">{{prod.company_product_price.price | currency: 'EUR'}}</td>
+                                                <td data-title="Company" class="text-center" *ngIf="prod.companyClientProductPrice == null">{{prod.company_product_price.price | currency: 'EUR'}}
+                                                    <br *ngIf="prod.companyClientProductPrice == null">
+                                                    <label class="date-size" *ngIf="prod.companyClientProductPrice == null">{{prod.companyClientProductPrice?.updated_at | date: 'dd/MM/yyyy'}}</label>
+                                                </td>
+                                                <td data-title="Company" class="text-center" *ngIf="prod.companyClientProductPrice">{{prod.companyClientProductPrice?.price | currency: 'EUR'}}
+                                                    <br>
+                                                    <label class="date-size">{{prod.companyClientProductPrice?.updated_at | date: 'dd/MM/yyyy'}}</label>
+                                                </td>
+                                                <td class="td-price pl-1 pr-1 text-center">
+                                                    <input class="form-control" size="16" type="number" [min]="minPrice" [disabled]="disable" (change)="changeEvent(prod.id,$event.target.value, prod, labelPrice)" class="form-control" [value]="prod.price">
+                                                </td>
+                                                <td data-title="Change" class="text-center">{{ prod.taxPercent }}%</td>
+                                                <td class="td-quantity  pl-1 pr-1 text-center">
+                                                    <input class="form-control" size="16" type="number" [min]="minQuantity" [disabled]="disable" (change)="changeEvent( prod.id, $event.target.value ,prod ,labelQuantity)" class="form-control" [value]="prod.quantity">
+                                                </td>
+                                                <td data-title="Price" class="text-center">{{ (prod.price * prod.quantity) | currency: 'EUR'}}</td>
+                                                <td data-title="Change" class="text-center ">{{ + (prod.price * prod.quantity) + (((prod.price * prod.quantity) * prod.taxPercent) / 100) | currency: 'EUR'}}</td>
+                                                <td data-title="Open" class="text-center"><button type="button" class="btn btn-default rounded-button editar btn-datatable" title="Eliminar" (click)="deleteProducts(prod.id)"><i class="fas fa-trash"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="style-tfoot">
+                                                <th class="text-center style-tfoot" colspan="6"></th>
+                                                <th class="text-center style-tfoot">{{ quantityTotal }}</th>
+                                                <th class="text-center style-tfoot">{{ subTotalTable | currency: 'EUR' }}</th>
+                                                <th class="text-center style-tfoot" colspan="2">{{ MontTotalTable | currency: 'EUR' }}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                    <div class="row pb-3 pr-3" *ngIf="orders.id !== 0">
+                                        <div class="col-12 print">
+                                            <a class="pointer" (click)="getPdfOrder(orders.id)"><i class="fas fa-print"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <!-- card observations -->
+                        <div class="col-12">
+                            <div class="card card-style-general">
+                                <div class="card-header general-panel-table">
+                                    <div class="row">
+                                        <div class="col-md-12 col-12 text-left">
+                                            <h2 class="general-h2-table ">{{ 'ORDERS.ORDERS_FORM.OBSERVATIONS' | translate }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-12">
+                                        <div class="form-group" [ngClass]="{'has-danger': orderForm.controls['observations'].invalid  && (orderForm.controls['observations'].dirty || orderForm.controls['observations'].touched)}">
+                                            <textarea id="observations" class="form-control style-text-area" formControlName="observations" [ngClass]="{'form-control-danger': orderForm.controls['observations'].invalid  && (orderForm.controls['observations'].dirty || orderForm.controls['observations'].touched)}"></textarea>
+                                        </div>
+                                        <ng-container *ngFor="let validation of ordersMessages.observations">
+                                            <small class="form-control-feedback text-danger" *ngIf="orderForm.get('observations').hasError(validation.type) && (orderForm.get('observations').dirty || orderForm.get('observations').touched)"> {{ validation.message }} </small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-right mt-4">
+                            <button type="submit" class="btn btn-dark" [disabled]="!orderForm.valid || orderProducts.length == 0 || clients.length == 0">{{ 'GENERAL.ACCEPT' | translate }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

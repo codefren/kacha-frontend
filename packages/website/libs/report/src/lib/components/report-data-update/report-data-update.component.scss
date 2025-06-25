@@ -1,0 +1,175 @@
+.report-data-update {
+    .card-header {
+        background: #ffffff;
+        border-radius: 5px 5px 0 0 !important;
+        border-bottom: 2px solid #EFF0F4;
+        padding: 13px 17px 13px 15px;
+        position: relative;
+    }
+    .card-header+.card-body {
+        border-radius: 0px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    .form-control-date {
+        border-top-left-radius: 5px !important;
+        border-bottom-left-radius: 5px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    .form-control {
+        height: 46px;
+        border: 1.5px solid #DFE1E8;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .btn-calendar {
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+    }
+    .btn-primary {
+        height: 45px;
+        background: #D8DAE2;
+        border-radius: 5px;
+    }
+    .btn-default {
+        background: #FFFFFF;
+        border-radius: 5px;
+        border-color: #fff;
+        height: 45px;
+    }
+    .alt-btn-default {
+        width: 134px;
+    }
+    .title-sheet {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .img-returns {
+        vertical-align: baseline;
+    }
+    .title-route {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .title-descargar {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #363740;
+    }
+    .dataTable thead th {
+        font-size: 14px !important;
+        padding: 15px;
+    }
+    .table-content-general-report div .row {
+        border-radius: 5px !important;
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+    .btn-group .dropdown-menu.show {
+        width: 14.5rem;
+        box-shadow: 2px 2px 10px rgb(0 0 0 / 10%);
+        border-radius: 5px;
+        border: 0px solid rgba(0, 0, 0, 0.15);
+    }
+    .padding-card-general {
+        padding-left: 2.6rem !important;
+        padding-right: 2.6rem !important;
+    }
+    .btn-cancel {
+        background-color: #ffffff !important;
+        border: 1.5px solid #DFE1E8;
+        border-radius: 5px;
+        text-align: left;
+        height: 46px;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        img {
+            float: right;
+            margin-top: 5px;
+        }
+    }
+    .btn-cancel-1 {
+        background-color: #ffffff !important;
+        border: 1.5px solid #DFE1E8;
+        border-radius: 5px;
+        height: 46px;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    a {
+        text-decoration: underline !important;
+        color: #3A3A3A !important;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .dp-hidden {
+        width: 0;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+    .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+    }
+    .custom-day.focused {
+        background-color: #e6e6e6;
+    }
+    .custom-day.range,
+    .custom-day:hover {
+        background-color: rgb(2, 117, 216);
+        color: white;
+    }
+    .custom-day.faded {
+        background-color: rgba(2, 117, 216, 0.5);
+    }
+}

@@ -1,0 +1,42 @@
+<div class="model-pdf-delivery-notes">
+
+    <div class="row align-items-center mt-3 mb-3">
+
+        <div class="col-xl-6 col-12 pl-xl-5 text-xl-left text-center">
+
+            <label class="title-ticket"> {{ 'SHEET_ROUTE.DOWNLOAD_PDF_DELIVERY_NOTES' | translate }}  </label>
+
+        </div>
+
+        <!--  <div class="col-xl-6 col-12 pr-xl-5 text-xl-right text-center">
+
+            <button class="btn btn-default" (click)="restar()"> 
+                <img src="assets/icons/rihgt.svg">
+             </button>
+
+            <button class="btn btn-default"> 
+                {{ conunter }} 
+            </button>
+
+            <button class="btn btn-default" (click)="sumar()"> 
+                <img src="assets/icons/left.svg"> 
+            </button>
+
+        </div>
+ -->
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="col-12 text-center" *ngIf="imageLoaded">
+
+            <!--   <img class="img-ticket" [src]="imageLoaded"> -->
+            <div class="embed-responsive embed-responsive-21by9">
+                <iframe class="embed-responsive-item" [src]="imageLoaded"></iframe>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

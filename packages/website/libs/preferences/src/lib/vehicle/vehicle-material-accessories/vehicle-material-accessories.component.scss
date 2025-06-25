@@ -1,0 +1,92 @@
+.material-accessories {
+    .title-road {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-road {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #3B4FFF;
+        }
+    }
+    .switch label input[type=checkbox]:checked+.lever {
+        background-color: #29cc97 !important;
+    }
+    .toogle-style {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .border-col {
+        border: 1px solid #CDD4DA;
+        border-radius: 5px;
+    }
+    .fond-input {
+        background: #EFF0F4 !important;
+    }
+    .title-form-1 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        color: #363740;
+    }
+    .sub-title-form {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        padding: 0.9rem;
+        font-size: 14px;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        align-items: center;
+        color: #363740;
+    }
+    .table tbody {
+        border: 3px solid #F0F0F6;
+    }
+    .add-expenses-type {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        align-items: center;
+        color: #3B4FFF;
+    }
+}

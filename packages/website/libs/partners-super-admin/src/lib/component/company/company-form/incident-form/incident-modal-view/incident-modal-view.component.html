@@ -1,0 +1,319 @@
+<div id="modalComfirmFtp">
+    <section class="card  modal-view-incident-partners">
+        <div class="card-body">
+            <div class="row justify-content-end mb-3">
+                <i class="fas fa-times mr-3 close-button" (click)="activeModal.close(false)"></i>
+            </div>
+
+            <div class="row m-3">
+                <div class="col text-center">
+                    <div class="title color-title">{{ 'INCIDENTS.INCIDENCE' | translate }}</div>
+
+
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <form [formGroup]="incidentForm" class="pl-5 pr-5" style="width: 100%" novalidate>
+
+                    <div class="row mb-5">
+
+                        <div class="col-12 col-md-5 pl-sm-4">
+
+                            <!-- date -->
+
+                            <div class="">
+                                <label class="label-info" for="date">
+                                    {{'INCIDENTS.INCIDENT_DATE' | translate }}
+                                </label>
+                                <p> {{ dateIncident(IncientView.date) }} </p>
+                            </div>
+
+                            <!-- END date -->
+
+                            <!-- clientName -->
+
+                            <div class="">
+                                <label class="label-info" for="clientName">
+                                    {{ 'INCIDENTS.CLIENT_NAME' | translate }}
+                                </label>
+                                <p> {{ IncientView.clientName }} </p>
+                            </div>
+
+                            <!-- end clientName -->
+
+                            <!-- title -->
+
+                            <div class="">
+                                <label class="label-info" for="title">
+                                    {{ 'INCIDENTS.TITLE' | translate }}
+                                </label>
+
+                                <p> {{ IncientView.title }} </p>
+                            </div>
+                            <!-- end title -->
+                        </div>
+
+
+
+                        <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+
+                            <!-- time -->
+
+                            <div class="">
+
+                                <label class="label-info" for="time">
+                                    {{ 'INCIDENTS.TIME_OF_INCIDENT' | translate }}
+                                </label>
+                                <p>{{ getTime(IncientView.time) }}</p>
+                            </div>
+
+                            <!-- END time -->
+
+
+                            <!-- requestFrom -->
+
+                            <div class="">
+                                <label class="label-info" for="contactTypeId">
+                                    {{ 'INCIDENTS.MEANS_BY_WHICH_HAVE_REQUESTED_HELP' | translate }}
+                               </label>
+                                <div class="text-center col-12 p-2" *ngIf="loadingCategory == 'loading'">
+                                    <div class="fa-3x mt-1">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+                                <div class="text-center p-0 col-12" *ngIf="loadingCategory == 'success' && requestFrom.length == 0">
+                                    <p class="text-center text-danger" style="font-size: 13px !important;">
+                                        {{ 'CONFIGURATIONS.CATEGORY.DONT_EXIST_CATEGORY' | translate }}
+                                    </p>
+                                </div>
+                                <ng-container *ngIf="loadingCategory == 'success' && requestFrom.length > 0">
+                                    <p>{{contactTypeId()}}</p>
+                                </ng-container>
+
+                                <div *ngIf="loadingCategory == 'error'">
+                                    <p class="text-danger text-center pointer" (click)="getRequestFrom()">{{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}<ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!</p>
+                                </div>
+
+                                <ng-container *ngFor="let validation of incidentMessages.contactTypeId">
+                                    <small class="form-control-feedback text-danger" *ngIf="incidentForm.get('contactTypeId').hasError(validation.type) && (incidentForm.get('contactTypeId').dirty || incidentForm.get('contactTypeId').touched)
+                                        ">
+                                            {{ validation.message }}
+                                        </small>
+                                </ng-container>
+                            </div>
+
+                            <!-- END requestFrom -->
+
+                            <!-- code  -->
+
+                            <div class="">
+
+                                <label class="label-info" for="code">
+                                    {{ 'INCIDENTS.CODE' | translate }}
+                                </label>
+
+                                <p>{{ IncientView.code }}</p>
+
+                            </div>
+
+                            <!-- END code -->
+                        </div>
+
+                        <div class="col-12 mt-4">
+
+                            <!-- descripcion -->
+
+                            <div class="form-row">
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label for="description">
+                                            {{ 'INCIDENTS.DESCRIPTION' | translate }}
+                                        </label>
+                                        <p class="style-text-area p-3">{{ IncientView.description }}</p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end descripcion -->
+
+                            <!-- outScheduleTime -->
+
+                            <div class="col-lg-12 col-md-12 p-0">
+                                <div class="row">
+                                    <div class="col-12  d-flex flex-row align-items-center">
+                                        <div class="round round-little margin-days">
+                                            <input type="checkbox" id="sunday-week" formControlName="outScheduleTime" />
+                                            <label for="sunday-week"></label>
+                                        </div>
+                                        <label for="sunday-week" class="label-check point">
+                                        {{
+                                            'INCIDENTS.THEIS_INCIDENT_HAS_BEEN_DEALT_WITH_OUTSIDE_THE_TECHNICIANS_WORKING_HOURS'
+                                                | translate
+                                        }}
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- end outScheduleTime -->
+                        </div>
+
+                        <!-- imagen -->
+
+                        <div class="col-12 mt-4 p-0 mb-4">
+                            <div class="form-group p-0 m-0" style="margin-bottom: -25px !important;">
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label for="img">
+                                            {{ 'INCIDENTS.ATTACH_IMAGE' | translate }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+
+                                <ng-container *ngFor="let card of [1, 2, 3, 4, 5]; let i = index">
+                                    <easyroute-image-view [image]="productImages[i]" [index]="i" [promotion]="false" [disabled]="true" (error)="imageError = $event" [delete]="false" [franchise]="false" [incient]="true" (deleteImage)="deleteProductImage($event.id, $event.image)" (updateImage)="_handleReaderLoaded($event.image)"
+                                        (changeMain)="selectMainImage($event)"></easyroute-image-view>
+                                </ng-container>
+                                <div class="col-12 text-center" *ngIf="imageError.length > 0">
+                                    <span class="text-danger">{{ imageError }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- end imagen -->
+
+                        <!-- solved and duration -->
+
+                        <div class="col-md-6 col-12 mt-5">
+
+                            <div class="card">
+                                <div class="card-body color-card-solved text-center">
+
+                                    <label class="text-center tile-solved" for="duration">{{'INCIDENTS.DURATION_OF_THE_RESOLUTION' | translate}}</label>
+                                    <div class="row justify-content-center mb-3 mt-3 size-card">
+                                        <div class="col-md-6 col-12">
+                                            <div class="input-group">
+                                                <input type="time" class="form-control color-control-form-async" id="duration" formControlName="duration" placeholder="{{ 'INCIDENTS.CODE' | translate }}" [ngClass]="{
+                                                    'form-control-danger':
+                                                    incidentForm.controls['duration'].invalid &&
+                                                    (incidentForm.controls['duration'].dirty ||
+                                                    incidentForm.controls['duration'].touched)
+                                                }" />
+                                                <div class="input-group-append">
+                                                    <a class="colorLink input-group-text point color-a-sync" id="tooltip" disabled="false" data-toggle="tooltip" data-placement="top" title="¿Cuanto duro la incidencia?">
+                                                        <img style="width: 26px;" src="assets/icons/optimmanage/create-outlineincident.svg">
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 col-12 mt-5">
+
+                            <div class="card">
+                                <div class="card-body color-card-solved text-center">
+                                    <label class="text-center tile-solved" for="solved">{{'INCIDENTS.HAVE_YOU_BEEN_ABLE_TO_SOLVE_THE_INCIDENT' | translate}}</label>
+
+                                    <div class="row justify-content-center mt-3 mb-3 size-card">
+
+                                        <div class="col-4 col-md-2 text-left p-0">
+                                            <div class="radio-custom radio-success">
+                                                <input type="radio" id="radioExample3" formControlName="solved" (change)="changeSolved(true)" [value]="true" name="solved">
+                                                <label for="radioExample3">Si</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md-2 text-left p-0">
+                                            <div class="radio-custom radio-success">
+                                                <input type="radio" id="radioExample4" formControlName="solved" (change)="changeSolved(false)" [value]="false" name="solved">
+                                                <label for="radioExample4">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end solved and duration -->
+
+                        <div class="col-12 mt-3">
+                            <!-- incidentSolution -->
+
+                            <div class="form-row">
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group" *ngIf="showEdit">
+                                        <label for="incidentSolution">
+                                            {{ 'INCIDENTS.HOW_HAS_IT_BEEN_SOLVED?' | translate }}
+                                        </label>
+                                        <p class="style-text-area p-3">{{ IncientView.incidentSolution }}</p>
+
+                                    </div>
+
+                                    <div class="form-row" *ngIf="!showEdit">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group" [ngClass]="{'has-danger': incidentForm.controls['incidentSolution'].invalid &&
+                                                (incidentForm.controls['incidentSolution'].dirty ||
+                                                incidentForm.controls['incidentSolution'].touched)}">
+                                                <label for="incidentSolution">
+                                                    {{ 'INCIDENTS.HOW_HAS_IT_BEEN_SOLVED?' | translate }}
+                                                </label>
+                                                <textarea id="incidentSolution" type="text" class="form-control style-text-area-create" placeholder="Escribe..." formControlName="incidentSolution" [ngClass]="{'form-control-danger':incidentForm.controls['incidentSolution'].invalid &&
+                                                (incidentForm.controls['description'].dirty ||
+                                                incidentForm.controls[ 'description'].touched)}">
+                                                </textarea>
+                                            </div>
+                                            <ng-container *ngFor="let validation of incidentMessages.incidentSolution">
+                                                <small class="form-control-feedback text-danger" *ngIf="incidentForm.get('incidentSolution').hasError(validation.type) &&
+                                                (incidentForm.get('incidentSolution').dirty ||
+                                                incidentForm.get('incidentSolution').touched)">
+                                                {{ validation.message }}
+                                                </small>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end incidentSolution -->
+                        </div>
+
+                    </div>
+                    <div class="row mb-2 mt-3" *ngIf="!showEdit">
+                        <div class="col-md-6 col-12 text-center text-md-right">
+                            <button class="btn size-btn-modal btn-cancel modal-dismiss" type="button" (click)="activeModal.close(false)">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                        </div>
+
+                        <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                            <button type="submit" class="btn btn-primary size-btn-modal modal-confirm" [disabled]="!incidentForm.valid" (click)="createIncident()">
+                                {{ 'GENERAL.SAVE' | translate }}
+                             </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+</div>

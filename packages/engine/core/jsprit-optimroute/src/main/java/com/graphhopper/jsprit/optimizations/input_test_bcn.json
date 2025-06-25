@@ -1,0 +1,157 @@
+{
+	"deliveryPoints": [
+		{
+			"demand": 0,
+			"serviceTime": 0,
+			"priority": 0,
+			"id": "depot",
+			"coordinates": {
+				"latitude": 41.3246811,
+				"longitude": 2.0372949
+			},
+			"deliveryWindow": {
+				"start": 0,
+				"end": 86399
+			}
+		},
+		{
+			"demand": 12,
+			"serviceTime": 480,
+			"priority": 2,
+			"id": "31",
+			"name": "Ana macia creus",
+			"coordinates": {
+				"latitude": 41.4111672,
+				"longitude": 2.1855286
+			},
+			"deliveryWindow": {
+				"start": 27000,
+				"end": 28000
+			}
+		},
+		{
+			"demand": 9,
+			"serviceTime": 720,
+			"priority": 2,
+			"id": "32",
+			"name": "Farmacia tuset",
+			"coordinates": {
+				"latitude": 41.396667,
+				"longitude": 2.1514129
+			},
+			"deliveryWindow": {
+				"start": 30600,
+				"end": 50400
+			}
+		},
+		{
+			"demand": 22,
+			"serviceTime": 1200,
+			"priority": 2,
+			"id": "33",
+			"name": "Roger de flor",
+			"coordinates": {
+				"latitude": 41.3903046,
+				"longitude": 2.1836582
+			},
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 50400
+			}
+		},
+		{
+			"demand": 22,
+			"serviceTime": 1200,
+			"priority": 2,
+			"id": "35",
+			"name": "Farmacia R.trull",
+			"coordinates": {
+				"latitude": 41.3802088,
+				"longitude": 2.1514317
+			},
+			"deliveryWindow": {
+				"start": 32400,
+				"end": 50400
+			}
+		},
+		{
+			"demand": 5,
+			"serviceTime": 450,
+			"priority": 2,
+			"id": "37",
+			"name": "Farmacia Marti tor",
+			"coordinates": {
+				"latitude": 41.3995194,
+				"longitude": 2.1743916
+			},
+			"deliveryWindow": {
+				"start": 28800,
+				"end": 50400
+			}
+		},
+		{
+			"demand": 3,
+			"serviceTime": 300,
+			"priority": 2,
+			"id": "39",
+			"name": "Farmacia Teresa Garcia",
+			"coordinates": {
+				"latitude": 41.4038923,
+				"longitude": 2.1616525
+			},
+			"deliveryWindow": {
+				"start": 30600,
+				"end": 50400
+			}
+		},
+		{
+			"demand": 5,
+			"serviceTime": 450,
+			"priority": 2,
+			"id": "44",
+			"name": "FArmacia Bertolin",
+			"coordinates": {
+				"latitude": 41.3754349,
+				"longitude": 2.1391738
+			},
+			"deliveryWindow": {
+				"start": 31500,
+				"end": 50400
+			}
+		},
+		{
+			"demand": 15,
+			"serviceTime": 1200,
+			"priority": 2,
+			"id": "45",
+			"name": "Farmacia pallares",
+			"coordinates": {
+				"latitude": 41.3978254,
+				"longitude": 2.1406
+			},
+			"deliveryWindow": {
+				"start": 30600,
+				"end": 50400
+			}
+		}
+	],
+	"vehicles": [
+		{
+			"capacity": 500
+		}
+	],
+	"options": {
+		"minVehicles": 0,
+		"ignoreCapacityLimit": false,
+		"explorationLevel": 5,
+		"forceDepartureTime": false,
+		"optimizeFromIndex": 0,
+		"maxDelayTime": 0,
+		"objectivePreferences": {
+			"travelDistance": 0.25,
+			"numVehicles": 0.25,
+			"customerSatisfaction": 0.25,
+			"vehicleTimeBalance": 0.25
+		}
+	}
+}

@@ -1,0 +1,46 @@
+<div class="col-12 loade-package-form">
+
+    <div class="form-row">
+        <div class="col-12 mt-2 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                    justify-content-sm-between  padding-document-table mt-1">
+            <div class="col-md-12 col-6 col-sm-7 d-flex align-items-center  flex-sm-row flex-column align-items-center  toggle-pointer p-0 pt-4 mb-4">
+                <span class="pl-lg-4 pl-sm-4"> <img src="assets/icons/loadingDock/loaded.svg" class="pr-2"> {{ 'LOADING_DOCK.FORM.LOADE' | translate }} </span>
+            </div>
+        </div>
+
+        <div class="col-12 p-0 font-generals">
+            <table id="tableLoadePackage" style="width: 100%; text-align: center;" class="table table-striped table-bordered mb-0">
+                <thead class="table-head">
+                    <tr>
+                        <th style="border-left: 1px solid #7387c2 !important;"> {{ 'LOADING_DOCK.SETTING.TYPE_PACKAGE' | translate }} </th>
+
+                        <th style="border-right: 1px solid #7387c2 !important;"> {{ 'LOADING_DOCK.FORM.QUANTITY' | translate }} </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of loadPackage">
+
+                        <td> {{ item.name }} </td>
+
+                        <td> {{ item.quantity }} </td>
+                    </tr>
+
+                    <tr *ngIf="loadPackage.length == 0">
+                        <td colspan="14" class="text-center data-avalilable">
+                            {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                        </td>
+                    </tr>
+
+                </tbody>
+                <tfoot *ngIf="loadPackage.length > 0">
+                    <tr>
+                        <td>TOTAL</td>
+
+                        <td> {{ totalLoadPackage }} </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>

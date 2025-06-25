@@ -1,0 +1,414 @@
+<!-- <div class="easyroute-register-three" style="height: 100vh;">
+    <div class="row h-100">
+        <div class="col-6 p-0 img-100 d-none d-xl-block">
+            <div class="w-100 h-100 d-flex flex-column justify-content-end">
+                <h3 class="title">
+                    "Con Optimmanage, pasar pedido a los conductores <br /> se ha convertido en un proceso rápido y sencillo" <br />
+                    <span class="font-italic edit">Mamafiore</span>
+                </h3>
+            </div>
+        </div>
+        <div class="col-xl-6 col-12s d-flex flex-column justify-content-between margin">
+            <div class="text-center">
+                <img src="assets/images/logito300x300.png" alt="logo" class="logo">
+                <h2><b>{{ 'REGISTER.CREATE_ACCOUNT' | translate }}</b></h2>
+                <p>{{ 'REGISTER.START_TRIAL' | translate }}</p>
+                <h4 class="mt-5"><b>{{ 'REGISTER.BUSINESS_DATA' | translate }}</b></h4>
+
+                <form class="mt-4" class="width" novalidate [formGroup]="registerThreeForm" (ngSubmit)="submit()">
+                    <div class="form-row text-center">
+                        <div class="form-group col-6">
+                          <input type="radio" 
+                            (change)="changeStyle( $event.target.value )" 
+                            class="form-check-input" 
+                            formControlName="clientType" 
+                            id="auto" 
+                            value="autonomus" 
+                          />
+                          <label [ngClass]="{ 'selected-radio': type === true, 'no-selected': type === false }" for="auto" class="form-check-label">Autónomo</label>
+                        </div>
+                        <div class="form-group col-6">
+                          <input 
+                            type="radio" 
+                            value="business" 
+                            (change)="changeStyle( $event.target.value )" 
+                            id="bus" 
+                            formControlName="clientType" 
+                            class="form-check-input" 
+                            value="business" 
+                          />
+                          <label [ngClass]="{ 'selected-radio': type === false, 'no-selected': type === true }" for="bus" class="form-check-label">Empresa</label>
+                        </div>
+                      </div>
+                    <div class="form-row text-center">
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['country'].invalid  && 
+                            (registerThreeForm.controls['country'].dirty || 
+                            registerThreeForm.controls['country'].touched)}">
+                            <select formControlName="country" (change)="changeCountry($event.target.value)" class="form-control forms">
+                                <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
+                            </select>
+                            <ng-container *ngFor="let validation of companyMessages.country">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('country').hasError(validation.type) 
+                                    && (registerThreeForm.get('country').dirty 
+                                    || registerThreeForm.get('country').touched)">
+                                    {{ validation.message }} 
+                                </small>
+                            </ng-container>
+
+                        </div>
+
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                'has-danger': registerThreeForm.controls['name'].invalid  && 
+                                (registerThreeForm.controls['name'].dirty || 
+                                registerThreeForm.controls['name'].touched)}">
+                            <input type="text" class="form-control forms" formControlName="name" placeholder="{{ 'CLIENTS.CLIENTS_LIST.NAME' | translate }}">
+                            <ng-container *ngFor="let validation of companyMessages.name">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('name').hasError(validation.type) 
+                                    && (registerThreeForm.get('name').dirty 
+                                    || registerThreeForm.get('name').touched)">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                'has-danger': registerThreeForm.controls['nif'].invalid  && 
+                                (registerThreeForm.controls['nif'].dirty || 
+                                registerThreeForm.controls['nif'].touched)}">
+                            <input type="text" class="form-control forms" formControlName="nif" placeholder="{{ 'CLIENTS.CLIENTS_LIST.NIF' | translate }}">
+                            <ng-container *ngFor="let validation of companyMessages.nif">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('nif').hasError(validation.type) 
+                                    && (registerThreeForm.get('nif').dirty 
+                                    || registerThreeForm.get('nif').touched)">
+                                    {{ validation.message }}
+                            </small>
+                            </ng-container>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['phone'].invalid  && 
+                            (registerThreeForm.controls['phone'].dirty || 
+                            registerThreeForm.controls['phone'].touched)}">
+                            <input type="text" class="form-control forms" formControlName="phone" placeholder="{{ 'CLIENTS.CLIENTS_FORMS.PHONE' | translate }}">
+                            <ng-container *ngFor="let validation of companyMessages.phone">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('phone').hasError(validation.type) 
+                                    && (registerThreeForm.get('phone').dirty 
+                                    || registerThreeForm.get('phone').touched)">
+                                    {{ validation.message }} {{ validation.type === 'invalidPhone' ? registerThreeForm.get('country').value : '' }}
+                                </small>
+                            </ng-container>
+                        </div>
+
+                       
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['email'].invalid  && 
+                            (registerThreeForm.controls['email'].dirty || 
+                            registerThreeForm.controls['email'].touched)}">
+                            <input type="text" id="Email" formControlName="email" autocomplete="off" placeholder="{{'REGISTER.REGISTER_FOUR.EMAIL' | translate }}" autocomplete="off" class="form-control forms">
+                            <ng-container *ngFor="let validation of companyMessages.email">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('email').hasError(validation.type) && (registerThreeForm.get('email').dirty || registerThreeForm.get('email').touched)"> {{ validation.message }} </small>
+                            </ng-container>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['email_confirmation'].invalid  && 
+                            (registerThreeForm.controls['email_confirmation'].dirty || 
+                            registerThreeForm.controls['email_confirmation'].touched)}">
+                            <input type="text" id="email_confirmation" autocomplete="off" formControlName="email_confirmation" placeholder="{{'REGISTER.REGISTER_FOUR.EMAIL_CONFIRMATION' | translate }}" autocomplete="off" class="form-control forms">
+                            <ng-container *ngFor="let validation of companyMessages.email_confirmation">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('email_confirmation').hasError(validation.type) && (registerThreeForm.get('email_confirmation').dirty || registerThreeForm.get('email_confirmation').touched)"> {{ validation.message }} </small>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['password'].invalid  && 
+                            (registerThreeForm.controls['password'].dirty || 
+                            registerThreeForm.controls['password'].touched)}">
+                            <input type="password" id="password" autocomplete="off" formControlName="password" placeholder="{{'REGISTER.REGISTER_FOUR.PASSWORD' | translate }}" autocomplete="off" class="form-control forms">
+                            <ng-container *ngFor="let validation of companyMessages.password">
+                                <small class="form-control-feedback text-danger" *ngIf="companyMessages.get('password').hasError(validation.type) && (companyMessages.get('password').dirty || companyMessages.get('password').touched)"> {{ validation.message }} </small>
+                            </ng-container>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-6 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['password_confirmation'].invalid  && 
+                            (registerThreeForm.controls['password_confirmation'].dirty || 
+                            registerThreeForm.controls['password_confirmation'].touched)}">
+                            <input type="password" id="password_confirmation" autocomplete="off" formControlName="password_confirmation" placeholder="{{ 'REGISTER.REGISTER_FOUR.PASSWORD_CONFIRMATION' | translate }}" autocomplete="off" class="form-control forms">
+                            <ng-container *ngFor="let validation of companyMessages.password_confirmation">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('password_confirmation').hasError(validation.type) && (registerThreeForm.get('password_confirmation').dirty || registerThreeForm.get('password_confirmation').touched)"> {{ validation.message }} </small>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                            'has-danger': registerThreeForm.controls['serviceTypeId'].invalid  && 
+                            (registerThreeForm.controls['serviceTypeId'].dirty || 
+                            registerThreeForm.controls['serviceTypeId'].touched)}">
+                            <select type="text" formControlName="serviceTypeId" class="form-control forms">
+                            <option value="">Seleccione gremio...</option>
+                            <option [value]="service.id" *ngFor="let service of servicesType">
+                              {{ service.name }}
+                            </option>
+                          </select>
+                            <ng-container *ngFor="let validation of companyMessages.serviceTypeId">
+                                <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('serviceTypeId').hasError(validation.type) 
+                              && (registerThreeForm.get('serviceTypeId').dirty 
+                              || registerThreeForm.get('serviceTypeId').touched)">
+                              {{ validation.message }}
+                            </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-row"> 
+                        <div class="d-flex flex-column justify-content-center align-items-start mt-2 especial">
+                            <div class="mb-2">
+                                <div class="checkbox-custom chekbox-primary style-checkbox">
+                                    <input id="for-project" type="checkbox" formControlName="acceptNewslettersAndOffers" name="acceptNewslettersAndOffers">
+                                    <label for="for-project" class="ml-2 text-margin">{{ 'REGISTER.REGISTER_FOUR.CONSENT_NEWSLETTERS_AND_OFFERS' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="checkbox-custom chekbox-primary style-checkbox" [ngClass]="{'has-danger': registerThreeForm.controls['termsAccepted'].invalid  && (registerThreeForm.controls['termsAccepted'].dirty || registerThreeForm.controls['termsAccepted'].touched)}">
+                                    <input id="termsAccepted" type="checkbox" name="termsAccepted" (change)="changeTermsCk($event.target.checked)" [ngClass]="{'registerfourForm-control-danger': registerThreeForm.controls['termsAccepted'].invalid  && (registerThreeForm.controls['termsAccepted'].dirty || registerThreeForm.controls['termsAccepted'].touched)}">
+                                    <label for="termsAccepted" class="ml-2 aling-terms">{{ 'REGISTER.REGISTER_FOUR.I_ACCEPT_THE' | translate }}</label>{{ ' ' }} <span (click)="changeTerms()" class="color-terns">{{ 'REGISTER.REGISTER_FOUR.TERMS_AND_CONDITIONS' | translate }}</span>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="checkbox-custom chekbox-primary style-checkbox" [ngClass]="{'has-danger': registerThreeForm.controls['acceptPrivacyPolicy'].invalid  && (registerThreeForm.controls['acceptPrivacyPolicy'].dirty || registerThreeForm.controls['acceptPrivacyPolicy'].touched)}">
+                                    <input id="acceptPrivacyPolicy" type="checkbox" name="acceptPrivacyPolicy" (change)="changePrivacy($event.target.checked)" [ngClass]="{'registerfourForm-control-danger': registerThreeForm.controls['acceptPrivacyPolicy'].invalid  && (registerThreeForm.controls['acceptPrivacyPolicy'].dirty || registerThreeForm.controls['acceptPrivacyPolicy'].touched)}">
+                                    <label for="acceptPrivacyPolicy" class="aling-police" style="margin-left: 0.5em !important">{{ 'REGISTER.REGISTER_FOUR.ACCEPT_THE' | translate }}</label> {{ ' ' }} <span (click)="changePrivacyPolicy()" class="color-terns">{{ 'REGISTER.REGISTER_FOUR.PRIVACY_POLICIES' | translate }}</span>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-12 mt-2">
+                            <div class="d-flex flex-row justify-content-center">
+                                <re-captcha formControlName="captcha" [siteKey]="recaptcha.siteKey"></re-captcha>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-5 mb-3">
+                        <div class="col-12 d-flex flex-row justify-content-center">
+                            <button class="btn btn-primary ml-2" type="submit" [disabled]="registerThreeForm.invalid">
+                                <span>{{ 'REGISTER.REGISTER_FOUR.CREATE_ACCOUNT' | translate }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center">
+                <p>{{ 'REGISTER.HAVE_ACCOUNT' | translate }}
+                    <a class="back-login" routerLink="/login">{{ 'GENERAL.TO_ACCESS' | translate }}</a>
+                </p>
+                <select id="" class="select" (change)="changeLanguage( $event.target.value )">
+                    <option value="es" selected>Español</option>
+                    <option value="en">Ingles</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="easyroute-login w-100" style="height: 100vh">
+
+    <section role="main" class="container mt-lg-5 pt-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12"><i class="point fas fa-arrow-left fa-2x" routerLink="/login"></i></div>
+                </div>
+                <div class="row p-4">
+                    <div class="col-md-5 col-xs-12 border-right mb-4 mb-sm-0">
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12 text-center pb-3 pt-5">
+                                <img src="assets/polpoo/login/login-logo.png" width="150" alt="">
+                            </div>
+                            <div class="col-md-12 col-xs-12 text-center">
+                                <span class="slogan">Crea una cuenta <br> <b> sin compromiso</b></span>
+                            </div>
+                            <div class="col-md-12 col-xs-12 text-center mt-5">
+                                <span class="sub-slogan">Échale un vistazo y luego <br> nos cuentas </span>
+                            </div>
+                            <div class="col-md-12 col-xs-12 text-center mt-5">
+                                <span class="card-title">Sin registro de tarjeta</span>
+                            </div>
+                            <div class="col-md-12 col-xs-12 text-center">
+                                <span class="is-new"> ¿Ya tienes cuenta? </span>
+                                <a style="font-size: 16px;" routerLink="/login"> <b> {{ 'GENERAL.TO_ACCESS' | translate }}</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-xs-12  pl-sm-5 pr-sm-5">
+                        <h2 class="login"><b>{{ 'LOGIN.REGISTER' | translate }}</b></h2>
+
+                        <form class="mt-2" class="width" novalidate [formGroup]="registerThreeForm" (ngSubmit)="submit()">
+                            <div class="form-row">
+                                <div class="form-group col-12 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                    'has-danger': registerThreeForm.controls['name'].invalid  && 
+                                    (registerThreeForm.controls['name'].dirty || 
+                                    registerThreeForm.controls['name'].touched)}">
+                                    <label for="name" class="form-label">{{ 'REGISTER.REGISTER_FOUR.NAME' | translate }}</label>
+                                    <input type="text" class="form-control forms" formControlName="name" placeholder="{{ 'CLIENTS.CLIENTS_LIST.NAME' | translate }}">
+                                    <ng-container *ngFor="let validation of companyMessages.name">
+                                        <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('name').hasError(validation.type) 
+                                            && (registerThreeForm.get('name').dirty 
+                                            || registerThreeForm.get('name').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </ng-container>
+                                </div>
+                                <div class="form-group col-12 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                    'has-danger': registerThreeForm.controls['country'].invalid  && 
+                                    (registerThreeForm.controls['country'].dirty || 
+                                    registerThreeForm.controls['country'].touched)}">
+                                    <label for="country" class="form-label">{{ 'REGISTER.REGISTER_FOUR.COUNTRY' | translate }}</label>
+                                    <select formControlName="country" (change)="changeCountry($event.target.value)" class="form-control forms">
+                                        <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
+                                    </select>
+                                    <ng-container *ngFor="let validation of companyMessages.country">
+                                        <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('country').hasError(validation.type) 
+                                            && (registerThreeForm.get('country').dirty 
+                                            || registerThreeForm.get('country').touched)">
+                                            {{ validation.message }} 
+                                        </small>
+                                    </ng-container>
+
+                                </div>
+                                <div class="form-group col-12 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                    'has-danger': registerThreeForm.controls['phone'].invalid  && 
+                                    (registerThreeForm.controls['phone'].dirty || 
+                                    registerThreeForm.controls['phone'].touched)}">
+                                    <label for="phone" class="form-label">{{ 'REGISTER.REGISTER_FOUR.PHONE' | translate }}</label>
+                                    <input type="text" class="form-control forms" formControlName="phone" placeholder="{{ 'REGISTER.REGISTER_FOUR.PHONE' | translate }}">
+                                    <ng-container *ngFor="let validation of companyMessages.phone">
+                                        <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('phone').hasError(validation.type) 
+                                            && (registerThreeForm.get('phone').dirty 
+                                            || registerThreeForm.get('phone').touched)">
+                                            {{ validation.message }} {{ validation.type === 'invalidPhone' ? registerThreeForm.get('country').value : '' }}
+                                        </small>
+                                    </ng-container>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-12 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                    'has-danger': registerThreeForm.controls['email'].invalid  && 
+                                    (registerThreeForm.controls['email'].dirty || 
+                                    registerThreeForm.controls['email'].touched)}">
+                                    <label for="email" class="form-label">{{ 'REGISTER.REGISTER_FOUR.EMAIL' | translate }}</label>
+                                    <input type="text" id="Email" formControlName="email" autocomplete="off" placeholder="{{'REGISTER.REGISTER_FOUR.EMAIL' | translate }}" autocomplete="off" class="form-control forms">
+                                    <ng-container *ngFor="let validation of companyMessages.email">
+                                        <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('email').hasError(validation.type) && (registerThreeForm.get('email').dirty || registerThreeForm.get('email').touched)"> {{ validation.message }} </small>
+                                    </ng-container>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-12 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                    'has-danger': registerThreeForm.controls['password'].invalid  && 
+                                    (registerThreeForm.controls['password'].dirty || 
+                                    registerThreeForm.controls['password'].touched)}">
+                                    <label for="password" class="form-label">{{ 'REGISTER.REGISTER_FOUR.PASSWORD' | translate }}</label>
+                                    <input type="password" id="password" autocomplete="off" formControlName="password" placeholder="{{'REGISTER.REGISTER_FOUR.PASSWORD' | translate }}" autocomplete="off" class="form-control forms">
+                                    <ng-container *ngFor="let validation of companyMessages.password">
+                                        <small class="form-control-feedback text-danger" *ngIf="companyMessages.get('password').hasError(validation.type) && (companyMessages.get('password').dirty || companyMessages.get('password').touched)"> {{ validation.message }} </small>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12 pt-2 col-sm-12 d-flex flex-column justify-content-center mb-2" [ngClass]="{
+                                    'has-danger': registerThreeForm.controls['companyProfileTypeId'].invalid  && 
+                                    (registerThreeForm.controls['companyProfileTypeId'].dirty || 
+                                    registerThreeForm.controls['companyProfileTypeId'].touched)}">
+                                    <select type="text" formControlName="companyProfileTypeId" class="form-control forms">
+                                    <option value="">Selecciona un pack</option>
+                                    <option [value]="service.id" *ngFor="let service of servicesType">
+                                      {{ service.name }}
+                                    </option>
+                                  </select>
+                                    <ng-container *ngFor="let validation of companyMessages.companyProfileTypeId">
+                                        <small class="form-control-feedback text-danger" *ngIf="registerThreeForm.get('companyProfileTypeId').hasError(validation.type) 
+                                      && (registerThreeForm.get('companyProfileTypeId').dirty 
+                                      || registerThreeForm.get('companyProfileTypeId').touched)">
+                                      {{ validation.message }}
+                                    </small>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="d-flex flex-column justify-content-center align-items-start mt-2 especial">
+                                    <div class="mb-2">
+                                        <div class="checkbox-custom chekbox-primary style-checkbox" [ngClass]="{'has-danger': registerThreeForm.controls['termsAccepted'].invalid  && (registerThreeForm.controls['termsAccepted'].dirty || registerThreeForm.controls['termsAccepted'].touched)}">
+                                            <input id="termsAccepted" type="checkbox" name="termsAccepted" (change)="changeTermsCk($event.target.checked)" [ngClass]="{'registerfourForm-control-danger': registerThreeForm.controls['termsAccepted'].invalid  && (registerThreeForm.controls['termsAccepted'].dirty || registerThreeForm.controls['termsAccepted'].touched)}">
+                                            <label for="termsAccepted" class="ml-2 aling-terms">{{ 'REGISTER.REGISTER_FOUR.I_ACCEPT_THE' | translate }}</label>{{ ' ' }} <a [href]="URL_ACCEPT_TERMS_CONDITIONS" target="_blank" class="color-terns">{{ 'REGISTER.REGISTER_FOUR.TERMS_AND_CONDITIONS' | translate }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="checkbox-custom chekbox-primary style-checkbox" [ngClass]="{'has-danger': registerThreeForm.controls['acceptPrivacyPolicy'].invalid  && (registerThreeForm.controls['acceptPrivacyPolicy'].dirty || registerThreeForm.controls['acceptPrivacyPolicy'].touched)}">
+                                            <input id="acceptPrivacyPolicy" type="checkbox" name="acceptPrivacyPolicy" (change)="changePrivacy($event.target.checked)" [ngClass]="{'registerfourForm-control-danger': registerThreeForm.controls['acceptPrivacyPolicy'].invalid  && (registerThreeForm.controls['acceptPrivacyPolicy'].dirty || registerThreeForm.controls['acceptPrivacyPolicy'].touched)}">
+                                            <label for="acceptPrivacyPolicy" class="aling-police" style="margin-left: 0.5em !important">{{ 'REGISTER.REGISTER_FOUR.ACCEPT_THE' | translate }}</label> {{ ' ' }} <a [href]="URL_PRIVACY_TERMS" target="_blank"
+                                                class="color-terns">{{ 'REGISTER.REGISTER_FOUR.PRIVACY_POLICIES' | translate }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-row form-group mt-2">
+                                <div class="form-group col-12 mt-2">
+                                    <div class="d-flex flex-row justify-content-center transform-scale">
+                                        <re-captcha 
+                                            formControlName="captcha" 
+                                            [size]="compactRecaptcha" 
+                                            [siteKey]="recaptcha.siteKey"    
+                                        ></re-captcha>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-3">
+                                <div class="col-12 d-flex flex-row justify-content-center">
+                                    <button class="button-signin btn btn-secondary  mt-2 p-2" type="submit" [disabled]="registerThreeForm.invalid">
+                                       <!--  <span style="font-size: 18px;">{{ 'REGISTER.REGISTER_FOUR.CREATE_ACCOUNT' | translate }}</span> -->
+                                        <b style="font-size: 18px;">{{ 'REGISTER.REGISTER_FOUR.CREATE_ACCOUNT' | translate }}</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

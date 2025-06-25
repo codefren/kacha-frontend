@@ -1,0 +1,104 @@
+<div class="easyroute-pay-method mt-5" *ngIf="canSuscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="title-page-methods">
+                    {{ 'INVOICING.PAY_METHOD.NAMES' | translate }}
+                </p>
+            </div>
+        </div>
+
+        <div class="row mb-2" *ngFor="let card of cards">
+            <div class="col-lg-6 col-sm-12">
+                <section class="card card-horizontal">
+                    <div class="card-body pt-2 pb-2 pl-3">
+                        <div class="row">
+                            <div class="col-1 pl-3 pr-2">
+                                <div class="row">
+                                    <div class="col mt-1">
+                                        <div class="round" *ngIf="card.default">
+                                            <input type="checkbox" class="isActive" id="row_${ data.id }" checked="true"
+                                                disabled=true />
+                                            <label for="row_${ data.id }"></label>
+                                        </div>
+
+                                        <div class="round" (click)="changeCard( card )" *ngIf="!card.default">
+                                            <input type="checkbox" class="isActive" id="row_${ data.id }"
+                                                disabled=true />
+                                            <label for="row_${ data.id }"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-9 col-sm-10">
+                                <p>**** **** **** {{ card.card.last4 }}</p>
+                                <p>{{ card.card.brand }}</p>
+                                <p>{{ card.card.exp_month }}/{{ card.card.exp_year }}</p>
+                            </div>
+
+                            <div class="col-1 pl-0 pr-4">
+                                <img class="icons-datatable point" (click)="deleteCard( card )"
+                                    src="assets/icons/optimmanage/trash-bin.svg">
+                                <!-- <div class="row">
+                                    <div class="col">
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 point" (click)="addPayMethod()">
+                <section class="card card-horizontal">
+                    <div class="card-body add-another-card p-4">
+                        <div class="row p-2">
+                            <div class="col-10">
+                                <p>{{ 'INVOICING.PAY_METHOD.ADD_ANOTHER_CAR' | translate }}</p>
+                            </div>
+
+                            <div class="col-2 p-0">
+                                <div class="row text-right">
+                                    <div class="col p-0 pr-4">
+                                        <img class="icons-datatable point" src="assets/icons/optimmanage/plus.svg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col">
+                <p class="title-page-methods">
+                    {{ 'INVOICING.PAY_METHOD.NAMES' | translate }}
+                </p>
+                <table class="table table-striped mb-2" id="cards">
+                    <thead class="text-center">
+                        <tr>
+                            <th>{{ 'INVOICING.PAY_METHOD.BRAND' | translate }}</th>
+                            <th>{{ 'INVOICING.PAY_METHOD.BRAND' | translate }}</th>
+                            <th>{{ 'INVOICING.PAY_METHOD.DATE_EXPIRED' | translate }}</th>
+                            <th>{{ 'INVOICING.PAY_METHOD.DEFAULT' | translate }}</th>
+                            <th>{{ 'INVOICING.PAY_METHOD.DELETE' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center"></tbody>
+                </table>
+            </div>
+        </div> -->
+
+        <div class="row pb-5" *ngIf="cards.length > 0 && isSubscribed">
+            <div class="col-12 mt-5 text-md-left text-center">
+                <button class="btn btn-cancel size-btn-form" (click)="cancel()">
+                    {{ 'INVOICING.CANCEL_SUSCRIPTION' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

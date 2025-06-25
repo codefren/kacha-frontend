@@ -1,0 +1,575 @@
+<div class="latest-roardmap">
+    <div class="card">
+
+        <div class="card-body p-xl-4">
+            <div class="row" *ngIf="routeSheet && routeSheet.formStructure">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [value]="routeSheet.activateFinalRouteSheet" [checked]="routeSheet.activateFinalRouteSheet" (change)="changeGeneral($event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="lever-text toogle-style"> {{'SHEET_ROUTE.ACTIVATE_POST_ROUTE_FORM' | translate}} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{'SHEET_ROUTE.THE_FORM_AFTER_THE_ROUTE_WILL_BE_THE_SCREEN_THAT_WILL_APPEAR_IN_THE_APP_TO_THE_DRIVER_BEFORE_STARTING_THE_ROUTE_SO_THAT' | translate }} </p>
+                </div>
+
+                <ng-container *ngIf="routeSheet.activateFinalRouteSheet">
+                    <div class="col-12 mt-4">
+
+                        <div class="border-col">
+
+                            <div class="row mt-3 p-3">
+
+                                <div class="col-xl-5 col-12">
+
+                                    <!-- card form -->
+                                    <div class="card">
+
+                                        <div class="card-body fond-input">
+
+                                            <div class="row overflow-scroos">
+                                                <ng-container *ngFor="let item of showForm">
+                                                    <!-- charger -->
+                                                    <ng-container *ngIf="item.id === 1 && item.isActive">
+                                                        <div class="col-12">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{ 'SHEET_ROUTE.CHARGER_1' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{ 'SHEET_ROUTE.WHO_HAS_LOADED_THE_VEHICLE' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <input class="form-control form-control-lg" type="text" readonly placeholder="{{ 'SHEET_ROUTE.WRITE' | translate }}">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                    <!-- end charger -->
+
+                                                    <!-- timer -->
+
+                                                    <ng-container *ngIf="item.id === 2 && item.isActive">
+                                                        <div class="col-xl-6 col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{ 'SHEET_ROUTE.BEGINNING' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{ 'SHEET_ROUTE.CHARGE_START_TIME' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <input class="form-control form-control-lg" type="text" readonly placeholder="00:00">
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-xl-6 col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{'SHEET_ROUTE.FINISH' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{'SHEET_ROUTE.LOAD_END_TIME' | translate}} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <input class="form-control form-control-lg" type="text" readonly placeholder="00:00">
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </ng-container>
+
+                                                    <!-- end timer -->
+
+                                                    <!-- temperature -->
+                                                    <ng-container *ngIf="item.id === 3 && item.isActive">
+                                                        <div class="col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{'SHEET_ROUTE.TEMPERATURE' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{'SHEET_ROUTE.WHAT_ID_THE_TEMPERATURE_OF_THE_CHAMBER' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0°">
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for=""> {{'SHEET_ROUTE.DEGREES' | translate }} </label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                    <!-- end temperature -->
+
+                                                    <!-- km -->
+                                                    <ng-container *ngIf="item.id === 4 && item.isActive">
+                                                        <div class="col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{'SHEET_ROUTE.KM_ARRIVAL' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{'SHEET_ROUTE.WITH_HOW_MANY_KM_HAS_THE_VEHICLES_ARRIVED' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0°">
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for="">Km</label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </ng-container>
+
+                                                    <!-- end km -->
+
+                                                    <!-- CARBURANTE -->
+                                                    <ng-container *ngIf="item.id === 5 && item.isActive">
+                                                        <div class="col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{'SHEET_ROUTE.FUEL' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{'SHEET_ROUTE.INDICATES_LITERS_AND_AMOUNT' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <label for="" class="label-sub-none"> {{'SHEET_ROUTE.TYPES' | translate }} </label>
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <img src="assets/icons/down.png">
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <label for="" class="label-sub-none"> {{'SHEET_ROUTE.SUPPLIER' | translate }} </label>
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <img src="assets/icons/down.png">
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0,00">
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for="">{{'SHEET_ROUTE.LITERS' | translate }}</label>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0,00">
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for="">km</label>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0,00">
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for="">€</label>
+
+                                                                        </div>
+
+                                                                        <div class="col-12 mt-2">
+                                                                            <button class="btn btn-default btn-block">
+                                                                        {{ 'SHEET_ROUTE.ADD_TICKET' | translate }}
+                                                                        </button>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+                                                                    <div class="row align-items-center">
+
+
+
+                                                                        <div class="col-12 mt-2">
+                                                                            <button class="btn btn-outline-primary btn-block">
+                                                                            + {{'SHEET_ROUTE.ADD_ANOTHER' | translate }}
+                                                                        </button>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                    <!-- END CARBURANTE -->
+
+                                                    <!-- Total envases -->
+                                                    <ng-container *ngIf="item.id === 6 && item.isActive">
+                                                        <div class="col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{'SHEET_ROUTE.TOTAL_CONTAINERS' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{'SHEET_ROUTE.INDICATES_THE_TOTAL_NUMBER_OF_ARRIVAL_PACKAGES' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0">
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for="">Total </label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                    <!-- end Total envases -->
+
+                                                    <!-- GASTOS -->
+                                                    <ng-container *ngIf="item.id === 7 && item.isActive">
+                                                        <div class="col-12 mt-3">
+
+                                                            <div class="card">
+
+                                                                <div class="card-body">
+
+                                                                    <label class="title-form-1" for=""> {{'SHEET_ROUTE.BILLS_' | translate }} </label>
+
+                                                                    <p class="sub-title-road mb-0 mt-1"> {{'SHEET_ROUTE.INDICATE_THE_EXPENSES_YOU_HAVE_HAD_ON_THE_TRIP' | translate }} </p>
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <label for="" class="label-sub-none"> {{'SHEET_ROUTE.TYPES' | translate }} </label>
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <img src="assets/icons/down.png">
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <label for="" class="label-sub-none"> {{ 'SHEET_ROUTE.SUPPLIER' | translate }}</label>
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <img src="assets/icons/down.png">
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <label for="" class="label-sub-none"> {{'SHEET_ROUTE.CONCEPTS' | translate }}</label>
+
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <img src="assets/icons/down.png">
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row align-items-center">
+
+                                                                        <div class="col-xl-8">
+
+                                                                            <input class="form-control form-control-lg" readonly type="text" placeholder="0,00">
+                                                                        </div>
+
+                                                                        <div class="col-xl-4 text-right">
+
+                                                                            <label class="label-info-form" for="">€</label>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+                                                                    <div class="row align-items-center">
+
+
+
+                                                                        <div class="col-12 mt-2">
+                                                                            <button class="btn btn-default btn-block">
+                                                                            {{ 'SHEET_ROUTE.ADD_TICKET' | translate }}
+                                                                        </button>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="card-footer pb-3" style="display: block;">
+                                                                    <div class="row align-items-center">
+
+
+
+                                                                        <div class="col-12 mt-2">
+                                                                            <button class="btn btn-outline-primary btn-block">
+                                                                            + {{'SHEET_ROUTE.ADD_ANOTHER_EXPENSE' | translate }}
+                                                                        </button>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                    <!-- END GASTOS -->
+                                                </ng-container>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- end card form -->
+
+                                </div>
+
+                                <!-- list -->
+                                <div class="col-xl-7 col-12 mt-xl-0 mt-2">
+                                    <label class="title-form-1"> {{'SHEET_ROUTE.FORM_FIELDS' | translate }} </label>
+                                    <p class="sub-title-form mt-1"> {{'SHEET_ROUTE.THESE_ARE_THE_FIELDS_THAT_DRIVERS_MUST_FILL_IN_BEFORE_STARTING_THE_ROUTE' | translate }} </p>
+
+                                    <table class="table table-striped table-responsive-lg table-bordered mb-0 mt-4" id="tableFirtRoad" style="text-align: center ; width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="border-top-left-radius: 6px;"> {{'SHEET_ROUTE.CONDITION' | translate }} </th>
+                                                <th> {{'SHEET_ROUTE.GUY' | translate }} </th>
+                                                <th> {{'SHEET_ROUTE.DESCRIPTION' | translate }} </th>
+                                                <th style="border-top-right-radius: 6px;"></th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-center" *ngFor="let item of tableLasted.formStructure; let i=index">
+                                                <td>
+                                                    <div class="switch w-100">
+                                                        <label class="switch-width mb-0">
+                                                            <input type="checkbox" [checked]="item.preference && item.preference.isActive ? item.preference && item.preference.isActive : false" [value]="item.preference && item.preference.isActive ? item.preference && item.preference.isActive : false" (change)="updateStateActive($event.target.checked, item.id, i)"/>
+                                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                                                            <!-- <span class="lever-text toogle-style">Activar formulario previo a la ruta</span> -->
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td [ngClass]="{'disables-text': item.preference && !item.preference.isActive }"> {{ item.name }} </td>
+                                                <td [ngClass]="{'disables-text': item.preference && !item.preference.isActive }">
+                                                    <ng-container *ngIf="item.id == 4">
+                                                        {{'SHEET_ROUTE.WITH_HOW_MANY_KM_HAS_THE_VEHICLES_ARRIVED' | translate }}
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="item.id != 4">
+                                                        {{ item.description }}
+                                                    </ng-container>
+                                                </td>
+                                                <td><img class="icons-datatable point" src="assets/icons/External_Link.svg" (click)="openModalForm(item)"></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- end list -->
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

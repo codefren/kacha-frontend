@@ -1,0 +1,376 @@
+<div class="d-flex justify-content-around mb-3 informative-chart">
+
+    <div class="div-3" (click)="moveToLeft()">
+
+        <div class="card card-left  justify-content-center point" style="width: 15px;">
+
+            <img src="assets/icons/travelIcons/izquie.svg" style="max-width: 20px; vertical-align: bottom; margin: 0 auto;">
+
+        </div>
+
+    </div>
+
+    <div class="div-3 size-element">
+
+        <div id="scroller-wrapper">
+
+            <div id="scroller" class="items point">
+
+                <!-- Salidas-->
+
+                <div class="elem">
+
+                    <div class="card card-left p-3 mr-2 size-card-test">
+
+                        <div class="page-title-span point">
+
+                            <span class="point spand-title-card"> {{ 'VEHICLES.VEHICLES_ANALYSIS.EXIT' | translate }}  </span>
+
+                        </div>
+
+                        <ng-container *ngIf="showCode">
+
+                            <p class="p-sub-number mt-3" *ngIf="totalAnalysisDetail"> {{ totalAnalysisDetail.exit }} </p>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!showCode">
+
+                            <div class="fa-2x mt-3">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <!-- end Salidas-->
+
+                <!-- Choferes asignados-->
+
+                <div class="elem">
+
+                    <div class="card card-left p-3 mr-2 size-card-test">
+
+                        <div class="page-title-span point">
+
+                            <span class="ml-2 point spand-title-card"> {{ 'VEHICLES.VEHICLES_ANALYSIS.ASSIGNED_DRIVERS' | translate }}  </span>
+
+                        </div>
+
+                        <ng-container *ngIf="showCode">
+
+                            <p class="p-sub-number mt-3"> {{ totalAnalysisDetail.assignedDrivers }}</p>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!showCode">
+
+                            <div class="fa-2x mt-3">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <!-- end  Choferes asignados- -->
+
+                <!-- chofer mas asignado -->
+
+                <div class="elem">
+
+                    <div class="card card-left p-3 mr-2 size-card-test">
+
+                        <div class="page-title-span point">
+
+                            <span class="ml-2 point spand-title-card"> {{'VEHICLES.VEHICLES_ANALYSIS.MOST_USED_DRIVER' | translate }}  </span>
+
+                        </div>
+
+                        <ng-container *ngIf="showCode">
+
+                            <p class="p-sub-number mt-3" *ngIf="totalAnalysisDetail" [title]="totalAnalysisDetail.most_used_driver"> {{ totalAnalysisDetail.most_used_driver ? totalAnalysisDetail.most_used_driver:'No disponible' }} </p>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!showCode">
+
+                            <div class="fa-2x mt-3">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <!-- end chofer mas asignado -->
+
+                <!-- repostajes -->
+
+                <div class="elem">
+
+                    <div class="card card-left p-3 mr-2 size-card-test max-width">
+
+                        <div class="row">
+
+                            <div class="col-4 bd-right">
+                                <div class="page-title-span point">
+
+                                    <span class="point spand-title-card"> {{'VEHICLES.VEHICLES_ANALYSIS.REFUELING_' | translate }}  </span>
+
+                                </div>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="p-sub-number mt-1 float-units"> {{ totalAnalysisDetail.refueling }}</p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x mt-3">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                            <div class="col-4 bd-right">
+                                <div class="page-title-span point">
+
+                                    <span class="point spand-title-card"> {{'VEHICLES.VEHICLES_ANALYSIS.REFUELING_LITER' | translate }} </span>
+
+                                </div>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="p-sub-number mt-1 float-units" *ngIf="totalAnalysisDetail"> {{ totalAnalysisDetail.refuelingLtr | number:'2.2'
+                                    }}L</p>
+
+                                </ng-container>
+
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x mt-3">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                            <div class="col-4">
+                                <div class="page-title-span point">
+
+                                    <span class="point spand-title-card"> {{'VEHICLES.VEHICLES_ANALYSIS.COST' | translate }} </span>
+
+                                </div>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="p-sub-number mt-1 float-units" *ngIf="totalAnalysisDetail"> {{ totalAnalysisDetail.refuelingCost | number:'2.2'
+                                    }}€</p>
+
+                                </ng-container>
+
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x mt-3">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- end litros repostajes -->
+
+                <!-- costo de reparaciones -->
+
+                <div class="elem">
+
+                    <div class="card card-left p-3 mr-2 size-card-test more-width">
+
+                        <div class="row">
+                            <div class="col-6 bd-right">
+                                <div class="page-title-span point">
+
+                                    <span class="point spand-title-card"> {{'VEHICLES.VEHICLES_ANALYSIS.REPAIR' | translate }} </span>
+
+                                </div>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="p-sub-number mt-1 float-units" *ngIf="totalAnalysisDetail"> {{ totalAnalysisDetail.repairs }}</p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x mt-1">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                            <div class="col-6">
+                                <div class="page-title-span point">
+
+                                    <span class="point spand-title-card"> {{'VEHICLES.VEHICLES_ANALYSIS.COST' | translate }} </span>
+
+                                </div>
+
+                                <ng-container *ngIf="showCode">
+
+                                    <p class="p-sub-number mt-1 float-units" *ngIf="totalAnalysisDetail"> {{ totalAnalysisDetail.repairsCost | number:'2.2' }}€</p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCode">
+
+                                    <div class="fa-2x mt-1">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <!-- end costo de reparaciones -->
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="div-3" (click)="moveToRight()">
+
+        <div class="card card-left  justify-content-center point" style="width: 15px;">
+
+            <img src="assets/icons/travelIcons/dere.svg" style="max-width: 20px; vertical-align: bottom; margin: 0 auto;">
+
+        </div>
+    </div>
+</div>
+
+<div class="row service-registration">
+
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-body pt-2">
+
+                <div class="row justify-content-center">
+
+                    <div class="col-12 lines-conteiner">
+
+                        <div class="row">
+
+                            <div class="col-xl-1 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'service'}" (click)="changePage('service')" style="min-width: 120px;">
+
+                                <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'service'}">
+
+                                    {{ 'VEHICLES.VEHICLES_ANALYSIS.SERVICES' | translate }}
+
+                                </label>
+                            </div>
+
+                            <div class="col-xl-1 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'driver'}" (click)="changePage('driver')" style="min-width: 120px;">
+
+                                <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'driver'}">
+
+                                    {{ 'VEHICLES.VEHICLES_ANALYSIS.DRIVERS' | translate }}
+
+                                </label>
+
+                            </div>
+
+                            <div class="col-xl-1 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'repostaje'}" (click)="changePage('repostaje')" style="min-width: 120px;">
+
+                                <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'repostaje'}">
+
+                                    {{ 'VEHICLES.VEHICLES_ANALYSIS.REFUELING_' | translate }}
+
+                                </label>
+
+                            </div>
+
+                            <div class="col-xl-1 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'repair'}" (click)="changePage('repair')" style="min-width: 120px;">
+
+                                <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'repair'}">
+
+                                    {{ 'VEHICLES.VEHICLES_ANALYSIS.REPAIR' | translate }}
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <ng-container *ngIf="default === 'service'">
+
+                    <easyroute-management-vehicles-analysis-service [idVehicle]="idVehicle" (filters)="getValidateDateFilter($event)"></easyroute-management-vehicles-analysis-service>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'driver'">
+
+                    <easyroute-management-vehicles-analysis-driver [idVehicle]="idVehicle" (filters)="getValidateDateFilter($event)"></easyroute-management-vehicles-analysis-driver>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'repostaje'">
+
+                    <easyroute-management-vehicles-analysis-repostaje [idVehicle]="idVehicle" (filters)="getValidateDateFilter($event)"></easyroute-management-vehicles-analysis-repostaje>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'repair'">
+                    <easyroute-management-vehicles-analysis-repairs [idVehicle]="idVehicle" (filters)="getValidateDateFilter($event)"></easyroute-management-vehicles-analysis-repairs>
+                </ng-container>
+
+
+            </div>
+        </div>
+    </div>
+</div>

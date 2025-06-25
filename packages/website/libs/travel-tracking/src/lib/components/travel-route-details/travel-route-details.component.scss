@@ -1,0 +1,99 @@
+.travel-detail {
+    .title-travel {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .style-info {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .sub-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .title-selected {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .no-selecter {
+        opacity: 0.65;
+        .title-selected {
+            font-weight: 500;
+        }
+    }
+    .float-rigth {
+        float: right;
+    }
+    .text-color-red{
+        color: #E91313;
+    }
+    .btn-status {
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: helvetica;
+        width: 120px;
+        box-shadow: none !important;
+    }
+    .btn-default {
+        background: #FFFFFF;
+        border-radius: 5px;
+        border-color: #fff;
+        height: 45px;
+    }
+
+    .blue-asig {
+        background-color: #24397c;
+        border-color: #24397c;
+        box-shadow: none !important;
+    }
+    .btn-proc {
+        background-color: blue;
+        border-color: blue;
+    }
+    .btn-finish {
+        background-color: #29CC97;
+        border-color: #29CC97;
+    }
+    .btn-post {
+        background-color: orange;
+        border-color: orange;
+    }
+    .btn-noEnc {
+        background-color: #a9a944;
+        border-color: #a9a944;
+    }
+
+    .bg-secondary {
+        background-color: #24397C !important;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 10px;
+        letter-spacing: 0.2px;
+        color: #FFFFFF;
+    }
+
+}

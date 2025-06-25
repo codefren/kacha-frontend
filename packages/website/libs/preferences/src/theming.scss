@@ -1,0 +1,4 @@
+@import './lib/preferences.theme';
+@mixin preferences-theming($theme, $typo) {
+    @include preferences-theme($theme);
+}

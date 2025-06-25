@@ -1,0 +1,39 @@
+<div id="modalForm">
+    <section class="card">
+        <div class="card-body">
+            <div class="row justify-content-end mb-3">
+                <i class="fas fa-times mr-3 point" (click)="closeDialog(false)"></i>
+            </div>
+
+
+
+            <!-- Stripe Elements Placeholder -->
+            <div class="row m-3">
+                <div class="col text-justify">
+                    <!-- <h3>{{ 'INVOICING.PAY_METHOD.CHANGE_DEFAULT' | translate }}</h3> -->
+                    <p class="parrafo">Va a suscribirse al <strong>{{ planName }}</strong>. El precio es de {{ price }}
+                        + IVA, cantidad que se cargará automáticamente cada 30 días.</p>
+                    <p class="parrafo">Al suscribirte en Polpoo, aceptas y reconoces haber leído los <a
+                            class="cur-pointer" [href]="urlTerms" target="_blank">términos y condiciones de Polpoo</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row m-sm-4">
+                <div class="col-md-6 col-12 text-center text-md-right">
+                    <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="closeDialog(false)">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+
+                <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                    <button class="btn btn-primary size-btn-modal modal-confirm" (click)="closeDialog(true)">
+                        {{ 'GENERAL.ACCEPT' | translate }}
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>

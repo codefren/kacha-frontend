@@ -1,0 +1,9 @@
+<div class="user-creation-dialog" fxLayout="column">
+  <div class="inputs-container" fxLayout="row" fxLayoutGap="10px">
+    <h4>{{ 'VEHICLES.DELETE_VEHICLE?' | translate }}</h4>
+  </div>
+  <div class="actions-container" fxLayout="row" fxLayoutAlign="space-around center">
+      <button mat-button (click)="closeDialog(false)">{{ 'GENERAL.NO' | translate }}</button>
+      <button mat-button (click)="closeDialog(true)">{{ 'GENERAL.YES' | translate }}</button>
+  </div>
+</div>

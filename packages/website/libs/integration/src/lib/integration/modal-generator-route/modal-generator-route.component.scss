@@ -1,0 +1,50 @@
+.table-wrapper {
+    max-height: 300px;
+    overflow: auto;
+    display: inline-block;
+    width: 100%;
+}
+
+.easyroute-modal-integration {
+    .control-label {
+        color: #4c4c4c;
+    }
+    .input-group-append>button {
+        padding: 0 15px;
+    }
+    input {
+        padding: 10px 20px !important;
+        height: 48px !important;
+        font-size: 14px !important;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    .btn-calendar {
+        height: 48px !important;
+    }
+    table {
+        margin-top: 15px !important;
+        th {
+            background: #7487c5;
+            color: white;
+            font-size: 14px;
+        }
+        td:first-child {
+            border-left: 1px solid lightgray !important;
+        }
+        td {
+            font-size: 14px;
+            border-right: 1px solid lightgray !important;
+        }
+        tr:last-child {
+            td {
+                border-bottom: 1px solid lightgray !important;
+            }
+        }
+    }
+    .adapt {
+        padding: 8px;
+    }
+}

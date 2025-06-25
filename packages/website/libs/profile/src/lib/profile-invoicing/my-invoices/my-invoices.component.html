@@ -1,0 +1,72 @@
+<div class="easyroute-my-invoices mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="title-page-invoices">
+                    {{ 'INVOICING.MY_INVOICES.YOUR_BILLS' | translate }}
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="row mt-3">
+                    <div class="col-sm-6 col-12">
+                        <div class="form-inline">
+                            <label class="my-1 mr-2">
+                                {{ 'GENERAL.FROM' | translate }}
+                            </label>
+
+                            <div class="input-group">
+                                <input ngbDatepicker type="text" #d="ngbDatepicker" autocomplete="off" class="form-control" [minDate]="minDate" [maxDate]="today" (dateSelect)="getdateInvoicenFrom($event)" [value]="date_from" readonly />
+                                <div class="input-group-append">
+                                    <button class="btn btn-calendar calendar m-0" (click)="d.toggle()" type="button">
+                                        <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-12">
+                        <div class="form-inline">
+                            <label class="my-1 mr-2">
+                                {{ 'GENERAL.TO' | translate }}
+                            </label>
+
+                            <div class="input-group">
+                                <input ngbDatepicker type="text" #b="ngbDatepicker" autocomplete="off" class="form-control" [maxDate]="today" (dateSelect)="getdateInvoicenTo($event)" [value]="date_to" readonly />
+                                <div class="input-group-append">
+                                    <button class="btn btn-calendar calendar m-0" (click)="b.toggle()" type="button">
+                                        <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col">
+                <div class="table-content">
+                    <table style="width: 100%;" class="table table-striped table-bordered table-responsive-lg mb-0" id="invoices" style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th>{{ 'INVOICING.MY_INVOICES.DATE' | translate }}</th>
+                                <th>{{ 'INVOICING.MY_INVOICES.NUMBER_INVOICES' | translate }}</th>
+                                <th>{{ 'INVOICING.MY_INVOICES.AMOUNT' | translate }}</th>
+                                <th>{{ 'INVOICING.MY_INVOICES.DOWNLOAD' | translate }}</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="row answers-form">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-header">
+                <p class="mb-0 title-answers"> {{'SHEET_ROUTE.ANSWERS_FROM' | translate }} </p>
+                <p class="mb-0 sub-title"> {{'SHEET_ROUTE.THESE_DATA_HAVE_BEEN_EXTRACTRED_FROM_THE_FORM_MADE_THE_DRIVER_APP' | translate }} </p>
+            </div>
+
+
+            <div class="card-body">
+
+
+
+                <!-- tabla de inicio de hoja de ruta  -->
+
+                <p class="title-sub-table"> {{'SHEET_ROUTE.HOME_ROADMAP' | translate }} {{ returnsHour (roadMap.routeSheetRouteInitialDate) }}</p>
+
+
+                <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" id="tableAnswers" style="text-align: center ; width: 100%;">
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="border-top-left-radius: 6px;">{{'SHEET_ROUTE.GUY' | translate }}</th>
+
+                            <th>{{ 'SHEET_ROUTE.RESPONSE' |translate }}</th>
+
+                            <th>{{ 'SHEET_ROUTE.RESPONSE_2' |translate }}</th>
+
+                            <th style="border-top-right-radius: 6px;">{{ 'SHEET_ROUTE.ATTACHMENTS' | translate }}</th>
+
+                            <!-- <th>{{ 'SHEET_ROUTE.HOUR' | translate }}</th> -->
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+
+                <!-- end tabla de iniciio de hoja de ruta -->
+            </div>
+            <div class="card-footer">
+                <p class="title-sub-table mt-3"> {{'SHEET_ROUTE.END_OF_ROADMAP' | translate }} {{ returnsHour (roadMap.routeSheetRouteFinalDate) }}</p>
+
+
+                <table class="table table-striped table-bordered mb-0 mt-1" id="tableEndRoadmap" style="text-align: center ; width: 100%;">
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="border-top-left-radius: 6px;">{{'SHEET_ROUTE.GUY' | translate }}</th>
+
+                            <th>{{ 'SHEET_ROUTE.RESPONSE' |translate }}</th>
+
+                            <th>{{ 'SHEET_ROUTE.RESPONSE_2' |translate }}</th>
+
+                            <th style="border-top-right-radius: 6px;">{{ 'SHEET_ROUTE.ATTACHMENTS' | translate }}</th>
+
+                            <!-- <th >{{ 'SHEET_ROUTE.HOUR' | translate }}</th> -->
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

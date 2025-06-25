@@ -1,0 +1,155 @@
+.report-settings {
+    .title-toggles {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .sub-title-toggles {
+        color: #9899AA;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 127.5%;
+    }
+    .padding-l-hidden {
+        margin-left: 63px;
+    }
+    .form-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+        opacity: 1 !important;
+    }
+    .spacing-row {
+        padding-left: 3.8rem;
+    }
+    .style-input-check {
+        // height: 76px !important;
+        padding: 4px 0px 0px 13px !important;
+        font-weight: 400;
+        font-size: 16px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+        border: 1px solid #DFE1E8;
+        p {
+            color: #363740;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 0.2px;
+        }
+    }
+    .title-label-email {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .size-input {
+        height: 45px !important;
+    }
+    .add-emails {
+        color: #3B4FFF;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .add-emails:hover {
+        text-decoration: underline;
+    }
+    .card-footer {
+        border-top: 2px dashed rgba(0, 0, 0, 0.125);
+    }
+    .multiselect {
+        background: #F6F8FA;
+        border: 1px solid #CDD6E1;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+    .btn-group .multiselect {
+        width: 100% !important;
+        text-align: start;
+    }
+    .label-blocks {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .border-other-Report {
+        border-top: 2px dashed rgba(0, 0, 0, 0.125);
+    }
+    .label-other-Report {
+        color: #363740;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.2px;
+    }
+    .img-dash {
+        max-width: 220px !important;
+        width: 36% !important;
+        height: 36px !important;
+        color: #363740;
+        font-family: Roboto;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.2px;
+        border-radius: 3px;
+        border: 1px solid #DFE1E8;
+        background: #F9F9FC;
+    }
+    .card-other {
+        border-radius: 3px;
+        background: #F5F7FF !important;
+    }
+    .loading-size {
+        font-size: 22em !important;
+    }
+    @media screen and (min-width: 320px) and (max-width:640px) {
+        .spacing-row {
+            padding-left: 0px;
+        }
+        .padding-l-hidden {
+            margin-left: 0px;
+        }
+        .img-dash {
+            width: 80% !important;
+        }
+    }
+}

@@ -1,0 +1,399 @@
+<div class="chat-talks">
+
+    <div class="row" *ngIf="chat">
+
+        <div class="col-12">
+
+            <div class="card scroll-chat">
+
+                <div class="card-header pb-xl-3 pt-xl-3" style="display: block; height: 78px;">
+
+                    <div class="row">
+
+                        <div class="col-6 col-xl-9">
+
+                            <div class="d-flex">
+
+                                <ng-container *ngIf="!getUserImgValidate(chat)">
+
+                                    <figure class="profile-picture mr-3 point">
+
+                                        <div class="rows">
+
+                                            <div [ngClass]="{'name-chat-fin': chat > 2}">
+
+                                                <span class="title-name-chat-open point" [attr.color]="getUserColor(chat)" [ngClass]="{'color-iten-name-close': chat.status ==='close'}">
+
+                                                    {{ getUserTo(chat) }}
+
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </figure>
+
+                                </ng-container>
+
+
+
+                                <ng-container *ngIf="getUserImgValidate(chat)">
+
+                                    <figure class="profile-picture mb-0 mr-3">
+
+                                        <div class="rows">
+
+                                            <div class="name-chat name-chat-fin">
+
+                                                <img class="img-avatar-size" [ngClass]="{'disabled-img': chat.status ==='close'}" [src]="'assets/images/pages/users/avatars/'+getUserImg(chat)">
+
+                                            </div>
+
+                                        </div>
+
+                                    </figure>
+
+                                </ng-container>
+
+                                <div class="chat-width">
+
+                                    <ng-container *ngIf="chat.status === 'request' || getUserMe(chat) || (chat.status === 'close' && chat.users.length === 1)">
+
+                                        <label class="text-left name-list point mt-3">{{ getUserTo(chat) }}</label>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="(chat.status === 'close' || chat.status === 'open') && chat.users.length === 2 && !getUserMe(chat)">
+
+                                        <label class="text-left name-list point mt-3">{{ getUserThird(chat) }}</label>
+
+                                    </ng-container>
+
+                                    <!-- <label class="text-left name-list point mt-3">{{ getUserTo(chat) }}</label>
+ -->
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 col-xl-3 point text-xl-right text-center" *ngIf="chat">
+
+                            <img class="mr-3" [ngClass]="{'mt-3': chat.status ==='request'}" data-toggle="tooltip" data-html="true" data-placement="bottom" data-tooltip-custom-classes="tooltip-inner-3" role="tooltip" title="<p class='sub-title-top mt-2 mb-1'>{{'CHAT.TEXT_INFO' | translate }}</p>"
+                                src="assets/icons/iconsChat.svg">
+
+                            <ng-container *ngIf="chat.status === 'open' && getUserMe(chat)">
+
+                                <div class="btn btn-primary size-btn" (click)="openModalDelete(selected)">{{'CHAT.END_CHAT' | translate}}</div>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="chat.status === 'close'">
+
+                                <label for="" class="textChatFinish mt-3">{{'CHAT.ENDED_CHAT' | translate}}</label>
+
+                            </ng-container>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="card-body font-body size-body pt-0 pr-xl-0 pl-xl-0 pr-3 pl-3 overflow-scroos chat-overflow">
+
+                    <!-- cuando se finaliza el chat -->
+
+                    <div class="row" *ngIf="chat.status === 'close'">
+
+                        <div class="font-end-chat d-flex align-items-center justify-content-center">
+
+                            <p class="title-chat-end mb-0">El chat ha sido finalizado el {{ chat.close_at | date:'yyyy-MM-dd' }} a las {{ chat.close_at | date:'HH:mm' }} por {{ chat.close_by_name }}.</p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- end cuando se finaliza el chat -->
+
+                    <!-- fecha de inicio del chat -->
+
+                    <ng-container *ngIf="chat.status !='close'">
+
+                        <div class="row mt-3">
+
+                            <div class="col-xl-2 col-12 message other-message text-center offset-xl-5 offset-lg-5">
+
+                                <label class="style-date">  {{ formataMont(chat.created_at) }} {{'CHAT.AT' | translate }} {{ formaDateChat(chat.created_at) }}</label>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+
+                    <!-- end fecha de inicio del chat -->
+
+                    <div class="row p-4 ">
+
+                        <!-- chat poolpo y cliente -->
+
+                        <div class="col-12">
+
+                            <div class="message-box" [ngClass]="{'friend-message': isMe(item.user), 'my-message': !isMe(item.user)}" *ngFor="let item of chat.messages; let i = index">
+
+
+                                <ng-container *ngIf="item && !item.urlChatImage">
+
+                                    <p> {{ item.text }} <b class="bb-style pl-3">{{ item.datetime | date:"HH:mm" }}</b></p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="item && item.urlChatImage">
+
+
+                                    <!--  <img [src]="item.urlChatImage" class="img-thumbnail">
+
+                                    <div class="img-chat-div" style="position: absolute;">
+
+                                        <span class="bb-style pl-2 pr-2">{{ item.datetime | date:"HH:mm" }} </span>
+
+                                    </div> -->
+
+                                    <div data-sort-destination data-sort-id="media-gallery" class="media-alings mb-3" [ngClass]="{'font-friend-img': isMe(item.user)}">
+
+                                        <div class="isotope-item document">
+
+                                            <div class="thumbnail mb-1">
+
+                                                <div class="thumb-preview">
+
+                                                    <a class="thumb-image" [href]="item.urlChatImage">
+
+                                                        <img [src]="item.urlChatImage" class="img-fluid" alt="Project">
+
+                                                    </a>
+
+                                                    <!-- menu oculto muestra el icono para ver la imagen y las acciones -->
+
+                                                    <div class="mg-thumb-options">
+
+                                                        <div class="mg-zoom" title="Ver imagen">
+                                                            <i class="fas fa-search"></i>
+                                                        </div>
+
+                                                        <!-- descomentar por si quieren que elimine la imagen -->
+
+                                                        <!--  <div class="mg-toolbar">
+
+                                                            <div class="mg-group float-right">
+
+                                                                <a href="#">Acciones</a>
+
+                                                                <button class="dropdown-toggle mg-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+
+                                                                <div class="dropdown-menu mg-dropdown" role="menu">
+
+                                                                    <a class="dropdown-item text-1" href="#"><i class="fas fa-download"></i> Descargar</a>
+
+                                                                    <a class="dropdown-item text-1" href="#"><i class="far fa-trash-alt"></i> Eliminar</a>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div> -->
+
+                                                    </div>
+
+                                                    <!-- end menu oculto muestra el icono para ver la imagen y las acciones -->
+
+                                                </div>
+
+
+                                                <div class="mg-description pt-2 pb-3">
+
+                                                    <!--  <small class="float-left text-muted">Design, Websites</small> -->
+
+                                                    <small class="float-right text-muted">
+
+                                                        <b class="bb-style font-date-info"> {{ item.datetime | date:"HH:mm" }} </b>
+
+                                                    </small>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </ng-container>
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- end chat poolpo y cliente -->
+
+                    </div>
+
+                </div>
+
+
+
+                <ng-container *ngIf="getUserExit(chat) || chat.status == 'new'">
+
+                    <div class="card-footer pt-xl-4 point" style="display: block;" *ngIf="chat.status === 'open' || chat.status === 'request'
+                        ||  chat.status == 'new' ||  (!getUserRejectChat(chat) && chat.status != 'close')" [ngClass]="{'font-accept-reject': getUserRejectChat(chat) && !isAdmin()}">
+
+                        <ng-container *ngIf="chat && chat.users && chat.status == 'new' || chat.status != 'request' && !getUserRejectChat(chat) && chat.status != 'close'">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-xl col-12 text-center mt-xl-0 mt-3 mb-xl-0 mb-3">
+
+                                    <img src="assets/icons/adjunt.svg" (click)="adjunt.click()">
+
+                                    <input type="file" accept="image/png, image/jpeg" (change)="fileChanceEvent($event)" hidden #adjunt>
+
+                                </div>
+
+                                <div class="col-xl-10 col-8 pl-0">
+
+                                    <div class="d-flex justify-content-md-end justify-content-center">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control search-general
+                                                pull-right input-personalize-datatable" spellcheck="true" placeholder="spellcheck='true'" (keyup.enter)="sendData()" [(ngModel)]="messageText" placeholder="Escribe tu mensaje..." style="max-width: initial;">
+                                            <span class="input-group-append">
+                                                <span class="input-group-text input-group-text-general table-append">
+
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl col-4">
+
+                                    <button class="btn btn-default" (click)="sendData()" [disabled]="validateTrim(messageText)">
+
+                                        <img src="assets/icons/sendChat.svg">
+
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="chat && chat.users && chat.status === 'request' && !getUserReject(chat)">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-xl-2 col-12 text-center mt-xl-0 mt-2 mb-xl-0 mb-2 pl-xl-1" (click)="openModalAcept()">
+
+                                    <button class="btn btn-primary btn-border"> {{'CHAT.ACCEPT_CHAT' | translate }} </button>
+
+                                </div>
+
+                                <div class="col-xl-2 col-12 text-center mt-xl-0 mt-2 mb-xl-0 mb-2 pl-xl-0" (click)="openModalReject()">
+
+                                    <button class="btn btn-danger btn-border"> {{'CHAT.REJECT_CHAT' | translate }} </button>
+
+                                </div>
+
+                                <div class="col-xl-4 col-col pl-xl-0">
+
+                                    <p class="mb-0 title-accept"> {{'CHAT.THIS_CHAT_IS_WAITING_TO_BE_ACCEPT_CLICK_ACCEPT_OR_REJECT' | translate }} </p>
+                                </div>
+
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="chat && chat.users && chat.status !== 'open' && getUserRejectChat(chat)">
+
+                            <ng-container *ngIf="chat.status === 'open' || chat.status === 'request'">
+
+                                <div class="row align-items-center">
+
+                                    <div class="col-12 text-center mt-2 mb-2">
+
+                                        <p class="accept-reject-show mb-0"> {{'CHAT.YOU_HAVE_REFUSED_TO_ANSWER_THIS_CHAT_ON_THE_DAY' | translate }} {{showDate(dataReject().datetime)}} {{'CHAT.AT' | translate}} {{showHourse(dataReject().datetime)}}. </p>
+
+                                    </div>
+
+                                </div>
+
+                            </ng-container>
+
+
+                        </ng-container>
+
+                        <ng-container *ngIf="chat && chat.users && chat.status === 'open' && getUserRejectChat(chat)">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-xl-4 col-12 text-center mt-xl-0 mt-2 mb-xl-0 mb-2 pl-xl-1" (click)="assignMeModalAcept()">
+
+                                    <button class="btn btn-primary btn-border"> {{'CHAT.ASSSIGN_ME_CHAT' | translate }} </button>
+
+                                </div>
+
+                                <div class="col-xl-8 col-col pl-xl-0">
+
+                                    <p class="mb-0 title-accept"> {{'CHAT.TEXT_ASIGN' | translate }} </p>
+                                </div>
+
+
+                            </div>
+
+                        </ng-container>
+                    </div>
+
+                </ng-container>
+                <ng-container *ngIf="chat.status == 'open' && !getUserExit(chat)">
+                    <div class="card-footer pt-xl-4 point" style="display: block;">
+                        <ng-container *ngIf="chat.status === 'open'">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-xl-4 col-12 text-center mt-xl-0 mt-2 mb-xl-0 mb-2 pl-xl-1" (click)="assignMeModalAcept()">
+
+                                    <button class="btn btn-primary btn-border"> {{'CHAT.ASSSIGN_ME_CHAT' | translate }} </button>
+
+                                </div>
+
+                                <div class="col-xl-8 col-col pl-xl-0">
+
+                                    <p class="mb-0 title-accept"> {{'CHAT.TEXT_ASIGN' | translate }} {{ getUserTo() }} </p>
+                                </div>
+
+
+                            </div>
+
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  engine:
+    build:
+      context: .
+      dockerfile: packages/engine/Dockerfile
+    environment:
+      - REDIS_URL=redis://dev.restapi.polpoo.com:6379?db=0&password=Lhnu9Sd7Mzm3cUL3PXMRPF2exnAjJDpR
+      - BACKEND_URL=https://dev.restapi.polpoo.com/api/
+      - OSRM_HOST=https://dev.osrm.polpoo.com
+    # This is the only external service
+    links:
+      - redis
+    # - osrm
+    depends_on:
+      - redis
+    # - osrm
+
+  jobs-api:
+    build:
+      context: .
+      dockerfile: packages/jobs-api/Dockerfile
+    environment:
+      - REDIS_URL=redis://dev.restapi.polpoo.com:6379?db=0&password=Lhnu9Sd7Mzm3cUL3PXMRPF2exnAjJDpR
+      - BACKEND_URL=https://dev.restapi.polpoo.com/api/
+    ports:
+      - 8000:5000
+    links:
+      - redis
+    depends_on:
+      - redis
+  redis:
+    image: redis:7-alpine
+    # command: ["redis-server", "--appendonly", "yes"]
+    command: /bin/sh -c 'redis-server --appendonly yes --requirepass $${REDIS_PASSWORD}'
+    hostname: redis
+    environment:
+      - REDIS_PASSWORD=Lhnu9Sd7Mzm3cUL3PXMRPF2exnAjJDpR
+      #- ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    expose:
+      - "6379"
+    restart: always

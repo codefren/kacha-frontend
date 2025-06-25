@@ -1,0 +1,36 @@
+<div class="app-popover" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="end center" class="exit-button-container">
+        <button
+            mat-icon-button
+            class="exit-button"
+            tabindex="-1"
+            color="accent"
+            (click)="cancel($event)"
+        >
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <ng-content (keydown.enter)="save($event)"></ng-content>
+    <div class="app-popover-buttons" fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+            <button
+                mat-icon-button
+                cancel
+                tabindex="-1"
+                color="accent"
+                (click)="cancel($event)"
+            >
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                save
+                tabindex="-2"
+                color="primary"
+                (click)="save($event)"
+            >
+                <mat-icon>done</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

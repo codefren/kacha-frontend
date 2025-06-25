@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+    jobs_api_test:
+        tty: true
+        build:
+            context: ../..
+            dockerfile: Dockerfile
+        command: >
+            sh -c "cd packages/jobs-api && npm run lint && npm run test:cov"
+        environment:
+            - REDIS_URL=redis://@redis:6379/0
+        depends_on:
+            - redis
+
+    redis:
+        image: redis:4.0.5-alpine
+        command: ["redis-server", "--appendonly", "yes"]
+        hostname: redis
+        volumes:
+            - redis-data:/data
+
+volumes:
+    redis-data:

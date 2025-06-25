@@ -1,0 +1,42 @@
+<div class="modal-decline-link">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-12 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'NOTIFICATIONS.REJECT_BINDING' | translate }} </label>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="title-infor"> {{'CLIENTS.CLIENTS_MODAL.DEACTIVATE_CLIENTS' | translate }}</p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center">
+                <button class="btn btn-default mr-2" (click)="activeModal.close(false)"> {{ 'GENERAL.CANCEL'| translate }} </button>
+
+                <button [className]="cssStyle" (click)="activeModal.close(true)"> {{ 'GENERAL.YES_DECLINE'| translate }} </button>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,87 @@
+.engine:
+    before_script:
+        - cd packages/engine 
+    only:
+        changes:
+            - packages/engine/**/*
+
+.test engine:
+    extends: .engine
+    stage: test
+    dependencies: []
+    allow_failure: true
+    script:
+        - docker-compose -f docker-compose.test.yml up --abort-on-container-exit
+    coverage: '/Lines\s+: \d+\.\d+/'
+
+.code quality engine:
+    extends: .engine
+    stage: test
+    image: docker:stable
+    allow_failure: true
+    dependencies: []
+    services:
+        - docker:stable-dind
+    script:
+        - $SCRIPTS_FOLDER/code_quality
+    artifacts:
+        paths: [packages/engine/gl-code-quality.sh-report.json]
+
+.dependency scan engine:
+    extends: .engine
+    image: node:10-alpine
+    stage: test
+    dependencies: []
+    script:
+        - npm audit
+    allow_failure: true
+
+push docker engine:
+    extends: .engine
+    stage: build
+    image: docker:stable-git
+    services:
+        - docker:stable-dind
+    dependencies: []
+    script:
+        - $SCRIPTS_FOLDER/push-to-docker.sh engine
+
+development engine:
+    extends: .engine
+    stage: deploy
+    script:
+        - $SCRIPTS_FOLDER/deploy-k8s.sh engine
+    dependencies: []
+    environment:
+        name: development
+    only:
+        refs:
+            - dev
+        
+
+staging engine:
+    extends: .engine
+    stage: deploy
+    script:
+        - $SCRIPTS_FOLDER/deploy-k8s.sh engine
+    dependencies: []
+    environment:
+        name: staging
+    only:
+        refs:
+            - master
+        
+
+production engine:
+    extends: .engine
+    stage: deploy
+    script:
+        - $SCRIPTS_FOLDER/deploy-k8s.sh engine
+    dependencies: []
+    environment:
+        name: production
+    when: manual
+    only:
+        refs:
+            - master
+        

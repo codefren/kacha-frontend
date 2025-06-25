@@ -1,0 +1,159 @@
+<div class="easyroute-orders-form padding-body-orders pt-0 bg-white2">
+
+    <div class="" *ngIf="novelty">
+        <div class="row pt-5 align-items-center justify-content-center">
+            <div class="mr-3 return-left point" routerLink="/super-admin/novelty">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0" *ngIf="novelty.id == 0">
+                {{ 'WHATS_NEW.ADD_NOVELITY' | translate }}
+            </p>
+            <p class="title m-0" *ngIf="novelty.id > 0">
+                {{ 'WHATS_NEW.EDIT_NEWS' | translate }}
+            </p>
+
+
+        </div>
+
+        <div class="row justify-content-center mt-4" *ngIf="novelty && noveltyForm && noveltyMessages">
+            <form [formGroup]="noveltyForm" class="padding-form" style="width: 100%" novalidate (ngSubmit)="createNovelty()">
+
+                <!-- Datos (Nuevo Pedido) -->
+                <ng-container>
+                    <div class="container">
+                        <div class="row mb-5">
+
+                            <!-- title -->
+                            <div class="col-12 col-md-5 pr-sm-4">
+                                <div class="form-row form-group mt-4" [ngClass]="{ 'has-danger': noveltyForm.controls['title'].invalid && (noveltyForm.controls['title'].dirty || noveltyForm.controls['title'].touched) }">
+                                    <label for="title">
+                                        {{ 'WHATS_NEW.TITLE_OF_THE_NOVELTY' | translate }}
+                                    <!-- <span class="asterisco">* </span> -->
+                                    </label>
+                                    <input type="text" class="form-control" id="title" formControlName="title" placeholder="{{ 'WHATS_NEW.TITLE_OF_THE_NOVELTY' | translate }}" [ngClass]="{
+                                        'form-control-danger':
+                                        noveltyForm.controls['title'].invalid &&
+                                            (noveltyForm.controls['title'].dirty ||
+                                            noveltyForm.controls['title'].touched)
+                                    }" />
+
+                                    <ng-container *ngFor="let validation of noveltyMessages.title">
+                                        <small class="form-control-feedback text-danger" *ngIf="noveltyForm.get('title').hasError(validation.type) && (noveltyForm.get('title').dirty || noveltyForm.get('title').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <!-- end title -->
+
+                            <!-- url -->
+
+                            <div class="col-12 col-md-5 offset-md-2 pl-sm-4">
+                                <div class="form-row form-group mt-4" [ngClass]="{ 'has-danger': noveltyForm.controls['url'].invalid && (noveltyForm.controls['url'].dirty || noveltyForm.controls['url'].touched) }">
+                                    <label for="url">
+                                        {{ 'WHATS_NEW.URL_WHRE_THE_NES_IS_FOUND' | translate }}
+                                    </label>
+                                    <input type="text" class="form-control" id="url" formControlName="url" placeholder="{{ 'WHATS_NEW.URL_WHRE_THE_NES_IS_FOUND' | translate }}" [ngClass]="{
+                                        'form-control-danger':
+                                        noveltyForm.controls['url'].invalid &&
+                                            (noveltyForm.controls['url'].dirty ||
+                                            noveltyForm.controls['url'].touched)
+                                    }" />
+
+                                    <!--  <input type="text" id="code" class="form-control" autocomplete="off" formControlName="code" [ngClass]="{'form-control-danger': categoryForm.controls['code'].invalid && (categoryForm.controls['code'].dirty || categoryForm.controls['code'].touched)}" /> -->
+
+                                    <ng-container *ngFor="let validation of noveltyMessages.url">
+                                        <small class="form-control-feedback text-danger" *ngIf="noveltyForm.get('url').hasError(validation.type) && (noveltyForm.get('url').dirty || noveltyForm.get('url').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <!-- end url -->
+
+                            <!-- descripcion -->
+
+                            <div class="col-12 mt-4">
+                                <div class="form-row">
+                                    <div class="col-md-12 col-12">
+                                        <div class="form-group" [ngClass]="{
+                                        'has-danger':
+                                        noveltyForm.controls['descripcion']
+                                                .invalid &&
+                                            (noveltyForm.controls['descripcion']
+                                                .dirty ||
+                                                noveltyForm.controls['descripcion']
+                                                    .touched)
+                                    }">
+                                            <label for="descripcion">
+                                                {{ 'WHATS_NEW.DESCRIPTION' | translate }}
+                                            </label>
+                                            <textarea id="descripcion" type="text" class="form-control style-text-area" placeholder="Escribe..." formControlName="descripcion" [ngClass]="{
+                                            'form-control-danger':
+                                            noveltyForm.controls['descripcion']
+                                                    .invalid &&
+                                                (noveltyForm.controls['descripcion']
+                                                    .dirty ||
+                                                    noveltyForm.controls[
+                                                        'descripcion'
+                                                    ].touched)
+                                        }"></textarea>
+                                            <p *ngIf="disable">{{ orders.observations }}</p>
+                                        </div>
+                                        <ng-container *ngFor="
+                                        let validation of noveltyMessages.descripcion
+                                    ">
+                                            <small class="form-control-feedback text-danger" *ngIf="
+                                            noveltyForm
+                                                .get('descripcion')
+                                                .hasError(validation.type) &&
+                                            (noveltyForm.get('descripcion').dirty ||
+                                            noveltyForm.get('descripcion')
+                                                    .touched)
+                                        ">
+                                                {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- end descripcion -->
+
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Botones -->
+                <div class="row pt-5 mt-5">
+                    <div class="col-sm-6 col-12 text-center text-sm-right mt-1">
+                        <button class="btn btn-default btn-cancel size-btn-form" type="button" routerLink="/super-admin/novelty">{{ 'GENERAL.CANCEL' | translate }}</button>
+                    </div>
+                    <div class="col-sm-6 col-12 text-center text-sm-left mt-1 pb-2">
+                        <button class="btn btn-primary size-btn-form" type="submit" [disabled]="!noveltyForm.valid">
+
+                            <ng-container *ngIf="novelty.id > 0">
+                                {{ 'GENERAL.SAVE' | translate }}
+                            </ng-container>
+                            <ng-container *ngIf="novelty.id == 0">
+                                {{ 'GENERAL.ADD' | translate }}
+                            </ng-container>
+                        </button>
+                    </div>
+                </div>
+                <!-- end Botones -->
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>

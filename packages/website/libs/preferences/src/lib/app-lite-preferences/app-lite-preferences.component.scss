@@ -1,0 +1,71 @@
+.form-label,
+.form-input,
+.form-select,
+.form-select-option,
+small {
+    font-size: 14px !important;
+}
+
+.thumbnail {
+    max-width: 300px;
+    position: relative;
+    margin-bottom: 0px !important;
+    border: 1px solid #DFE1E8;
+    background: #F9F9FC;
+}
+
+.thumbnailSinImagen {
+    width: 159px;
+    height: 159px;
+}
+
+img {
+    max-height: 161px;
+}
+
+.show-background {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    i {
+        color: transparent;
+    }
+}
+
+.show-background:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transition: 0.3s ease background;
+    i {
+        color: white;
+    }
+}
+
+.title-enterprise {
+    color: #363740;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.2px;
+}
+
+.text-app-lite {
+    color: #9899AA;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 127.5%;
+}
+
+.font-general {
+    color: #9899AA;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+}

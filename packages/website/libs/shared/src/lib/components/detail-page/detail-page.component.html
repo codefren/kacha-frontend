@@ -1,0 +1,194 @@
+<div class="pt-0 easyroute-detail-page">
+    <div class="container">
+
+        <div class="mt-3 container-special">
+            <form *ngIf="orderDetailForm" [formGroup]="orderDetailForm">
+                <ng-container *ngIf="orders.user_address">
+                    <h4 class="subtitle-detail">{{ 'ORDERS.ORDERS_DETAIL.CLIENT_ADDRESS' | translate }}</h4>
+                    <hr class="hr-secondary mb-2 mt-2" />
+                    <!-- CLIENT_ADDRESS -->
+                    <div class="row">
+
+                        <div class="col-md-5 col-12">
+                            <div class="lines-info-client">
+                                <label class="label-info" for="detail_client_buildingName">{{ 'ORDERS.ORDERS_DETAIL.CLIENT_NAME' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p">{{orders.user_address ? orders.user_address.buildingName : 'no disponible'}}</p>
+                            </div>
+                            <div class="lines-info-client mt-3">
+                                <label class="label-info" for="detail_client_address">{{ 'ORDERS.ORDERS_DETAIL.ADDRESS' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p" [title]="orders.user_address  ? orders.user_address.address : 'no disponible'">{{ sliceString(orders.user_address ? orders.user_address.address : 'no disponible')}}</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-12 mt-1">
+                                    <div class="lines-info-client mt-3">
+                                        <label class="label-info" for="detail_doorName">{{ 'ORDERS.ORDERS_DETAIL.DOOR' | translate }}</label>
+                                        <p class="m-0 p-0 style-info-p">{{ orders.user_address && orders.user_address.doorName ? orders.user_address.doorName : 'no disponible'}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-12 mt-1">
+                                    <div class="lines-info-client mt-3">
+                                        <label class="label-info" for="detail_province">{{ 'ORDERS.ORDERS_DETAIL.PROVINCE' | translate }}</label>
+                                        <p class="m-0 p-0 style-info-p">{{ orders.user_address && orders.user_address.province ? orders.user_address.province : 'no disponible'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="offset-md-2 col-md-5 col-12">
+                            <div class="lines-info-client">
+                                <label class="label-info" for="detail_phone">{{ 'ORDERS.ORDERS_FORM.PHONE' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders.user_phone !=null">{{ orders.user_phone && orders.user_phone.phone ? orders.user_phone.phone : 'no disponible'}}</p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders.user_phone === null">{{ orders.user_address && orders.user_address.phone ? orders.user_address.phone : 'no disponible'}}</p>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-lg-6 col-md-12 col-12">
+                                    <div class="lines-info-client mt-3">
+                                        <label class="label-info" for="detail_number">{{ 'ORDERS.ORDERS_DETAIL.NUMBER' | translate }}</label>
+                                        <p class="m-0 p-0 style-info-p">{{ orders.user_address && orders.user_address.id ? orders.user_address.id : 'no disponible'}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-12">
+                                    <div class="lines-info-client mt-3">
+                                        <label class="label-info" for="detail_buildingFloor">{{ 'ORDERS.ORDERS_DETAIL.FLAT' | translate }}</label>
+                                        <p class="m-0 p-0 style-info-p">{{ orders.user_address && orders.user_address.buildingFloor ? orders.user_address.buildingFloor : 'no disponible'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lines-info-client mt-3">
+                                <label class="label-info" for="detail_postalCode">{{ 'ORDERS.ORDERS_FORM.POSTAL_CODE' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p">{{ orders.user_address && orders.user_address.postalCode ? orders.user_address.postalCode : 'no disponible'}}</p>
+                            </div>
+                            <!--  <div class="lines-info-client mt-3">
+                                <label class="label-info" for="detail_phone">{{ 'ORDERS.ORDERS_FORM.PHONE' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p">{{ orders.user_address && orders.user_address.phone ? orders.user_address.phone : 'no disponible'}}</p>
+                            </div> -->
+
+
+
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <ng-container *ngIf="orders.last_order_payment?.order_payment_status && orders.last_order_payment?.order_payment_type">
+
+                    <h4 class="subtitle-detail mt-5">{{ 'ORDERS.ORDERS_DETAIL.CHARGES' | translate }}</h4>
+                    <hr class="hr-secondary mb-2 mt-2" />
+                    <div class="row">
+                        <div class="col-md-5 col-12">
+
+                            <div class="lines-info-client">
+                                <label class="label-info" for="import-order">{{ 'ORDERS.ORDERS_DETAIL.ORDER_IMPORT' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p">{{ orderDetailForm.value.importOrder }}</p>
+                            </div>
+                            <div class="lines-info-client mt-3">
+                                <label class="label-info" for="detail_pay_method">{{ 'ORDERS.ORDERS_DETAIL.PAY_METHOD' | translate }}</label>
+                                <p class="m-0 p-0 style-info-p">{{ orderDetailForm.value.payMethod }}</p>
+                            </div>
+
+                        </div>
+                        <div class="offset-md-2 col-md-5 col-12">
+                            <div class="lines-info-client">
+                                <label class="label-info" for="detail_pay_state">{{ 'ORDERS.ORDERS_DETAIL.PAY_STATE' | translate }} </label>
+                                <p class="m-0 p-0 style-info-p">{{ orderDetailForm.value.payState }}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-12 text-center mt-5 p-0">
+                                <button class="btn btn-primary size-btn-form modal-confirm point border-btn" [disabled]="!orders.ticket" (click)="modalTicket(orders)">
+                                    <i class="fas fa-eye fa-1x point mr-1" style="color: #ffffff;"></i>
+                                    <span>{{ 'ORDERS.ORDERS_DETAIL.SEE_DOCUMENT' | translate }}</span>
+                                    
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <!-- extra -->
+                <ng-container *ngIf="orders.deliveryEnd">
+
+                    <h4 class="subtitle-detail mt-5">{{ 'ORDERS.ORDERS_DETAIL.DELIVERY' | translate }}</h4>
+                    <hr class="hr-secondary mb-2 mt-2" style="box-sizing: border-box;" />
+                    <div class="row">
+                        <div class="col-md-5 col-12">
+
+                            <div class="lines-info-client">
+                                <label class="label-info" for="detail_type_delivery">{{ 'ORDERS.ORDERS_DETAIL.TYPE_DELIVERY' | translate }} </label>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.zone_delivery == null && orders && orders.company_preference_delivery == null"> {{ 'GENERAL.FREE' | translate }}</p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.company_preference_delivery && orders.company_preference_delivery.id">{{ orderDetailForm.value.typeDelivery }}</p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.zone_delivery && orders.zone_delivery.id">{{ orders.zone_delivery.name }}</p>
+
+                            </div>
+
+                            <div class="lines-info-client">
+                                <label class="label-info" for="extras">{{ 'ORDERS.ORDERS_DETAIL.EXTRA' | translate }} </label>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.zone_delivery == null && orders && orders.company_preference_delivery == null">0.00€</p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.company_preference_delivery && orders.company_preference_delivery.id">{{ orderDetailForm.value.extra }}</p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.zone_delivery && orders.zone_delivery.id">{{ orderDetailForm.value.extra }}</p>
+
+                            </div>
+
+                        </div>
+                        <div class="offset-md-2 col-md-5 col-12">
+
+                            <div class="lines-info-client">
+                                <label class="label-info" for="detail_delivery_price">{{ 'ORDERS.ORDERS_DETAIL.DELIVERY_PRICE' | translate }} </label>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.zone_delivery == null && orders && orders.company_preference_delivery == null"> {{ 'GENERAL.FREE' | translate }} </p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.company_preference_delivery && orders.company_preference_delivery.id">{{ orderDetailForm.value.priceDelivery}}</p>
+                                <p class="m-0 p-0 style-info-p" *ngIf="orders && orders.zone_delivery && orders.zone_delivery.id">{{ orders.zone_delivery.price + '€'}}</p>
+                            </div>
+                            <div class="lines-info-client">
+                                <label class="label-info" for="extras">{{ 'ORDERS.ORDERS_DETAIL.EXTRA_PRICE' | translate }} </label>
+                                <p class="m-0 p-0 style-info-p">{{ orderDetailForm.value.quantityBuyWithoutMinimun }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <!-- extra -->
+                <!--  <div class="row mt-2">
+                    <div class="col-12 col-md-5">
+
+
+                        <div class="lines-info-client">
+                            <label class="label-info" for="extras">{{ 'ORDERS.ORDERS_DETAIL.EXTRA' | translate }} </label>
+                            <p class="m-0 p-0 style-info-p">{{ orderDetailForm.value.extra }}</p>
+                        </div>
+                    </div>
+                    <div class="offset-md-2 col-12 col-md-5">
+
+
+                        <div class="lines-info-client">
+                            <label class="label-info" for="extras">{{ 'ORDERS.ORDERS_DETAIL.EXTRA_PRICE' | translate }} </label>
+                            <p class="m-0 p-0 style-info-p">{{ orderDetailForm.value.quantityBuyWithoutMinimun }}</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="jumbotron mt-4">
+                    <h4 class="subtitle-detail jumbotron-subtitle">
+                        {{ 'ORDERS.ORDERS_DETAIL.TOTAL_CHARGES' | translate }}
+                    </h4>
+                    <p class="mt-5 w-100 text-center">
+                        <span>{{ calculateTotal()[0] }},</span>
+                        <span>{{ calculateTotal()[1] }}€</span>
+                        <br />
+                        <span>
+                            {{ 'ORDERS.ORDERS_DETAIL.ORDER' | translate }} + {{ 'ORDERS.ORDERS_DETAIL.DELIVERY' | translate | lowercase }}
+                            <ng-container *ngIf="orders.quantityBuyWithoutMinimun > 0">
+                                +  {{ 'ORDERS.ORDERS_DETAIL.MINIMUM_PURCHASE_CHARGE' | translate | lowercase  }}
+                            </ng-container>    
+                        </span>
+
+                    </p>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

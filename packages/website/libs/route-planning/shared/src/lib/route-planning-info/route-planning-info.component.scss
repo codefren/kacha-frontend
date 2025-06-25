@@ -1,0 +1,39 @@
+.easyroute-route-planning-info {
+    .line-spacing {
+        margin-bottom: 5px;
+    }
+
+    .margin-info-chip {
+        .line-spacing {
+            margin-right: 5px !important;
+        }
+    }
+}
+
+
+.cross-docking {
+    background-color: #FFE9D6 !important;
+    min-width: 307px;
+
+    .edit {
+        line-height: 12px;
+        background: #FF8D24;
+        color: #fff;
+        border-radius: 25px;
+        height: 22px;
+        font-size: 12px;
+        padding: 5px;
+        margin-left: 4px;
+    }
+
+    .remove {
+        line-height: 10px;
+        background: #FF8D24;
+        color: #fff;
+        border-radius: 25px;
+        height: 23px;
+        font-size: 12px;
+        padding: 7px;
+        margin-left: 4px;
+    }
+}

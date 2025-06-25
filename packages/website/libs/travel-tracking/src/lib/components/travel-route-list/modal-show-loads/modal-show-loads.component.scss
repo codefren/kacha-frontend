@@ -1,0 +1,220 @@
+.modal-show-loads {
+    .title-modal {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px;
+    }
+    .title-infor {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #363740;
+    }
+    .modal-footer {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-header {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .modal-body {
+        padding: 1rem 15px;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+    .sub-title-modal {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .size-btn {
+        width: 151px;
+    }
+    .btn-outline-primary:not(:disabled):not(.disabled).active,
+    .show>.btn-outline-primary.dropdown-toggle {
+        color: #fff;
+        border-radius: 5px !important;
+        background-color: #24397C;
+        border-color: #24397C;
+    }
+    .btn-outline-primary {
+        border-radius: 5px !important;
+        color: #24397C;
+        border-color: #24397C;
+    }
+    .btn-outline-primary:hover {
+        border-radius: 5px !important;
+        color: #fff;
+        background-color: #24397C;
+        border-color: #24397C;
+    }
+    .table-bordered th {
+        border-right: 0px solid #fff !important;
+        padding: 13px;
+        font-style: normal;
+        font-weight: 600 !important;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
+    table td {
+        padding: 0.3rem;
+    }
+    .addres-lenght {
+        max-width: 5.5rem;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        font-family: "Roboto";
+        font-style: normal;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .company-select {
+        cursor: pointer;
+        max-width: 25.5rem !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        font-family: 'Roboto';
+        font-style: normal;
+        letter-spacing: 0.2px;
+        color: #000000;
+        .company-address-menu {
+            font-family: "Roboto";
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 16px;
+            align-items: center;
+            color: #363740;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden
+        }
+        .company-menu {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            align-items: center;
+            color: #000000;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+    .list {
+        border: 1px solid #DBE2E7;
+        border-radius: 5px;
+        background: #F9F9FC;
+        .scroll-list {
+            //max-height: 300px;
+            max-height: calc(397px - 3em);
+            overflow-x: hidden;
+            overflow-y: auto;
+            box-sizing: border-box;
+            padding: 0rem;
+        }
+        /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+        .scroll-list::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+        .scroll-lists::-webkit-scrollbar:vertical {
+            width: 10px;
+        }
+        .scroll-list::-webkit-scrollbar-button:increment,
+        .scroll-list::-webkit-scrollbar-button {
+            display: none;
+        }
+        .scroll-list::-webkit-scrollbar:horizontal {
+            height: 10px;
+        }
+        .scroll-list::-webkit-scrollbar-thumb {
+            background-color: #FFFFFF;
+            border-radius: 50px;
+            border: 2px solid #FFFFFF;
+        }
+        .scroll-list::-webkit-scrollbar {
+            width: 15px;
+            height: 8px;
+            background-color: #DBE2E7;
+            /* or add it to the track */
+        }
+        .scroll-list::-webkit-scrollbar-track {
+            border-radiu .label-sub-none {
+                font-style: normal;
+                font-size: 15px;
+                line-height: 22px;
+                align-items: center;
+                color: #000000;
+                padding: 0.5rem 0rem !important;
+            }
+            .disables-text {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 19px;
+                align-items: center;
+                color: #FFFFFF !important;
+            }
+        }
+        .row {
+            padding-inline-start: 1rem;
+            padding-inline-end: 1rem;
+            border: 0px !important;
+            /* .col-12 {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            } */
+            .border-bottom {
+                border-bottom: 1px solid #DBE2E7;
+            }
+        }
+        span {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            /* identical to box height */
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+        .p-title {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            /* identical to box height */
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #F9F9FC;
+        opacity: 1;
+    }
+}

@@ -1,0 +1,185 @@
+<div id="modalForm">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+    </div>
+
+    <div class="container sub-category-form">
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                <p class="title">{{ titleTranslate | translate }}</p>
+                <hr class="line-primary" />
+            </div>
+        </div>
+
+        <div class="row justify-content-center" *ngIf="data.subCategory.id == 0">
+            <div class="col-10 text-center">
+                <p class="info-texto">
+                    "{{ 'GENERAL.TO_GENERATE_SUBCATEGORY_YOU_MUST_FIRST_CREATE_CATEGORY' | translate }}"
+                </p>
+            </div>
+        </div>
+
+        <form [formGroup]="subCategoryForm">
+            <div class="row justify-content-center mt-4">
+                <div class="col-8">
+
+                    <!-- categoría -->
+                    <div class="form-group row" [ngClass]="{
+                        'has-danger':
+                        subCategoryForm.controls['categoryId'].invalid &&
+                            (subCategoryForm.controls['categoryId'].dirty ||
+                            subCategoryForm.controls['categoryId'].touched)
+                    }">
+                        <label class="col-sm-4 col-form-label font-weight-bold" for="categoryId">
+                            {{ 'CONFIGURATIONS.CATEGORY.CATEGORY' | translate }}</label>
+
+                        <div class="col-sm-8">
+                            <div class="text-center p-2" *ngIf="loadingCategory == 'loading'">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                            <div class="text-center p-0" *ngIf="loadingCategory == 'success' && category.length == 0">
+                                <p class="text-justify text-danger">{{ 'CONFIGURATIONS.CATEGORY.DONT_EXIST_CATEGORY' | translate }}</p>
+                            </div>
+                            <div class="input-group hack-select" *ngIf="loadingCategory == 'success' && category.length > 0">
+                                <select class="form-control" type="text" formControlName="categoryId" id="categoryId">
+                                    <option value="null">{{ 'CONFIGURATIONS.CATEGORY.CHOOSE_CATEGORY' | translate }}</option>
+                                    <option *ngFor="let item of category" [value]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="loadingCategory == 'error'">
+                                <p class="text-danger text-center pointer" (click)="getcategory()">{{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}<ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!</p>
+                            </div>
+
+                            <ng-container *ngFor="let validation of sub_category_messages.categoryId">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                    subCategoryForm.get('categoryId').hasError(validation.type) &&
+                                        (subCategoryForm.get('categoryId').dirty ||
+                                        subCategoryForm.get('categoryId').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" [ngClass]="{
+                            'has-danger':
+                            subCategoryForm.controls['code'].invalid &&
+                                (subCategoryForm.controls['code'].dirty ||
+                                subCategoryForm.controls['code'].touched)
+                        }">
+                        <label class="col-sm-4 col-form-label font-weight-bold" for="code">
+                            {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="code" placeholder="{{
+                                    'CONFIGURATIONS.MEASURE.CODE' | translate
+                                }}" formControlName="code" [ngClass]="{
+                                    'form-control-danger':
+                                    subCategoryForm.controls['code'].invalid &&
+                                        (subCategoryForm.controls['code'].dirty ||
+                                        subCategoryForm.controls['code'].touched)
+                                }" />
+
+                            <ng-container *ngFor="let validation of sub_category_messages.code">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                    subCategoryForm.get('code').hasError(validation.type) &&
+                                        (subCategoryForm.get('code').dirty ||
+                                        subCategoryForm.get('code').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" [ngClass]="{
+                            'has-danger':
+                            subCategoryForm.controls['name'].invalid &&
+                                (subCategoryForm.controls['name'].dirty ||
+                                subCategoryForm.controls['name'].touched)
+                        }">
+                        <label class="col-sm-4 col-form-label font-weight-bold" for="name">
+                            {{ 'CONFIGURATIONS.MEASURE.NAME' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="name" placeholder="{{
+                                    'CONFIGURATIONS.MEASURE.NAME' | translate
+                                }}" formControlName="name" [ngClass]="{
+                                    'form-control-danger':
+                                    subCategoryForm.controls['name'].invalid &&
+                                        (subCategoryForm.controls['name'].dirty ||
+                                        subCategoryForm.controls['name'].touched)
+                                }" />
+
+                            <ng-container *ngFor="let validation of sub_category_messages.name">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                    subCategoryForm.get('name').hasError(validation.type) &&
+                                        (subCategoryForm.get('name').dirty ||
+                                        subCategoryForm.get('name').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-between">
+                        <div class="col-sm-12">
+                            <div class="switch">
+                                <label>
+                                    <strong>
+                                        {{ 'CONFIGURATIONS.MEASURE.ACTIVE' | translate }}
+                                        <span class="asterisco"> *</span>
+                                    </strong>
+
+                                    <input type="checkbox"
+                                        [checked]="data.subCategory.isActive"
+                                        [value]="data.subCategory.isActive"
+                                        (click)="changeActive()"
+                                        class="mr-4"
+                                    />
+                                    <ng-container *ngFor="let validation of sub_category_messages.isActive">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            subCategoryForm.get('isActive').hasError(validation.type) &&
+                                                (subCategoryForm.get('isActive').dirty ||
+                                                subCategoryForm.get('isActive').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </ng-container>
+                                    <span class="lever switch-col-primary ml-5"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn btn-cancel modal-dismiss" (click)="closeDialog([false, null])">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn btn-default modal-confirm" *ngIf="data.subCategory.id == 0" [disabled]="!subCategoryForm.valid" (click)="createUpdateSubCategory()">
+                            {{ 'GENERAL.CREATE' | translate }}
+                        </button>
+                        <button class="btn btn-default modal-confirm" *ngIf="data.subCategory.id > 0" [disabled]="!subCategoryForm.valid" (click)="createUpdateSubCategory()">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

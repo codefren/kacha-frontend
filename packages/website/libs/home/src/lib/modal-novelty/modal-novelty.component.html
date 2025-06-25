@@ -1,0 +1,66 @@
+<div class="modal-novelty-home">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ title }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="cloModalBtn()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="justify-content-center">
+
+                <div class="col-12  p-3">
+
+                    <p class="sub-title pb-3"> {{ message }} </p>
+
+
+                    <div class="embed-responsive embed-responsive-16by9">
+
+                        <iframe class="embed-responsive-item" height="315" frameborder="5" [src]="videoLoaded" allowfullscreen></iframe>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- end sumary -->
+
+        </div>
+    </div>
+
+
+
+    <!--  <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'HOME.DO_NOT_SHOW_AGAIN'| translate }} </button>
+
+                <button [className]="cssStyle" (click)="donwloadFilter()"> {{ accept }} </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+ -->
+
+</div>

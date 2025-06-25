@@ -1,0 +1,733 @@
+<div class="user-hour-form pt-4 pb-4">
+    <form *ngIf="createUserFormGroup" [formGroup]="createUserFormGroup">
+        <div class="row container-fluid m-0">
+
+            <div class="col-12 col-lg-12 mb-3">
+                <p class="mb-0 title-user"> {{'USERS.WORKING_HOURS' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'USERS.MESSAGE_WORKING_HOURS' | translate }} </p>
+            </div>
+
+            <div class="col-xl-12 col-12">
+
+                <div class="switch w-100">
+
+                    <label class="switch-width mb-0">
+
+                        <input type="checkbox" id="radioExample3" formControlName="useSchedule" (change)="changeUseSchedule($event.target)"
+                        name="useSchedule"/>
+
+                        <span class="lever lever-general switch-col-primary m-0 mr-3"></span>
+
+                        <span class="lever-text toogle-style title-user"> {{ 'USERS.APPLY_SCHEDULE' | translate }} </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-12 col-12">
+
+                <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4 sub-title-user"> {{ 'USERS.MESSAGE_APPLY_SCHEDULE' | translate }} </p>
+
+            </div>
+
+            <div class="col-xl-12 col-12">
+                <div class="row">
+
+                    <ng-container *ngIf="!loadingSchedule && user.schedule && createUserFormGroup && createUserFormGroup.controls['useSchedule'] && createUserFormGroup.controls['useSchedule'].value">
+            
+                        <!-- lunes -->
+                        <div class="col-xl-12 col-12">
+        
+                            <div class="form-row border-special pt-1 pb-1 pl-3">
+                                <!-- checkbox  -->
+                                <div class="col-lg-2 col-12 align-self-center">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                    <input
+                                                        type="checkbox"
+                                                        (change)="changeScheduleDay($event.target.checked, 1, false)" formControlName="activeScheduleMonday" 
+                                                        id="activeScheduleMonday"
+                                                    />
+                                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleMonday'] && 
+                                                    createUserFormGroup.controls['activeScheduleMonday'].value" >
+                                                    {{ 'SCHEDULE_WORK.DAY.MONDAY' |translate }}
+                                                    </span>  
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleMonday'] && 
+                                                    !createUserFormGroup.controls['activeScheduleMonday'].value" >
+                                                    {{ 'SCHEDULE_WORK.DAY.MONDAY' |translate }}
+                                                    </span>  
+                                                </label>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleMonday'] && createUserFormGroup.controls['activeScheduleMonday'].value">
+        
+                                    <ng-container *ngFor="let itemMonday of sortBy('1'); let j = index;">
+        
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+                                            <!-- Cuando borras -->
+                                            <ng-container *ngIf="itemMonday.hours.length === 0">
+        
+                                                <div class="row">
+        
+                                                    <div class="col-lg-6 col-12">
+        
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+        
+                                                    </div>
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+        
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+        
+                                                    </div>
+        
+                                                </div>
+        
+                                            </ng-container>
+        
+                                            <!-- Cuando Agregas -->
+                                            <ng-container *ngIf="itemMonday.hours.length > 0">
+        
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': j > 0}" *ngFor="let scheMonday of itemMonday.hours; let j = index;">
+        
+                                                    <div class="row">
+        
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheMonday) || validIntervalHours(scheMonday, itemMonday)}">
+        
+                                                            <input type="time" class="form-control text-center border-form" (focusout)="changeHour($event.target.value, scheMonday, itemMonday ,'start',j)" [value]="secondToTime(scheMonday.timeStart)">
+        
+                                                        </div>
+        
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheMonday) || validIntervalHours(scheMonday, itemMonday)}">
+        
+                                                            <input type="time" class="form-control text-center border-form" (focusout)="changeHour($event.target.value, scheMonday, itemMonday ,'end')" [value]="secondToTime(scheMonday.timeEnd)">
+                                                        </div>
+        
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        
+                                        <!-- Botones -->
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+                                            
+                                            <ng-container *ngIf="itemMonday.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(itemMonday.intDay, itemMonday)">
+                                            
+                                            </ng-container>
+                                            
+                                            <ng-container *ngIf="itemMonday.hours && itemMonday.hours.length > 0">
+        
+                                                <ng-container *ngFor="let scheMonday of itemMonday.hours; let j = index;">
+        
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(itemMonday.intDay, scheMonday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+        
+                                        </div>
+                                    </ng-container>
+        
+                                </ng-container>
+        
+                            </div>
+        
+                        </div>
+        
+        
+                        <!-- martes -->
+                        <div class="col-xl-12 col-12">
+                            <div class="form-row border-specification pt-1 pb-1 pl-3">
+        
+                                <!-- checkbox -->
+                                <div class="col-lg-2 col-12 align-self-center">
+        
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                    <input
+                                                        type="checkbox"
+                                                        (change)="changeScheduleDay($event.target.checked, 2, false)" formControlName="activeScheduleTuesday" 
+                                                        id="activeScheduleTuesday"
+                                                    />
+                                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleTuesday'] && 
+                                                    createUserFormGroup.controls['activeScheduleTuesday'].value" >
+                                                    {{ 'SCHEDULE_WORK.DAY.TUESDAY' |translate }}
+                                                    </span>  
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleTuesday'] && 
+                                                    !createUserFormGroup.controls['activeScheduleTuesday'].value" >
+                                                    {{ 'SCHEDULE_WORK.DAY.TUESDAY' |translate }}
+                                                    </span>  
+                                                </label>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleTuesday'] && createUserFormGroup.controls['activeScheduleTuesday'].value">
+                                    
+                                    <ng-container *ngFor="let itemTuesday of sortBy('2'); let t = index;">
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+                                            <ng-container *ngIf="itemTuesday.hours.length === 0">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="itemTuesday.hours.length > 0">
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': tue  > 0}" *ngFor="let scheTuesday of itemTuesday.hours; let tue = index;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheTuesday) || validIntervalHours(scheTuesday, itemTuesday)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheTuesday, itemTuesday, 'start')" [value]="secondToTime(scheTuesday.timeStart)">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheTuesday) || validIntervalHours(scheTuesday, itemTuesday)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheTuesday, itemTuesday, 'end')" [value]="secondToTime(scheTuesday.timeEnd)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+        
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+        
+                                            <ng-container *ngIf="itemTuesday.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(itemTuesday.intDay, itemTuesday)">
+                                            
+                                            </ng-container>
+                                        
+                                        <ng-container *ngIf="itemTuesday.hours && itemTuesday.hours.length > 0">
+        
+                                            <ng-container *ngFor="let scheTuesday of itemTuesday.hours; let tue = index;">
+        
+                                                <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(itemTuesday.intDay, scheTuesday)">
+                                            
+                                            </ng-container>
+                                        
+                                        </ng-container>
+                                        
+                                        </div>
+        
+                                    </ng-container>
+        
+                                </ng-container>
+                            </div>
+                        </div>
+        
+        
+                        <!-- miercoles -->
+                        <div class="col-xl-12 col-12">
+                            <div class="form-row border-specification pt-1 pb-1 pl-3">
+        
+                                <!-- checkbox -->
+                                <div class="col-lg-2 col-12 align-self-center">
+        
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                            <label class="switch-width">
+                                                <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 3, false)" formControlName="activeScheduleWednesday" id="activeScheduleWednesday"/>
+        
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                <span  class="pl-2 open-style" *ngIf="
+                                                createUserFormGroup && createUserFormGroup.controls['activeScheduleWednesday'] && 
+                                                createUserFormGroup.controls['activeScheduleWednesday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.WEDNESDAY' |translate }}
+                                                </span>  
+                                                <span  class="pl-2 open-style" *ngIf="
+                                                createUserFormGroup && createUserFormGroup.controls['activeScheduleWednesday'] && 
+                                                !createUserFormGroup.controls['activeScheduleWednesday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.WEDNESDAY' |translate }}
+                                                </span>  
+                                            </label>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleWednesday'] && createUserFormGroup.controls['activeScheduleWednesday'].value">
+                                    <ng-container *ngFor="let item of sortBy('3'); let w = index;">
+        
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+                                            <ng-container *ngIf="item.hours.length === 0">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="item.hours.length > 0">
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': w > 0}" *ngFor="let sche of item.hours; let w = index;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(sche) || validIntervalHours(sche, item)}">
+                                                        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, sche, item ,'start')" [value]="secondToTime(sche.timeStart)">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(sche) || validIntervalHours(sche, item)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, sche, item ,'end')" [value]="secondToTime(sche.timeEnd)">
+                                                        </div>
+        
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+        
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+        
+                                            <ng-container *ngIf="item.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(item.intDay, item)">
+                                            
+                                            </ng-container>
+                                        
+                                            <ng-container *ngIf="item.hours && item.hours.length > 0">
+        
+                                                <ng-container *ngFor="let sche of item.hours; let w = index;">
+        
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(item.intDay, sche)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                            
+                                        </div>
+                                    </ng-container>
+        
+                                </ng-container>
+                            </div>
+                        </div>
+        
+        
+                        <!-- jueves -->
+                        <div class="col-xl-12 col-12">
+                            <div class="form-row border-specification pt-1 pb-1 pl-3">
+                            
+                                <!-- checkbox -->
+                                <div class="col-lg-2 col-12 align-self-center">
+        
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                    <input
+                                                        type="checkbox"
+                                                        (change)="changeScheduleDay($event.target.checked, 4, false)" formControlName="activeScheduleThursday" id="activeScheduleThursday"
+                                                    />
+                                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleThursday'] && 
+                                                    createUserFormGroup.controls['activeScheduleThursday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.THURSDAY' |translate }}
+                                                    </span>  
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleThursday'] && 
+                                                    !createUserFormGroup.controls['activeScheduleThursday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.THURSDAY' |translate }}
+                                                    </span>  
+                                                </label>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleThursday'] && createUserFormGroup.controls['activeScheduleThursday'].value">
+                                    <ng-container *ngFor="let thursday of sortBy('4'); let i = index;">
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+                                            <ng-container *ngIf="thursday.hours.length === 0">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="thursday.hours.length > 0">
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': i > 0}" *ngFor="let schethursday of thursday.hours; let i = index;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(schethursday) || validIntervalHours(schethursday, thursday)}">
+                                                        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, schethursday, thursday ,'start')" [value]="secondToTime(schethursday.timeStart)">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(schethursday) || validIntervalHours(schethursday, thursday)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, schethursday, thursday ,'end')" [value]="secondToTime(schethursday.timeEnd)">
+                                                        </div>
+        
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+        
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+        
+                                            <ng-container *ngIf="thursday.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(thursday.intDay, thursday)">
+                                            
+                                            </ng-container>
+                                            
+                                            <ng-container *ngIf="thursday.hours && thursday.hours.length > 0">
+        
+                                                <ng-container *ngFor="let schethursday of thursday.hours; let tue = index;">
+        
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(thursday.intDay, schethursday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                            
+                                        </div>
+        
+                                    </ng-container>
+        
+                                </ng-container>
+                            </div>
+        
+                        </div>
+        
+        
+                        <!-- viernes -->
+                        <div class="col-xl-12 col-12">
+                            <div class="form-row border-specification pt-1 pb-1 pl-3">
+                            
+                                <!-- checkbox -->
+                                <div class="col-lg-2 col-12 align-self-center">
+        
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                    <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 5, false)" formControlName="activeScheduleFriday" id="activeScheduleFriday"/>
+                                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleFriday'] && 
+                                                    createUserFormGroup.controls['activeScheduleFriday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.FRIDAY' |translate }}
+                                                    </span>  
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleFriday'] && 
+                                                    !createUserFormGroup.controls['activeScheduleFriday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.FRIDAY' |translate }}
+                                                    </span>  
+                                                </label>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleFriday'] && createUserFormGroup.controls['activeScheduleFriday'].value">
+                                    <ng-container *ngFor="let friday of sortBy('5'); let f = index;">
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+                                            <ng-container *ngIf="friday.hours.length === 0">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="friday.hours.length > 0">
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': f > 0}" *ngFor="let scheFriday of friday.hours; let f = index;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheFriday) || validIntervalHours(scheFriday, friday)}">
+                                                            
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheFriday, friday ,'start')" [value]="secondToTime(scheFriday.timeStart)">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheFriday) || validIntervalHours(scheFriday, friday)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheFriday, friday ,'end')" [value]="secondToTime(scheFriday.timeEnd)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+        
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+                                            
+                                            <ng-container *ngIf="friday.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(friday.intDay, friday)">
+                                            
+                                            </ng-container>
+                                        
+                                            <ng-container *ngIf="friday.hours && friday.hours.length > 0">
+        
+                                                <ng-container *ngFor="let scheFriday of friday.hours; let tue = index;">
+        
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(friday.intDay, scheFriday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                            
+                                        </div>
+                                    </ng-container>
+        
+                                </ng-container>
+                            </div>
+        
+                        </div>
+        
+        
+                        <!-- sabado -->
+                        <div class="col-xl-12 col-12">
+                            <div class="form-row border-specification pt-1 pb-1 pl-3">
+                            
+                                <!-- checkbox -->
+                                <div class="col-lg-2 col-12 align-self-center">
+        
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                    <input
+                                                        type="checkbox"
+                                                        (change)="changeScheduleDay($event.target.checked, 6, false)" formControlName="activeScheduleSaturday" id="activeScheduleSaturday"
+                                                    />
+                                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleSaturday'] && 
+                                                    createUserFormGroup.controls['activeScheduleSaturday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.SATURDAY' |translate }}
+                                                    </span>  
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleSaturday'] && 
+                                                    !createUserFormGroup.controls['activeScheduleSaturday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.SATURDAY' |translate }}
+                                                    </span>  
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleSaturday'] && createUserFormGroup.controls['activeScheduleSaturday'].value">
+        
+                                    <ng-container *ngFor="let saturday of sortBy('6'); let s = index;">
+        
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+        
+                                            <ng-container *ngIf="saturday.hours.length === 0">
+        
+                                                <div class="row">
+        
+                                                    <div class="col-lg-6 col-12">
+        
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+        
+                                                    </div>
+        
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+        
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+        
+                                                    </div>
+        
+                                                </div>
+        
+                                            </ng-container>
+        
+                                            <ng-container *ngIf="saturday.hours.length > 0">
+        
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': s > 0}" *ngFor="let scheSaturday of saturday.hours; let s = index;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheSaturday) || validIntervalHours(scheSaturday, saturday)}">
+                                                            
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSaturday, saturday ,'start')" [value]="secondToTime(scheSaturday.timeStart)">
+        
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheSaturday) || validIntervalHours(scheSaturday, saturday)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSaturday, saturday ,'end')" [value]="secondToTime(scheSaturday.timeEnd)">
+        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+        
+                                        </div>
+        
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+        
+                                            <ng-container *ngIf="saturday.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(saturday.intDay, saturday)">
+                                            
+                                            </ng-container>
+                                        
+                                            <ng-container *ngIf="saturday.hours && saturday.hours.length > 0">
+        
+                                                <ng-container *ngFor="let scheSaturday of saturday.hours; let s = index;">
+        
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(saturday.intDay, scheSaturday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                            
+                                        </div>
+        
+                                    </ng-container>
+        
+                                </ng-container>
+                            </div>
+        
+                        </div>
+        
+        
+                        <!-- domingo -->
+                        <div class="col-xl-12 col-12 pb-2">
+                            <div class="form-row border-specification border-end pt-1 pb-1 pl-3">
+                            
+                                <!-- checkbox -->
+                                <div class="col-lg-2 col-12 align-self-center">
+        
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                                    <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 7, false)" formControlName="activeScheduleSunday" id="activeScheduleSunday"/>
+                                                    
+                                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleSunday'] && 
+                                                    createUserFormGroup.controls['activeScheduleSunday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.SUNDAY' |translate }}
+                                                    </span>  
+                                                    <span  class="pl-2 open-style" *ngIf="
+                                                    createUserFormGroup && createUserFormGroup.controls['activeScheduleSunday'] && 
+                                                    !createUserFormGroup.controls['activeScheduleSunday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.SUNDAY' |translate }}
+                                                    </span>  
+                                                </label>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <!-- end checkbox -->
+                                <ng-container *ngIf="createUserFormGroup && createUserFormGroup.controls['activeScheduleSunday'] && createUserFormGroup.controls['activeScheduleSunday'].value">
+                                    <ng-container *ngFor="let sunday of sortBy('7'); let su = index;">
+                                        <div class="col-lg-4 col-12 mt-2 mb-2">
+                                            <ng-container *ngIf="sunday.hours.length === 0">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+                                                    <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                        <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                    </div>
+        
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="sunday.hours.length > 0">
+                                                <div class="col-12 p-0" [ngClass]="{'mt-2': su > 0}" *ngFor="let scheSunday of sunday.hours; let su = index;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheSunday) || validIntervalHours(scheSunday, sunday)}">
+                                                            
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSunday, sunday ,'start')" [value]="secondToTime(scheSunday.timeStart)">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheSunday) || validIntervalHours(scheSunday, sunday)}">
+        
+                                                            <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSunday, sunday ,'end')" [value]="secondToTime(scheSunday.timeEnd)">
+        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+                                            
+                                            <ng-container *ngIf="sunday.hours.length === 0">
+        
+                                                <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(sunday.intDay, sunday)">
+                                            
+                                            </ng-container>
+                                        
+                                            <ng-container *ngIf="sunday.hours && sunday.hours.length > 0">
+        
+                                                <ng-container *ngFor="let scheSunday of sunday.hours; let su = index;">
+        
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(sunday.intDay, scheSunday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                            
+                                        </div>
+        
+                                    </ng-container>
+        
+                                </ng-container>
+                            </div>
+        
+                        </div>
+        
+                    </ng-container>
+
+                </div>
+            </div>
+                
+        </div>
+
+        <div class="card-footer mt-4 mb-4 p-0"></div>
+
+        <div class="row container-fluid m-0 pl-4">
+            <div class="col-sm-6 col-12 text-sm-left text-center p-0">
+                <button type="submit" class="btn btn-primary" [disabled]="createUserFormGroup.invalid || validateAbsolute()" (click)="createUser()">
+                    <span *ngIf="user.id == 0">{{ 'GENERAL.ADD_' | translate }}</span>
+                    <span *ngIf="user.id > 0">{{ 'GENERAL.SAVE' | translate }}</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>

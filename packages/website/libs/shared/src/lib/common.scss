@@ -1,0 +1,13 @@
+$white-transparency: rgba(255, 255, 255, 0.2);
+$dark-transparency: rgba(0, 0, 0, 0.15);
+$lighter-transparency: 0.12;
+$shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.16);
+$border-light: rgba(0, 0, 0, 0.12);
+@mixin mat-color-styler($palette, $important: null) {
+    background-color: mat-color($palette) $important;
+    color: mat-color($palette, default-contrast) $important;
+}
+
+.easyroute-no-padding-base-dialog .mat-dialog-container {
+    padding: 0;
+}

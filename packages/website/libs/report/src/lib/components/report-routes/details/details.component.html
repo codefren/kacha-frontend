@@ -1,0 +1,1018 @@
+<div class="report-details font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnTable()">
+
+            <label class="title-sheet pl-3"> {{ 'REPORT.RETURNS' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right point">
+
+
+
+            <button class="mb-1 mt-xl-0 mt-1 mr-1 btn btn-default" (click)="openModalViewPdf()">
+
+                <img src="assets/icons/report/dowloadBlack.svg">
+
+                <label class="pl-2 title-descargar point">{{ 'REPORT.DOWNLOAD_REPORTS' | translate }}</label>
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="row mt-3">
+
+        <!-- pagina 1 -->
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Resumen -->
+                    <ng-container *ngIf="showSummary">
+
+                        <table class="table table-striped table-responsive-lg mb-0 mt-3">
+                            <thead>
+
+                                <tr>
+                                    <th class="border-resumen" colspan="4">
+                                        <span class="title-span">RESUMEN</span>
+                                    </th>
+                                </tr>
+                                <tr>
+
+                                    <th> <b>{{ 'REPORT.DATE' | translate }}:</b> {{ returnDate(summary.dateDeliveryStart) }} </th>
+
+                                    <th colspan="3"> <b> {{ 'REPORT.ROUTES' | translate }}:</b> {{ summary.nameRoute }}
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th> <b> {{ 'REPORT.DRIVERS' | translate }}:</b> {{ summary.driverName }} </th>
+
+                                    <th> <b> {{'REPORT.TUITION' | translate }}:</b> {{ summary.registration }} </th>
+
+                                    <th> <b> {{'REPORT.START_TIME' | translate }}:</b> {{ returHourse(summary.driverStartTime) }} </th>
+
+                                    <th> <b> {{'REPORT.FINAL_HOUR' | translate }}:</b> {{ returHourse(summary.driverEndTime) }}</th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th><b> {{'REPORT.TOTAL_KM' | translate }}:</b> {{ summary.totalKm }} </th>
+
+                                    <th><b> {{'REPORT.TOTAL_KG' | translate }}:</b> {{ summary.totalKg }}</th>
+
+                                    <th><b> {{'REPORT.DELIVERIES_MADE' | translate }}:</b> {{ summary.totalDelivery }}
+                                    </th>
+
+                                    <th><b> {{'REPORT.COLLECTED_PACKAGING' | translate }}:</b> {{ summary.deliveredBoxes }} </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th><b> {{'REPORT.DELIVERY_NOTES' | translate }}:</b> {{summary.totalAlbaran }}
+                                    </th>
+
+                                    <th><b> {{'REPORT.RETURNS_' | translate }}:</b> {{ summary.totalDevolution }} </th>
+
+                                    <th><b> {{'REPORT.INCIDENTS' | translate }}:</b> {{ summary.totalIncident }}</th>
+
+                                    <th><b> {{'REPORT.TIME_TRAVEL' | translate }}:</b> {{returnDiff(summary.timeTravel)}}
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th><b> {{'REPORT.SECOND_LAPS' | translate }}:</b> {{ summary.howOftenReturned }}</th>
+
+                                    <th><b> {{'REPORT.TOTAL_CHARGES' | translate }}:</b> {{ summary.totalInvoice }} €</th>
+
+                                    <th *ngIf="moduleCost()"><b> {{'REPORT.ROUTE_COST' | translate }}:</b> {{ decimal(summary.costShow) }}</th>
+
+                                    <th></th>
+
+                                </tr>
+
+                            </thead>
+
+                        </table>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="!showSummary">
+
+                        <div class="fa-10x mb-2 text-center pt-5">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+
+                    </ng-container>
+
+                    <!-- end resumen -->
+
+                    <!-- COMPARATIVA -->
+
+                    <ng-container *ngIf="corporate && corporate.length > 0">
+
+                        <ng-container *ngIf="showCoporate">
+
+                            <table class="table table-responsive-lg mb-0 mt-4">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th class="border-resumen" colspan="8">
+
+                                            <span class="title-span"> {{'REPORT.COMPARISON' | translate }} </span>
+
+                                        </th>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th> <b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                        <th><b> {{'REPORT.CLIENT' | translate }} </b> </th>
+
+                                        <th><b> {{'REPORT.ADDRESS' | translate }} </b> </th>
+
+                                        <th><b> {{'REPORT.ARRIVAL' | translate }} </b></th>
+
+                                        <th><b> {{'REPORT.CONTROL' | translate }} </b> </th>
+
+                                        <th><b> {{ 'Polpoo' | translate }} </b></th>
+
+                                        <th><b> {{'REPORT.DRIVER' | translate }} </b></th>
+
+                                        <th><b> {{'REPORT.REAL_ORDER' | translate }} </b></th>
+
+                                    </tr>
+
+
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let item of corporate; let i = index">
+
+                                        <td> {{ item.idClient }} </td>
+
+                                        <td> {{ item.nameClient }} </td>
+
+                                        <td> {{ item.address }} </td>
+
+                                        <td> {{ returHourse(item.driverArrivalTime) }} </td>
+
+                                        <td [ngClass]="{'delay-class':item.delayTimeOnDelivery == 'Retraso'}"> {{ item.delayTimeOnDelivery }} </td>
+
+
+                                        <!-- <td [ngClass]="{'delay-class':item.delayTimeOnDelivery}">
+
+                                            <ng-container *ngIf="item.delayTimeOnDelivery === null"> --- </ng-container>
+
+                                            <ng-container *ngIf="!item.delayTimeOnDelivery && item.delayTimeOnDelivery !=null"> {{'REPORT.ON_TIME' | translate }} </ng-container>
+
+                                            <ng-container *ngIf="item.delayTimeOnDelivery && item.delayTimeOnDelivery !=null"> {{'REPORT.LATE' | translate }} </ng-container>
+
+                                        </td> -->
+                                        <td [ngClass]="{'delay-class':item.delayTimeOnDelivery == 'Retraso'}"> {{ item.orderInitial }} </td>
+
+                                        <td [ngClass]="{'delay-class':item.delayTimeOnDelivery == 'Retraso'}"> {{ item.order }} </td>
+
+                                        <td class="text-center" [ngClass]="{'delay-class':item.delayTimeOnDelivery == 'Retraso'}"> {{ item.realOrder > 0 ? item.realOrder : '-' }} </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </ng-container>
+
+                        <ng-container *ngIf="!showCoporate">
+
+                            <div class="fa-10x mb-2 text-center pt-5">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+
+                        </ng-container>
+                    </ng-container>
+                    <!-- end COMPARATIVA -->
+
+                </div>
+
+                <div class="card-footer text-center pb-3">
+                    <span class="footer-table"> {{'REPORT.PAGE' | translate }} 1/{{ totalPage }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- end pagina 1 -->
+
+        <!-- pagina 2 -->
+
+        <ng-container *ngIf="(delay && delay.length > 0) || (albaranModified && albaranModified.length > 0)
+            || (pointNoDelivered && pointNoDelivered.length > 0) || (devolution && devolution.length > 0)
+            || (productNotDelivered && productNotDelivered.length > 0 || costControl && costControl.length > 0)">
+
+            <div class="col-12 pt-4">
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- RETRASOS -->
+
+                        <ng-container *ngIf="delay && delay.length > 0">
+
+                            <ng-container *ngIf="showDelay">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="7">
+
+                                                <span class="title-span"> {{'REPORT.DELAYS_' | translate }} </span>
+                                            </th>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th> <b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                            <!--    <th><b>{{'REPORT.CODE' | translate }}</b></th> -->
+
+                                            <th><b> {{'REPORT.CLIENT' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.TYPOLOGY' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ADDRESS'| translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ARRIVAL'| translate }}</b></th>
+
+                                            <th><b> {{'REPORT.DELAY' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.PLANNED' | translate }} </b></th>
+
+                                        </tr>
+
+
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let item of delay; let i = index">
+
+                                            <td> {{ item.idClient }}</td>
+
+                                            <td> {{ item.nameClient }} </td>
+
+                                            <td> {{ item.typologyName ? item.typologyName:'------' }} </td>
+
+                                            <td> {{ item.address }} </td>
+
+                                            <td> {{ returHourse (item.driverArrivalTime) }} </td>
+
+                                            <td>
+
+                                                {{returnDiff(item.delay)}}
+
+                                            </td>
+
+                                            <td> {{ item.order }} </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showDelay">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+
+                        <!-- end RETRASOS -->
+
+                        <!-- PUNTOS NO ENTREGADOS -->
+
+                        <ng-container *ngIf="pointNoDelivered && pointNoDelivered.length > 0">
+
+                            <ng-container *ngIf="showPointNoDelivered">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="7">
+
+                                                <span class="title-span"> PUNTOS NO ENTREGADOS </span>
+                                            </th>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th> <b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.CLIENT' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ADDRESS'| translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ARRIVAL'| translate }}</b></th>
+
+                                            <th><b> {{'REPORT.PLANNED' | translate }} </b></th>
+
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let item of pointNoDelivered; let i = index">
+
+                                            <td> {{ item.deliveryPointId }}</td>
+
+                                            <td> {{ item.name }} </td>
+
+                                            <td> {{ item.address }} </td>
+
+                                            <td> {{ returHourse (item.driverArrivalTime) }} </td>
+
+                                            <td> {{ item.order }} </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showPointNoDelivered">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+
+                        <!-- end PUNTOS NO ENTREGADOS -->
+
+                        <!-- ALBARANES MODIFICADOS -->
+
+                        <ng-container *ngIf="albaranModified && albaranModified.length > 0">
+                            <ng-container *ngIf="showAlbaranModified">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="4">
+
+                                                <span class="title-span"> {{'REPORT.MODIFIED_DELIVERY_NOTES' | translate }} </span>
+
+                                            </th>
+
+                                        </tr>
+
+                                        <ng-container *ngFor="let item of albaranModified; let last= last">
+
+                                            <tr>
+                                                <th colspan="2"> <b> {{'REPORT.CLIENT' | translate }}:</b> {{ item.nameClient }} </th>
+
+                                                <th><b> {{'REPORT.DELIVERY_NOTE' | translate }}:</b> {{ item.deliveryNoteCode }} </th>
+
+                                            </tr>
+
+                                            <tr *ngFor="let products of item.products">
+
+                                                <th><b> {{'REPORT.PRODUCT' | translate }}:</b> {{ products.name }}
+                                                    <ng-container *ngIf="products.codeProduct">({{products.codeProduct}})</ng-container>
+                                                </th>
+                                                <!-- <th><b>Original: </b> 10</th> -->
+                                                <th colspan="2">
+                                                    <b> {{'REPORT.MODIFICATION' | translate }}: </b> {{ products.measureQuantity }}
+                                                </th>
+
+                                            </tr>
+
+                                            <br *ngIf="!last">
+
+                                        </ng-container>
+
+                                    </thead>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showAlbaranModified">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- end ALBARANES MODIFICADOS -->
+
+                        <!-- PRODUCTOS NO ENTREGADOS Se comenta hasta saber como hacer con Cefrusa-->
+
+                        <!-- <ng-container *ngIf="productNotDelivered && productNotDelivered.length > 0">
+                            <ng-container *ngIf="showProductNotDelivered">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="7">
+
+                                                <span class="title-span"> {{'REPORT.NOT_DELIVERED_PRODUCTS' | translate }} </span>
+                                            </th>
+
+                                        </tr>
+
+                                        <tr>
+                                            <th><b> {{'REPORT.CLIENT' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ALBARAN' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.PRODUCT' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.QUANTITY_NOT_DELIVERED' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.UNIT_MEASURE' | translate }} </b></th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let item of productNotDelivered; let i = index">
+
+                                            <td> {{ item.nameClient }}</td>
+
+                                            <td> {{ item.deliveryNoteCode }} </td>
+
+                                            <td> {{ item.codeProduct }} </td>
+
+                                            <td> {{ item.name }} </td>
+
+                                            <td> {{ item.quantity }} </td>
+
+                                            <td> {{ item.measure }} </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showProductNotDelivered">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+                        </ng-container> -->
+
+                        <!-- end PRODUCTOS NO ENTREGADOS -->
+
+                        <!-- DEVOLUCIONES -->
+                        <ng-container *ngIf="devolution && devolution.length > 0">
+                            <ng-container *ngIf="showDevolution">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="2">
+
+                                                <span class="title-span"> {{'REPORT.RETURNS_1' | translate }} </span>
+
+                                            </th>
+
+                                        </tr>
+
+                                        <ng-container *ngFor="let devo of devolution; let i = index;  let last= last">
+
+                                            <tr>
+                                                <th> <b> {{'REPORT.CLIENT' | translate }}:</b> {{ devo.delivery_point.name }} </th>
+
+                                                <th> <b> {{'REPORT.DELIVERY_NOTE' | translate }}:</b> {{ devo.deliveryNoteCode }} </th>
+
+                                            </tr>
+
+                                            <tr *ngFor="let prod of devo.list_devolutions">
+
+                                                <th> <b> {{'REPORT.PRODUCT' | translate }}:</b> {{ prod.nameProduct }} </th>
+
+                                                <th> <b> {{'REPORT.QUANTITY' | translate }}: </b> {{ prod.quantityProduct }} </th>
+
+
+                                            </tr>
+
+                                            <tr>
+
+                                                <th colspan="5"> <b> {{'REPORT.OBSERVATIONS' | translate }}:</b> {{ devo.devolutionDeliveryNote }} </th>
+
+                                            </tr>
+
+                                            <br *ngIf="!last">
+
+                                        </ng-container>
+
+                                    </thead>
+
+                                </table>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!showDevolution">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- end DEVOLUCIONES -->
+
+                        <!-- pagina de coste -->
+
+                        <ng-container *ngIf="moduleCost()">
+
+                            <ng-container *ngIf="costControl && costControl.length > 0">
+
+                                <ng-container *ngIf="showCostControl">
+
+                                    <table class="table table-responsive-lg mb-0 mt-4">
+
+                                        <thead>
+
+                                            <tr>
+
+                                                <th class="border-resumen" colspan="7">
+
+                                                    <span class="title-span"> {{'REPORT.COST_CONTROL' | translate }} </span>
+
+                                                </th>
+
+                                            </tr>
+
+                                            <tr>
+
+                                                <th> <b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                                <th><b> {{'REPORT.CLIENT' | translate }} </b> </th>
+
+                                                <th><b> {{'REPORT.ADDRESS' | translate }} </b> </th>
+
+                                                <th><b> {{'REPORT.COST' | translate }} </b></th>
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let item of costControl; let i = index">
+
+                                                <td> {{ item.idClient }} </td>
+
+                                                <td> {{ item.nameClient }} </td>
+
+                                                <td> {{ item.address }} </td>
+
+                                                <td> {{ decimal(item.costShow) }} </td>
+
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showCostControl">
+
+                                    <div class="fa-10x mb-2 text-center pt-5">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+                        <!-- end pagina de coste -->
+
+                    </div>
+
+                    <div class="card-footer text-center pb-3">
+                        <span class="footer-table">{{'REPORT.PAGE' | translate }} 2/{{ totalPage }}</span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- end pagina 2 -->
+
+
+        <!-- pagina 3 -->
+        <ng-container *ngIf="(bill && bill.list && bill.list.length > 0) || (secondRound && secondRound.length > 0)
+            || (outRange && outRange.length > 0) || (packagingList && packagingList.length > 0) || (refueling && refueling.length > 0)">
+            <div class="col-12 pt-4">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <!-- SEGUNDAS VUELTAS -->
+                        <ng-container *ngIf="secondRound && secondRound.length > 0">
+                            <ng-container *ngIf="showSecondRound">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+                                    <thead>
+
+                                        <tr>
+                                            <th class="border-resumen" colspan="7">
+                                                <span class="title-span">SEGUNDAS VUELTAS</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th> <b>Código</b></th>
+                                            <th><b>Cliente</b> </th>
+                                            <th><b>Dirección</b> </th>
+                                            <th><b>Total vueltas</b> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let item of secondRound; let i = index">
+
+                                            <td> {{ item.idClient }} </td>
+
+                                            <td> {{ item.nameClient }} </td>
+
+                                            <td> {{ item.address }} </td>
+
+                                            <td> {{ item.totalSecondRound }} </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </ng-container>
+
+
+                            <ng-container *ngIf="!showSecondRound">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        <!-- end SEGUNDAS VUELTAS -->
+
+                        <!-- SERVICIO FUERA DE RADIO -->
+
+                        <ng-container *ngIf="outRange && outRange.length > 0">
+                            <ng-container *ngIf="showOutRange">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="7">
+
+                                                <span class="title-span text-uppercase"> {{'REPORT.SERVICE_OUTRANGE' | translate }} </span>
+
+                                            </th>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th><b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.CLIENT' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ADDRESS' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.ARRIVAL' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.PLANNED' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.REAL_ORDER' | translate }} </b></th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let item of outRange; let i = index">
+
+                                            <td> {{ item.idClient }} </td>
+
+                                            <td> {{ item.nameClient }} </td>
+
+                                            <td> {{ item.address }} </td>
+
+                                            <td> {{ returHourse(item.driverArrivalTime) }} </td>
+
+                                            <td [ngClass]="{'delay-class':item.delayTimeOnDelivery == 'Retraso'}"> {{ item.order }} </td>
+
+                                            <td class="text-center" [ngClass]="{'delay-class':item.delayTimeOnDelivery == 'Retraso'}"> {{ item.realOrder > 0 ? item.realOrder : '-' }} </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showOutRange">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+                        </ng-container>
+                        <!-- end SERVICIO FUERA DE RADIO -->
+
+                        <!-- envases -->
+
+                        <ng-container *ngIf="packagingList && packagingList.length > 0">
+
+                            <ng-container *ngIf="showPackaging">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="7">
+
+                                                <span class="title-span"> ENVASES </span>
+
+                                            </th>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th> <b> {{'REPORT.CODE' | translate }} </b></th>
+
+                                            <th><b> {{ 'REPORT.CLIENT' | translate }} </b> </th>
+
+                                            <th><b> {{ 'REPORT.ADDRESS' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.CONTAINERS_DELIVERED' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.COLLECTED_PACKAGING' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.BALANCE' | translate }} </b></th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let item of packagingList; let i = index">
+
+                                            <td> {{ item.idClient }} </td>
+
+                                            <td> {{ item.nameClient }} </td>
+
+                                            <td> {{ item.address }} </td>
+
+                                            <td> {{ item.devolutionBoxes }} </td>
+
+                                            <td> {{ item.deliveredBoxes }} </td>
+
+                                            <td> {{ item.totalBoxes }} </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showPackaging">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+
+
+                        <!-- end envases -->
+
+                        <!-- REPOSTAJE -->
+                        <ng-container *ngIf="refueling && refueling.length > 0">
+
+                            <ng-container *ngIf="showRefueling">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th class="border-resumen" colspan="7">
+
+                                                <span class="title-span"> REPOSTAJE </span>
+
+                                            </th>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th> <b> {{'REPORT.HOUR' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.PROVIDER' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.CONCEPT' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.LITERS' | translate }} </b></th>
+
+                                            <th><b> {{'REPORT.KM' | translate }} </b> </th>
+
+                                            <th><b> {{'REPORT.IMPORT' | translate }} </b></th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let item of refueling; let i = index">
+
+                                            <td> {{ getHour(item.created_at) }} </td>
+
+                                            <td> {{ item.provider }} </td>
+
+                                            <td> {{ item.concept }} </td>
+
+                                            <td> {{ item.liter }} </td>
+
+                                            <td> {{ item.km }} </td>
+
+                                            <td> {{ decimal(item.import) }} </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showCoporate">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+                        </ng-container>
+                        <!-- end REPOSTAJE -->
+
+                        <!-- RESUMEN COBROS -->
+                        <ng-container *ngIf="bill && bill.list && bill.list.length > 0">
+
+                            <ng-container *ngIf="showBill">
+
+                                <table class="table table-responsive-lg mb-0 mt-4">
+
+                                    <thead>
+
+                                        <tr>
+                                            <th class="border-resumen" colspan="5">
+                                                <span class="title-span">RESUMEN COBROS</span>
+                                            </th>
+
+                                        </tr>
+
+                                        <tr *ngIf="totales">
+
+                                            <th> <b>Total cobrado:</b> {{ totales.total_paid }} €</th>
+
+                                            <th> <b>En efectivo:</b> {{ totales.total_cash }} €</th>
+
+                                            <th> <b>En tarjeta:</b> {{ totales.total_card }} €</th>
+
+                                            <th colspan="2"> <b>En cheque:</b> {{ totales.total_check }} €</th>
+
+                                        </tr>
+
+                                        <br>
+
+                                        <tr>
+
+                                            <th>Código</th>
+
+                                            <th>Cliente</th>
+
+                                            <th>Dirección</th>
+
+                                            <th>Importe</th>
+
+                                            <th>Método</th>
+
+                                        </tr>
+
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr *ngFor="let item of bill.list; let i = index">
+
+                                            <td> {{ item.code }} </td>
+
+                                            <td> {{ item.delivery_point.name }} </td>
+
+                                            <td> {{ item.delivery_point.address }} </td>
+
+                                            <td> {{ item.total }} € </td>
+
+                                            <td> {{ item.bill_payment_type ? item.bill_payment_type.name :item.bill_payment_type ? item.bill_payment_type.name :'' }} </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!showBill">
+
+                                <div class="fa-10x mb-2 text-center pt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+
+                            </ng-container>
+
+                        </ng-container>
+                        <!-- end RESUMEN COBROS -->
+
+                    </div>
+
+                    <div class="card-footer text-center pb-3">
+                        <span class="footer-table">{{'REPORT.PAGE' | translate }}
+                            <ng-container *ngIf="totalPage <= 2">
+                                2/{{ totalPage }}
+                            </ng-container>
+                            <ng-container *ngIf="totalPage >= 3">
+                                3/{{ totalPage }}
+                            </ng-container>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- end pagina 3 -->
+    </div>
+
+
+
+</div>

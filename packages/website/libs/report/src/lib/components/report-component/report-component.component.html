@@ -1,0 +1,366 @@
+<div class="report-component main-container container-fluid pt-4 pb-4">
+
+    <!-- header -->
+    <div class="d-flex row align-items-center justify-content-between" style="height: 45px;">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title">
+
+                <img src="assets/icons/report.svg" class="header-brand-img img-providers" alt="cost">
+
+                <span class="ml-3"> {{'REPORT.NAME' | translate }} </span>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end">
+
+                <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                    <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="row align-items-center mt-2">
+
+        <!-- rutas -->
+
+        <div class="col-xl-auto col-md-6 col-12 pt-2">
+
+            <!-- card donde esta la imagen -->
+
+            <div class="card size-card-img">
+
+                <div class="card-body card-img card-body-img">
+
+                    <img class="card-img-top" src="assets/icons/report/report1.svg" alt="Card image cap">
+
+                    <div class="w-100 d-flex show-background point h-50 flex-column justify-content-end align-items-center pb-4" (click)="redirectPages('route')">
+
+                        <span> {{ 'REPORT.VIEW_REPORT' | translate }} </span>
+
+                        <img class="point pt-2" src="assets/icons/report/hover.svg">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- end  card donde esta la imagen -->
+
+            <!-- card donde esta la informacion -->
+
+            <div class="card position-card size-card-no-img point" (click)="redirectPages('route')">
+
+                <div class="card-header card-h">
+
+                    <div class="div">
+                        <span class="mb-0"> {{'REPORT.ROUTE' | translate }} </span>
+
+                        <img class="img-lock" src="assets/icons/report/locked.svg">
+                    </div>
+
+
+
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-content mb-0"> {{'REPORT.TEXT_1' | translate }} </p>
+
+                    <p class="open-report mt-4 mb-1"> {{ 'REPORT.VIEW_REPORT' | translate }} </p>
+                </div>
+            </div>
+
+            <!-- end card donde esta la informacion -->
+
+        </div>
+
+        <!-- end  -->
+
+
+        <!-- actualizacion de datos clientes -->
+
+        <div class="col-xl-auto col-md-6 col-12 pt-2">
+
+            <!-- card donde esta la imagen -->
+
+            <div class="card size-card-img">
+
+                <div class="card-body card-img card-body-img">
+
+                    <img class="card-img-top img-color" src="assets/icons/report/DASH.svg" alt="Card image cap">
+
+                    <div class="w-100 d-flex show-background point h-50 flex-column justify-content-end align-items-center pb-4" (click)="redirectPages('data-update')">
+
+                        <span> {{ 'REPORT.VIEW_REPORT' | translate }} </span>
+
+                        <img class="point pt-2" src="assets/icons/report/hover.svg">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- end  card donde esta la imagen -->
+
+            <!-- card donde esta la informacion -->
+
+            <div class="card position-card size-card-no-img point" (click)="redirectPages('data-update')">
+
+                <div class="card-header card-h">
+
+                    <div class="div">
+                        <span class="mb-0"> {{'REPORT.UPDATES' | translate }} </span>
+
+                        <img class="img-lock" src="assets/icons/report/locked.svg">
+                    </div>
+
+
+
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-content mb-0"> {{'REPORT.TEXT_2' | translate }} </p>
+
+                    <p class="open-report mt-4 mb-1"> {{ 'REPORT.VIEW_REPORT' | translate }} </p>
+                </div>
+            </div>
+
+            <!-- end card donde esta la informacion -->
+
+        </div>
+
+        <!-- end actualizacion de datos clientes -->
+
+        <!-- Rentabilidad -->
+
+        <div class="col-xl-auto col-md-6 col-12 pt-2">
+
+            <!-- card donde esta la imagen -->
+
+            <div class="card size-card-img">
+
+                <div class="card-body card-img card-body-img">
+
+                    <img class="card-img-top img-color" [ngClass]="{'grises': !moduleCost()}" src="assets/icons/report/productivity.svg" alt="Card image cap">
+
+                    <div class="w-100 d-flex show-background point h-50 flex-column justify-content-end align-items-center pb-4" (click)="rediresPagesCostEffectiveness('cost-effectiveness')">
+
+                        <span> {{ 'REPORT.VIEW_REPORT' | translate }} </span>
+
+                        <img class="point pt-2" src="assets/icons/report/hover.svg">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- end  card donde esta la imagen -->
+
+            <!-- card donde esta la informacion -->
+
+            <div class="card position-card size-card-no-img point" (click)="rediresPagesCostEffectiveness('cost-effectiveness')">
+
+                <div class="card-header card-h">
+
+                    <div class="div">
+
+                        <span class="mb-0"> {{ 'REPORT.COST_EFFECTIVENESS.NAME' | translate }} </span>
+
+                        <ng-container *ngIf="moduleCost()">
+
+                            <img class="img-lock" src="assets/icons/report/locked.svg">
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!moduleCost()">
+
+                            <img class="img-lock" src="assets/icons/report/lock.svg">
+
+                        </ng-container>
+
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-content mb-0"> {{ 'REPORT.TEXT_3' | translate }} </p>
+
+                    <ng-container *ngIf="moduleCost()">
+                        <p class="open-report mt-4 mb-1"> {{ 'REPORT.VIEW_REPORT' | translate }} </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!moduleCost()">
+                        <p class="mt-4 mb-1 title-no-module">{{'REPORT.ONLY_WITH_THE_COST_MODULE' | translate }}</p>
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <!-- end card donde esta la informacion -->
+
+        </div>
+
+        <!-- end Rentabilidad -->
+
+        <!-- actualizacion de datos clientes -->
+
+        <div class="col-xl-auto col-md-6 col-12 pt-2">
+
+            <!-- card donde esta la imagen -->
+
+            <div class="card size-card-img">
+
+                <div class="card-body card-img card-body-img">
+
+                    <img class="card-img-top img-color" [ngClass]="{ 'grises': !isAdminCompany() }" src="assets/icons/report/accessLog.svg" alt="Card image cap">
+
+                    <div class="w-100 d-flex show-background point h-50 flex-column justify-content-end align-items-center pb-4" (click)="rediresAccessLog('access-log')">
+
+                        <span> {{ 'REPORT.VIEW_REPORT' | translate }} </span>
+
+                        <img class="point pt-2" src="assets/icons/report/hover.svg">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- end  card donde esta la imagen -->
+
+            <!-- card Registro de accesos -->
+
+            <div class="card position-card size-card-no-img point" (click)="rediresAccessLog('access-log')">
+
+                <div class="card-header card-h">
+
+                    <div class="div">
+                        <span class="mb-0"> {{'REPORT.ACCESS_LOG' | translate }} </span>
+
+                        <ng-container *ngIf="isAdminCompany()">
+
+                            <img class="img-lock" src="assets/icons/report/locked.svg">
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!isAdminCompany()">
+
+                            <img class="img-lock" src="assets/icons/report/lock.svg">
+
+                        </ng-container>
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-content mb-0"> {{'REPORT.ACCESS_LOG_TEXT' | translate }} </p>
+
+                    <ng-container *ngIf="isAdminCompany()">
+                        <p class="open-report mt-4 mb-1"> {{ 'REPORT.VIEW_REPORT' | translate }} </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!isAdminCompany()">
+                        <p class="mt-4 mb-1 title-no-module">{{'REPORT.ONLY_WITH_THE_ROL_ADMIN_COMPANY' | translate }}</p>
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <!-- end card Registro de accesos -->
+
+        </div>
+
+        <!-- end actualizacion de datos clientes -->
+
+        <!-- Documentos de control -->
+
+        <div class="col-xl-auto col-md-6 col-12 pt-2">
+
+            <!-- card donde esta la imagen -->
+
+            <div class="card size-card-img">
+
+                <div class="card-body card-img card-body-img">
+
+                    <img class="card-img-top img-color" src="assets/icons/report/controlDocument.svg" alt="Card image cap">
+
+                    <div class="w-100 d-flex show-background point h-50 flex-column justify-content-end align-items-center pb-4" (click)="redirectPages('control-Documents')">
+
+                        <span> {{ 'REPORT.VIEW_REPORT' | translate }} </span>
+
+                        <img class="point pt-2" src="assets/icons/report/hover.svg">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- end  card donde esta la imagen -->
+
+            <!-- card donde esta la informacion -->
+
+            <div class="card position-card size-card-no-img point" (click)="redirectPages('control-Documents')">
+
+                <div class="card-header card-h">
+
+                    <div class="div">
+
+                        <span class="mb-0"> {{ 'REPORT.CONTROL_DOCUMENTS' | translate }} </span>
+
+                        <img class="img-lock" src="assets/icons/report/locked.svg">
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-content mb-0"> {{ 'REPORT.CONTROL_DOCUMENTS_TEXT' | translate }} </p>
+                    <br/>
+                    <br/>
+                    <p class="open-report mt-xl-0 mt-3 mb-1"> {{ 'REPORT.VIEW_REPORT' | translate }} </p>
+
+                </div>
+            </div>
+
+            <!-- end card donde esta la informacion -->
+
+        </div>
+
+        <!-- end Documentos de control -->
+
+
+    </div>
+
+</div>

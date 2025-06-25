@@ -1,0 +1,285 @@
+<div class="easyroute-route-planning-panel" #panel [style.width]="sidenavWidth + 'px'">
+    <div class="accordion" [id]="'accordion' + zone.id">
+        <div class="card">
+            <div class="route-planning-panel-header" [id]="'heading' + zone.id">
+                <div (mouseenter)="hoverEvent.emit(true)" (mouseleave)="hoverEvent.emit(false)">
+                    <div class="main-panel-header" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="">
+                        <div fxLayout="row" fxLayoutAlign="start center" class="left-header-title" fxFlex="">
+                            <!-- <div class="expand-icon pointer" fxLayout="column" fxLayoutAlign="top" (click)="toggleExpansion()">
+                                <i class="fas fa-chevron-down color-primary" *ngIf="!isExpanded"></i>
+                                <i class="fas fa-chevron-up color-primary" *ngIf="isExpanded"></i>
+                            </div> -->
+
+                            <div class="header-title-container" [style.maxWidth]="sidenavWidth - 160 + 'px'" fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="space-evenly" fxFlex="">
+                                <div fxLayout="row" fxLayoutAlign="space-between center" class="pointer pt-2">
+                                    <div class="header-title-line" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px" *ngIf="!editableHeader">
+                                        <app-info-chip [shadow]="true" size="s" help="Identificador" [color]="zone.color" class="header-identifier"></app-info-chip>
+
+                                        <span class="header-title mat-h2" [ngStyle]="{'color': zone.color}">{{ zone.name
+                                            }}</span>
+                                    </div>
+                                    <div class="header-title-line pointer margin-rigth" *ngIf="(zoneState$ | async) && (zoneState$ | async).deliveryPoints 
+                                        && (zoneState$ | async).deliveryPoints.length === 0" fxLayout="row" fxLayoutAlign="start center" (click)="deleteZone()">
+                                        <img style="height: 19px;" src="assets/icons/delete-route.svg">
+                                    </div>
+
+
+                                    <div class="header-title-line" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px" *ngIf="editableHeader">
+                                        <ng-content select="[editable-zone-color]"></ng-content>
+
+                                        <ng-content select="[editable-zone-name]"></ng-content>
+                                    </div>
+
+                                    <ng-content select="[route-planning-actions]"></ng-content>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8 pointer">
+                                        <div class="chips">
+                                            <ng-content select="[route-planning-info-chips]"></ng-content>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row point p-2" [ngStyle]="{ 'background-color': '#F2F2F2' }" (click)="toggleExpansion()" *ngIf="(routePlanning$ | async) && (routePlanning$ | async).viewingMode === 0">
+                                    <div class="col-11" *ngIf=" zone && zone.evaluated">
+                                        <div class="header-title-line" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                                            <app-info-chip [shadow]="true" size="s" help="Identificador" [color]="zone.color" class="subheader-identifier"></app-info-chip>
+
+                                            <span class="subheader-title">Ruta evaluada ({{
+                                                zone.name
+                                                }})</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 align-self-center" [ngClass]="{'offset-11':!(zone && zone.evaluated)}">
+                                        <i class="fas fa-chevron-down" [ngStyle]="{'color': '#000'}" *ngIf="!isExpanded"></i>
+                                        <i class="fas fa-chevron-up" [ngStyle]="{'color': '#000'}" *ngIf="isExpanded"></i>
+                                    </div>
+
+                                </div>
+                                <div class="row point p-2" [ngStyle]="{ 'background-color': '#F2F2F2' }" *ngIf="(routePlanning$ | async) && (routePlanning$ | async).viewingMode === 1">
+                                    <div class="col-11" *ngIf=" zone">
+                                        <div class="header-title-line" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                                            <span class="subheader-title">Ruta optimizadas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="(routePlanning$ | async) && (routePlanning$ | async).viewingMode === 0">
+                <div [id]="'collapse' + zone.id" class="collapse" [ngClass]="{'show': isExpanded}">
+                    <div class="zone-content" fxLayout="column">
+                        <div class="subzones">
+                            <easyroute-route-planning-subzones *ngIf="zone.deliveryZones && zone.isMultiZone" route-planning-subzones [zoneId]="zone.id" [subZones]="zone.deliveryZones" [isOptimized]="(routePlanning$ | async).viewingMode === 0 ? false : true">
+                            </easyroute-route-planning-subzones>
+                        </div>
+
+                        <ng-container *ngIf="isRoutesDisabled">
+                            <ng-content select="[route-planning-options]"></ng-content>
+                            <ng-content select="[route-planning-delivery-points]"></ng-content>
+
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!isRoutesDisabled">
+                            <div [ngStyle]="{ 'background-color': '#FFE9D6' }">
+                                <div class="row p-2">
+                                    <div class="col-12">
+                                        <label class="title-routes">Rutas</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <ng-container>
+                                <div class="toggleable border-top" *ngFor="let route of zone.optimization.solution.routes; let i = index;">
+
+                                    <div class="row p-2" (click)="toggleRoute(i)" [ngStyle]="{ 'background-color': '#FFE9D6' }">
+                                        <div class="col-11">
+                                            <div class="header-title-line" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                                                <app-info-chip [shadow]="true" size="s" help="Identificador" [color]="route.color" class="subheader-identifier"></app-info-chip>
+
+                                                <label class="title-route">{{ route.name }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 text-left">
+                                            <i class="fas fa-chevron-up" *ngIf="route.toggle"></i>
+                                            <i class="fas fa-chevron-down" *ngIf="!route.toggle"></i>
+                                        </div>
+                                    </div>
+
+                                    <ng-container *ngIf="route.toggle">
+                                        <div class="row p-2" [ngStyle]="{ 'background-color': '#FFE9D6' }">
+                                            <div class="col-6">
+                                                <ng-container *ngIf="!isRoutesDisabled || !atRouteStage">
+                                                    <easyroute-route-planning-info route-planning-calculated-routes-info-chips *ngIf="zone.optimization.solution.routes !== null" [zoneId]="zone.id" [routeInfoChips]="getRouteInfoChip(i) | async" [showZoneChips]="false" [showRouteChips]="true" routesColor="#FF9F46"
+                                                        [hasShadow]="false">
+                                                    </easyroute-route-planning-info>
+                                                </ng-container>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <div route-planning-calculated-routes-options *ngIf="zoneStatus.optimized && zone.optimization.solution.routes !== null" class="route-planning-calculated-routes-toolbar" fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="end center" (click)="$event.stopPropagation()">
+                                                    <div class="route-planning-routes-pagination" fxLayoutGap="6px" fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation()">
+                                                        <mat-progress-spinner *ngIf="
+                                                            routesStatus[route.id] &&
+                                                            routesStatus[route.id].evaluating
+                                                        " [diameter]="20" mode="indeterminate" color="accent">
+                                                        </mat-progress-spinner>
+                                                        <button mat-icon-button (click)="showRouteGeometry(i)">
+                                                            <mat-icon>directions</mat-icon>
+                                                        </button>
+
+                                                        <mat-checkbox (change)="toggleSelectRoute(route.id)" class="button-accent" [checked]="
+                                                                routesStatus !== null
+                                                                    ? route.id && routesStatus[route.id]
+                                                                        ? routesStatus[route.id].selected
+                                                                        : false
+                                                                    : false
+                                                            ">
+                                                        </mat-checkbox>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row p-2 border-top" [ngStyle]="{ 'background-color': '#F2F2F2' }">
+                                            <div class="col-7">
+                                                <easyroute-recalculate-route class="recalculate-route" [zoneId]="zone.id" [routeId]="getCurrentRouteId(i)" [routesStatus]="routesStatus" [zoneStatus]="zoneStatus" [zoneOptimizationStatus$]="zoneOptimizationStatus$">
+                                                </easyroute-recalculate-route>
+                                            </div>
+                                            <div class="col-5 text-right align-self-end" *ngIf="(routePlanning$ | async) && (routePlanning$ | async).viewingMode === 1">
+                                                <button class="btn btn-add-grey" (click)="moveDeliveryPointOptim()">
+                                                    <i class="fas fa-list-ol pr-1"></i>{{ 'GENERAL.MOVE_DELIVERY_POINTS'
+                                                    |
+                                                    translate
+                                                    }}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <easyroute-route-planning-table [zoneId]="zone.id" [routeId]="getCurrentRouteId(i)">
+                                        </easyroute-route-planning-table>
+
+                                    </ng-container>
+
+                                </div>
+                            </ng-container>
+
+
+
+
+                            <!--  <ng-content *ngIf="isRoutesDisabled && hasOptimization && atRouteStage"
+                                easyroute-route-panel-header-centered-right select="[route-planning-routes-switch]">
+                            </ng-content> -->
+
+
+
+
+
+
+
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="(routePlanning$ | async) && (routePlanning$ | async).viewingMode === 1">
+                <div [id]="'collapse-optimized' + zone.id">
+                    <div class="zone-content" fxLayout="column">
+                        <div class="subzones">
+                            <easyroute-route-planning-subzones *ngIf="zone.deliveryZones && zone.isMultiZone" route-planning-subzones [zoneId]="zone.id" [subZones]="zone.deliveryZones" [isOptimized]="(routePlanning$ | async).viewingMode === 0 ? false : true">
+                            </easyroute-route-planning-subzones>
+                        </div>
+
+                        <ng-container *ngIf="isRoutesDisabled">
+                            <ng-content select="[route-planning-options]"></ng-content>
+                            <ng-content select="[route-planning-delivery-points]"></ng-content>
+
+
+                        </ng-container>
+
+                        <ng-container *ngIf="!isRoutesDisabled">
+                            <ng-container>
+                                <div class="toggleable" *ngFor="let route of zone.optimization.solution.routes; let i = index;">
+
+                                    <div class="row p-2" (click)="toggleRoute(i)" [ngStyle]="{ 'background-color': '#F2F2F2' }">
+                                        <div class="col-11">
+                                            <div class="header-title-line" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                                                <app-info-chip [shadow]="true" size="s" help="Identificador" [color]="route.color" class="subheader-identifier"></app-info-chip>
+
+                                                <label class="title-route">Ruta optimizada ({{ route.name }})</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 text-left">
+                                            <i class="fas fa-chevron-up" *ngIf="route.toggle"></i>
+                                            <i class="fas fa-chevron-down" *ngIf="!route.toggle"></i>
+                                        </div>
+                                    </div>
+
+                                    <ng-container *ngIf="route.toggle">
+                                        <div class="row p-2" [ngStyle]="{ 'background-color': '#F2F2F2' }">
+                                            <div class="col-6">
+                                                <ng-container *ngIf="!isRoutesDisabled || !atRouteStage">
+                                                    <easyroute-route-planning-info route-planning-calculated-routes-info-chips *ngIf="zone.optimization.solution.routes !== null" [routeInfoChips]="getRouteInfoChip(i) | async" [zoneId]="zone.id" [showZoneChips]="false" [showRouteChips]="true" routesColor="#F2F2F2"
+                                                        [hasShadow]="false">
+                                                    </easyroute-route-planning-info>
+                                                </ng-container>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <div route-planning-calculated-routes-options *ngIf="zoneStatus.optimized && zone.optimization.solution.routes !== null" class="route-planning-calculated-routes-toolbar" fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="end center" (click)="$event.stopPropagation()">
+                                                    <div class="route-planning-routes-pagination" fxLayoutGap="6px" fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation()">
+                                                        <mat-progress-spinner *ngIf="
+                                                            routesStatus[route.id] &&
+                                                            routesStatus[route.id].evaluating
+                                                        " [diameter]="20" mode="indeterminate" color="accent">
+                                                        </mat-progress-spinner>
+                                                        <button mat-icon-button (click)="showRouteGeometry(i)">
+                                                            <mat-icon>directions</mat-icon>
+                                                        </button>
+
+                                                        <mat-checkbox (change)="toggleSelectRoute(route.id)" class="button-accent" [checked]="
+                                                                routesStatus !== null
+                                                                    ? route.id && routesStatus[route.id]
+                                                                        ? routesStatus[route.id].selected
+                                                                        : false
+                                                                    : false
+                                                            ">
+                                                        </mat-checkbox>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row p-2 border-top" [ngStyle]="{ 'background-color': '#F2F2F2' }">
+                                            <div class="col-7">
+                                                <easyroute-recalculate-route class="recalculate-route" [zoneId]="zone.id" [routeId]="getCurrentRouteId(i)" [routesStatus]="routesStatus" [zoneStatus]="zoneStatus" [zoneOptimizationStatus$]="zoneOptimizationStatus$">
+                                                </easyroute-recalculate-route>
+                                            </div>
+                                            <div class="col-5 text-right align-self-end" *ngIf="(routePlanning$ | async) && (routePlanning$ | async).viewingMode === 1">
+                                                <button class="btn btn-add-grey" (click)="moveDeliveryPointOptim()">
+                                                    <i class="fas fa-list-ol pr-1"></i>{{ 'GENERAL.MOVE_DELIVERY_POINTS'
+                                                    |
+                                                    translate
+                                                    }}
+                                                </button>
+                                            </div>
+                                        </div>
+
+
+                                        <easyroute-route-vehicle [zone]="zone" [route]="this.zone.optimization.solution.routes[i]" [vehicle]="this.zone.optimization.solution.routes[i].vehicle">
+                                        </easyroute-route-vehicle>
+
+                                        <easyroute-route-planning-table [zoneId]="zone.id" [routeId]="getCurrentRouteId(i)">
+                                        </easyroute-route-planning-table>
+
+                                    </ng-container>
+
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

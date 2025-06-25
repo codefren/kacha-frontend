@@ -1,0 +1,191 @@
+<div class="easyroute-modal-directions">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center">
+
+                <label class="title-modal"  *ngIf="direction.id === ''"> {{ 'DELIVERY_POINTS.ADD_DIRECTION' | translate }} </label>
+                <label class="title-modal" *ngIf="direction.id !== ''"> {{ 'DELIVERY_POINTS.EDIT_DIRECTION' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <p class="title-infor"> {{ 'DELIVERY_POINTS.DIRECTION_MODAL_MESSAGE' | translate }} </p>
+            </div>
+        </div>
+
+        <form [formGroup]="form" *ngIf="form">
+
+            <div class="form-row">
+                <!-- Direccion -->
+                <div class="col-xl-12 col-12 col-md-12">
+                    <div class="input-group" style="display: block;">
+                        <span class="has-float-label w-100">
+                            <input type="text" class="form-control radiusDeliveryOrderCode point" 
+                            id="modal-address" formControlName="address" placeholder=" {{ 'DELIVERY_POINTS.ADDRESS' | translate }}" />
+                            <label for="first" class="mt-2 title-col">{{ 'DELIVERY_POINTS.ADDRESS' | translate }} <span class="asterisco">* </span> </label>
+                        </span>
+                        <span class="has-float-label w-100 has-float-primary">
+                            <button type="button" class="btn btn-primary btn-save" data-placement="top" title="¿Otras coordenadas?"
+                                style="vertical-align: text-bottom;"
+                                (click)="searchAddress()" id="tooltip" data-toggle="tooltip" id="tooltip">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <ng-container *ngFor="let validation of directions_messages.address">
+                        <div class="w-100 text-left">
+                            <small class="form-control-feedback text-danger" 
+                                *ngIf="form.get('address').hasError( validation.type ) 
+                                && (form.get('address').dirty 
+                                || form.get('address').touched)">
+                                {{ validation.message }}
+                            </small>
+                        </div>
+                    </ng-container>
+                </div>
+               
+                <!-- Provincia -->
+                <div class="col-xl-6 col-12 mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input class="form-control point" id="province" type="text" 
+                            placeholder="{{ 'DELIVERY_POINTS.PROVINCE' | translate }}" formControlName="province"/>
+
+                            <label for="province" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.PROVINCE' | translate }}</label>
+                        </span>
+                        <ng-container *ngFor="let validation of directions_messages.province">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        form.get('province').hasError(
+                                            validation.type
+                                        ) &&
+                                        (form.get('province').dirty ||
+                                        form.get('province').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Código postal -->
+                <div class="col-xl-6 col-12 mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input class="form-control point" id="postalCode" type="text" 
+                            placeholder="{{ 'DELIVERY_POINTS.POSTAL_CODE' | translate }}" formControlName="postalCode"/>
+
+                            <label for="postalCode" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.POSTAL_CODE' | translate }}</label>
+                        </span>
+                        <ng-container *ngFor="let validation of directions_messages.postalCode">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        form.get('postalCode').hasError(
+                                            validation.type
+                                        ) &&
+                                        (form.get('postalCode').dirty ||
+                                        form.get('postalCode').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Latitud -->
+                <div class="col-xl-6 col-12 mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100" *ngIf="showAddress">
+                            <input class="form-control point" id="coordinatesLatitude" type="text" 
+                            placeholder="{{ 'DELIVERY_POINTS.LATITUDE' | translate }}" formControlName="coordinatesLatitude"/>
+
+                            <label for="coordinatesLatitude" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.LATITUDE' | translate }} <span class="asterisco">* </span></label>
+                        </span>
+                        <ng-container *ngFor="let validation of directions_messages.coordinatesLatitude">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        form.get('coordinatesLatitude').hasError(
+                                            validation.type
+                                        ) &&
+                                        (form.get('coordinatesLatitude').dirty ||
+                                        form.get('coordinatesLatitude').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!showAddress">
+                            <div class="col-12 mt-3 d-flex justify-content-center align-items-center">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Logintud -->
+                <div class="col-xl-6 col-12 mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100" *ngIf="showAddress">
+                            <input class="form-control point" id="coordinatesLongitude" type="text" 
+                            placeholder="{{ 'DELIVERY_POINTS.LENGTH' | translate }}" formControlName="coordinatesLongitude"/>
+
+                            <label for="coordinatesLongitude" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.LENGTH' | translate }} <span class="asterisco">* </span></label>
+                        </span>
+                        <ng-container *ngFor="let validation of directions_messages.coordinatesLongitude">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        form.get('coordinatesLongitude').hasError(
+                                            validation.type
+                                        ) &&
+                                        (form.get('coordinatesLongitude').dirty ||
+                                        form.get('coordinatesLongitude').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!showAddress">
+                            <div class="col-12 mt-3 d-flex justify-content-center align-items-center">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center">
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary size-btn-modal" (click)="submit()" [disabled]="!form.valid"> {{ 'GENERAL.SAVE' | translate }} </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

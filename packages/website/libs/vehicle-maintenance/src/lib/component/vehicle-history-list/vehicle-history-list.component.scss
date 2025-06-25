@@ -1,0 +1,34 @@
+.easyroute-franchise-historial {
+    .margin {
+        margin: 20px 0;
+        button {
+            width: 225px;
+            height: 40px;
+        }
+    }
+    .description {
+        color: #777777;
+        font-size: 15px;
+    }
+    .redirect-link {
+        cursor: pointer;
+        font-weight: 600;
+    }
+    .group-btn {
+        //font-size: 16px;
+        font-weight: bolder;
+        width: 30%;
+        height: 41px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        .group-btn {
+            width: 83%;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .group-btn {
+            width: 50%;
+        }
+    }
+}

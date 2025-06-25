@@ -1,0 +1,477 @@
+<div class="report-settings">
+
+    <ng-container *ngIf="!loadingReportSettings">
+
+        <ng-container *ngFor="let item of reportCompanyAll; let i = index">
+
+            <!-- informe de rutas -->
+
+            <div class="card" [ngClass]="{'mt-3': i > 0 , 'mt-2': i< 0}" *ngIf="reportCompanyAll">
+
+                <div class="card-body">
+
+                    <div class="row p-2 p-md-0">
+
+                        <!-- toogle general -->
+
+                        <div class="col-xl-12 col-md-12 col-12 pb-2">
+
+                            <div class="form-group">
+
+                                <div class="form-row">
+
+                                    <div class="switch w-100 col-12">
+
+                                        <label class="switch-width">
+    
+                                    <input type="checkbox" [checked]="item.isActive" (change)="activatePreferencesInfoGeneral($event.target.checked, item.id, item)"/>
+    
+                                    <span class="lever lever-general switch-col-primary m-2" ></span>
+    
+                                    <span class="title-toggles toogle-style">
+                                        Enviar informe de: {{item.name }}
+                                    </span>
+                                </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end toogle general -->
+
+                        <!-- text informative -->
+
+                        <div class="col-12 padding-l-hidden">
+
+                            <p class="sub-title-toggles text-justify"> {{ item.description }} </p>
+
+                        </div>
+
+                        <!-- end text Informative -->
+                    </div>
+
+                    <ng-container *ngIf="item.isActive">
+
+                        <div class="row spacing-row" [ngClass]="{'pt-4 border-other-Report': r > 0}" *ngFor="let internal of item.reportCompanyPreference; let last = last; let r = index;">
+
+
+                            <ng-container *ngIf="r > 0">
+
+                                <div class="col-12 pb-3">
+
+                                    <div class="card">
+
+                                        <div class="card-body card-other pt-2 pb-2 pl-2 pr-2">
+
+                                            <div class="row align-items-center">
+
+                                                <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                                                    <span class="label-other-Report"> {{ r + 1 }}ª Personalización</span>
+
+                                                </div>
+
+                                                <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                                                    <button title="Eliminar personalización" class="btn btn-icon btn-icon-white img-dash btn-large ml-2 mt-xl-0 mt-2 point" (click)="deleteOtherReport(internal, r, item.reportCompanyPreference)">
+
+                                                    <img class="mr-1" src="assets/icons/delete.svg" >
+
+                                                    Eliminar personalización
+
+                                                </button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </ng-container>
+
+                            <!-- Bloques del informe  -->
+                            <ng-container *ngIf="item.id === 1">
+
+                                <div class="col-4 col-xl-4 col-md-6 col-12" *ngIf="blockList.length > 0">
+
+                                    <div class="form-group row">
+
+                                        <div class="col-lg-12" (mouseenter)="add($event,r ,internal, item)" (mouseleave)="deleteChangeBlock($event,r)">
+
+                                            <label class="d-block label-blocks">Bloques del informe</label>
+
+                                            <select class="form-control form-select" multiple="multiple" data-plugin-multiselect data-plugin-options='{ "maxHeight": 200,  "buttonTextAlignment": "left", "allSelectedText": "Todos los bloques", "nonSelectedText": "Seleccione.......", "selectAllName": true, "nSelectedText": "Seleccionadas", "includeSelectAllOption": true, "selectAllText": "Todos los bloques" }'
+                                                [id]="'blocks' + r">
+    
+                                                    <option *ngFor="let blockG of blockList" [value]="blockG.id" [selected]="showCheckBlock(internal.reportBlokId, blockG, r)"> {{ blockG.name }} </option>
+                                                
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </ng-container>
+
+                            <!-- end Bloques del informe -->
+
+                            <!-- Hora de envío -->
+
+                            <div class="col-xl-4 col-md-6 col-12">
+                                <div class="form-group input-group mt-3">
+
+                                    <span class="has-float-label w-100">
+    
+                                    <input type="text" class="form-control form-input"  value="{{ internal.hourTime | dayTime }}"  type="time" 
+                                    
+                                    placeholder="Hora de envío"  (focusout)="updateChange($event.target.value, internal, item)"/>
+            
+                                    <label for="first" class="mt-2 title-col"> Hora de envío </label>
+            
+                                </span>
+
+                                </div>
+                            </div>
+
+                            <!-- end Hora de envío -->
+
+                            <!-- Programar envío -->
+
+                            <div class="col-xl-4 col-md-6 col-12">
+
+                                <div class="form-group input-group mt-3">
+
+                                    <span class="has-float-label w-100">
+    
+                                    <select class="form-select form-control w-100" id="categoryId" [(ngModel)]="internal.scheduleShipping" placeholder="Seleccione" (change)="changeScheduleShipping($event.target.value, internal)">
+        
+                                        <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+        
+                                        <option value="week">Semana</option>
+        
+                                        <option value="month">Mes</option>
+        
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> Programar envío </label>
+    
+                                  </span>
+
+                                </div>
+                            </div>
+
+                            <!-- end Programar envío -->
+
+                            <ng-container *ngIf="internal.scheduleShipping ==='week'">
+
+                                <div class="col-xl-8 col-md-6 col-12 mt-3">
+
+                                    <div class="style-input-check">
+
+                                        <p class="mb-0 mt-2">Día de la semana</p>
+
+                                        <div class="row row pb-2">
+                                            <!-- lunes -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Lun'+ i + r" [checked]="showCheckWeek(internal.scheduledDay, 1)" (change)="changeDaySelecter($event.target.checked, internal, '1', i , r, 'Lun')" />
+
+                                                        <label [for]="'Lun'+ i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Lun" [for]="'Lun'+ i + r" class="label-check point">
+                    
+                                                        Lun.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end lunes -->
+                                            <!-- martes -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Mar' + i + r" [checked]="showCheckWeek(internal.scheduledDay, 2)" (change)="changeDaySelecter($event.target.checked, internal, '2', i , r, 'Mar')" />
+
+                                                        <label [for]="'Mar'+ i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Mar" [for]="'Mar' + i + r" class="label-check point">
+                    
+                                                        Mar.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end martes -->
+                                            <!-- miercoles -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Mié' + i + r" [checked]="showCheckWeek(internal.scheduledDay, 3)" (change)="changeDaySelecter($event.target.checked, internal, '3', i , r, 'Mié')" />
+
+                                                        <label [for]="'Mié' + i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Mié" [for]="'Mié' + i + r " class="label-check point">
+                    
+                                                        Mié.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end miercoles -->
+                                            <!-- jueves -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Jue' + i + r" [checked]="showCheckWeek(internal.scheduledDay, 4)" (change)="changeDaySelecter($event.target.checked, internal, '4', i , r, 'Jue')" />
+
+                                                        <label [for]="'Jue'+ i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Jue" [for]="'Jue'+ i + r" class="label-check point">
+                    
+                                                        Jue.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end jueves -->
+                                            <!-- viernes -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Vie'+ i + r " [checked]="showCheckWeek(internal.scheduledDay, 5)" (change)="changeDaySelecter($event.target.checked, internal, '5', i , r, 'Vie')" />
+
+                                                        <label [for]="'Vie' + i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Vie" [for]="'Vie' + i + r" class="label-check point">
+                    
+                                                        Vie.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end viernes -->
+                                            <!-- sabado -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Sáb' + i + r" [checked]="showCheckWeek(internal.scheduledDay, 6)" (change)="changeDaySelecter($event.target.checked, internal, '6' , i , r, 'Sáb')" />
+
+                                                        <label [for]="'Sáb' + i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Sáb" [for]="'Sáb' + i + r" class="label-check point">
+                    
+                                                        Sáb.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end sabado -->
+                                            <!-- domingo -->
+                                            <div class="col-xl col-lg-6 col-md-6 col-6">
+                                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                                    <div class="round round-little margin-days round-1">
+
+                                                        <input type="checkbox" [id]="'Dom' + i + r" [checked]="showCheckWeek(internal.scheduledDay, 7)" (change)="changeDaySelecter($event.target.checked, internal, '7' , i , r, 'Dom')" />
+
+                                                        <label [for]="'Dom'+ i + r"></label>
+
+                                                    </div>
+
+                                                    <label title="Dom" [for]="'Dom' + i + r" class="label-check point">
+                    
+                                                        Dom.
+                                
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- end domingo -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="internal.scheduleShipping ==='month'">
+
+                                <div class="col-xl-4 col-md-6 col-12 mt-3">
+                                    <span class="has-float-label w-100">
+    
+                            <select class="form-select form-control w-100" id="scheduledDay" [(ngModel)]="internal.scheduledDay" placeholder="Seleccione" (change)="updateMonth($event.target.value, internal)">
+    
+                                <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+    
+                                <option [value]="i"  *ngFor="let i of days">
+                                    {{ i }}
+                                </option>
+    
+                            </select>
+    
+                            <label for="type" class="mt-2 title-col"> Día del mes </label>
+    
+                        </span>
+                                </div>
+
+                            </ng-container>
+
+
+                            <!-- correos -->
+                            <div class="col-12 mt-3">
+
+                                <label class="title-label-email"> {{'PREFERENCES.NOTIFICATIONS.EMAIL' | translate }} </label>
+
+                                <ng-container *ngIf="internal.id > 0">
+
+                                    <div class="row pb-1" *ngFor="let comment of internal.report_company_preference_email; let i = index;" [ngClass]="{'pb-4': internal.report_company_preference_email.length >= 6 && i == (internal.report_company_preference_email.length - 1)}">
+
+                                        <div class="col-xl-4 col-md-6 col-10 mt-1">
+
+                                            <input class="form-control size-input" type="text" disabled [(ngModel)]="comment.reportEmail">
+
+                                        </div>
+
+                                        <div class="col-xl-2 col-md-6 col-2 pl-xl-0">
+
+                                            <div class="form-group input-group mt-1">
+
+                                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteIntegrationSendEmail(i, comment, internal)">
+        
+                                                    <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                    
+                                                </button>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </ng-container>
+
+
+
+                                <div class="row pb-1 mt-2">
+
+                                    <div class="col-xl-4 col-md-6 col-12 mt-1">
+
+                                        <input class="form-control size-input" type="text" #inputIntegrationMail (input)="validateEmil(inputIntegrationMail.value)">
+
+                                        <ng-container *ngIf="!validateEmil(inputIntegrationMail.value) && inputIntegrationMail.value.length >0">
+
+                                            <p class="text-danger m-0">{{ 'PREFERENCES.NOTIFICATIONS.IT_SHOULD_BE_IN_THE_FORMAT' | translate }}.</p>
+
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1 pr-4 pt-1 pb-4 " [ngClass]="{'pb-3': internal.report_company_preference_email.length === 5}">
+
+                                    <div class="col-xl-4 col-md-4 col-12 mt-1 pl-3 pr-5">
+
+                                        <ng-container *ngIf="internal.id > 0">
+                                            <a class="add-emails point" (click)="createIntegrationSendEmail(inputIntegrationMail.value, item, internal); inputIntegrationMail.value = '';">{{'PREFERENCES.NOTIFICATIONS.ADD_EMAIL' | translate }}</a>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="internal.id === 0">
+                                            <a class="add-emails point" (click)="changeEmailBox(inputIntegrationMail.value, internal, item); inputIntegrationMail.value = '';">{{'PREFERENCES.NOTIFICATIONS.ADD_EMAIL' | translate }}</a>
+                                        </ng-container>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end correos -->
+
+                        </div>
+                    </ng-container>
+
+
+
+                </div>
+
+                <ng-container *ngIf="item.id === 1 && item.isActive && (item.reportCompanyPreference.at(-1))">
+
+                    <div class="card-footer">
+                        <div class="row spacing-row mt-3 mb-3">
+                            <div class="col-12">
+                                <label class="add-emails point" (click)="addOtherReportRoute(item)">+ Añadir envío personalizado</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+
+            </div>
+            <!-- end informe de rutas -->
+
+
+        </ng-container>
+
+    </ng-container>
+
+    <ng-container *ngIf="loadingReportSettings">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="col-12 d-flex justify-content-center align-items-center">
+
+                    <div class="fa-10x loading-size">
+
+                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+
+
+</div>

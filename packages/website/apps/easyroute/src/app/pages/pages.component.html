@@ -1,0 +1,9 @@
+<ngx-loading-bar color="white" height="4px" [includeSpinner]="false"></ngx-loading-bar>
+<section class="body">
+   <app-header></app-header>
+    <div class="inner-wrapper" [ngClass]="{'padding-notification':defeatedDemo() && demoDay() <= 15 }">
+        <section role="main" class="content-body">
+            <router-outlet></router-outlet>
+        </section>
+    </div>
+</section>

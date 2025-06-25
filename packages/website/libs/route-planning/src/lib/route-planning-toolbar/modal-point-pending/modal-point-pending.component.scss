@@ -1,0 +1,66 @@
+.UPS {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+.text-not-asigned {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #000000;
+}
+
+.text-select-option {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.input-radio {
+    background: #f3f3f3;
+    border-radius: 2px;
+    min-height: 100px;
+    text-align: justify;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    color: #000000;
+    width: 100%;
+    input {
+        margin-right: 8px !important;
+    }
+}
+
+.title-show-only {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+
+
+.subtitle-show-only {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    text-align: center;
+
+    color: #000000;
+}

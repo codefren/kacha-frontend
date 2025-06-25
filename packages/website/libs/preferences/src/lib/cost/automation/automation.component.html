@@ -1,0 +1,764 @@
+<div class="automation" *ngIf="companyPreferenceCoste">
+
+    <div class="card">
+
+        <div class="card-body p-xl-4">
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" [checked]="companyPreferenceCoste.lowerDriverCostAutomatically"
+                            (change)="changeUpdatefield('lowerDriverCostAutomatically', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="lever-text toogle-style"> {{ 'COST.LOWER_THE_COST_OF_DRIVERS_AUTOMATICALLY' | translate }} </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'COST.BY_ACTIVATING_THIS_OPTION_YOU_MUST_CONFIGURE_WHICH_CONCEPTS_YOU_WANT_TO_DOWNLOAD_AUTOMATICALLY' | translate }} </p>
+                </div>
+
+            </div>
+
+            <div class="row pl-xl-2 pr-xl-5 pb-3" *ngIf="companyPreferenceCoste.lowerDriverCostAutomatically">
+
+                <!-- bajar salario -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowersalary" [checked]="companyPreferenceCoste.lowerSalary" (change)="changeUpdatefield('lowerSalary', $event.target.checked)" />
+
+                                <label for="lowersalary"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.LOWER_SALARY' | translate }}" for="lowersalary" class="label-check point pl-2">
+
+                              {{ 'COST.LOWER_SALARY' | translate }}
+
+                            </label>
+
+                        </div>
+
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerSalary">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="lowerSalaryDay" [value]="companyPreferenceCoste.lowerSalaryDay" (change)="changeUpdatefield('lowerSalaryDay', $event.target.value)" placeholder="Seleccione">
+            
+                                            <option [value]="i"  *ngFor="let i of days">
+                                                {{ i }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="type" class="mt-2 title-col"> ¿Qué día bajará el coste? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <!--  <div class="col-6">
+                                <label class="pl-3">Día de bajar salario</label>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group pr-2">
+                                    <select class="form-control" [value]="companyPreferenceCoste.lowerSalaryDay" (change)="changeUpdatefield('lowerSalaryDay', $event.target.value)">
+                                        <option [value]="i"  *ngFor="let i of days">
+                                            {{ i }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div> -->
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end bajar salario -->
+
+                <!-- Bajar horas extras nocturnas -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="loweNightlyOvertime" [checked]="companyPreferenceCoste.loweNightlyOvertime" (change)="changeUpdatefield('loweNightlyOvertime', $event.target.checked)" />
+
+                                <label for="loweNightlyOvertime"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.LOWER_NIGHT_OVERTIME' | translate }}" for="loweNightlyOvertime" class="label-check point pl-2">
+
+                               {{ 'COST.LOWER_NIGHT_OVERTIME' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Bajar horas extras nocturnas -->
+
+                <!--  Bajar días festivos -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="downloadHolidays" [checked]="companyPreferenceCoste.lowerExtraDaytimeHours" (change)="changeUpdatefield('lowerExtraDaytimeHours', $event.target.checked)" />
+
+                                <label for="downloadHolidays"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.REDUCE_DAYTIME_OVERTIME' | translate }}" for="downloadHolidays" class="label-check point pl-2">
+
+                               {{ 'COST.REDUCE_DAYTIME_OVERTIME' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end  Bajar días festivos -->
+
+                <!--   Bajar dias extras -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="donwloadExtraDays" [checked]="companyPreferenceCoste.lowerExtraDays" (change)="changeUpdatefield('lowerExtraDays', $event.target.checked)" />
+
+                                <label for="donwloadExtraDays"></label>
+
+                            </div>
+
+                            <label title="{{'COST.DOWNLOAD_EXTRA_DAYS' | translate }}" for="donwloadExtraDays" class="label-check point pl-2">
+
+                             {{'COST.DOWNLOAD_EXTRA_DAYS' | translate }}
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end   Bajar dias extras -->
+
+                <!--   Bajar suplementos -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowerSupplements" [checked]="companyPreferenceCoste.lowerSupplements" (change)="changeUpdatefield('lowerSupplements', $event.target.checked)" />
+
+                                <label for="lowerSupplements"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.DOWNLOAD_SUPPLEMENTS' | translate }}" for="lowerSupplements" class="label-check point pl-2">
+
+                               {{ 'COST.DOWNLOAD_SUPPLEMENTS' | translate }}
+
+                            </label>
+
+                        </div>
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerSupplements">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="lowerSupplementsDay" [value]="companyPreferenceCoste.lowerSupplementsDay" (change)="changeUpdatefield('lowerSupplementsDay', $event.target.value)" placeholder="Seleccione">
+            
+                                            <option [value]="i"  *ngFor="let i of days">
+                                                {{ i }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="type" class="mt-2 title-col"> ¿Día de bajar suplementos? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+                            <!--  <div class="col-6">
+                                <label class="pl-3">Día de bajar suplementos</label>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group pr-2">
+                                    <select class="form-control" [value]="companyPreferenceCoste.lowerSupplementsDay" (change)="changeUpdatefield('lowerSupplementsDay', $event.target.value)">
+                                        <option [value]="i"  *ngFor="let i of days">
+                                            {{ i }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div> -->
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end   Bajar suplementos -->
+
+                <!-- Otros gastos -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowerOtherMonthlyExpenses" [checked]="companyPreferenceCoste.lowerOtherMonthlyExpenses" (change)="changeUpdatefield('lowerOtherMonthlyExpenses', $event.target.checked)" />
+
+                                <label for="lowerOtherMonthlyExpenses"></label>
+
+                            </div>
+
+                            <label title="Bajar otros gastos mensuales" for="lowerOtherMonthlyExpenses" class="label-check point pl-2">
+
+                                Bajar otros gastos mensuales
+
+                            </label>
+
+                        </div>
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerOtherMonthlyExpenses">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="lowerOtherMonthlyExpensesDay" [value]="companyPreferenceCoste.lowerOtherMonthlyExpensesDay" (change)="changeUpdatefield('lowerOtherMonthlyExpensesDay', $event.target.value)" placeholder="Seleccione">
+            
+                                            <option [value]="t"  *ngFor="let t of days">
+                                                {{ t }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="type" class="mt-2 title-col"> ¿Día de bajar otros gastos? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+                            <!--  <div class="col-6">
+                                <label class="pl-3">Día de bajar suplementos</label>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group pr-2">
+                                    <select class="form-control" [value]="companyPreferenceCoste.lowerSupplementsDay" (change)="changeUpdatefield('lowerSupplementsDay', $event.target.value)">
+                                        <option [value]="i"  *ngFor="let i of days">
+                                            {{ i }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div> -->
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Otros Gastos -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bajar el coste de vehículos de forma automática -->
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="companyPreferenceCoste.lowerVehicleCostAutomatically"
+                                    (change)="changeUpdatefield('lowerVehicleCostAutomatically', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="lever-text toogle-style"> {{ 'COST.LOWER_THE_COST_OF_VEHICLES_AUTOMATICALLY' | translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'COST.BY_ACTIVATING_THIS_OPTION_YOU_MUST_CONFIGURE_WHICH_CONCEPTS_YOU_WANT_TO_DOWNLOAD_AUTOMATICALLY' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+            <div class="row pl-xl-2 pr-xl-5 pb-3" *ngIf="companyPreferenceCoste.lowerVehicleCostAutomatically">
+
+                <!-- bajar adquisicion de vehiculo -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowerVehicleAcquisition" [checked]="companyPreferenceCoste.lowerVehicleAcquisition" (change)="changeUpdatefield('lowerVehicleAcquisition', $event.target.checked)" />
+
+                                <label for="lowerVehicleAcquisition"></label>
+
+                            </div>
+
+                            <label title="{{'COST.DOWNLOAD_VEHICLES_ACQUISITION' | translate }}" for="lowerVehicleAcquisition" class="label-check point pl-2">
+
+                             {{'COST.DOWNLOAD_VEHICLES_ACQUISITION' | translate }}
+
+                            </label>
+
+                        </div>
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerVehicleAcquisition">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="lowerVehicleAcquisitionDay" [value]="companyPreferenceCoste.lowerVehicleAcquisitionDay" (change)="changeUpdatefield('lowerVehicleAcquisitionDay', $event.target.value)" placeholder="Seleccione">
+            
+                                            <option [value]="i"  *ngFor="let i of days">
+                                                {{ i }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="type" class="mt-2 title-col"> ¿Día de bajar adquisición de vehículo? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- end bajar adquisicion de vehiculo -->
+
+                <!-- Bajar seguro -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowerInsurance" [checked]="companyPreferenceCoste.lowerInsurance" (change)="changeUpdatefield('lowerInsurance', $event.target.checked)" />
+
+                                <label for="lowerInsurance"></label>
+
+                            </div>
+
+                            <label title="{{'COST.DOWNLOAD_INSURANCE' | translate }}" for="lowerInsurance" class="label-check point pl-2">
+
+                              {{'COST.DOWNLOAD_INSURANCE' | translate }}
+
+                            </label>
+
+                        </div>
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerInsurance">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="lowerInsuranceDay" [value]="companyPreferenceCoste.lowerInsuranceDay" (change)="changeUpdatefield('lowerInsuranceDay', $event.target.value)" placeholder="Seleccione">
+            
+                                            <option [value]="i"  *ngFor="let i of days">
+                                                {{ i }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="type" class="mt-2 title-col"> ¿Día de bajar los seguros del vehículo? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end Bajar seguro -->
+
+                <!-- bajar otros gastos mensuales vehiculos -->
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowerOtherMonthlyExpensesVehicle" [checked]="companyPreferenceCoste.lowerOtherMonthlyExpensesVehicle" (change)="changeUpdatefield('lowerOtherMonthlyExpensesVehicle', $event.target.checked)" />
+
+                                <label for="lowerOtherMonthlyExpensesVehicle"></label>
+
+                            </div>
+
+                            <label title="Bajar otros gastos mensuales" for="lowerOtherMonthlyExpensesVehicle" class="label-check point pl-2">
+
+                                Bajar otros gastos mensuales
+
+                            </label>
+
+                        </div>
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerOtherMonthlyExpensesVehicle">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="lowerOtherMonthlyExpensesDayVehicle" [value]="companyPreferenceCoste.lowerOtherMonthlyExpensesDayVehicle" (change)="changeUpdatefield('lowerOtherMonthlyExpensesDayVehicle', $event.target.value)" placeholder="Seleccione">
+            
+                                            <option [value]="t"  *ngFor="let t of days">
+                                                {{ t }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="type" class="mt-2 title-col"> ¿Día de bajar otros gastos? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end bajar otros gastos mensuales vehiculos -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Calcular el coste de la ruta con horas extra -->
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="companyPreferenceCoste.calculateCostRouteWithOvertime"
+                                    (change)="changeUpdatefield('calculateCostRouteWithOvertime', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="lever-text toogle-style"> {{ 'COST.CALCULATE_COST_ROUTE_WITH_OVERTIME' | translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{'COST.MESSAGE_CALCULATE_COST_ROUTE_WITH_OVERTIME' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Bajar el coste de desocupación de forma automática -->
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="companyPreferenceCoste.lowerVacancyCostAutomatically"
+                                    (change)="changeUpdatefield('lowerVacancyCostAutomatically', $event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="lever-text toogle-style"> {{ 'COST.LOWER_THE_COST_OF_VACANCY_AUTOMATICALLY' | translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{'COST.ACTIVATING_THIS_OPTION_WILL_AUTOMATICALLY_LOWER_THE_COST_OF_VACATING_WITH_THE_VERIFIED_STATUS' | translate }} </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- Permitir aplicar costes anuales -->
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <!-- allowApplyAnnualCost -->
+
+            <div class="row">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="">
+
+                        <div class="">
+
+                            <div class="switch w-100">
+
+                                <label class="switch-width mb-0">
+
+                                    <input type="checkbox" [checked]="companyPreferenceCoste.allowApplyAnnualCost"
+
+                                    (change)="changeUpdatefield('allowApplyAnnualCost', $event.target.checked)"/>
+
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                    <span class="lever-text toogle-style"> {{ 'COST.ALLOW_TO_APPLY_ANNUAL' | translate }} </span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{'COST.BY_ACTIVATING_TEXT' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <!-- end allowApplyAnnualCost -->
+
+
+            <div class="row pl-xl-2 pr-xl-5 pb-3" *ngIf="companyPreferenceCoste.allowApplyAnnualCost">
+
+                <!-- Dividir coste en 12 meses -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="divideCostIntoTwelveMonths" [checked]="companyPreferenceCoste.divideCostIntoTwelveMonths" (change)="changeCostAnual('divideCostIntoTwelveMonths', $event.target.checked)" />
+
+                                <label for="divideCostIntoTwelveMonths"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.SPLI_COST_OVER_12_MONTHS' | translate }}" for="divideCostIntoTwelveMonths" class="label-check point pl-2">
+
+                              {{ 'COST.SPLI_COST_OVER_12_MONTHS' | translate }}
+
+                            </label>
+
+                        </div>
+
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.divideCostIntoTwelveMonths">
+
+                            <div class="col-xl-11 col-11 mt-3 text-center">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <select class="form-select form-control w-100" id="dayToSplitCost" [value]="companyPreferenceCoste.dayToSplitCost" (change)="changeUpdatefield('dayToSplitCost', $any($event.target).value)" placeholder="Seleccione">
+            
+                                            <option [value]="t"  *ngFor="let t of days">
+                                                {{ t }}
+                                            </option>
+            
+                                        </select>
+            
+                                        <label for="dayToSplitCost" class="mt-2 title-col"> ¿Día de bajar otros gastos? <span class="text-danger">*</span> </label>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end Dividir coste en 12 meses-->
+
+                <!-- Bajar coste una vez al año -->
+
+                <div class="col-12 col-lg-4 col-md-4 pl-xl-3 p-xl-0 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="lowerCostOnceYear" [checked]="companyPreferenceCoste.lowerCostOnceYear" (change)="changeCostAnual('lowerCostOnceYear', $event.target.checked)" />
+
+                                <label for="lowerCostOnceYear"></label>
+
+                            </div>
+
+                            <label title="{{ 'COST.LOWER_COST_ONCE_A_YEAR' | translate }}" for="lowerCostOnceYear" class="label-check point pl-2">
+
+                               {{ 'COST.LOWER_COST_ONCE_A_YEAR' | translate }}
+
+                            </label>
+
+                        </div>
+
+                        <div class="row pb-0 mb-0 pb-3 pl-3" *ngIf="companyPreferenceCoste.lowerCostOnceYear">
+
+                            <div class="col-xl-8 col-11 mt-3 text-center">
+
+                                <div class="input-group">
+
+                                    <input ngbDatepicker #f="ngbDatepicker" type="text" class="form-control form-control-date size-date" autocomplete="off" readonly [min]="min" [formControl]="dateSearchFrom" (dateSelect)="changeDate('from', $event)" placeholder="00/00/0000" id="dateDeliveryStart"
+                                    />
+
+                                    <button class="btn btn-calendar calendar" (click)="f.toggle()" type="button">
+            
+                                        <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                                    </button>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end Bajar coste una vez al año -->
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end Permitir aplicar costes anuales -->
+</div>

@@ -1,0 +1,104 @@
+<div class="summary-of-updates">
+
+    <div class="card">
+
+
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-xl-9 col-12 text-xl-left text-center">
+
+                    <p class="title-radial pt-3"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.UPDATES' | translate }} </p>
+
+                </div>
+
+                <div class="col-xl-3 col-12 text-xl-right text-center">
+
+                    <ng-container *ngIf="show">
+
+                        <select id="deliveryPointUpdateStatusId" [value]="filter.values.deliveryPointUpdateStatusId" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point" (change)="changeFilterGeneral($event)">
+    
+                                <option value=""> {{ 'REPORT.SUMMARY_UPDATE_OF_DATA.STATE' | translate }} </option>
+        
+                                <option *ngFor="let item of deliveryPointUpdateList" [value]="item.id" > {{ item.name }} </option>
+        
+                            </select>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="!show">
+
+                        <div class="col-12 text-center mt-2">
+
+                            <div class="fa-4x">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div class=" pl-lg-0  mt-3 mb-2 align-items-center">
+
+                        <table class="table table-hover table-responsive-md table-striped" id="clientsDataUpdate" style="text-align: center ; width: 100%;">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th class="text-xl-left" style="border-top-left-radius: 6px;"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.DATE' | translate }} </th>
+
+                                    <th class="text-xl-left"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.USER' | translate }} </th>
+
+                                    <th class="text-xl-left"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.CUSTOMER' | translate }} </th>
+
+                                    <th class="text-xl-left"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.TYPE' | translate }} </th>
+
+                                    <th class="text-xl-left" style="border-top-right-radius: 6px;"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.ANCIENT' | translate }} </th>
+
+                                    <th class="text-xl-left" style="border-top-right-radius: 6px;">{{'REPORT.SUMMARY_UPDATE_OF_DATA.UPDATED' | translate }}</th>
+
+                                    <th class="text-xl-left" style="border-top-right-radius: 6px;">{{ 'REPORT.SUMMARY_UPDATE_OF_DATA.STATE' | translate }}</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- <ng-container *ngIf="!show">
+
+            <div class="fa-10x mb-2 text-center pt-5">
+
+                <i class="fas fa-circle-notch fa-spin"></i>
+
+            </div>
+
+        </ng-container> -->
+
+    </div>
+
+</div>

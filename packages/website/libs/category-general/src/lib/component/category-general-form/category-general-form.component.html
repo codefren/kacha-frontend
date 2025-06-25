@@ -1,0 +1,386 @@
+<!-- <div class="row easyroute-notifications-preferences">
+    <div class="col-12">
+        <div class="card padding-body">
+            <div class="card-header general-panel">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-left">
+                        <h2 class="general-h2">
+                            {{ 'CONFIGURATIONS.CATEGORY.GENERAL_CATEGORIES' | translate }}
+                        </h2>
+                    </div>
+                    <div class="col-md-6 col-6 text-right">
+                        <button
+                            class="btn btn-default btn-sm"
+                            title="{{
+                                'CONFIGURATIONS.CATEGORY.CATEGORY_FORM.CATEGORY_RETURN_TO'
+                                    | translate
+                            }}"
+                            routerLink="/category-general"
+                        >
+                            <i class="fas fa-undo addVehicleIcon pr-1"></i>
+                            {{ 'GENERAL.RETURN' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <div class="" *ngIf="category">
+                        <form
+                            [formGroup]="categoryForm"
+                            novalidate
+                            (ngSubmit)="createCategory()"
+                        >
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div
+                                        class="form-group"
+                                        [ngClass]="{
+                                            'has-danger':
+                                                categoryForm.controls['code'].invalid &&
+                                                (categoryForm.controls['code'].dirty ||
+                                                    categoryForm.controls['code'].touched)
+                                        }"
+                                    >
+                                        <label class="control-label" for="code">
+                                            {{ 'CONFIGURATIONS.CODE' | translate }}
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="code"
+                                            class="form-control"
+                                            autocomplete="off"
+                                            formControlName="code"
+                                            [ngClass]="{
+                                                'form-control-danger':
+                                                    categoryForm.controls['code'].invalid &&
+                                                    (categoryForm.controls['code'].dirty ||
+                                                        categoryForm.controls['code']
+                                                            .touched)
+                                            }"
+                                        />
+                                    </div>
+                                    <ng-container
+                                        *ngFor="let validation of category_messages.code"
+                                    >
+                                        <small
+                                            class="form-control-feedback text-danger"
+                                            *ngIf="
+                                                categoryForm
+                                                    .get('code')
+                                                    .hasError('maxlength') &&
+                                                (categoryForm.get('code').dirty ||
+                                                    categoryForm.get('code').touched)
+                                            "
+                                        >
+                                            {{ validation.message }}
+                                        </small>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div
+                                        class="form-group"
+                                        [ngClass]="{
+                                            'has-danger':
+                                                categoryForm.controls['name'].invalid &&
+                                                (categoryForm.controls['name'].dirty ||
+                                                    categoryForm.controls['name'].touched)
+                                        }"
+                                    >
+                                        <label
+                                            class="control-label font-weight-bold"
+                                            for="name"
+                                        >
+                                            <span class="asterisco">* </span>
+                                            {{ 'CONFIGURATIONS.NAME' | translate }}
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            class="form-control"
+                                            autocomplete="off"
+                                            formControlName="name"
+                                            [ngClass]="{
+                                                'form-control-danger':
+                                                    categoryForm.controls['name'].invalid &&
+                                                    (categoryForm.controls['name'].dirty ||
+                                                        categoryForm.controls['name']
+                                                            .touched)
+                                            }"
+                                        />
+                                    </div>
+                                    <ng-container
+                                        *ngFor="let validation of category_messages.name"
+                                    >
+                                        <small
+                                            class="form-control-feedback text-danger"
+                                            *ngIf="
+                                                categoryForm
+                                                    .get('name')
+                                                    .hasError(validation.type) &&
+                                                (categoryForm.get('name').dirty ||
+                                                    categoryForm.get('name').touched)
+                                            "
+                                        >
+                                            {{ validation.message }}
+                                        </small>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <div
+                                        class="form-group"
+                                        [ngClass]="{
+                                            'has-danger':
+                                                categoryForm.controls['isActive'].invalid &&
+                                                (categoryForm.controls['isActive'].dirty ||
+                                                    categoryForm.controls['isActive']
+                                                        .touched)
+                                        }"
+                                    >
+                                        <label
+                                            class="control-label font-weight-bold"
+                                            for="isActive"
+                                        >
+                                            <span class="asterisco">* </span>
+                                            {{ 'GENERAL.IS_ACTIVE' | translate }}
+                                        </label>
+                                        <br />
+                                        <div class="switch ">
+                                            <label>
+                                                {{ 'GENERAL.NO' | translate }}
+                                                <input
+                                                    type="checkbox"
+                                                    [checked]="category.isActive"
+                                                    [value]="category.isActive"
+                                                    (click)="changeActive()"
+                                                />
+                                                <span
+                                                    class="lever switch-col-primary"
+                                                ></span>
+                                                {{ 'GENERAL.YES' | translate }}
+                                            </label>
+                                        </div>
+                                        <ng-container
+                                            *ngFor="
+                                                let validation of category_messages.isActive
+                                            "
+                                        >
+                                            <small
+                                                class="form-control-feedback text-danger"
+                                                *ngIf="
+                                                    categoryForm
+                                                        .get('isActive')
+                                                        .hasError(validation.type) &&
+                                                    (categoryForm.get('isActive').dirty ||
+                                                        categoryForm.get('isActive')
+                                                            .touched)
+                                                "
+                                            >
+                                                {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-12 text-right mt-4">
+                                <button
+                                    type="submit"
+                                    class="btn btn-dark"
+                                    [disabled]="!categoryForm.valid"
+                                >
+                                    {{ 'GENERAL.ACCEPT' | translate }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+<div id="modalForm ">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+    </div>
+
+    <div class="container category-form">
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                <p class="title">{{ titleTranslate | translate }}</p>
+                <hr class="line-primary" />
+            </div>
+        </div>
+
+        <form [formGroup]="categoryForm" *ngIf="data">
+            <div class="mb-5 images col-12">
+                <div class="pl-0 pr-0 d-flex flex-row justify-content-center w-100">
+
+                    <!-- card-img -->
+                    <div class="card border card-img point" *ngFor="let card of category.images; let i = index" (click)="fileAddProduct.click()">
+                        <div class="w-100 h-100 show-background point" *ngIf="category && category.images === null && !cardImageBase64">
+                            <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                <i class="fas fa-trash fa-2x"></i>
+                            </div>
+                        </div>
+                        <img [src]="cardImageBase64" alt="" *ngIf="cardImageBase64" class="img-flud img-render img-upload img-load" alt="Project" />
+                        <img #urlLogo [src]="card.urlimage" alt="" *ngIf="
+                                category.images !== null && !cardImageBase64
+                            " class="img-flud img-render img-upload w-100 img-load" alt="Project1" />
+                        <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                    </div>
+                    <!-- array-img -->
+
+                    <!-- card-add -->
+                    <div class="card border card-img  point" (click)="fileAddProduct.click()" *ngIf="category && category.images === null || category.images.length ==0">
+                        <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                            <i class="fas fa-camera fa-2x"></i>
+                        </div>
+                        <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                    </div>
+                </div>
+
+                <!-- <div class="row m-2">
+                    <p class="font-italic text-center w-100 title-info">"En caso de que se suba una imagen de logotexto cuadrada, no dejar márgenes blancos arriba y abajo"
+                    </p>
+                </div> -->
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-8">
+                    <div class="form-group row" [ngClass]="{
+                            'has-danger':
+                            categoryForm.controls['code'].invalid &&
+                                (categoryForm.controls['code'].dirty ||
+                                categoryForm.controls['code'].touched)
+                        }">
+                        <label class="col-sm-4 col-form-label font-weight-bold" for="code">
+                            {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="code" placeholder="{{
+                                    'CONFIGURATIONS.MEASURE.CODE' | translate
+                                }}" formControlName="code" [ngClass]="{
+                                    'form-control-danger':
+                                    categoryForm.controls['code'].invalid &&
+                                        (categoryForm.controls['code'].dirty ||
+                                        categoryForm.controls['code'].touched)
+                                }" />
+
+                            <ng-container *ngFor="let validation of category_messages.code">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                    categoryForm.get('code').hasError(validation.type) &&
+                                        (categoryForm.get('code').dirty ||
+                                        categoryForm.get('code').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" [ngClass]="{
+                            'has-danger':
+                            categoryForm.controls['name'].invalid &&
+                                (categoryForm.controls['name'].dirty ||
+                                categoryForm.controls['name'].touched)
+                        }">
+                        <label class="col-sm-4 col-form-label font-weight-bold" for="name">
+                            {{ 'CONFIGURATIONS.MEASURE.NAME' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="name" placeholder="{{
+                                    'CONFIGURATIONS.MEASURE.NAME' | translate
+                                }}" formControlName="name" [ngClass]="{
+                                    'form-control-danger':
+                                    categoryForm.controls['name'].invalid &&
+                                        (categoryForm.controls['name'].dirty ||
+                                        categoryForm.controls['name'].touched)
+                                }" />
+
+                            <ng-container *ngFor="let validation of category_messages.name">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                    categoryForm.get('name').hasError(validation.type) &&
+                                        (categoryForm.get('name').dirty ||
+                                        categoryForm.get('name').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-between">
+                        <div class="col-sm-12">
+                            <div class="switch">
+                                <label>
+                                    <strong>
+                                        {{ 'CONFIGURATIONS.MEASURE.ACTIVE' | translate }}
+                                        <span class="asterisco"> *</span>
+                                    </strong>
+
+                                    <input
+                                    type="checkbox"
+                                    [checked]="data.category.isActive"
+                                    [value]="data.category.isActive"
+                                    (click)="changeActive()"
+                                    class="mr-4"
+                                    />
+                                    <ng-container *ngFor="let validation of category_messages.isActive">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            categoryForm.get('isActive').hasError(validation.type) &&
+                                                (categoryForm.get('isActive').dirty ||
+                                                categoryForm.get('isActive').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </ng-container>
+                                    <span class="lever switch-col-primary ml-5"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <ng-container *ngIf="data && data.category && data.category.id > 0">
+            <h3 class="style-subtitle-sub mt-2 mb-3">{{ 'CONFIGURATIONS.CATEGORY.ASSIGNED_SUBCATEGORIES' | translate }}</h3>
+            <div class="col-12 p-0">
+                <table id="subcategory" style="width: 100%; text-align: center" class="table table-bordered table-striped table-responsive-lg mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{ 'CONFIGURATIONS.CODE' |translate }}</th>
+                            <th>{{ 'CONFIGURATIONS.NAME' |translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </ng-container>
+
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn btn-cancel modal-dismiss" (click)="closeDialog([false, null])">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn btn-default modal-confirm" *ngIf="data.category.id == 0" [disabled]="!categoryForm.valid" (click)="createCategory()">
+                            {{ 'GENERAL.CREATE' | translate }}
+                        </button>
+
+                        <button class="btn btn-default modal-confirm" *ngIf="data.category.id > 0" [disabled]="!categoryForm.valid" (click)="createCategory()">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

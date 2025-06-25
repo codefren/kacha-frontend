@@ -1,0 +1,170 @@
+.categori-list {
+    background-color: #ffffff;
+    height: 100%;
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        font-weight: lighter;
+        font-size: 16px;
+        border-radius: 0px;
+        text-transform: uppercase;
+    }
+    /* .btn-large {
+        width: 250px;
+        height: 40px;
+    } */
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+        font-weight: lighter;
+        font-size: 16px;
+        border-radius: 0px;
+        text-transform: uppercase;
+    }
+    .fa-calendar-alt {
+        color: #ff9e4d;
+    }
+    .selected-box:after {
+        content: '';
+    }
+    .selected-box {
+        color: #4c4c4c;
+    }
+    .space-button {
+        color: #ff9e4d;
+    }
+    .form-control {
+        border-radius: 0.25rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .h2-table {
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: 500 !important;
+        font-size: 16px !important;
+        letter-spacing: -1px;
+    }
+    .accordion .card-header .fila {
+        padding: 12px 10px;
+    }
+    .accordion .card-header span {
+        padding: 12px 10px;
+    }
+    .accordion .card-title {
+        font-size: 14px;
+        font-family: 'Helvetica';
+    }
+    .accordion>.card .card-header {
+        margin-bottom: 0px;
+    }
+    .fa-plus {
+        font-size: 10px;
+        color: #908c8c;
+    }
+    .card-body {
+        padding: 0.9rem;
+    }
+    .card+.card {
+        margin-top: 1.2rem;
+    }
+    .padding-header-sub {
+        padding: 8px;
+        color: rgba(0, 0, 0, 0.87) !important;
+        background: white;
+    }
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #737373;
+        color: white;
+    }
+    .col-especial {
+        padding-right: 0px;
+        padding-left: 0px;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .input-table {
+        text-align: center;
+    }
+    .modal-block-warning .fa,
+    .modal-block-warning .fab,
+    .modal-block-warning .fal,
+    .modal-block-warning .far,
+    .modal-block-warning .fas {
+        color: #0088cc !important;
+    }
+    .print {
+        text-align: -webkit-right;
+        font-size: 2em;
+        color: #f89e4c;
+        cursor: pointer;
+    }
+    table td {
+        color: #1d1d1d;
+        font-weight: lighter;
+        font-size: 14px;
+    }
+    .btn-editar {
+        border-color: transparent;
+        background: transparent;
+    }
+    .td-price {
+        width: 100px;
+    }
+    .td-quantity {
+        width: 100px;
+    }
+    .date-size {
+        font-size: 12px;
+    }
+    .card-style-general {
+        border: 1px solid #d7dce1;
+    }
+    thead>tr {
+        background-color: #737373 !important;
+        color: #fff;
+        border: none !important;
+    }
+    .style-text-area {
+        height: 91px !important;
+    }
+    .style-tfoot {
+        border: 1px solid #dee2e6 !important;
+    }
+    .hack-select {
+        padding: 0;
+        font-size: 19px;
+    }
+    .hack-select:after {
+        top: 23%;
+        right: 14px;
+    }
+}
+
+.m0>.d {
+    display: block;
+    position: relative;
+}
+
+.m0>.d:after {
+    content: '\025be';
+    font-weight: 900;
+    font-family: 'Font Awesome\ 5 Free';
+    right: 0;
+    float: left;
+    padding-right: 10px;
+    font-size: 14px;
+    color: #ff9e4d;
+}
+
+.m0>.d[aria-expanded='true']:after {
+    content: '\025B4';
+    font-weight: 900;
+}
+
+#accordion {
+    cursor: pointer;
+}

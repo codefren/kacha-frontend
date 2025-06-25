@@ -1,0 +1,9 @@
+@import './lib//management.theme.scss';
+@mixin management-theming($theme, $typo) {
+    // Theme
+    @include management-theme($theme);
+    // Typography
+    @include management-typography($typo);
+    // Typography
+    @include management-typography($typo);
+}

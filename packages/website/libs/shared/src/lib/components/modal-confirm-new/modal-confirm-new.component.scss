@@ -1,0 +1,43 @@
+.modal-confirm-new {
+    @media (min-width: 576px) {
+        .modal-sm {
+            max-width: 342px;
+        }
+    }
+    .title-route {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000000;
+    }
+    img {
+        vertical-align: sub;
+    }
+    .paragran-info {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #000000;
+    }
+    .sub-title-p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: #9899AA;
+        text-align: justify;
+    }
+    .btn-gray {
+        background: #E9E9E9;
+        border-radius: 5px !important;
+        color: #000000;
+        height: 40px;
+    }
+    .btn-primary {
+        height: 40px;
+        // background: #CB0000 !important;
+        border-radius: 5px !important;
+    }
+}

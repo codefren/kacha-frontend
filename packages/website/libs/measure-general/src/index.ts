@@ -1,0 +1,1 @@
+export { MeasureGeneralModule } from "./lib/measure-general.module";

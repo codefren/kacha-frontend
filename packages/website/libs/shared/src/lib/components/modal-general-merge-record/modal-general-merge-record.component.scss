@@ -1,0 +1,232 @@
+.general-merge-record {
+    .modal-content {
+        background-color: transparent !important;
+        border: none !important;
+    }
+    //new style
+    .modal-header {
+        display: block !important;
+    }
+    .modal-footer {
+        display: block;
+        //padding: 1rem 2rem;
+    }
+    .round-new-form input[type=radio]:checked+label {
+        background-color: #24397c;
+        border-color: #24397c;
+    }
+    .title-modal {
+        /* color: rgb(3, 3, 3);
+    font-size: 18px;
+    font-weight: bold; */
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .title-info {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+        color: #000000;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .btn-cancel {
+        border-radius: 5px !important;
+        width: 101px !important;
+    }
+    .btn-primary {
+        border-radius: 5px !important;
+        width: 110px !important;
+    }
+    .btn-primary-grps {
+        width: 170px !important;
+    }
+    .lines-conteiner {
+        border-bottom: 1px solid #DDDEEA;
+    }
+    .no-selecter {
+        color: #A1A7AF;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .selecter {
+        /*  font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #5478EA; */
+        color: #363740;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .col-selecter {
+        //background: #f1f4ff;
+        height: 49px;
+        justify-content: center !important;
+        border-bottom: 2px solid #5478EA !important;
+    }
+    .point {
+        cursor: pointer;
+    }
+    .modal-p-b {
+        padding: 3px 17px 0px 17px;
+    }
+    .vr {
+        /* border-right: 2px solid #D4D8E3;
+        height: 100%;
+        position: absolute;
+        margin-left: -3px;
+        top: 0; */
+        border-right: 2px solid #EFF0F4;
+        //height: 58.2vh;
+        margin-left: -3px;
+        top: 0;
+    }
+    .round label {
+        border-radius: 3px !important;
+    }
+    .title-clients {
+        color: #363740;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        margin-left: 1.5rem;
+        margin-top: 3px;
+    }
+    .sub-title-phone {
+        color: #363740;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        margin-left: 2.3rem;
+        margin-top: 2px;
+    }
+    .title-address {
+        color: #9899AA;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        margin-left: 2.3rem;
+        margin-top: 3px;
+    }
+    .overflow-scroos {
+        height: 441px;
+        overflow-y: auto;
+        box-sizing: border-box;
+       /*  padding: 0rem; */
+    }
+    /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+    .overflow-scroos::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:vertical {
+        width: 8px;
+    }
+    .overflow-scroos::-webkit-scrollbar-button:increment,
+    .overflow-scroos::-webkit-scrollbar-button {
+        display: none;
+    }
+    .overflow-scroos::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+    .overflow-scroos::-webkit-scrollbar-thumb {
+        background-color: #D3D5DD;
+        border-radius: 10px;
+        border: 2px solid #D3D5DD;
+    }
+    .overflow-scroos::-webkit-scrollbar-track {
+        border-radiu .label-sub-none {
+            font-style: normal;
+            font-size: 15px;
+            line-height: 22px;
+            align-items: center;
+            color: #000000;
+            padding: 0.5rem 0rem !important;
+        }
+        .disables-text {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            align-items: center;
+            color: #9899AA !important;
+        }
+    }
+
+
+    .round-new-form input[type=radio]:checked+label {
+        background-color: #24397c;
+        border-color: #24397c;
+    }
+
+    .input-personalize-datatable {
+        border-radius: 15px !important;
+        padding: 10px 20px !important;
+        height: 34px !important;
+    }
+    .search-general {
+        max-width: initial;
+        height: 48px !important;
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-start-end-radius: 1px !important;
+        border-top-left-radius: 5px !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 5px !important;
+    }
+    .datatables-input-group-width {
+        width: 100% !important;
+    }
+    .input-group-appenda {
+        .form-control {
+            border-top-right-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+        }
+        .input-group-text {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+    .input-group-text {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .btn-primary-desabled {
+        border-radius: 5px !important;
+        width: 170px !important;
+        background-color: #E9E9E9;
+        color: #ABABAB;
+    }
+}

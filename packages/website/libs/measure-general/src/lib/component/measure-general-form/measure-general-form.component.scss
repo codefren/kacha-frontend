@@ -1,0 +1,28 @@
+.btn {
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.btn-cancel {
+    color: white;
+    background-color: #cdcdcf;
+    border: none;
+}
+
+.btn-default {
+    color: white;
+    background-color: #ff9e4d;
+    border: none;
+}
+
+label,
+input {
+    font-size: 16px !important;
+    font-weight: lighter;
+}
+
+select,
+option,
+button {
+    font-size: 18px !important;
+}

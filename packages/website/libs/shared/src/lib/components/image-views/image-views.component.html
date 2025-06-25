@@ -1,0 +1,31 @@
+<div class="easyroute-image-views">
+  <div class="row justify-content-center">
+    <div 
+      *ngFor="let card of cards; let i = index" 
+      class="d-flex flex-column justify-content-around column"
+      [ngClass]="{'margin-inter':  i % 2 == 0 }"
+    >
+      <div class="card point" [ngClass]="{ 'card-franchise': franchise }" (click)="fileImage.click()">
+        <div 
+          class="w-100 h-100 d-flex flex-column align-items-center justify-content-center"
+          *ngIf="!images[i]"  
+        >
+          <i class="color-icon fas fa-camera fa-2x"></i>
+        </div>
+        <div class="text-center w-100 h-100" *ngIf="images[i]">
+          <img [src]="images[i].image" class="img-upload">
+      </div>
+      </div>
+      <input 
+        type="file" 
+        hidden 
+        #fileImage 
+        (change)="handleFileChange( $event, images[i] ? images[i].id : i + 1 )"
+      >
+      <p class="color-alert text-center mt-1">máximo 1MB</p>
+    </div>
+  </div>
+  <div class="row justify-content-center" *ngIf="imageError.length > 0">
+    <span class="text-danger">{{ imageError }}</span>
+  </div>
+</div>

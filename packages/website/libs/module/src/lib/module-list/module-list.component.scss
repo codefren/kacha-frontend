@@ -1,0 +1,82 @@
+.easyroute-module-list {
+    
+    background-color: #f0f0f0;
+    height: 100%;
+    border-radius: 4px;
+    
+    .padding-container {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    
+    .m-0>a:after {
+        // familia unicode > 100 colocar font-weight: 900
+        content: '\f107';
+        font-weight: 900;
+        font-family: 'Font Awesome\ 5 Free';
+        right: 0;
+        float: center;
+        padding-left: 10px;
+        font-size: 14px;
+    }
+    
+    .m-0>a[aria-expanded='true']:after {
+        content: '\f106';
+        font-weight: 900;
+    }
+    .border-shadow {
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    .card-header a {
+        color: rgba(0, 0, 0, 0.87) !important;
+    }
+    .style-tax {
+        color: #cecbcb;
+        font-size: 22px;
+    }
+    .btn-success:hover {
+        color: white;
+    }
+    .sytle-description {
+        text-align: center;
+        font-size: 13px;
+        color: #8e8e8e;
+        line-height: 19px !important;
+        font-weight: lighter;
+        margin: 0;
+    }
+    .w-button {
+        width: 18rem;
+        border-radius: 15px;
+    }
+    .card-height {
+        height: 92vh;
+    }
+    @media only screen and (min-width: 360px) and (max-width: 640px) {
+        .margin-video {
+            margin-left: 0%;
+        }
+        .thumbnail-with {
+            width: 100%;
+        }
+        .w-button {
+            width: 100%;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .margin-video {
+            margin-left: 0%;
+        }
+        .thumbnail-with {
+            width: 100%;
+        }
+        .w-button {
+            width: 100%;
+        }
+
+        .padding-container {
+            padding-left: 10px;
+            padding-right: 10px;   
+        }
+    }
+}

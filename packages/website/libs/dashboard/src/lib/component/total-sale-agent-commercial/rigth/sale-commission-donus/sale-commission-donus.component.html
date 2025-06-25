@@ -1,0 +1,46 @@
+<div class="easyroute-total-invoiced">
+
+    <div class="row text-center mt-4 mb-1">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <ng-container *ngIf="!show">
+                        <div class="col-12 mt-5">
+                            <div class="fa-4x mb-2">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+                        </div>
+
+
+                    </ng-container>
+
+                    <div class="chart chart-md" id="morrisDonut3"></div>
+
+                    <div class="col-12 text-center">
+
+                        <label class="total-client-label"> {{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.SALES_COMMISSION' | translate }} </label>
+
+                        <p class="p-0 m-0 total"> {{ decimal (totalGeneral) }} </p>
+
+
+                    </div>
+
+                    <!-- <ng-container *ngIf="!totalGeneral">
+                        {{ 'DASHBOARD.TOTAL_CLIENT.NO_DATA_TO_DISPLAY' | translate }}
+                    </ng-container> -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

@@ -1,0 +1,87 @@
+.easyroute-card-module {
+    
+    .card {
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        background: #ffffff;
+    }
+    .card-header{
+        border-top-left-radius: 10px !important;
+        border-top-right-radius: 10px !important;
+        border-bottom: 0px solid #dadada;
+        background: #ffffff;
+        height: 7rem;
+    }
+
+    .card-body {
+        height: 16rem;
+    }
+
+    .card-footer {
+        border-bottom-left-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
+        border: hidden;
+    }
+
+    .title {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 0.5rem;
+    }
+
+    img {
+        width: 30%;
+        display:block;
+        margin:auto;
+        padding-bottom: 1rem;
+       /*  width: 150px;
+        height: 122px; */
+    }
+    .img-render {
+        width: 90%;
+    }
+    
+    .read-more {
+        text-decoration: underline;
+        color: #595757;
+    }
+
+    .sytle-description {
+        text-align: center;
+        font-size: 13px;
+        color: #8e8e8e;
+        line-height: 19px !important;
+        font-weight: lighter;
+        margin: 0;
+    }
+
+    .text-secondary {
+        color: #8e8e8e !important;
+        text-align: center;
+    }
+
+    button {
+        width: 75%;
+        border-radius: 20px;
+        font-size: 15px;
+    }
+
+    .btn-success:disabled {
+        opacity: 1;
+        cursor: default;
+    }
+
+    .soon {
+        text-align: center;
+        color: #595757;
+        margin: 0px;
+        padding-bottom: 0.5rem;
+    }
+
+    
+    .modal.show .modal-dialog {
+        max-width: 700px;
+    }
+
+}

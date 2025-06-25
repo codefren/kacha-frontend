@@ -1,0 +1,24 @@
+<div class="modal-integration-favorite">
+    <section class="card p-2">
+        <header>
+            <div class="row">
+                <div class="col-12 text-right">
+                    <i class="fas fa-times close-button" (click)="closeDialog(false)"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="card-body p-4">
+            <p class="text-center">{{ message }}</p>
+        </div>
+
+        <footer class="row pb-2">
+            <div class="col-12 col-md-6 text-center text-md-right">
+                <button type="button" class="btn btn-cancel size-btn-modal" (click)="closeDialog(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+            </div>
+            <div class="col-12 col-md-6 mt-2 mt-md-0 text-center text-md-left">
+                <button type="button" class="btn btn-primary size-btn-modal" (click)="closeDialog(true)">{{ 'GENERAL.ACCEPT' | translate }}</button>
+            </div>
+        </footer>
+    </section>
+</div>

@@ -1,0 +1,168 @@
+<div class="client-service-type-form" *ngIf="clientServiceTypeSchedule">
+
+    <div class="row p-5">
+
+        <div class="col-xl-8 col-12 p-0 text-xl-left text-center">
+            <label class="title-modal" *ngIf="clientServiceTypeSchedule.id > 0"> {{ 'DELIVERY_POINTS.EDIT_TIME_ZONE' | translate }} </label>
+            <label class="title-modal" *ngIf="clientServiceTypeSchedule.id == 0"> {{ 'DELIVERY_POINTS.ADD_TIME_ZONE_NEW' | translate }} </label>
+        </div>
+
+        <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="close()">
+            <img src="assets/icons/close1.svg">
+        </div>
+
+        <form [formGroup]="clientServiceTypeForm" class="padding-form" style="width: 100%" novalidate action="">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-row mt-3" [ngClass]="{ 'has-danger': clientServiceTypeForm.controls['name'].invalid 
+                        && (clientServiceTypeForm.controls['name'].dirty 
+                        || clientServiceTypeForm.controls['name'].touched) }">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="name" type="text"
+                                placeholder="{{ 'DELIVERY_POINTS.NAME_TIME_ZONE' | translate }}" formControlName="name"/>
+                                <label for="first" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.NAME_TIME_ZONE' | translate }} </label>
+                            </span>
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let validation of sub_category_messages.name">
+                        <small class="form-control-feedback text-danger" *ngIf="clientServiceTypeForm.get('name').hasError(validation.type) 
+                            && (clientServiceTypeForm.get('name').dirty 
+                            || clientServiceTypeForm.get('name').touched)
+                            ">
+                            {{ validation.message }}
+                        </small>
+                    </ng-container>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-row mt-3" [ngClass]="{ 'has-danger': clientServiceTypeForm.controls['code'].invalid 
+                        && (clientServiceTypeForm.controls['code'].dirty 
+                        || clientServiceTypeForm.controls['code'].touched) }">
+                        <ng-container *ngIf="showCode">
+                            <div class="input-group" style="display: block;">
+                                <span class="has-float-label w-100">
+                                    <input *ngIf="clientServiceTypeSchedule.id > 0" type="text" readonly [ngClass]="{'no-point': data && data.id > 0}"
+                                        class="form-control code-edit-form radiusDeliveryOrderCode point" id="code" 
+                                        formControlName="code" placeholder="{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CODE' | translate }}" />
+                                    <input *ngIf="!clientServiceTypeSchedule.id" type="text" class="form-control radiusDeliveryOrderCode point" 
+                                        onKeyPress="if(this.value.length == 31) return false;" 
+                                        id="code" formControlName="code" placeholder="{{ 'VEHICLES.SERVICE_TYPE.CODE' | translate }}" />
+                                    <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.SERVICE_TYPE.CODE' | translate }} </label>
+                                </span>
+                                <span class="has-float-label w-100 has-float-primary">
+                                    <button type="button" class="btn btn-primary btn-save" 
+                                        [disabled]="data && data.id > 0" [ngClass]="{'no-point': data && data.id > 0}"
+                                        style="vertical-align: text-bottom;" 
+                                        (click)="searchIncidentCode()" 
+                                        id="tooltip" disabled="false">
+                                        <i class="fas fa-sync color-icon-sync"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <ng-container *ngFor="let validation of sub_category_messages.code">
+                                <div>
+                                    <small class="form-control-feedback text-danger ml-2" *ngIf="clientServiceTypeForm.get('code').hasError(validation.type) 
+                                        && (clientServiceTypeForm.get('code').dirty 
+                                        || clientServiceTypeForm.get('code').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-container *ngIf="!showCode">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <div class="fa-3x mt-5">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-row mt-3" [ngClass]="{ 'has-danger': clientServiceTypeForm.controls['timeStart'].invalid 
+                    && (clientServiceTypeForm.controls['timeStart'].dirty 
+                    || clientServiceTypeForm.controls['timeStart'].touched) }">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="timeStart" autocomplete="off" formControlName="timeStart" type="time" 
+                                (change)="changetime($event, 'timeStart')" placeholder="{{ 'DELIVERY_POINTS.NAME_TIME_ZONE' | translate }}" 
+                                />
+                                <label for="first" class="mt-2 title-col">{{ 'DELIVERY_POINTS.START' | translate }} </label>
+                            </span>
+                            <ng-container *ngFor="let validation of sub_category_messages.timeStart">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="clientServiceTypeForm.get('timeStart').hasError(validation.type) 
+                                        && (clientServiceTypeForm.get('timeStart').dirty 
+                                        || clientServiceTypeForm.get('timeStart').touched)">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-row mt-3">
+                        <div class="form-group input-group" [ngClass]="{ 'has-danger': clientServiceTypeForm.controls['timeEnd'].invalid 
+                            && (clientServiceTypeForm.controls['timeEnd'].dirty 
+                            || clientServiceTypeForm.controls['timeEnd'].touched) }">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" formControlName="timeEnd" id="timeEnd" (change)="changetime($event, 'timeEnd')" type="time" 
+                                placeholder="{{ 'DELIVERY_POINTS.NAME_TIME_ZONE' | translate }}" autocomplete="off"/>
+
+                                <label for="first" class="mt-2 title-col"> {{ 'DELIVERY_POINTS.END' | translate }} </label>
+                            </span>
+                            <ng-container *ngFor="let validation of sub_category_messages.timeEnd">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="clientServiceTypeForm.get('timeEnd').hasError(validation.type) 
+                                        && (clientServiceTypeForm.get('timeEnd').dirty 
+                                        || clientServiceTypeForm.get('timeEnd').touched)">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-row mt-3">
+                        <div class="form-group input-group">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" formControlName="isActive"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="lever-text">{{ 'GENERAL.ACTIVE' | translate }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="col-xl-12 col-lg-12 col-12 mt-3 p-0">
+            <div class="form-row mt-2 d-flex justify-content-end">
+                <ng-container *ngIf="!data">
+                    <button class="btn btn-primary btn-primary-width btn-block" type="button" [disabled]="!clientServiceTypeForm.valid" (click)="createclientServiceTypeSchedule()" *ngIf="clientServiceTypeSchedule.id == 0">
+                        {{'GENERAL.ADD' | translate }}
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="data">
+                    <button class="btn btn-primary btn-primary-width btn-block" type="button" [disabled]="!clientServiceTypeForm.valid" (click)="createclientServiceTypeSchedule()" *ngIf="clientServiceTypeSchedule.id > 0">
+                        {{ 'GENERAL.SAVE' | translate }}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+
+</div>

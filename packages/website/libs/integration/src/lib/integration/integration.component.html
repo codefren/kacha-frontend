@@ -1,0 +1,156 @@
+<div class="optimroute-integration bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'DELIVERY_PLANNER.NAME' | translate }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boton añadir -->
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-4 text-center">
+                <button class="btn btn-secondary btn-large" title="{{ 'ROUTE_PLANNING.PLANNING_NEW_DELIVERY' | translate }}" (click)="add()">
+                    {{ 'ROUTE_PLANNING.PLANNING_NEW_DELIVERY' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nombre y filtro -->
+    <div class="row justify-content-center align-items-end">
+        <div class="col-12 col-md-9 col-xl-10 col-lg-9 mt-3 mt-md-0 order-last order-md-first">
+            <span class="title-table">
+                {{ 'DELIVERY_PLANNER.NAME' | translate }}
+            </span>
+        </div>
+        <div class class="col-md-3 col-xl-2 col-lg-3 col-12 text-center pl-1 pl-sm-1 pl-md-1 pl-lg-5 pl-xs-1 pl-xl-5">
+            <button class="btn btn-filter  pr-2 ml-3" (click)="filterOpen()">
+                <i class="fas fa-sliders-h"></i>
+                {{ 'GENERAL.FILTERS' | translate  }}
+            </button>
+        </div>
+    </div>
+
+    <!-- <div class="padding-body pt-0">
+        <div class="form-row justify-content-sm-around margin">
+
+            <div class="col-lg-2 mt-2 mt-lg-0">
+                <label class="margin-label control-label col-especial">
+            {{ 'GENERAL.TO_SHOW' | translate }}:
+            </label>
+                <div class="hack-select w-100">
+                    <select id="favorites" (change)="ChangeFilter($event)" #favorites class="form-control">
+                <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option value="true">{{ 'GENERAL.FAVORITES' | translate }}</option>
+            </select>
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 mt-2 mt-lg-0">
+                <label class="margin-label control-label col-especial" for="orderDate">{{ 'INTEGRATION.PLANNING_TYPE' | translate }}:</label>
+                <div class="input-group">
+                    <div class="hack-select w-100">
+                        <select (change)="ChangeFilter($event)" #integrationSessionTypeId class="form-control letter-app" id="integrationSessionTypeId">
+                    <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                    <option [value]="1">{{ 'INTEGRATION.DELIVERY_POINTS' | translate  }}</option>
+                    <option [value]="2">{{ 'INTEGRATION.ORDERS' | translate }}</option>
+                </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 mt-2 mt-lg-0">
+                <label class="margin-label">{{ 'ORDERS.ORDERS_LIST.INTERVAL' | translate }}:</label>
+                <div class="hack-select w-100">
+                    <select (change)="ChangeFilter($event)" #interval id="interval" class="form-control letter-app">
+                <option value="todas">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option value="hoy">{{ 'GENERAL.TODAY' | translate }}</option>
+                <option value="por fecha">{{ 'GENERAL.BY_DATE' | translate }}</option>
+            </select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 mt-2 mt-lg-0">
+                <div class="form-group" *ngIf="showIntervalFiel">
+                    <label class="control-label margin-label col-especial" for="orderDate">{{ 'GENERAL.FROM' | translate }}:</label>
+
+                    <div class="input-group">
+                        <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}" 
+                        [(ngModel)]="model" name="dateFrom" 
+                        (ngModelChange)="getDate($event, dateFrom)" 
+                        ngbDatepicker #b="ngbDatepicker" 
+                        autocomplete="off" [minDate]="datemin" [startDate]="dateNow"
+                            id="dateFrom">
+
+                        <button class="btn btn-calendar calendar table-append m-0" (click)="b.toggle()" type="button">
+                        <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 mt-2 mt-lg-0">
+                <div class="form-group" *ngIf="showIntervalFiel">
+                    <label class="control-label margin-label col-especial" for="orderDate">{{ 'GENERAL.TO' | translate }}:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}" [disabled]="disabledateto" [(ngModel)]="model2" name="datedateTo" (ngModelChange)="getDate($event, datedateTo)" ngbDatepicker #d="ngbDatepicker" autocomplete="off" [minDate]="dateMax"
+                            [startDate]="dateNow" id="dateTo">
+
+                        <button class="btn btn-calendar calendar table-append m-0" (click)="d.toggle()" type="button">
+                            <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-1 mt-3 mt-lg-0">
+                <div class="h-100 d-flex flex-row justify-content-center align-items-end">
+                    <button class="btn btn-default btn-clear" (click)="clearSearch()">
+                        <div class="return">
+                        <i class="fas fa-times addVehicleIcon p-1" style="font-size: 11px;"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <hr class="hr-secondary">
+            <div class="row justify-content-center margin mt-0" style="padding-top: 16px;">
+                <button class="btn btn-cancel" (click)="add()" style="text-transform: initial;">
+                    {{ 'ROUTE_PLANNING.PLANNING_NEW_DELIVERY' | translate }}
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="row justify-content-center">
+        <div class="col-11 text-left">
+            {{ 'DELIVERY_PLANNER.NAME' | translate }}
+        </div>
+    </div> -->
+
+    <div class="table-content mt-3">
+        <table id="integration" style="width: 100%" class="table table-bordered table-striped table-responsive-lg mb-0" style="text-align: center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>{{ 'INTEGRATION.NAME' | translate }}</th>
+                    <th>{{ 'INTEGRATION.DESCRIPTION' | translate }}</th>
+                    <th>{{ 'INTEGRATION.DATE_SESSION' | translate }}</th>
+                    <th>{{ 'INTEGRATION.CREATED_BY' | translate }}</th>
+                    <th>{{ 'INTEGRATION.PLANNING_TYPE' | translate }}</th>
+                    <th>{{ 'GENERAL.CREATION_DATE' | translate }}</th>
+                    <th style="border-right: 1px solid #7387c2 !important;"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+</div>

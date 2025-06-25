@@ -1,0 +1,342 @@
+<div class="start-list bg-white">
+    <div class="container-fluit">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'MENU.SUPER_ADMIN' | translate }}</p>
+            </div>
+        </div>
+
+        <!-- navs donde como va ir-->
+        <div class="row d-flex justify-content-between mb-3">
+
+            <!-- <div class="col-12 col-xl-2"></div> -->
+
+            <div class="col-12 col-xl-6 offset-xl-4">
+                <nav class="row p-0 m-0 group-btn">
+                    <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='start' }" (click)="changePage( 'start' )">
+                        <a class="text-center">{{ 'COMPANIES.START' | translate }}</a>
+                    </div>
+                    <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='company' }" (click)="changePage( 'company' )">
+                        <a class="text-center">{{ 'COMPANIES.NAME' | translate }}</a>
+                    </div>
+                    <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='user' }" (click)="changePage( 'user' )">
+                        <a class="text-center">{{ 'USERS.NAME' | translate }}</a>
+                    </div>
+                    <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='novelty' }" (click)="changePage( 'novelty' )">
+                        <a class="text-center">{{ 'WHATS_NEW.NAME' | translate }}</a>
+                    </div>
+                    <div class="col-md col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='invoice' }" (click)="changePage( 'invoice' )">
+                        <a class="text-center">{{ 'INVOICES.NAME' | translate }}</a>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-md-2 col-12 pr-lg-4 text-right  mb-1">
+                <button class="btn btn-filter" (click)="filterOpen()">
+                    <i class="fas fa-sliders-h"></i>
+                    {{ 'GENERAL.FILTERS' | translate  }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- card -->
+    <div class="row justify-content-center pl-4 pr-4 mt-4">
+
+        <!-- Compañías activas -->
+
+        <div class="col-xl col-lg-6 col-md-6 col-12 mt-xl-0 mt-3">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-3 pl-2">
+
+                            <img src="assets/icons/clock.svg">
+
+                        </div>
+
+                        <div class="col pl-1">
+
+                            <p class="title-cards mb-1"> {{'START.ACTIVE_COMPANIES' | translate }} </p>
+
+                            <ng-container *ngIf="showResumen">
+
+                                <p class="sub-title mb-1" *ngIf="dataResumen">
+
+                                    {{ dataResumen.activeCompany }}
+
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!showResumen">
+
+                                <div class="fa-2x">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Compañías activas -->
+
+        <!-- Compañías inactivas -->
+
+        <div class="col-xl col-lg-6 col-md-6 col-12 mt-xl-0 mt-3">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-3 pl-2">
+
+                            <img src="assets/icons/close12.svg">
+
+                        </div>
+
+                        <div class="col pl-1">
+
+                            <p class="title-cards mb-1"> {{'START.INACTIVE_COMPANIES' | translate }} </p>
+
+                            <ng-container *ngIf="showResumen">
+
+                                <p class="sub-title mb-1" *ngIf="dataResumen">
+
+                                    {{ dataResumen.inactiveCompany }}
+
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!showResumen">
+
+                                <div class="fa-2x">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Compañías inactivas -->
+
+        <!-- Activas con rutas asignadas y Rutas con mínimo 1 albarán -->
+
+        <div class="col-xl-5 col-12 mt-xl-0 mt-3">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-6">
+
+                            <div class="row">
+
+                                <div class="col-3 pr-0 pl-0 text-center">
+
+                                    <img src="assets/icons/active1.svg">
+
+                                </div>
+
+                                <div class="col pl-1">
+
+                                    <p class="title-cards mb-1"> {{'START.ACTIVE_WITH_ROUTES_ASSIGNED' | translate }} </p>
+
+                                    <ng-container *ngIf="showResumen">
+
+                                        <p class="sub-title mb-1" *ngIf="dataResumen">
+
+                                            {{ dataResumen.activeWithRoute }}
+
+                                        </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showResumen">
+
+                                        <div class="fa-2x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+
+                            <div class="vr"></div>
+
+                        </div>
+
+                        <div class="col-6">
+
+
+                            <div class="col pl-4">
+
+                                <p class="title-cards mb-1"> {{'START.ROUTES_WITH_AT_LEAST_1_DELIVERY_NOTE' | translate }} </p>
+
+                                <!--   <p class="sub-title mb-1">00</p> -->
+
+                                <ng-container *ngIf="showResumen">
+
+                                    <p class="sub-title mb-1" *ngIf="dataResumen">
+
+                                        {{ dataResumen.activeWithAlbaran }}
+
+                                    </p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showResumen">
+
+                                    <div class="fa-2x">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Activas con rutas asignadas y Rutas con mínimo 1 albarán -->
+
+        <!-- Activas sin rutas asignadas -->
+
+        <div class="col-xl col-lg-6 col-md-6 col-12 mt-xl-0 mt-3">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-3 pl-2">
+
+                            <img src="assets/icons/active.svg">
+
+                        </div>
+
+                        <div class="col pl-1">
+
+                            <p class="title-cards mb-1"> {{'START.ACTIVE_WITHOUT_ROUTES_ASSIGNED' | translate }} </p>
+
+                            <ng-container *ngIf="showResumen">
+
+                                <p class="sub-title mb-1" *ngIf="dataResumen">
+
+                                    {{ dataResumen.activeWithoutRoute }}
+
+                                </p>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="!showResumen">
+
+                                <div class="fa-2x">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end Activas sin rutas asignadas -->
+
+
+        <!-- table -->
+
+        <div class="col-12">
+            <div class="table-content mt-3">
+
+                <table style="width: 100%;" class="table table-striped table-bordered table-responsive-lg mb-0" id="start" style="text-align: center">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th style="border-radius: 5px 0px 0px 0px;">{{ 'START.COMPANY' | translate }}</th>
+
+                            <th>{{ 'START.PROVINCE' | translate }}</th>
+
+                            <th>{{ 'START.BILLING_MAIL' | translate }}</th>
+
+                            <th>{{ 'START.TOTAL_DELIVERY_NOTES' | translate }}</th>
+
+                            <th>{{ 'START.TOTAL_ROUTES' | translate }}</th>
+
+                            <th style="border-radius: 0px 5px 0px 0px;">{{ 'START.LAST_ROUTE_ASSIGNED' | translate }}</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- end table -->
+
+    </div>
+
+
+
+
+</div>

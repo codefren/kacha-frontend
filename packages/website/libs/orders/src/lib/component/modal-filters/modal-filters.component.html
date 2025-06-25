@@ -1,0 +1,139 @@
+<div class="row mb-3 border-bottom">
+    <div class="col-3 text-center">
+        <h3 for="" class="ml-4 filter-title">Filtros</h3>
+    </div>
+    <div class="col-9 text-right pt-3 pr-4">
+        <button class="btn clear" (click)="closeDialog()"> <i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+
+<!-- Filtros y Botonera principal -->
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+
+    <!-- Comercial -->
+    <div class="col-12 mt-2 mt-sm-0" *ngIf="isAdmin()">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'GENERAL.COMMERCIAL' | translate }}</label>
+
+        <div class="text-center p-2" *ngIf="loading == 'loading'">
+            <div class="fa-3x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+        <div class="text-center p-2" *ngIf="loading == 'success' && agentUser.length == 0">
+            <p class="text-center text-danger">{{ 'COMMERCIAL.DONT_EXIST_COMMERCIAL' | translate }}</p>
+        </div>
+        <div class="input-group hack-select" *ngIf="loading == 'success' && agentUser.length > 0">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.commercialId" class="form-control letter-app" #commercialId id="commercialId">
+                <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option *ngFor="let user of agentUser" [value]="user.id">{{user.name}} {{user.surname}}</option>
+            </select>
+        </div>
+        <div *ngIf="loading == 'error'">
+            <p class="text-danger text-center pointer" (click)="getAllAgentUser()">{{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}<ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!</p>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+
+    <!-- Clientes -->
+    <div class="col-12 mt-2 mt-sm-0">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'ORDERS.ORDERS_LIST.CLIENTS' | translate
+            }}</label>
+        <div class="form-actions w-100">
+            <button type="button" class="btn btn-cancel btn-block" title="{{ 'INTEGRATION.ADD_ROUTES' | translate }}" (click)="addclient()" *ngIf="filter.deliveryPointId.length == 0">
+                {{ 'GENERAL.Search' | translate }}
+            </button>
+            <button type="button" class="btn btn-default btn-block text-left buttons-filter" [title]="clientName" (click)="addclient()" *ngIf="filter.deliveryPointId.length > 0">
+                {{clientName | slice:0:50}} {{ clientName.length > 50 ? '...' : '' }}
+                <!-- <i class="fas fa-caret-down	addVehicleIcon style-fas pl-4"></i> -->
+            </button>
+        </div>
+        <div class="input-group hack-select" *ngIf="companyClient.length > 0">
+            <select (change)="ChangeFilter($event)" class="form-control letter-app" id="deliveryPointId">
+                <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option *ngFor="let client of companyClient" [value]="client.id">{{client.name}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+    <!-- Estatus -->
+    <div class="col-12 mt-2 mt-sm-0" *ngIf="isAdmin()">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'GENERAL.STATE_ORDER' | translate }}</label>
+
+        <div class="text-center p-2" *ngIf="loading == 'loading'">
+            <div class="fa-3x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+        <div class="text-center p-2" *ngIf="loading == 'success' && Estatus.length == 0">
+            <p class="text-center text-danger">{{ 'GENERAL.NO_STATUS_AVAILABLE' | translate }}</p>
+        </div>
+        <div class="input-group hack-select" *ngIf="loading == 'success' && Estatus.length > 0">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.statusOrderId" class="form-control letter-app" [(ngModel)]="statusFilter" #statusOrderId id="statusOrderId">
+                <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option *ngFor="let status of Estatus" [value]="status.id">{{status.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="loading == 'error'">
+            <p class="text-danger text-center pointer" (click)="getStatus()">{{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}<ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!</p>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+    <!-- Intervalo -->
+    <div class="col-12 mt-2 mt-sm-0">
+        <label class="control-label col-especial m-0">{{ 'ORDERS.ORDERS_LIST.INTERVAL' | translate }}</label>
+        <div class="hack-select">
+            <select (change)="ChangeFilter($event)" #interval id="interval" [(ngModel)]="typeInterval" class="form-control letter-app">
+                <option value="todas">{{ 'GENERAL.ALL_' | translate }}</option>
+                <option value="hoy">{{ 'GENERAL.FROM_TODAY' | translate }}</option>
+                <option value="desdeMa" selected>{{ 'GENERAL.DELIVERY_FROM_TOMORROW' | translate }}</option>
+                <option value="mañana" >{{ 'GENERAL.DELIVERIES_FOR_TOMORROW' | translate }}</option>
+                <option value="por fecha">{{ 'GENERAL.BY_DATE' | translate }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4" *ngIf="showIntervalFiel">
+    <ng-container>
+        <div class="col-12 mt-2 mt-sm-0">
+            <label class="control-label col-especial m-0" for="orderDate">{{ 'GENERAL.FROM' |translate }}</label>
+            <div class="input-group">
+
+                <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}" [(ngModel)]="model" name="dateFrom" (ngModelChange)="getDate($event, dateFrom)" ngbDatepicker #b="ngbDatepicker" autocomplete="off" [minDate]="datemin" [startDate]="dateNow"
+                    id="dateFrom">
+                <button class="btn btn-calendar calendar table-append m-0 " (click)="b.toggle()" type="button">
+                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                        aria-hidden="true">
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4" *ngIf="showIntervalFiel">
+    <ng-container>
+        <div class="col-12 mt-2 mt-sm-0">
+            <label class="control-label col-especial m-0" for="orderDate">{{ 'GENERAL.TO' |translate }}</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="{{ 'ORDERS.ORDERS_FORM.DATE' | translate }}" [disabled]="disabledateto" [(ngModel)]="model2" name="datedateTo" (ngModelChange)="getDate($event, datedateTo)" ngbDatepicker #d="ngbDatepicker" autocomplete="off" [minDate]="dateMax"
+                    [startDate]="dateNow" id="dateTo">
+                <button class="btn btn-calendar calendar table-append m-0" (click)="d.toggle()" type="button">
+                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg"
+                        aria-hidden="true">
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="row">
+    <div class="col-lg-6 offset-3 col-md-6 text-center mt-4">
+        <button class="btn btn-primary btn-block" (click)="closeDialog()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 text-left ml-4 position-absolute bottom-0">
+        <a (click)="clearSearch()">Limpiar filtro</a>
+    </div>
+</div>

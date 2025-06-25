@@ -1,0 +1,80 @@
+.modalhelp {
+    
+    background: #24397C;
+    border-radius: 10px;
+    background-image: url(../../../../assets/polpoo/logo-blank.svg);
+    background-repeat: no-repeat;
+    
+    .card-body {
+        background: none;
+    }
+    .logo {
+        max-width: 50px;
+    }
+    
+    .title-color {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 35px;
+        align-items: center;
+        letter-spacing: 1px !important;
+        color: #FFFFFF;
+    }
+    .btn-gray {
+        background: #BAB7B7 !important;
+    }
+    p {
+        font-size: 16px;
+    }
+    .text-general {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 17px;
+        line-height: 20px;
+        align-items: center;
+        text-align: center;
+
+        color: #FFFFFF;
+
+        b {
+            font-weight: bold;
+        }
+    }
+    .card-header {
+        background: #f6f6f600 !important;
+        border-radius: 5px 5px 0 0 !important;
+        border-bottom: none !important;
+        /* padding: 18px; */
+        position: relative;
+        margin-left: 3% !important;
+        margin-right: 3% !important;
+    }
+
+    .weight {
+      font-weight: 700;
+    }
+
+    .btn-outline-primary {
+        color: #ff9e4d !important;
+        border: 1px solid #ff9e4d !important;
+        background-color: white !important;
+        width: 100px;
+    }
+
+    button {
+      // border-radius: 2px;
+      font-size: 16px !important;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    @media screen and (max-width: 767px) and (min-width: 320px) {
+
+        .size-btn-modal {
+            width: 8rem !important;
+        }
+    }
+}

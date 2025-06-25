@@ -1,0 +1,48 @@
+@import '~@angular/material/theming';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin management-vehicles-table-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    // $app-background: map-get($theme, background);
+    // $app-foreground: map-get($theme, foreground);
+
+    // $foreground-text: mat-color($app-foreground, text);
+    // $background: mat-color($app-background, background);
+
+    .easyroute-management-vehicles-table {
+        .top-row {
+            background-color: mat-color($accent, 200);
+            color: mat-color($accent, '200-contrast');
+        }
+
+        .header-row {
+            background-color: mat-color($accent, 100);
+            color: mat-color($accent, '100-contrast');
+        }
+
+        .element-row {
+            background-color: mat-color($accent, 50);
+            color: mat-color($accent, '50-contrast');
+        }
+
+        .adding-row,
+        .editing {
+            background-color: mat-color($primary, 100);
+            color: mat-color($primary, '100-contrast');
+        }
+    }
+}
+
+@mixin management-vehicles-table-typography($config) {
+    .easyroute-management-vehicles-table {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

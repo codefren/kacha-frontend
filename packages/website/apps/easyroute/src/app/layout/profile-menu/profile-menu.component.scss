@@ -1,0 +1,46 @@
+.profile-menu {
+    .title {
+        color: #000000 !important;
+        margin: 0 4px !important;
+        font-size: 15px !important;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 0.3rem 1.3rem;
+        margin-bottom: 0 !important;
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 13px !important;
+        font-family: Helvetica;
+    }
+
+    .sub-ul {
+        padding-inline-start: 15px;
+    }
+
+    .sub-li {
+        padding: 0.3rem 0rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .active-weight {
+        font-weight: bold;
+    }
+
+    .a-black {
+        color: inherit;// #000000;
+    }
+
+    .a-primary {
+        color: #24397c !important;
+    }
+
+    .help {
+        color: #f2930a !important;
+    }
+}

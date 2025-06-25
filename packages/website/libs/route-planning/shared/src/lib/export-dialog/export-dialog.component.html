@@ -1,0 +1,362 @@
+<div class="ExportDialogComponent font-general">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'GENERAL.EXPORT_ROUTES' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point">
+
+                <img src="assets/icons/close-cost.svg" (click)="closeDialog()">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal-body modal-p-b">
+
+        <!-- selecter -->
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 lines-conteiner">
+
+                <div class="row">
+
+                    <div class="col-xl-3 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'optimizedRoutes'}" (click)="changePage('optimizedRoutes')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'optimizedRoutes'}">
+    
+                            {{ 'GENERAL.OPTIMIZED' | translate }}
+    
+                        </label>
+                    </div>
+
+                    <div class="col-xl-3 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'evaluated'}" (click)="changePage('evaluated')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'evaluated'}">
+    
+                            {{ 'GENERAL.EVALUATED' | translate }}
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- END SELETER -->
+
+        <ng-container *ngIf="default === 'evaluated'">
+
+            <div class="row mb-4 pt-4">
+                <div class="col-12">
+
+                    <p class="title-info mb-2"> {{'GENERAL.EVALUATED_ROUTES' | translate }} </p>
+
+                    <p class="sub-title"> {{'GENERAL.SELECT_THE_EVALUATED_ROUTES_YOU_WANT_TO_EXPORT' | translate }} </p>
+
+                </div>
+
+              
+
+                <ng-container *ngIf="areEvaluatedsEmpty()">
+
+                    <div class="col-md-12 text-center">
+
+                        <span class="no-optimized-routes">{{ 'GENERAL.THERE_IS_NO_ROUTE_EVALUATED' | translate }}</span>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="!areEvaluatedsEmpty()">
+
+                    <ng-container *ngFor="let zone of (evaluateds | keyvalue); let i = index">
+
+                        <div class="col-xl-6 col-12 mt-xl-2 mt-3">
+
+                            <div class="border-special">
+
+                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                    <div class="round round-little margin-days round-1">
+
+                                        <input [id]="'for-all' + i" value="all" type="checkbox" [checked]="isZoneChecked(zone.key)" (change)="checkZoneEvaluateds(zone.key, $event.target.checked)" (click)="$event.stopPropagation()" title="Ruta: {{zone.value.name}}" />
+
+                                        <label [for]="'for-all' + i"></label>
+
+                                    </div>
+
+                                    <label title="{{ zone.value.name }}" [for]="'for-all' + i" class="label-check point">
+                
+                                        {{'GENERAL.ROUTE_' | translate }} : {{ zone.value.name }}
+                
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                </ng-container>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="default === 'optimizedRoutes'">
+
+            <div class="row mb-4 pt-4">
+
+                <div class="col-12">
+
+                    <p class="title-info mb-2"> {{'GENERAL.OPTIMIZED_ROUTES' | translate }} </p>
+
+                    <p class="sub-title"> {{'GENERAL.SELECT_THE_OPTIMIZED_ROUTES_YOU_WANT_TO_EXPORT' | translate }} </p>
+
+                </div>
+
+                <ng-container *ngIf="areRoutesEmpty()">
+
+                    <div class="col-md-12 col-12 text-center">
+
+                        <span class="no-optimized-routes">{{ 'GENERAL.THERE_IS_NO_CALCULATED_ROUTE' | translate }}</span>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="!areRoutesEmpty()">
+
+                    <ng-container *ngFor="let route of  (routes | keyvalue); let i = index">
+
+                        <div class="col-xl-6 col-12 mt-xl-2 mt-3">
+
+                            <div class="border-special">
+
+                                <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                    <div class="round round-little margin-days round-1">
+
+                                        <input [id]="'for-all-eva' + i" value="all" type="checkbox" [checked]="isAllZoneChecked(route.key)" (change)="checkZone(route.key, $event.target.checked)" (click)="$event.stopPropagation()" />
+
+                                        <label [for]="'for-all-eva' + i"></label>
+
+                                    </div>
+
+                                    <label title="{{ route.value.name }}" [for]="'for-all-eva' + i" class="label-check point">
+                
+                                        {{'GENERAL.ROUTE_' | translate }} : {{ route.value.name }}
+                
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+
+                </ng-container>
+
+
+
+
+            </div>
+
+        </ng-container>
+
+
+
+    </div>
+
+
+
+    <ng-container *ngIf="default === 'evaluated'">
+
+        <div class="modal-footer">
+
+            <div class="row pt-1 pb-3">
+
+                <div class="col-12">
+
+                    <p class="title-info mb-2"> {{ 'GENERAL.SELECT_EXPORT_FORMAT' | translate }} </p>
+
+                </div>
+
+                <div class="col-xl-3 col-12 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="CSV1" name="porto_is" type="radio" value="csv" [(ngModel)]="format_evaluated" />
+
+                                <label for="CSV1"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}" for="CSV1" class="label-check point">
+            
+                                CSV
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little round-new-form  margin-days round-1">
+
+                                <input id="JSON1" name="porto_is" type="radio" value="json" [(ngModel)]="format_evaluated" />
+
+                                <label for="JSON1"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}" for="JSON1" class="label-check point">
+            
+                                Json
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <div class="row">
+                <div class="col-12 text-xl-right text-center">
+
+                    <button class="btn btn-cancel size-btn-modal modal-dismiss mr-2 mb-xl-0 mb-2" (click)="closeDialog()"> {{ 'GENERAL.CLOSE' | translate }} </button>
+
+                    <button class="btn btn-primary size-btn-modal modal-confirm mb-xl-0 mb-2" [disabled]="selectedEvaluatedAmount === 0" (click)="accept_evaluateds()" type="button" id="card-button"> {{ 'GENERAL.DOWNLOAD' | translate }} </button>
+
+                    <button class="btn btn-primary btn-primary-donwnload size-btn-modal modal-confirm ml-2  mb-xl-0 mb-2" *ngIf="format_evaluated === 'json'" [disabled]="selectedEvaluatedAmount === 0" (click)="integrationEvaluations()" type="button" id="card-button-s"> {{ 'GENERAL.SEND_FROM_CLOUD' | translate }} </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="default === 'optimizedRoutes'">
+
+        <div class="modal-footer">
+
+            <div class="row pt-1 pb-3">
+
+                <div class="col-12">
+
+                    <p class="title-info mb-2"> {{ 'GENERAL.SELECT_EXPORT_FORMAT' | translate }} </p>
+
+                </div>
+
+                <div class="col-xl-3 col-12 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="CVS2" name="calcualte csv" type="radio" value="csv" [(ngModel)]="format" />
+
+                                <label for="CVS2"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}" for="CVS2" class="label-check point">
+            
+                                CSV
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12 mt-xl-2 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little round-new-form  margin-days round-1">
+
+                                <input id="JSON2" name="calculate json" type="radio" value="json" [(ngModel)]="format" />
+
+                                <label for="JSON2"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}" for="JSON2" class="label-check point">
+            
+                                Json
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <div class="row">
+
+                <div class="col-12 text-xl-right text-center">
+
+                    <button class="btn btn-cancel size-btn-modal modal-dismiss mr-2 mb-xl-0 mb-2" (click)="closeDialog()"> {{ 'GENERAL.CLOSE' | translate }} </button>
+
+                    <button class="btn btn-primary size-btn-modal modal-confirm mb-xl-0 mb-2" [disabled]="selectedAmount === 0" (click)="accept()" type="button"> {{ 'GENERAL.DOWNLOAD' | translate }} </button>
+
+                    <button class="btn btn-primary btn-primary-donwnload size-btn-modal modal-confirm ml-2 mb-xl-0 mb-2" [disabled]="selectedAmount === 0" *ngIf="format === 'json'" (click)="integrationOptimizations()" type="button" id="card-button-s"> {{ 'GENERAL.SEND_FROM_CLOUD' | translate }} </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+</div>

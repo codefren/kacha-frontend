@@ -1,0 +1,115 @@
+<div class="sub-category-list bg-white">
+
+    <!-- botnes de acciones -->
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-3">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end pt-3">
+
+                <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openPdf()">
+
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'CONFIGURATIONS.DOWNLOAD_SUBCATEGORIES' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openImportProducts()">
+
+                        <img src="assets/icons/import.svg" class="pr-2"> {{ 'CONFIGURATIONS.IMPORT_SUBCATEGORIES' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="redirectProducts()">
+
+                        <img src="assets/icons/iconProducto.svg" class="pr-2"> {{ 'MENU.PRODUCTS' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="redirectMeasure()">
+
+                        <img src="assets/icons/iconFormat.svg" class="pr-2"> {{'GENERAL.FORMATS' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-xl-0 mt-5 text-center">
+                <p class="title">{{ 'CONFIGURATIONS.CATEGORY.CATEGORIES' | translate }}</p>
+            </div>
+        </div>
+
+        <!-- navs donde como va ir-->
+        <div class="row justify-content-center mb-3">
+            <nav class="row p-0 m-0 group-btn">
+                <div class="col-md-4 col-4 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='category' }" (click)="changePage( 'category' )">
+                    <a class="text-center">{{ 'CONFIGURATIONS.CATEGORY.CATEGORIES' | translate }}</a>
+                </div>
+                <div class="col-md-4 col-4 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='subcategory' }" (click)="changePage( 'subcategory' )">
+                    <a class="text-center">{{ 'GENERAL.SUBCATEGORIES' | translate }}</a>
+                </div>
+                <div class="col-md-4 col-4 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='categoryFilter' }" (click)="changePage( 'categoryFilter' )">
+                    <a class="text-center">{{ 'GENERAL.FILTERS' | translate }}</a>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+    <!-- botones -->
+    <div class="row justify-content-center align-items-end">
+        <div class="col-md-4 col-12 mb-1">
+            <span class="title-table">{{ 'GENERAL.SUBCATEGORIES' | translate }}</span>
+        </div>
+        <div class="col-md-4 col-12 text-center mb-1">
+            <button class="btn btn-secondary mt-sm-1 ml-sm-2 btn-large" style="text-transform: initial;" routerLink="new">
+                {{ 'GENERAL.ADD_SUBCATEGORIES' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-4 col-12 pr-lg-4 text-right mb-1" *ngIf="!showSentProductFranshise()"></div>
+        <div class="col-md-4 col-12 pr-lg-4 text-right mb-1" *ngIf="showSentProductFranshise()">
+            <button class="btn btn-franchise btn-primary mt-sm-1 ml-sm-2 btn-large" style="text-transform: initial;" (click)="openModalFranchise()">
+                {{ 'PRODUCTS.SEND_TO_FRANCHISES' | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="table-content mt-3">
+        <table style="width: 100%;" class="table table-striped table-bordered  mb-0" id="sub_category" style="text-align: center">
+            <thead>
+                <tr>
+
+                    <th>ID</th>
+                    <th>{{ 'CONFIGURATIONS.CODE' |translate }}</th>
+                    <th>{{ 'CONFIGURATIONS.NAME' |translate }}</th>
+                    <th>{{ 'CONFIGURATIONS.CATEGORY.CATEGORY' |translate }}</th>
+                    <th>{{ 'CONFIGURATIONS.CATEGORY.CREATED_BY' | translate }}</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

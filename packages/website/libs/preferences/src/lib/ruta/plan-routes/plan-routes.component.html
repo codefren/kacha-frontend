@@ -1,0 +1,852 @@
+<div class="plan-routes">
+
+    <!-- Direccion de almacenamiento -->
+
+    <div class="card">
+
+        <div class="card-body pl-4 pr-xl-5">
+
+            <div class="row pt-2">
+
+                <div class="col-xl-12 col-12">
+
+                    <label class="title-road"> {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.WAREHOUSE_ADDRESS' | translate }}
+                    </label>
+
+                    <p class="sub-title-road mt-1"> Escribe aquí la dirección de tu almacén para que se planifiquen las
+                        rutas desde este punto. </p>
+
+                </div>
+
+            </div>
+
+            <div class="row pb-3 pl-xl-2">
+
+                <div class="col-xl-3 col-md-6 col-12 padding-col-download">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="text" class="form-control form-input" [(ngModel)]="address"
+                                (change)="addressChanged = true" type="text" (blur)="updateWarehouse()"
+                                (keyup.enter)="updateWarehouse()" placeholder="{{ 'GENERAL.WRITE' | translate }}" />
+
+                            <label for="first" class="mt-2 title-col">
+                                {{'PREFERENCES.OPTIMIZATION.MAP_POINTS.WAREHOUSE_ADDRESS_'| translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Guardar sesión automáticamente al cargar -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).createSession.autoSaveSession"
+                                    (change)=" toggleOptimizationPreference('autoSaveSession', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.OPTIMIZATION.DATA_SESSION.SAVE_SESION_IN_LOAD_AUTO.NAME' | translate
+                                    }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción se guardará un
+                        registro de forma automática cada vez que se carguen datos en el planificador y cada vez que se
+                        asignen rutas. En caso de estar desactivado, se habilitará un botón para generar el guardado de
+                        forma
+                        manual.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Unir puntos con el mismo código -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).createSession.joinDeliveryPointOnCharge"
+                                    (change)=" toggleOptimizationPreference('joinDeliveryPointOnCharge', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Unir puntos con el mismo código
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción, en caso de cargar en
+                        el planificador el mismo identificador de cliente varias veces, los unificará de forma
+                        automática, apareciendo un único punto de entregan el mapa y en el listado de entregas. En caso
+                        de
+                        estar desactivado aparecerán tantos puntos y entregas como puntos se carguen con el mismo
+                        identificador único.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Utilizar día siguiente por defecto -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="(controlPanelPreferences$ | async ).assignedNextDay"
+                                    (change)="toggleControlPanelPreference('assignedNextDay', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.NEXT_DAY' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción aparecerá de forma
+                        automática el día siguiente al actual en el momento de asignar tus rutas. En caso de estar
+                        desactivado aparecerá el día actual.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Exportar automáticamente al asignar las rutas -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async ).createSession.automaticallyExportAssign"
+                                    (change)="toggleOptimizationPreference('automaticallyExportAssign', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Exportar automáticamente al asignar las rutas
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción se generará el fichero
+                        de rutas de forma automática al asignar las rutas. En caso de estar desactivado se tendrá que
+                        generar de manera manual. Se requiere de integración con tu ERP para que funcione correctamente.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Planificar ruta con fecha previa -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).selectAsignationDateBeforePlanning"
+                                    (change)="toggleOptimizationAction('selectAsignationDateBeforePlanning', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.SUBTITLES.ROUTE_PREVIEW_DATE' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">En caso de activarlo, podrás seleccionar el
+                        día de la entrega de la planificación antes de la carga para aplicar los estados de horarios de
+                        los clientes así como sus días de apertura.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Crear zona de “Cerrados” -->
+    <div class="card mt-3">
+
+        <div class="card-body p-4 pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).createZoneWithPointsClosed"
+                                    (change)="toggleOptimizationAction('createZoneWithPointsClosed', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Crear zona de “Cerrados”
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">En caso de activarlo, los clientes que están
+                        marcados como cerrados se envíarán a la zona de cerrados, pero no los quitará de la entrega.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Unir entregas planificadas -->
+    <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).allowJoinIntegrationSession"
+                                    (change)="toggleOptimizationAction('allowJoinIntegrationSession', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.SUBTITLES.JOIN_PLANNED_DELIVERIES' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">En caso de activarlo, al seleccionar “Cargar
+                        entregas planificadas” en el planificar rutas, permitirá seleccionar más de una entrega
+                        planificada y cargarlas unidas.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Guardar al dibujar en mapa -->
+    <div class="card  mt-3">
+
+        <div class="card-body p-4 pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).saveOnDraw"
+                                    (change)="toggleManagementPreference('saveOnDraw', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.OPTIMIZATION.MAP_POINTS.SAVE_ON_DRAW' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">En caso de activarlo, una vez hayas
+                        delimitado mediante un dibujo una zona del mapa, se guardará de manera automática.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Conversor para carga de metros cúbicos -->
+    <div class="card  mt-3">
+
+        <div class="card-body p-4 pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(managementPreferences$ | async).activateCubicMeterConverter"
+                                    (change)="toggleManagementPreference('activateCubicMeterConverter', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.SUBTITLES.CUBICS_METERS' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar el conversor de carga de metros
+                        cúbicos el software cogera el valor entero de la carga y lo convertirá en numeros decimales.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Evaluar y asignar rutas automáticamente y Enviar puntos de entrega y albaranes desde el mismo fichero -->
+    <div class="card  mt-3">
+
+        <div class="card-body p-4 pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(managementPreferences$ | async).activateEvaluateAssignAutomatic"
+                                    (change)="toggleManagementPreference('activateEvaluateAssignAutomatic', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{ 'PREFERENCES.SUBTITLES.EVALUATE_ASSIGN_AUTOMATIC' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción, tanto la evaluación y
+                        asignación de tus rutas se hará de forma automática cuando mandes la información de tu ERP a
+                        Polpoo. Para que esto funcione de forma correcta debes tener correctamente integrados tus
+                        usuarios
+                        y vehículos entre tu ERP y Polpoo para que toda la asignación se realice de forma correcta.</p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <ng-container *ngIf="(managementPreferences$ | async).activateEvaluateAssignAutomatic">
+            <div class="card-footer">
+
+                <div class="row mt-3">
+                    <div class="col-xl-12 col-12">
+                        <div class="">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox"
+                                        [checked]="(managementPreferences$ | async).sendJointDeliveryPointsDeliveryNotes"
+                                        (change)="toggleManagementPreference('sendJointDeliveryPointsDeliveryNotes', $event.target.checked)" />
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle title-road">
+                                        {{ 'PREFERENCES.SUBTITLES.SEND_JOIN_DELIVERY_POINT_DELIVERY_NOTES' | translate
+                                        }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción, se podrá enviar
+                            la información de los puntos de entrega y la información de albaranes desde el mismo fichero
+                            de integración (delivery_points.json). Antes de activar esta opción ponte en contacto con un
+                            técnico
+                            de Polpoo ya que esta configuración requiere de una modificación en la integración.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+
+    <!-- Email de no carga de fichero -->
+
+    <div class="card mt-3">
+        <div class="card-body p-4 pr-xl-5">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).activateEmailNotLoadRoute"
+                                    (change)="toggleOptimizationAction('activateEmailNotLoadRoute', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Email de no carga de fichero
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Llegada a una hora en concreto del día
+                        (configurable) si no hay ninguna ruta en seguimiento, les mande un correo de aviso.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <ng-container *ngIf="(optimizationPreferences$ | async).activateEmailNotLoadRoute">
+
+            <div class="card-footer">
+
+
+
+                <div class="row spacing-row mb-2">
+
+                    <!-- hora de envio -->
+
+                    <div class="col-xl-4 col-md-6 col-12">
+
+                        <div class="form-group input-group mt-3">
+
+                            <span class="has-float-label w-100">
+
+                                <!-- (focusout)="updateChange($event.target.value, internal, item)" -->
+
+                                <input type="text" class="form-control form-input" type="time"
+                                    placeholder="Hora de envío"
+                                    value="{{ (optimizationPreferences$ | async).hourTime | dayTime }}"
+                                    (focusout)="updateChange('hourTime', $event.target.value)" />
+
+                                <label for="first" class="mt-2 title-col"> Hora de envío </label>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- end hora de envio -->
+
+                    <!-- emailClient -->
+
+                    <div class="col-xl-4 col-md-6 col-12">
+
+                        <div class="form-group input-group mt-3">
+
+                            <span class="has-float-label w-100">
+
+                                <!-- (focusout)="updateChange($event.target.value, internal, item)" -->
+
+                                <input type="text" class="form-control form-input" type="text"
+                                    placeholder="Correo electrónico"
+                                    [value]="(optimizationPreferences$ | async).emailNotLoadRoute" #emailNotLoadRoute
+                                    (input)="updateEmail(emailNotLoadRoute.value)" />
+
+                                <label for="first" class="mt-2 title-col"> Correo electrónico </label>
+
+                            </span>
+
+                            <ng-container
+                                *ngIf="!validateEmil(emailNotLoadRoute.value) && emailNotLoadRoute.value.length > 0">
+
+                                <p class="text-danger m-0">{{ 'PREFERENCES.NOTIFICATIONS.IT_SHOULD_BE_IN_THE_FORMAT' |
+                                    translate }}.</p>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                    <!-- end emailClient -->
+
+                </div>
+
+
+                <!-- dias de la semana -->
+
+                <div class="row spacing-row mb-4">
+
+                    <div class="col-xl-8 col-md-6 col-12 mt-3">
+
+                        <div class="style-input-check">
+
+                            <p class="mb-0 mt-2">Día de la semana</p>
+
+                            <div class="row row pb-2">
+                                <!-- lunes -->
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Lun"
+                                                [checked]="showCheckWeek(this.daySelecter, 1)"
+                                                (change)="changeDaySelecter($event.target.checked, '1', 'Lun')" />
+
+                                            <label for="Lun"></label>
+
+                                        </div>
+
+                                        <label title="Lun" for="Lun" class="label-check point">
+
+                                            Lun.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end lunes -->
+
+                                <!-- martes -->
+
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Mar"
+                                                [checked]="showCheckWeek(this.daySelecter, 2)"
+                                                (change)="changeDaySelecter($event.target.checked, '2', 'Mar')" />
+
+                                            <label for="Mar"></label>
+
+                                        </div>
+
+                                        <label title="Mar" for="Mar" class="label-check point">
+
+                                            Mar.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end martes -->
+
+                                <!-- miercoles -->
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Mié"
+                                                [checked]="showCheckWeek(this.daySelecter, 3)"
+                                                (change)="changeDaySelecter($event.target.checked, '3', 'Mié')" />
+
+                                            <label for="Mié"></label>
+
+                                        </div>
+
+                                        <label title="Mié" for="Mié" class="label-check point">
+
+                                            Mié.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end miercoles -->
+                                <!-- jueves -->
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Jue"
+                                                [checked]="showCheckWeek(this.daySelecter, 4)"
+                                                (change)="changeDaySelecter($event.target.checked, '4', 'Jue')" />
+
+                                            <label for="Jue"></label>
+
+                                        </div>
+
+                                        <label title="Jue" for="Jue" class="label-check point">
+
+                                            Jue.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end jueves -->
+                                <!-- viernes -->
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Vie"
+                                                [checked]="showCheckWeek(this.daySelecter, 5)"
+                                                (change)="changeDaySelecter($event.target.checked, '5', 'Vie')" />
+
+                                            <label for="Vie"></label>
+
+                                        </div>
+
+                                        <label title="Vie" for="Vie" class="label-check point">
+
+                                            Vie.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end viernes -->
+                                <!-- sabado -->
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Sáb"
+                                                [checked]="showCheckWeek(this.daySelecter, 6)"
+                                                (change)="changeDaySelecter($event.target.checked, '6', 'Sáb')" />
+
+                                            <label for="Sáb"></label>
+
+                                        </div>
+
+                                        <label title="Sáb" for="Sáb" class="label-check point">
+
+                                            Sáb.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end sabado -->
+                                <!-- domingo -->
+                                <div class="col-xl col-lg-6 col-md-6 col-6">
+                                    <div class="row pl-3 pb-0 mb-0 pt-1 pb-2">
+
+                                        <div class="round round-little margin-days round-1">
+
+                                            <input type="checkbox" id="Dom"
+                                                [checked]="showCheckWeek(this.daySelecter, 7)"
+                                                (change)="changeDaySelecter($event.target.checked, '7', 'Dom')" />
+
+                                            <label for="Dom"></label>
+
+                                        </div>
+
+                                        <label title="Dom" for="Dom" class="label-check point">
+
+                                            Dom.
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!-- end domingo -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end dias de la semana -->
+            </div>
+        </ng-container>
+
+
+    </div>
+
+    <!-- end Email de no carga de fichero -->
+
+    <!-- Proceso de integracion y deliveryPoint directo -->
+
+    <div class="card mt-3">
+        <div class="card-body p-4 pr-xl-5">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox"
+                                    [checked]="(optimizationPreferences$ | async).activateCreateDeliveryPointByIntegration"
+                                    (change)="toggleOptimizationAction('activateCreateDeliveryPointByIntegration', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Crear clientes directamente desde la integración.
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Crear clientes directamente desde la
+                        integración.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Proceso de llegar antes-->
+
+    <div class="card mt-3">
+        <div class="card-body p-4 pr-xl-5">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="(optimizationPreferences$ | async).allowArriveEarlier"
+                                    (change)="toggleOptimizationAction('allowArriveEarlier', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Permitir llegar antes a un cliente.
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Permitir llegar antes a un cliente.</p>
+                </div>
+
+            </div>
+            <div class="row" *ngIf="(optimizationPreferences$ | async).allowArriveEarlier">
+                <div class="col-xl-4 col-4">
+                    <div class="">
+                        <input type="number" class="form-control" [value]="(optimizationPreferences$ | async).allowArriveEarlierDistance"
+                            (focusout)="toggleOptimizationAction('allowArriveEarlierDistance', $event.target.value)" />
+                        <span class="title-toggle title-road">
+                            Distancia.
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-4">
+                    <div class="">
+                        <input type="number" class="form-control" [value]="(optimizationPreferences$ | async).allowArriveEarlierTime"
+                            (focusout)="toggleOptimizationAction('allowArriveEarlierTime', $event.target.value)" />
+                        <span class="title-toggle title-road">
+                            Tiempo.
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- end Email de no carga de fichero -->
+
+    <!--Cargar sesion en la planificación de rutas-->
+    <div class="card mt-3">
+        <div class="card-body p-4 pr-xl-5">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="(optimizationPreferences$ | async).loadSessionIntoRoutePlanning"
+                                    (change)="toggleOptimizationAction('loadSessionIntoRoutePlanning', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    Unir sesión guardada con entrega planificada.
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Al activar esta opción podrás cargar una sesión guardada junto a una entrega planificada.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--End -->
+
+    <!-- Tabla informativa en Rutas Asignadas -->
+    <!--   <div class="card mt-3">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="(optimizationPreferences$ | async).createSession.joinDeliveryPointOnCharge"
+                                (change)=" toggleOptimizationPreference('joinDeliveryPointOnCharge', $event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road">
+                                    {{'PREFERENCES.TABLE_ROUTE_ASIGNED.SHOW_INFORMATIVE_TABLE_IN_ASSIGNED_ROUTES' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">{{'PREFERENCES.TABLE_ROUTE_ASIGNED.IN_THE_ASSIGMED_ROUTES_SCREEN_AND_INFORMATIVE_TABLE_IS_SHOWN_ON_THE_DATA_BEFORE_AND' | translate}}</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div> -->
+</div>

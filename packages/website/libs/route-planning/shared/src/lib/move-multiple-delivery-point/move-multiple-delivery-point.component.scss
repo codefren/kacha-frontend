@@ -1,0 +1,59 @@
+.optimroute-delivery-points {
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+        line-height: 1.3 !important;
+    }
+
+    .options {
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 60%;
+    }
+
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+    }
+
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        border-radius: 15px;
+    }
+
+    label,
+    input {
+        font-size: 16px !important;
+        font-weight: lighter;
+    }
+
+    select,
+    option,
+    button {
+        font-size: 18px !important;
+    }
+
+    .dataTable thead th{
+        padding: 0px !important;
+        vertical-align: middle;
+    }
+
+}
+
+.widthTd{
+    width: 100px;
+}
+
+
+.col-especial {
+    padding-right: 0px;
+    padding-left: 0px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    font-weight: lighter;
+}

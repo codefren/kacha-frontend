@@ -1,0 +1,240 @@
+<div class="modal-filter-donwload-control">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'REPORT.CUSTOM_DOWNLOAD' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close1.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="title-infor"> {{'REPORT.SELECT_THE_SECTIONS_OF' | translate }} </p>
+
+            </div>
+
+            <!-- sumary -->
+
+            <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('sumary')" [(ngModel)]="filter.sumary" name="flexRadioDefault" id="flexRadioDefault8">
+
+                            <label for="flexRadioDefault8"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault8" class="label-check point label-filter">
+    
+                            {{ 'REPORT.SUMMARY1' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- OFF_RADIOS_VISITS -->
+
+            <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('outRange')" [(ngModel)]="filter.outRange" name="flexRadioDefault" id="flexRadioDefault9">
+
+                            <label for="flexRadioDefault9"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault9" class="label-check point label-filter">
+    
+                            {{ 'REPORT.OFF_RADIOS_VISITS' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <!-- delay -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('delay')" [(ngModel)]="filter.delay" name="flexRadioDefault" id="flexRadioDefault3">
+
+                            <label for="flexRadioDefault3"></label>
+
+                        </div>
+
+                        <label for="flexRadioDefault3" class="label-check point label-filter">
+    
+                            {{ 'REPORT.DELAY' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- offRoutevisits -->
+
+            <!-- <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('offRoutevisits')" [(ngModel)]="filter.offRoutevisits" name="flexRadioDefault" id="offRoutevisits">
+
+                            <label for="offRoutevisits"></label>
+
+                        </div>
+
+                        <label for="offRoutevisits" class="label-check point  label-filter">
+    
+                            {{ 'REPORT.OFF_ROUTE_VISITS'| translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div> -->
+
+
+            <!-- COMPARISON_ -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('comparative')" [(ngModel)]="filter.comparative" name="flexRadioDefault" id="comparative">
+
+                            <label for="comparative"></label>
+
+                        </div>
+
+                        <label for="comparative" class="label-check point label-filter">
+    
+                           {{ 'REPORT.COMPARISON_' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- REFUELING -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('refueling')" [(ngModel)]="filter.refueling" name="flexRadioDefault" id="refueling">
+
+                            <label for="refueling"></label>
+
+                        </div>
+
+                        <label for="refueling" class="label-check point  label-filter">
+
+                            {{ 'REPORT.REFUELING'| translate }}
+
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- UNVISITED_CUSTOMERS -->
+
+            <div class="col-xl-6 col-12 mt-2">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="checkbox" (change)="changeSelecter('unvisitedClient')" [(ngModel)]="filter.unvisitedClient" name="flexRadioDefault" id="unvisitedClient">
+
+                            <label for="unvisitedClient"></label>
+
+                        </div>
+
+                        <label for="unvisitedClient" class="label-check point label-filter">
+    
+                            {{ 'REPORT.UNVISITED_CUSTOMERS' | translate }}
+    
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center">
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary mr-2" [disabled]="!filter.sumary 
+                && !filter.outRange && !filter.delay && !filter.offRoutevisits && !filter.comparative 
+                && !filter.refueling && !filter.unvisitedClient" (click)="donwloadFilter()"> {{ 'REPORT.DISCHARGE'| translate }} </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

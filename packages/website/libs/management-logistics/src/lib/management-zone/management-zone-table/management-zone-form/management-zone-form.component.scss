@@ -1,0 +1,75 @@
+.app-input-number>mat-form-field {
+    width: 120px;
+    padding: 8px;
+}
+
+.primary-selecter {
+    color: #ff9800;
+}
+
+.custom-range::-webkit-slider-thumb {
+    background: #ff9e4d;
+}
+
+.custom-range::-moz-range-thumb {
+    background: #ff9e4d;
+}
+
+.custom-range::-ms-thumb {
+    background: #ff9e4d;
+}
+
+.espacing-margin-h2 {
+    margin: 7px 0 19px 0;
+}
+
+label,
+input {
+    font-size: 16px !important;
+    font-weight: lighter;
+}
+
+.easyroute-management-zone {
+    form {
+        padding: 20px !important;
+    }
+
+    label {
+        font-size: 14px !important;
+    }
+
+    .input-color {
+        padding: 0 !important;
+        border: none !important;
+    }
+    .input-color::-webkit-color-swatch-wrapper {
+        padding: 0 !important;
+        border: transparent !important;	
+    } 
+    .input-color::-webkit-color-swatch {
+        border-radius: 10px !important;	
+    }
+
+    .hack-select:after {
+        color: #fff;
+        top: 22%;
+        right: 15px;
+    }
+
+    .info {
+        i {
+            font-size: 10px;
+            // float: right;
+            padding-left: 0.5rem;
+            color: #4c4c4c;
+        }
+    }
+
+    .i-relative {
+        position: relative;
+        top: -5px;
+        right: 5px;
+        color: #aeaeae !important;
+    }
+}
+

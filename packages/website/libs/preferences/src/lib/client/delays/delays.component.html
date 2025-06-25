@@ -1,0 +1,236 @@
+<div class="delays-settings">
+
+    <!--  Permitir retrasos a clientes  -->
+
+    <div class="card">
+
+        <div class="card-body pl-4 pr-4">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox"  [checked]="( optimizationPreferences$ | async).allowDelayTime"
+                                    (change)="toggleOptimizationAction('allowDelayTime',$event.target.checked)" />
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> Permitir retrasos a clientes </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Al permitir tiempo de retraso en clientes, el software a la hora de organizar la ruta tendrá en cuenta aquellos clientes que no pueden entregarse por horario de entrega. En vez de eliminarlos los colocará al final para que manualmente
+                        se determine una posición. Si tiene activo los tiempos de retrasos, permite llegarle tarde al cliente según el tipo de retraso que tenga. Una vez creadas, asigna cada tipo de retraso a cada cliente.</p>
+                </div>
+
+                <ng-container *ngIf="( optimizationPreferences$ | async).allowDelayTime">
+
+                    <div class="col-12 mt-4">
+
+                        <p class="title-toggle mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">Crea los tipos de retrasos</p>
+
+                        <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4 mb-2">Crea los distintos tipos de retraso, asígnales un nombre para identificarlos y aplícales el tiempo de retraso que se les permite.</p>
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <div class="row pl-xl-5 ml-xl-3" *ngFor="let item of allowDelayTime; let i = index">
+
+
+
+                            <div class="col-xl-4 col-12 padding-col-download mt-2 mb-2">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" id="inputPassword"  type="text" placeholder="0" id="name" [value]="item.name" (change)="addOthers($event.target.value, item, 'name')" placeholder="{{'PREFERENCES.MANAGEMENT.DATA_USAGE_OF_DOWNLOAD_TIMES.WRITE' | translate }}" required />
+            
+                                        <label for="first" class="mt-2 title-col"> Nombre retraso </label>
+            
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-3 col-12 padding-col-download mt-2 mb-2">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control showNUmber point showKg" id="minutes" type="number" pattern="[0-9]*" min="0" max="1440" [value]="showNUmber(item.time)" (focusout)="addOthers($event.target.value, item, 'minutes')" placeholder="{{'GENERAL.SECONDS' | translate }}" required />
+            
+                                        <label for="first" class="mt-2 title-col"> {{ 'GENERAL.MINUTES' | translate }} </label>
+            
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="row mt-1 pt-1 pb-4 pl-xl-5 ml-xl-2" [ngClass]="{'pb-3': allowDelayTime.length === 5}">
+                            <div class="col-12 mt-1">
+                                <a class="add-other point" title="Añadir otro retraso" (click)="Addanother()">+ Añadir otro retraso</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end  Permitir retrasos a clientes  -->
+
+    <!-- Actualización tiempo de retraso desde el planificador -->
+
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="( optimizationPreferences$ | async).allowUpdateDelayTime"
+                                    (change)="toggleOptimizationAction('allowUpdateDelayTime',$event.target.checked)"  />
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> Actualización tiempo de retraso desde el planificador </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Si está activo, cuando se realice una modificación del tiempo de retraso desde el planificador de rutas, se actualizará en la ficha de cliente de forma automática.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end Actualización tiempo de retraso desde el planificador -->
+
+    <!-- Actualizar horario desde la app según los retrasos -->
+
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="( optimizationPreferences$ | async).updateScheduleAppByDelay"
+                                    (change)="toggleOptimizationAction('updateScheduleAppByDelay',$event.target.checked)"  />
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> Actualizar horario desde la app según los retrasos </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> Si está activo, cuando el chófer llegue antes del horario (adelantado) o con retraso una cantidad de veces (personalizado) le aparecerá una pantalla que le permitirá modificar el horario.</p>
+                </div>
+
+                <ng-container *ngIf="( optimizationPreferences$ | async).updateScheduleAppByDelay">
+                    <div class="col-12">
+
+                        <div class="row mt-1 pl-xl-5 ml-xl-3">
+
+                            <div class="col-xl-4 col-12 padding-col-download">
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" id="quantityAdvancesModifySchedule"  type="number"  min="0" max="60" [(ngModel)]="quantityAdvancesModifySchedule" (blur)="updateQuantityAdvancesModifySchedule()" (keyup.enter)="updateQuantityAdvancesModifySchedule()" required/>
+            
+                                        <label for="quantityAdvancesModifySchedule" class="mt-2 title-col"> Adelantos para modificar horario </label>
+            
+                                    </span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12 padding-col-download mt-xl-0 mt-3">
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point showMin" id="advanceWhenAnticipatingTime"  type="number" min="0" max="1440" [(ngModel)]="advanceWhenAnticipatingTime" (blur)="updateAdvanceWhenAnticipatingTime()" (keyup.enter)="updateAdvanceWhenAnticipatingTime()" placeholder="{{'GENERAL.MINUTES'| translate}}" required/>
+            
+                                        <label for="advanceWhenAnticipatingTime" class="mt-2 title-col"> Considerar adelanto al anticiparse </label>
+            
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 pl-xl-5 ml-xl-3">
+
+                            <div class="col-xl-4 col-12 padding-col-download">
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" id="quantityDelayModifySchedule"  type="number"  min="0" max="60" [(ngModel)]="quantityDelayModifySchedule" (blur)="updateQuantityDelayModifySchedule()" (keyup.enter)="updateQuantityDelayModifySchedule()" required/>
+            
+                                        <label for="quantityDelayModifySchedule" class="mt-2 title-col"> Retrasos para modificar horario </label>
+            
+                                    </span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12 padding-col-download mt-xl-0 mt-3">
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point showMin" id="delayWhenPassingTime"  type="number" min="0" max="1440" [(ngModel)]="delayWhenPassingTime" (blur)="updateDelayWhenPassingTime()" (keyup.enter)="updateDelayWhenPassingTime()" placeholder="{{'GENERAL.MINUTES'| translate}}" required/>
+            
+                                        <label for="delayWhenPassingTime" class="mt-2 title-col"> Considerar retraso al rebasar </label>
+            
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end Actualizar horario desde la app según los retrasos -->
+</div>

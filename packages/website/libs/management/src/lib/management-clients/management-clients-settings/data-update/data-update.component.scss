@@ -1,0 +1,51 @@
+.data-update {
+    .title-toggle {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #363740;
+    }
+    .sub-title-text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .label-check {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        margin-left: 1.5rem;
+        margin-top: 6px;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        opacity: 2.6 !important;
+    }
+    .padding-col-download {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .card-footer {
+        border-top: 2px solid #D9DBE3;
+    }
+
+}

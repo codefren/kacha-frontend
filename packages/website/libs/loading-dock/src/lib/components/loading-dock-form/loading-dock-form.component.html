@@ -1,0 +1,234 @@
+<div class="form-loading-dock p-3">
+
+    <!-- header -->
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'LOADING_DOCK.NAME' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <button class="btn btn-primary btn-large ml-2" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}" *ngIf="loadingDockData && loadingDockData.dockStatus.id == 1" (click)="forceFinished()">
+                <img src="assets/icons/loadingDock/forceFinished.svg" class="pr-2">
+                {{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0" *ngIf="loadingDockData">
+
+            <div class="card">
+
+                <div class="card-body" style="display: block;">
+
+                    <label class="style-info"> {{'LOADING_DOCK.ROUTE' | translate }} </label>
+
+                    <p class="m-0 sub-title"> {{ loadingDockData.routeName }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'LOADING_DOCK.VEHICLE' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{ loadingDockData && loadingDockData.vehicle && loadingDockData.vehicle.name ? loadingDockData && loadingDockData.vehicle && loadingDockData.vehicle.name: 'No disponible'}} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{ 'LOADING_DOCK.FORM.CHARGE' | translate }} </label>
+
+                    <p class="m-0 name-title ">{{ loadingDockData.userDriver.name }} {{ loadingDockData.userDriver.surname }}</p>
+
+                </div>
+
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{ 'LOADING_DOCK.FORM.DATE' | translate }} </label>
+
+                    <p class="m-0 name-title">{{ returnsDate(loadingDockData.routeDate) }}</p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+                    <div class="row">
+                        <div class="col-12 col-xl-6">
+                            <label class="style-info"> {{'LOADING_DOCK.FORM.ARRIVAL' | translate }} </label>
+
+                            <p class="m-0 name-title"> {{ returnsHour(loadingDockData.startTime) }} </p>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                            <label class="style-info"> {{ 'LOADING_DOCK.FORM.EXIT' | translate }} </label>
+
+                            <p class="m-0 name-title"> {{ returnsHour(loadingDockData.endTime) }} </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <div class="row">
+
+                        <div class="col-xl-2 col-12 text-center">
+
+                            <img class="img-anclar" src="assets/icons/loadingDock/preparation-time.svg">
+
+                        </div>
+
+                        <div class="col-xl-8 col-12 mt-xl-0">
+
+                            <p class="m-0 style-info">{{'LOADING_DOCK.FORM.PREPARATION_TIME' | translate }}</p>
+
+                            <p class="mt-2 name-title">{{ returnHoursDiff(loadingDockData.endTime -loadingDockData.startTime ) }}</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12 mt-xl-0 mt-3" *ngIf="loadingDockData">
+            <div class="row">
+                <div class="col-12 col-xl-4 pr-xl-0">
+                    <div class="card">
+
+                        <div class="card-body" style="display: block;">
+
+                            <div class="row">
+
+                                <div class="col-xl-2 col-12 text-center">
+
+                                    <img class="img-anclar" src="assets/icons/loadingDock/route-status.png">
+
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-0">
+
+                                    <p class="m-0 name-title-box">{{'LOADING_DOCK.FORM.STATUS' | translate }}</p>
+
+                                    <p class="mt-2 style-info-box mb-0" [ngClass]="{'finalized': loadingDockData.dockStatus.id == 2}">{{ loadingDockData.dockStatus.name }}</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-xl-4 pr-xl-0">
+                    <div class="card">
+
+                        <div class="card-body" style="display: block;">
+
+                            <div class="row">
+
+                                <div class="col-xl-2 col-12 text-center">
+
+                                    <img class="img-anclar" src="assets/icons/loadingDock/temperatura-box.svg">
+
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-0">
+
+                                    <p class="m-0 name-title-box">{{'LOADING_DOCK.FORM.TEMPERATURE_BOX' | translate }}</p>
+
+                                    <p class="mt-2 style-info-box mb-0">{{ loadingDockData.temperaruteBox }}°</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-xl-4">
+                    <div class="card" (mouseenter)="loadingDockData.vehicleStatus && loadingDockData.vehicleStatus.id === 2 ? hoverBad = true : hoverBad = false"
+                    (mouseleave)="hoverBad = false">
+
+                        <div class="card-body" style="display: block;">
+
+                            <div class="row pointer" >
+
+                                <div class="col-xl-2 col-12 text-center">
+
+                                    <img class="img-anclar" src="assets/icons/loadingDock/vehicle-status.svg">
+
+                                </div>
+
+                                <div class="col-xl-9 col-12 p-0">
+
+                                    <p class="m-0 name-title-box">{{'LOADING_DOCK.FORM.VEHICLE_STATUS' | translate }}</p>
+
+                                    <p class="mt-2 style-info-box status-vehicle mb-0 "
+                                        [ngClass]="{'finalized': loadingDockData.vehicleStatus && loadingDockData.vehicleStatus.id === 1 }">{{ loadingDockData.vehicleStatus && loadingDockData.vehicleStatus.name ?loadingDockData.vehicleStatus && loadingDockData.vehicleStatus.name :'No disponible' }}</p>
+
+
+
+
+                                </div>
+                                <div class="col-xl-1 col-1 p-0" *ngIf="loadingDockData.vehicleStatus && loadingDockData.vehicleStatus.id === 2">
+                                    <img src="assets/icons/down.png" alt="">
+                                </div>
+
+
+
+
+                            </div>
+                            <ng-container *ngIf="loadingDockData.vehicleStatus && loadingDockData.vehicleStatus.id === 2 && hoverBad">
+                                <div class="row float-bad">
+                                    <div class="col-12 align-self-center text-left pl-4">
+                                        <span class="style-info-box">{{ (loadingDockData.dockCompanyPredefinedAnswer) ? loadingDockData.dockCompanyPredefinedAnswer.name : 'No disponible' }}</span>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-body" style="display: block;">
+                            <div class="row">
+                                <div class="col-12 col-xl-6 pr-xl-0">
+                                    <easyroute-douwload-package [routeId]="routeId" [downloadPackage]="downloadPackage" [totalDownloadPackage]="totalDownloadPackage"></easyroute-douwload-package>
+                                </div>
+                                <div class="col-12 col-xl-6 pl-xl-0">
+                                    <easyroute-loade-package [routeId]="routeId" [loadPackage]="loadPackage" [totalLoadPackage]="totalLoadPackage"></easyroute-loade-package>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

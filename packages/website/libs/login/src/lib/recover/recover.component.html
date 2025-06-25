@@ -1,0 +1,64 @@
+<div class="easyroute-login w-100" style="height: 100vh;">
+    <div class="row align-items-center h-100">
+        <div class="col-xl-4 col-12 offset-xl-4 pl-xl-5 pl-4 pr-xl-5 pr-4">
+
+            <div class="card">
+                <div class="card-body">
+    
+                    <div class="row">
+    
+                        <div class="col-12 text-center pt-5">
+                            <img [src]="logo" alt="logo-polpo" *ngIf="logo">
+                        </div>
+    
+                        <div class="col-12 text-center pt-3">
+                            <h2 class="recover text-center"><b>{{ 'GENERAL.PASSWORD_RECOVERY'  | translate }}</b></h2>
+                            <p class="text-center recover-text mb-3">{{ 'RECOVER.TEXT_P' | translate }}</p>
+                        </div>
+
+                        <div class="col-md-12 col-xs-12 pl-xl-5 pr-xl-5">
+                            <form [formGroup]="form" (ngSubmit)="submit()">
+                                <div class="form-group mb-5"
+                                  [ngClass]="{'has-danger': form.controls['email'].invalid  && (form.controls['email'].dirty || form.controls['email'].touched)}"
+                                >
+                                    <div class="div">
+                                        <label for="username" class="form-label">{{ 'RECOVER.EMAIL' | translate }}</label>
+                                        <div class="input-group">
+                                            <input name="email" type="email" autocomplete="on" placeholder="{{'RECOVER.EMAIL' | translate }}" formControlName="email" class="form-control form-control-lg" />
+                                        </div>
+                                        <ng-container *ngFor="let validation of validationMessages.email">
+                                            <small class="form-control-feedback text-danger" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)"> {{ validation.message }} </small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="row pb-5">
+                                    <div class="transform-scale col-md-12 d-flex flex-wrap justify-content-center">
+                                        <re-captcha 
+                                            formControlName="captcha" 
+                                            [size]="compactRecaptcha" 
+                                            [siteKey]="recaptcha.siteKey"
+                                        ></re-captcha>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-secondary btn-block mt-2 p-2" [disabled]="!form.valid">
+                                          <span>{{ 'RECOVER.SEND' | translate }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-12 col-lg-12 col-md-12 text-center pt-3">
+                            <p class="text-center recover-text-2 point mb-2" routerLink="/login">
+                                {{ 'RECOVER.RETURN_LOGIN' | translate }} "{{ 'RECOVER.LOGIN' | translate }}"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

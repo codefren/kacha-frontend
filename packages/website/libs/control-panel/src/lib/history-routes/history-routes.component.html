@@ -1,0 +1,811 @@
+<div class="optimroute-route-history-table">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'CONTROL_PANEL.ROUTE_HISTORY' | translate }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- cuadros informativos -->
+
+    <div
+        class="col-12"
+        *ngIf="
+            routeSeleted &&
+            (optimizationPreferences$ | async).showInformativeTableAssignedRoutes &&
+            (!validateSAC() || isControlPanel() || isAdminCompany())
+        "
+    >
+        <div class="container">
+            <div class="row  justify-content-center justify-content-md-center">
+                <div class="col-xl-4 col-12">
+                    <div class="card">
+                        <div class="card-body card-init-route p-0">
+                            <div
+                                class="col-12 mt-3 mb-3"
+                                [ngClass]="{ 'border-span': togglInfor }"
+                                (click)="showCardInfo()"
+                            >
+                                <label
+                                    class="title-card "
+                                    [ngClass]="{ 'mb-3': togglInfor }"
+                                >
+                                    {{
+                                        'CONTROL_PANEL.DATA_PRIOR_TO_THE_START_OF_THE_ROUTE'
+                                            | translate
+                                    }}
+                                </label>
+
+                                <img
+                                    class="img-card"
+                                    src="assets/icons/optimmanage/arrowdown.svg"
+                                    *ngIf="!togglInfor"
+                                />
+
+                                <img
+                                    class="img-card"
+                                    src="assets/icons/optimmanage/arrowtup.svg"
+                                    *ngIf="togglInfor"
+                                />
+                            </div>
+
+                            <div class="card-body card-init-route" *ngIf="togglInfor">
+                                <div class="row">
+                                    <div class="col-xl-4 col-12 text-center">
+                                        <p class="font-info">
+                                            {{ 'CONTROL_PANEL.TOTAL_BILLING' | translate }}
+                                        </p>
+
+                                        <ng-container *ngIf="show">
+                                            <p class="price" *ngIf="routeStartData">
+                                                {{ decimal(routeStartData.totalBilling) }}
+                                                <!--{{routeStartData.totalBilling| number:'4.3-5'}} -->
+                                            </p>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-xl-5 col-12 text-center">
+                                        <p class="font-info">
+                                            {{ 'CONTROL_PANEL.TOTAL_LOAD' | translate }}
+                                        </p>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="show">
+                                            <ng-container
+                                                *ngIf="
+                                                    routeStartData &&
+                                                    routeStartData.totalLoadMeasures
+                                                "
+                                            >
+                                                <div class="row border-measure">
+                                                    <ng-container
+                                                        *ngFor="
+                                                            let item of routeStartData.totalLoadMeasures
+                                                        "
+                                                    >
+                                                        <div class="col-6 p-0">
+                                                            <p class="p-0 m-0 measure">
+                                                                {{
+                                                                    item.measure
+                                                                        ? item.measure
+                                                                        : 'No disponible'
+                                                                }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-6 p-0">
+                                                            <!-- <p class="p-0 m-0 measure"> {{decimal(item.totalQuantity ? item.totalQuantity:'No disponible')}}</p> -->
+                                                            <!-- <p class="p-0 m-0 measure"> {{item.totalQuantity | number:2}}</p> -->
+                                                            <p class="p-0 m-0 measure">
+                                                                {{
+                                                                    formatEuro(
+                                                                        item.totalQuantity
+                                                                    )
+                                                                }}
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            class="col-12 border-span"
+                                                        ></div>
+                                                    </ng-container>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    routeStartData &&
+                                                    !routeStartData.totalLoadMeasures
+                                                "
+                                            >
+                                                <p class="p-0 m-0 measure">No disponible</p>
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-xl-3 col-12 text-center mt-xl-0 mt-4">
+                                        <p class="font-info">Total km</p>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="show">
+                                            <ng-container
+                                                *ngIf="
+                                                    routeStartData &&
+                                                    routeStartData.totalDistance
+                                                "
+                                            >
+                                                <p class="price">
+                                                    {{
+                                                        formatEuro(
+                                                            routeStartData.totalDistance
+                                                        )
+                                                    }}
+                                                </p>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    routeStartData &&
+                                                    !routeStartData.totalDistance
+                                                "
+                                            >
+                                                <p class="p-0 m-0 measure">No disponible</p>
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-8 col-12  mt-xl-0 mt-3">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div
+                                class="col-12 mt-3 mb-3"
+                                [ngClass]="{ 'border-span': togglInfor }"
+                                (click)="showCardInfo()"
+                            >
+                                <label
+                                    class="title-card "
+                                    [ngClass]="{ 'mb-3': togglInfor }"
+                                    >{{
+                                        'CONTROL_PANEL.DATA_DURING_DELIVERY' | translate
+                                    }}</label
+                                >
+
+                                <img
+                                    class="img-card"
+                                    src="assets/icons/optimmanage/arrowdown.svg"
+                                    *ngIf="!togglInfor"
+                                />
+
+                                <img
+                                    class="img-card"
+                                    src="assets/icons/optimmanage/arrowtup.svg"
+                                    *ngIf="togglInfor"
+                                />
+                            </div>
+
+                            <div class="card-body card-init-data" *ngIf="togglInfor">
+                                <div class="row">
+                                    <div class="col-xl col-12 text-center">
+                                        <p class="font-info">
+                                            {{
+                                                'CONTROL_PANEL.PENDING_DELIVERIES'
+                                                    | translate
+                                            }}
+                                        </p>
+
+                                        <ng-container *ngIf="show">
+                                            <p class="price" *ngIf="dataDuringDelivery">
+                                                {{
+                                                    dataDuringDelivery.TotalPendingDeliveries
+                                                }}
+                                            </p>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-xl col-12 text-center">
+                                        <p class="font-info">
+                                            {{
+                                                'CONTROL_PANEL.COMPLETED_DELIVERIES'
+                                                    | translate
+                                            }}
+                                        </p>
+
+                                        <ng-container *ngIf="show">
+                                            <p class="price" *ngIf="dataDuringDelivery">
+                                                {{
+                                                    dataDuringDelivery.TotalFinishedDeliveries
+                                                }}
+                                            </p>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-xl col-12 text-center">
+                                        <p class="font-info">
+                                            {{ 'CONTROL_PANEL.RETURNS' | translate }}
+                                        </p>
+
+                                        <ng-container *ngIf="show">
+                                            <p class="price" *ngIf="dataDuringDelivery">
+                                                {{ dataDuringDelivery.TotalDevolutions }}
+                                            </p>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-xl col-12 text-center">
+                                        <p class="font-info">
+                                            {{ 'CONTROL_PANEL.BOXES' | translate }}
+                                        </p>
+
+                                        <ng-container *ngIf="show">
+                                            <p class="price" *ngIf="dataDuringDelivery">
+                                                {{
+                                                    dataDuringDelivery.TotalBoxes
+                                                        ? dataDuringDelivery.TotalBoxes
+                                                        : 0
+                                                }}
+                                            </p>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="col-xl col-12 text-center">
+                                        <p class="font-info">
+                                            {{ 'CONTROL_PANEL.DELAYS' | translate }}
+                                        </p>
+
+                                        <ng-container *ngIf="show">
+                                            <p class="price" *ngIf="dataDuringDelivery">
+                                                {{ dataDuringDelivery.TotalDelay }}
+                                            </p>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!show">
+                                            <div class="fa-3x mb-2">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- en cuadros informativos -->
+
+    <div class="row mt-4 pl-3 pr-3">
+        <div class="col-md-12 col-12 pb-5 pr-0 pl-0 m-0">
+            <div class="form-row d-flex justify-content-center align-items-center">
+                <!-- Listado de rutas -->
+                <div class="m-1" *ngIf="routeSeleted">
+                    <label class="control-label col-especial m-0" for="orderDate">
+                        {{ 'CONTROL_PANEL.ROUTE' | translate }}
+                    </label>
+                    <div class="input-group hack-select">
+                        <select
+                            class="form-control"
+                            id="selectedRouteId"
+                            [value]="selectedRouteId"
+                            (change)="changeRoute($event.target.value)"
+                        >
+                            <option *ngFor="let item of routes" [value]="item.id">
+                                {{ item.name }}
+                                <span class="ml-2">
+                                    ({{
+                                        item.user?.name === null
+                                            ? ' '
+                                            : item.user?.name
+                                    }}
+                                    {{
+                                        item.user?.surname === null
+                                            ? ' '
+                                            : item.user?.surname
+                                    }})
+                                </span>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fecha de asignación -->
+                <div class="ml-1 mr-2">
+                    <label class="control-label col-especial m-0" for="orderDate">
+                        {{ 'CONTROL_PANEL.DATE' | translate }}
+                    </label>
+                    <div class="input-group">
+                        <input
+                            ngbDatepicker
+                            #b="ngbDatepicker"
+                            type="text"
+                            class="form-control"
+                            id="startDate"
+                            readonly
+                            autocomplete="off"
+                            [formControl]="dateSearch"
+                            [value]="dateRoute"
+                            (dateSelect)="changeDate('change', $event)"
+                        />
+                        <button
+                            class="btn btn-calendar calendar"
+                            (click)="b.toggle()"
+                            type="button"
+                        >
+                            <img
+                                class="icons-calendar point"
+                                src="assets/icons/optimmanage/calendar-outlines.svg"
+                                aria-hidden="true"
+                            />
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Descargar todo -->
+                <div class="align-self-center mt" *ngIf="routeSeleted">
+                    <ul class="optimize-route-menu notifications mt-3">
+                        <li class="">
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                data-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                {{ 'INVOICING.MY_INVOICES.DOWNLOAD_ALL' | translate }}
+                            </button>
+
+                            <div
+                                class="dropdown-menu notification-menu small notiSpecial"
+                                x-placement="bottom-start"
+                            >
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <button
+                                                class="btn btn-default btn-height mr-3 m-bottom space-button btn-block"
+                                                type="button"
+                                                (click)="exportJsonRouteGeneral()"
+                                                [title]="
+                                                    'CONTROL_PANEL.DOWNLOAD_JSON_ROUTES'
+                                                        | translate
+                                                "
+                                            >
+                                                {{
+                                                    'CONTROL_PANEL.JSON_ROUTES' | translate
+                                                }}
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button
+                                                class="btn btn-default btn-height mr-3 m-bottom space-button btn-block"
+                                                type="button"
+                                                (click)="ftpJsonRouteGeneral()"
+                                                [title]="
+                                                    'GENERAL.SEND_FROM_CLOUD' | translate
+                                                "
+                                            >
+                                                {{ 'GENERAL.SEND_FROM_CLOUD' | translate }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Titulo, Datos, Refrescar y Albaranes -->
+    <div class="row d-flex justify-content-center align-items-end">
+        <div
+            class="col-12 col-md-2 order-last order-md-first pt-4 flex-fill align-self-center"
+        >
+            <span class="title-table">
+                {{ 'CONTROL_PANEL.ROUTE_HISTORY' | translate }}
+            </span>
+        </div>
+
+        <div
+            class="col-12 col-md-7 col-sm-6 col-xs-12 pt-4 flex-fill align-self-center pr-5 pl-5"
+            style="font-size: 16px;"
+        >
+            <div class="text-center" *ngIf="routeSeleted">
+                <span>
+                    <b>{{ 'ASSIGNED_ROUTES.STATE' | translate }}:</b>
+                    {{ routeSeleted.status_route?.name }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'CONTROL_PANEL.ROUTE' | translate }}:</b>
+                    {{ routeSeleted.name }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'ASSIGNED_ROUTES.ROLE' | translate }}:</b>
+                    <span
+                        *ngFor="
+                            let item of routeSeleted.vrp_vehicle.vehicle?.user
+                                ?.user_profile;
+                            let i = index
+                        "
+                    >
+                        {{ item.profile.name
+                        }}<span
+                            *ngIf="
+                                i + 1 <
+                                routeSeleted.vrp_vehicle.vehicle.user.user_profile.length
+                            "
+                            >/</span
+                        >
+                    </span>
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'ASSIGNED_ROUTES.USER' | translate }}:</b>
+                    {{
+                        routeSeleted.user?.name === null
+                            ? ' '
+                            : routeSeleted.user?.name
+                    }}
+                    {{
+                        routeSeleted.user?.surname === null
+                            ? ' '
+                            : routeSeleted.user?.surname
+                    }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'ASSIGNED_ROUTES.VEHICLE' | translate }}:</b>
+                    {{ routeSeleted.vrp_vehicle?.name }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'ASSIGNED_ROUTES.DRIVER_START_TIME' | translate }}</b>
+                    {{
+                        routeSeleted.driverStartTime
+                            ? convertTime(routeSeleted.driverStartTime)
+                            : ''
+                    }}
+                </span>
+            </div>
+        </div>
+
+        <div
+            class="col-12 col-md-3 col-sm-6 col-xs-12 pr-lg-5 padding-md pl-0 pt-4 text-center text-md-right"
+        >
+            <button
+                class="btn btn-default btn-refresh text-center mt-1 mb-2 mt-md-0 mb-md-0"
+                (click)="refresh()"
+                *ngIf="routeSeleted"
+            >
+                <i class="fas fa-redo"></i>
+            </button>
+
+            <ul class="optimize-route-menu notifications ml-3" *ngIf="routeSeleted">
+                <li>
+                    <button
+                        type="button"
+                        class="btn btn-franchise btn-block"
+                        data-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        Descargar albaranes
+                    </button>
+                    <div
+                        class="dropdown-menu notification-menu small notiSpecial2"
+                        x-placement="bottom-start"
+                    >
+                        <div class="content">
+                            <ul>
+                                <li>
+                                    <button
+                                        class="btn btn-default mr-3 m-bottom space-button btn-block btn-height"
+                                        type="button"
+                                        (click)="exportJsonRoute()"
+                                        [title]="
+                                            'CONTROL_PANEL.DOWNLOAD_JSON_ROUTES' | translate
+                                        "
+                                    >
+                                        {{ 'CONTROL_PANEL.JSON_ROUTES' | translate }}
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button
+                                        class="btn btn-default mr-3 m-bottom space-button btn-block btn-height"
+                                        type="button"
+                                        (click)="ftpJsonRoute()"
+                                        [title]="'GENERAL.SEND_FROM_CLOUD' | translate"
+                                    >
+                                        {{ 'GENERAL.SEND_FROM_CLOUD' | translate }}
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="padding-body pt-0 pb-0">
+        <!-- Fecha de asignación -->
+        <!-- <div class="row mt-4">
+            <div class="offset-md-3 col-md-6 col-12 text-center border-bottom-sub pb-3 pl-3 pr-3">
+                <div class="input-group d-flex justify-content-center align-items-center">
+
+                    <input ngbDatepicker #b="ngbDatepicker" type="text" class="form-control min-height ml-3 mt-1" id="startDate" readonly autocomplete="off" [formControl]="dateSearch" [value]="dateRoute" (dateSelect)="changeDate('change', $event)" />
+                    <button class="btn btn-calendar calendar mt-1" (click)="b.toggle()" type="button">
+                        <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                    </button>
+
+                    <ng-container *ngIf="routeSeleted">
+                        <ul class="optimize-route-menu notifications mt-3">
+                            <li class="">
+                                <button type="button" class="btn btn-cancel ml-4 mr-3 mt-1" data-toggle="dropdown" aria-expanded="false">
+                                    {{ 'INVOICING.MY_INVOICES.DOWNLOAD_ALL' | translate }}
+                                </button>
+
+                                <div class="dropdown-menu notification-menu small notiSpecial" x-placement="bottom-start">
+                                    <div class="content">
+                                        <ul>
+                                            <li>
+                                                <button class="btn btn-default mr-3 m-bottom space-button btn-block" type="button" (click)="exportJsonRouteGeneral()" [title]="'CONTROL_PANEL.DOWNLOAD_JSON_ROUTES' | translate">
+                                                    <i class="fas fa-download pr-1"></i>
+                                                    {{ 'CONTROL_PANEL.JSON_ROUTES' | translate }}
+                                                </button>
+                                            </li>
+
+                                            <li>
+                                                <button class="btn btn-default mr-3 m-bottom space-button btn-block" type="button" (click)="ftpJsonRouteGeneral()" [title]="'GENERAL.SEND_FROM_CLOUD' | translate">
+                                                    <i class="fas fa-cloud pr-1"></i>
+                                                    {{ 'GENERAL.SEND_FROM_CLOUD' | translate }}
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-default btn-refresh ml-4 mr-3 mt-1" (click)="refresh()">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+ -->
+        <!-- Listado de rutas -->
+        <!-- <div class="row pt-4" *ngIf="routeSeleted">
+            <div class="offset-md-4 col-md-4 col-12 text-center hack-select">
+                <select class="form-control mb-3 selected-box space-button" id="selectedRouteId" (change)="cargar($event.target.value)">
+                    <option *ngFor="let item of routes" [value]="item.id">
+                        {{ item.name }}
+                        <span class="ml-2">
+                            {{
+                                item.vrp_vehicle.user?.name === null
+                                    ? ' '
+                                    : item.vrp_vehicle.user?.name
+                            }}
+                            {{
+                                item.vrp_vehicle.user?.surname === null
+                                    ? ' '
+                                    : item.vrp_vehicle.user?.surname
+                            }}
+                        </span>
+                    </option>
+                </select>
+            </div>
+        </div> -->
+
+        <!-- Datos del chofer y Botonera-->
+        <!-- <div class="row pt-1" *ngIf="routeSeleted">
+            <div class="offset-md-3 col-md-6 col-12 text-center border-bottom-sub pb-2" style="font-size: 15px;">
+                <span>
+                    <b>{{ 'ASSIGNED_ROUTES.STATE' | translate }}:</b>
+                    {{ routeSeleted.status_route?.name }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'ASSIGNED_ROUTES.VEHICLE' | translate }}:</b>
+                    {{ routeSeleted.vrp_vehicle?.name }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ 'ASSIGNED_ROUTES.DRIVER' | translate }}:</b>
+                    {{
+                        routeSeleted.vrp_vehicle.vehicle?.user?.name === null
+                            ? ' '
+                            : routeSeleted.vrp_vehicle.vehicle?.user?.name
+                    }}
+                    {{
+                        routeSeleted.vrp_vehicle.vehicle?.user?.surname === null
+                            ? ' '
+                            : routeSeleted.vrp_vehicle.vehicle?.user?.surname
+                    }}
+                </span>
+                <span class="ml-2">
+                    <b>{{ "ASSIGNED_ROUTES.DRIVER_START_TIME" | translate }}</b>
+                    {{ routeSeleted.driverStartTime ? convertTime(routeSeleted.driverStartTime) : '' }}
+                </span>
+                <span>
+                    <ul class="optimize-route-menu notifications">
+                        <li>
+                            <button type="button" class="btn btn-cancel btn-cancel-width m-3" data-toggle="dropdown" aria-expanded="false">
+                                Descargar
+                            </button>
+                            <div class="dropdown-menu notification-menu small notiSpecial2" x-placement="bottom-start">
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <button class="btn btn-default mr-3 m-bottom space-button btn-block" type="button" (click)="exportJsonRoute()" [title]="'CONTROL_PANEL.DOWNLOAD_JSON_ROUTES' | translate">
+                                                <i class="fas fa-download pr-1"></i>
+                                                {{ 'CONTROL_PANEL.JSON_ROUTES' | translate }}
+                                            </button>
+                                        </li>
+        
+                                        <li>
+                                            <button class="btn btn-default mr-3 m-bottom space-button btn-block" type="button" (click)="ftpJsonRoute()" [title]="'GENERAL.SEND_FROM_CLOUD' | translate ">
+                                                <i class="fas fa-cloud pr-1"></i>
+                                                {{ 'GENERAL.SEND_FROM_CLOUD' | translate }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- Datatable -->
+    <div class="row mt-2">
+        <ng-container
+            *ngIf="routes.length > 0; then content; else noContent"
+        ></ng-container>
+
+        <ng-template #content>
+            <ng-container *ngIf="routes && routes.length > 0">
+                <div class="col-12">
+                    <div class="table-content">
+                        <table
+                            class="table table-bordered table-striped table-responsive-lg mb-0"
+                            style="text-align: center; width: 100%"
+                            id="assigned"
+                        >
+                            <thead class="text-center">
+                                <tr>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.ORDER' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.ORDER' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.POINT' | translate }}
+                                    </th>
+                                    <th></th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.POPULATION' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.ADDRESS' | translate }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.OPENING_TIME'
+                                                | translate
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.CLOSING_TIME_'
+                                                | translate
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.TRAVEL_TIME' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.ARRIVAL_TIME' | translate }}
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.CLIENT_DELAY' | translate }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            'DELIVERY_POINTS.VEHICLE_WAIT_TIME' | translate
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.DELIVERY_TIME' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.TOTAL_KM' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.WAIT_TIME' | translate }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            'DELIVERY_POINTS.DRIVER_ARRIVAL_TIME'
+                                                | translate
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            'CONTROL_PANEL.DELIVERY_CONFIRMATION'
+                                                | translate
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{
+                                            'CONTROL_PANEL.SERVICE_TIME_CLIENT' | translate
+                                        }}
+                                    </th>
+                                    <th>
+                                        {{ 'DELIVERY_POINTS.STATE' | translate }}
+                                    </th>
+                                    <th></th>
+                                    <th
+                                        style="border-right: 1px solid #7387c2 !important;"
+                                    ></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-template>
+
+        <ng-template #noContent>
+            <div class="col-12 text-center">
+                <span>No hay información disponible</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

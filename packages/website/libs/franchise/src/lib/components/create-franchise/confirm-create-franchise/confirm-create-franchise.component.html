@@ -1,0 +1,35 @@
+<div class="modal-modules">
+    <section class="card">
+        <div class="row">
+            <div class="col-12 text-right pt-2">
+                <i class="fas fa-times close-button point" (click)="activeModal.close(false)"></i>
+                <!-- <button class=" btn btn-default btn-sm btn-color"></button> -->
+            </div>
+        </div>
+
+        <div class="card-body pt-2 p-2">
+            <div class="modal-text">
+                <p class="mb-0 text-center pr-2 pl-2 text-style">
+                    {{ 'FRANCHISE.MESSAGE' | translate }} {{ data.individualFranchisePrice }}€ {{ 'FRANCHISE.MESSAGE_II' | translate }} ({{ data.individualFranchisePriceIva }}€).
+                </p>
+                <p class="mb-0 text-center pr-2 pl-2 text-style color-text-user">
+                    <br> {{ 'MODULES.YOU_WILL_BE_ABLE_TO_CONSULT_THE' | translate }} <u> {{ 'MODULES.BILL' | translate }} </u> {{ 'MODULES.FROM_YOUR_USER_PROFILE' | translate }}
+                </p>
+            </div>
+            <div class="row pt-4 pb-4">
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-primary size-btn-modal" (click)="activeModal.close(true)">
+                  {{ 'GENERAL.ACCEPT' |  translate }}
+                </button>
+                </div>
+            </div>
+            <p class="mb-0 text-center pr-2 pl-2 style-terns">
+                {{ 'MODULES.BY_HIRING_THE_MODULE_YOU_ACEEPT_THE' | translate }} <u> {{ 'MODULES.TERMS_AND_CONDITIONS' | translate }} </u>
+            </p>
+            <p class="mb-0 text-center p-0 m-0 pr-2 pl-2 style-terns">
+                {{ 'MODULES.BY_OPTIMANAGE' | translate }}
+            </p>
+        </div>
+
+    </section>
+</div>

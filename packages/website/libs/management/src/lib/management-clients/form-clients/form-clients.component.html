@@ -1,0 +1,264 @@
+<div class="optimroute-client-form p-3">
+
+    <!-- header -->
+    <div class="row mt-1 align-items-center">
+        <div class="col-xl-6 col-12">
+            <img class="img-returns point" src="assets/icons/retunrs.svg" routerLink="/management/clients">
+            <label class="title-sheet pl-3 pr-2"> {{ 'PREFERENCES.CLIENTS' | translate }} </label>
+
+            <img class="img-returns point" *ngIf="point && point.isGroup" style="vertical-align: sub;" src="assets/icons/group-g.svg">
+            <img class="img-returns point" *ngIf="point && !point.isGroup" style="vertical-align: sub;" src="assets/icons/group-i.svg">
+        </div>
+
+        <!-- <div class="col-xl-6 col-12 text-right">
+            <div class="d-flex form-row flex-row align-items-center justify-content-end">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped " role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                        <span class="pl-2">
+                            78% 
+                            <img alt="progress" class="header-brand-img img-progress" src="assets/icons/info-white.svg"
+                            data-toggle="tooltip" data-html="true" data-placement="bottom" data-tooltip-custom-classes="tooltip-inner-2" role="tooltip"
+                            title="<p class='title-top mb-2 mt-3'>xxxxxx</p>  <p class='sub-title-top'>xxxxxxxx</p>">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+        <div class="col-xl-3 col-12 pr-xl-0" *ngIf="point">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-12">
+                            <p class="title-img"> {{ 'GENERAL.CUSTOMER_PHOTO' | translate }} </p>
+                        </div>
+
+                        <ng-container *ngFor="let item of [0,1,2,3]; let i= index">
+
+                            <!-- 1 posición -->
+                            <div class="col-12 text-center" *ngIf="i ==0">
+
+                                <!-- si no hay nada -->
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+                                        <img class="size-img point" src="assets/icons/img1.svg" (click)="fileAddImage.click()">
+                                    </ng-container>
+                                    <!-- end si no hay nada -->
+
+                                    <!-- si hay imagen -->
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <!-- para eliminar -->
+
+                                        <div class="size-hover1 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                        <!-- para eliminar -->
+
+                                        <img class="size-load point" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <!-- end 1 posición -->
+
+                            <!-- 2 posición -->
+                            <div class="col-4 mt-2" *ngIf="i ==1">
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="img-2 point" src="assets/icons/img2.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <img class="size-load2" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                        <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <!-- 3 posición -->
+                            <div class="col-4 mt-2" *ngIf="i ==2">
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="img-2 point" src="assets/icons/img2.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <img class="size-load2" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                        <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <!-- 4 posición -->
+                            <div class="col-4 mt-2" *ngIf="i ==3">
+                                <div class="card">
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img class="img-2 point" src="assets/icons/img2.svg" (click)="fileAddImage.click()">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].image">
+
+                                        <img class="size-load2" [src]="franchiseImages[i].image" (click)="fileAddImage.click()">
+
+                                        <div class="w-100 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                            <i class="fas fa-trash fa-2x" title="{{ 'GENERAL.DELETE' | translate }}" (click)="_handleDeleteImage(franchiseImages[i].id)"></i>
+
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <!-- input hidden type file -->
+                            <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChangeEvent($event ,franchiseImages[i])" />
+
+                        </ng-container>
+
+                        <div class="col-12 text-center mt-3" *ngIf="imageError.length > 0">
+                            <span class="text-danger">{{ imageError }}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'DELIVERY_POINTS.CLIENT' | translate }} </label>
+
+                    <p class="m-0 name-title"> {{ point.name }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+                    <label class="style-info">{{ 'DELIVERY_POINTS.STATE_CLIENT' | translate }}</label>
+                    <div class="border-special">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="point.isActive" (change)="changeActive($event.target.checked)"/>
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="lever-text">{{ 'GENERAL.ACTIVE' | translate }}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> ID </label>
+
+                    <p class="m-0 name-title"> #{{ point.id }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+                    <label class="style-info">{{ 'GENERAL.CREATION_DATE' | translate }}</label>
+                    <p class="m-0 name-title">{{returnsDate( point.created_at )}}</p>
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+                    <label class="style-info">{{ 'GENERAL.CREATED_BY' | translate }}</label>
+                    <p class="m-0 name-title">{{ (point.created_by_user != '') ? point.created_by_user : 'No disponible' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- divison derecha -->
+        <div class="col-xl-9 col-12" *ngIf="point">
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'client_information'}" (click)="changePageTaps('client_information')">
+                <label class="title-selected point" for=""> Información cliente </label>
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'hours', 'no-point': point.id == 0}" (click)="changePageTaps('hours')" [disabled]="point.id == 0">
+                <label class="title-selected" [ngClass]="{'point': point.id > 0}" for=""> Horario </label>
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'your_route_data', 'no-point': point.id == 0}" (click)="changePageTaps('your_route_data')" [disabled]="point.id == 0">
+                <label class="title-selected" [ngClass]="{'point': point.id > 0}" for=""> Datos de su ruta </label>
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'packaging_balance', 'no-point': point.id == 0}" (click)="changePageTaps('packaging_balance')" [disabled]="point.id == 0">
+                <label class="title-selected" [ngClass]="{'point': point.id > 0}" for=""> Saldo envases </label>
+            </button>
+
+            <!--  <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'balance_boxes', 'no-point': point.id == 0}" (click)="changePageTaps('balance_boxes')" [disabled]="point.id == 0">
+                <label class="title-selected" [ngClass]="{'point': point.id > 0}" for=""> Saldo cajas  </label>
+            </button> -->
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'settings', 'no-point': point.id == 0}" (click)="changePageTaps('settings')" [disabled]="point.id == 0">
+                <label class="title-selected" [ngClass]="{'point': point.id > 0}" for=""> Ajustes  </label>
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'group', 'no-point': point.id == 0}" (click)="changePageTaps('group')" [disabled]="point.id == 0" *ngIf="point && point.isGroup">
+                <label class="title-selected" [ngClass]="{'point': point.id > 0}" for=""> Grupo  </label>
+            </button>
+
+
+            <ng-container *ngIf="select === 'client_information'">
+                <easyroute-client-information [point]="point" (clients)="getData($event)" [idParam]="idParam" [isActiveClient]="isActiveClient" [franchiseImages]="franchiseImages"></easyroute-client-information>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'hours'">
+                <easyroute-schedule-clients-form [idParam]="idParam" [point]="point" (clients)="getData($event)"></easyroute-schedule-clients-form>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'your_route_data'">
+                <easyroute-client-route-data [idParam]="idParam"></easyroute-client-route-data>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'packaging_balance'">
+
+                <easyroute-client-packaging-balance [idParam]="idParam" [point]="point"></easyroute-client-packaging-balance>
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'settings'">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <easyroute-client-settings [idParam]="idParam"></easyroute-client-settings>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'group'">
+                <easyroute-client-duplicate [idParam]="idParam"></easyroute-client-duplicate>
+            </ng-container>
+
+
+        </div>
+    </div>
+
+</div>

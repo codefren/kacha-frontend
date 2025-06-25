@@ -1,0 +1,79 @@
+<div>
+    <div class="row mt-2" *ngIf="!showOnly">
+        <div class="col-12 text-center">
+            <h1 class="UPS">¡Ups!</h1>
+        </div>
+    </div>
+    <div class="row mt-1" *ngIf="!showOnly">
+        <div class="col-12 text-center">
+            <label class="text-not-asigned">Estos puntos no se han podido asignar a ninguna ruta</label>
+        </div>
+    </div>
+    <div class="row mt-2" *ngIf="showOnly">
+        <div class="col-12 text-center">
+            <h1 class="title-show-only">Puntos no asignados ({{ notAssigned.length }})</h1>
+        </div>
+    </div>
+    <div class="row mt-2" *ngIf="showOnly">
+        <div class="col-12 text-center pl-4 pr-4">
+            <label class="subtitle-show-only">Estos son los puntos no asignados de las rutas que has optimizado. Han podido quedar fuera a causa de los horarios o una gran distancia entre puntos, revisalo en cada ruta.</label>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content mt-3">
+                <table class="table table-striped table-bordered  mb-0" id="pendings"
+                    style="text-align: center ; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>
+                                Cliente
+                            </th>
+                            <th>
+                                Ruta de reparto
+                            </th>
+                            <th>
+                                Hora desde
+                            </th>
+                            <th>
+                                Hora hasta
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row p-5" *ngIf="!showOnly">
+        <div class="col-12">
+            <label class="text-select-option">Selecciona que quieres hacer con los puntos sobrantes:</label>
+        </div>
+    </div>
+    <div class="row pl-5 pr-5 pt-2" *ngIf="!showOnly">
+        <div class="col-4 p-2">
+            <label class="input-radio p-4">
+                <input type="radio" name="options" id="optionsRadios1" value="1" [(ngModel)]="option" [checked]="'1' === option" >
+                Generar una nueva ruta con los puntos sobrantes para hoy
+            </label>
+        </div>
+        <div class="col-4 p-2">
+            <label class="input-radio p-4">
+                <input id="2" type="radio" value="2" name="options" [(ngModel)]="option" [checked]="'2' === option">
+                Guardar los puntos sobrantes en el buzón para cargarlos otro día
+            </label>
+        </div>
+        <div class="col-4 p-2">
+            <label class="input-radio pl-4 pr-4 pt-4">
+                <input id="3" type="radio" value="3" name="options" [(ngModel)]="option" [checked]="'3' === option">
+                Continuar sin guardar
+            </label>
+        </div>
+    </div>
+    <div class="row pl-5 pr-5 pb-5 pt-5">
+        <div class="col-12 text-center">
+            <button class="btn btn-primary size-btn-modal" (click)="submit()">Aceptar</button>
+        </div>
+    </div>
+</div>

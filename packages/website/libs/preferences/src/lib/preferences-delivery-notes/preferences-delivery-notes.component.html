@@ -1,0 +1,279 @@
+<!-- Se movió para seguimiento de viajes->configuracion->albarán -->
+<!-- <div style="background-color: #fff; border-radius: 5px;" class="preferences-delivery-notes" *ngIf="showSharedInformation">
+
+    <div class="row mt-3 p-4">
+
+        <div class="col-12">
+            <label class="title-enterprise"> {{ 'ALBARAN.SHARE_COMPANY_INFORMATION' | translate }} </label>
+        </div>
+
+        <div class="col-12">
+            <label class="text-delivery-notes"> {{ 'ALBARAN.SHARE_COMPANY_INFORMATION_TEXT' | translate }} </label>
+        </div>
+    </div>
+    <div class="row mt-1 pl-2 pb-3">
+        <div class="col-xl-10 col-md-12 col-12 pb-2">
+            <div class="form-group col-12">
+                <div class="form-row">
+                    <div class="switch w-100 col-12">
+                        <label class="switch-width">
+                            <input type="checkbox"
+                                [checked]="companyPreferenceALbaran.shareCompanyInformation"
+                                (change)="changeCompanyPreferencealabaran('shareCompanyInformation', $event.target.checked)"
+                               />
+                            <span class="lever switch-col-primary m-0"></span>
+
+                            <span  class="pl-2 spand-toogle size-label">
+                               {{ 'ALBARAN.ACTIVE_SHARE_COMPANY_INFORMATION' | translate }}
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+
+
+<!-- <div style="background-color: #fff; border-radius: 5px;" class="preferences-delivery-notes">
+
+    <div class="row mt-3 p-4">
+
+        <div class="col-12">
+            <label class="title-enterprise"> {{ 'ALBARAN.DELIVERY_OF_DELIVERY_NOTE_AUTOMATICALLY' | translate }} </label>
+        </div>
+
+        <div class="col-12">
+            <label class="text-delivery-notes"> {{ 'ALBARAN.BY_ACTIVATING_THIS_OPTION' | translate }} </label>
+        </div>
+    </div>
+    <div class="row mt-1 pl-2 pb-3">
+        <div class="col-xl-10 col-md-12 col-12 pb-2">
+            <div class="form-group col-12">
+                <div class="form-row">
+                    <div class="switch w-100 col-12">
+                        <label class="switch-width">
+                            <input type="checkbox"
+                                [checked]="companyPreferenceALbaran.activateSendDeliveryNotes"
+                                (change)="changeCompanyPreferencealabaran('activateSendDeliveryNotes', $event.target.checked)"
+                               />
+                            <span class="lever switch-col-primary m-0"></span>
+
+                            <span  class="pl-2 spand-toogle size-label">
+                               {{ 'ALBARAN.ACTIVATE_DELIVERY_OF_DELIVERY_NOTE_AUTOMACALLY' | translate }}
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pl-2" *ngIf="companyPreferenceALbaran && companyPreferenceALbaran.activateSendDeliveryNotes">
+
+        <ng-container *ngIf="!show">
+            <div class="col-12 text-center mt-3 mb-3">
+                <div class="fa-5x">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                </div>
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="show">
+            
+
+            <div class="col-12 mt-2 mb-2">
+                <div class="form-group">
+
+                    <div class="col-md-4 col-sm-12">
+                        <label class="size-secund text-center size-label"> {{ 'ALBARAN.ERP_SHIPPING_TIME' | translate }} </label>
+                        <input class="form-control primary form-input" id="minutes" type="time" min="0" max="59" [value]="showTime(companyPreferenceALbaran.timeSendDeliveryNotes)" (focusout)="
+                        addOthers($event.target.value,companyPreferenceALbaran, 'timeSendDeliveryNotes')
+                        " placeholder="{{
+                            'GENERAL.TIME'
+                                | translate
+                        }}" required />
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="col-12 mt-2 mb-2">
+                <div class="form-group">
+                    <div class="col-lg-6 col-md-12 mb-1 d-flex flex-row">
+                        <div class="round round-little margin-days">
+                            <input type="checkbox" id="sunday-week" [checked]="companyPreferenceALbaran.activateSendDeliveryNotesEvery" (change)="changeCompanyPreferencealabaran('activateSendDeliveryNotesEvery', $event.target.checked)" />
+                            <label for="sunday-week"></label>
+                        </div>
+                        <label for="sunday-week" class="label-check size-label">
+                        {{'ALBARAN.AUTOMATICALLY_SEND_EVERY' | translate }}
+                    </label>
+
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+            
+            <ng-container *ngIf="companyPreferenceALbaran && companyPreferenceALbaran.activateSendDeliveryNotesEvery">
+
+                <div class="col-12 mt-2 mb-5">
+
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-12">
+                            <label class="size-secund text-center size-label">{{'ALBARAN.SEND_DELIVERY_NOTES_EVERY' | translate }}:</label>
+                            <input type="number" class="form-control primary form-input" id="minutes" min="0" max="59" [value]="showNUmber(companyPreferenceALbaran.timeSendDeliveryNotesEvery)" (focusout)="
+                            addOthers($event.target.value, companyPreferenceALbaran, 'timeSendDeliveryNotesEvery')
+                            " placeholder="{{
+                                'GENERAL.MINUTES'
+                                    | translate
+                            }}" required />
+                            <label>Minutos</label>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+
+            
+        </ng-container>
+
+
+
+
+
+    </div>
+    
+</div> -->
+
+
+<!-- carga albaranes por asignación -->
+<!-- Se movió para seguimiento de viajes->configuracion->albarán -->
+<!-- <div style="background-color: #fff; border-radius: 5px;" class="preferences-delivery-notes">
+
+
+    <div class="row mt-3 p-4">
+
+        <div class="col-12">
+            <label class="title-enterprise"> {{ 'ALBARAN.AUTOMATIC_LOADING_OF_DELIVERY_NOTES_TO_ASSIGNED_ROUTES' | translate }} </label>
+        </div>
+
+        <div class="col-12">
+            <label class="text-delivery-notes"> {{ 'ALBARAN.TEXT_1' | translate }} </label>
+        </div>
+
+    </div>
+
+    <div class="row mt-1 pl-2 pb-4">
+        <div class="col-xl-10 col-md-12 col-12 pb-2">
+            <div class="form-group col-12">
+                <div class="form-row">
+                    <div class="switch w-100 col-12">
+                        <label class="switch-width">
+                            <input type="checkbox"
+                                [checked]="companyPreferenceALbaran.activateAutomaticDeliveryNotesAssignedRoute"
+                                (change)="changeCompanyPreferencealabaran('activateAutomaticDeliveryNotesAssignedRoute', $event.target.checked)"
+                               />
+                            <span class="lever switch-col-primary m-0"></span>
+
+                            <span  class="pl-2 spand-toogle size-label">
+                               {{ 'ALBARAN.ACTIVATE_AUTOMATIC_LOADING_OF_DELIVERY_NOTES_TO_ASSIGNED_ROUTES' | translate }}
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+<!-- end carga albaranes por asignación -->
+
+<!-- tabla de albaran -->
+
+<!-- <div style="background-color: #fff; border-radius: 5px;" class="preferences-delivery-notes">
+    <div class="row mt-3 p-4">
+
+        <div class="col-12">
+            <label class="title-enterprise">Visualización de albarán</label>
+        </div>
+
+        <div class="col-12">
+            <label class="text-delivery-notes">Configura la información que deseas que se muestre a tus clientes y en
+                que orden colocarla.
+                Recuerda que máximo se permiten 10 líneas de texto con un máximo de 100 caracteres por línea y solo
+                podrás destacar una de ellas en la que se verá de mayor tamaño.</label>
+        </div>
+    </div>
+    <div class="row mt-3 p-4">
+        <div class="col-12 p-0">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                        <div class="col-md-10 col-7 p-0">
+                            <span>Información albarán</span>
+                        </div>
+                        <div class="col-md-2 col-5 p-0 text-sm-right">
+                            <button class="btn btn-add card-button mt-2 mt-sm-0" type="button" (click)="addLine()" [disabled]="deliveryNotesLines.length >= 10" title="Añadir línea">
+                                <label>Añadir línea</label>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table" *ngIf="deliveryNotesLines && deliveryNotesLines.length > 0">
+                        <thead class="thead">
+                            <tr>
+                                <th class="text-center">Orden</th>
+                                <th class="text-center">Destacado</th>
+                                <th class="text-center">Texto</th>
+                                <th class="text-center">Código de color</th>
+                                <th class="text-center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of deliveryNotesLines; let i = index;" [ngClass]="{
+                                'bg-white': i % 2 == 0,
+                                'bg-gray': i % 2 > 0
+                            }">
+                                <td style="width: 10%;">
+                                    <input type="number" class="form-control" min="1" (focusout)="handleChange( 'order', $event.target.value, item )" [value]="item.order">
+                                </td>
+                                <td class="row justify-content-center">
+                                    <div class="round">
+                                        <input type="checkbox" [id]="'isActiveSchedule' + item.id" (change)="highlightActive( $event.target.checked, item )" [checked]="item.highlight" />
+                                        <label [for]="'isActiveSchedule'+ item.id"></label>
+                                    </div>
+                                </td>
+                                <td style="width: 50%;">
+                                    <input type="text" class="form-control" [maxLength]="100" (focusout)="handleChange( 'description', $event.target.value, item )" [value]="item.description">
+                                </td>
+                                <td style="width: 15%;">
+                                    <input type="color" class="form-control" (change)="handleChange( 'color', $event.target.value, item )" [value]="item.color">
+                                </td>
+                                <td class="row justify-content-center">
+                                    <img src="assets/icons/delete-icon.svg" class="pointer" (click)="deleteLine(item)">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row" *ngIf="deliveryNotesLines && deliveryNotesLines.length === 0">
+                        <div class="col-12 text-center">
+                            <h4> No hay registros.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

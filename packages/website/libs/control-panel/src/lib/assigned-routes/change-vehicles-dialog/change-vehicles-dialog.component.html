@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-right pt-2 pr-4">
+            <i class="fas fa-times close-button" (click)="cancelSelection()"></i>
+        </div>
+        <div class="col-10 text-center">
+            <p class="title">{{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.CHANGE_VEHICLE' | translate }}</p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="offset-md-1 col-md-10 col-12">
+            <h3 class="subtitle-general">{{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.AVAILABLE' | translate }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-md-1 col-md-10 col-12 padding-special">
+            <ng-container *ngIf="availableVehicles.length > 0; then: vehicles; else: noVehicles"></ng-container>
+
+            <ng-template #vehicles>
+                <div class="row mt-1"  *ngFor="let v of availableVehicles; let i = index">
+                    <div class="col-1 p-2">
+                        <div class="round round-little">
+                            <input type="radio" name="vehicle" [id]="v.id" (click)="selectedVehicle(v.id, v.name)">
+                            <label [for]="v.id" #clik_vehicle></label>
+                        </div>
+                    </div>
+                    <div class="col-10 p-2">
+                        <label class="point ml-2" [for]="v.id">
+                            {{ v.name }} ({{ v.capacity }}u
+                                {{
+                                    v.user?.name === null
+                                        ? ' '
+                                        : v.user?.name
+                                }}
+                                {{
+                                    v.user?.surname === null
+                                        ? ' '
+                                        : v.user?.surname
+                                }})
+                        </label>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template #noVehicles>
+                <span class="size-general-font">{{ 'GENERAL.NO_VEHICLES_AVAILABLE' | translate }}</span>
+            </ng-template>
+        </div>
+
+    </div>
+
+    <div class="row mt-4 pt-2 pb-3">
+        <div class="col-md-6 col-12 text-center text-md-right">
+            <button class="btn size-btn-modal  btn-cancel" (click)="cancelSelection()">
+                {{ 'GENERAL.CANCEL' | translate }}
+            </button>
+        </div>
+        <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+            <button class="btn btn-primary size-btn-modal" (click)="addSelection()"> 
+                {{ 'GENERAL.TO_ACCEPT' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

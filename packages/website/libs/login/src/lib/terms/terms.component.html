@@ -1,0 +1,38 @@
+<div class="easyroute-login w-100" style="height: 100vh">
+
+    <section role="main" class="container mt-lg-5 pt-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12"><i class="fas fa-arrow-left fa-2x" (click)="cancelTerms()"></i></div>
+                </div>
+                <div class="row p-4">
+                    <div class="col-12 margin p-0 text-center">
+                        <img src="assets/polpoo/login/login-logo.png" alt="logo" class="logo">
+                        <h2 class="mt-5"><b>{{ 'GENERAL.TERMS' | translate }}</b></h2>
+
+                        <form>
+                            <div class="form-group mb-4">
+                                <div class="col-12	col-sm-8 col-md-6 col-lg-4 col-xl-4 offset-lg-4 offset-md-3 offset-sm-2 pl-xl-5">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="terms" (change)="changeValue( $event.target.checked )">
+                                        <label for="terms" class="aling-terms pl-md-3 pl-xl-0 pl-3">{{ 'REGISTER.REGISTER_FOUR.I_ACCEPT_THE' | translate }}</label>{{ ' ' }} <a [href]="urlPolpooTerms" target="_blank" class="aling-terms">{{ 'REGISTER.REGISTER_FOUR.TERMS_AND_CONDITIONS' | translate }}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <button type="button" class="btn btn-default m-2" (click)="cancelTerms()">{{ 'GENERAL.CANCEL' | translate }}</button>
+
+                                    <button type="button" [disabled]="disabled" class="btn btn-dark m-2" (click)="acceptTerms()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

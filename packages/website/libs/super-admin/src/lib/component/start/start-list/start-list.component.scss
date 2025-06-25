@@ -1,0 +1,176 @@
+.start-list {
+    background-color: #ffffff;
+    height: 100%;
+    background: white;
+    .btn-large {
+        width: 209px;
+        height: 40px;
+        border-radius: 24px;
+    }
+    .title {
+        color: #24397C;
+        text-transform: initial;
+        font-size: 18px;
+    }
+    .group-btn {
+        //font-size: 16px;
+        font-weight: bolder;
+        width: 68%;
+        height: 41px;
+    }
+    .btn-franchise {
+        width: 209px;
+        height: 40px;
+        background-color: #24397c;
+        border-radius: 24px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+    .padding-label {
+        padding-left: 5rem;
+    }
+    .div:focus,
+    .div.focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(247, 247, 247, 0.25);
+    }
+    .btn-filter {
+        background-color: #b5b5b5;
+        border-radius: 20px;
+        width: 132px;
+        height: 38px;
+        font-size: 14px;
+        color: #ffffff;
+    }
+    .title-cards {
+        color: #363740;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.32px;
+    }
+    .sub-title {
+        color: #363740;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.36px;
+    }
+    .lines-left {
+        border-right: 2px solid #DFE1EA;
+    }
+    .vr {
+        border-right: 2px solid #DFE1EA;
+        height: 90%;
+        position: absolute;
+        margin-left: -3px;
+        top: 4px;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 767px) {
+        button {
+            width: 92% !important;
+        }
+        .padding-label {
+            padding-left: 2rem;
+        }
+        .group-btn {
+            width: 99%;
+            height: 10%;
+            border-radius: 18px;
+        }
+        div .text-right {
+            text-align: center !important;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .group-btn {
+            width: 50%;
+        }
+    }
+    table.dataTable thead>tr>th.sorting_asc,
+    table.dataTable thead>tr>th.sorting_desc,
+    table.dataTable thead>tr>th.sorting,
+    table.dataTable thead>tr>td.sorting_asc,
+    table.dataTable thead>tr>td.sorting_desc,
+    table.dataTable thead>tr>td.sorting {
+        padding: 19px !important;
+    }
+    .col-1,
+    .col-2,
+    .col-3,
+    .col-4,
+    .col-5,
+    .col-6,
+    .col-7,
+    .col-8,
+    .col-9,
+    .col-10,
+    .col-11,
+    .col-12,
+    .col,
+    .col-auto,
+    .col-sm-1,
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4,
+    .col-sm-5,
+    .col-sm-6,
+    .col-sm-7,
+    .col-sm-8,
+    .col-sm-9,
+    .col-sm-10,
+    .col-sm-11,
+    .col-sm-12,
+    .col-sm,
+    .col-sm-auto,
+    .col-md-1,
+    .col-md-2,
+    .col-md-3,
+    .col-md-4,
+    .col-md-5,
+    .col-md-6,
+    .col-md-7,
+    .col-md-8,
+    .col-md-9,
+    .col-md-10,
+    .col-md-11,
+    .col-md-12,
+    .col-md,
+    .col-md-auto,
+    .col-lg-1,
+    .col-lg-2,
+    .col-lg-3,
+    .col-lg-4,
+    .col-lg-5,
+    .col-lg-6,
+    .col-lg-7,
+    .col-lg-8,
+    .col-lg-9,
+    .col-lg-10,
+    .col-lg-11,
+    .col-lg-12,
+    .col-lg,
+    .col-lg-auto,
+    .col-xl-1,
+    .col-xl-2,
+    .col-xl-3,
+    .col-xl-4,
+    .col-xl-5,
+    .col-xl-6,
+    .col-xl-7,
+    .col-xl-8,
+    .col-xl-9,
+    .col-xl-10,
+    .col-xl-11,
+    .col-xl-12,
+    .col-xl,
+    .col-xl-auto {
+        position: relative;
+        width: 100%;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}

@@ -1,0 +1,322 @@
+<div class="bill-form font-new-style p-3">
+
+    <div class="row mt-2 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'BILLS.BILLING' | translate }} </label>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-xl-6 col-12">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="form-row">
+
+                        <div class="col-12 pb-2">
+
+                            <label class="title-data"> {{'BILLS.INVOICE_DATA' | translate }} </label>
+
+                        </div>
+
+                        <ng-container *ngIf="!showInfoDetail">
+
+                            <div class="col-12 text-center">
+
+                                <div class="fa-9x">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="showInfoDetail">
+
+
+                            <!-- clients -->
+
+                            <div class="col-xl-6 col-12">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="clients" type="text" [value]="bill.delivery_point && bill.delivery_point.name ? bill.delivery_point.name : 'No disponible'" placeholder=" {{ 'BILLS.CLIENT' | translate }}" />
+            
+                                    <label for="clients" class="mt-2 title-col">  {{ 'BILLS.CLIENT' | translate }} </label>
+            
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end clients -->
+
+                            <!-- code -->
+
+                            <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="code" type="text" [value]="bill.code" placeholder=" {{ 'BILLS.CODE' | translate }}" />
+            
+                                    <label for="code" class="mt-2 title-col">  {{ 'BILLS.CODE' | translate }} </label>
+            
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end code -->
+
+                            <!-- bill_Payment_Status && paymentDate -->
+
+                            <div class="col-xl-6 col-12">
+
+                                <div class="form-row mt-xl-3 mt-2">
+
+                                    <div class="col-xl-6 col-12">
+
+                                        <div class="form-group input-group">
+
+                                            <span class="has-float-label w-100">
+                    
+                                            <input class="form-control point" readonly id="bill_Payment_Status" type="text" [value]="bill.bill_Payment_Status && bill.bill_Payment_Status.name ? bill.bill_Payment_Status.name : '---'" placeholder="{{ 'BILLS.PAYMENTS' | translate }}" />
+                    
+                                            <label for="bill_Payment_Status" class="mt-2 title-col">  {{ 'BILLS.PAYMENTS' | translate }} </label>
+                    
+                                        </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                                        <div class="form-group input-group">
+
+                                            <span class="has-float-label w-100">
+                    
+                                            <input class="form-control point" readonly id="paymentDate" type="text" [value]="getDateSpanish(bill.paymentDate)" placeholder="{{ 'BILLS.PAYMENT_DATE_' | translate }}" />
+                    
+                                            <label for="paymentDate" class="mt-2 title-col">  {{ 'BILLS.PAYMENT_DATE_' | translate }} </label>
+                    
+                                        </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end bill_Payment_Status && paymentDate -->
+
+                            <!-- bill_charge_type &&  bill_Payment_Type -->
+
+                            <div class="col-xl-6 col-12">
+
+                                <div class="form-row mt-xl-3 mt-2">
+
+                                    <div class="col-xl-6 col-12">
+
+                                        <div class="form-group input-group">
+
+                                            <span class="has-float-label w-100">
+                    
+                                            <input class="form-control point" readonly id="bill_charge_type" type="text" [value]="bill.bill_charge_type && bill.bill_charge_type.name ? bill.bill_charge_type.name : '---'" placeholder="{{ 'BILLS.PAYMENT_CHANNEL' | translate }}" />
+                    
+                                            <label for="bill_charge_type" class="mt-2 title-col">  {{ 'BILLS.PAYMENT_CHANNEL' | translate }} </label>
+                    
+                                        </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-6 col-12 mt-xl-0 mt-2">
+
+                                        <div class="form-group input-group">
+
+                                            <span class="has-float-label w-100">
+                    
+                                            <input class="form-control point style-elipce" readonly id="bill_Payment_Type" type="text" [title]="bill.bill_Payment_Type && bill.bill_Payment_Type.name ? bill.bill_Payment_Type.name : '---'" [value]="bill.bill_Payment_Type && bill.bill_Payment_Type.name ? bill.bill_Payment_Type.name : '---'" placeholder="{{ 'BILLS.PAYMENT_METHOD' | translate }}" />
+                    
+                                            <label for="bill_Payment_Type" class="mt-2 title-col">  {{ 'BILLS.PAYMENT_METHOD' | translate }} </label>
+                    
+                                        </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- end bill_charge_type &&  bill_Payment_Type-->
+
+                            <!-- user_charged_by -->
+
+                            <div class="col-xl-6 col-12 mt-xl-3 pb-xl-3 mt-2">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+
+                                        
+
+                                        <ng-container *ngIf="!bill.user_charged_by">
+                                            <input class="form-control point" readonly id="user_charged_by" type="text" value="---" placeholder=" {{ 'BILLS.CHARGED_BY' | translate }}" />
+                                        </ng-container>
+
+                                        <ng-container *ngIf="bill.user_charged_by">
+                                            <input class="form-control point" readonly id="user_charged_by" type="text" [value]="bill.user_charged_by.name + ' ' + bill.user_charged_by.surname" placeholder=" {{ 'BILLS.CHARGED_BY' | translate }}" />
+                                        </ng-container>
+            
+                                   
+            
+                                    <label for="user_charged_by" class="mt-2 title-col">  {{ 'BILLS.CHARGED_BY' | translate }} </label>
+            
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end user_charged_by -->
+
+                            <!-- AMOUNT -->
+
+                            <div class="col-xl-6 col-12 mt-xl-3 mt-2 pb-3">
+
+                                <div class="form-group input-group">
+
+                                    <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="clients" type="text" [value]="formatEuro(bill.total)" placeholder=" {{ 'BILLS.AMOUNT' | translate }}" />
+            
+                                    <label for="clients" class="mt-2 title-col">  {{ 'BILLS.AMOUNT' | translate }} </label>
+            
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end AMOUNT -->
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <div class="form-row mt-2 mb-5">
+
+                        <div class="col-12 pb-2 mt-2">
+
+                            <label class="title-history"> {{ 'BILLS.HISTORIACAL_UNCOLLECTED_INVOICE' | translate }} </label>
+
+                        </div>
+
+                        <div class="col-12 p-0">
+
+                            <table id="autorizedCharges" style="width: 100%; text-align: center;" class="table p-0 table-bordered table-striped mb-0">
+
+                                <thead class="table-head toggle-directions">
+
+                                    <tr>
+
+                                        <th style="border-top-left-radius: 6px;" class="text-left">{{'BILLS.DATE' | translate }}</th>
+
+                                        <th class="text-left">{{ 'BILLS.AUTORIZED_BY' | translate }}</th>
+
+                                        <th style="border-top-right-radius: 6px;" class="text-left">{{ 'BILLS.DRIVER' | translate }}</th>
+
+
+
+
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-12 mt-xl-0 mt-3">
+
+            <div class="card">
+
+                <div class="card-body color-view-pdf">
+
+                    <div class="form-row">
+
+                        <ng-container *ngIf="!showInfoDetail">
+
+                            <div class="col-12 text-center">
+
+                                <div class="fa-9x">
+
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                </div>
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="showInfoDetail">
+
+                            <div class="col-12 text-center" *ngIf="imageLoaded">
+
+
+                                <div class="embed-responsive embed-responsive-21by9">
+
+                                    <iframe class="embed-responsive-item" [src]="imageLoaded"></iframe>
+
+                                </div>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

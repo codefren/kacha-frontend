@@ -1,0 +1,275 @@
+<div class="summary-boxes">
+
+    <div class="card">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'TRAVEL_TRACKING.CONFIGURE_DISPLAY_OF_SUMMARY' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'TRAVEL_TRACKING.TEXT_1' | translate }}</p>
+
+                </div>
+
+            </div>
+
+            <!-- cuadros -->
+
+            <div class="row pt-4">
+
+                <!-- cuadro 1 -->
+
+                <div class="col-xl-4 col-md-4 col-12">
+
+                    <div class="card">
+
+                        <div class="card-body card-body-color">
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <label class="title-card-info" for=""> {{ 'TRAVEL_TRACKING.SUMMARY_LOADS' | translate }} </label>
+
+                                </div>
+
+                                <div class="col-12 mt-2">
+
+                                    <div class="switch w-100 mx-md-n2">
+
+                                        <label class="switch-width mb-0">
+                
+                                            <input type="checkbox" [checked]="preferenceTravelCash.summaryLoads" (change)="changeUpdateCash('summaryLoads', $event.target.checked)"/>
+                
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                
+                                            <span class="lever-text title-tootlge"> {{ 'TRAVEL_TRACKING.SHOW_LOADS_SUMMARY' | translate }} </span>
+                
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <ng-container *ngIf="showImg">
+
+                                        <ng-container *ngIf="preferenceTravelCash.summaryLoads">
+
+                                            <img class="img-show" src="assets/icons/settingsTravel/cuadro1.svg">
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!preferenceTravelCash.summaryLoads">
+
+                                            <img class="img-show" src="assets/icons/settingsTravel/cuadro1False.svg">
+
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showImg">
+
+                                        <div class="fa-5x text-center">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <label class="text-legend"> {{'TRAVEL_TRACKING.WHEN_ACTIVATING_LOAD_SUMMARY' | translate }} <br> {{'TRAVEL_TRACKING.TEXT_2' | translate }} </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end cuadro 1 -->
+
+
+                <!-- cuadro 2 -->
+
+                <div class="col-xl-4 col-md-4 col-12">
+
+                    <div class="card">
+
+                        <div class="card-body card-body-color">
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <label class="title-card-info" for=""> {{ 'TRAVEL_TRACKING.DELIVERY_STATUS' | translate }} </label>
+
+                                </div>
+
+                                <div class="col-12 mt-2">
+
+                                    <div class="switch w-100 switch w-100 mx-md-n2">
+
+                                        <label class="switch-width mb-0">
+                
+                                            <input type="checkbox" [checked]="preferenceTravelCash.deliveryStatus" (change)="changeUpdateCash('deliveryStatus', $event.target.checked)"/>
+                
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                
+                                            <span class="lever-text title-tootlge"> {{ 'TRAVEL_TRACKING.SHOW_DELIVERY_STATUS' | translate }} </span>
+                
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <ng-container *ngIf="showImg">
+
+                                        <ng-container *ngIf="preferenceTravelCash.deliveryStatus">
+
+                                            <img class="img-show" src="assets/icons/settingsTravel/cuadro2.svg">
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!preferenceTravelCash.deliveryStatus">
+
+                                            <img class="img-show" src="assets/icons/settingsTravel/cuadro2false.svg">
+
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showImg">
+
+                                        <div class="fa-5x text-center">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <label class="text-legend"> {{'TRAVEL_TRACKING.WHEN_ACTIVATING_DELEVERY_STATUS' | translate }} <br> {{'TRAVEL_TRACKING.TEXT_3' | translate }} </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end cuadro 2 -->
+
+                <!-- cuadro 3 -->
+
+                <div class="col-xl-4 col-md-4 col-12" *ngIf="ModuleCost()">
+
+                    <div class="card">
+
+                        <div class="card-body card-body-color">
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <label class="title-card-info" for=""> {{ 'TRAVEL_TRACKING.SUMMARY_COSTS' | translate }} </label>
+
+                                    <img class="img-money" src="assets/icons/settingsTravel/money.svg">
+
+                                </div>
+
+                                <div class="col-12 mt-2">
+
+                                    <div class="switch w-100 mx-md-n2">
+
+                                        <label class="switch-width mb-0">
+                
+                                            <input type="checkbox" [checked]="preferenceTravelCash.summaryCosts" (change)="changeUpdateCash('summaryCosts', $event.target.checked)"/>
+                
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+                
+                                            <span class="lever-text title-tootlge"> {{'TRAVEL_TRACKING.SHOW_COST_SUMMARY' | translate }} </span>
+                
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <ng-container *ngIf="showImg">
+
+                                        <ng-container *ngIf="preferenceTravelCash.summaryCosts">
+
+                                            <img class="img-show" src="assets/icons/settingsTravel/cuadro3.svg">
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="!preferenceTravelCash.summaryCosts">
+
+                                            <img class="img-show" src="assets/icons/settingsTravel/cuadro3False.svg">
+
+                                        </ng-container>
+
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf="!showImg">
+
+                                        <div class="fa-5x text-center">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+
+                                <div class="col-12 mt-3">
+
+                                    <label class="text-legend"> {{'TRAVEL_TRACKING.WHEN_ACTIVATING_SUMMARY_COST' | translate }} <br> {{'TRAVEL_TRACKING.TEXT_4' | translate }} </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end cuadro 3 -->
+
+            </div>
+
+            <!-- end cuadros -->
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,557 @@
+<div class="user-general-form pt-4 pb-4">
+    <form *ngIf="createUserFormGroup" [formGroup]="createUserFormGroup">
+
+        <!-- Datos de usuario -->
+        <div class="row container-fluid m-0">
+
+            <div class="col-12 col-lg-12">
+                <p class="mb-0 title-user"> {{'USERS.USER_DATA' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'USERS.MESSAGE_USER_DATA' | translate }} </p>
+            </div>
+
+            <div class="col-12">
+
+                <div class="form-row mt-3">
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="name" type="text"
+                                placeholder="{{ 'USERS.EMPLOYEE_NAME' | translate }}" formControlName="name"/>
+
+                                <label for="name" class="mt-2 title-col"> {{ 'GENERAL.NAMES' | translate }} <span class="asterisco"> *</span></label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.name">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            createUserFormGroup.get('name').hasError(
+                                                validation.type
+                                            ) &&
+                                            (createUserFormGroup.get('name').dirty ||
+                                            createUserFormGroup.get('name').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="surname" type="text" 
+                                placeholder="{{ 'USERS.EMPLOYEE_SURNAME' | translate }}" formControlName="surname"/>
+
+                                <label for="surname" class="mt-2 title-col"> {{ 'GENERAL.SURNAMES' | translate }} <span class="asterisco"> *</span></label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.surname">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            createUserFormGroup.get('surname').hasError(
+                                                validation.type
+                                            ) &&
+                                            (createUserFormGroup.get('surname').dirty ||
+                                            createUserFormGroup.get('surname').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="nationalId" type="text" 
+                                placeholder="DNI/NIE" formControlName="nationalId"/>
+
+                                <label for="nationalId" class="mt-2 title-col"> DNI/NIE </label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.nationalId">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                            createUserFormGroup.get('nationalId').hasError(
+                                                validation.type
+                                            ) &&
+                                            (createUserFormGroup.get('nationalId').dirty ||
+                                            createUserFormGroup.get('nationalId').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="phone" type="text" mask="999 999999999" prefix="+" 
+                                placeholder="{{ 'GENERAL.PHONE' | translate }}"  [formControl]="createUserFormGroup.controls['phone']"/>
+
+                                <label for="phone" class="mt-2 title-col"> {{ 'GENERAL.PHONE' | translate }} <span class="asterisco"> *</span></label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.phone">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                        createUserFormGroup
+                                            .get('phone')
+                                            .hasError(validation.type) &&
+                                        (createUserFormGroup.get('phone').dirty ||
+                                            createUserFormGroup.get('phone').touched)
+                                    ">
+                                        {{ validation.message }}
+                                        {{ validation.type === 'invalidPhone'
+                                            ? ' ' + createUserFormGroup.get('country').value
+                                            : ''
+                                        }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <select class="form-select form-control w-100" id="country" placeholder="Seleccione"
+                                    formControlName="country" (change)="changeCountry($event.target.value)">
+                                    <option value="0">Seleccione...</option>
+                                    <option *ngFor="let country of countrys" [value]="country">{{ country }}</option>
+                                </select>
+
+                                <label for="type" class="mt-2 title-col"> {{ 'GENERAL.COUNTRY' | translate }} <span class="asterisco"> *</span></label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.country">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup.get('country').hasError(validation.type) 
+                                    && (createUserFormGroup.get('country').dirty 
+                                    || createUserFormGroup.get('country').touched)">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <select class="form-select form-control w-100" id="companyId" placeholder="Seleccione..." formControlName="companyId">
+                                    <option value="0">{{ 'COMPANIES.SELECT' | translate }}</option>
+                                    <option *ngFor="let item of companies" [value]="item.id"> {{ item.name }} </option>
+                                </select>
+
+                                <label for="type" class="mt-2 title-col"> {{ 'COMPANIES.NAME' | translate }} <span class="asterisco"> *</span></label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.companyId">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="createUserFormGroup
+                                        .get('companyId')
+                                        .hasError(validation.type) &&
+                                        (createUserFormGroup.get('companyId').dirty ||
+                                        createUserFormGroup.get('companyId').touched)">
+                                            {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="idERP" type="text" 
+                                placeholder="{{ 'USERS.ID_ERP' | translate }}"  [formControl]="createUserFormGroup.controls['idERP']"/>
+                                <label for="phone" class="mt-2 title-col"> {{ 'USERS.ID_ERP' | translate }} </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-5 mb-5 p-0"></div>
+
+        <!-- acceso a polpoo -->
+        <div class="row container-fluid m-0">
+
+            <div class="col-12 col-lg-12">
+                <p class="mb-0 title-user"> {{'USERS.ACCESS_TO_POLPOO' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'USERS.MESSAGE_ACCESS_TO_POLPOO' | translate }} </p>
+            </div>
+
+            <div class="col-12">
+                <div class="form-row mt-3">
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="email" type="text"
+                                placeholder="{{ 'GENERAL.EMAIL' | translate }}"  [formControl]="createUserFormGroup.controls['email']"/>
+
+                                <label for="email" class="mt-2 title-col"> {{ 'GENERAL.EMAIL' | translate }} <span class="asterisco"> *</span></label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.email">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    createUserFormGroup
+                                        .get('email')
+                                        .hasError(validation.type) &&
+                                    (createUserFormGroup.get('email').dirty ||
+                                        createUserFormGroup.get('email').touched)
+                                ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="password" type="password" 
+                                placeholder="{{ 'USERS.PASSWORD' | translate }}" formControlName="password"/>
+
+                                <label for="password" class="mt-2 title-col">  {{ 'USERS.PASSWORD' | translate }}
+                                    <span class="asterisco" *ngIf="!user.id || user.id == 0"> *</span>
+                            </label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.password">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                        createUserFormGroup
+                                            .get('password')
+                                            .hasError(validation.type) &&
+                                        (createUserFormGroup.get('password').dirty ||
+                                            createUserFormGroup.get('password').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-12 mt-3">
+                        <div class="form-group input-group">
+                            <span class="has-float-label w-100">
+                                <input class="form-control point" id="password_confirmation" type="password" 
+                                placeholder="{{ 'USERS.PASSWORD' | translate }}" formControlName="password_confirmation"/>
+
+                                <label for="password_confirmation" class="mt-2 title-col"> {{ 'GENERAL.REPEAT_PASSWORD' | translate }}
+                                    <span class="asterisco" *ngIf="!user.id || user.id == 0">*</span>
+                            </label>
+                            </span>
+                            <ng-container *ngFor="let validation of usuario_messages.password_confirmation">
+                                <div class="w-100 text-left">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                    createUserFormGroup
+                                        .get('password_confirmation')
+                                        .hasError(validation.type) &&
+                                    (createUserFormGroup.get('password_confirmation')
+                                        .dirty ||
+                                        createUserFormGroup.get('password_confirmation')
+                                            .touched)
+                                ">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-5 mb-5 p-0"></div>
+
+        <!-- Asignar roles -->
+        <div class="row container-fluid m-0" *ngIf="(user && user.id > 0 && !isTecnical && !isPartnerType) || (user && user.id === 0 &&  !isPartnerType)">
+
+            <div class="col-12 col-lg-12">
+                <p class="mb-0 title-user"> {{'USERS.ASSIGN_ROLE' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'USERS.MESSAGE_ASSIGN_ROLE' | translate }} </p>
+            </div>
+
+            <div class="col-12 mt-4">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 col-md-4 p-0 border-rol" formArrayName="profiles" *ngFor="
+                            let profile of createUserFormGroup?.get('profiles')
+                                ?.controls;
+                            let i = index
+                        ">
+                            <div class="switch switch-width ml-xl-4 ml-lg-4 ml-md-3 ml-4 mt-3 mr-xl-4 mr-lg-4 mr-md-3 mr-4">
+                                <div class="row">
+                                    <div class="col-6 col-lg-6">
+                                        <label class="color-tootle" [for]="i">{{ profiles[i].name }}</label>
+                                    </div>
+                                    <div class="col-6 col-lg-6 text-right">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i" [id]="i"
+                                                (change)="selectPreparator($event.target.checked, profiles[i].name )" />
+                                            <span class="lever lever-general switch-col-primary m-0"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 mb-4 mt-2">
+                                        <label class="title-role" data-toggle="tooltip" data-placement="top" [title]="profiles[i].description ? profiles[i].description: 'Descripción no disponible' ">
+                                            {{ profiles[i].description ? profiles[i].description: 'Descripción no disponible' }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- preparator -->
+        <ng-container *ngIf="showPreparator">
+            <!-- linea divisoria -->
+            <div class="card-footer mt-5 mb-5 p-0"></div>
+
+            <div class="row container-fluid m-0">
+                <div class="col-12 col-lg-12">
+                    <p class="mb-0 title-user"> {{'GENERAL.PREPARER_SETTING' | translate }} </p>
+                </div>
+
+                <div class="col-12 col-lg-12">
+                    <div class="form-row  mt-3">
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="allowedQuantityOrders" type="number"
+                                    placeholder="{{ 'USERS.MAXIMUN_SIMULTANEUS_ORDERS' | translate }}" formControlName="allowedQuantityOrders"/>
+    
+                                    <label for="name" class="mt-2 title-col"> {{ 'USERS.MAXIMUN_SIMULTANEUS_ORDERS' | translate }} </label>
+                                </span>
+                                <ng-container *ngFor="let validation of usuario_messages.allowedQuantityOrders">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            createUserFormGroup
+                                                .get('allowedQuantityOrders')
+                                                .hasError(validation.type) &&
+                                            (createUserFormGroup.get('allowedQuantityOrders')
+                                                .dirty ||
+                                                createUserFormGroup.get('allowedQuantityOrders')
+                                                    .touched)
+                                        ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- linea divisoria -->
+        <div class="card-footer mt-5 mb-4 p-0" *ngIf="showCommercialDirectorAdjustment || showCommercialAgentAdjustment || showSuperAdmin || showAdminCompany || !isPartnerType"></div>
+
+        <!-- Ajuste agente comercial -->
+        <ng-container *ngIf="showCommercialDirectorAdjustment || showCommercialAgentAdjustment || showSuperAdmin || showAdminCompany">
+            <div class="row justify-content-center container-fluid m-0">
+
+                <!-- Objetivos y comisones -->
+                <div class="col-12 col-lg-12">
+                    <p class="mb-3 title-user" style="font-weight: 700;"> Ajuste agente comercial </p>
+                    <p class="mb-0 title-user"> {{'USERS.OBJECTIVES_AND_COMMISSIONS' | translate }} </p>
+                    <p class="mb-0 sub-title-user"> {{'USERS.CONFIGURE_THE_MONTHLY_OBJETIVE_THE_COMMERCIAL_MUST_MEET_AND_WHAT_THE_COMMISSION' | translate }} </p>
+                </div>
+
+                <div class="col-12 col-lg-12">
+                    <div class="form-row mt-3">
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input type="number" step="0.001" min="0" max="99999" onKeyPress="if(this.value.length==7) return false;" 
+                                        autocomplete="off" class="form-control" id="monthlyObjective" 
+                                        placeholder="{{ 'USERS.MONTHLY_TARGET' | translate }}" formControlName="monthlyObjective"
+                                        />
+                                        <label for="monthlyObjective" class="mt-2 title-col">  {{ 'USERS.MONTHLY_TARGET' | translate }} </label>
+                                    </span>
+                                <ng-container *ngFor="let validation of usuario_messages.monthlyObjective">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                createUserFormGroup
+                                                    .get('monthlyObjective')
+                                                    .hasError(validation.type) &&
+                                                (createUserFormGroup.get('monthlyObjective').dirty ||
+                                                    createUserFormGroup.get('monthlyObjective').touched)
+                                            ">
+                                                {{ validation.message }}
+                                            </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input type="number" type="number" min="0" max="99999" onKeyPress="if(this.value.length==7) return false;" 
+                                        class="form-control" id="commissionOrdersAppPercentage" 
+                                        placeholder="{{ 'USERS.COMMISSION_ORDERS_PER_CUSTOMER_APP_IN' | translate }}" formControlName="commissionOrdersAppPercentage"
+                                        />
+                                        <label for="monthlyObjective" class="mt-2 title-col"> {{ 'USERS.COMMISSION_ORDERS_PER_CUSTOMER_APP_IN' | translate }} </label>
+                                    </span>
+                                <ng-container *ngFor="let validation of usuario_messages.commissionOrdersAppPercentage">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                createUserFormGroup
+                                                    .get('commissionOrdersAppPercentage')
+                                                    .hasError(validation.type) &&
+                                                (createUserFormGroup.get('commissionOrdersAppPercentage').dirty ||
+                                                    createUserFormGroup.get('commissionOrdersAppPercentage').touched)
+                                            ">
+                                                {{ validation.message }}
+                                            </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                        <input type="number" min="0" max="99999" onKeyPress="if(this.value.length==7) return false;" type="number" 
+                                        class="form-control" id="commissionOrdersPercentage" 
+                                        placeholder="{{ 'USERS.COMMISSION_ORDERS_IN' | translate }}" formControlName="commissionOrdersPercentage"
+                                        />
+                                        <label for="monthlyObjective" class="mt-2 title-col"> {{ 'USERS.COMMISSION_ORDERS_IN' | translate }} </label>
+                                    </span>
+                                <ng-container *ngFor="let validation of usuario_messages.commissionOrdersPercentage">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                    createUserFormGroup
+                                                        .get('commissionOrdersPercentage')
+                                                        .hasError(validation.type) &&
+                                                    (createUserFormGroup.get('commissionOrdersPercentage')
+                                                        .dirty ||
+                                                        createUserFormGroup.get('commissionOrdersPercentage')
+                                                            .touched)
+                                                ">
+                                                {{ validation.message }}
+                                            </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </ng-container>
+
+        <!-- Identificador de albarán -->
+        <ng-container *ngIf="(appPreferences$| async).allowAutoSell">
+
+            <div class="row justify-content-center container-fluid m-0">
+
+                <div class="col-12 col-lg-12 mt-3" [ngClass]="{'mt-3':showCommercialDirectorAdjustment || showCommercialAgentAdjustment || showSuperAdmin || showAdminCompany}">
+
+                    <p class="mb-0 title-user"> Identificador de albarán </p>
+
+                    <p class="mb-0 sub-title-user"> En caso de estar activo, podrás escribir una nomenclatura para identificar los albaranes del comercial, puedes escribir su nombre o sus iniciales. Después del prefijo la numeración del albarán será auto incrementable. </p>
+
+                </div>
+
+                <div class="col-12 col-lg-12">
+                    <div class="form-row mt-3">
+                        <div class="col-xl-4 col-12 align-self-center">
+                            <div class="form-group input-group">
+                                <div class="border-special">
+                                    <div class="switch w-100">
+                                        <label class="switch-width" style="justify-content: flex-start;">
+                                                <input type="checkbox"
+                                                (change)="changeAllowDeliveryNoteIdentification($event.target.checked)"
+                                                    [checked]="createUserFormGroup.get('allowDeliveryNoteIdentificator').value"
+                                                    formControlName="allowDeliveryNoteIdentificator" />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+                    
+                                                <span style="font-size: 14px;color: #363740 !important;" class="pl-2 pr-2">
+                                                    {{ 'Aplicar identificador de albarán' }}
+                                                </span>
+                                            </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-12" *ngIf="createUserFormGroup.get('allowDeliveryNoteIdentificator').value">
+                            <div class="form-group input-group" [ngClass]="{
+                                    'has-danger':
+                                        createUserFormGroup.controls['deliveryNoteNomenclature'].invalid &&
+                                        (createUserFormGroup.controls['deliveryNoteNomenclature'].dirty ||
+                                            createUserFormGroup.controls['deliveryNoteNomenclature'].touched)
+                                  }">
+                                <span class="has-float-label w-100">
+                                        <input id="nom" class="form-control" formControlName="deliveryNoteNomenclature" />
+                                        <label for="monthlyObjective" class="mt-2 title-col"> Nomenclatura </label>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+             <!-- linea divisoria -->
+             
+            <div class="card-footer mt-5 mb-4 p-0"></div>
+
+        </ng-container>
+
+
+
+
+        <!-- <ng-container *ngIf="me && status && user.id > 0">
+
+            <div class="card-footer mt-5 mb-5 p-0"></div>
+
+            <div class="row justify-content-center container-fluid m-0">
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-basic" (click)="inactiveUser(user)" *ngIf="
+                            me && status && user.id > 0 && user.isActive === true
+                            ">
+                                {{ option }}
+                            </button>
+
+                            <button type="button" class="btn btn-basic" (click)="activeUser(user)" *ngIf="
+                            me &&  status && user.id > 0 && user.isActive === false
+                            ">
+                                {{ option }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container> -->
+
+
+        <!-- Botón -->
+        <div class="row container-fluid m-0">
+            <div class="col-sm-6 col-12 text-sm-left text-center mt-1 pb-2">
+                <button type="submit" class="btn btn-primary" [disabled]=" createUserFormGroup.invalid || getProfiles().length === 0" (click)="createUser()">
+                    <span *ngIf="user.id == 0">{{ 'GENERAL.ADD_' | translate }}</span>
+                    <span *ngIf="user.id > 0">{{ 'GENERAL.SAVE' | translate }}</span>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

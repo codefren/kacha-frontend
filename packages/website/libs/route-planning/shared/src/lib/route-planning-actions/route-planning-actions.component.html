@@ -1,0 +1,144 @@
+<div class="easyroute-route-planning-actions" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="routePlanning"
+    (click)="$event.stopPropagation()">
+    <!--
+        <button
+            mat-icon-button
+            (click)="toggleShowZone($event)"
+            [class.primary]="color === 'primary'"
+            [class.accent]="color === 'accent'"
+            [class.warn]="color === 'warn'"
+        >
+            <mat-icon>near_me</mat-icon>
+        </button>
+    -->
+
+    <div *ngIf="(optimizationStatus$ | async) && (optimizationStatus$ | async).loading" fxLayout="row"
+        fxLayoutAlign="space-around center" fxLayoutGap="16px">
+        <span *ngIf="
+                (optimizationStatus$ | async).state &&
+                (optimizationStatus$ | async).state === 'waiting'
+            ">
+            {{ 'ROUTE_PLANNING.ZONE.STATE.WAITING' | translate }}
+        </span>
+        <span *ngIf="
+                (optimizationStatus$ | async).state &&
+                (optimizationStatus$ | async).state === 'active'
+            ">
+            {{ 'ROUTE_PLANNING.ZONE.STATE.ACTIVE' | translate }}
+        </span>
+        <mat-progress-spinner *ngIf="
+                (optimizationStatus$ | async).state === 'waiting' ||
+                (optimizationStatus$ | async).progress === 0
+            " [diameter]="progressSpinnerDiameter" mode="indeterminate" color="primary">
+        </mat-progress-spinner>
+        <mat-progress-spinner *ngIf="
+                (optimizationStatus$ | async).state === 'active' &&
+                (optimizationStatus$ | async).progress !== 0
+            " [diameter]="progressSpinnerDiameter"
+            [appProgressSpinnerPercentage]="(optimizationStatus$ | async).progress" mode="determinate" color="primary"
+            [value]="(optimizationStatus$ | async).progress">
+        </mat-progress-spinner>
+    </div>
+    <!-- <mat-icon
+        title="La ruta no se puede optimizar por falta de capacidad en los vehículos"
+        color="warn"
+        *ngIf="!hasEnoughCapacity"
+        >error</mat-icon
+    > -->
+    <p class="error no-vehicle" *ngIf="vehiclesCount === 0 && deliveryPointsCount > 0">
+        Debes asignar un vehículo
+    </p>
+    <p class="error no-vehicle" *ngIf="vehiclesCount > 0 && (!hasEnoughCapacity || !hasEnoughVolumen) && deliveryPointsCount > 0">
+        Vehículo sin capacidad
+    </p>
+
+    <p class="error no-vehicle" *ngIf="deliveryPointsCount === 0">
+        Debes agregar al menos un cliente
+    </p>
+    <i class="p1 fas fa-exclamation-circle has-badge text-danger"
+        title="La ruta no se puede optimizar por falta de capacidad en los vehículos" *ngIf="!hasEnoughCapacity">
+    </i>
+
+    <i class="p1 fas fa-exclamation-circle has-badge text-danger" title="Esta ruta no se puede optimizar"
+        *ngIf="(vehiclesCount === 0 || deliveryPointsCount === 0) && hasEnoughCapacity">
+    </i>
+
+    <!--  <mat-icon
+        title="Esta ruta no se puede optimizar"
+        color="warn"
+        *ngIf="(vehiclesCount === 0 || deliveryPointsCount === 0) && hasEnoughCapacity"
+        >error</mat-icon
+    > -->
+    <!--  <mat-icon
+        title="{{ 'ROUTE_PLANNING.ZONE.OPTIMIZED' | translate }}"
+        color="accent"
+        [matBadge]="routesCount.toString()"
+        matBadgePosition="above after"
+        matBadgeSize="medium"
+        *ngIf="
+            (zoneStatus$ | async).optimized &&
+            (optimizationStatus$ | async) &&
+            (optimizationStatus$ | async).state === 'completed'
+        "
+        >explore</mat-icon -->
+    <!--  <a class="notification-icon">
+            <i class="fas fa-compass accent fa-2x"
+                title="{{ 'ROUTE_PLANNING.ZONE.OPTIMIZED' | translate }}"
+                *ngIf="
+                (zoneStatus$ | async).optimized &&
+                (optimizationStatus$ | async) &&
+                (optimizationStatus$ | async).state === 'completed'"
+            >
+            </i>
+        <span class="badge badge-light">4</span>
+    </a> -->
+
+    <div id="ex4">
+        <span class="p1 fa-stack fa-2x has-badge accent" [attr.data-count]="routesCount.toString()" *ngIf="
+                (zoneStatus$ | async) &&
+                (zoneStatus$ | async).optimized &&
+                (optimizationStatus$ | async) &&
+                (optimizationStatus$ | async).state === 'completed'
+            ">
+            <!--<i class="p2 fa fa-circle fa-stack-2x"></i>-->
+            <i class="p3 fas fa-compass fa-stack-1x xfa-inverse"></i>
+        </span>
+    </div>
+
+    <!-- <mat-icon
+        title="Se ha producido un error"
+        color="warn"
+        *ngIf="(optimizationStatus$ | async) && (optimizationStatus$ | async).error"
+        >error</mat-icon
+    > -->
+    <i class="p1 fas fa-exclamation-circle has-badge text-danger" [title]="(optimizationStatus$ | async).error"
+        *ngIf="(optimizationStatus$ | async) && (optimizationStatus$ | async).error">
+    </i>
+
+    <i (click)="showGeometry()" class="p1 fas fa-directions fa-2x has-badge color-primary"
+        *ngIf="isEvaluated && routePlanning.viewingMode === 0"></i>
+
+    <!--     <mat-checkbox
+        (change)="toggleSelectZone($event)"
+        [checked]="(zoneStatus$ | async).selected"
+        [color]="color"
+    ></mat-checkbox> -->
+
+    <!--
+        check de selección: se necesita zoneId para vincular datos
+        y cambiar el estado del label
+    -->
+
+    <label class="round round-little">
+        <input type="checkbox" *ngIf="(zoneStatus$ | async)" [checked]="(zoneStatus$ | async).selected"
+            (change)="toggleSelectZone($event)" [id]="'zone_' + zoneId">
+        <label [for]="'zone_' + zoneId" style="top: 1px;"></label>
+    </label>
+
+    <!-- <div class="checkbox-custom checkbox-default">
+        <input type="checkbox"
+            [checked]="(zoneStatus$ | async).selected"
+            (change)="toggleSelectZone($event)">
+        <label></label>
+    </div> -->
+</div>

@@ -1,0 +1,40 @@
+.easyroute-modal-integration {
+    .title-page-modal-integration {
+        font-size: 14px;
+        font-weight: lighter;
+        color: #424242;
+    }
+    .line {
+        border-bottom: 1px solid #c6c7c9;
+    }
+    .options {
+        font-size: 16px;
+    }
+    /*  .btn {
+        width: 70%;
+    } */
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+    }
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        border-radius: 15px;
+    }
+    label,
+    input {
+        font-size: 16px !important;
+        font-weight: lighter;
+    }
+    button {
+        font-size: 18px !important;
+    }
+    /* @media screen and (max-width: 767px) and (min-width: 320px) {
+        .size-btn-modal {
+            width: 7rem !important;
+        }
+    } */
+}

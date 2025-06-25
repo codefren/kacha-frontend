@@ -1,0 +1,50 @@
+@import '../../../../../../../apps/easyroute/src/common.scss';
+
+.easyroute-shared-note {
+    .title-page-add-vehicles-dialog {
+        font-size: 14px;
+        font-weight: lighter;
+        color: #424242;
+    }
+
+    .line {
+        border-bottom: 1px solid #c6c7c9;
+    }
+
+    .options {
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 50%;
+    }
+
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+    }
+
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        border-radius: 15px;
+    }
+
+    label,
+    input {
+        font-size: 16px !important;
+        font-weight: lighter;
+    }
+
+    button {
+        font-size: 18px !important;
+    }
+
+    /* @media screen and ( max-width: 767px ) {
+        button { 
+            width: 85% !important; 
+        }
+    } */
+}

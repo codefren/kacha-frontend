@@ -1,0 +1,65 @@
+<div class="easyroute-clients-linked-table mb-5">
+
+    <div class="text-center" *ngIf="loading">
+        <div class="fa-2x">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+    </div>
+
+    <ng-container *ngIf="!loading">
+
+        <div class="row pl-3 pr-3">
+            <div class="col-xl-12 col-12">
+
+                <p class="mb-0 title-user"> {{ 'DELIVERY_POINTS.APP_LINK' | translate }} </p>
+                <p class="mb-0 sub-title-user"> {{'DELIVERY_POINTS.APP_LINK_MESSAGE' | translate }} </p>
+                
+            </div>
+
+            <div class="col-xl-12 col-12 mt-3">
+
+                <ng-container *ngIf="clientsLinked && clientsLinked.length > 0">
+                    <table class="table table-responsive-lg table-bordered table-striped mb-0">
+                        <thead class="thead">
+                            <tr class="text-center">
+                                <th width="30%" style="border-top-left-radius: 6px !important;">{{ 'USERS.EMAIL' | translate }}</th>
+                                <th width="30%">{{ 'USERS.NAME_USER' | translate }}</th>
+                                <th width="15%">{{ 'USERS.SURNAME_USER' | translate }}</th>
+                                <th width="15%">{{ 'DELIVERY_POINTS.PHONE' | translate }}</th>
+                                <th width="5%"></th>
+                                <th width="5%" style="border-top-right-radius: 6px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" *ngFor="let client of clientsLinked">
+                                <td>{{ client.email }}</td>
+                                <td>{{ client.name }}</td>
+                                <td>{{ client.surname }}</td>
+                                <td>{{ client.phone }}</td>
+                                <td class="text-center">
+                                    <span class="editar m-1" title="Editar" (click)="changePassword(client.id)">
+                                        <img class="icons-datatable point"
+                                            src="assets/icons/editSettings.svg">
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="editar m-1" title="Eliminar" (click)="deleteElement(client.id)">
+                                        <img class="icons-datatable point"
+                                            src="assets/icons/trashSetting.svg">
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+
+                <ng-container *ngIf="clientsLinked && clientsLinked.length == 0">
+                    <p class="text-center mb-2 mt-2">
+                        {{ 'DELIVERY_POINTS.NO_CLIENT_LINKED' | translate }}
+                    </p>
+                </ng-container>
+
+            </div>
+        </div>
+    </ng-container>
+</div>

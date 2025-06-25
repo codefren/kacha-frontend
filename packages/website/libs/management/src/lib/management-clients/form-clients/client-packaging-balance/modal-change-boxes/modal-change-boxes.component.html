@@ -1,0 +1,69 @@
+<div class="modal-change-boxes">
+
+    <div class="row p-5">
+
+        <div class="col-xl-6 col-12 text-xl-left text-center">
+
+            <label class="title-modal"> {{ 'PACKAGING_BALANCE.BALANCE_IN_CASH' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+            <img src="assets/icons/close1.svg">
+
+        </div>
+
+        <div class="col-12 mt-2">
+
+            <div class="form-row mt-3 description">
+
+                <span> {{ 'PACKAGING_BALANCE.TEXT_2' | translate }} </span>
+
+            </div>
+
+        </div>
+
+        <form [formGroup]="packagingForm" class="padding-form" style="width: 100%" novalidate>
+
+            <div class="col-12 mt-2">
+
+                <div class="form-row mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input class="form-control point" id="name" type="number"
+
+                            placeholder="{{ 'PACKAGING_BALANCE.BALANCE_CASH' | translate }}" formControlName="pendingContainers"/>
+
+                            <label for="first" class="mt-2 title-col"> {{'PACKAGING_BALANCE.BALANCE_CASH' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="col-12 mt-3">
+
+            <div class="form-row mt-2">
+
+                <button class="btn btn-primary btn-block" type="button" [disabled]="!packagingForm.valid" (click)="submit()">
+
+                        {{'GENERAL.SAVE' | translate }}
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

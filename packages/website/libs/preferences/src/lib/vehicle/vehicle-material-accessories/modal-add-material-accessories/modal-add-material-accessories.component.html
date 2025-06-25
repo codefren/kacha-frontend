@@ -1,0 +1,84 @@
+<div class="modal-add-material">
+
+    <div class="row p-4">
+
+        <div class="col-xl-8 col-12 text-xl-left text-center">
+            <label class="title-modal">Complementos materiales </label>
+        </div>
+
+        <div class="col-xl-4 col-12 text-xl-right text-center point" (click)="close()">
+            <img src="assets/icons/close1.svg">
+        </div>
+
+        <form [formGroup]="otherLicenseForm" class="padding-form" style="width: 100%" novalidate action="">
+
+            <div class="col-12 mt-2">
+                <div class="form-row mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+                            <input class="form-control point" id="name" type="text"
+                            placeholder="{{ 'USERS.SETTINGS.WRITE' | translate }}" formControlName="name"/>
+                            <label for="first" class="mt-2 title-col"> {{'USERS.SETTINGS.NAME' | translate }} </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-2">
+                <div class="form-row mt-3">
+                    <div class="form-group input-group">
+                        <span class="has-float-label w-100">
+
+                            <select class="form-select form-control w-100" id="type" formControlName="type" placeholder="Conductor asignado">
+
+                            <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+
+                            <option  value="number">
+
+                               Numérico
+
+                            </option>
+
+                            <option  value="date">
+
+                                Tipo fecha
+
+                             </option>
+
+                             <option  value="text">
+
+                                Tipo texto
+
+                             </option>
+
+                            </select>
+
+                            <label for="type" class="mt-2 title-col">Tipo de dato  </label>
+
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="col-12 mt-3">
+            <div class="form-row mt-2">
+                <ng-container *ngIf="!data">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!otherLicenseForm.valid" (click)="submit()">
+                        {{ 'USERS.SETTINGS.ADD' | translate }}
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="data">
+                    <button class="btn btn-primary btn-block" type="button" [disabled]="!otherLicenseForm.valid" (click)="submit()">
+                        {{'GENERAL.SAVE' | translate }}
+                    </button>
+                    <button class="btn btn-outline-primary btn-block" type="button" (click)="deleteService(data)">
+                        {{ 'GENERAL.DELETE' | translate }}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

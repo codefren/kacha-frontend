@@ -1,0 +1,52 @@
+<div class="documentation">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="col-12 pt-3 pb-2">
+
+                <p class="title-docmuent mb-1">Registro de documentación del vehículo</p>
+
+                <p class="sub-title-document">Carga en Polpoo toda la documentación del vehículo para completar la ficha.</p>
+
+            </div>
+
+
+            <div class="container-fluid pb-4">
+
+                <!-- datatables de cargar documentos -->
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <table id="vehicleDocument" style="width: 100%; text-align: center;" class="table table-striped table-responsive-lg table-responsive-md  table-bordered mb-0 mt-4">
+                            <thead>
+                                <tr>
+                                    <th style="border-top-left-radius: 6px !important;">Tipo</th>
+                                    <th class="text-left" width="50%">Nombre del documento</th>
+                                    <th width="30%">Fecha subida</th>
+                                    <th></th>
+                                    <th style="border-top-right-radius: 6px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+
+                    </div>
+
+                    <div class="col-12">
+                        <p class="add-document point" (click)="addDocument()">+ Añadir otro documento</p>
+                    </div>
+                </div>
+
+
+
+                <!-- enddatatables de cargar documentos -->
+            </div>
+
+        </div>
+    </div>
+</div>

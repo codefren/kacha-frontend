@@ -1,0 +1,663 @@
+<div class="visualization">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <p class="sub-title-user-storage mb-2">{{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.NAME' | translate }}</p>
+
+                    <p class="text-information-storage">{{ 'DESCRIPTIONS.VIEW_RESUME_ROUTE' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+
+                <!-- Matricula -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="ShowRegistration" [checked]="(interferencePreferences$ | async).ShowRegistration" (change)="ToggleInterfaceResumeRoute('ShowRegistration',$event.target.checked)" />
+
+                                <label for="ShowRegistration"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.REGISTRATION' | translate }}" for="ShowRegistration" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.REGISTRATION' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- carga -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="ShowDemand" [checked]="(interferencePreferences$ | async).ShowDemand" (change)="ToggleInterfaceResumeRoute('ShowDemand',$event.target.checked)" />
+
+                                <label for="ShowDemand"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.DEMAND' | translate }}" for="ShowDemand" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.DEMAND' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Capacidad -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="ShowCapacity" [checked]="(interferencePreferences$ | async).ShowCapacity" (change)="ToggleInterfaceResumeRoute('ShowCapacity',$event.target.checked)" />
+
+                                <label for="ShowCapacity"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.CAPACITY' | translate }}" for="ShowCapacity" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.CAPACITY' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Volumen -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="ShowVolumen" [checked]="(interferencePreferences$ | async).ShowVolumen" (change)="ToggleInterfaceResumeRoute('ShowVolumen', $event.target.checked)" />
+
+                                <label for="ShowVolumen"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.REGISTRATION' | translate }}" for="ShowVolumen" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.VOLUME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- chofer -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="ShowDriver" [checked]="(interferencePreferences$ | async).ShowDriver" (change)="ToggleInterfaceResumeRoute('ShowDriver',$event.target.checked)" />
+
+                                <label for="ShowDriver"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.DRIVER' | translate }}" for="ShowDriver" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.ROUTE_PLANNING.VIEW_RESUME_ROUTE.DRIVER' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <p class="sub-title-user-storage mb-2">Visualización tabla planificador</p>
+
+                    <p class="text-information-storage">{{ 'DESCRIPTIONS.FIELDS_TO_SHOW' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+
+                <!-- Apertura -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-open-time" [checked]="(interferencePreferences$ | async).openTime" (change)="toggleInterfacePreference('openTime', $event.target.checked )" />
+
+                                <label for="show-open-time"></label>
+
+                            </div>
+
+                            <label for="show-open-time" class="label-check point">
+
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.OPEN_TIME' | translate}}
+
+                            </label>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- Hora entrega -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-ready-time" [checked]="(interferencePreferences$ | async).readyTime" (change)="toggleInterfacePreference('readyTime', $event.target.checked )" />
+
+                                <label for="show-ready-time"></label>
+
+                            </div>
+
+                            <label for="show-ready-time" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.ARRIVAL_TIME' | translate}}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Total KM -->
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-travel-distance" [checked]="(interferencePreferences$ | async).travelDistance" (change)="toggleInterfacePreference('travelDistance', $event.target.checked )" />
+
+                                <label for="show-travel-distance"></label>
+
+                            </div>
+
+                            <label for="show-travel-distance" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.TRAVEL_DISTANCE' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Límite entrega -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-limit-time" [checked]="(interferencePreferences$ | async).limitTime" (change)="toggleInterfacePreference('limitTime', $event.target.checked )" />
+
+                                <label for="show-limit-time"></label>
+
+                            </div>
+
+                            <label for="show-limit-time" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.CLOSING_TIME' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Retraso cliente -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-customer-wait-time" [checked]="(interferencePreferences$ | async).customerWaitTime" (change)="toggleInterfacePreference('customerWaitTime', $event.target.checked )" />
+
+                                <label for="show-customer-wait-time"></label>
+
+                            </div>
+
+                            <label for="show-customer-wait-time" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.CLIENT_DELAY' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Diferencia apertura -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-arrival" [checked]="(interferencePreferences$ | async).arrival" (change)="toggleInterfacePreference('arrival', $event.target.checked )" />
+
+                                <label for="show-arrival"></label>
+
+                            </div>
+
+                            <label for="show-arrival" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.ARRIVAL' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Tiempo circulando -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="show-travelTime" [checked]="(interferencePreferences$ | async).travelTime" (change)="toggleInterfacePreference('travelTime', $event.target.checked )" />
+
+                                <label for="show-travelTime"></label>
+
+                            </div>
+
+                            <label for="show-travelTime" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.TRAVEL_TIME' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Vehículo parado -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="show-vehicleWaitTime" [checked]="(interferencePreferences$ | async).vehicleWaitTime" (change)="toggleInterfacePreference('vehicleWaitTime', $event.target.checked )" />
+
+                                <label for="show-vehicleWaitTime"></label>
+
+                            </div>
+
+                            <label for="show-vehicleWaitTime" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.VEHICLE_DELAY' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Población -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="show-population" [checked]="(interferencePreferences$ | async).population" (change)="toggleInterfacePreference('population', $event.target.checked )" />
+
+                                <label for="show-population"></label>
+
+                            </div>
+
+                            <label for="show-population" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.POPULATION' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Tiempo de entrega -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-deliverytime" [checked]="(interferencePreferences$ | async).deliverytime" (change)="toggleInterfacePreference('deliverytime', $event.target.checked )" />
+
+                                <label for="show-deliverytime"></label>
+
+                            </div>
+
+                            <label for="show-deliverytime" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.DELIVERYTIME' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Carga -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-demand" [checked]="(interferencePreferences$ | async).demand" (change)="toggleInterfacePreference('demand', $event.target.checked )" />
+
+                                <label for="show-demand"></label>
+
+                            </div>
+
+                            <label for="show-demand" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.DEMAND' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Esp. Servicio -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-skill" [checked]="(interferencePreferences$ | async).skill" (change)="toggleInterfacePreference('skill', $event.target.checked )" />
+
+                                <label for="show-skill"></label>
+
+                            </div>
+
+                            <label for="show-skill" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.SKILL' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Permitir retraso en cliente -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-allowDelayTime" [checked]="(interferencePreferences$ | async).allowDelayTime" (change)="toggleInterfacePreference('allowDelayTime', $event.target.checked )" />
+
+                                <label for="show-allowDelayTime"></label>
+
+                            </div>
+
+                            <label for="show-allowDelayTime" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.ALLOWED_DELAY_TIME' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Especificación de ruta -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="show-routeSpecification" [checked]="(interferencePreferences$ | async).routeSpecification" (change)="toggleInterfacePreference('routeSpecification', $event.target.checked)" />
+
+                                <label for="show-routeSpecification"></label>
+
+                            </div>
+
+                            <label for="show-routeSpecification" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.ROUTE_SPECIFICACION' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Metros cúbicos -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-volumetric" [checked]="(interferencePreferences$ | async).volumetric" (change)="toggleInterfacePreference('volumetric', $event.target.checked )" />
+
+                                <label for="show-volumetric"></label>
+
+                            </div>
+
+                            <label for="show-volumetric" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.VOLUMETRIC' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Código postal -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-postalCode" [checked]="(interferencePreferences$ | async).postalCode" (change)="toggleInterfacePreference('postalCode', $event.target.checked )" />
+
+                                <label for="show-postalCode"></label>
+
+                            </div>
+
+                            <label for="show-postalCode" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.CODE_POSTAL' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Cajas -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-box" [checked]="(interferencePreferences$ | async).box" (change)="toggleInterfacePreference('box', $event.target.checked )" />
+
+                                <label for="show-box"></label>
+
+                            </div>
+
+                            <label for="show-box" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.BOX' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Coste servicio -->
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little  margin-days round-1">
+
+                                <input type="checkbox" id="show-serviceCost" [checked]="(interferencePreferences$ | async).serviceCost" (change)="toggleInterfacePreference('serviceCost', $event.target.checked )" />
+
+                                <label for="show-serviceCost"></label>
+
+                            </div>
+
+                            <label for="show-serviceCost" class="label-check point">
+                                
+                                {{ 'PREFERENCES.INTERFACE.ROUTE_PLANNING.FIELDS_TO_SHOW.SERVICE_COST' | translate}}
+                                
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

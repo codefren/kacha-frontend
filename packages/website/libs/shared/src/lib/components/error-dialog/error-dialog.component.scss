@@ -1,0 +1,43 @@
+.ErrorDialogComponent {
+    .card-header-error {
+        background: #F44336 !important;
+        border-radius: 5px 5px 0 0 !important;
+        border-bottom: 1px solid red !important;
+        padding: 18px !important;
+        position: relative !important;
+        font-size: 15px !important;
+        color: #ffffff!important;
+        font-family: Roboto, "Helvetica Neue", sans-serif !important;
+        font-weight: 400 !important;
+        .card-title {
+            color: #ffffff !important;
+            text-align: center;
+        }
+    }
+    .card-body {
+        padding: 0;
+        .modal-block {
+            font-size: 1.5em !important;
+            color: #2f2e2e !important;
+            h3 {
+                font-weight: 400 !important;
+                letter-spacing: normal !important;
+                line-height: 1.2 !important;
+                font-size: 1.2em !important;
+                margin: 0;
+            }
+        }
+    }
+    .card-footer {
+        border-top: 0;
+        .btn-dark-color {
+            background-color: #e9edf1;
+            border-color: #e9edf1 #e9edf1 #e9edf1;
+            color: #F44336;
+        }
+        .btn-dark:hover {
+            background-color: #F44336 !important;
+            border-color: #F44336 #F44336 #F44336;
+        }
+    }
+}

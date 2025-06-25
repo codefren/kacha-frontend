@@ -1,0 +1,66 @@
+<div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-3">
+                <i class="fas fa-times close-button" (click)="activeModal.close([false, null])"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ data.title }}</p>
+                <!--   <hr class="line-primary" /> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-12 font-general">
+                <form [formGroup]="formDemo" class="p-4">
+                    <div class="form-row">
+                        <label for="start">
+                            {{ 'COMPANIES.DATE_FROM' | translate }} <span class="asterisco">* </span>
+                        </label>
+                        <div class="input-group" [ngClass]="{ 'has-danger': formDemo.controls['start'].invalid && ( formDemo.controls['start'].dirty || formDemo.controls['start'].touched) }">
+                            <input class="form-control" placeholder="{{ 'COMPANIES.DATE_FROM' | translate }}" formControlName="start" ngbDatepicker #d="ngbDatepicker" autocomplete="off" id="start" [minDate]="min" [(ngModel)]="date" readonly>
+                            <button class="btn btn-calendar table-append m-0 calendar" (click)="d.toggle()" type="button">
+                                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                            </button>
+                            <ng-container *ngFor="let validation of session_messages.start">
+                                <div class="w-100 text-center">
+                                    <small class="form-control-feedback text-danger" *ngIf="formDemo.get('start').hasError( validation.type ) && (formDemo.get('start').dirty || formDemo.get('start').touched)">
+                                        {{ validation.message }}
+                                    </small>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <!-- <div class="col-md-5 col-6 pt-2 pl-4">
+                        </div>
+                        <div class="col-md-7 col-6">
+                        </div> -->
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-md-6 col-12 text-md-right text-center">
+                            <button class="btn btn-cancel size-btn-modal" (click)="activeModal.close([false, null])">
+                                {{ 'GENERAL.CANCEL' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-md-6 col-12 text-md-left text-center mt-2 mt-md-0">
+                            <button id="card-button" class="btn btn-primary size-btn-modal modal-confirm" [disabled]="!formDemo.valid" (click)="activeModal.close([true, formDemo.value])">
+                                {{ 'GENERAL.ACCEPT' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

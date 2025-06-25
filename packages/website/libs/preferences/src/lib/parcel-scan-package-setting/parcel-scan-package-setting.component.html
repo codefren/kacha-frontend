@@ -1,0 +1,98 @@
+<div class="scan-packages">
+
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row" *ngIf="companyPreferencesPackage">
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="">
+
+                        <div class="border-special">
+
+                            <div class="switch w-100">
+
+                                <label class="switch-width mb-0">
+        
+                                    <input type="checkbox" [value]="companyPreferencesPackage.allowVerifcationScanner" [checked]="companyPreferencesPackage.allowVerifcationScanner" (change)="changeGeneral($event.target.checked, 'allowVerifcationScanner')"/>
+        
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                    <span class="lever-text toogle-style"> {{'PARCEL.VERIFICATION_OF_PACKAGES_WITH_SCANNER' | translate}} </span>
+        
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{'PARCEL.BYE_ACTIVATING_THE_PACKAGE_SCANNER_VERIFICATION_OPTION' | translate }} </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- preferencias para escanear producto -->
+    <ng-container *ngIf="companyPreferencesPackage && companyPreferencesPackage.allowVerifcationScanner">
+
+        <div class="card pt-1 mt-2">
+
+            <div class="card-body p-xl-4">
+
+                <div class="col-12 p-xl-0 pt-2">
+                    <label class="title-product"> {{ 'PARCEL.TYPE_OF_PACKAGE_VERIFICATION' | translate }} </label>
+
+                    <p class="sub-title mt-1"> {{ 'PARCEL.SELECT_HOW_YOU_WANT_TO_VERIFY_THE_PACKAGES_BY_DELIVERY_NOTE_OR_PRODUCT' | translate }} </p>
+                </div>
+
+
+                <!-- productos -->
+
+                <div class="col-xl-12 col-12 border-col-tips mt-4">
+
+                    <div class="row pt-2 pb-2">
+                        <div class="col-12 mb-1 d-flex flex-row">
+                            <div class="round round-little margin-days">
+                                <input type="checkbox" id="allowVerifcationProductScanner" [value]="companyPreferencesPackage.allowVerifcationProductScanner" [checked]="companyPreferencesPackage.allowVerifcationProductScanner" (change)="changeGeneralAlbaran($event.target.checked, 'allowVerifcationProductScanner')"
+                                />
+                                <label for="allowVerifcationProductScanner"></label>
+                            </div>
+                            <label for="allowVerifcationProductScanner" class="label-check point">
+                                {{'PARCEL.PRODUCT_VERIFICATION_WITH_SCANNER' | translate}}
+                            </label>
+
+                        </div>
+                        <div class="col-12">
+
+                            <p class="sub-title-road mt-xl-0 pt-3"> {{'PARCEL.BYE_ACTIVATING_THE_PRODUCT_VERIFICATION_OPTION' | translate }} </p>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <!-- end productos -->
+
+
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+    <!-- end preferencias para escanear producto -->
+
+
+</div>

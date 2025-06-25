@@ -1,0 +1,135 @@
+<div class="easyroute-save-route">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-3">
+                <i class="fas fa-times close-button" (click)="activeModal.close([false, null])"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ 'SESSION.TITLE' | translate }}</p>
+            </div>
+        </div>
+
+        <div class="container">
+
+        </div>
+
+        <form [formGroup]="sessionForm" class="pad-special">
+            <div class="form-row">
+                <div class="col-12">
+                    <div class="form-group" [ngClass]="{
+                        'has-danger':
+                        sessionForm.controls['name'].invalid &&
+                        (sessionForm.controls['name'].dirty ||
+                        sessionForm.controls['name'].touched)
+                    }">
+                        <label for="save_name">
+                            {{ 'SESSION.NAME' | translate }}
+                            <span class="asterisco"> * </span>
+                        </label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="name" placeholder="{{ 'SESSION.NAME' | translate }}" id="save_name" />
+    
+                        <ng-container *ngFor="let validation of session_messages.name">
+                            <div class="text-left w-100">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        sessionForm.get('name').hasError(validation.type) &&
+                                        (sessionForm.get('name').dirty ||
+                                            sessionForm.get('name').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-8">
+                </div> -->
+            </div>
+
+            <div class="form-row">
+                
+                <div class="col-12">
+                    <div class="form-group" [ngClass]="{
+                        'has-danger':
+                        sessionForm.controls['description'].invalid &&
+                        (sessionForm.controls['description'].dirty ||
+                        sessionForm.controls['description'].touched)
+                    }">
+                        <label for="save_description">
+                            {{ 'SESSION.DESCRIPTION' | translate }}
+                            <span class="asterisco"> * </span>
+                        </label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="description" placeholder="{{ 'SESSION.DESCRIPTION' | translate }}" id="save_description" />
+    
+                        <ng-container *ngFor="let validation of session_messages.description">
+                            <div class="w-100 text-left">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        sessionForm
+                                            .get('description')
+                                            .hasError(validation.type) &&
+                                        (sessionForm.get('description').dirty ||
+                                            sessionForm.get('description').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-12">
+                    <label for="savedDate">
+                        {{ 'COMPANIES.DATE_FROM' | translate }}
+                        <span class="asterisco"> * </span>
+                    </label>
+                    <div class="input-group" [ngClass]="{
+                        'has-danger':
+                        sessionForm.controls['savedDate'].invalid &&
+                        (sessionForm.controls['savedDate'].dirty ||
+                        sessionForm.controls['savedDate'].touched)
+                    }">
+                        <input class="form-control" placeholder="{{ 'COMPANIES.DATE_FROM' | translate }}" autocomplete="off" formControlName="savedDate" ngbDatepicker #b="ngbDatepicker" id="savedDate" [minDate]="min" [(ngModel)]="min" readonly id="savedDate" />
+                        <div class="input-group-append">
+                            <button class="btn btn-calendar calendar" (click)="b.toggle()" type="button">
+                            <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                            </button>
+                        </div>
+
+                        <ng-container *ngFor="let validation of session_messages.name">
+                            <div class="w-100 text-center">
+                                <small class="form-control-feedback text-danger col-especial" *ngIf="
+                                        sessionForm
+                                            .get('savedDate')
+                                            .hasError(validation.type) &&
+                                        (sessionForm.get('savedDate').dirty ||
+                                            sessionForm.get('savedDate').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+
+        <footer class="p-3 mt-3 mt-md-0">
+            <div class="row">
+                <div class="col-md-6 col-12 mb-sm-0 text-center text-sm-right">
+                    <button type="button" class="btn btn-cancel size-btn-modal " (click)="activeModal.close([false, null])">
+                        {{ 'GENERAL.CANCEL' | translate }}
+                    </button>
+                </div>
+                <div class="col-12 col-md-6 mt-2 mt-md-0 text-center text-sm-left">
+                    <button type="button" class="btn size-btn-modal size-btn-modal-confirm" (click)="activeModal.close([true, sessionForm.value])" [disabled]="!sessionForm.valid">
+                        {{ 'GENERAL.ACCEPT' | translate }}
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

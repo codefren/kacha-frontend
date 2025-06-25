@@ -1,0 +1,267 @@
+.unemployment-table {
+    .card-left {
+        // width: 180px;
+        height: 100px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .card-rigth {
+        // width: 195px;
+        height: 100px;
+        background: #E8E9EE;
+        box-shadow: 0px 0px 10px #efefef;
+        border-radius: 5px;
+    }
+    .p-sub-number {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 29px;
+        color: #000000;
+    }
+    .p-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #000000;
+    }
+    .col-1,
+    .col-2,
+    .col-3,
+    .col-4,
+    .col-5,
+    .col-6,
+    .col-7,
+    .col-8,
+    .col-9,
+    .col-10,
+    .col-11,
+    .col-12,
+    .col,
+    .col-auto,
+    .col-sm-1,
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4,
+    .col-sm-5,
+    .col-sm-6,
+    .col-sm-7,
+    .col-sm-8,
+    .col-sm-9,
+    .col-sm-10,
+    .col-sm-11,
+    .col-sm-12,
+    .col-sm,
+    .col-sm-auto,
+    .col-md-1,
+    .col-md-2,
+    .col-md-3,
+    .col-md-4,
+    .col-md-5,
+    .col-md-6,
+    .col-md-7,
+    .col-md-8,
+    .col-md-9,
+    .col-md-10,
+    .col-md-11,
+    .col-md-12,
+    .col-md,
+    .col-md-auto,
+    .col-lg-1,
+    .col-lg-2,
+    .col-lg-3,
+    .col-lg-4,
+    .col-lg-5,
+    .col-lg-6,
+    .col-lg-7,
+    .col-lg-8,
+    .col-lg-9,
+    .col-lg-10,
+    .col-lg-11,
+    .col-lg-12,
+    .col-lg,
+    .col-lg-auto,
+    .col-xl-1,
+    .col-xl-2,
+    .col-xl-3,
+    .col-xl-4,
+    .col-xl-5,
+    .col-xl-6,
+    .col-xl-7,
+    .col-xl-8,
+    .col-xl-9,
+    .col-xl-10,
+    .col-xl-11,
+    .col-xl-12,
+    .col-xl,
+    .col-xl-auto {
+        position: relative;
+        width: 100%;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .form-control {
+        height: 45px;
+        border: 1.5px solid #DFE1E8;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .form-control-date {
+        border-top-left-radius: 5px !important;
+        border-bottom-left-radius: 5px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    .input-personalize-datatable {
+        border-radius: 15px !important;
+        padding: 10px 20px !important;
+        height: 34px !important;
+    }
+    .search-general {
+        max-width: initial;
+        height: 45px !important;
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-start-end-radius: 1px !important;
+        border-top-left-radius: 5px !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 5px !important;
+    }
+    .datatables-input-group-width {
+        /*  width: 246px !important; */
+        width: 100% !important;
+    }
+    .input-group-appenda {
+        .form-control {
+            border-top-right-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+        }
+        .input-group-text {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+    .input-group-text {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+    .table-append {
+        background-color: #fff !important;
+        border-right: 1px solid #ced4da;
+        border-top: 1px solid #ced4da;
+        border-bottom: 1px solid #ced4da;
+        color: #ff9e4d;
+    }
+    .font-row {
+        background: #FFFFFF !important;
+    }
+    .btn-calendar {
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+    }
+    .dp-hidden {
+        width: 0;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+    .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+    }
+    .custom-day.focused {
+        background-color: #e6e6e6;
+    }
+    .custom-day.range,
+    .custom-day:hover {
+        background-color: rgb(2, 117, 216);
+        color: white;
+    }
+    .custom-day.faded {
+        background-color: rgba(2, 117, 216, 0.5);
+    }
+    .div-drop {
+        position: absolute !important;
+        /*  transform: translate3d(1223px, 53px, 0px);
+        top: 0px !important;
+        left: 0px !important; */
+        top: 53px !important;
+        left: 97% !important;
+        will-change: transform;
+        position: absolute;
+        top: 100%;
+        display: block !important;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 14rem;
+        padding: 0;
+        margin: 0.125rem 0 0;
+        font-size: 1rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.25rem;
+    }
+    .title-retunrs {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #3B4FFF;
+    }
+    .img-retunrs {
+        vertical-align: inherit;
+    }
+    .title-drop {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #ecf5ff;
+    }
+    .img-option {
+        vertical-align: initial !important;
+    }
+    .opacity-cost-select {
+        opacity: 0.7;
+    }
+    .button-blue-coste {
+        //width: 143px;
+        width: 90%;
+        height: 45px;
+    }
+    .size-date {
+        font-size: 14px !important;
+    }
+    .size-number {
+        font-size: 15px !important;
+    }
+    @media screen and ( min-width: 320px) and ( max-width: 414px) {
+        .button-blue-coste {
+            //width: 143px;
+            width: 9rem;
+        }
+    }
+}

@@ -1,0 +1,81 @@
+<div class="notification-setting bg-white p-3">
+
+    <div class="row">
+
+        <!-- mini menu seleccionable -->
+
+        <div class="col-xl-3 col-12">
+
+            <label class="title-left-sheet  mt-2"> {{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }} </label>
+
+            <ul class="list-group">
+
+                <li class="list-group-item point my-2">
+
+                    <ul class="sub-ul">
+
+                        <li class="list-group-item sub-li point my-2 " [ngClass]="{'background-selecter': select === 'notices'}" (click)="changePage('notices')">
+                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'notices'}">
+                                {{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }}
+                            </label>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
+            <!-- volver -->
+
+            <div class="point" (click)="retunrsList()">
+
+                <img class="img-Returns point mr-1" src="assets/icons/retunrsBlue.svg">
+
+                <label class="retursList point"> {{'SHEET_ROUTE.RETURN' | translate }} </label>
+
+            </div>
+
+        </div>
+
+        <!-- lines divisoria -->
+
+        <div class="d-flex" style="height: 200px;">
+
+            <div class="vr"></div>
+
+        </div>
+
+        <!-- Contenido -->
+
+        <div class="col-xl-9 col-12">
+
+            <div class="row align-items-center">
+
+                <div class="col-xl-6 col-12 text-xl-left text-center mt-1">
+
+                    <ng-container *ngIf="select === 'notices'">
+
+                        <label class="title-left-sheet" for=""> {{ 'NOTIFICATIONS.SETTINGS.NOTICES' | translate }}</label>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 p-0 mt-3">
+
+                <ng-container *ngIf="select === 'notices'">
+
+                   <easyroute-notices></easyroute-notices>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

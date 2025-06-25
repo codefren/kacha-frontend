@@ -1,0 +1,1832 @@
+<div class="generic-information">
+
+    <div class="card">
+
+        <form *ngIf="createVehicleFormGroup" [formGroup]="createVehicleFormGroup">
+
+            <div class="card-body pb-4">
+
+                <div class="col-12 pt-3">
+
+                    <p class="title-generic mb-1">Datos del vehículo</p>
+
+                    <p class="sub-title">Introduce y visualiza la información asignada a este vehículo</p>
+
+                </div>
+
+
+                <!-- formulario -->
+
+                <div class="container-fluid">
+
+                    <!-- Datos del vehículo -->
+
+
+                    <div class="form-row mt-3">
+
+                        <!-- vehicleType -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+        
+                                    <select class="form-select form-control w-100" id="vehicleType" formControlName="vehicleType" placeholder="Seleccione">
+        
+                                    <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+        
+                                    <option *ngFor="let item of vehiclesType" [value]="item.id">
+        
+                                        {{ item.name }}
+        
+                                    </option>
+        
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> {{ 'VEHICLES.VEHICLE_TYPE' | translate }} </label>
+        
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end vehicleType -->
+
+                        <!-- name -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="form-group input-group" [ngClass]="{'has-danger':createVehicleFormGroup.controls['name'].invalid && (createVehicleFormGroup.controls['name'].dirty || createVehicleFormGroup.controls['name'].touched) }">
+                                <span class="has-float-label w-100">
+                                    <input  class="form-control point" type="text" id="name" autocomplete="off" placeholder="Nombre/ número" formControlName="name" [ngClass]="{'form-control-danger': createVehicleFormGroup.controls['name'].invalid &&  (createVehicleFormGroup.controls['name'].dirty || createVehicleFormGroup.controls['name'].touched)}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> Nombre/ número <span class="asterisco"> *</span></label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.name">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                            createVehicleFormGroup
+                                                .get('name')
+                                                .hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('name').dirty ||
+                                                createVehicleFormGroup.get('name').touched)
+                                        ">
+                                        {{ validation.message }}
+                                    </small>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+                        <!-- end name -->
+
+                        <!-- registration -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['registration'].invalid && (createVehicleFormGroup.controls['registration'].dirty || createVehicleFormGroup.controls['registration'].touched)}">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="registration" type="text" placeholder="{{ 'VEHICLES.PLATE' | translate }}" formControlName="registration" [ngClass]="{'form-control-danger': createVehicleFormGroup.controls['registration'].invalid && (createVehicleFormGroup.controls['registration'].dirty || createVehicleFormGroup.controls['registration'].touched) }" />
+        
+                                    <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.PLATE' | translate }} <span class="asterisco"> *</span></label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.registration">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                createVehicleFormGroup
+                                                    .get('registration')
+                                                    .hasError(validation.type) &&
+                                                (createVehicleFormGroup.get('registration').dirty ||
+                                                    createVehicleFormGroup.get('registration')
+                                                        .touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end registration -->
+
+                        <!-- vehicleBrand -->
+
+                        <div class="col-xl-4 col-12 mt-2">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['vehicleBrand'].invalid && (createVehicleFormGroup.controls['vehicleBrand'].dirty || createVehicleFormGroup.controls['vehicleBrand'].touched)}">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="vehicleBrand" type="text"  placeholder="{{ 'VEHICLES.VEHICLE_BRAND' | translate }}" formControlName="vehicleBrand"  [ngClass]="{'form-control-danger': createVehicleFormGroup.controls['vehicleBrand'].invalid && (createVehicleFormGroup.controls['vehicleBrand'].dirty || createVehicleFormGroup.controls['vehicleBrand'].touched) }"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.VEHICLE_BRAND' | translate }} </label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.vehicleBrand">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                createVehicleFormGroup
+                                                    .get('vehicleBrand')
+                                                    .hasError(validation.type) &&
+                                                (createVehicleFormGroup.get('vehicleBrand').dirty ||
+                                                    createVehicleFormGroup.get('vehicleBrand')
+                                                        .touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end vehicleBrand -->
+
+                        <!-- model -->
+
+                        <div class="col-xl-4 col-12 mt-2">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['model'].invalid && (createVehicleFormGroup.controls['model'].dirty || createVehicleFormGroup.controls['model'].touched)}">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" id="model" type="text" formControlName="model" placeholder="{{'VEHICLES.MODEL' | translate }}"  [ngClass]="{'form-control-danger': createVehicleFormGroup.controls['model'].invalid && (createVehicleFormGroup.controls['model'].dirty || createVehicleFormGroup.controls['model'].touched) }"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{'VEHICLES.MODEL' | translate }} </label>
+
+                                </span>
+
+                                <ng-container *ngFor="let validation of vehicles_messages.model">
+
+                                    <div class="w-100 text-left">
+
+                                        <small class="form-control-feedback text-danger" *ngIf="
+
+                                                createVehicleFormGroup
+                                                    .get('model')
+                                                    .hasError(validation.type) &&
+                                                (createVehicleFormGroup.get('model').dirty ||
+                                                    createVehicleFormGroup.get('model')
+                                                        .touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end model -->
+
+                        <!-- frameNumber -->
+
+                        <div class="col-xl-4 col-12 mt-2">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['frameNumber'].invalid && (createVehicleFormGroup.controls['frameNumber'].dirty || createVehicleFormGroup.controls['frameNumber'].touched)}">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="frameNumber" type="text" formControlName="frameNumber" placeholder="{{ 'VEHICLES.FRAME_NUMBER' | translate }}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.FRAME_NUMBER' | translate }} </label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.frameNumber">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                createVehicleFormGroup.get('frameNumber').hasError(
+                                                    validation.type
+                                                ) &&
+                                                (createVehicleFormGroup.get('frameNumber').dirty ||
+                                                createVehicleFormGroup.get('frameNumber').touched)
+                                            ">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end frameNumber -->
+
+                        <!-- acquisitionDate -->
+
+                        <div class="col-xl-4 col-12 mt-2">
+
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="acquisitionDate" type="date" formControlName="acquisitionDate" placeholder="{{'VEHICLES.ACQUISITION_DATE' | translate}}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{'VEHICLES.ACQUISITION_DATE' | translate}} </label>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- end acquisitionDate -->
+
+                        <!-- lowDate -->
+
+                        <div class="col-xl-4 col-12 mt-2">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" id="lowDate" type="date" formControlName="lowDate" placeholder="{{'VEHICLES.LOW_DATE' | translate }}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{'VEHICLES.LOW_DATE' | translate }} </label>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end lowDate -->
+
+                        <!-- licenseId -->
+
+                        <div class="col-xl-4 col-12 mt-2">
+
+                            <ng-container *ngIf="loadList == 'loading'">
+                                <div class="text-center p-2">
+                                    <div class="fa-3x">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="(licenseList && licenseList.length == 0 && loadList == 'success')">
+
+                                <div class="pt-3">
+
+                                    <p class="text-center font-italic m-0 text-danger">
+
+                                        {{ 'VEHICLES.MUST_LOAD_AT_LEAST_ONE_USER_WITH_THE_DRIVER_PROFILE' | translate }} {{ 'VEHICLES.COMMERCIAL_DIRECTOR' | translate }} {{ 'VEHICLES.COMMERCIAL' | translate }}.
+
+                                        <ins (click)="redirectUsersList()" class="point">  {{ 'VEHICLES.CLICK_HERE' | translate }} </ins>
+
+                                    </p>
+
+                                </div>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="(licenseList && licenseList.length > 0  && loadList == 'success')">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['licenseId'].invalid && (createVehicleFormGroup.controls['licenseId'].dirty || createVehicleFormGroup.controls['licenseId'].touched)}">
+
+                                    <span class="has-float-label w-100">
+        
+                                    <select class="form-select form-control w-100" id="licenseId" formControlName="licenseId" placeholder="Conductor asignado">
+        
+                                    <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+        
+                                    <option *ngFor="let item of licenseList" [value]="item.id">
+        
+                                        {{ item.name }}
+        
+                                    </option>
+        
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> {{'VEHICLES.MINIMUN_LICENSE' | translate }}  </label>
+
+                                    </span>
+
+
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <!-- END licenseId -->
+
+                        <!-- userId -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+                            <ng-container *ngIf="load == 'loading'">
+                                <div class="text-center p-2">
+                                    <div class="fa-3x">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="(users && users.length == 0 && load == 'success')">
+
+                                <div class="pt-3">
+
+                                    <p class="text-center font-italic m-0 text-danger">
+
+                                        {{ 'VEHICLES.MUST_LOAD_AT_LEAST_ONE_USER_WITH_THE_DRIVER_PROFILE' | translate }} {{ 'VEHICLES.COMMERCIAL_DIRECTOR' | translate }} {{ 'VEHICLES.COMMERCIAL' | translate }}.
+
+                                        <ins (click)="redirectUsersList()" class="point">  {{ 'VEHICLES.CLICK_HERE' | translate }} </ins>
+
+                                    </p>
+
+                                </div>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="(users && users.length > 0  && load == 'success')">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['userId'].invalid && (createVehicleFormGroup.controls['userId'].dirty || createVehicleFormGroup.controls['userId'].touched)}">
+
+                                    <span class="has-float-label w-100">
+        
+                                    <select class="form-select form-control w-100" id="userId" formControlName="userId" placeholder="Conductor asignado">
+        
+                                    <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+        
+                                    <option *ngFor="let item of users" [value]="item.id">
+        
+                                        {{ item.name + ' ' + item.surname }}
+        
+                                    </option>
+        
+                                    </select>
+        
+                                    <label for="type" class="mt-2 title-col"> Conductor asignado <span class="asterisco"> *</span> </label>
+
+                                    </span>
+                                    <ng-container *ngFor="let validation of vehicles_messages.userId">
+                                        <div class="w-100 text-left">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('userId').hasError(validation.type) && (createVehicleFormGroup.get('userId').dirty || createVehicleFormGroup.get('userId').touched)">{{ validation.message }}
+                                         </small>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </ng-container>
+
+
+
+                        </div>
+
+                        <!-- end userId -->
+
+                        <!-- capacity -->
+
+                        <!--  <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" id="capacity" type="number" formControlName="capacity" placeholder="{{ 'VEHICLES.CAPACITY' | translate }}"/>
+        
+                                    <label for="first" class="mt-2 title-col">  {{ 'VEHICLES.CAPACITY' | translate }} </label>
+                                </span>
+
+                            </div>
+                        </div> -->
+
+                        <!-- end capacity -->
+
+                        <!-- weightLimit -->
+
+                        <!--  <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" id="weightLimit" type="number" formControlName="weightLimit" placeholder="{{ 'VEHICLES.CAPACITY' | translate }}"/>
+        
+                                    <label for="first" class="mt-2 title-col">  {{ 'VEHICLES.WEIGHT_LIMIT' | translate }} </label>
+                                </span>
+                                
+
+                            </div>
+                        </div> -->
+
+                        <!-- end weightLimit -->
+
+                        <!-- nextVehicleInspection -->
+
+                        <div class="col-xl-4 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" id="nextVehicleInspection" type="date" formControlName="nextVehicleInspection" placeholder="{{ 'VEHICLES.CAR_INSPECTION' | translate }}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.CAR_INSPECTION' | translate }} </label>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ID ERP-->
+                        <div class="col-xl-4 col-4 mt-3">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['idERP'].invalid && (createVehicleFormGroup.controls['idERP'].dirty || createVehicleFormGroup.controls['idERP'].touched)}">
+
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" id="idERP" type="text" placeholder="Escribir" formControlName="idERP" [ngClass]="{'form-control-danger':createVehicleFormGroup.controls['idERP'].invalid && (createVehicleFormGroup.controls['idERP'].dirty || createVehicleFormGroup.controls[ 'idERP'].touched)}"/>
+                                <label for="first" class="mt-2 title-col"> ID del ERP </label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- end nextVehicleInspection -->
+
+                        <!-- accessories -->
+
+                        <div class="col-xl-12 col-12 mt-2 pb-3">
+                            <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['accessories'].invalid && (createVehicleFormGroup.controls['accessories'].dirty || createVehicleFormGroup.controls['accessories'].touched)}">
+
+                                <span class="has-float-label w-100">
+                                   
+                                    <input class="form-control point" id="accessories" type="text" placeholder="Escribir" formControlName="accessories" [ngClass]="{'form-control-danger':createVehicleFormGroup.controls['accessories'].invalid && (createVehicleFormGroup.controls['accessories'].dirty || createVehicleFormGroup.controls[ 'accessories'].touched)}"/>
+        
+                                <label for="first" class="mt-2 title-col"> Accesorios/ descripción </label>
+                                 <!--   <textarea></textarea>
+        
+                                    <label for="type" class="mt-2 title-col"> Accesorios/ descripción </label> -->
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.accessories">
+                                    <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('accessories').hasError(validation.type) &&
+                                    (createVehicleFormGroup.get('accessories').dirty ||
+                                    createVehicleFormGroup.get('accessories').touched)">
+                                    {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!-- end accessories -->
+
+
+
+
+
+
+                    </div>
+
+                    <!-- end Datos del vehículo -->
+                </div>
+
+            </div>
+
+            <!-- imension y capacidad -->
+
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+
+                <div class="col-12 pt-3">
+
+                    <p class="title-generic mb-1">Dimensión y capacidad</p>
+
+                    <p class="sub-title">Introduce la información volumétrica del vehículo para poder generar y optimizar las rutas.</p>
+
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-xl-4 col-12">
+
+                            <img class="img-car" src="assets/icons/camion.svg">
+
+                        </div>
+
+                        <div class="col-xl-8 col-12 mt-xl-0 mt-2">
+
+                            <div class="form-row">
+
+                                <!-- tare -->
+
+                                <div class="col-xl-6 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['capacity'].invalid && (createVehicleFormGroup.controls['capacity'].dirty || createVehicleFormGroup.controls['capacity'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                        <input class="form-control point" min="0" id="tare" type="number" formControlName="capacity"  placeholder="0.000"  step="01"/>
+                                            
+                                          <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.USEFUL_LOAD' | translate }} </label>
+                                        
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.capacity">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('capacity').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('capacity').dirty ||
+                                            createVehicleFormGroup.get('capacity').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+
+                                <!-- end tare -->
+
+
+                                <!-- mma -->
+
+                                <div class="col-xl-6 col-12 mt-xl-0 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['weightLimit'].invalid && (createVehicleFormGroup.controls['weightLimit'].dirty || createVehicleFormGroup.controls['weightLimit'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point showKg"  min="0" id="mma" type="number" formControlName="weightLimit" placeholder="0.000" step="01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.WEIGHT_LIMIT' | translate }} </label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.weightLimit">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('weightLimit').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('weightLimit').dirty ||
+                                            createVehicleFormGroup.get('weightLimit').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+
+                                <!-- end mma -->
+
+
+                                <!-- usefulLoad -->
+
+                                <div class="col-xl-6 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['usefulLoad'].invalid && (createVehicleFormGroup.controls['usefulLoad'].dirty || createVehicleFormGroup.controls['usefulLoad'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point"  min="0" id="usefulLoad" type="number" formControlName="usefulLoad" placeholder="0.000" step="01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.CAPACITY' | translate }} </label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.usefulLoad">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('usefulLoad').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('usefulLoad').dirty ||
+                                            createVehicleFormGroup.get('usefulLoad').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- end usefulLoad -->
+
+
+                                <!-- liftGate -->
+
+                                <div class="col-xl-6 col-12 mt-3">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+                
+                                            <select class="form-select form-control w-100" id="liftGate" formControlName="liftGate" (change)="changePuertaElevadora($event.target.value)" placeholder="Seleccione">
+                
+                                            <option value="">{{ 'COMPANIES.SELECT' | translate }}</option>
+                
+                                            <option  value="true">
+                
+                                                Sí
+                
+                                            </option>
+                                            <option value="false">
+                
+                                               No
+                
+                                            </option>
+                
+                                            </select>
+                
+                                            <label for="type" class="mt-2 title-col"> {{'VEHICLES.LIFT_GATE' | translate }}  </label>
+                
+                                        </span>
+
+                                    </div>
+
+                                    <!--  <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['liftGate'].invalid && (createVehicleFormGroup.controls['liftGate'].dirty || createVehicleFormGroup.controls['liftGate'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point showKg"  min="0" id="liftGate" type="number" formControlName="liftGate" placeholder="0.000" step="01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{'VEHICLES.LIFT_GATE' | translate }} </label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.liftGate">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('liftGate').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('liftGate').dirty ||
+                                            createVehicleFormGroup.get('liftGate').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div> -->
+
+                                </div>
+
+                                <!-- end liftGate -->
+
+
+                                <!-- length -->
+
+                                <div class="col-xl-6 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['length'].invalid 
+                                        && (createVehicleFormGroup.controls['length'].dirty || createVehicleFormGroup.controls['length'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point showM" min="0" id="length" type="text" formControlName="length" placeholder="0.000" step="01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.LENGTH' | translate }}  </label>
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.length">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('length').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('length').dirty ||
+                                            createVehicleFormGroup.get('length').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+
+                                <!-- end length -->
+
+                                <!-- Width -->
+
+                                <div class="col-xl-6 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['width'].invalid && (createVehicleFormGroup.controls['width'].dirty || createVehicleFormGroup.controls['width'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point showM" id="width"  min="0" type="text" formControlName="width" placeholder="0.000" step="01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.Width' | translate }} </label>
+
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.width">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('width').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('width').dirty ||
+                                            createVehicleFormGroup.get('width').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- end Width -->
+
+                                <!-- HEIGTH -->
+
+                                <div class="col-xl-6 col-12 mt-3">
+
+                                    <div class="form-group input-group" [ngClass]="{'has-danger': createVehicleFormGroup.controls['tall'].invalid && (createVehicleFormGroup.controls['tall'].dirty || createVehicleFormGroup.controls['tall'].touched)}">
+
+                                        <span class="has-float-label w-100">
+
+                                            <input class="form-control point showM" id="tall" min="0" type="text" formControlName="tall" (change)="totalVoluments()" placeholder="0.000" step="01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{'VEHICLES.HEIGTH' | translate }} </label>
+                                        </span>
+                                        <ng-container *ngFor="let validation of vehicles_messages.tall">
+                                            <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('tall').hasError(validation.type) &&
+                                            (createVehicleFormGroup.get('tall').dirty || 
+                                            createVehicleFormGroup.get('tall').touched)">
+                                            {{ validation.message }}
+                                            </small>
+                                        </ng-container>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- end HEIGTH -->
+
+                                <!-- totalVolumen -->
+
+
+                                <div class="col-xl-6 col-12 mt-3">
+
+                                    <div class="form-group input-group">
+
+                                        <span class="has-float-label w-100">
+
+                                            <!-- value="{{totalVolument}}" -->
+
+                                            <input class="form-control point" id="total" type="number" formControlName="totalVolumetricCapacity"   step="0.01"/>
+                                                
+                                            <label for="first" class="mt-2 title-col"> {{ 'VEHICLES.TOTAL_VOLUMETRIC_CAPACITY' | translate }}  </label>
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                                <!-- end totalVolument -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- end imension y capacidad -->
+
+            <!-- horarios -->
+
+            <div class="card-footer pt-3 pb-5" style="display: block;">
+
+
+                <div class="col-12 pt-3">
+
+                    <p class="title-generic mb-1">Horario del vehículo</p>
+
+                    <p class="sub-title">Introduce la información horaria del vehículo para poder generar y optimizar las rutas en función de las horas disponibles.</p>
+
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-xl-4 col-12 mt-3">
+                            <div class="form-group input-group" [ngClass]="{'has-danger':createVehicleFormGroup.controls['deliveryWindowStart'].invalid && (createVehicleFormGroup.controls['deliveryWindowStart'].dirty || createVehicleFormGroup.controls['deliveryWindowStart'].touched)}">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point"  formControlName="deliveryWindowStart" id="deliveryWindowStart" type="time" (change)="changetime($event, deliveryWIndowsStart)" placeholder="00:00" [ngClass]="{'form-control-danger':createVehicleFormGroup.controls['deliveryWindowStart'].invalid && (createVehicleFormGroup.controls['deliveryWindowStart'].dirty || createVehicleFormGroup.controls['deliveryWindowStart'].touched) }" />
+        
+                                    <label for="first" class="mt-2 title-col">Horario inicio circulación </label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.deliveryWindowStart">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('deliveryWindowStart').hasError(validation.type)
+                                             && (createVehicleFormGroup.get('deliveryWindowStart').dirty ||
+                                                createVehicleFormGroup.get('deliveryWindowStart').touched)
+                                            ">
+                                            {{ validation.message }}
+                                            </small
+                                        >
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+        
+                        <div class="col-xl-4 col-12 mt-3">
+        
+                            <div class="form-group input-group" [ngClass]="{'has-danger':createVehicleFormGroup.controls['deliveryWindowEnd'].invalid && (createVehicleFormGroup.controls['deliveryWindowEnd'].dirty || createVehicleFormGroup.controls['deliveryWindowEnd'].touched)}">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control point" formControlName="deliveryWindowEnd" id="deliveryWindowEnd" (change)="changetime($event, deliveryWIndowsEnd)" type="time" placeholder="00:00" [ngClass]="{'form-control-danger':createVehicleFormGroup.controls['deliveryWindowEnd'].invalid && (createVehicleFormGroup.controls['deliveryWindowEnd'].dirty || createVehicleFormGroup.controls['deliveryWindowEnd'].touched) }"/>
+        
+                                    <label for="first" class="mt-2 title-col">Horario fin circulación </label>
+                                </span>
+                                <ng-container *ngFor="let validation of vehicles_messages.deliveryWindowEnd">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="createVehicleFormGroup.get('deliveryWindowEnd').hasError(validation.type)
+                                             && (createVehicleFormGroup.get('deliveryWindowEnd').dirty ||
+                                                createVehicleFormGroup.get('deliveryWindowEnd').touched)
+                                            ">
+                                            {{ validation.message }}
+                                            </small
+                                        >
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                
+        
+                <!-- activateDeliverySchedule -->
+        
+                <div class="col-12 mt-3">
+        
+                    <div class="border-special">
+        
+                        <div class="switch w-100">
+        
+                            <label class="switch-width mb-0">
+        
+                                <input type="checkbox"  formControlName="activateDeliverySchedule"
+        
+                                (change)="changedeliveryPointScheduleTypeId($event.target.value)"/>
+        
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+        
+                                <span class="lever-text">Aplicar horario específico (Programar el horario por días o especificación)</span>
+        
+                            </label>
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <!-- end activateDeliverySchedule -->
+        
+                <!-- deliveryPointScheduleTypeId -->
+        
+                <div class="col-12" *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activateDeliverySchedule'] && createVehicleFormGroup.controls['activateDeliverySchedule'].value">
+                   
+                    <div class="col-xl-12 col-12 border-col-tips">
+        
+        
+                        <div class="row pt-2 border-specification pl-xl-2" *ngIf="type">
+                            <div class="mt-2 d-flex" [ngClass]="{ 'col-xl-3 col-12': i ===0, 'col-xl-6 col-12' :i >0 }" *ngFor="let item of type; let i=index;">
+                                <div class="round round-little margin-days">
+                                    <input type="radio" (change)="changedeliveryPointScheduleTypeId($event.target.value)" formControlName="deliveryPointScheduleTypeId" [value]="item.id" [id]="'deliveryPointScheduleTypeId' + item.id" />
+                                    <label [for]="'deliveryPointScheduleTypeId' + item.id"></label>
+                                </div>
+                                <label [for]="'deliveryPointScheduleTypeId' + item.id" class="label-check point">
+                                    {{ item.name }}
+                                </label>
+        
+                            </div>
+        
+                        </div>
+        
+        
+        
+                    </div>
+        
+                   
+        
+                </div>
+        
+                <!-- end deliveryPointScheduleTypeId -->
+
+                <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activateDeliverySchedule'] && createVehicleFormGroup.controls['activateDeliverySchedule'].value">
+
+                    <div class="col-12 pb-3">
+                        
+                        <div class="border-specification border-end">
+
+                            <ng-container *ngIf="!loadingSchedule">
+                                 <!-- Aplicar horario por día -->
+        
+                            <div class="pt-0 col-12" *ngIf="vehicles.schedule && 
+                            createVehicleFormGroup && createVehicleFormGroup.controls['deliveryPointScheduleTypeId'] && 
+                            createVehicleFormGroup.controls['deliveryPointScheduleTypeId'].value == 1">
+    
+                            <div class="col-12 text-left p-0 pt-3">
+                                <p for="" class="m-0 title-specificacion "> Al activar el “horario por día” puedes activar de manera manual los días de la semana que el cliente está disponible y fijar un día obligatorio de entrega. </p>
+                            </div>
+    
+                           <!--  <div class="col-12 text-left p-0 pt-3" (click)="applyChangeScheduleVisit()">
+                                <img class="img-copy" src="assets/icons/copy.svg" alt="">
+                                <label class="label-copy point pl-xl-2">Copiar horario de arriba a todos</label>
+                            </div> -->
+    
+    
+                            <!-- lunes -->
+                            <div class="col-12 pl-lg-0 mt-3">
+    
+                                <div class="form-row border-special pt-1 pb-1">
+                                
+                                    <!-- checkbox -->
+    
+                                    <div class="col-lg-2 col-12 align-self-center">
+                                    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                                        <input
+                                                            type="checkbox"
+                                                            (change)="changeScheduleDay($event.target.checked, 1, false)" formControlName="activeScheduleMonday" id="activeScheduleMonday"
+                                                        />
+                                                        <span class="lever lever-general switch-col-primary m-2"></span>
+                
+                                                        <span  class="pl-2 open-style" *ngIf="
+                                                        createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleMonday'] && 
+                                                        createVehicleFormGroup.controls['activeScheduleMonday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.MONDAY' |translate }}
+                                                        </span>  
+                                                        <span  class="pl-2 open-style" *ngIf="
+                                                        createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleMonday'] && 
+                                                        !createVehicleFormGroup.controls['activeScheduleMonday'].value" >
+                                                        {{ 'SCHEDULE_WORK.DAY.MONDAY' |translate }}
+                                                        </span>  
+                                                    </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <!-- end checkbox -->
+    
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleMonday'] && createVehicleFormGroup.controls['activeScheduleMonday'].value">
+    
+                                        <ng-container *ngFor="let itemMonday of sortBy('1'); let j = index;">
+    
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+    
+                                                <ng-container *ngIf="itemMonday.hours.length === 0">
+    
+                                                    <div class="row">
+    
+                                                        <div class="col-lg-6 col-12">
+    
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+    
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+    
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+    
+                                                        </div>
+    
+                                                    </div>
+    
+                                                </ng-container>
+    
+                                                <ng-container *ngIf="itemMonday.hours.length > 0">
+    
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': j > 0}" *ngFor="let scheMonday of itemMonday.hours; let j = index;">
+    
+                                                        <div class="row">
+    
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheMonday) || validIntervalHours(scheMonday, itemMonday)}">
+    
+                                                            <!--  <label for="" class="schedule-count" hidden>Horario {{ j + 1 }}</label> -->
+    
+                                                                <input type="time" class="form-control text-center border-form" (focusout)="changeHour($event.target.value, scheMonday, itemMonday ,'start',j)" [value]="secondToTime(scheMonday.timeStart)">
+    
+                                                            </div>
+    
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheMonday) || validIntervalHours(scheMonday, itemMonday)}">
+    
+                                                                <input type="time" class="form-control text-center border-form" (focusout)="changeHour($event.target.value, scheMonday, itemMonday ,'end')" [value]="secondToTime(scheMonday.timeEnd)">
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+                                            </div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+                                                
+                                                    <ng-container *ngIf="itemMonday.hours.length === 0">
+    
+                                                        <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(itemMonday.intDay, itemMonday)">
+                                                    
+                                                    </ng-container>
+                                                
+                                                <ng-container *ngIf="itemMonday.hours && itemMonday.hours.length > 0">
+    
+                                                    <ng-container *ngFor="let scheMonday of itemMonday.hours; let j = index;">
+    
+                                                        <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(itemMonday.intDay, scheMonday)">
+                                                    
+                                                    </ng-container>
+                                                
+                                                </ng-container>
+    
+                                            </div>
+                                        </ng-container>
+    
+                                    </ng-container>
+    
+                                </div>
+    
+                            </div>
+    
+                            <!-- end lunes -->
+    
+    
+                            <!-- martes -->
+    
+                            <div class="col-12 pl-lg-0">
+    
+                                <div class="form-row border-specification pt-1 pb-1">
+    
+                                    <!-- checkbox -->
+                                
+                                    <div class="col-lg-2 col-12 align-self-center">
+    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                                <input
+                                                    type="checkbox"
+                                                    (change)="changeScheduleDay($event.target.checked, 2, false)" formControlName="activeScheduleTuesday" id="activeScheduleTuesday"
+                                                />
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+            
+                                                <span  class="pl-2 open-style" *ngIf="
+                                                createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleTuesday'] && 
+                                                createVehicleFormGroup.controls['activeScheduleTuesday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.TUESDAY' |translate }}
+                                                </span>  
+                                                <span  class="pl-2 open-style" *ngIf="
+                                                createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleTuesday'] && 
+                                                !createVehicleFormGroup.controls['activeScheduleTuesday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.TUESDAY' |translate }}
+                                                </span>  
+                                            </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <!-- end checkbox -->
+    
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleTuesday'] && createVehicleFormGroup.controls['activeScheduleTuesday'].value">
+                                        <ng-container *ngFor="let itemTuesday of sortBy('2'); let t = index;">
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+                                                <ng-container *ngIf="itemTuesday.hours.length === 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                    </div>
+    
+                                                </ng-container>
+                                                <ng-container *ngIf="itemTuesday.hours.length > 0">
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': tue  > 0}" *ngFor="let scheTuesday of itemTuesday.hours; let tue = index;">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheTuesday) || validIntervalHours(scheTuesday, itemTuesday)}">
+                                                                <!-- <label for="" class="schedule-count" hidden>Horario {{ t + 1 }}</label> -->
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheTuesday, itemTuesday, 'start')" [value]="secondToTime(scheTuesday.timeStart)">
+                                                            </div>
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheTuesday) || validIntervalHours(scheTuesday, itemTuesday)}">
+    
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheTuesday, itemTuesday, 'end')" [value]="secondToTime(scheTuesday.timeEnd)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+                                            </div>
+    
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+    
+                                                <ng-container *ngIf="itemTuesday.hours.length === 0">
+    
+                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(itemTuesday.intDay, itemTuesday)">
+                                                
+                                                </ng-container>
+                                            
+                                            <ng-container *ngIf="itemTuesday.hours && itemTuesday.hours.length > 0">
+    
+                                                <ng-container *ngFor="let scheTuesday of itemTuesday.hours; let tue = index;">
+    
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(itemTuesday.intDay, scheTuesday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                            
+                                            </div>
+    
+                                        </ng-container>
+    
+                                    </ng-container>
+                                </div>
+    
+                            </div>
+    
+                            <!-- end martes -->
+    
+    
+    
+    
+                            <!-- miercoles -->
+                            <div class="col-12 pl-lg-0">
+    
+                                <div class="form-row border-specification pt-1 pb-1">
+    
+                                    <!-- checkbox -->
+    
+                                    <div class="col-lg-2 col-12 align-self-center">
+    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                <label class="switch-width">
+                                            <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 3, false)" formControlName="activeScheduleWednesday" id="activeScheduleWednesday"/>
+    
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleWednesday'] && 
+                                            createVehicleFormGroup.controls['activeScheduleWednesday'].value" >
+                                            {{ 'SCHEDULE_WORK.DAY.WEDNESDAY' |translate }}
+                                            </span>  
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleWednesday'] && 
+                                            !createVehicleFormGroup.controls['activeScheduleWednesday'].value" >
+                                            {{ 'SCHEDULE_WORK.DAY.WEDNESDAY' |translate }}
+                                            </span>  
+                                        </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <!-- end checkbox-->
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleWednesday'] && createVehicleFormGroup.controls['activeScheduleWednesday'].value">
+                                        <ng-container *ngFor="let item of sortBy('3'); let w = index;">
+    
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+                                                <ng-container *ngIf="item.hours.length === 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngIf="item.hours.length > 0">
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': w > 0}" *ngFor="let sche of item.hours; let w = index;">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(sche) || validIntervalHours(sche, item)}">
+                                                            
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, sche, item ,'start')" [value]="secondToTime(sche.timeStart)">
+                                                            </div>
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(sche) || validIntervalHours(sche, item)}">
+    
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, sche, item ,'end')" [value]="secondToTime(sche.timeEnd)">
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+                                            </div>
+    
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+    
+                                                <ng-container *ngIf="item.hours.length === 0">
+    
+                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(item.intDay, item)">
+                                                
+                                                </ng-container>
+                                            
+                                            <ng-container *ngIf="item.hours && item.hours.length > 0">
+    
+                                                <ng-container *ngFor="let sche of item.hours; let w = index;">
+    
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(item.intDay, sche)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                                
+                                            </div>
+                                        </ng-container>
+    
+                                    </ng-container>
+                                </div>
+    
+                            </div>
+    
+                            <!-- end miercoles -->
+    
+    
+    
+                            <!-- jueves -->
+    
+                            <div class="col-12 pl-lg-0">
+                                <div class="form-row border-specification pt-1 pb-1">
+                                
+                                    <!-- checkbox -->
+    
+                                    <div class="col-lg-2 col-12 align-self-center">
+    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                            <input
+                                                type="checkbox"
+                                                (change)="changeScheduleDay($event.target.checked, 4, false)" formControlName="activeScheduleThursday" id="activeScheduleThursday"
+                                            />
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleThursday'] && 
+                                            createVehicleFormGroup.controls['activeScheduleThursday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.THURSDAY' |translate }}
+                                            </span>  
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleThursday'] && 
+                                            !createVehicleFormGroup.controls['activeScheduleThursday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.THURSDAY' |translate }}
+                                            </span>  
+                                        </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <!-- end checkbox -->
+    
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleThursday'] && createVehicleFormGroup.controls['activeScheduleThursday'].value">
+                                        <ng-container *ngFor="let thursday of sortBy('4'); let i = index;">
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+                                                <ng-container *ngIf="thursday.hours.length === 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngIf="thursday.hours.length > 0">
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': i > 0}" *ngFor="let schethursday of thursday.hours; let i = index;">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(schethursday) || validIntervalHours(schethursday, thursday)}">
+                                                            
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, schethursday, thursday ,'start')" [value]="secondToTime(schethursday.timeStart)">
+                                                            </div>
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(schethursday) || validIntervalHours(schethursday, thursday)}">
+    
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, schethursday, thursday ,'end')" [value]="secondToTime(schethursday.timeEnd)">
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+                                            </div>
+    
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+    
+                                                <ng-container *ngIf="thursday.hours.length === 0">
+    
+                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(thursday.intDay, thursday)">
+                                                
+                                                </ng-container>
+                                            
+                                            <ng-container *ngIf="thursday.hours && thursday.hours.length > 0">
+    
+                                                <ng-container *ngFor="let schethursday of thursday.hours; let tue = index;">
+    
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(thursday.intDay, schethursday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                                
+                                                
+                                            </div>
+    
+                                        </ng-container>
+    
+                                    </ng-container>
+                                </div>
+    
+                            </div>
+    
+                            <!-- end jueves -->
+    
+    
+    
+    
+                            <!-- viernes -->
+    
+                            <div class="col-12 pl-lg-0">
+                                <div class="form-row border-specification pt-1 pb-1">
+                                
+                                    <!-- checkbox -->
+    
+                                    <div class="col-lg-2 col-12 align-self-center">
+    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                            <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 5, false)" formControlName="activeScheduleFriday" id="activeScheduleFriday"/>
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleFriday'] && 
+                                            createVehicleFormGroup.controls['activeScheduleFriday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.FRIDAY' |translate }}
+                                            </span>  
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleFriday'] && 
+                                            !createVehicleFormGroup.controls['activeScheduleFriday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.FRIDAY' |translate }}
+                                            </span>  
+                                        </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <!-- end checkbox -->
+    
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleFriday'] && createVehicleFormGroup.controls['activeScheduleFriday'].value">
+                                        <ng-container *ngFor="let friday of sortBy('5'); let f = index;">
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+                                                <ng-container *ngIf="friday.hours.length === 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngIf="friday.hours.length > 0">
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': f > 0}" *ngFor="let scheFriday of friday.hours; let f = index;">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheFriday) || validIntervalHours(scheFriday, friday)}">
+                                                                
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheFriday, friday ,'start')" [value]="secondToTime(scheFriday.timeStart)">
+                                                            </div>
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheFriday) || validIntervalHours(scheFriday, friday)}">
+    
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheFriday, friday ,'end')" [value]="secondToTime(scheFriday.timeEnd)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+                                            </div>
+    
+    
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+                                                
+                                                <ng-container *ngIf="friday.hours.length === 0">
+    
+                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(friday.intDay, friday)">
+                                                
+                                                </ng-container>
+                                            
+                                            <ng-container *ngIf="friday.hours && friday.hours.length > 0">
+    
+                                                <ng-container *ngFor="let scheFriday of friday.hours; let tue = index;">
+    
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(friday.intDay, scheFriday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                                
+                                            </div>
+                                        </ng-container>
+    
+                                    </ng-container>
+                                </div>
+    
+                            </div>
+    
+                            <!-- end viernes -->
+    
+    
+    
+                            <!-- sabado -->
+    
+                            <div class="col-12 pl-lg-0">
+                                <div class="form-row border-specification pt-1 pb-1">
+                                
+                                    <!-- checkbox -->
+    
+                                    <div class="col-lg-2 col-12 align-self-center">
+    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                            <input
+                                                type="checkbox"
+                                                (change)="changeScheduleDay($event.target.checked, 6, false)" formControlName="activeScheduleSaturday" id="activeScheduleSaturday"
+                                            />
+                                            <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleSaturday'] && 
+                                            createVehicleFormGroup.controls['activeScheduleSaturday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.SATURDAY' |translate }}
+                                            </span>  
+                                            <span  class="pl-2 open-style" *ngIf="
+                                            createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleSaturday'] && 
+                                            !createVehicleFormGroup.controls['activeScheduleSaturday'].value" >
+                                                {{ 'SCHEDULE_WORK.DAY.SATURDAY' |translate }}
+                                            </span>  
+                                        </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <!-- end checkbox -->
+    
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleSaturday'] && createVehicleFormGroup.controls['activeScheduleSaturday'].value">
+    
+                                        <ng-container *ngFor="let saturday of sortBy('6'); let s = index;">
+    
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+    
+                                                <ng-container *ngIf="saturday.hours.length === 0">
+    
+                                                    <div class="row">
+    
+                                                        <div class="col-lg-6 col-12">
+    
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+    
+                                                        </div>
+    
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+    
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+    
+                                                        </div>
+    
+                                                    </div>
+    
+                                                </ng-container>
+    
+                                                <ng-container *ngIf="saturday.hours.length > 0">
+    
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': s > 0}" *ngFor="let scheSaturday of saturday.hours; let s = index;">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheSaturday) || validIntervalHours(scheSaturday, saturday)}">
+                                                                
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSaturday, saturday ,'start')" [value]="secondToTime(scheSaturday.timeStart)">
+    
+                                                            </div>
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheSaturday) || validIntervalHours(scheSaturday, saturday)}">
+    
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSaturday, saturday ,'end')" [value]="secondToTime(scheSaturday.timeEnd)">
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+    
+                                            </div>
+    
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+    
+                                                <ng-container *ngIf="saturday.hours.length === 0">
+    
+                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(saturday.intDay, saturday)">
+                                                
+                                                </ng-container>
+                                            
+                                            <ng-container *ngIf="saturday.hours && saturday.hours.length > 0">
+    
+                                                <ng-container *ngFor="let scheSaturday of saturday.hours; let s = index;">
+    
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(saturday.intDay, scheSaturday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                                
+    
+                                            </div>
+    
+                                        </ng-container>
+    
+                                    </ng-container>
+                                </div>
+    
+                            </div>
+    
+                            <!-- end sabado -->
+    
+                            <!-- domingo -->
+    
+                            <div class="col-12 pl-lg-0 pb-4">
+                                <div class="form-row border-specification border-end pt-1 pb-1">
+                                
+                                    <!-- checkbox -->
+    
+                                    <div class="col-lg-2 col-12 align-self-center">
+    
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="switch w-100 col-12">
+                                                    <label class="switch-width">
+                                                        <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 7, false)" formControlName="activeScheduleSunday" id="activeScheduleSunday"/>
+                                                        
+                                                        <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                                        <span  class="pl-2 open-style" *ngIf="
+                                                        createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleSunday'] && 
+                                                        createVehicleFormGroup.controls['activeScheduleSunday'].value" >
+                                                            {{ 'SCHEDULE_WORK.DAY.SUNDAY' |translate }}
+                                                        </span>  
+                                                        <span  class="pl-2 open-style" *ngIf="
+                                                        createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleSunday'] && 
+                                                        !createVehicleFormGroup.controls['activeScheduleSunday'].value" >
+                                                            {{ 'SCHEDULE_WORK.DAY.SUNDAY' |translate }}
+                                                        </span>  
+                                                    </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <!-- end checkbox -->
+                                    <ng-container *ngIf="createVehicleFormGroup && createVehicleFormGroup.controls['activeScheduleSunday'] && createVehicleFormGroup.controls['activeScheduleSunday'].value">
+                                        <ng-container *ngFor="let sunday of sortBy('7'); let su = index;">
+                                            <div class="col-lg-4 col-12 mt-2 mb-2">
+                                                <ng-container *ngIf="sunday.hours.length === 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+                                                        <div class="col-lg-6 col-12 mt-xl-0 mt-2">
+                                                            <input type="text" readonly class="form-control border-form diabled-free text-center" value="Libre">
+                                                        </div>
+    
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngIf="sunday.hours.length > 0">
+                                                    <div class="col-12 p-0" [ngClass]="{'mt-2': su > 0}" *ngFor="let scheSunday of sunday.hours; let su = index;">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12" [ngClass]="{'has-danger': validtimeStart(scheSunday) || validIntervalHours(scheSunday, sunday)}">
+                                                                
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSunday, sunday ,'start')" [value]="secondToTime(scheSunday.timeStart)">
+                                                            </div>
+                                                            <div class="col-lg-6 col-12 mt-xl-0 mt-2" [ngClass]="{'has-danger': validtimeEnd(scheSunday) || validIntervalHours(scheSunday, sunday)}">
+    
+                                                                <input type="time" class="form-control border-form text-center" (focusout)="changeHour($event.target.value, scheSunday, sunday ,'end')" [value]="secondToTime(scheSunday.timeEnd)">
+    
+                                                            </div>
+    
+    
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+    
+    
+                                            </div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-12 text-xl-left text-center align-self-center">
+                                                
+                                                <ng-container *ngIf="sunday.hours.length === 0">
+    
+                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addScheduleToDay(sunday.intDay, sunday)">
+                                                
+                                                </ng-container>
+                                            
+                                            <ng-container *ngIf="sunday.hours && sunday.hours.length > 0">
+    
+                                                <ng-container *ngFor="let scheSunday of sunday.hours; let su = index;">
+    
+                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="img-delete point" src="assets/icons/deleteEche.svg" (click)="deleteHours(sunday.intDay, scheSunday)">
+                                                
+                                                </ng-container>
+                                            
+                                            </ng-container>
+                                                
+                                            </div>
+    
+                                        </ng-container>
+    
+                                    </ng-container>
+                                </div>
+    
+                            </div>
+    
+                            <!-- end domingo -->
+    
+    
+                        </div>
+    
+                        <!-- end Aplicar horario por día -->
+    
+    
+                        <!-- Aplicar especificación horaria -->
+    
+                        <div class="pt-0 col-12" *ngIf="vehicles.timeZone && 
+                            createVehicleFormGroup && createVehicleFormGroup.controls['deliveryPointScheduleTypeId'] && 
+                            createVehicleFormGroup.controls['deliveryPointScheduleTypeId'].value == 2">
+    
+                            <div class="col-12 text-left p-0 pt-3">
+                                <p for="" class="m-0 title-specificacion "> Al activar la “especificación horaria” podrás vincular de manera ágil la franja horaria que se ha asignado a un vehículo desde la tabla de horario.  <b class="point" (click)="redirect()">Crea aquí</b> las especificaciones horarias </p>
+                            </div>
+    
+                            <div class="form-row mt-3">
+    
+                                <div class="col-12 pb-4">
+                                    <div class="form-row border-schedule pl-xl-3">
+    
+                                        <div class="col-lg-2 col-12" [ngClass]="{'align-self-center':vehicles.timeZone.length === 0 || vehicles.timeZone.length === 1, 'mt-3': vehicles.timeZone.length > 1}" >
+    
+                                            <label class="days-style">{{ 'DELIVERY_POINTS.TIME_SPECIFICATION' |translate }}</label>
+                                            
+    
+                                        </div>
+    
+                                        <div class="col-lg-9 col-12 align-self-center pt-3 pb-3">
+    
+                                            <ng-container *ngIf="vehicles.timeZone.length === 0">
+    
+                                                <div class="row">
+    
+                                                    <div class="col-lg-6 col-12">
+    
+                                                        <input type="text" readonly class="form-control size-no-selecter border-form diabled-free" value="Libre">
+                                                        
+                                                    </div>
+    
+                                                    <div class="col-lg-2 col-12 p-lg-0 align-self-center">
+    
+                                                        <div class="contenedor-imagenes">
+                                                        
+                                                            <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addTimeZone()">
+    
+                                                          </div>
+                                                    
+                                                     
+                                                    </div>
+    
+                                                </div>
+                                            </ng-container>
+    
+                                            <ng-container *ngIf="vehicles.timeZone.length > 0">
+    
+                                                <div class="row">
+    
+                                                    <ng-container *ngFor="let scheMonday of vehicles.timeZone; let r = index;  let last= last">
+    
+                                                       
+                                                        <div class="col-xl-6 col-12" [ngClass]="{'mt-3': r > 1}" >
+    
+                                                            <div class="row">
+    
+                                                            <div class="col-xl-10 col-12">
+    
+                                                                <select class="form-control shedule-select letter-app" [id]="'itemMondaySelect'+ r" (change)="changeSelectShedule($event.target.value, scheMonday, 'itemMondaySelect'+r)">
+    
+                                                                    <option value="">
+    
+                                                                        {{ 'GENERAL.SELECT' | translate }}
+    
+                                                                    </option>
+                                                                    
+                                                                    <ng-container *ngIf="companyTimeZone">
+    
+                                                                        <option *ngFor="let companytimeZone of companyTimeZone" [value]="companytimeZone.id" [selected]="scheMonday.companyTimeZoneId === companytimeZone.id">
+    
+                                                                           Franja {{ companytimeZone.name }} ({{secondToTime(companytimeZone.timeStart)}} - {{secondToTime(companytimeZone.timeEnd)}})
+    
+                                                                        </option>
+    
+                                                                    </ng-container>
+    
+                                                                </select>
+            
+                                                            </div>
+    
+                                                            <div class="col-lg-2 col-12 p-lg-0 align-self-center mt-xl-0 mt-2" *ngIf="vehicles.timeZone && vehicles.timeZone.length > 0">
+    
+                                                                <div class="contenedor-imagenes justify-content-xl-start justify-content-center">
+                                                                    
+                                                                    <img title="{{'GENERAL.REMOVE' | translate }}" class="point" src="assets/icons/deleteEche.svg" (click)="deleteSpecification(scheMonday.id, scheMonday)">
+    
+                                                                    <img title="{{'DELIVERY_POINTS.ADD_SCHEDULE' | translate }}" class="point" src="assets/icons/addEche.svg" (click)="addTimeZone()" *ngIf="last">
+    
+                                                                  </div>
+                                                               
+                                                            
+                                                            </div>
+                                                            <div class="col-xl-10 col-12 text-center mt-xl-0 mt-2" *ngIf="validSpecificationService(scheMonday)">
+                                                                <label class="error-selecter">{{'GENERAL.THERE_IS_ALREDY_A_SCHEDULE_WITH_THAT_VALUE' | translate }}</label>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                       <!--  <div class="col-lg-6 col-12">
+                                                            
+                                                            
+                                                        </div>
+                                                        <div class="col-lg-2 col-12 p-lg-0" *ngIf="vehicles.timeZone && vehicles.timeZone.length > 0">
+                                                            <label for="" class="pointer text-right text-lg-left" style="width: 100%;">
+                                                                <i class="fas fa-times fas-close-shedule" 
+                                                                (click)="deleteSpecification(scheMonday.id, scheMonday)" 
+                                                                *ngIf="vehicles.timeZone && vehicles.timeZone.length > 0">
+                                                                </i>
+                                                                &nbsp;
+                                                            </label>
+                                                        </div> -->
+                                                    </ng-container>
+                                                   
+    
+                                                </div>
+                                               
+                                                <!-- <div class="col-6 p-0" >
+                                                    <div class="row" [ngClass]="{'mt-2': j > 0}" *ngFor="let scheMonday of vehicles.timeZone; let j = index;">
+                                                        <div class="col-lg-10 col-12">
+    
+                                                            <select class="form-control letter-app" [id]="'itemMondaySelect'+ j" (change)="changeSelectShedule($event.target.value, scheMonday, 'itemMondaySelect'+j)">
+                                                            <option value="">
+                                                                {{ 'GENERAL.SELECT' | translate }}
+                                                            </option>
+                                                            
+                                                            <ng-container *ngIf="companyTimeZone" >
+                                                                <option *ngFor="let companytimeZone of companyTimeZone" [value]="companytimeZone.id" [selected]="scheMonday.companyTimeZoneId === companytimeZone.id">
+                                                                    {{ companytimeZone.name }} ({{secondToTime(companytimeZone.timeStart)}} - {{secondToTime(companytimeZone.timeEnd)}})
+                                                                </option>
+                                                            </ng-container>
+                                                        </select>
+    
+                                                            <div class="text-center" *ngIf="validSpecificationService(scheMonday)">
+                                                                <label class="error-selecter">{{'GENERAL.THERE_IS_ALREDY_A_SCHEDULE_WITH_THAT_VALUE' | translate }}</label>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-lg-2 col-12 p-lg-0" *ngIf="vehicles.timeZone && vehicles.timeZone.length > 0">
+                                                            <label for="" class="pointer text-right text-lg-left" style="width: 100%;">
+                                                                <i class="fas fa-times fas-close-shedule" 
+                                                                (click)="deleteSpecification(scheMonday.id, scheMonday)" 
+                                                                *ngIf="vehicles.timeZone && vehicles.timeZone.length > 0">
+                                                                </i>
+                                                                &nbsp;
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </ng-container>
+    
+                                        </div>
+                                       <!--  <div class="col-lg-1 col-12 text-center mt-lg-2 mt-5 mb-3" *ngIf="vehicles.timeZone.length === 0" >
+                                            <div class="d-flex justify-content-center">
+                                                <label class="shedule-add point" [ngClass]="{ 'position-label': timeZone.length ===0, 'position-label-specification' :timeZone.length > 1}" (click)="addTimeZone()"> {{'DELIVERY_POINTS.ADD_ANOTHER' | translate }} </label>
+                                            </div>
+                                        </div> -->
+    
+    
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        <!-- end Aplicar especificación horaria -->
+                            </ng-container>
+        
+                            <div class="col-12" *ngIf="loadingSchedule">
+                                <div class="form-row p-0 mt-4">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="fa-6x">
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        
+                        </div>
+                    </div>
+                 </ng-container>
+          </div>
+
+          <!-- end horarios -->
+
+          <div class="card-footer pt-3 pb-3" style="display: block;">
+            <div class="col-12 text-sm-left text-center">
+                <button type="button" class="btn btn-primary size-btn-form modal-confirm" [disabled]="!createVehicleFormGroup.valid || !createVehicleFormGroup.dirty || validateAbsolute()" (click)="submit()">
+                    <span *ngIf="vehicles.id == 0">{{ 'GENERAL.ADD_' | translate }}</span>
+                    <span *ngIf="vehicles.id > 0">{{ 'GENERAL.SAVE' | translate }}</span>
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+   
+
+</div>

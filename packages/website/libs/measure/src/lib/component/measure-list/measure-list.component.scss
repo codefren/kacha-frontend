@@ -1,0 +1,80 @@
+@import '../../../../../../apps/easyroute/src/common.scss';
+.easyroute-measure-list {
+    /* .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+        font-weight: lighter;
+        font-size: 16px;
+        border-radius: 0px;
+        text-transform: uppercase;
+    } */
+    .btn-large {
+        width: 250px;
+        height: 40px;
+    }
+    .info-texto {
+        font-size: 12px;
+    }
+    .line-grey {
+        border-bottom: 1px solid #c6c7c9;
+        margin-top: 0px;
+    }
+    i {
+        font-size: 13px;
+    }
+    .fa-exclamation-circle {
+        padding-right: 0.2rem;
+        /* position: absolute; */
+        transform: rotate(180deg);
+        float: right;
+        /* padding-top: 10px; */
+    }
+    .fa-exclamation-circle:before {
+        background: #fff;
+        color: #f89801;
+        border-radius: 10px;
+    }
+    table thead th label {
+        font-size: 14px;
+        color: #fff;
+        i {
+            font-size: 13px;
+            float: right;
+            position: absolute;
+            padding-left: 0.2rem;
+        }
+    }
+    /* ipad y ipad prod */
+    @media screen and ( min-width: 768px) and ( max-width: 1366px) {
+        .btn-large {
+            width: 200px;
+        }
+    }
+    .border-drop {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+}

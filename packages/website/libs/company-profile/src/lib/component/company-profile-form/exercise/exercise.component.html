@@ -1,0 +1,74 @@
+<div class="row exercise">
+
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-footer">
+
+                <p class="title-row mt-4 mb-1"> {{'COMPANY_PROFILE.HOLIDAYS' | translate }} </p>
+
+                <p class="sub-title"> {{'COMPANY_PROFILE.ADD_THE_DAYS_THAT_ARE_CONSIDERED_HOLIDYS_IN_THE_COMPANY' | translate }} </p>
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="form-row">
+                            <label for="type" class="mb-2 title-label col-xl-3 col-12 col-md-4 col-sm-4"> {{ 'COMPANY_PROFILE.CONCEPT' | translate }} </label>
+
+                            <label for="first" class="mb-2 title-label col-xl-3 col-12 col-md-4 col-sm-4"> {{ 'COMPANY_PROFILE.DAYS' | translate }} </label>
+
+                            <label for="first" class="mb-2 title-label col-xl-3 col-12 col-md-4 col-sm-4">  &nbsp; </label>
+                        </div>
+
+                        <div class="form-row" *ngFor="let item of festiveDay; let i = index;">
+
+                            <div class="form-group input-group col-xl-3 col-9 col-md-4 col-sm-4 m-0 mt-1">
+                                <input class="form-control form-control-input" [value]="item.name" (focusout)="changeName($event.target.value, item, i)" type="text" placeholder="{{ 'COMPANY_PROFILE.PUBLIC_HOLIDAY' | translate }}" />
+                            </div>
+
+                            <div class="form-group input-group col-xl-3 col-9 col-md-4 col-sm-4 m-0 mt-1">
+
+                                <input ngbDatepicker #f="ngbDatepicker" class="form-control form-control-date size-date" placeholder="dd/mm/yyyy" name="dpFromDate" 
+                                    [value]="dateFormat(item.date)"
+                                    (dateSelect)="changeValue($event, item, i)" [placement]="'bottom'"/>
+
+                                <button class="btn btn-calendar calendar" (click)="f.toggle()" type="button">
+            
+                                    <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+
+                                </button>
+
+                            </div>
+
+
+                            <div class="form-group input-group col-xl-3 col-9 col-md-4 col-sm-4 m-0 mt-1">
+                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteHoliday(i)">
+                                    <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 px-xl-7 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin">
+
+                        <button type="button" class="btn btn-add-concept" (click)="addHoliday()">
+
+                            <label for="concept" class="add-concept point"> {{'COMPANY_PROFILE.ADD_HOLIDAY' | translate }} </label>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

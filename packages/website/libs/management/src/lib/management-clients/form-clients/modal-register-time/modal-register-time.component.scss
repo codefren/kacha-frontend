@@ -1,0 +1,57 @@
+.easyroute-modal-directions {
+
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .title-infor{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .btn-primary {
+        background: #24397C;
+        border-radius: 5px !important;
+    }
+    .modal-footer {
+        display: block;
+    }
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-header {
+        display: block;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba(152, 153, 170, 1);
+    }
+    .btn-default{
+        border-radius: 5px;
+    }
+
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 0px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        padding: 14px;
+    }
+    .table td {
+        padding: 5px !important;
+        vertical-align: baseline !important;
+    }
+    
+}

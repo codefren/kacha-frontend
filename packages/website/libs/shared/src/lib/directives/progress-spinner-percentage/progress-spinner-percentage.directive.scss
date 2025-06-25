@@ -1,0 +1,21 @@
+@mixin progress-spinner-percentage-styles($typography-config) {
+    .progress-spinner-percentage-container {
+        align-items: center;
+        background-color: transparent;
+        color: inherit;
+        display: flex;
+        height: inherit;
+        justify-content: center;
+        width: inherit;
+
+        span {
+            color: inherit;
+        }
+
+        font: {
+            family: mat-font-family($typography-config, body-1);
+            size: mat-font-size($typography-config, body-1);
+            weight: mat-font-weight($typography-config, body-1);
+        }
+    }
+}

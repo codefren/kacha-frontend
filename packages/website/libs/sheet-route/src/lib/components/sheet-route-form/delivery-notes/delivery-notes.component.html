@@ -1,0 +1,24 @@
+<div class="row answers-form">
+    <div class="col-12">
+
+        <p class="mb-0 title-answers" *ngIf="deliveryNote"> {{'SHEET_ROUTE.DELIVERY_NOTES' | translate }} ( {{ cont }} )</p>
+        <p class="mb-0 sub-title"> {{ 'SHEET_ROUTE.THESE_ARE_THE_DELIVERY_NOTES_ASSIGNED_TO_THIS_ROUTE' | translate }} </p>
+
+        <table class="table table-striped table-bordered mb-0 mt-5" id="tableDeliveryNotes" style="text-align: center ; width: 100%;">
+            <thead>
+                <tr>
+                    <th style="border-top-left-radius: 6px;">{{'SHEET_ROUTE.DELIVERY_NOTE' | translate }}</th>
+                    <th>{{ 'SHEET_ROUTE.ORDER_NUMBER' |translate }}</th>
+                    <th>{{ 'SHEET_ROUTE.DNI_NIE' |translate }}</th>
+                    <th>{{ 'SHEET_ROUTE.CLIENT' | translate }}</th>
+                    <th>{{ 'SHEET_ROUTE.AMOUNT' | translate }}</th>
+                    <th>{{ 'SHEET_ROUTE.CONDITION' | translate }}</th>
+                    <th style="border-top-right-radius: 6px;"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+
+    </div>
+</div>

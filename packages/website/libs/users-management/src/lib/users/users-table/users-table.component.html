@@ -1,0 +1,246 @@
+<div class="users main-container container-fluid p-0 pt-4 pb-4">
+
+    <!-- header -->
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+            <div class="page-title">
+                <img src="assets/images/pages/users/icon-user.svg" class="header-brand-img img-providers" alt="User">
+                <span class="ml-3">{{ 'USERS.NAME' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+            <div class="d-flex flex-row align-items-center justify-content-end">
+                <ng-container>
+
+                    <!-- Boton 1 -->
+                    <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                    </button>
+
+                    <!-- Boton 2 -->
+                    <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+                        <!-- (click)="openModalDonwloadUser()" -->
+                        <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openModalDonwloadUser()">
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'USERS.DOWNLOAD_USERS' | translate }}
+                        </a>
+
+                        <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="fileAddArch.click()">
+                            <img src="assets/icons/import.svg" class="pr-2 size-import"> {{ 'USERS.IMPORT_USERS' | translate }}
+                        </a>
+
+                        <input type="file" hidden #fileAddArch accept=".xlsx, .xls" (change)="importClient($event.target.files[0])" />
+
+                        <ng-container *ngIf="!Partners() || !isPartnerType">
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                                <img src="assets/icons/setting.svg" class="pr-2"> {{ 'GENERAL.SETTING' | translate }}
+
+                            </a>
+
+                        </ng-container>
+
+                    </div>
+
+                    <!-- Boton coste -->
+                    <div class="dropdown poin" *ngIf="moduleCost()">
+
+                        <button class="btn btn-icon btn-icon-white size-load-albaran ml-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/icons/coste.svg"> Coste
+                        </button>
+                        <button class="btn btn-icon btn-icon-white size-open" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/icons/donw.svg">
+                        </button>
+
+                        <form>
+                            <div class="form-group">
+                                <input #fileImportSalary hidden type="file" class="form-control-file" accept=".xlsx, .xls, .ods" (change)="importSalary($event.target.files[0])" />
+                            </div>
+                        </form>
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openModalApplySalaryCost()">
+
+                                <img src="assets/icons/hand.svg " class="pr-2"> {{ 'USERS.LOAD_SALARY_BY_HAND' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="fileImportSalary.click()">
+
+                                <img src="assets/icons/import.svg " class="pr-2"> {{ 'USERS.LOAD_SALARY_BY_EXCEL' | translate }}
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Boton agregar -->
+                    <button class="btn btn-secondary btn-large ml-2" [disabled]="!isValidateRol()" title="{{ 'COMPANIES.NAME' | translate }}" *ngIf="me" (click)="addUserLink(me)">
+                        <img src="assets/icons/plus.svg" class="pr-2">
+                        {{ 'USERS.CREATED_USER' | translate }}
+                    </button>
+
+                    <button class="btn btn-secondary btn-large ml-2" [disabled]="!isValidateRol()" title="{{ 'COMPANIES.NAME' | translate }}" *ngIf="!me" (click)="addUserLink(me)">
+                        <img src="assets/icons/plus.svg" class="pr-2">
+                        {{ 'USERS.CREATED_USER' | translate }}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Cajas informativas -->
+
+    <div class="row align-items-center separatorButtonBox pl-4 pr-4">
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{'USERS.TOTAL_USERS' | translate }} </p>
+
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ totalized.total }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'USERS.ACTIVE_USERS' | translate }} </p>
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ totalized.user_active }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'USERS.INACTIVE_USERS' | translate }} </p>
+                <ng-container *ngIf="showCode">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ totalized.user_inActive }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showCode">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <ng-container *ngIf="!Partners()">
+
+            <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+                <div class="card card-left p-3">
+                    <p class="p-title"> {{ 'USERS.TYPE' | translate }} {{ 'USERS.COMPANY' | translate }} </p>
+                    <ng-container *ngIf="showCode">
+                        <p class="p-sub-number" *ngIf="totalized"> {{ totalized.user_type_company }} </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showCode">
+                        <div class="fa-2x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+                <div class="card card-left p-3">
+                    <p class="p-title"> {{ 'USERS.TYPE' | translate }} {{ 'USERS.AUTONOMOUS' | translate }}</p>
+                    <ng-container *ngIf="showCode">
+                        <p class="p-sub-number" *ngIf="totalized"> {{ totalized.user_type_autonomo }} </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showCode">
+                        <div class="fa-2x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="Partners()">
+
+            <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+                <div class="card card-rigth"></div>
+
+            </div>
+
+            <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+                <div class="card card-rigth"></div>
+
+            </div>
+
+        </ng-container>
+
+
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-rigth"></div>
+
+        </div>
+
+        <div class="col-xl col-md-3 col-sm-4 col-12 mt-xl-0 mt-1">
+
+            <div class="card card-rigth"></div>
+
+        </div>
+
+    </div>
+
+    <!-- table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general">
+                <table class="table table-striped table-bordered table-responsive-lg mb-0" id="users" style="text-align: center; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>{{'IdERP'}}</th>
+                            <th>{{ 'GENERAL.COMPANY' | translate }}</th>
+                            <th>{{ 'USERS.NATIONALID' | translate }}</th>
+                            <th>{{ 'USERS.EMAIL' | translate }}</th>
+                            <th>{{ 'USERS.NAME_USER' | translate }}</th>
+                            <th>{{ 'USERS.SURNAME_USER' | translate }}</th>
+                            <th>{{ 'USERS.PHONE' | translate }}</th>
+                            <th>{{ 'GENERAL.SUBSCRIPTION' | translate }}</th>
+                            <th>{{ 'USERS.ROLE' | translate }}</th>
+                            <th>{{ 'USERS.USER_TYPE' | translate }}</th>
+                            <th>{{ 'USERS.LAST_CONNECTION' | translate }}</th>
+                            <th>{{ 'USERS.LAST_CONNECTION_IP' | translate }}</th>
+                            <th class="widthAccionDatatable"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

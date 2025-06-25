@@ -1,0 +1,69 @@
+<div class="recalculate-route" fxLayout="column" fxLayoutAlign="start strech">
+    <div class="recalculate-route-header" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="recalculate-route-container" fxLayout="column" fxLayoutAlign="center">
+            <div class="form-group">
+                <label for="">Recalcular ruta a partir de:</label>
+                <input #optimizeFromIndexInput class="form-control"
+                    [value]="(route$ | async) ? (route$ | async).settings.optimizeFromIndex : 1" [min]="1"
+                    [max]="(route$ | async) ? (route$ | async).deliveryPoints.length : 1" type="number"
+                    (blur)="updateOptimizeFromIndex(optimizeFromIndexInput.value)"
+                    (keyup.enter)="updateOptimizeFromIndex(optimizeFromIndexInput.value)"
+                    [formControl]="recomputeFromIndexFormControl" />
+                <!-- <mat-error *ngIf="recomputeFromIndexFormControl.hasError('min')">Mínimo 1</mat-error>
+                <mat-error *ngIf="recomputeFromIndexFormControl.hasError('max')">Máximo {{ (route$ |
+                    async).deliveryPoints.length }}</mat-error>
+                <mat-error *ngIf="recomputeFromIndexFormControl.hasError('required')">Campo obligatorio
+                </mat-error> -->
+            </div>
+        </div>
+        <div *ngIf="
+            zoneStatus.optimized &&
+            (zoneState$ | async).optimization.solution.routes !== null &&
+            (zoneState$ | async).optimization.solution.routes.length >= 1
+        " route-planning-calculated-routes-recalculate fxLayout="column" class="align-self-end"
+            fxLayoutAlign="space-between center">
+            <mat-progress-spinner *ngIf="
+                routesStatus[routeId] &&
+                routesStatus[routeId].recomputing &&
+                routesStatus[routeId].progress > 0
+                " [diameter]="35" [appProgressSpinnerPercentage]="routesStatus[routeId].progress" mode="determinate"
+                color="accent" [value]="routesStatus[routeId].progress">
+            </mat-progress-spinner>
+        </div>
+        <div *ngIf="
+        zoneStatus.optimized &&
+        (zoneState$ | async).optimization.solution.routes !== null &&
+        (zoneState$ | async).optimization.solution.routes.length >= 1
+        " route-planning-calculated-routes-recalculate fxLayout="column" class="align-self-center"
+            fxLayoutAlign="space-between center">
+            <mat-icon [title]="routesStatus[routeId].error" color="warn"
+            *ngIf="routesStatus[routeId] && routesStatus[routeId].error">error</mat-icon>
+        </div>
+        <!-- <h4 class="recalculate-route-label">RECALCULAR RUTA</h4> -->
+        <div *ngIf="
+                zoneStatus.optimized &&
+                (zoneState$ | async).optimization.solution.routes !== null &&
+                (zoneState$ | async).optimization.solution.routes.length >= 1
+            " route-planning-calculated-routes-recalculate fxLayout="column" class="align-self-end"
+            fxLayoutAlign="space-between center">
+            <!-- <div fxLayout="row" fxLayoutGap="24px">-->
+
+            
+            <button *ngIf="routesStatus[routeId]" class="btn recalculate-button"
+                (click)="recompute(); $event.stopPropagation()" [disabled]="
+                        (zoneOptimizationStatus$ | async).loading ||
+                        (routesStatus[routeId] && routesStatus[routeId].evaluating) ||
+                        recomputeFromIndexFormControl.invalid ||
+                        (route$ | async)
+                            ? optimizeFromIndexInput.value >
+                              (route$ | async).deliveryPoints.length
+                            : false
+                    ">
+                Recalcular
+            </button>
+            <!--  </div> -->
+        </div>
+
+    </div>
+
+</div>

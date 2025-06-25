@@ -1,0 +1,34 @@
+<div class="modal-form-field">
+
+    <div class="row padding-special">
+
+        <div class="col-xl-6 col-12 text-xl-left text-center p-xl-0">
+            <label class="title-modal">Avatar</label>
+        </div>
+
+        <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+            <img src="assets/icons/close1.svg">
+        </div>
+
+        <div class="col-xl-12 col-12 text-xl-left text-center p-xl-0">
+            <p>{{'USERS.CHOOSE_THE_AVATAR_THAT_BEST_REPRESENTS_THE_USER' | translate }}</p>
+        </div>
+
+        <div class="col-12 col-xl-3 col-lg-3 point" *ngFor="let item of [1,2,3,4,5,6,7,8]">
+            <div class="row mt-3">
+                <div class="form-group input-group">
+                    <img [src]="'assets/images/pages/users/avatars/avatar_'+item+'.png'" alt="avatar"  class="avatar_img"
+                        (click)="changeAvatar('avatar_'+item+'.png')" [ngClass]="{'select': avatarImg == 'avatar_'+item+'.png'}">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-3 pl-1 pr-4">
+            <div class="form-row mt-2">
+                <button class="btn btn-primary btn-block" type="button" (click)="submit()" [disabled]="avatarImg == ''">
+                    {{'GENERAL.SAVE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

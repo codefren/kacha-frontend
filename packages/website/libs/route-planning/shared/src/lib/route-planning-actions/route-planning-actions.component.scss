@@ -1,0 +1,52 @@
+:host {
+    padding-left: 16px;
+    padding-right: 20px;
+}
+
+.easyroute-route-planning-actions {
+    margin: 0;
+    margin-top: -5px;
+
+    i,
+    .round-little {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    i {
+        margin-top: -5px;
+        font-size: 1.61em;
+    }
+}
+
+#ex4 .p1[data-count]:after {
+    position: absolute;
+    right: 25%;
+    top: 8%;
+    content: attr(data-count);
+    font-size: 40%;
+    padding: 0.3em;
+    border-radius: 50%;
+    line-height: 1em;
+    color: white;
+    background: rgba(255, 132, 0, 0.85);
+    text-align: center;
+    min-width: 1.5em;
+}
+
+#ex4 i {
+    font-size: 0.85em !important;
+    margin-top: -4px !important;
+}
+
+.no-vehicle {
+    background-color: #f9d7d7;
+    padding: 4px;
+    color: #d73327;
+    font-weight: 600;
+    margin: 0px 0px 5px;
+}
+
+.color-primary {
+    color: #263a78 !important;
+}

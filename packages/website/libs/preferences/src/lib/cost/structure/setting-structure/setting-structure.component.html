@@ -1,0 +1,103 @@
+<div class="structure-cost">
+
+    <div class="card">
+
+        <div class="card-body p-xl-4">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'COST.STRUCTURE_COSTS' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'COST.CREATE_HERE_THE_MONTHLY_STRUCTURAL_COSTS_TO_BE' | translate }} </p>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3" *ngIf="structureData && structureData.length > 0">
+
+                <div class="col-xl col-12 col-md-4 col-sm-4">
+
+                    <label for="type" class="mb-2 title-road "> {{ 'COST.CONCEPT' | translate }} </label>
+
+                </div>
+
+                <div class="col-xl col-12 col-md-4 col-sm-4">
+
+                    <label for="first" class="mb-2 title-road "> {{'COST.AMOUNT' | translate }} </label>
+
+                </div>
+
+                <div class="col-xl col-12 col-md-4 col-sm-4">
+
+                    <label for="first" class="mb-2 title-road ">  {{'COST.REVIEW_DATE' | translate }} </label>
+
+                </div>
+
+                <div class="col-xl-1 col-2 p-xl-0">
+
+                    <label for="first" class="mb-2 title-road col-xl col-12 col-md-4 col-sm-4"> </label>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-1" *ngFor="let struct of structureData; let i = index;" [ngClass]="{'pb-4': structureData.length >= 6 && i == (structureData.length - 1)}">
+
+                <div class="col-xl col-12 mt-1 pl-3">
+
+                    <div class="orm-group input-group">
+
+                        <input class="form-control form-control-input" type="text" [(ngModel)]="struct.name" placeholder="Escribir..." (focusout)="changeConceptItem(struct)">
+
+                    </div>
+
+                </div>
+                <div class="col-xl col-12 mt-1 pl-3">
+
+                    <div class="orm-group input-group">
+
+                        <input class="form-control form-control-input" type="number" placeholder="0,00€" [(ngModel)]="struct.price" (focusout)="changeConceptItem(struct)">
+
+                    </div>
+
+                </div>
+                <div class="col-xl col-12 mt-1 pl-3">
+
+                    <div class="orm-group input-group">
+
+                        <input class="form-control form-control-input" type="date" [(ngModel)]="struct.reviewDate" (focusout)="changeConceptItem(struct)">
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-1 col-12 p-xl-0">
+
+                    <div class="form-group  input-group col-xl-4 col-3 col-md-4 col-sm-4 m-0 mt-1">
+
+                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="delete(struct, i)">
+            
+                                <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+            
+                            </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row pt-3 pb-3">
+                <div class="col-12">
+                    <a class="add-expenses-type point" (click)="addOthers()"> {{ 'COST.ADD_CONCEPT' | translate }} </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

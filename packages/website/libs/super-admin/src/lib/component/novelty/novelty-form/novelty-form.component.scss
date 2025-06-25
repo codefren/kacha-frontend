@@ -1,0 +1,153 @@
+.easyroute-orders-form {
+    .padding-body-orders {
+        padding: 20px !important;
+    }
+    .switch {
+        display: contents !important;
+        vertical-align: middle;
+        cursor: pointer;
+        margin: 3px 0;
+    }
+    .toggle-directions {
+        background: #444A60;
+        //border-radius: 15px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397C;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .icon-delect {
+        color: red;
+        font-size: 21px
+    }
+    .table {
+        padding: 1px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        width: 14%;
+        padding: 14px;
+    }
+    .table th,
+    .table td {
+        vertical-align: middle;
+        border: 0px solid #dee2e6;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f1f4ff !important;
+    }
+    .disabeld-col {
+        padding: 14px;
+    }
+    .green {
+        color: #91D600;
+    }
+    .red {
+        color: #E92B11;
+    }
+    .style-tfoot {
+        background-color: #f1f4ff;
+        padding: 1%;
+    }
+    .card-title {
+        a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #4c4c4c;
+            ;
+        }
+    }
+    .btn.btn-add {
+        float: right;
+        margin-top: -0.4rem;
+    }
+    .padding-header-sub {
+        padding: 8px;
+        color: rgba(0, 0, 0, 0.87) !important;
+        background: white;
+    }
+    .col-especial {
+        padding-right: 0px;
+        padding-left: 0px;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .input-table {
+        text-align: center;
+    }
+    .modal-block-warning .fa,
+    .modal-block-warning .fab,
+    .modal-block-warning .fal,
+    .modal-block-warning .far,
+    .modal-block-warning .fas {
+        color: #0088cc !important;
+    }
+    .print {
+        text-align: -webkit-right;
+        font-size: 2em;
+        color: #000000;
+        cursor: pointer;
+    }
+    table td {
+        color: #1d1d1d;
+        font-weight: lighter;
+        font-size: 14px;
+    }
+    .td-price {
+        width: 100px;
+    }
+    .td-quantity {
+        width: 100px;
+    }
+    .date-size {
+        font-size: 12px;
+    }
+    .card-style-general {
+        border: 1px solid #d7dce1;
+    }
+    thead>tr {
+        background-color: #737373 !important;
+        color: #fff;
+        border: none !important;
+    }
+    .style-text-area {
+        height: 220px !important;
+    }
+    .margin-span {
+        margin-left: 1.5rem;
+    }
+
+
+    //pixel
+    @media screen and (min-width: 411px) and (max-width: 731px) and (orientation: portrait) {
+        .margin-span {
+            margin-left: 0.5rem;
+        }
+    }
+    //iphone 8
+    @media screen and (min-width: 414px) and (max-width: 736px) and (orientation: portrait) {
+        .margin-span {
+            margin-left: 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,166 @@
+.companies-form {
+    .modal-dismiss {
+        margin-left: 1em;
+    }
+    .text-white {
+        color: white !important;
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .disabeld-col {
+        padding: 14px;
+    }
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #bec4ca;
+        background-color: #7387c2;
+        color: white;
+        /* width: 14%; */
+        padding: 14px;
+    }
+    .table th,
+    .table td {
+        vertical-align: middle;
+        border: 0px solid #dee2e6;
+    }
+    table td {
+        color: #1d1d1d;
+        font-weight: lighter;
+        font-size: 13px;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f1f4ff !important;
+    }
+    tbody tr:nth-of-type(odd) {
+        background-color: #f1f4ff !important;
+    }
+    .date-size {
+        font-size: 12px;
+    }
+    .card {
+        .card-body {
+            background-color: #f1f4ff !important;
+            min-height: 120px;
+            .title {
+                color: #2a2929 !important;
+                text-transform: initial !important;
+                font-size: 18px !important;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+        .border {
+            border: 1px solid #24397c !important;
+        }
+    }
+    .switch label .lever {
+        /* margin: 0 6px !important; */
+        margin: 0 6px 0px 0px !important;
+    }
+    .toggle-directions-sub {
+        background: #444A60;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 14px;
+        }
+        .button-document {
+            border-radius: 3px;
+            width: 156px !important;
+            padding: 0 12px;
+            label {
+                color: #24397c !important;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .toggle-directions {
+        background: #444a60;
+        // border-radius: 15px;
+        i {
+            color: #fff;
+        }
+        span {
+            color: #fff;
+            font-size: 16px;
+        }
+        .btn-blank {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            color: #24397c;
+            font-weight: bold;
+        }
+        .toggle-pointer {
+            cursor: pointer;
+        }
+    }
+    .show-directions {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .padding-col {
+        padding: 6px;
+    }
+    .custom-file-label::after {
+        padding: 12px 0.75rem !important;
+        color: #ffffff !important;
+        content: "Cargar archivo";
+        background-color: #24397c !important;
+        border-radius: 0 10px 10px 0;
+        height: 47px !important;
+    }
+    .custom-file-label {
+        border-radius: 10px !important;
+        height: 48px !important;
+        padding: 12px 20px;
+        margin-top: 0px !important;
+    }
+    .colorDataNull {
+        color: #b5b7b9 !important;
+    }
+    .colorFileData {
+        color: #4c4c4c !important;
+    }
+    /* .color-table-detail {
+        color: #2544a6;
+    } */
+    /* .color-table-detail {
+        color: #2544a6 !important;
+    } */
+    .sytle-delete {
+        color: #393939;
+        text-align: center;
+        font-family: Roboto;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .text-delete {
+        color: #949494 !important;
+        text-align: center;
+        font-family: Roboto;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .btn-danger {
+        width: 108px;
+        border-radius: 22px;
+        background: #D40000;
+        border-color: #D40000 #D40000 #D40000;
+    }
+    .card-delete {
+        background-color: #EFF3F8 !important;
+    }
+}

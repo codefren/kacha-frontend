@@ -1,0 +1,167 @@
+<div class="client-packagind-balance">
+    <div class="card">
+
+        <form>
+
+            <div class="card-body pb-4">
+
+                <div class="col-xl-12 col-12 pt-3 ">
+
+                    <p class="title-user mb-1"> {{'PACKAGING_BALANCE.NAME' | translate }} </p>
+
+                    <p class="sub-title-user"> {{'PACKAGING_BALANCE.TEXT' | translate }} </p>
+
+                </div>
+
+                <!-- TOTAL DEVOLUTION -->
+
+                <div class="container-fluid">
+
+                    <div class="form-row pt-3">
+
+                        <div class="col-xl-4 col-12 mb-2">
+
+                            <div class="form-group input-group" style="display: block;">
+
+                                <span class="has-float-label w-100">
+        
+                                    <input class="form-control point radiusDeliveryOrderCode style-input-change" readonly id="serviceTimeMinute" [value]="point.pendingContainers" type="text" placeholder="{{'PACKAGING_BALANCE.PACKAGING_PENDING_TO_BE_RETURNED' | translate }}"/>
+        
+                                    <label for="first" class="mt-2 title-col"> {{'PACKAGING_BALANCE.PACKAGING_PENDING_TO_BE_RETURNED' | translate }} </label>
+        
+                                </span>
+
+                                <span class="has-float-label w-100 has-float-eye" style="vertical-align: middle;">
+
+                                    <button type="button" class="btn btn-defauld btn-save point" style="vertical-align: text-bottom;" (click)="openModalEnva()">
+                                        
+                                        <img src="assets/icons/editEnva.svg" alt="eye">
+
+                                    </button>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- END TOTAL DEVOLUTION -->
+
+            </div>
+
+            <div class="card-footer">
+
+                <div class="container-fluid">
+
+                    <div class="col-md-12 col-12 pb-2 pr-0 pl-0 m-0">
+
+                        <div class="form-row d-flex justify-content-xl-start justify-content-center align-items-end mb-2">
+
+                            <!-- filtros de chofer -->
+
+                            <div class="m-1 size-btn">
+
+                                <div class="">
+
+                                    <select class="form-control form-select letter-app" id="userId" (change)="ChangeFilter($event)" [value]="filter.userId">
+                                        
+                                        <option value="" selected> {{ 'COST.DRIVER' | translate }} </option>
+        
+                                        <option *ngFor="let item of users" [value]="item.id" > {{ item.name }} {{ item.surname }}</option>
+                                          
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end filtro de chofer -->
+
+                            <!-- filter by date -->
+
+                            <div class="m-1 size-btn">
+
+                                <div class="dp-hidden position-absolute">
+
+                                    <div class="input-group">
+
+                                        <input name="datepicker" class="form-control   input-size date1 point" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [minDate]="{year: 1980, month: 1, day: 1}"
+                                            [startDate]="fromDate!" tabindex="-1" />
+
+                                        <ng-template #t let-date let-focused="focused">
+
+                                            <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                {{ date.day }}
+                                            </span>
+
+                                        </ng-template>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="input-group">
+
+                                    <input #dpFromDate class="form-control form-control-date form-control-d" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                                    <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+                
+                                        <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+            
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <!-- end filter bt date  -->
+
+                        </div>
+
+                    </div>
+
+                    <!-- datatables -->
+
+                    <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" id="clientAnalysisTablePackaging" style="text-align: center ; width: 100%;">
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="border-top-left-radius: 6px;">{{'PACKAGING_BALANCE.TRAVEL_DATE' | translate }}</th>
+
+                                <th>{{ 'PACKAGING_BALANCE.DRIVERS' | translate }}</th>
+
+                                <th>{{ 'PACKAGING_BALANCE.CONTAINERS_DELIVERED' |translate }}</th>
+
+                                <th style="border-top-right-radius: 6px;">{{ 'PACKAGING_BALANCE.COLLECTED_PACKAGIND' | translate }}</th>
+
+                                <!-- <th style="border-top-right-radius: 6px;">{{ 'PACKAGING_BALANCE.BALANCE' | translate }}</th> -->
+
+                                <!-- <th style="border-top-right-radius: 6px;">{{ 'CLIENTS.CLIENTS_ANALYSIS.COST' | translate }}</th>
+
+                                <th style="border-top-right-radius: 6px;">{{ 'CLIENTS.CLIENTS_ANALYSIS.BILLING' | translate }}</th>
+
+                                <th style="border-top-right-radius: 6px;">{{ 'CLIENTS.CLIENTS_ANALYSIS.DETAIL' | translate }}</th> -->
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody></tbody>
+
+                    </table>
+
+                    <!-- end datatables -->
+                </div>
+
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

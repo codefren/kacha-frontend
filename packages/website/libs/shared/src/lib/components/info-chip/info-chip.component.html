@@ -1,0 +1,39 @@
+<div class="info-chip" [ngClass]="{'info-chip-modified': !isColorDot}" [class.medium-size]="size == 'm'" [class.small-size]="size == 's'" [class.primary]="color == 'primary'" [class.primary-200]="color == 'primary-200'" [class.accent]="color == 'accent'"
+    [class.warn]="color == 'warn'" [class.dark]="color == 'dark'" [class.primary-900]="color == 'primary-900'" [class.primary-300]="color == 'primary-300'" [class.shadow]="shadow" [class.bordered]="bordered" [class.editable]="editable" [class.borderedNoRight]="borderNoRight"
+    [title]="help" [class.unknown-color]="
+        color != 'primary' && 
+        color != 'primary-200' && 
+        color != 'accent' && 
+        color != 'dark' && 
+        color != 'warn' &&
+        color != 'primary-900' &&
+        color != 'primary-300'
+    " [style.backgroundColor]="
+        color == 'primary' || color == 'primary-200' || color == 'accent' || color == 'dark' || color == 'warn' || color == 'primary-900' || color == 'primary-300'
+            ? 'auto'
+            : editable && isHovered
+            ? highlighted(color)
+            : color
+    " (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" [style.min-width.px]="minWidth" [style.color]="colorFont ? colorFont : getContrastColor(color)">
+    <i class="icon-middle" *ngIf="icon && !svgIcon" [ngClass]="[icon]"></i>
+    <!-- <mat-icon class="material-icon-container" *ngIf="icon && !svgIcon" [inline]="true">{{
+        icon
+    }}</mat-icon> -->
+    <img *ngIf="svgIcon && !icon" [src]="svgIcon" class="ico-modify" style="margin-right: 5px;" [ngClass]="{'padding-icon': padding}">
+    <!-- <mat-icon
+        class="material-icon-container"
+        *ngIf="svgIcon && !icon"
+        [svgIcon]="svgIcon"
+        color="svg-icon"
+        [inline]="true"
+    ></mat-icon> -->
+    <span class="info-chip-text" [class.medium]="size == 'm'" [class.small]="size == 's'">{{
+        text
+        }}</span>
+
+    <div class="progress" *ngIf="showProgess">
+        <div class="progress-bar" role="progressbar" [ngClass]="{'progress-bar-red': progressValue >=100}" [style.width]="progressValue+'%'" aria-valuemin="0" aria-valuemax="100">
+            <label for="" style="width: 100px;">{{ progressValue }}%</label>
+        </div>
+    </div>
+</div>

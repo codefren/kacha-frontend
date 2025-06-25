@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@import 'shared/src/lib/common';
+
+@mixin add-vehicles-dialog-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    .easyroute-add-vehicles-dialog {
+        h2,
+        h3 {
+            color: mat-color($primary);
+        }
+
+        .vehicle-container {
+            background-color: mat-color($accent);
+        }
+    }
+}
+
+@mixin add-vehicles-dialog-typography($config) {
+}

@@ -1,0 +1,66 @@
+.easyroute-modal-promotion-info-images {
+    .title {
+        color: #24397c !important;
+        font-style: normal;
+        line-height: 18px;
+        font-size: 14px !important;
+        text-align: center;
+    }
+    .ajust {
+        margin: 10px auto;
+    }
+    .fa-times {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        color: #808080;
+        font-size: 22px;
+    }
+    .description {
+        color: var(--background-header) !important;
+        line-height: 20px;
+    }
+    p:not(.title) {
+        color: #808080;
+        text-align: center;
+        font-size: 16px;
+        margin-top: 35px;
+        margin-bottom: 35px;
+    }
+    .info-size {
+        color: #808080;
+        font-size: 11px;
+    }
+    .img-info {
+        max-width: 100%;
+        display: block;
+        height: auto;
+    }
+    @media screen and (max-width: 767px) {
+        .title {
+            font-size: 15px !important;
+        }
+        p:not(.title) {
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+        .fa-times {
+            right: 20px;
+            top: 15px;
+            font-size: 16px;
+        }
+    }
+    @media screen and (max-width: 320px) {
+        .title {
+            font-size: 12px !important;
+            padding-right: 12px !important;
+        }
+        .fa-times {
+            right: 16px;
+            top: 32px;
+        }
+    }
+    .img-container {
+        background: #f2f5ff;
+    }
+}

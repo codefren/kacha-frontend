@@ -1,0 +1,2292 @@
+{
+    "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "",
+    "projects": {
+        "easyroute": {
+            "root": "apps/easyroute/",
+            "sourceRoot": "apps/easyroute/src",
+            "projectType": "application",
+            "prefix": "easyroute",
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/easyroute",
+                        "index": "apps/easyroute/src/index.html",
+                        "main": "apps/easyroute/src/main.ts",
+                        "polyfills": "apps/easyroute/src/polyfills.ts",
+                        "tsConfig": "apps/easyroute/tsconfig.app.json",
+                        "assets": [
+                            "apps/easyroute/src/favicon.ico",
+                            "apps/easyroute/src/assets",
+                            "apps/easyroute/src/manifest.json"
+                        ],
+                        "styles": [
+                            "apps/easyroute/src/styles.scss",
+                            "../../node_modules/material-icons/css/material-icons.scss",
+                            "../../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss"
+                        ],
+                        "scripts": [],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["./apps/easyroute/src", "./libs"]
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/easyroute/src/environments/environment.ts",
+                                    "with": "apps/easyroute/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "10mb"
+                                }
+                            ],
+                            "serviceWorker": true
+                        },
+                        "staging": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/easyroute/src/environments/environment.ts",
+                                    "with": "apps/easyroute/src/environments/environment.staging.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "10mb"
+                                }
+                            ]
+                        },
+                        "development": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/easyroute/src/environments/environment.ts",
+                                    "with": "apps/easyroute/src/environments/environment.development.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "10mb"
+                                }
+                            ],
+                            "serviceWorker": true
+                        },
+                        "local": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/easyroute/src/environments/environment.ts",
+                                    "with": "apps/easyroute/src/environments/environment.local.ts"
+                                }
+                            ],
+                            "outputHashing": "all",
+                            "sourceMap": true,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": false,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "10mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "easyroute:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "easyroute:build:production"
+                        },
+                        "local": {
+                            "browserTarget": "easyroute:build:local"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "easyroute:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/easyroute/tsconfig.app.json",
+                            "apps/easyroute/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "apps/easyroute/jest.config.js",
+                        "tsConfig": "apps/easyroute/tsconfig.spec.json",
+                        "setupFile": "apps/easyroute/src/test-setup.ts",
+                        "assets": ["apps/easyroute/src/manifest.json"]
+                    }
+                }
+            }
+        },
+        "easyroute-e2e": {
+            "root": "apps/easyroute-e2e",
+            "projectType": "application",
+            "prefix": "",
+            "architect": {
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "apps/easyroute-e2e/protractor.conf.js",
+                        "devServerTarget": "easyroute:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "easyroute:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": "apps/easyroute-e2e/tsconfig.e2e.json",
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "playground": {
+            "root": "apps/playground",
+            "sourceRoot": "apps/playground/src",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/playground",
+                        "index": "apps/playground/src/index.html",
+                        "main": "apps/playground/src/main.ts",
+                        "polyfills": "apps/playground/src/polyfills.ts",
+                        "tsConfig": "apps/playground/tsconfig.json",
+                        "assets": [
+                            "apps/playground/src/favicon.ico",
+                            "apps/playground/src/assets"
+                        ],
+                        "styles": [
+                            "apps/easyroute/src/styles.scss",
+                            "../../node_modules/material-icons/css/material-icons.scss",
+                            "../../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["./apps/easyroute/src", "./libs"]
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": false
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "playground:build",
+                        "port": 4201
+                    }
+                }
+            }
+        },
+        "backend": {
+            "root": "libs/backend",
+            "sourceRoot": "libs/backend/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/backend/tsconfig.lib.json",
+                            "libs/backend/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/backend/jest.config.js",
+                        "tsConfig": "libs/backend/tsconfig.spec.json",
+                        "setupFile": "libs/backend/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "shared": {
+            "root": "libs/shared",
+            "sourceRoot": "libs/shared/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/shared/tsconfig.lib.json",
+                            "libs/shared/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/shared/jest.config.js",
+                        "tsConfig": "libs/shared/tsconfig.spec.json",
+                        "setupFile": "libs/shared/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "route-planning": {
+            "root": "libs/route-planning",
+            "sourceRoot": "libs/route-planning/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/route-planning/tsconfig.lib.json",
+                            "libs/route-planning/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/route-planning/jest.config.js",
+                        "tsConfig": "libs/route-planning/tsconfig.spec.json",
+                        "setupFile": "libs/route-planning/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "management": {
+            "root": "libs/management",
+            "sourceRoot": "libs/management/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/management/tsconfig.lib.json",
+                            "libs/management/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/management/jest.config.js",
+                        "tsConfig": "libs/management/tsconfig.spec.json",
+                        "setupFile": "libs/management/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "preferences": {
+            "root": "libs/preferences",
+            "sourceRoot": "libs/preferences/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/preferences/tsconfig.lib.json",
+                            "libs/preferences/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/preferences/jest.config.js",
+                        "tsConfig": "libs/preferences/tsconfig.spec.json",
+                        "setupFile": "libs/preferences/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "help": {
+            "root": "libs/help",
+            "sourceRoot": "libs/help/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/help/tsconfig.lib.json",
+                            "libs/help/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/help/jest.config.js",
+                        "tsConfig": "libs/help/tsconfig.spec.json",
+                        "setupFile": "libs/help/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "profile": {
+            "root": "libs/profile",
+            "sourceRoot": "libs/profile/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/profile/tsconfig.lib.json",
+                            "libs/profile/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/profile/jest.config.js",
+                        "tsConfig": "libs/profile/tsconfig.spec.json",
+                        "setupFile": "libs/profile/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "map": {
+            "root": "libs/map",
+            "sourceRoot": "libs/map/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/map/tsconfig.lib.json",
+                            "libs/map/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/map/jest.config.js",
+                        "tsConfig": "libs/map/tsconfig.spec.json",
+                        "setupFile": "libs/map/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "delivery-points": {
+            "root": "libs/delivery-points",
+            "sourceRoot": "libs/delivery-points/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/delivery-points/tsconfig.lib.json",
+                            "libs/delivery-points/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/delivery-points/jest.config.js",
+                        "tsConfig": "libs/delivery-points/tsconfig.spec.json",
+                        "setupFile": "libs/delivery-points/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "delivery-zones": {
+            "root": "libs/delivery-zones",
+            "sourceRoot": "libs/delivery-zones/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/delivery-zones/tsconfig.lib.json",
+                            "libs/delivery-zones/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/delivery-zones/jest.config.js",
+                        "tsConfig": "libs/delivery-zones/tsconfig.spec.json",
+                        "setupFile": "libs/delivery-zones/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "vehicles": {
+            "root": "libs/vehicles",
+            "sourceRoot": "libs/vehicles/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/vehicles/tsconfig.lib.json",
+                            "libs/vehicles/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/vehicles/jest.config.js",
+                        "tsConfig": "libs/vehicles/tsconfig.spec.json",
+                        "setupFile": "libs/vehicles/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "routing-inputs": {
+            "root": "libs/routing-inputs",
+            "sourceRoot": "libs/routing-inputs/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/routing-inputs/tsconfig.lib.json",
+                            "libs/routing-inputs/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/routing-inputs/jest.config.js",
+                        "tsConfig": "libs/routing-inputs/tsconfig.spec.json",
+                        "setupFile": "libs/routing-inputs/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "routing-outputs": {
+            "root": "libs/routing-outputs",
+            "sourceRoot": "libs/routing-outputs/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/routing-outputs/tsconfig.lib.json",
+                            "libs/routing-outputs/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/routing-outputs/jest.config.js",
+                        "tsConfig": "libs/routing-outputs/tsconfig.spec.json",
+                        "setupFile": "libs/routing-outputs/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "routing-computations": {
+            "root": "libs/routing-computations",
+            "sourceRoot": "libs/routing-computations/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/routing-computations/tsconfig.lib.json",
+                            "libs/routing-computations/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/routing-computations/jest.config.js",
+                        "tsConfig": "libs/routing-computations/tsconfig.spec.json",
+                        "setupFile": "libs/routing-computations/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "route-planning-shared": {
+            "root": "libs/route-planning/shared",
+            "sourceRoot": "libs/route-planning/shared/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/route-planning/shared/tsconfig.lib.json",
+                            "libs/route-planning/shared/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/route-planning/shared/jest.config.js",
+                        "tsConfig": "libs/route-planning/shared/tsconfig.spec.json",
+                        "setupFile": "libs/route-planning/shared/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-preferences": {
+            "root": "libs/state-preferences",
+            "sourceRoot": "libs/state-preferences/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-preferences/tsconfig.lib.json",
+                            "libs/state-preferences/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-preferences/jest.config.js",
+                        "tsConfig": "libs/state-preferences/tsconfig.spec.json",
+                        "setupFile": "libs/state-preferences/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-vehicles": {
+            "root": "libs/state-vehicles",
+            "sourceRoot": "libs/state-vehicles/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-vehicles/tsconfig.lib.json",
+                            "libs/state-vehicles/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-vehicles/jest.config.js",
+                        "tsConfig": "libs/state-vehicles/tsconfig.spec.json",
+                        "setupFile": "libs/state-vehicles/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-delivery-zones": {
+            "root": "libs/state-delivery-zones",
+            "sourceRoot": "libs/state-delivery-zones/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-delivery-zones/tsconfig.lib.json",
+                            "libs/state-delivery-zones/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-delivery-zones/jest.config.js",
+                        "tsConfig": "libs/state-delivery-zones/tsconfig.spec.json",
+                        "setupFile": "libs/state-delivery-zones/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-profile": {
+            "root": "libs/state-profile",
+            "sourceRoot": "libs/state-profile/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-profile/tsconfig.lib.json",
+                            "libs/state-profile/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-profile/jest.config.js",
+                        "tsConfig": "libs/state-profile/tsconfig.spec.json",
+                        "setupFile": "libs/state-profile/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-route-planning": {
+            "root": "libs/state-route-planning",
+            "sourceRoot": "libs/state-route-planning/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-route-planning/tsconfig.lib.json",
+                            "libs/state-route-planning/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-route-planning/jest.config.js",
+                        "tsConfig": "libs/state-route-planning/tsconfig.spec.json",
+                        "setupFile": "libs/state-route-planning/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-auth": {
+            "root": "libs/state-auth",
+            "sourceRoot": "libs/state-auth/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-auth/tsconfig.lib.json",
+                            "libs/state-auth/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-auth/jest.config.js",
+                        "tsConfig": "libs/state-auth/tsconfig.spec.json",
+                        "setupFile": "libs/state-auth/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-profile-settings": {
+            "root": "libs/state-profile-settings",
+            "sourceRoot": "libs/state-profile-settings/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-profile-settings/tsconfig.lib.json",
+                            "libs/state-profile-settings/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-profile-settings/jest.config.js",
+                        "tsConfig": "libs/state-profile-settings/tsconfig.spec.json",
+                        "setupFile": "libs/state-profile-settings/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-easyroute": {
+            "root": "libs/state-easyroute",
+            "sourceRoot": "libs/state-easyroute/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-easyroute/tsconfig.lib.json",
+                            "libs/state-easyroute/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-easyroute/jest.config.js",
+                        "tsConfig": "libs/state-easyroute/tsconfig.spec.json",
+                        "setupFile": "libs/state-easyroute/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-users": {
+            "root": "libs/state-users",
+            "sourceRoot": "libs/state-users/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-users/tsconfig.lib.json",
+                            "libs/state-users/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-users/jest.config.js",
+                        "tsConfig": "libs/state-users/tsconfig.spec.json",
+                        "setupFile": "libs/state-users/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "users-management": {
+            "root": "libs/users-management",
+            "sourceRoot": "libs/users-management/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/users-management/tsconfig.lib.json",
+                            "libs/users-management/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/users-management/jest.config.js",
+                        "tsConfig": "libs/users-management/tsconfig.spec.json",
+                        "setupFile": "libs/users-management/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-companies": {
+            "root": "libs/state-companies",
+            "sourceRoot": "libs/state-companies/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-companies/tsconfig.lib.json",
+                            "libs/state-companies/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-companies/jest.config.js",
+                        "tsConfig": "libs/state-companies/tsconfig.spec.json",
+                        "setupFile": "libs/state-companies/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "auth-local": {
+            "root": "libs/auth-local",
+            "sourceRoot": "libs/auth-local/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/auth-local/tsconfig.lib.json",
+                            "libs/auth-local/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/auth-local/jest.config.js",
+                        "tsConfig": "libs/auth-local/tsconfig.spec.json",
+                        "setupFile": "libs/auth-local/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "login": {
+            "root": "libs/login",
+            "sourceRoot": "libs/login/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/login/tsconfig.lib.json",
+                            "libs/login/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/login/jest.config.js",
+                        "tsConfig": "libs/login/tsconfig.spec.json",
+                        "setupFile": "libs/login/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-points": {
+            "root": "libs/state-points",
+            "sourceRoot": "libs/state-points/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-points/tsconfig.lib.json",
+                            "libs/state-points/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/state-points/jest.config.js",
+                        "tsConfig": "libs/state-points/tsconfig.spec.json",
+                        "setupFile": "libs/state-points/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "control-panel": {
+            "root": "libs/control-panel",
+            "sourceRoot": "libs/control-panel/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/control-panel/tsconfig.lib.json",
+                            "libs/control-panel/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/control-panel/jest.config.js",
+                        "tsConfig": "libs/control-panel/tsconfig.spec.json",
+                        "setupFile": "libs/control-panel/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "integration": {
+            "root": "libs/integration",
+            "sourceRoot": "libs/integration/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/integration/tsconfig.lib.json",
+                            "libs/integration/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/integration/jest.config.js",
+                        "tsConfig": "libs/integration/tsconfig.spec.json",
+                        "setupFile": "libs/integration/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "note": {
+            "root": "libs/note",
+            "sourceRoot": "libs/note/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/note/tsconfig.lib.json",
+                            "libs/note/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/note/jest.config.js",
+                        "tsConfig": "libs/note/tsconfig.spec.json",
+                        "setupFile": "libs/note/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "my-note": {
+            "root": "libs/my-note",
+            "sourceRoot": "libs/my-note/src",
+            "projectType": "library",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/my-note/tsconfig.lib.json",
+                            "libs/my-note/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "libs/my-note/jest.config.js",
+                        "tsConfig": "libs/my-note/tsconfig.spec.json",
+                        "setupFile": "libs/my-note/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "category": {
+            "projectType": "library",
+            "root": "libs/category",
+            "sourceRoot": "libs/category/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/category/tsconfig.lib.json",
+                            "libs/category/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/category/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/category/jest.config.js",
+                        "tsConfig": "libs/category/tsconfig.spec.json",
+                        "setupFile": "libs/category/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "category-general": {
+            "projectType": "library",
+            "root": "libs/category-general",
+            "sourceRoot": "libs/category-general/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/category-general/tsconfig.lib.json",
+                            "libs/category-general/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/category-general/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/category-general/jest.config.js",
+                        "tsConfig": "libs/category-general/tsconfig.spec.json",
+                        "setupFile": "libs/category-general/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "products": {
+            "projectType": "library",
+            "root": "libs/products",
+            "sourceRoot": "libs/products/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/products/tsconfig.lib.json",
+                            "libs/products/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/products/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/products/jest.config.js",
+                        "tsConfig": "libs/products/tsconfig.spec.json",
+                        "setupFile": "libs/products/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "measure": {
+            "projectType": "library",
+            "root": "libs/measure",
+            "sourceRoot": "libs/measure/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/measure/tsconfig.lib.json",
+                            "libs/measure/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/products/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/measure/jest.config.js",
+                        "tsConfig": "libs/measure/tsconfig.spec.json",
+                        "setupFile": "libs/measure/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "measure-general": {
+            "projectType": "library",
+            "root": "libs/measure-general",
+            "sourceRoot": "libs/measure-general/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/measure-general/tsconfig.lib.json",
+                            "libs/measure-general/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/products/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/measure-general/jest.config.js",
+                        "tsConfig": "libs/measure-general/tsconfig.spec.json",
+                        "setupFile": "libs/measure-general/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "orders": {
+            "projectType": "library",
+            "root": "libs/orders",
+            "sourceRoot": "libs/orders/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/orders/tsconfig.lib.json",
+                            "libs/orders/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/orders/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/orders/jest.config.js",
+                        "tsConfig": "libs/orders/tsconfig.spec.json",
+                        "setupFile": "libs/orders/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "my-orders": {
+            "projectType": "library",
+            "root": "libs/my-orders",
+            "sourceRoot": "libs/my-orders/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/my-orders/tsconfig.lib.json",
+                            "libs/my-orders/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/my-orders/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/my-orders/jest.config.js",
+                        "tsConfig": "libs/my-orders/tsconfig.spec.json",
+                        "setupFile": "libs/my-orders/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-register": {
+            "projectType": "library",
+            "root": "libs/state-register",
+            "sourceRoot": "libs/state-register/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-register/tsconfig.lib.json",
+                            "libs/state-register/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/state-register/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/state-register/jest.config.js",
+                        "tsConfig": "libs/state-register/tsconfig.spec.json",
+                        "setupFile": "libs/state-register/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "home": {
+            "projectType": "library",
+            "root": "libs/home",
+            "sourceRoot": "libs/home/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/home/tsconfig.lib.json",
+                            "libs/home/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/home/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/home/jest.config.js",
+                        "tsConfig": "libs/home/tsconfig.spec.json",
+                        "setupFile": "libs/home/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "miwigo-clients-unlinked": {
+            "projectType": "library",
+            "root": "libs/miwigo-clients-unlinked",
+            "sourceRoot": "libs/miwigo-clients-unlinked/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/miwigo-clients-unlinked/tsconfig.lib.json",
+                            "libs/miwigo-clients-unlinked/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/miwigo-clients-unlinked/**"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/miwigo-clients-unlinked/jest.config.js",
+                        "tsConfig": "libs/miwigo-clients-unlinked/tsconfig.spec.json",
+                        "setupFile": "libs/miwigo-clients-unlinked/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "state-geolocation": {
+            "projectType": "library",
+            "root": "libs/state-geolocation",
+            "sourceRoot": "libs/state-geolocation/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/state-geolocation/tsconfig.lib.json",
+                            "libs/state-geolocation/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/state-geolocation/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/state-geolocation/jest.config.js",
+                        "tsConfig": "libs/state-geolocation/tsconfig.spec.json",
+                        "setupFile": "libs/state-geolocation/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "franchise": {
+            "projectType": "library",
+            "root": "libs/franchise",
+            "sourceRoot": "libs/franchise/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/franchise/tsconfig.lib.json",
+                            "libs/franchise/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/franchise/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/franchise/jest.config.js",
+                        "tsConfig": "libs/franchise/tsconfig.spec.json",
+                        "setupFile": "libs/franchise/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "sub-category": {
+            "projectType": "library",
+            "root": "libs/sub-category",
+            "sourceRoot": "libs/sub-category/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/sub-category/tsconfig.lib.json",
+                            "libs/sub-category/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/sub-category/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/sub-category/jest.config.js",
+                        "tsConfig": "libs/sub-category/tsconfig.spec.json",
+                        "setupFile": "libs/sub-category/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "category-filter": {
+            "projectType": "library",
+            "root": "libs/category-filter",
+            "sourceRoot": "libs/category-filter/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/category-filter/tsconfig.lib.json",
+                            "libs/category-filter/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/category-filter/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/category-filter/jest.config.js",
+                        "tsConfig": "libs/category-filter/tsconfig.spec.json",
+                        "setupFile": "libs/category-filter/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "module": {
+            "projectType": "library",
+            "root": "libs/module",
+            "sourceRoot": "libs/module/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/module/tsconfig.lib.json",
+                            "libs/module/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_libs/modules/**", "!libs/module/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/module/jest.config.js",
+                        "tsConfig": "libs/module/tsconfig.spec.json",
+                        "setupFile": "libs/module/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "notifications": {
+            "projectType": "library",
+            "root": "libs/notifications",
+            "sourceRoot": "libs/notifications/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/notifications/tsconfig.lib.json",
+                            "libs/notifications/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/notifications/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/notifications/jest.config.js",
+                        "tsConfig": "libs/notifications/tsconfig.spec.json",
+                        "setupFile": "libs/notifications/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "management-logistics": {
+            "projectType": "library",
+            "root": "libs/management-logistics",
+            "sourceRoot": "libs/management-logistics/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/management-logistics/tsconfig.lib.json",
+                            "libs/management-logistics/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/management-logistics/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/management-logistics/jest.config.js",
+                        "tsConfig": "libs/management-logistics/tsconfig.spec.json",
+                        "setupFile": "libs/management-logistics/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "super-admin": {
+            "projectType": "library",
+            "root": "libs/super-admin",
+            "sourceRoot": "libs/super-admin/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/super-admin/tsconfig.lib.json",
+                            "libs/super-admin/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/super-admin/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/super-admin/jest.config.js",
+                        "tsConfig": "libs/super-admin/tsconfig.spec.json",
+                        "setupFile": "libs/super-admin/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "vehicle-maintenance": {
+            "projectType": "library",
+            "root": "libs/vehicle-maintenance",
+            "sourceRoot": "libs/vehicle-maintenance/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/vehicle-maintenance/tsconfig.lib.json",
+                            "libs/vehicle-maintenance/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/vehicle-maintenance/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/vehicle-maintenance/jest.config.js",
+                        "tsConfig": "libs/vehicle-maintenance/tsconfig.spec.json",
+                        "setupFile": "libs/vehicle-maintenance/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "bills": {
+            "projectType": "library",
+            "root": "libs/bills",
+            "sourceRoot": "libs/bills/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/bills/tsconfig.lib.json",
+                            "libs/bills/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/bills/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/bills/jest.config.js",
+                        "tsConfig": "libs/bills/tsconfig.spec.json",
+                        "setupFile": "libs/bills/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "dashboard": {
+            "projectType": "library",
+            "root": "libs/dashboard",
+            "sourceRoot": "libs/dashboard/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/dashboard/tsconfig.lib.json",
+                            "libs/dashboard/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/dashboard/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/dashboard/jest.config.js",
+                        "tsConfig": "libs/dashboard/tsconfig.spec.json",
+                        "setupFile": "libs/dashboard/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "filter-state": {
+            "projectType": "library",
+            "root": "libs/filter-state",
+            "sourceRoot": "libs/filter-state/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/filter-state/tsconfig.lib.json",
+                            "libs/filter-state/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/filter-state/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/filter-state/jest.config.js",
+                        "tsConfig": "libs/filter-state/tsconfig.spec.json",
+                        "setupFile": "libs/filter-state/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "providers": {
+            "projectType": "library",
+            "root": "libs/providers",
+            "sourceRoot": "libs/providers/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/providers/tsconfig.lib.json",
+                            "libs/providers/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/providers/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/providers/jest.config.js",
+                        "tsConfig": "libs/providers/tsconfig.spec.json",
+                        "setupFile": "libs/providers/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "sheet-route": {
+            "projectType": "library",
+            "root": "libs/sheet-route",
+            "sourceRoot": "libs/sheet-route/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/sheet-route/tsconfig.lib.json",
+                            "libs/sheet-route/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/sheet-route/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/sheet-route/jest.config.js",
+                        "tsConfig": "libs/sheet-route/tsconfig.spec.json",
+                        "setupFile": "libs/sheet-route/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "parcel": {
+            "projectType": "library",
+            "root": "libs/parcel",
+            "sourceRoot": "libs/parcel/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/parcel/tsconfig.lib.json",
+                            "libs/parcel/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/parcel/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/parcel/jest.config.js",
+                        "tsConfig": "libs/parcel/tsconfig.spec.json",
+                        "setupFile": "libs/parcel/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "cost": {
+            "projectType": "library",
+            "root": "libs/cost",
+            "sourceRoot": "libs/cost/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/cost/tsconfig.lib.json",
+                            "libs/cost/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/cost/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/cost/jest.config.js",
+                        "tsConfig": "libs/cost/tsconfig.spec.json",
+                        "setupFile": "libs/cost/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "report": {
+            "projectType": "library",
+            "root": "libs/report",
+            "sourceRoot": "libs/report/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/report/tsconfig.lib.json",
+                            "libs/report/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/report/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/report/jest.config.js",
+                        "tsConfig": "libs/report/tsconfig.spec.json",
+                        "setupFile": "libs/report/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "loading-dock": {
+            "projectType": "library",
+            "root": "libs/loading-dock",
+            "sourceRoot": "libs/loading-dock/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/loading-dock/tsconfig.lib.json",
+                            "libs/loading-dock/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/loading-dock/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/loading-dock/jest.config.js",
+                        "tsConfig": "libs/loading-dock/tsconfig.spec.json",
+                        "setupFile": "libs/loading-dock/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "company-profile": {
+            "projectType": "library",
+            "root": "libs/company-profile",
+            "sourceRoot": "libs/company-profile/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/company-profile/tsconfig.lib.json",
+                            "libs/company-profile/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/company-profile/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/company-profile/jest.config.js",
+                        "tsConfig": "libs/company-profile/tsconfig.spec.json",
+                        "setupFile": "libs/company-profile/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "travel-tracking": {
+            "projectType": "library",
+            "root": "libs/travel-tracking",
+            "sourceRoot": "libs/travel-tracking/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/travel-tracking/tsconfig.lib.json",
+                            "libs/travel-tracking/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/travel-tracking/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/travel-tracking/jest.config.js",
+                        "tsConfig": "libs/travel-tracking/tsconfig.spec.json",
+                        "setupFile": "libs/travel-tracking/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "partners-super-admin": {
+            "projectType": "library",
+            "root": "libs/partners-super-admin",
+            "sourceRoot": "libs/partners-super-admin/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/partners-super-admin/tsconfig.lib.json",
+                            "libs/partners-super-admin/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/partners-super-admin/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/partners-super-admin/jest.config.js",
+                        "tsConfig": "libs/partners-super-admin/tsconfig.spec.json",
+                        "setupFile": "libs/partners-super-admin/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "chat": {
+            "projectType": "library",
+            "root": "libs/chat",
+            "sourceRoot": "libs/chat/src",
+            "prefix": "easyroute",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/chat/tsconfig.lib.json",
+                            "libs/chat/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/chat/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/chat/jest.config.js",
+                        "tsConfig": "libs/chat/tsconfig.spec.json",
+                        "setupFile": "libs/chat/src/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        }
+    },
+    "cli": {
+        "warnings": {
+            "typescriptMismatch": false,
+            "versionMismatch": false
+        },
+        "defaultCollection": "@nrwl/schematics",
+        "packageManager": "npm"
+    },
+    "schematics": {
+        "@nrwl/schematics:application": {
+            "style": "scss"
+        },
+        "@nrwl/schematics:library": {
+            "style": "scss"
+        }
+    },
+    "defaultProject": "easyroute"
+}

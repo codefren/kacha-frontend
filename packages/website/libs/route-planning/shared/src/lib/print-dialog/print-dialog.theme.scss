@@ -1,0 +1,25 @@
+@mixin print-dialog-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .print-dialog {
+        .print-dialog-title {
+            background-color: mat-color($primary);
+        }
+
+        .no-optimized-routes {
+            color: mat-color($warn);
+        }
+    }
+}
+
+@mixin print-dialog-typography($config) {
+    .print-dialog {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

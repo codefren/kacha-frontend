@@ -1,0 +1,146 @@
+<div class="row easyroute-route-planning-info">
+    <div class="col-12 d-flex flex-row" [ngClass]="{ 'justify-content-start': !alignRight, 'justify-content-end': alignRight }" *ngIf="showZoneChips">
+        <!--         <app-info-chip class="line-spacing" size="s" [svgIcon]="'assets/icons/optimmanage2/icono-personas-copia.svg'"
+            [text]="zoneInfoChips.deliveryPoints" help="{{ 'INFOCHIPS.ZONE.DELIVERY_POINTS' | translate }}"
+            [shadow]="hasShadow" [bordered]="true" [isColorDot]="false" [color]="'#fff'" [colorFont]="'#000'">
+        </app-info-chip> -->
+
+        <app-info-chip class="line-spacing" size="m"
+            *ngIf="interfacePreferences && interfacePreferences.ShowRegistration"
+            [svgIcon]="'assets/icons/optimmanage2/icono-camino.svg'"
+            [text]="zone ? (zone.vehicles.length == 1 ? zone.vehicles[0].registration : zoneInfoChips.vehicles) : zoneInfoChips.vehicles "
+            help="{{ 'INFOCHIPS.ZONE.VEHICLES' | translate }}"
+            [color]="'#fff'" [colorFont]="'#000'" [borderNoRight]="true" [shadow]="hasShadow" [bordered]="true" [isColorDot]="false">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m"
+            *ngIf="interfacePreferences && interfacePreferences.ShowDemand"
+            [svgIcon]="'assets/icons/optimmanage2/icono-cubo.svg'"
+            [text]="'Carga: ' + (managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0 ? convertToDecimal(zoneInfoChips.demand /  managementPreferences.cubicMeterConverter) : zoneInfoChips.demand)"
+            help="{{ 'INFOCHIPS.ZONE.DEMAND' | translate }}" [color]="'#fff'" [borderNoRight]="true" [colorFont]="'#000'" [shadow]="hasShadow" [bordered]="true" [isColorDot]="false">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m"
+            *ngIf="interfacePreferences && interfacePreferences.ShowCapacity"
+            [svgIcon]="'assets/icons/optimmanage2/icono-kg.svg'"
+            [text]="'Capacidad: ' + (managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0 ? convertToDecimal(zoneInfoChips.vehiclesCapacity / managementPreferences.cubicMeterConverter) : zoneInfoChips.vehiclesCapacity) "
+            help="{{ 'INFOCHIPS.ZONE.VEHICLES_CAPACITY' | translate }}" [color]="'#fff'" [showProgess]="true" [progressValue]="calculateWeightPercent((managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0 ? convertToDecimal(zoneInfoChips.vehiclesCapacity / managementPreferences.cubicMeterConverter) : zoneInfoChips.vehiclesCapacity), (managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0 ? convertToDecimal(zoneInfoChips.demand /  managementPreferences.cubicMeterConverter) : zoneInfoChips.demand))"
+            [colorFont]="'#000'" [shadow]="hasShadow" [borderNoRight]="false" [bordered]="true" [isColorDot]="false">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m"
+            *ngIf="interfacePreferences && interfacePreferences.ShowVolumen"
+            [svgIcon]="'assets/icons/planificacion/metro_cubico.svg'"
+            [text]="'Volumen: ' + zoneInfoChips.vehiclesVolumen" help="{{ 'INFOCHIPS.ZONE.VEHICLES_CAPACITY' | translate }}" [color]="'#fff'" [showProgess]="true" [progressValue]="calculateWeightPercent(zoneInfoChips.vehiclesVolumen, zoneInfoChips.volumetric)"
+            [colorFont]="'#000'" [shadow]="hasShadow" [borderNoRight]="false" [bordered]="true" [isColorDot]="false">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m"
+            [svgIcon]="'assets/icons/optimmanage2/user.svg'"
+            [text]="zone.vehicles[0].user.name + ' ' + zone.vehicles[0].user.surname" *ngIf="zoneInfoChips.vehicles === 1 && interfacePreferences && interfacePreferences.ShowDriver" help="{{ 'Chófer' }}" [color]="'#fff'" [borderNoRight]="false"
+            [colorFont]="'#000'" [shadow]="hasShadow" [bordered]="true" [isColorDot]="false">
+        </app-info-chip>
+    </div>
+
+    <div class="col-12 d-flex flex-row margin-info-chip" *ngIf="zoneInfoChips" [ngClass]="{ 'justify-content-start': !alignRight, 'justify-content-end': alignRight }">
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/delivery.svg'" [text]="zoneInfoChips.deliveryPoints ? zoneInfoChips.deliveryPoints : '- -' " help="{{ 'INFOCHIPS.ZONE.DELIVERY_POINTS' | translate }}" [color]="'#F2F2F2'"
+            [minWidth]="56" [shadow]="hasShadow" [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/demand.svg'" [text]="zoneInfoChips.demand ? managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0 ? convertToDecimal(zoneInfoChips.demand / managementPreferences.cubicMeterConverter) : zoneInfoChips.demand : '- -' "
+            help="{{ 'INFOCHIPS.ZONE.DEMAND' | translate }}" [color]="'#F2F2F2'" [minWidth]="70" [shadow]="hasShadow" [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/box.svg'" [text]="zoneInfoChips.box" help="{{ 'INFOCHIPS.ZONE.DEMAND' | translate }}" [color]="'#F2F2F2'" [minWidth]="70" [shadow]="hasShadow" [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/metro_cubico_gray.svg'" [text]="addNomenclatuta(zoneInfoChips.volumetric)" help="{{ 'INFOCHIPS.ZONE.VOLUMETRIC' | translate }}" [color]="'#F2F2F2'" [minWidth]="70" [shadow]="hasShadow"
+            [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/distance.svg'" [text]="zoneInfoChips?.travelDistance ? (zoneInfoChips?.travelDistance | distance ): '- -'" help="Distancia total recorrida" [minWidth]="95" [color]="'#F2F2F2'"
+            [shadow]="hasShadow" [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/time.svg'" [text]="zoneInfoChips?.time ? (zoneInfoChips?.time | duration) : '- -'" help="Tiempo total" [color]="'#F2F2F2'" [shadow]="hasShadow" [minWidth]="92" [isColorDot]="false"
+            [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/delay.svg'" [text]="zoneInfoChips?.delayTime ? (zoneInfoChips?.delayTime | duration) : '- -'" help="Total retraso en el cliente" [color]="'#F2F2F2'" [shadow]="hasShadow"
+            [minWidth]="92" [isColorDot]="false" [colorFont]="'#7C7C7C'"></app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/vehiclewaitime.svg'" [text]="zoneInfoChips?.vehicleWaitTime ? (zoneInfoChips?.vehicleWaitTime | duration) : '- -'" help="Tiempo total de espera de los vehículos" [color]="'#F2F2F2'"
+            [shadow]="hasShadow" [padding]="true" [minWidth]="92" [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/costes-gray.svg'" [text]="zoneInfoChips?.costTotal ? ((zoneInfoChips?.costTotal | number:'1.2') + '€') : '- -'" help="Tiempo total de espera de los vehículos" [color]="'#F2F2F2'" [shadow]="hasShadow"
+            [padding]="true" [minWidth]="92" [isColorDot]="false" [colorFont]="'#7C7C7C'">
+        </app-info-chip>
+    </div>
+
+    <div class="col-12 d-flex flex-row margin-info-chip" [ngClass]="{ 'justify-content-start': !alignRight, 'justify-content-end': alignRight }">
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/delivery-route.svg'" [text]="routeInfoChips?.deliveryPoints ?  routeInfoChips?.deliveryPoints : '- -'" help="{{ 'INFOCHIPS.ZONE.DELIVERY_POINTS' | translate }}" [color]="'#FFE9D6'"
+            [shadow]="hasShadow" [minWidth]="56" [isColorDot]="false" [padding]="true" [colorFont]="'#FF8D24'"></app-info-chip>
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/demand-route.svg'" [text]="routeInfoChips?.demand ? managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0 ? convertToDecimal(routeInfoChips?.demand / managementPreferences.cubicMeterConverter) : routeInfoChips?.demand : '- -'"
+            help="{{ 'INFOCHIPS.ZONE.DEMAND' | translate }}" [color]="'#FFE9D6'" [shadow]="hasShadow" [isColorDot]="false" [minWidth]="70" [padding]="true" [colorFont]="'#FF8D24'">
+        </app-info-chip>
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/box-route.svg'" [text]="routeInfoChips?.box" help="{{ 'INFOCHIPS.ZONE.DEMAND' | translate }}" [color]="'#FFE9D6'" [shadow]="hasShadow" [isColorDot]="false" [minWidth]="70"
+            [padding]="true" [colorFont]="'#FF8D24'">
+        </app-info-chip>
+
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/metro_cubico_gray.svg'" [text]="addNomenclatuta(routeInfoChips?.volumetric)" help="{{ 'INFOCHIPS.ZONE.VOLUMETRIC' | translate }}" [color]="'#FFE9D6'" [shadow]="hasShadow" [isColorDot]="false"
+            [minWidth]="70" [padding]="true" [colorFont]="'#FF8D24'">
+        </app-info-chip>
+
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/distance-route.svg'" [text]=" routeInfoChips?.travelDistance ? (routeInfoChips?.travelDistance | distance) : '- -'" help="Distancia total recorrida" [color]="'#FFE9D6'"
+            [shadow]="hasShadow" [isColorDot]="false" [minWidth]="95" [colorFont]="'#FF8D24'"></app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/time-route.svg'" [text]="routeInfoChips?.time ? (routeInfoChips?.time | duration) : '- -'" help="Tiempo total" [minWidth]="92" [color]="'#FFE9D6'" [shadow]="hasShadow"
+            [isColorDot]="false" [colorFont]="'#FF8D24'">
+        </app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/delay-route.svg'" [text]="routeInfoChips?.delayTime ? (routeInfoChips?.delayTime | duration) : '- -'" help="Total retraso en el cliente" [minWidth]="92" [color]="'#FFE9D6'"
+            [shadow]="hasShadow" [isColorDot]="false" [colorFont]="'#FF8D24'"></app-info-chip>
+
+
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/planificacion/vehiclewaitime-route.svg'" [text]="routeInfoChips?.vehicleWaitTime ? (routeInfoChips?.vehicleWaitTime | duration) : '- -'" help="Tiempo total de espera de los vehículos"
+            [color]="'#FFE9D6'" [shadow]="hasShadow" [isColorDot]="false" [minWidth]="92" [padding]="true" [colorFont]="'#FF8D24'"></app-info-chip>
+
+        <app-info-chip class="line-spacing" size="m" [svgIcon]="'assets/icons/costes-orange.svg'" [text]="routeInfoChips?.costTotal ? ((routeInfoChips?.costTotal | number:'1.2') + '€') : '- -'" help="Tiempo total de espera de los vehículos" [color]="'#FFE9D6'"
+            [shadow]="hasShadow" [isColorDot]="false" [minWidth]="92" [padding]="true" [colorFont]="'#FF8D24'"></app-info-chip>
+
+
+
+        <img class="line-spacing" src="assets/icons/warning.svg" *ngIf="routeInfoChips && routeInfoChips.deliveryPointsUnassigned > 0" [title]="routeInfoChips.deliveryPointsUnassigned + ' puntos sin asignar'" />
+
+    </div>
+
+    <div class="col-12 d-flex flex-row margin-info-chip" *ngIf="zoneId && zoneInfoChips && zoneInfoChips.crossDocking && zoneInfoChips.crossDocking > 0" [ngClass]="{ 'justify-content-start': !alignRight, 'justify-content-end': alignRight }">
+        <div class="cross-docking p-2">
+            <img src="assets/icons/crossdocking.svg">
+            <span class="ml-2">Cross docking:</span>
+            <i class="fas fa-times float-right remove" (click)="removeCrossDocking()"></i>
+            <i class="p3 fas fa-pen float-right edit" (click)="editCrossDocking()"></i>
+            <span class="float-right"> {{ formatEuro(zoneInfoChips.crossDocking)  }}</span>
+            <!-- <span class="float-right"> {{ zoneInfoChips.crossDocking  |  number:'1.2' }}€</span> old -->
+
+        </div>
+    </div>
+
+</div>

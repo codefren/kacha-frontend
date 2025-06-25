@@ -1,0 +1,57 @@
+<div class="card">
+
+    <div class="card-body p-4">
+
+        <div class="row p-xl-4">
+
+            <div class="col-12">
+
+                <p class="title-enterprise mb-2">Visualización en app</p>
+
+                <p class="text-app-lite">Adjunta una imagen del logotipo de tu empresa en formato 1:1 (cuadrado) con un máximo de 1MB. Esta imagen se verá desde la app Lite para que tus clientes te encuentren.</p>
+
+            </div>
+
+            <div class="col-xl-4 col-12">
+
+                <div class="form-row font-general">
+                    <div class="col-12 p-0 d-flex flex-column align-items-md-start justify-content-sm-start align-items-center">
+                        <div class="thumbnail" (click)="file.click()" [ngClass]="{'thumbnailSinImagen': appLitePreferences && appLitePreferences.urlImage === null && !cardImageBase64}">
+                            <div class="thumb-preview w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                                <div class="w-100 h-100 show-background point">
+                                    <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                        <i class="fas fa-camera fa-3x"></i>
+                                    </div>
+                                </div>
+
+                                <a class="thumb-image w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                                    <ng-container *ngIf="(appLitePreferences && appLitePreferences.urlImage && appLitePreferences.urlImage !== null) || cardImageBase64">
+                                        <img [src]="cardImageBase64" alt="" *ngIf="cardImageBase64" class="img-fluid" alt="Project" />
+
+                                        <img [src]="appLitePreferences.urlImage + '?' + date.getTime()" alt="" *ngIf="appLitePreferences && appLitePreferences.urlImage !== null && !cardImageBase64" class="img-fluid" alt="Project" />
+                                    </ng-container>
+
+                                    <ng-container *ngIf="appLitePreferences && appLitePreferences.urlImage === null && !cardImageBase64">
+                                        <img [src]="'assets/icons/preference/camaraAppLite.svg'" alt="" class="img-fluid" alt="Project" />
+                                    </ng-container>
+                                </a>
+
+                                <input #file type="file" (change)="fileChanceEvent($event)" hidden/>
+                            </div>
+                        </div>
+
+                        <span class="text-danger text-left pt-2">{{ imageError }}</span>
+
+                        <div class="form-row w-100 justify-content-left">
+                            <div class="col-12 pt-2">
+                                <span class="note">{{ 'PROFILE.PROFILE_SETTINGS.LIMIT_MAT' | translate }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

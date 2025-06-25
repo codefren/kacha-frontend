@@ -1,0 +1,86 @@
+.edit-delivery-point-mat-dialog-container {
+    .mat-dialog-container {
+        padding: 0 !important;
+    }
+}
+
+.edit-delivery-point {
+    width: 100%;
+
+    .delivery-point-name {
+        text-align: center;
+
+        h3 {
+            margin: 0;
+            padding: 24px;
+        }
+    }
+
+    .delivery-point-content {
+        padding: 24px 24px 16px;
+
+        .time-input-container {
+            height: 120px;
+        }
+
+        .change-order-container {
+            height: 60px;
+        }
+    }
+
+    mat-divider {
+        margin-top: 12px;
+        padding: 0 10px;
+    }
+
+    h4 {
+        margin-bottom: 0;
+
+        &.first-title {
+            margin-bottom: 8px;
+            margin-top: 0;
+        }
+
+        &.change-order-title {
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+
+        &.change-delivery-window-title {
+            margin: 16px 0;
+        }
+    }
+
+    .change-vehicle {
+        button {
+            margin-bottom: 40px;
+            width: fit-content;
+        }
+    }
+
+    .change-order {
+        mat-form-field {
+            &.zone-selection-mat-form-field {
+                width: 160px;
+            }
+
+            &.position-selection-mat-form-field {
+                width: 80px;
+            }
+        }
+    }
+
+    .change-delivery-window {
+        mat-form-field {
+            width: 80px;
+        }
+    }
+
+    .action-buttons {
+        margin-bottom: 16px;
+
+        button {
+            min-width: 120px;
+        }
+    }
+}

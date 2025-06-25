@@ -1,0 +1,164 @@
+<div class="row answers-form">
+
+    <div class="col-12">
+
+        <p class="mb-0 title-answers"> {{'SHEET_ROUTE.ROUTE_SUMMARY' | translate }} </p>
+
+        <p class="mb-0 sub-title"> {{'SHEET_ROUTE.THESE_DATA_HAVE_BEEN_EXTRACTED_FROM_THE_FORM_MADE_FROM_THE_DRIVER_APP' | translate }} </p>
+
+    </div>
+
+    <!-- form -->
+
+
+    <ng-container *ngIf="duringDelivery">
+        <!-- inciden -->
+
+        <div class="col-xl-4 col-12 mt-3">
+
+            <div class="form-row mt-3">
+
+
+                <div class="form-group input-group" (click)="openModalIncident()">
+
+                    <span class="has-float-label w-100">
+    
+                        <input class="form-control point" id="Cajas extra" readonly type="text" placeholder="{{ 'SHEET_ROUTE.EXTRA_INCIDENTS' | translate }} " [value]="duringDelivery.TotalIncidents"/>
+    
+                        <label for="first" class="mt-2 title-col"> {{ 'SHEET_ROUTE.EXTRA_INCIDENTS' | translate }} </label>
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!-- end inciden -->
+
+        <!-- bonus boxes -->
+
+        <div class="col-xl-4 col-12 mt-3">
+
+            <div class="form-row mt-3">
+
+                <div class="form-group input-group" (click)="openModalExtraBoxes()">
+
+                    <span class="has-float-label w-100">
+    
+                        <input class="form-control point" id="Cajas extra" readonly type="text" placeholder="{{'SHEET_ROUTE.BONUS_BOXES' | translate }}" [value]="duringDelivery.TotalExtraBoxes"/>
+    
+                        <label for="first" class="mt-2 title-col"> {{'SHEET_ROUTE.BONUS_BOXES' | translate }} </label>
+    
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!-- end bonus boxes -->
+
+        <!-- route retunrs -->
+
+        <div class="col-xl-4 col-12 mt-3">
+
+            <div class="form-row mt-3">
+
+
+
+                <div class="form-group input-group" (click)="openModalReturns()">
+
+                    <span class="has-float-label w-100">
+    
+                        <input class="form-control point"  id="Devoluciones" readonly type="text" placeholder="{{'SHEET_ROUTE.RETURNS' | translate }}" [value]="duringDelivery.TotalDevolutions"/>
+    
+                        <label for="first" class="mt-2 title-col"> {{'SHEET_ROUTE.RETURNS' | translate }} </label>
+    
+                    </span>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="!duringDelivery">
+        <div class="col-12 text-center mt-2">
+            <div class="fa-4x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- end route returns -->
+
+    <!--  <div class="col-xl-3 col-12 mt-3">
+
+        <div class="form-row mt-3">
+
+            <div class="form-group input-group" (click)="openObservations()">
+
+                <span class="has-float-label w-100">
+
+                    <input class="form-control point" id="Observaciones"  type="text" placeholder="{{'SHEET_ROUTE.OBSERVATION' | translate }}" value="2"/>
+
+                    <label for="first" class="mt-2 title-col"> {{'SHEET_ROUTE.OBSERVATION' | translate }} </label>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div> -->
+
+    <!-- end form -->
+
+    <div class="col-12">
+        <div class="form-row">
+            <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                        justify-content-sm-between  padding-document-table mt-1">
+                <div class="col-md-12 col-6 col-sm-7 d-flex align-items-center  flex-sm-row flex-column align-items-center  toggle-pointer p-0 pt-4 mb-4">
+                    <span class="pl-lg-4 pl-sm-4"> {{ 'SHEET_ROUTE.BILLS' | translate }} </span>
+                </div>
+
+            </div>
+
+            <div class="col-12 p-0 font-generals">
+                <table id="tableSummary" style="width: 100%; text-align: center;" class="table table-striped table-bordered   mb-0">
+                    <thead class="table-head toggle-directions">
+                        <tr>
+                            <th> {{ 'SHEET_ROUTE.CODE' | translate }} </th>
+
+                            <th> {{'SHEET_ROUTE.DATE' | translate }} </th>
+
+                            <th>{{'SHEET_ROUTE.AMOUNT' | translate }}</th>
+
+                            <th>{{'SHEET_ROUTE.PAYMENT_METHOD' | translate }}</th>
+
+                            <th>{{'SHEET_ROUTE.AUTHORIZED_BY' | translate }}</th>
+
+                            <th>{{'SHEET_ROUTE.CONDITION' | translate }}</th>
+
+                            <th style="vertical-align: inherit; border-right: 1px solid #7387c2 !important;"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>

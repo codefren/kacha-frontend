@@ -1,0 +1,156 @@
+<div class="travel-detail font-new-style p-3">
+
+    <!-- header -->
+    <div class="row mt-1 align-items-center">
+        <div class="col-xl-6 col-12">
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-travel pl-3"> {{ 'TRAVEL_TRACKING.DETAILS.TRACING' | translate }} </label>
+        </div>
+    </div>
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+        <div class="col-xl-3 col-12 pr-xl-0" *ngIf="data">
+            <div class="card">
+
+                <div class="card-body" style="display: block;">
+
+                    <div class="row">
+
+                        <!-- cargar y ver imagen -->
+                        <div class="col-12 text-center">
+                            <div class="card">
+
+                                <!-- si no hay nada -->
+                                <ng-container *ngIf="!imgLoad">
+
+                                    <img class="size-img point" src="assets/images/pages/users/avatars/default.png">
+
+                                </ng-container>
+                                <!-- end si no hay nada -->
+
+                                <!-- si hay imagen -->
+                                <ng-container *ngIf="imgLoad">
+
+                                    <img class="size-load point" [src]="imgLoad">
+
+                                </ng-container>
+                                <!-- en si hay imagenes -->
+
+                            </div>
+                        </div>
+                        <!-- Mostrar el estatus -->
+                        <div class=" col-12 d-flex flex-row align-items-center justify-content-start m-2" style="position: absolute;">
+
+                            <button class="btn btn-status p-2 no-point" [ngClass]="{'blue-asig': data.statusRouteDeliveryPointId == 1, 'btn-proc': data.statusRouteDeliveryPointId == 2,  'btn-finish': data.statusRouteDeliveryPointId === 3, 'btn-post': data.statusRouteDeliveryPointId == 4, 'btn-noEnc': data.statusRouteDeliveryPointId == 5 }"
+                                type="button">
+                                {{data.status_route_delivery_point.name}}
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{ 'TRAVEL_TRACKING.DETAILS.CLIENT' | translate }} </label>
+
+                    <p class="sub-title mb-0"> {{data.name}} </p>
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'TRAVEL_TRACKING.DETAILS.DIRECTION' | translate }} </label>
+
+                    <p class="sub-title mb-0"> {{data.address}} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'TRAVEL_TRACKING.DETAILS.SCHEDULED_TIME' | translate }}: </label>
+
+                    <label class="sub-title mb-0 float-rigth">{{ arrivalDayTime }} </label>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'TRAVEL_TRACKING.DETAILS.DELAY_OF' | translate }}: </label>
+
+                    <label class="sub-title mb-0 float-rigth text-color-red"> {{ delayTimeOnDelivery }} </label>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    
+                    <label class="style-info"> {{'TRAVEL_TRACKING.DETAILS.SERVICE_TIME' | translate }}: </label>
+
+                    <label class="sub-title mb-0 float-rigth"> {{ serviceTimeClient }} </label>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{ 'Servicio' }}: </label>
+
+                    <label class="sub-title mb-0 float-rigth"> {{ data.outRange ? 'Fuera de radio' : 'Dentro del radio' }} </label>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- end division izquierda -->
+
+
+        <!-- divison derecha -->
+        <div class="col-xl-9 col-12" *ngIf="data">
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 pl-3 pr-3 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'service_information'}" (click)="changePage('service_information')">
+
+                <label class="title-selected point" for=""> {{'TRAVEL_TRACKING.DETAILS.SERVICE_INFORMATION' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 pl-3 pr-3 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'delivery_note'}" (click)="changePage('delivery_note')">
+
+                <label class="title-selected point" for=""> {{ 'TRAVEL_TRACKING.DETAILS.DELIVERY_NOTE' | translate }} 
+                    <span class="translate-middle badge rounded-pill bg-secondary">{{ countAlbaran }}</span>
+                </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 pl-3 pr-3 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'bills'}" (click)="changePage('bills')" *ngIf="data.countCompanyBill > 0 || data.countCompanyBillAuthorizationDontCharge > 0">
+
+                <label class="title-selected point" for=""> {{ 'TRAVEL_TRACKING.BILL' | translate }} 
+                   
+                </label>
+
+            </button>
+
+            <ng-container *ngIf="select === 'service_information'">
+
+                <easyroute-service-information [dataDetail]="data"></easyroute-service-information>
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'delivery_note'">
+
+                <easyroute-delivery-note-detail [dataDetail]="data"></easyroute-delivery-note-detail>
+
+            </ng-container>
+
+            <ng-container *ngIf="select === 'bills'">
+                <easyroute-bills [dataDetail]="data"></easyroute-bills>
+            </ng-container>
+
+        </div>
+        <!-- end divison derecha -->
+
+    </div>
+</div>

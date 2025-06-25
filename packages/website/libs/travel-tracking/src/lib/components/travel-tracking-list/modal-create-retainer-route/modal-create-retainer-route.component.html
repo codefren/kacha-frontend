@@ -1,0 +1,244 @@
+<div class="modal-create-ratainer-route">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <ng-container *ngIf="step == 1">
+
+                    <label class="title-modal">  Crear ruta - Ruta </label>
+
+                </ng-container>
+
+                <ng-container *ngIf="step == 2">
+
+                    <label class="title-modal">  Crear ruta - Ruta </label>
+
+                </ng-container>
+
+                <ng-container *ngIf="step == 3">
+
+                    <label class="title-modal">  Crear ruta - Clientes </label>
+
+                </ng-container>
+
+                <ng-container *ngIf="step === 4">
+
+                    <label class="title-modal">   Crear ruta - Resumen </label>
+
+                </ng-container>
+
+
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 ml-xl-3">
+
+                <span class="sub-title-modal">
+
+                    <ng-container *ngIf="step == 1">Selecciona una ruta donde cargar los clientes.</ng-container>
+
+                    <ng-container *ngIf="step == 2">Selecciona el vehículo que quieres asignar.</ng-container>
+
+                    <ng-container *ngIf="step == 3">Selecciona los clientes que quieres añadir a la ruta.</ng-container>
+
+                    <ng-container *ngIf="step == 4">Verifica la lista de clientes antes de crear la ruta.</ng-container>            
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+        <ng-container *ngIf="step === 1">
+
+            <div class="row optimroute-integration-table pt-3">
+
+                <div class="col-12 p-xl-0">
+
+                    <div class="table-content">
+
+                        <table id="delivery-zones" class="table table-travel table-bordered table-bordered-travel table-striped mb-0" style="text-align: center; width: 100%">
+
+                            <thead class="thead-new">
+                                <tr>
+                                    <th style="border-left: 1px solid #7387c2 !important;"></th>
+                                    <th class="text-left"> {{ 'DELIVERY_ZONES.ID' | translate }} </th>
+                                    <th class="text-left"> {{ 'DELIVERY_ZONES.NAME_' | translate }} </th>
+                                    <th class="text-left" style="border-right: 2px solid #7387c2 !important;"> {{'DELIVERY_ZONES.COLOR' | translate}} </th>
+                                </tr>
+                            </thead>
+
+                            <tbody></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="step === 2">
+
+            <div class="row optimroute-integration-table pt-3">
+
+                <div class="col-12 p-xl-0">
+
+                    <div class="table-content">
+
+                        <table id="vehicle" class="table table-travel table-bordered table-bordered-travel table-striped mb-0" style="text-align: center; width: 100%">
+
+                            <thead class="thead-new">
+
+                                <tr>
+                                    <th style="border-left: 1px solid #7387c2 !important;"></th>
+                                    <th class="text-left">{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                                    <th class="text-left">{{ 'VEHICLES.DRIVER' | translate }}</th>
+                                    <th class="text-left">{{ 'GENERAL.NAME' | translate }}</th>
+                                    <th class="text-left" style="border-right: 2px solid #7387c2 !important;">{{ 'Matrícula' }}</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="step === 3">
+
+            <div class="row optimroute-integration-table pt-3">
+
+                <div class="col-12 p-xl-0">
+
+                    <div class="table-content">
+
+                        <table id="delivery_points" class="table table-travel table-bordered table-bordered-travel table-striped mb-0" style="text-align: center; width: 100%">
+
+                            <thead class="thead-new">
+
+                                <tr>
+                                    <th style="border-left: 1px solid #7387c2 !important;"></th>
+                                    <th class="text-left">{{ 'TRAVEL_TRACKING.CODE' | translate }}</th>
+                                    <th class="text-left">{{ 'TRAVEL_TRACKING.CLIENT_' | translate }}</th>
+                                    <th class="text-left" style="border-right: 2px solid #7387c2 !important;">{{ 'TRAVEL_TRACKING.ADDRESS' | translate }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="step === 4">
+
+            <div class="list ml-3 mr-3 mb-3 mt-3">
+
+                <div class="row">
+
+                    <div class="col-12 border-bottom">
+
+                        <p class="p-title mt-3 mb-3"> Clientes seleccionados:</p>
+
+                    </div>
+                </div>
+
+                <div class="scroll-list">
+
+                    <div class="row" *ngFor="let data of selectedPoints; let i = last">
+
+                        <div class="col-12" [ngClass]="{'border-bottom': !i}">
+
+                            <div class="company-select">
+
+                                <p class="company-address-menu mt-3 mb-3 text-no-wrap" [title]="data.id + '|' + ' ' + data.name + ' ' + '|' + ' ' + data.address"> {{ data.id }} | {{ data.name }} | {{ data.address }} </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </ng-container>
+
+    </div>
+
+
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <ng-container *ngIf="step > 1">
+
+                    <button class="btn btn-outline-primary mr-2 size-btn" (click)="back()"> Atrás </button>
+
+                </ng-container>
+
+                <ng-container *ngIf="step === 1">
+
+                    <button class="btn btn-primary mr-2 size-btn" (click)="next()" [disabled]="step == 1 && selected.length === 0"> Siguiente </button>
+
+                </ng-container>
+
+                <ng-container *ngIf="step > 1 && step < 4">
+
+                    <button class="btn btn-primary mr-2 size-btn" (click)="next()" [disabled]="(step === 1 && selected.length === 0) || (step === 2 && selectedVehicle.length === 0) || (step === 3 && selectedPoints.length === 0)"> Siguiente </button>
+
+                </ng-container>
+
+                <ng-container *ngIf="step === 4">
+
+                    <button class="btn btn-primary mr-2 size-btn" (click)="create()"> Crear ruta </button>
+
+                </ng-container>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

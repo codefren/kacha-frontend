@@ -1,0 +1,51 @@
+<div class="alert-time">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="title-road" for=""> {{ 'PREFERENCES.GEOLOCATION.TIME_ALERT' | translate }} </label>
+                    <p class="sub-title-road mt-1 mb-0"> {{ 'PREFERENCES.GEOLOCATION.TIME_ALERT_MESSAGE' | translate }} </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="time" class="form-control showMint form-input" format="HH:mm" #stoppedCommercialMaxTimeInput 
+                                value="{{ stoppedCommercialMaxTime | dayTime }}" 
+                                (focusout)="updateStoppedCommercialMaxTime($event.target.value)" />
+                                
+                            <label for="first" class="mt-2 title-col"> {{ 'PREFERENCES.GEOLOCATION.COMMERCIAL_DETAINED' | translate }} </label>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="form-group input-group">
+
+                        <span class="has-float-label w-100">
+
+                            <input type="time" class="form-control showMint form-input" format="HH:mm" #stoppedDriverMaxTimeInput 
+                                value="{{ stoppedDriverMaxTime | dayTime }}" 
+                                (focusout)="updateStoppedDriverMaxTime($event.target.value)" />
+                                
+                            <label for="first" class="mt-2 title-col"> {{ 'PREFERENCES.GEOLOCATION.DRIVER_DETAINED' | translate }} </label>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

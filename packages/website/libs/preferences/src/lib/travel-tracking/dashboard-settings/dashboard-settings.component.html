@@ -1,0 +1,31 @@
+<div class="plan-routes">
+
+    <div class="card">
+
+        <div class="card-body pr-xl-5">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="switch w-100">
+                            <label class="switch-width mb-0">
+                                <input type="checkbox" [checked]="( dashboard$ | async).showCosts"
+                                (change)="toggleDashBoardAction('showCosts',$event.target.checked)" />
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+                                <span class="title-toggle title-road"> 
+                                    Mostrar importe de facturación en el dashboard
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4">Configura la información que quieres ver en el dashboard de rutas.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

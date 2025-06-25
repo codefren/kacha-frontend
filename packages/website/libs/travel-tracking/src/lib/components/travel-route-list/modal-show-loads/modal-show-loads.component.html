@@ -1,0 +1,101 @@
+<div class="modal-show-loads">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{'TRAVEL_TRACKING.LOADS' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close(false)">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 pl-4 pr-4">
+
+                <div class="form-group input-group">
+
+                    <span class="has-float-label w-100">
+
+                        <input class="form-control point" readonly id="totalLoad" type="text" placeholder="{{'TRAVEL_TRACKING.TOTAL_LOAD' | translate }}" [value]="formatEuro(totalLoad)"/>
+
+                        <label for="surname" class="mt-2 title-col"> {{'TRAVEL_TRACKING.TOTAL_LOAD' | translate }} </label>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 pl-4 pr-4">
+
+                <div class="list mb-3 mt-3">
+
+                    <div class="row">
+
+                        <div class="col-12 border-bottom">
+
+                            <p class="p-title mt-3 mb-3"> {{'TRAVEL_TRACKING.RESUMEN' | translate }}</p>
+
+                        </div>
+                    </div>
+
+                    <div class="scroll-list">
+
+                        <div class="row" [ngClass]="{'border-bottom': !i}" *ngFor="let detal of data; let i = last">
+
+                            <div class="col-xl-6 col-12 text-xl-left text-center" [ngClass]="{'border-bottom': !i}">
+
+                                <div class="company-select">
+
+                                    <p class="company-address-menu mt-3 mb-3 text-no-wrap"> {{ detal.measure ? detal.measure:'No disponible'}} </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-6 col-12 text-xl-right text-center">
+
+                                <div class="company-select">
+
+                                    <p class="company-address-menu mt-3 mb-3 text-no-wrap"> {{ formatEuro(detal.totalQuantity) }} </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

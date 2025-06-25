@@ -1,0 +1,387 @@
+<div class="vehicle-check-maintenance font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12 point" (click)="redirectList()">
+
+            <img class="img-returns" src="assets/icons/retunrs.svg">
+
+            <label class="title-sheet pl-3 point"> {{ 'VEHICLE_MAINTENANCE.VEHICLE_MAINTENANCE' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <ng-container *ngIf="vehicleMaintenace && vehicleMaintenace.maintenanceStatusId != 3">
+
+                <button class="btn btn-primary btn-large ml-2" title=" {{ 'VEHICLE_MAINTENANCE.VERIFY' | translate }}" (click)="forceFinished()">
+
+                    <img src="assets/icons/loadingDock/forceFinished.svg" class="pr-1">
+
+                    {{ 'VEHICLE_MAINTENANCE.VERIFY' | translate }}
+
+                </button>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0">
+
+            <div class="card" *ngIf="vehicleMaintenace">
+
+                <!-- img client -->
+
+                <div class="card-body">
+
+
+                    <div class="row">
+
+
+                        <div class="col-12">
+
+                            <p class="title-img"> {{ 'GENERAL.CUSTOMER_PHOTO' | translate }} </p>
+
+                        </div>
+
+
+
+                        <!-- 1 posición -->
+
+                        <div class="col-12 text-center">
+
+
+
+
+                            <div class="card card-img-vehicle">
+
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+
+                                    <!-- si no hay nada -->
+
+                                    <ng-container *ngIf="vehicleMaintenace && !vehicleMaintenace.vehicle.urlImage">
+
+                                        <img src="assets/icons/noImgVehicle.svg">
+
+                                    </ng-container>
+
+                                    <!-- end si no hay nada -->
+
+                                    <!-- en si hay imagenes -->
+
+                                    <ng-container *ngIf="vehicleMaintenace && vehicleMaintenace.vehicle.urlImage">
+
+                                        <img class="point img-upload" [src]="vehicleMaintenace.vehicle.urlImage">
+
+                                    </ng-container>
+
+                                    <!-- end si hay imagenes -->
+
+                                </div>
+
+
+
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                        <!-- end 1 posición -->
+
+                    </div>
+
+                </div>
+
+                <!-- end img client -->
+
+                <div class="card-footer" style="display: block;">
+                </div>
+
+                <div class="card-body pt-xl-0" style="display: block;">
+
+                    <p class="title-route mb-0"> {{'VEHICLE_MAINTENANCE.VEHICLE_NAME' | translate }} </p>
+
+                    <p class="sub-title mb-0"> {{ vehicleMaintenace.vehicle.name }} </p>
+
+                </div>
+
+                <div class="card-footer pb-4" style="display: block;">
+
+                    <label class="style-info"> {{'VEHICLE_MAINTENANCE.TUTION' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{ vehicleMaintenace.vehicle.registration }} </p>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'VEHICLE_MAINTENANCE.ASSIGNED_DRIVER' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{ vehicleMaintenace.user.name }} {{ vehicleMaintenace.user.surname }}</p>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12 mt-xl-0 mt-3" *ngIf="vehicleMaintenace">
+
+            <div class="row">
+
+                <div class="col-xl-3 col-12">
+
+                    <div class="card">
+
+                        <div class="card-body d-flex align-items-start pb-2 pt-3">
+
+                            <img src="assets/icons/settingVehicle.svg">
+
+                            <label class="title-maintenance pl-3"> {{ 'VEHICLE_MAINTENANCE.MAINTENANCE' | translate }} <br> <span [ngClass]="{'finalizado':vehicleMaintenace.maintenanceStatusId == 2, 'historico':vehicleMaintenace.maintenanceStatusId == 3, 'pendiente':vehicleMaintenace.maintenanceStatusId == 1}" > {{ vehicleMaintenace && vehicleMaintenace.maintenanceStatus && vehicleMaintenace.maintenanceStatus.name ? vehicleMaintenace.maintenanceStatus.name:'No disponible'}} </span> </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12">
+
+                    <div class="card">
+
+                        <div class="card-body d-flex align-items-start pb-2 pt-3">
+
+                            <img src="assets/icons/dateCalendar.svg">
+
+                            <label class="title-maintenance pl-3"> {{'VEHICLE_MAINTENANCE.MAINTENANCE_DATE_' | translate }} <br> <span> {{ formDate(vehicleMaintenace.date) }} </span> </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-3 col-12">
+
+                    <div class="card">
+
+                        <div class="card-body d-flex align-items-start pb-2 pt-3">
+
+                            <img src="assets/icons/TruckVehicle.svg">
+
+                            <label class="title-maintenance pl-3"> {{ 'VEHICLE_MAINTENANCE.VEHICLE_STATUS' | translate }} <br> 
+
+                                <span [ngClass]="{'bad-vehicle':vehicleMaintenace.maintenanceVehicleStateTypeId == 4 , 'regular-vehicle':vehicleMaintenace.maintenanceVehicleStateTypeId == 3, 'goog-vehicle': vehicleMaintenace.maintenanceVehicleStateTypeId == 2, 'finish-vehicle': vehicleMaintenace.maintenanceVehicleStateTypeId ==1 || vehicleMaintenace.maintenanceVehicleStateTypeId == 5 }" > {{ vehicleMaintenace && vehicleMaintenace.maintenanceVehicleStateType && vehicleMaintenace.maintenanceVehicleStateType.name ? vehicleMaintenace.maintenanceVehicleStateType.name:'No disponible' }} </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card mt-3">
+
+                <div class="card-body">
+
+                    <label class="new-sub-title"> {{'VEHICLE_MAINTENANCE.ATTACHED_PHOTOGRAPHS' | translate }} </label>
+
+                    <p class="m-0 sub-title-end"> {{'VEHICLE_MAINTENANCE.TEXT_6' | translate }} </p>
+
+                    <!-- ng for img -->
+
+                    <div class="row justify-content-xl-center  justify-content-center mt-4 mb-4" *ngIf="vehicleMaintenace">
+
+                        <div class="col-xl-4 col-12 mt-xl-0 mt-3" *ngFor="let card of [1,2,3]; let i = index">
+
+                            <div class="card card-1" *ngIf="i ==0">
+
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img src="assets/icons/noImgVehicle.svg">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].urlimage">
+                                        <div class="text-center w-100 h-100">
+                                            <img [src]="franchiseImages[i].urlimage" class="img-upload">
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <div class="card card-1" *ngIf="i ==1">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img src="assets/icons/noImgVehicle.svg">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].urlimage">
+                                        <div class="text-center w-100 h-100">
+                                            <img [src]="franchiseImages[i].urlimage" class="img-upload">
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <div class="card card-1" *ngIf="i ==2">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+
+                                    <ng-container *ngIf="!franchiseImages[i]">
+
+                                        <img src="assets/icons/noImgVehicle.svg">
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="franchiseImages && franchiseImages[i] && franchiseImages[i].urlimage">
+                                        <div class="text-center w-100 h-100">
+                                            <img [src]="franchiseImages[i].urlimage" class="img-upload">
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <!-- end ng for img -->
+                </div>
+
+                <!-- formulario de mantenimiento -->
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="new-sub-title"> {{'VEHICLE_MAINTENANCE.MAINTENANCE_FORM' | translate }} </label>
+
+                    <p class="m-0 sub-title-end"> {{'VEHICLE_MAINTENANCE.TEXT_7' | translate }} </p>
+
+                    <ng-container *ngIf="vehicleMaintenace && vehicleMaintenace.total_vehicle_review > 0">
+
+                        <ng-container *ngIf="!show">
+                            <div class="col-12 text-center mt-5 mb-5">
+                                <div class="fa-6x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="show">
+
+                            <div class="row mt-4 mb-4 pb-4">
+
+                                <ng-container *ngFor="let item of MaintenanceDataFormReview; let i = index">
+
+                                    <div class="col-12 col-md-4 lines-for-col-top mt-2">
+
+                                        <div class="card card-tester">
+                                            <div class="card-body d-flex align-items-center">
+
+                                                <ng-container *ngIf="item.checked">
+
+                                                    <img src="assets/icons/check.svg">
+
+                                                </ng-container>
+
+                                                <ng-container *ngIf="!item.checked">
+
+                                                    <img src="assets/icons/bad.svg">
+
+                                                </ng-container>
+
+                                                <label [title]="item.name" class="label-text pl-3">
+                                                    {{ sliceString(item.name) }}
+                                                    
+                                                   
+                                                    
+                                                </label>
+
+                                            </div>
+
+                                            <div *ngIf="item.comentary && item.comentary != null && item.comentary.length">
+
+                                                <div class="card-coment card-footer">
+
+                                                    <p class="text-comentary mb-2 mt-1" [title]="item.comentary ">
+
+                                                        {{ sliceString2(item.comentary)}}
+
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </ng-container>
+
+
+                            </div>
+                        </ng-container>
+
+
+
+
+                        <!-- end check indicativos -->
+
+                        <!-- end check -->
+                    </ng-container>
+
+
+
+                </div>
+
+                <!-- end formulario de mantenimiento -->
+
+            </div>
+
+
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+
+</div>

@@ -1,0 +1,325 @@
+.optimroute-manage-zone-form {
+    background: white;
+    .info-picture-zone {
+        font-size: 14px;
+        color: #24397c;
+        font-weight: bold;
+        font-family: Helvetica;
+    }
+    .subtitle-general {
+        color: #100f0f;
+    }
+    .promotion-images {
+        .card {
+            height: 103px;
+            width: 195px;
+            background: #eaeaea;
+            border-radius: 4px;
+        }
+        .card-franchise {
+            height: 93px !important;
+            width: 209px !important;
+        }
+        .margin-lateral {
+            margin-left: 20px !important;
+        }
+        .column+.column {
+            margin-left: 15px;
+        }
+        .column:last-child {
+            margin-left: 0;
+        }
+        /* .color-icon {
+            color: #c7c7c7;
+            font-size: 3em;
+        } */
+        .color-alert {
+            color: #a0a0a0;
+        }
+        .img-upload {
+            max-width: 100%;
+            // max-height: 91px;
+            height: 100%;
+            border-radius: 4px;
+        }
+    }
+    .label-store-managent {
+        color: #1d1d1d !important;
+        font-size: 14px !important;
+        margin-bottom: 6px;
+        text-align: justify;
+    }
+    .label-description-store {
+        font-weight: inherit;
+        font-style: italic;
+        color: #a6a6a6 !important;
+        font-size: 14px !important;
+    }
+    .form-row {
+        margin-left: 0px;
+    }
+    .form-width-prod {
+        width: 100% !important;
+    }
+    .card-img {
+        height: 93px;
+        width: 180px;
+        background: #eaeaea;
+    }
+    .color-alert {
+        color: #a0a0a0;
+    }
+    .color-icon {
+        color: #c7c7c7;
+        font-size: 3em;
+    }
+    .card-img+.card-img {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .ajuste {
+        width: 105px;
+    }
+    .font-italic {
+        font-size: 12px;
+    }
+    .info {
+        i {
+            font-size: 10px;
+            float: right;
+            padding-left: 0.5rem;
+            color: #4c4c4c;
+        }
+    }
+    #product_category {
+        content: '\25BC';
+        text-decoration: solid;
+        text-decoration-color: #f2930a;
+    }
+    .images {
+        margin-top: 30px;
+    }
+    .form-row {
+        margin-bottom: 20px;
+    }
+    .label-check {
+        /*  margin-left: 26px; */
+        margin-left: 1.5rem;
+        margin-top: 14px !important;
+    }
+    /*  .special-font {
+        font-size: 12px !important;
+    } */
+    .card-header {
+        background: #444a60;
+        padding: 5px 15px 6px 27px;
+        border-radius: 15 !important;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        .row {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        span {
+            font-size: 16px !important;
+            margin: 0;
+            color: #fff;
+        }
+    }
+    .btn.btn-add {
+        float: right;
+        margin-top: -0.4rem;
+        label {
+            color: #24397c !important;
+            font-weight: bold;
+        }
+    }
+    // buscara especificamente el segundo entre varios hermanos
+    // https://developer.mozilla.org/es/docs/Web/CSS/:nth-child
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #ffffff !important;
+    }
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: #F1F4FF !important;
+    }
+    table td:nth-child(2) {
+        min-width: 150px;
+    }
+    table td {
+        border-top: none;
+        border-right: 2px solid #fff;
+        border-bottom: none;
+        color: #4c4c4c;
+        //  padding: 15px;
+        i {
+            color: #e91512;
+        }
+        /*  .round {
+            margin-left: 14px !important
+        } */
+    }
+    table th {
+        background-color: #7387c2;
+        padding: 15px;
+        border-right: 2px solid #fff;
+    }
+    .table th,
+    .table td {
+        //padding: 15px;
+        vertical-align: top;
+    }
+    .thead>tr {
+        background-color: #737373 !important;
+        color: #fff !important;
+        // border: none !important;
+    }
+    .table tbody+tbody {
+        border-top: 0px solid #dee2e6 !important;
+    }
+    .card-img {
+        height: 93px;
+        width: 209px; // altura
+        background: #f9f9f9;
+        display: inline-block;
+    }
+    .card-img+.card-img {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .card-add {
+        background: black;
+        opacity: 0.3;
+        color: white;
+    }
+    .img-upload {
+        max-width: 100%;
+        // max-height: 91px;
+        height: 100%;
+        border-radius: 4px;
+    }
+    .show-background {
+        background: transparent;
+        position: absolute;
+        top: 79px;
+        left: 0;
+        border-radius: 4px;
+        i {
+            color: rgba(139, 69, 19, 0);
+            font-size: 11px;
+        }
+    }
+    .show-background:hover {
+        background: #7480a8;
+        transition: 0.3s ease background;
+        i {
+            color: white;
+            font-size: 11px;
+        }
+    }
+    .show-background-trans {
+        background: transparent;
+        position: absolute;
+        border-radius: 5px;
+        top: 0;
+        left: 0;
+        i {
+            color: transparent;
+        }
+    }
+    .show-background-trans:hover {
+        background: rgba(0, 0, 0, 0.6);
+        transition: 0.3s ease background;
+        i {
+            color: white;
+        }
+    }
+    .colo-echedule-zone {
+        color: #7e7e7e !important;
+        font-size: 14px !important;
+    }
+    .colorLink {
+        color: #f89e4c !important;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .filter-class {
+        margin-left: 32px;
+    }
+    .round {
+        margin-left: 34%;
+    }
+    .padding-col {
+        padding: 0 30px;
+    }
+    .error-schedule {
+        border-color: #d2322d !important;
+    }
+    .color-icon-sync {
+        color: #ffffff;
+        font-size: 1rem;
+    }
+    .color-a-sync {
+        background-color: #24397c;
+        border: 1px solid #24397c;
+    }
+    .color-control-form-async {
+        border: 1px solid #24397c;
+    }
+    .color-label-info {
+        color: #818181 !important;
+        font-size: 12px !important;
+    }
+    .background-color-sync {
+        background-color: #eaefff;
+        opacity: 1;
+    }
+    .code-edit {
+        border-top-right-radius: 12px !important;
+        border-bottom-right-radius: 12px !important;
+    }
+    .style-card-app {
+        border: 1px solid #cbcbcb;
+    }
+    .card-title {
+        color: #314684 !important;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .bg-gray {
+        background: #F1F4FF;
+    }
+    .bg-white {
+        background-color: white !important;
+    }
+    .error-price {
+        border-color: #d2322d !important;
+    }
+    .margin-rounder {
+        margin-left: 33% !important;
+    }
+    .margin-days {
+        margin-left: 0% !important;
+    }
+    @media screen and (min-width: 320px) and (max-width: 767px) {
+        .mt-xs {
+            margin-top: 10px;
+        }
+        .card-header {
+            padding: 12px 0;
+        }
+        .Ajuste-title {
+            width: 148px;
+        }
+        .form-width-prod {
+            width: 85% !important;
+        }
+        .btn.btn-add {
+            float: initial;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .padding-col {
+            padding: 0 15px !important;
+        }
+    }
+}

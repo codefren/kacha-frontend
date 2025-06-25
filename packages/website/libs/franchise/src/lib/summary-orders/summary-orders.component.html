@@ -1,0 +1,398 @@
+<div class="optimroute-summary-orders">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-5 text-center">
+                        <p class="title">{{ 'FRANCHISE.SUMMARY_ORDERS.NAME' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <!-- prototipe -->
+            <div class="row justify-content-center justify-content-md-center">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-12 mt-lg-0 mt-2">
+                        <div class="d-flex flex-lg-column  justify-content-around column pl-lg-0">
+                            <div class="card">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                                    <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.TOTAL_ORDERS' | translate }}</p>
+                                    <ng-container *ngIf="showInfoDetail">
+                                        <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                            {{multiStoreTotalSummary.totalOrder}}
+                                        </p>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showInfoDetail">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 mt-lg-0 mt-2">
+                        <div class="d-flex flex-lg-column  justify-content-around column pl-lg-0">
+                            <div class="card">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                                    <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.SLOPES' | translate }}</p>
+                                    <ng-container *ngIf="showInfoDetail">
+                                        <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                            {{multiStoreTotalSummary.totalSlopes}}
+                                        </p>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showInfoDetail">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 mt-lg-0 mt-2">
+                        <div class="d-flex flex-lg-column  justify-content-around column pl-lg-0">
+                            <div class="card">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                                    <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.PREPARED' | translate }}</p>
+                                    <ng-container *ngIf="showInfoDetail">
+                                        <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                            {{multiStoreTotalSummary.totalPrepared}}
+                                        </p>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showInfoDetail">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 mt-lg-0 mt-2">
+                        <div class="d-flex flex-lg-column  justify-content-around column pl-lg-0">
+                            <div class="card">
+                                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                                    <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.DELIVERED' | translate }}</p>
+                                    <ng-container *ngIf="showInfoDetail">
+                                        <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                            {{multiStoreTotalSummary.totalDelivered}}
+                                        </p>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showInfoDetail">
+                                        <div class="fa-2x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- card info -->
+            <!--  <div class="row justify-content-center">
+                <div class="d-flex flex-column  justify-content-around column pl-lg-0">
+                    <div class="card point">
+                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                            <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.TOTAL_ORDERS' | translate }}</p>
+                            <ng-container *ngIf="showInfoDetail">
+                                <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                    {{multiStoreTotalSummary.totalOrder}}
+                                </p>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showInfoDetail">
+                                <div class="fa-2x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex flex-column  justify-content-around column ml-lg-4">
+                    <div class="card point">
+                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                            <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.SLOPES' | translate }}</p>
+                            <ng-container *ngIf="showInfoDetail">
+                                <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                    {{multiStoreTotalSummary.totalSlopes}}
+                                </p>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showInfoDetail">
+                                <div class="fa-2x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column  justify-content-around column ml-lg-4 mt-lg-0 mt-lg-0 mt-md-0 mt-2">
+                    <div class="card point">
+                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                            <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.PREPARED' | translate }}</p>
+                            <ng-container *ngIf="showInfoDetail">
+                                <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                    {{multiStoreTotalSummary.totalPrepared}}
+                                </p>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showInfoDetail">
+                                <div class="fa-2x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column  justify-content-around column ml-lg-4 mr-lg-3 mt-lg-0 mt-md-0 mt-2">
+                    <div class="card point">
+                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+                            <p class="m-0 p-0 color-infor-card space-paragran">{{ 'FRANCHISE.SUMMARY_ORDERS.DELIVERED' | translate }}</p>
+                            <ng-container *ngIf="showInfoDetail">
+                                <p class="m-0 p-0 color-info  space-paragran" style="font-size: 20px !important;" *ngIf="multiStoreTotalSummary">
+                                    {{multiStoreTotalSummary.totalDelivered}}
+                                </p>
+                            </ng-container>
+
+                            <ng-container *ngIf="!showInfoDetail">
+                                <div class="fa-2x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+            <!-- end card info -->
+            <div class="pl-lg-5 pr-lg-5 pl-3 pr-3  justify-content-center justify-content-md-center">
+
+
+                <div class="row width-row mt-3">
+
+                    <!-- zone -->
+                    <div class="col-12 col-lg-2 col-md-6 offset-lg-1">
+
+                        <ng-container *ngIf="loading == 'loading'">
+                            <div class="text-center p-2">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="franchiseList.length > 0 && loading == 'success'">
+                            <div class="input-group">
+                                <label for="summary_shop">
+                                    {{ 'FRANCHISE.SUMMARY_ORDERS.ZONE' | translate }}
+                                </label>
+                                <div class="input-group">
+                                    <select (change)="ChangeZone($event.target.value)" [(ngModel)]="filter.zoneId" class="form-control letter-app" #zoneId id="zoneId">
+                                        <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                                        <option *ngFor="let zone of zones" [value]="zone.id">{{zone.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="franchiseList.length == 0 && loading == 'success'">
+                            <div class="text-center mt-4">
+                                <p class="text-center text-danger">{{ 'FRANCHISE.SUMMARY_ORDERS.NO_ZONES_AVAILABLE' |translate }}</p>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="loading == 'error'">
+
+                            <p class="text-danger text-center pointer" (click)="setZone()">
+                                {{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}
+                                <ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!
+                            </p>
+                        </ng-container>
+
+                    </div>
+                    <!-- end zone -->
+
+                    <!-- shop -->
+
+                    <div class="col-12 col-lg-2 col-md-6">
+
+                        <ng-container *ngIf="loading == 'loading'">
+                            <div class="text-center p-2">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="franchiseList.length > 0 && loading == 'success'">
+                            <div class="input-group">
+                                <label for="summary_shop">
+                                    {{ 'FRANCHISE.SUMMARY_ORDERS.SHOP' | translate }}
+                                </label>
+                                <div class="input-group">
+                                    <select class="form-control letter-app" (change)="changeShop( $event.target.value )" id="summary_shop">
+                                        <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                                        <option 
+                                            *ngFor="let franchise of franchiseList" 
+                                            [value]="franchise.id"
+                                        >
+                                            {{ franchise.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="franchiseList.length == 0 && loading == 'success'">
+                            <div class="text-center mt-4">
+                                <p class="text-center text-danger">{{ 'FRANCHISE.SUMMARY_ORDERS.NO_STORES_AVAILABLES' | translate }}</p>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="loading == 'error'">
+                            <p class="text-danger text-center pointer" (click)="getFranchises()">
+                                {{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}
+                                <ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!
+                            </p>
+                        </ng-container>
+
+                    </div>
+                    <!-- end shop -->
+
+                    <!-- status -->
+                    <div class="col-12 col-lg-2 col-md-6">
+
+                        <ng-container *ngIf="loading == 'loading'">
+                            <div class="text-center p-2">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="statusList.length > 0 && loading == 'success'">
+                            <div class="input-group">
+                                <label for="summary_shop">
+                                    {{ 'FRANCHISE.SUMMARY_ORDERS.CONDITION' | translate }}
+                                </label>
+                                <div class="input-group">
+                                    <select class="form-control letter-app" (change)="changeStatus( $event.target.value )" id="summary_shop">
+                                        <option value="">{{ 'GENERAL.ALL_' | translate }}</option>
+                                        <option 
+                                            *ngFor="let status of statusList" 
+                                            [value]="status.id"
+                                        >
+                                            {{ status.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="statusList.length == 0 && loading == 'success'">
+                            <div class="text-center mt-4">
+                                <p class="text-center text-danger">{{ 'FRANCHISE.SUMMARY_ORDERS.NO_AVAILABLE_STATUS' | translate }}</p>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="loading == 'error'">
+                            <p class="text-danger text-center pointer" (click)="getStatus()">
+                                {{ 'CLIENTS.CLIENTS_FORMS.THERE_WAS' | translate }}
+                                <ins>{{ 'CLIENTS.CLIENTS_FORMS.HERE' | translate }}</ins>!
+                            </p>
+                        </ng-container>
+
+                    </div>
+                    <!-- end status -->
+
+                    <div class="col-12 col-lg-2 col-md-6 mt-3 mt-md-0 mb-3">
+                        <label class="control-label col-especial m-0" for="dateFrom">
+                            {{ 'GENERAL.FROM' | translate }}
+                        </label>
+                        <div class="input-group">
+                            <input ngbDatepicker #f="ngbDatepicker" type="text" class="form-control" readonly autocomplete="off" [formControl]="dateSearchFrom" placeholder="Seleccione ..." (dateSelect)="changeDate('from', $event)" id="dateFrom" />
+                            <button class="btn btn-calendar calendar" (click)="f.toggle()" type="button">
+                                <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" 
+                                    aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-2 col-md-6 mt-3 mt-md-0 mb-3">
+                        <label class="control-label col-especial m-0" for="dateTo">
+                            {{ 'GENERAL.TO' | translate }}
+                        </label>
+                        <div class="input-group">
+                            <input ngbDatepicker #t="ngbDatepicker" type="text" class="form-control" readonly autocomplete="off" [formControl]="dateSearchTo" placeholder="Seleccione ..." (dateSelect)="changeDate('to', $event)" id="dateTo" [minDate]="dateMax" />
+                            <button class="btn btn-calendar calendar" (click)="t.toggle()" type="button">
+                                <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" 
+                                    aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- table -->
+        <div class="col-12">
+            <div class="table-content mt-3">
+                <table class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%" id="summary_orders">
+                    <thead class="text-center">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <!--  <th></th> -->
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th style="width: 96px !important;"></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="col-12 col-md-3"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

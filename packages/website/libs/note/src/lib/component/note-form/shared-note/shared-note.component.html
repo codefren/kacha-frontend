@@ -1,0 +1,50 @@
+<div class="easyroute-shared-note">
+    <div id="modalForm">
+        <div class="col-md-12 col-12 text-right pt-2 ">
+            <i class="fas fa-times close-button point" (click)="closemodal()"></i>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <p class="title">
+                    {{ 'NOTES.NOTES_FORM.SHARED' | translate }}
+                </p>
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-12">
+                    <div class="table-content">
+                        <table class="table-font display nowrap table table-hover table-bordered" id="salesman" style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>{{ 'GENERAL.NAME' | translate }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-sm-6 col-12 text-center text-sm-right mb-2 mb-sm-0">
+                            <button class="btn btn-cancel size-btn-modal modal-dismiss" (click)="closemodal()">
+                                {{ 'GENERAL.CLOSE' | translate }}
+                            </button>
+                        </div>
+
+                        <div class="col-sm-6 col-12 text-center text-sm-left">
+                            <button class="btn size-btn-modal btn-primary modal-dismiss" (click)="acceptModal()">
+                                {{ 'GENERAL.ACCEPT' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

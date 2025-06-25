@@ -1,0 +1,120 @@
+.client-route-data-form {
+    .title-user {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .sub-title-user {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .form-select {
+        background-image: url("/assets/images/polygon.svg") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .form-control-select,
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+    .has-float-label input,
+    .has-float-label select {
+        font-size: 14px !important;
+    }
+    .has-float-label label,
+    .has-float-label>span {
+        font-size: 14px !important;
+    }
+
+    .has-float-label label::after{
+        background: transparent !important;
+    }
+    .has-float-primary {
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        border: 1px solid #DFE1E8;
+    }
+    .radiusDeliveryOrderCode {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .showNUmber {
+        background-image: url(/assets/icons/numberInput.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem bottom 0.95rem !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        border-width: 0px;
+        margin: 0;
+        height: 34px;
+        width: 23px;
+        cursor: pointer;
+    }
+
+    .has-float-eye {
+        color: #ffffff;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        border: 1px solid #DFE1E8;
+    }
+
+    .radiusDeliveryOrderCode {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+
+    .round-new-form input[type=radio]:checked+label {
+        background-color: #24397c;
+        border-color: #24397c;
+    }
+    .link {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        -webkit-text-decoration-line: underline !important;
+        text-decoration-line: underline !important;
+        color: #3B4FFF !important;
+    }
+   
+    .btn-primary {
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+    }
+    .pl-5 {
+        padding-left: 2rem !important;
+    }
+
+}

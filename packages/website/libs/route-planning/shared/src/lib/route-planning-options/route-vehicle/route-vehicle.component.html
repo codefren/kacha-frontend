@@ -1,0 +1,88 @@
+<div class="easyroute-zone-vehicles">
+    <div class="card bg-color">
+        <div class="row pl-4 pb-2 pt-2">
+
+            <ng-container *ngIf="vehicle">
+                <div class="col-3 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Nombre</label>
+                        <input type="text" class="form-control form-size" [value]="vehicle.name" [disabled]="true" />
+                    </div>
+                </div>
+                <div class="col-2 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">H. inicio</label>
+
+                        <input value="{{ vehicle.deliveryWindowStart | dayTime }}" type="time"
+                            class="form-control form-size" [disabled]="true" />
+                    </div>
+                </div>
+
+                <div class="col-2 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">H. llegada</label>
+
+                        <input type="time" class="form-control form-size"
+                            value="{{ vehicle.deliveryWindowEnd | dayTime }}" [disabled]="true" />
+                    </div>
+                </div>
+
+
+
+                <div class="col-1 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Capacidad</label>
+                        <input type="text" class="form-control form-size p-1" value="{{ vehicle.capacity }}"
+                            [disabled]="true" />
+                    </div>
+                </div>
+
+                <ng-container *ngIf="vehicle && drivers | async ">
+                    <div class="col-4 pl-1 pr-4" *ngIf="drivers | async ">
+                        <div class="form-group">
+                            <label class="text-muted">Asignar Chofer</label>
+
+                            <div class="hack-select">
+                                <select class="form-control form-size" [ngModel]="vehicle.userId"
+                                    (ngModelChange)="onChangeDriver($event, vehicle.id)">
+                                    <option *ngFor="let user of (drivers | async); trackBy: trackById"
+                                        [value]="user.id">
+                                        {{ user.name }} {{ user.surname }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="col-4" *ngIf="vehicle.vehicleServiceType && vehicle.vehicleServiceType.length > 0">
+                    <button class="btn link espe-servicio pl-0" (click)="viewService(vehicle)">
+                        <img src="assets/icons/skill.svg" class="pr-1" title="Especificación de servicio" />
+                        Ver esp. de servicio
+                    </button>
+                </div>
+                <ng-container *ngIf="feetUser &&  feetUser[vehicle.id] && feetUser[vehicle.id].length > 0">
+                    <div class="col-3 pl-1 pr-1">
+                        <div class="form-group">
+                            <label class="text-muted">Tarifa</label>
+
+                            <div class="hack-select" *ngIf="feetUser && feetUser[vehicle.id].length > 0">
+                                <select class="form-control form-size" [ngModel]="vehicle.userFeeCostId"
+                                    (ngModelChange)="changeFee($event)">
+                                    <option *ngFor="let feet of feetUser[vehicle.id]; trackBy: trackById"
+                                        [value]="feet.id">
+                                        {{ feet.company_fee_cost.name }} {{ feet.price | number: '1.2' }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+
+</div>

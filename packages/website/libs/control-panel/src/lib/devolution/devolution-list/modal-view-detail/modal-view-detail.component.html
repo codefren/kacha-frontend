@@ -1,0 +1,210 @@
+<div class="modal-view-details">
+
+    <div class="row">
+
+        <div class="col-xl-5 col-12 order-xl-1 order-2">
+
+            <div class="modal-header pb-1">
+
+                <div class="row">
+
+                    <div class="col-xl-6 col-6 text-xl-left text-left">
+
+                        <label class="title-modal mt-2"> {{ 'DEVOLUTION.DETAIL' | translate }} </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-body">
+
+                <ng-container *ngIf="!show">
+
+                    <div class="form-row">
+
+                        <div class="col-12 text-center">
+
+                            <div class="fa-9x mb-2">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="show">
+
+                    <div class="form-row pl-2">
+
+                        <!-- date -->
+
+                        <div class="col-xl-12 col-12">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="date" type="text" [value]="formartDate(data.route_planning_route.dateDeliveryStart)" placeholder=" {{ 'DEVOLUTION.DELIVERY_DATE' | translate }}" />
+            
+                                    <label for="date" class="mt-2 title-col">  {{ 'DEVOLUTION.DELIVERY_DATE' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end date -->
+
+                        <!-- client -->
+
+                        <div class="col-xl-12 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="client" type="text" [value]="data.delivery_point.name" placeholder="{{ 'DEVOLUTION.CLIENT' | translate }}" />
+            
+                                    <label for="client" class="mt-2 title-col" data-toggle="tooltip" data-placement="top" [title]=" data.delivery_point.name"> {{ 'DEVOLUTION.CLIENT' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end client -->
+
+                        <!-- user -->
+
+                        <div class="col-xl-12 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="user" type="text" value="{{ data.user_driver.name }} {{ data.user_driver.surname }}" placeholder="{{ 'DEVOLUTION.USER' | translate }}" />
+            
+                                    <label for="user" class="mt-2 title-col"> {{ 'DEVOLUTION.USER' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end user -->
+
+                        <!-- product devolution -->
+
+                        <div class="col-xl-12 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" readonly id="productDe" [value]="data.returnedProducts" type="text" placeholder="{{ 'DEVOLUTION.RETURNED_PRODUCTS' | translate }}" />
+            
+                                    <label for="productDe" class="mt-2 title-col"> {{ 'DEVOLUTION.RETURNED_PRODUCTS' | translate }} </label>
+            
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end product devolution -->
+
+                        <!-- Observaciones -->
+
+                        <div class="col-xl-12 col-12 mt-3">
+
+                            <div class="has-float-label">
+
+                                <textarea class="form-control" readonly style="height: 160px !important" [value]="data.devolutionDeliveryNote ? data.devolutionDeliveryNote:'No disponible'" placeholder="{{'DEVOLUTION.OBSERVATIONS' | translate }}" id="observation"></textarea>
+
+                                <label for="observation"> {{'DEVOLUTION.OBSERVATIONS' | translate }} </label>
+
+                            </div>
+
+                        </div>
+
+                        <!-- end Observaciones -->
+
+                    </div>
+
+                </ng-container>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-7 col-12 order-xl-2 order-1">
+
+            <div class="fond-rigth h-100">
+
+                <div class="modal-header pb-1">
+
+                    <div class="row">
+
+                        <div class="col-xl-6 col-6 text-xl-left text-left">
+
+                            <label class="title-modal mt-2"> {{'DEVOLUTION.NAME' | translate }} </label>
+
+                        </div>
+
+                        <div class="col-xl-6 col-6 text-xl-right text-right point" (click)="close(false)">
+
+                            <img src="assets/icons/travelIcons/close.svg">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+
+
+                    <div class="form-row form-group pl-2 pr-2">
+
+                        <div class="col-12">
+
+                            <table id="details_devolution" style="width: 100%; text-align: center" class="table table-devolution p-0 table-bordered table-striped-delivery mb-0">
+
+                                <thead class="table-head toggle-directions">
+
+                                    <tr>
+
+                                        <th width="70%" style="border-radius: 5px 0px 0px 0px !important;">{{ 'DEVOLUTION.PRODUCTS' | translate }}</th>
+
+                                        <th style="border-radius: 0px 5px 0px 0px !important;"> {{ 'DEVOLUTION.QUANTITY' | translate }} </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

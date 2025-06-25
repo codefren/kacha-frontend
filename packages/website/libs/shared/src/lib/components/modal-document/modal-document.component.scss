@@ -1,0 +1,25 @@
+.user-modal-document {
+    .padding-col {
+        padding: 0 25px !important;
+    }
+    .custom-file-label::after {
+        padding: 12px 0.75rem !important;
+        color: #ffffff !important;
+        content: "Cargar archivo";
+        background-color: #ff9800 !important;
+        border-radius: 0 10px 10px 0;
+        height: 47px !important;
+    }
+    .custom-file-label {
+        border-radius: 10px !important;
+        height: 48px !important;
+        padding: 12px 20px;
+        margin-top: 0px !important;
+    }
+    .colorDataNull {
+        color: #b5b7b9 !important;
+    }
+    .colorFileData {
+        color: #4c4c4c !important;
+    }
+}

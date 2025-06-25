@@ -1,0 +1,51 @@
+<div class="easyroute-route-delivery-schedule">
+    <h4 class="delivery-schedule-title">
+        {{ 'ROUTE_PLANNING.ZONE.SETTINGS.DELIVERY_SCHEDULE.NAME' | translate }}
+    </h4>
+    <div
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+        class="delivery-schedule-container"
+    >
+        <div
+            class="schedule-from-container "
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="8px"
+        >
+            <span>{{ 'GENERAL.FROM' | translate }}</span>
+            <input
+                class="form-control"
+                type="time"
+                [(ngModel)]="start"
+                (blur)="updateDeliverySchedule('start')"
+                (keyup.enter)="updateDeliverySchedule('start')"
+            />
+        </div>
+        
+        <div
+            class="schedule-to-container"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="8px"
+            >
+            <span>{{ 'GENERAL.TO' | translate }}</span>
+            <input
+                class="form-control"
+                type="time"
+                [(ngModel)]="end"
+                (blur)="updateDeliverySchedule('end')"
+                (keyup.enter)="updateDeliverySchedule('end')"
+            />
+        </div>
+
+        <div class="checkbox-custom checkbox-default">
+            <input type="checkbox" id="forceDeparture"
+                [(ngModel)]="forceDeparture"
+                (change)="toggleForceOutputValue()">
+            <label for="forceDeparture">{{
+                'ROUTE_PLANNING.ZONE.SETTINGS.DELIVERY_SCHEDULE.FORCE_DEPARTURE' | translate
+            }}</label>
+        </div>
+    </div>
+</div>

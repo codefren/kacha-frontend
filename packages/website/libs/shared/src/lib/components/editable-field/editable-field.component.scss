@@ -1,0 +1,28 @@
+.app-editable-field-element {
+    // border: 1px solid transparent;
+    // border-radius: 4px;
+    cursor: crosshair !important;
+
+    display: inline-flex !important;
+    // padding: 3px 5px 3px 10px;
+
+    .mat-form-field {
+        input {
+            cursor: inherit;
+        }
+    }
+
+    // mat-icon {
+    //     font-size: 16px;
+    //     margin: 1px 0 -4px 4px;
+    //     visibility: hidden;
+    // }
+
+    // &:hover {
+    //     transition: background-color 0.2s ease;
+
+    //     mat-icon {
+    //         visibility: visible;
+    //     }
+    // }
+}

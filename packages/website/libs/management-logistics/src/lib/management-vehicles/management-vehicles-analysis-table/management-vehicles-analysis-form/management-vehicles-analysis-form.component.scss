@@ -1,0 +1,145 @@
+.vehicles-analysis-form {
+    .btn-primary {
+        height: 45px;
+        background: #D8DAE2;
+        border-radius: 5px;
+    }
+    .btn-default {
+        background: #FFFFFF;
+        border-radius: 5px;
+        border-color: #fff;
+        height: 45px;
+    }
+    /*  .alt-btn-default {
+        width: 134px;
+    } */
+    .title-sheet {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+    .img-returns {
+        vertical-align: baseline;
+    }
+    .progress-bar {
+        background-color: #3B4FFF;
+    }
+    .title-route {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .sub-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .style-info {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .name-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .no-selecter {
+        opacity: 0.65;
+        .title-selected {
+            font-weight: 500;
+        }
+    }
+    .progress {
+        height: 20px;
+    }
+    .title-selected {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 21px;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .progress {
+        background-color: #e9ecef !important;
+    }
+    .show-background {
+        background: transparent;
+        position: absolute;
+        border-radius: 5px;
+        top: 0;
+        //left: 0;
+        left: 0;
+        i {
+            color: transparent;
+        }
+        a {
+            color: transparent;
+        }
+        img {
+            display: none;
+        }
+    }
+    .show-background:hover {
+        background: rgba(0, 0, 0, 0.6);
+        transition: 0.3s ease background;
+        i {
+            color: white;
+        }
+        a {
+            color: white;
+        }
+        img {
+            display: block;
+        }
+    }
+    .size-hover1 {
+        width: 100% !important;
+    }
+    .title-add {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+        color: #7C7C7C;
+    }
+    .img-anclar {
+        vertical-align: baseline;
+    }
+    .title-label {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740 !important;
+    }
+    .size-load {
+        //height: 100%;
+        height: 257px;
+        width: 100%;
+        border-radius: 4px;
+    }
+}

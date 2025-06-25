@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+
+:host {
+    @include mat-elevation(2);
+    border-radius: 2px;
+    display: block;
+    padding: 10px;
+    // .exit-button-container {
+    //     .exit-button {
+    //         align-self: flex-end;
+    //     }
+    // }
+}

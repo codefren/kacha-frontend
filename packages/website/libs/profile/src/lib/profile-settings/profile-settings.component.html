@@ -1,0 +1,421 @@
+<div class="easyroute-profile-settings padding-body pt-0 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-9 text-left">
+                <p class="title">{{ 'PROFILE.NAME' | translate }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-xl-9 col-12 font-general">
+                <!-- form-company -->ssss
+                <form [formGroup]="companiesForm" *ngIf="companiesForm && isAdminAdministrative()">
+                    <!-- image -->
+
+                    <div class="form-row font-general" style="margin-left: 1px">
+                        <div class="d-flex flex-column align-items-md-start justify-content-sm-start align-items-center">
+                            <div class="thumbnail" (click)="file.click()">
+                                <div class="thumb-preview">
+                                    <div class="w-100 h-100 show-background point">
+                                        <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                            <i class="fas fa-camera fa-3x"></i>
+                                        </div>
+                                    </div>
+
+                                    <a class="thumb-image">
+                                        <ng-container *ngIf="(profile && profile.company && profile.company.urlLogo && profile.company.urlLogo !== null) || cardImageBase64">
+                                            <img [src]="cardImageBase64" alt="" *ngIf="cardImageBase64" class="img-fluid" alt="Project" />
+
+                                            <img [src]="profile.company.urlLogo + '?' + date.getTime()" alt="" *ngIf="profile && profile.company && profile.company.urlLogo !== null && !cardImageBase64" class="img-fluid" alt="Project" />
+                                        </ng-container>
+
+                                        <ng-container *ngIf="profile && profile.company && profile.company.urlLogo === null && !cardImageBase64">
+                                            <img [src]="'assets/images/empty.png'" alt="" class="img-fluid" alt="Project" />
+                                        </ng-container>
+                                    </a>
+
+                                    <input #file type="file" (change)="fileChanceEvent($event)" hidden/>
+                                </div>
+                            </div>
+
+                            <span class="text-danger text-center">{{ imageError }}</span>
+
+                            <div class="form-row w-100 justify-content-center">
+                                <span class="note">{{ 'PROFILE.PROFILE_SETTINGS.LIMIT' | translate }}</span>
+                                <!-- <div class="col">
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end-image -->
+
+                    <div class="row form-row font-general">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{'has-danger': companiesForm.controls['name'].invalid && (companiesForm.controls['name'].dirty || companiesForm.controls['name'].touched )}">
+                                <label for="company-name" class="form-label">{{ 'GENERAL.COMPANY' | translate }}</label>
+
+                                <input class="form-control form-input" readonly id="company-name" placeholder="{{ 'GENERAL.COMPANY' | translate }}" type="text" formControlName="name" style="background: white;" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.name">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('name').hasError( validation.type ) && (companiesForm.get('name').dirty || companiesForm.get('name').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['country'].invalid && (companiesForm.controls['country'].dirty || companiesForm.controls['country'].touched) }">
+                                <label class="form-label" for="company-country">{{ 'GENERAL.COUNTRY' | translate }}</label>
+
+                                <div class="hack-select">
+                                    <select id="company-country" class="form-control form-select" formControlName="country" (change)="changeCountry( $event.target.value )">
+                                        <option *ngFor="let country of countrys" class="form-select-option" [value]="country">{{ country }}</option>
+                                    </select>
+                                </div>
+
+                                <ng-container *ngFor="let validation of companiesMessages.country">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('country').hasError(validation.type) && (companiesForm.get('country').dirty || companiesForm.get('country').touched )">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row form-row font-general">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['nif'].invalid && (companiesForm.controls['nif'].dirty || companiesForm.controls['nif'].touched )}">
+                                <label class="form-label" for="company-nif">{{ 'COMPANIES.NIF' | translate }}
+                                   
+                                     <span class="asterisco">* </span></label>
+
+                                <input type="text" id="company-nif" placeholder="{{ 'GENERAL.NIF' | translate }}" class="form-control form-input" formControlName="nif" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.nif">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('nif').hasError(validation.type) && (companiesForm.get('nif').dirty || companiesForm.get('nif').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['streetAddress'].invalid && (companiesForm.controls['streetAddress'].dirty || companiesForm.controls['streetAddress'].touched )}">
+                                <label class="form-label" for="company-address">{{ 'GENERAL.ADDRESS' | translate }} <span class="asterisco">* </span></label>
+
+                                <input type="text" id="company-address" placeholder="{{ 'GENERAL.ADDRESS' | translate }}" class="form-control form-input" formControlName="streetAddress" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.streetAdress">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('streetAddress').hasError(validation.type) && (companiesForm.get('streetAddress').dirty || companiesForm.get('streetAddress').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['billingEmail'].invalid && (companiesForm.controls['billingEmail'].dirty || companiesForm.controls['billingEmail'].touched ) }">
+                                <label class="form-label" for="company-billEmail">{{ 'GENERAL.BILLING_EMAIL' | translate }} <span class="asterisco">* </span></label>
+
+                                <input id="company-billEmail" type="email" class="form-control form-input" formControlName="billingEmail" placeholder="{{ 'GENERAL.BILLING_EMAIL' | translate }}" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.billingEmail">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('billingEmail').hasError( validation.type ) && (companiesForm.get('billingEmail').dirty || companiesForm.get('billingEmail').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label" for="company-service">{{ 'COMPANIES.SERVICE_TYPE' | translate
+                                    }}</label>
+
+                                <div class="hack-select">
+                                    <select id="company-service" formControlName="serviceTypeId" class="form-control form-select">
+                                        <option value="">Seleccione</option>
+                                        <option [value]="item.id" class="form-select-option" *ngFor="let item of servicesType">{{ item.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-row font-general">
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['province'].invalid && (companiesForm.controls['province'].dirty || companiesForm.controls['province'].touched)}">
+                                <label class="form-label" for="company-province">{{ 'DELIVERY_POINTS.PROVINCE' | translate }} <span class="asterisco">* </span></label>
+
+                                <input id="company-province" type="text" class="form-control form-input" placeholder="{{ 'DELIVERY_POINTS.PROVINCE' | translate }}" formControlName="province" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.province">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('province').hasError( validation.type ) && (companiesForm.get('province').dirty || companiesForm.get('province').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['zipCode'].invalid && (companiesForm.controls['zipCode'].dirty || companiesForm.controls['zipCode'].touched)}">
+                                <label class="form-label" for="company-postal">{{ 'GENERAL.POSTAL_CODE' | translate }} <span class="asterisco">* </span></label>
+
+                                <input type="text" id="company-postal" class="form-control form-input" placeholder="{{ 'GENERAL.POSTAL_CODE' | translate }}" formControlName="zipCode" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.zipCode">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('zipCode').hasError( validation.type ) && (companiesForm.get('zipCode').dirty || companiesForm.get('zipCode').touched )">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['currencyId'].invalid && (companiesForm.controls['currencyId'].dirty || companiesForm.controls['currencyId'].touched) }">
+                                <label class="form-label" for="company-currency">{{ 'COMPANIES.CURRENCY' | translate }} <span class="asterisco">* </span></label>
+
+                                <div class="hack-select">
+                                    <select class="form-control form-select" formControlName="currencyId" id="company-currency">
+                                        <option value="">{{ 'CLIENTS.CLIENTS_FORMS.SELECT' | translate }}</option>
+                                        <option [value]="currency.id" class="form-select-option" *ngFor="let currency of currencies">
+                                            {{ currency.isoString + ' (' + currency.symbol + ')' }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <ng-container *ngFor="let validation of companiesMessages.currencyId">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('currencyId').hasError(validation.type) && (companiesForm.get('currencyId').dirty || companiesForm.get('currencyId').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  <div class="row form-row font-general">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['province'].invalid && (companiesForm.controls['province'].dirty || companiesForm.controls['province'].touched)}">
+                                <label class="form-label" for="company-province">{{ 'DELIVERY_POINTS.PROVINCE' | translate }} <span class="asterisco">* </span></label>
+
+                                <input id="company-province" type="text" class="form-control form-input" placeholder="{{ 'DELIVERY_POINTS.PROVINCE' | translate }}" formControlName="province" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.province">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('province').hasError( validation.type ) && (companiesForm.get('province').dirty || companiesForm.get('province').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['zipCode'].invalid && (companiesForm.controls['zipCode'].dirty || companiesForm.controls['zipCode'].touched)}">
+                                <label class="form-label" for="company-postal">{{ 'GENERAL.POSTAL_CODE' | translate }} <span class="asterisco">* </span></label>
+
+                                <input type="text" id="company-postal" class="form-control form-input" placeholder="{{ 'GENERAL.POSTAL_CODE' | translate }}" formControlName="zipCode" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.zipCode">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('zipCode').hasError( validation.type ) && (companiesForm.get('zipCode').dirty || companiesForm.get('zipCode').touched )">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['country'].invalid && (companiesForm.controls['country'].dirty || companiesForm.controls['country'].touched) }">
+                                <label class="form-label" for="company-country">{{ 'GENERAL.COUNTRY' | translate }}</label>
+
+                                <div class="hack-select">
+                                    <select id="company-country" class="form-control form-select" formControlName="country" (change)="changeCountry( $event.target.value )">
+                                        <option *ngFor="let country of countrys" class="form-select-option" [value]="country">{{ country }}</option>
+                                    </select>
+                                </div>
+
+                                <ng-container *ngFor="let validation of companiesMessages.country">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('country').hasError(validation.type) && (companiesForm.get('country').dirty || companiesForm.get('country').touched )">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row form-row font-general">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': companiesForm.controls['phone'].invalid && (companiesForm.controls['phone'].dirty || companiesForm.controls['phone'].touched) }">
+                                <label class="form-label" for="company-phone-number">{{ 'GENERAL.PHONE_NUMBER' | translate }} </label>
+
+                                <input id="company-phone-number" [formControl]="companiesForm.controls['phone']" mask="999 999999999" prefix="+" class="form-control form-input" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.phone">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="companiesForm.get('phone').hasError( validation.type ) && (companiesForm.get('phone').dirty || companiesForm.get('phone').touched )">
+                                            {{ validation.message }}
+                                            {{ validation.type === 'invalidPhone' ? ' ' + (profile.profile.country !== null ? profile.profile.country: 'España'): '' }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- <div class="form-row font-general">
+                        <label class="col-form-label">{{ 'COMPANIES.CREATED_AT' | translate }}</label>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="createdAt" placeholder="{{ 'COMPANIES.CREATED_AT' | translate }}"/>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="form-row font-general">
+                        <label class="col-form-label">{{ 'COMPANIES.CREATED_BY' | translate }}</label>
+                        <div class=">
+                            <div class="form-group">
+                            <input type="text" class="form-control" formControlName="createdBy" placeholder="{{ 'COMPANIES.CREATED_BY' | translate }}" />
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <p class="note text-justify mt-3 mb-3">
+                        {{ 'TEMPLATE.PROFILE_COMPANY_ASOCIATED' | translate }} <br> {{ 'TEMPLATE.PROFILE_COMPANY_ASOCIATED_II' | translate }}
+                        <a routerLink="/management/associated-companies" class="color-span">
+                            {{ 'TEMPLATE.PROFILE_COMPANY_ASOCIATED_III' | translate }}
+                        </a>
+                    </p>
+
+                    <div class="w-100 d-flex flex-md-row flex-column justify-content-start align-items-center">
+                        <!-- <button (click)="cancel()" [disabled]="!companiesForm.dirty" class="btn size-btn-form btn-cancel">
+                            {{ 'GENERAL.CANCEL' | translate | uppercase }}
+                        </button> -->
+
+                        <button (click)="updateCompany()" [disabled]="!companiesForm.valid || !companiesForm.dirty" class="btn size-btn-form btn-secondary">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </form>
+                <!-- end form-company -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-9 col-12 mt-4 text-left">
+                <p class="title line-black-div">{{ 'PROFILE.PROFILE_SETTINGS.PROFILE_SESSION' | translate }}</p>
+                <!-- <hr class="line-primary" /> -->
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-xl-9 col-12 font-general">
+                <!-- form-company-user -->
+                <form [formGroup]="profileSettingsGroup" *ngIf="profileSettingsGroup">
+                    <div class="row form-row font-general">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['name'].invalid && ( profileSettingsGroup.controls['name'].dirty || profileSettingsGroup.controls['name'].touched) }">
+                                <label class="form-label" for="profile-name">{{ 'GENERAL.NAME' | translate }} <span class="asterisco">* </span></label>
+
+                                <input id="profile-name" formControlName="name" type="text" class="form-control form-input" placeholder="{{ 'GENERAL.NAME' | translate }}" />
+
+                                <ng-container *ngFor="let validation of profileMessages.name">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('name').hasError( validation.type ) && (profileSettingsGroup.get('name').dirty || profileSettingsGroup.get('name').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['surname'].invalid && (profileSettingsGroup.controls['surname'].dirty || profileSettingsGroup.controls['surname'].touched) }">
+                                <label class="form-label" for="profile-surname">{{ 'GENERAL.SURNAMES' | translate }} <span class="asterisco">* </span></label>
+
+                                <input type="text" id="profile-surname" class="form-control form-input" formControlName="surname" placeholder="{{ 'GENERAL.SURNAMES' | translate }}" />
+
+                                <ng-container *ngFor="let validation of profileMessages.surname">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('surname').hasError( validation.type ) && (profileSettingsGroup.get('surname').dirty || profileSettingsGroup.get('surname').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-row font-general">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['phone'].invalid && (profileSettingsGroup.controls['phone'].dirty || profileSettingsGroup.controls['phone'].touched) }">
+                                <label class="form-label" for="profile-phone-number">{{ 'GENERAL.PHONE_NUMBER' | translate }} <span class="asterisco">* </span></label>
+
+                                <input id="profile-phone-number" [formControl]="profileSettingsGroup.controls['phone']" mask="999 999999999" prefix="+" class="form-control form-input" />
+
+                                <ng-container *ngFor="let validation of profileMessages.phone">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('phone').hasError( validation.type ) && (profileSettingsGroup.get('phone').dirty || profileSettingsGroup.get('phone').touched )">
+                                            {{ validation.message }}
+                                            {{ validation.type === 'invalidPhone' ? ' ' + (profile.profile.country !== null ? profile.profile.country: 'España'): '' }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group" [ngClass]="{ 'has-danger': profileSettingsGroup.controls['nationalId'].invalid 
+                            && (profileSettingsGroup.controls['nationalId'].dirty || profileSettingsGroup.controls['nationalId'].touched) }">
+                                <label class="form-label" for="profile-dni">{{ 'GENERAL.DNI' | translate }}</label>
+
+                                <input id="profile-dni" type="text" class="form-control form-input" formControlName="nationalId" placeholder="{{ 'GENERAL.DNI' | translate }}" />
+
+                                <ng-container *ngFor="let validation of profileMessages.nationalId">
+                                    <div class="w-100 text-center">
+                                        <small class="form-control-feedback text-danger" *ngIf="profileSettingsGroup.get('nationalId').hasError( validation.type ) && (profileSettingsGroup.get('nationalId').dirty || profileSettingsGroup.get('nationalId').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-100 d-flex flex-md-row flex-column justify-content-start align-items-center mt-3">
+                        <!-- <button (click)="cancel()" [disabled]="!profileSettingsGroup.dirty" class="btn size-btn-form btn-cancel">
+                            {{ 'GENERAL.CANCEL' | translate | uppercase }}
+                        </button> -->
+
+                        <button (click)="update()" [disabled]="!formIsCorrect() || !profileSettingsGroup.dirty" class="btn btn-secondary size-btn-form">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

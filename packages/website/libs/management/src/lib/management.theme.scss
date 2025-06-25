@@ -1,0 +1,19 @@
+@mixin management-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $app-background: map-get($theme, background);
+    $app-foreground: map-get($theme, foreground);
+    $foreground-text: mat-color($app-foreground, text);
+    $background: mat-color($app-background, background);
+}
+
+@mixin management-typography($config) {
+    .optimroute-management {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

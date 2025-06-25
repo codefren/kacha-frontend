@@ -1,0 +1,376 @@
+<div class="bg-white2 padding-body pt-0 optimroute-users-form">
+
+    <div class="container">
+        <div class="row pt-5 align-items-center justify-content-center">
+            <div class="mr-3 return-left point" *ngIf="me" routerLink="/management/users">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <div class="mr-3 return-left point" *ngIf="!me" routerLink="/users-management/users">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <p class="title m-0">
+                {{ titleTranslate | translate }}
+            </p>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <form *ngIf="createUserFormGroup && user" class="font-general form-width" [formGroup]="createUserFormGroup">
+
+                <div class="row mb-sm-4">
+
+                    <div class="col-12 mb-2">
+                        <h3 class="subtitle-general">
+                            {{ 'USERS.USERS_DATA' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="col-12 col-sm-6 pr-sm-4">
+                        <!-- companyName -->
+                        <div class="">
+                            <label for="companyId">
+                             {{ 'COMPANIES.NAME' | translate }}
+                           </label>
+                            <br>
+                            <p> {{ user.company.name }} </p>
+                        </div>
+
+                        <div class="">
+                            <label for="name">
+                                {{ 'GENERAL.NAMES' | translate }}
+                            
+                            </label>
+                            <p> {{ user.name }} </p>
+
+
+                        </div>
+
+                        <div class="">
+                            <label for="email">
+                              {{ 'GENERAL.EMAIL' | translate }}
+                               
+                           </label>
+                            <p> {{ user.email }} </p>
+                        </div>
+
+                        <div class="">
+                            <label for="nationalId">{{ 'GENERAL.DNI' | translate }}</label>
+
+                            <p> {{user.nationalId }} </p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-sm-6 pl-sm-4">
+
+                        <div class="">
+                            <label for="country">
+                                    {{ 'GENERAL.COUNTRY' | translate }}
+                            </label>
+                            <p> {{ user.country }} </p>
+                        </div>
+
+                        <div class="">
+                            <label for="surname">
+                            {{ 'GENERAL.SURNAMES' | translate }}
+                            
+                            </label>
+                            <p> {{ user.surname }} </p>
+
+                        </div>
+
+                        <div class="">
+                            <label for="phone">
+                              {{ 'GENERAL.PHONE_NUMBER' | translate }}
+                              
+                              </label>
+                            <p> +{{ user.phone}} </p>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end main-form -->
+
+                <div class="row justify-content-center" *ngIf="(user && user.id > 0 && !isTecnical) || (user && user.id === 0)">
+                    <div class="col-12 mt-4 p-0">
+                        <h3 class="subtitle-general mb-4">
+                            {{ 'USERS.ROLE' | translate }}
+                            <span data-toggle="tooltip" class="info" data-placement="top" title="{{ 'GENERAL.ROLE_ASSIGNED_TO_THE_USER' | translate }}">
+                            <i class="fas fa-info-circle i-relative"></i>
+                              </span>
+                        </h3>
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4  border-rol" formArrayName="profiles" *ngFor="
+                                      let profile of createUserFormGroup?.get('profiles')
+                                          ?.controls;
+                                      let i = index
+                                  ">
+
+
+                                    <div class=" ml-xl-2 ml-lg-2 ml-md-2 ml-2 mt-3">
+                                        <label class="color-rol" [ngClass]="{'color-rol-driver': showlabelDrive(profiles[i].id)}" [for]="i">{{ profiles[i].name }}</label>
+                                        <!-- <span data-toggle="tooltip" class="info" data-placement="top" [title]="profiles[i].description ? profiles[i].description: 'Descripción no disponible'">
+                                                 <i class="fas fa-info-circle i-relative"></i>
+                                        </span> -->
+                                    </div>
+
+                                    <div class="col-12 mb-4 ml-xl-2 ml-lg-3 ml-2 p-0">
+                                        <label class="description-rol title-role" data-toggle="tooltip" data-placement="top" [title]="profiles[i].description ? profiles[i].description: 'Descripción no disponible' ">{{ profiles[i].description ? profiles[i].description: 'Descripción no disponible' }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- setting user -->
+                <div class="row mb-sm-2">
+                    <div class="col-12 p-0">
+                        <h3 class="subtitle-general">
+                            {{ 'USER_SETTING.USER_SETTINGS' | translate }}
+
+                        </h3>
+                    </div>
+
+                    <div class="col-12 text-left p-0">
+                        <label for="" class="schedule-question">{{ 'USER_SETTING.WHAT_KIND_OF_WOKER_IS_HE?' | translate }}</label>
+                    </div>
+
+                    <div class="row p-0">
+                        <div class="col-12 col-md-6 text-left" *ngFor="let item of userType">
+                            <div class="radio-custom radio-success">
+                                <input type="radio" [id]="'setting' + item.id" formControlName="userTypeId" [value]="item.id" name="userTypeId">
+                                <label [for]="'setting' + item.id">{{item.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- end setting user -->
+
+                <!-- chofer Incidencias -->
+                <ng-container *ngIf="showlabelDriveIncident()">
+                    <h3 class="row subtitle-general mb-2">
+                        {{ 'USERS.DRIVER_SETTING' | translate }}
+                    </h3>
+
+                    <div class="row p-0">
+                        <div class="col-md-12 col-12 d-flex align-items-center toggle-pointer disabeld-col p-0 pt-2 pb-1">
+                            <span>{{ 'USERS.INCIDENT_HISTORY' | translate }} </span>
+                        </div>
+                    </div>
+
+                    <div class="row p-0">
+                        <!-- <div class="col-12 pt-2 pb-2 mt-3 toggle-directions show-directions">
+                            <div class="row">
+                                <div class="col-md-12 col-12 d-flex align-items-center toggle-pointer disabeld-col">
+                                    <span class="pl-2">{{ 'USERS.INCIDENT_HISTORY' | translate }} </span>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="row p-0" *ngIf="loadingDriver">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <div class="fa-3x">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+
+                        <div class="table-content col-12 p-0">
+                            <table id="driverIncidentHistory" style="width: 100%; text-align: center" class="table table-bordered table-responsive-md table-striped mb-0">
+                                <thead class="table-head toggle-directions">
+                                    <tr>
+                                        <th>{{'NOTIFICATIONS.DETAILS.INCIDENT_DATE' |translate }}</th>
+                                        <th style="vertical-align: inherit;">{{ 'NOTIFICATIONS.DETAILS.HOUR' |translate }}</th>
+                                        <th style="vertical-align: inherit;">{{ 'NOTIFICATIONS.DETAILS.WHAT_HAS_HAPPENED?' |translate }}</th>
+                                        <th style="vertical-align: inherit;">{{ 'NOTIFICATIONS.DETAILS.OBSERVATIONS' |translate }}</th>
+                                        <th style="vertical-align: inherit; border-right: 1px solid #7387c2 !important;">{{'NOTIFICATIONS.DETAILS.WATCH' |translate }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <!-- <h5 class="text-center data-avalilable" *ngIf="user.vehicleBreakdown.length == 0">
+                                {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                            </h5> -->
+                        </div>
+
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Horarios  -->
+                <h3 class="row subtitle-general mb-2">
+                    {{ 'SCHEDULE_WORK.NAME' | translate }}
+                    <span data-toggle="tooltip" class="info" data-placement="top" title="{{ 'SCHEDULE_WORK.NAME' | translate }}">
+                      <i class="fas fa-info-circle i-relative"></i>
+                    </span>
+                </h3>
+
+
+                <div class="row p-0">
+                    <div class="col-12 pt-2 pb-2 mt-3 toggle-directions" [ngClass]="{'show-directions': toggleSchedule}">
+                        <div class="row">
+                            <div class="col-md-12 col-12 d-flex align-items-center toggle-pointer disabeld-col" (click)="showToggleSchedule()">
+                                <i class="fas fa-caret-down" *ngIf="toggleSchedule"></i>
+                                <i class="fas fa-caret-up" *ngIf="!toggleSchedule"></i>
+                                <span class="pl-4">{{ 'SCHEDULE_WORK.SETTINGS_DAYS' | translate }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <h3 class="style-subtitle-sub mt-4 mb-3">{{ 'CONFIGURATIONS.CATEGORY.ASSIGNED_FILTER' | translate }}</h3> -->
+                    <div class="col-12 p-0" *ngIf="toggleSchedule">
+                        <table id="subcategory" style="width: 100%; text-align: center" class="table table-bordered table-responsive-lg table-responsive-md table-striped mb-0" *ngIf="user.schedule && createUserFormGroup && createUserFormGroup.controls['useSchedule'] && createUserFormGroup.controls['useSchedule'].value">
+                            <thead class="table-head" style="border-top-left-radius: 5px !important;
+                            border-top-right-radius: 5px !important;">
+                                <tr>
+                                    <th style="border-left: 1px solid #7387c2 !important;">{{ 'SCHEDULE_WORK.DAY.MONDAY' |translate }}</th>
+                                    <th>{{ 'SCHEDULE_WORK.DAY.TUESDAY' |translate }}</th>
+                                    <th>{{ 'SCHEDULE_WORK.DAY.WEDNESDAY' |translate }}</th>
+                                    <th>{{ 'SCHEDULE_WORK.DAY.THURSDAY' |translate }}</th>
+                                    <th>{{ 'SCHEDULE_WORK.DAY.FRIDAY' |translate }}</th>
+                                    <th>{{ 'SCHEDULE_WORK.DAY.SATURDAY' |translate }}</th>
+                                    <th style="border-right: 1px solid #7387c2 !important;">{{ 'SCHEDULE_WORK.DAY.SUNDAY' |translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" (change)="changeScheduleDay($event.target.checked, 1)" formControlName="activeScheduleMonday" id="activeScheduleMonday">
+                                                <label for="activeScheduleMonday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" formControlName="activeScheduleTuesday" (change)="changeScheduleDay($event.target.checked, 2)" id="activeScheduleTuesday">
+                                                <label for="activeScheduleTuesday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" formControlName="activeScheduleWednesday" (change)="changeScheduleDay($event.target.checked, 3)" id="activeScheduleWednesday">
+                                                <label for="activeScheduleWednesday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" formControlName="activeScheduleThursday" (change)="changeScheduleDay($event.target.checked, 4)" id="activeScheduleThursday">
+                                                <label for="activeScheduleThursday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" formControlName="activeScheduleFriday" (change)="changeScheduleDay($event.target.checked, 5)" id="activeScheduleFriday">
+                                                <label for="activeScheduleFriday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" formControlName="activeScheduleSaturday" (change)="changeScheduleDay($event.target.checked, 6)" id="activeScheduleSaturday">
+                                                <label for="activeScheduleSaturday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="col-2 offset-4 p-0">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" formControlName="activeScheduleSunday" (change)="changeScheduleDay($event.target.checked, 7)" id="activeScheduleSunday">
+                                                <label for="activeScheduleSunday"></label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="!loadingSchedule && user.schedule && createUserFormGroup && createUserFormGroup.controls['useSchedule'] && createUserFormGroup.controls['useSchedule'].value">
+                                    <td *ngFor="let item of sortBy('intDay')">
+                                        <div class="row" *ngFor="let hour of item.hours">
+                                            <div class="col-12" style="font-size: 12px;">
+                                                <ng-container *ngIf="hour.timeStart >= 0 && hour.timeEnd >= 0">
+                                                    {{ secondToTime(hour.timeStart) + '-' + secondToTime(hour.timeEnd) }}
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h5 class="text-center data-avalilable" *ngIf="!user.schedule">
+                            {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="row p-0" *ngIf="loadingSchedule">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <div class="fa-3x">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+                <!--ENd Horarios  -->
+
+                <!-- Document -->
+
+                <h3 class="row subtitle-general mb-2 mt-5">
+                    {{'RATES_AND_MODULES.DOCUMENT.DOCUMENTATION' | translate }}
+
+                </h3>
+
+                <div class="row mb-3 p-0" *ngIf="user && user.id > 0">
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 pl-3 mt-3 toggle-directions w-100 d-flex flex-sm-row flex-column align-items-center 
+                                        justify-content-sm-between padding-col">
+                                <div class="col-md-12 col-12 d-flex align-items-center toggle-pointer disabeld-col">
+                                    <span class="pl-4">{{'RATES_AND_MODULES.DOCUMENT.DOCUMENTATION' | translate }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 p-0 font-generals ">
+                                <table id="userManamentDetailDocument" style="width: 100%; text-align: center;" class="table p-0 table-bordered table-striped-doc mb-0">
+                                    <thead class="table-head toggle-directions">
+                                        <tr>
+                                            <th>id</th>
+                                            <th width="50%">{{'RATES_AND_MODULES.DOCUMENT.DOCUMENT_NAME' | translate }}</th>
+                                            <th width="30%">{{'RATES_AND_MODULES.DOCUMENT.UPLOAD_DATE' | translate }}</th>
+                                            <th width="20%" style="vertical-align: inherit; border-right: 1px solid #7387c2 !important;">{{'GENERAL.ACTIONS' |translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

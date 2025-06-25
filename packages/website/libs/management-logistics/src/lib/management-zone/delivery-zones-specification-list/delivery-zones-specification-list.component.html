@@ -1,0 +1,44 @@
+<div class="delivery-zones-specification">
+    <div class="container ">
+
+        <!-- navs -->
+
+        <div class="row justify-content-center mb-1 mt-5 pt-5">
+            <nav class="row p-0 m-0 group-btn">
+                <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='route' }" (click)="changePage( 'route' )">
+                    <a class="text-center">{{ 'DELIVERY_ZONES.ROUTE' | translate }}</a>
+                </div>
+                <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='specification' }" (click)="changePage( 'specification' )">
+                    <a class="text-center">{{ 'DELIVERY_ZONES.ESP_ROUTE' | translate }}</a>
+                </div>
+
+            </nav>
+        </div>
+
+        <!-- end navs -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-10 text-center mt-4">
+                <button class="btn btn-secondary size-btn-form" style="text-transform: initial;" routerLink="new">
+                    {{ 'DELIVERY_ZONES.ADD_ROUTE_SPECIFICATIION' | translate }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="table-content mt-3">
+        <table id="delivery-zone-specification" style="width: 100%" class="table table-bordered table-striped mb-0" style="text-align: center">
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>{{ 'VEHICLES.SERVICE_TYPE.CODE' | translate }}</th>
+                    <th>{{ 'DELIVERY_ZONES.PATH_SPECIFICATION' | translate }}</th>
+                    <th>{{ 'VEHICLES.SERVICE_TYPE.ACTIVE' | translate }}</th>
+                    <th style="border-right: 1px solid #7387c2 !important;"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

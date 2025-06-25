@@ -1,0 +1,39 @@
+<div class="active-dialog-module-partners">
+    <section class="card">
+
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-4">
+                <i class="fas fa-times close-button point" (click)="activeModal.close([false, null])"></i>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="modal-wrapper pt-0">
+                <div class="modal-text text-center parrafo">
+                    <p class="mb-0" *ngIf="data.isActive">
+                        {{ 'COMPANIES.MODULES.ACTIVATE_MODULE?' | translate }}
+                    </p>
+                    <p class="mb-0" *ngIf="!data.isActive">
+                        {{ 'COMPANIES.MODULES.DEACTIVATE_MODULE?' | translate }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn size-btn-modal btn-cancel modal-dismiss" 
+                    (click)="activeModal.close([false, null])">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                <button class="btn btn-primary size-btn-modal modal-confirm" 
+                    (click)="activeModal.close([true, null])">
+                    {{ 'GENERAL.ACCEPT' | translate  }}
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,152 @@
+<div id="modalForm">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                <p class="title">{{ titleTranslate | translate }}</p>
+                <hr class="line-primary" />
+            </div>
+        </div>
+
+        <form [formGroup]="measureForm">
+            <div class="row justify-content-center mt-4">
+                <div class="col-10">
+                    <div
+                        class="form-group row"
+                        [ngClass]="{
+                            'has-danger':
+                                measureForm.controls['code'].invalid &&
+                                (measureForm.controls['code'].dirty ||
+                                    measureForm.controls['code'].touched)
+                        }"
+                    >
+                        <label class="col-sm-6 col-form-label" for="code">
+                            {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="code"
+                                placeholder="{{
+                                    'CONFIGURATIONS.MEASURE.CODE' | translate
+                                }}"
+                                formControlName="code"
+                                [ngClass]="{
+                                    'form-control-danger':
+                                        measureForm.controls['code'].invalid &&
+                                        (measureForm.controls['code'].dirty ||
+                                            measureForm.controls['code'].touched)
+                                }"
+                            />
+
+                            <ng-container *ngFor="let validation of measure_messages.code">
+                                <small
+                                    class="form-control-feedback text-danger"
+                                    *ngIf="
+                                        measureForm.get('code').hasError(validation.type) &&
+                                        (measureForm.get('code').dirty ||
+                                            measureForm.get('code').touched)
+                                    "
+                                >
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div
+                        class="form-group row"
+                        [ngClass]="{
+                            'has-danger':
+                                measureForm.controls['name'].invalid &&
+                                (measureForm.controls['name'].dirty ||
+                                    measureForm.controls['name'].touched)
+                        }"
+                    >
+                        <label class="col-sm-6 col-form-label" for="name">
+                            {{ 'CONFIGURATIONS.MEASURE.NAME' | translate }}
+                            <span class="asterisco"> *</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                placeholder="{{
+                                    'CONFIGURATIONS.MEASURE.NAME' | translate
+                                }}"
+                                formControlName="name"
+                                [ngClass]="{
+                                    'form-control-danger':
+                                        measureForm.controls['name'].invalid &&
+                                        (measureForm.controls['name'].dirty ||
+                                            measureForm.controls['name'].touched)
+                                }"
+                            />
+
+                            <ng-container *ngFor="let validation of measure_messages.name">
+                                <small
+                                    class="form-control-feedback text-danger"
+                                    *ngIf="
+                                        measureForm.get('name').hasError(validation.type) &&
+                                        (measureForm.get('name').dirty ||
+                                            measureForm.get('name').touched)
+                                    "
+                                >
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-between">
+                        <div class="col-sm-12">
+                            <div class="switch">
+                                <label>
+                                    {{ 'CONFIGURATIONS.MEASURE.ACTIVE' | translate }}
+                                    <span class="asterisco"> *</span>
+
+                                    <input
+                                        type="checkbox"
+                                        formControlName="isActive"
+                                        class="mr-5 ml-5"
+                                    />
+                                    <span class="lever switch-col-primary ml-5"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-center">
+                        <button
+                            class="btn btn-cancel modal-dismiss"
+                            (click)="closeDialog([false, null])"
+                        >
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-6 text-center">
+                        <button
+                            class="btn btn-default modal-confirm"
+                            [disabled]="!measureForm.valid"
+                            (click)="createMeasureGeneral()"
+                        >
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

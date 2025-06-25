@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+@import 'shared/src/lib/common';
+
+@mixin edit-delivery-point-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .edit-delivery-point {
+        .delivery-point-name {
+            background-color: mat-color($primary);
+            color: mat-color($primary, default-contrast);
+        }
+
+        h4 {
+            color: mat-color($primary);
+        }
+
+        button {
+            color: mat-color($primary);
+        }
+
+        button.active {
+            color: mat-color($warn);
+        }
+    }
+}
+
+@mixin edit-delivery-point-typography($config) {
+    .edit-delivery-point {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            weight: mat-font-weight($config, body-1);
+        }
+    }
+}

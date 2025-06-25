@@ -1,0 +1,75 @@
+<div class="modal-incidencias">
+
+    <div class="row align-items-center mt-4 mb-3">
+
+        <div class="col-xl-12 col-12 pl-xl-5 text-xl-left text-center">
+
+            <label class="title-ticket">{{'SHEET_ROUTE.EXTRA_INCIDENTS' | translate }} ({{numberLength}})</label>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3 mb-4">
+
+        <div class="col-12 text-center pl-5 pr-5">
+
+            <ng-container *ngIf="showIncident">
+
+                <table class="table table-striped table-bordered mb-0 mt-2" id="Incident" style="text-align: center ; width: 100%;">
+
+                    <thead>
+
+                        <tr>
+                            <th>{{'SHEET_ROUTE.EXTRA_INCIDENTS' | translate }}</th>
+
+                            <th>{{ 'SHEET_ROUTE.OBSERVATION' |translate }}</th>
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        <ng-container *ngIf="incidentList && incidentList.length >0 ">
+                            <tr class="text-center" *ngFor="let box of incidentList; let i=index">
+
+
+                                <td> {{ box.breakdownTypeDetail.breakdownType.name }} </td>
+
+                                <td [title]="box.observations"> {{ sliceString(box.observations) }} </td>
+
+
+
+                            </tr>
+                        </ng-container>
+
+                        <ng-container *ngIf="incidentList && incidentList.length == 0 ">
+                            <tr>
+                                <td colspan="7" class="center">
+
+                                    {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }} </td>
+                            </tr>
+
+                        </ng-container>
+                    </tbody>
+
+                </table>
+
+            </ng-container>
+
+
+            <ng-container *ngIf="!showIncident">
+
+                <div class="fa-5x">
+
+                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                </div>
+
+            </ng-container>
+        </div>
+
+    </div>
+
+</div>

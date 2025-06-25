@@ -1,0 +1,587 @@
+<div class="costs">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="col-12 pt-3 pb-2">
+
+                <p class="title-maintenance mb-1"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.VEHICLE_COSTS' | translate }}</p>
+
+                <p class="sub-title-maintenace mb-1"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.MESSAGE_VEHICLE_COSTS' | translate }}</p>
+
+            </div>
+
+            <div class="col-12">
+                <form [formGroup]="formAcquisition" *ngIf="formAcquisition">
+                    <div class="row">
+                        <!-- Tipos de adquisición -->
+                        <div class="col-12 mt-3">
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <div class="card style-card">
+
+                                        <div class="card-body" *ngIf="formAcquisition">
+
+                                            <div class="row">
+                                                <div class="col-xl-1 col-12 text-center p-xl-0">
+
+                                                    <img class="img-anclar" src="assets/icons/service5.svg">
+
+                                                </div>
+
+                                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+
+                                                    <p class="mb-0 title-left text-xl-left text-center">{{ 'VEHICLES.COSTS_TAP_VEHICLE.ACQUISITION_TYPE' | translate }}</p>
+
+                                                    <p class="mb-0 sub-title text-xl-left text-center">{{ 'VEHICLES.COSTS_TAP_VEHICLE.MESSAGE_ACQUISITION_TYPE' | translate }}</p>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row pt-3 pl-xl-2">
+
+                                                <!-- acquisitionDateCost -->
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group input-group">
+                                                        <span class="has-float-label w-100">
+                                                            <input class="form-control point" id="acquisitionDateCost" type="date" 
+                                                            formControlName="acquisitionDateCost" (focusout)="updateVehicle()"/>
+                                
+                                                            <label for="first" class="mt-2 title-col"> {{'VEHICLES.ACQUISITION_DATE' | translate}} </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Tipo de adquisición -->
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group input-group">
+                                                        <span class="has-float-label w-100">
+                                                            <select class="form-select form-control w-100" id="vehicleType"
+                                                                formControlName="typeAcquisitionId" (change)="updateVehicle()">
+                                                                <option value="" selected>{{ 'COMPANIES.SELECT' | translate }}</option>
+                                                                <option *ngFor="let item of typeAcquisition" [value]="item.id">
+                                                                    {{ item.name }} 
+                                                                </option>
+                                                            </select>
+
+                                                            <label for="type" class="mt-2 title-col"> 
+                                                                {{ 'VEHICLES.COSTS_TAP_VEHICLE.ACQUISITION_TYPE' | translate }}
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <ng-container *ngIf="formAcquisition.get('typeAcquisitionId').value > 0">
+
+                                                    <!-- Cuota mensual o Importe Total -->
+                                                    <div class="col-xl-4 col-12">
+                                                        <div class="form-group input-group" [ngClass]="{'has-danger':formAcquisition.controls['acquisitionShare'].invalid && (formAcquisition.controls['acquisitionShare'].dirty || formAcquisition.controls['acquisitionShare'].touched) }">
+                                                            <span class="has-float-label w-100">
+                                                                <input class="form-control point" id="acquisitionShare"
+                                                                    formControlName="acquisitionShare"
+                                                                    (focusout)="updateVehicle()"
+                                                                    onKeyPress="if(this.value.length==6) return false;"
+                                                                    type="number" placeholder="00" min="0"/>
+
+                                                                <label for="first" class="mt-2 title-col" 
+                                                                    *ngIf="formAcquisition.get('typeAcquisitionId').value == 1 
+                                                                        || formAcquisition.get('typeAcquisitionId').value == 3"> 
+                                                                    {{ 'VEHICLES.COSTS_TAP_VEHICLE.MONTHLY_FEE' | translate }}
+                                                                </label>
+                                                                <label for="first" class="mt-2 title-col" *ngIf="formAcquisition.get('typeAcquisitionId').value == 2"> 
+                                                                    {{ 'VEHICLES.COSTS_TAP_VEHICLE.AMOUNT_TOTAL' | translate }}
+                                                                </label>
+                                                            </span>
+                                                            <ng-container *ngFor="let validation of vehicles_messages.acquisitionShare">
+                                                                <div class="w-100 text-left">
+                                                                    <small class="form-control-feedback text-danger" *ngIf="
+                                                                             formAcquisition
+                                                                            .get('acquisitionShare')
+                                                                            .hasError(validation.type) &&
+                                                                        (formAcquisition.get('acquisitionShare').dirty ||
+                                                                        formAcquisition.get('acquisitionShare').touched)
+                                                                    ">
+                                                                    {{ validation.message }}
+                                                                </small>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Fecha Fin y fecha limite de contrato -->
+                                                    <ng-container *ngIf="formAcquisition.get('typeAcquisitionId').value == 1 || formAcquisition.get('typeAcquisitionId').value == 3">
+                                                        <div class="col-xl-4 col-12 mt-2">
+                                                            <div class="form-group input-group">
+                                                                <span class="has-float-label w-100">
+                                                                    <input class="form-control point" id="endDate" type="date" 
+                                                                    formControlName="endDate" (change)="updateVehicle()"/>
+                                        
+                                                                    <label for="first" class="mt-2 title-col"
+                                                                            *ngIf="formAcquisition.get('typeAcquisitionId').value == 1"> 
+                                                                            {{'VEHICLES.COSTS_TAP_VEHICLE.END_DATE' | translate}} 
+                                                                    </label>
+                                                                    <label for="first" class="mt-2 title-col"
+                                                                            *ngIf="formAcquisition.get('typeAcquisitionId').value == 3"> 
+                                                                            {{'VEHICLES.COSTS_TAP_VEHICLE.CONTRACT_LIMIT_DATE' | translate}} 
+                                                                    </label>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="formAcquisition.get('typeAcquisitionId').value == 2">
+                                                        <div class="col-xl-4 col-12 mt-2">
+                                                            <div class="form-group input-group" [ngClass]="{'has-danger':formAcquisition.controls['costToPassOn'].invalid && (formAcquisition.controls['costToPassOn'].dirty || formAcquisition.controls['costToPassOn'].touched) }">
+                                                                <span class="has-float-label w-100">
+                                                                    <input class="form-control point" id="costToPassOn"
+                                                                        formControlName="costToPassOn"
+                                                                        (focusout)="updateVehicle()"
+                                                                        onKeyPress="if(this.value.length==6) return false;"
+                                                                        type="number" placeholder="00" min="0"/>
+
+                                                                    <label for="first" class="mt-2 title-col"> 
+                                                                        {{ 'VEHICLES.COSTS_TAP_VEHICLE.COST_TO_PASS_ON' | translate }}
+                                                                    </label>
+                                                                    
+                                                                </span>
+                                                                <ng-container *ngFor="let validation of vehicles_messages.costToPassOn">
+                                                                    <div class="w-100 text-left">
+                                                                        <small class="form-control-feedback text-danger" *ngIf="
+                                                                                 formAcquisition
+                                                                                .get('costToPassOn')
+                                                                                .hasError(validation.type) &&
+                                                                            (formAcquisition.get('costToPassOn').dirty ||
+                                                                            formAcquisition.get('costToPassOn').touched)
+                                                                        ">
+                                                                        {{ validation.message }}
+                                                                    </small>
+                                                                    </div>
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </ng-container>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end Tipos de adquisición -->
+
+                        <!-- Coste aprípor km -->
+                        <div class="col-12 mt-3">
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <div class="card style-card">
+
+                                        <div class="card-body" *ngIf="formAcquisition">
+
+                                            <div class="row">
+                                                <div class="col-xl-1 col-12 text-center p-xl-0">
+                                                    <img class="img-anclar" src="assets/icons/service6.svg">
+                                                </div>
+
+                                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                                    <p class="mb-0 title-left text-xl-left text-center">{{ 'VEHICLES.COSTS_TAP_VEHICLE.COST_APRIPOR_KM' | translate }}</p>
+                                                    <p class="mb-0 sub-title text-xl-left text-center">{{ 'VEHICLES.COSTS_TAP_VEHICLE.MESSAGE_COST_APRIPOR_KM' | translate }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row pt-3 pl-xl-2">
+
+                                                <!-- Coste aproximado por km -->
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group input-group">
+                                                        <span class="has-float-label w-100">
+                                                                <input class="form-control point" id="approximateCostKm"
+                                                                    formControlName="approximateCostKm"
+                                                                    type="number" placeholder="00" min="0"
+                                                                    (focusout)="updateVehicle()"/>
+
+                                                                <label for="first" class="mt-2 title-col"> 
+                                                                    {{ 'VEHICLES.COSTS_TAP_VEHICLE.APPROXIMATE_COST_KM' | translate }}
+                                                                </label>
+                                                            </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Coste por km real  -->
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group input-group">
+                                                        <span class="has-float-label w-100">
+                                                                <input class="form-control" id="actualCostKm"
+                                                                    formControlName="actualCostKm"
+                                                                    type="number" placeholder="00" min="0"/>
+
+                                                                <label for="first" class="mt-2 title-col"> 
+                                                                    {{ 'VEHICLES.COSTS_TAP_VEHICLE.ACTUAL_COST_KM' | translate }}
+                                                                </label>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End coste apríPor Km -->
+                    </div>
+                </form>
+            </div>
+
+            <!-- Seguros de vehículo -->
+            <div class="col-12 pt-3">
+                <form [formGroup]="vehicleInsuranceForm" class="form-width-prod" *ngIf="conceptVehicleInsurance">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card style-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-1 col-12 text-center p-xl-0">
+                                            <img class="img-anclar" src="assets/icons/service8.svg">
+                                        </div>
+
+                                        <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                            <p class="mb-0 title-left text-xl-left text-center">
+                                                {{ 'VEHICLES.COSTS_TAP_VEHICLE.VEHICLE_INSURANCE' | translate }}
+                                            </p>
+                                            <p class="mb-0 sub-title text-xl-left text-center">
+                                                {{ 'VEHICLES.COSTS_TAP_VEHICLE.MENSSAGE_VEHICLE_INSURANCE' | translate }}
+                                                <a (click)="redirect()" class="redirect point">
+                                                    {{ 'VEHICLES.COSTS_TAP_VEHICLE.PROVIDERS' | translate }}
+                                                </a>
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row pl-2">
+                                        <div class="container-fluid" *ngIf="conceptVehicleInsurance.length > 0">
+                                            <div class="row mt-3">
+                                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.TYPE' | translate }} </label>
+                                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.PROVIDER' | translate }} </label>
+                                                <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.CONCEPT' | translate }} </label>
+                                                <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.AMOUNT' | translate }} </label>
+                                                <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="container-fluid">
+
+                                            <ng-container *ngIf="conceptVehicleInsurance.length > 0">
+
+                                                <ng-container formArrayName="conceptVehicleInsurance">
+
+                                                    <ng-container *ngFor="let vehicleInsuranceItem of conceptVehicleInsurance.controls; let p = index;" [formGroup]="vehicleInsuranceItem">
+
+                                                        <div class="form-row" [ngClass]="{'mt-3': p > 0}">
+                                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                                <ng-container *ngIf="showProvidersType">
+                                                                    <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeId" (change)="changeSelectProviderType($event.target.value, vehicleInsuranceItem, p, 'itemSelect'+ p)">
+            
+                                                                        <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+            
+                                                                        <option *ngFor="let X of providerTypeList" [value]="X.id">
+                                                                            {{X.name}}
+                                                                        </option>
+            
+                                                                    </select>
+                                                                </ng-container>
+
+                                                                <ng-container *ngIf="!showProvidersType">
+                                                                    <div class="col-12 text-center mt-2">
+                                                                        <div class="fa-4x">
+                                                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </ng-container>
+                                                            </div>
+
+                                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                                <ng-container *ngIf="showProviders">
+                                                                    <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerId" (change)="changeSelectProvider($event.target.value, vehicleInsuranceItem, p, 'itemSelect'+ p)">
+            
+                                                                        <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+            
+                                                                        <option *ngFor="let X of providerList[conceptVehicleInsurance.controls[p].get('providerTypeId').value]" [value]="X.id">
+                                                                            {{X.name}}
+                                                                        </option>
+            
+                                                                    </select>
+                                                                </ng-container>
+
+                                                                <ng-container *ngIf="!showProviders">
+                                                                    <div class="col-12 text-center mt-2">
+                                                                        <div class="fa-4x">
+                                                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </ng-container>
+
+                                                            </div>
+
+                                                            <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                                <ng-container *ngIf="showConcept">
+                                                                    <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeConceptId" (change)="changeSelectConcept($event.target.value, vehicleInsuranceItem, p, 'itemSelect'+ p)">
+            
+                                                                        <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+            
+                                                                        <option *ngFor="let X of conceptList[conceptVehicleInsurance.controls[p].get('providerId').value]" [value]="X.id">
+                                                                            {{X.name}}
+                                                                        </option>
+            
+                                                                    </select>
+                                                                </ng-container>
+
+                                                                <ng-container *ngIf="!showConcept">
+                                                                    <div class="col-12 text-center mt-2">
+                                                                        <div class="fa-4x">
+                                                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </ng-container>
+                                                            </div>
+
+                                                            <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                                <input class="form-control form-control-input" type="number" formControlName="price" (change)="changeImporteProvider($event.target.value, vehicleInsuranceItem, p)" placeholder="Importe" min="0" />
+                                                            </div>
+
+                                                            <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                                <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteVehicleInsurancelist(vehicleInsuranceItem,p)">
+                                                                <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                            </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </ng-container>
+                                                </ng-container>
+
+                                            </ng-container>
+
+                                            <div class="col-12 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin p-0">
+                                                <button type="button" class="btn btn-add-concept p-0" (click)="addConceptVehicleInsurancelist()">
+                                                <label for="concept" class="add-concept point">{{'VEHICLES.COSTS_TAP_VEHICLE.ADD_INSURANCE' | translate }}</label>
+                                            </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end Seguros de vehículo -->
+
+            <!-- otros gatos mensuales -->
+            <div class="col-12 mt-4">
+                <form [formGroup]="vehicleInsuranceForm" class="form-width-prod" *ngIf="conceptOtherMonthlyExpenses">
+                    <div class="card style-card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-xl-1 col-12 text-center p-xl-0">
+                                    <img class="img-anclar" src="assets/images/pages/users/extra-costs.svg">
+                                </div>
+
+                                <div class="col-xl-10 col-12 p-xl-0 mt-xl-0 mt-2">
+                                    <p class="mb-0 title-left text-xl-left text-center"> {{ 'USERS.COSTS.OTHER_MONTHLY_EXPENSES' | translate }} </p>
+
+                                    <p class="mb-0 sub-title text-xl-left text-center"> {{ 'USERS.COSTS.OTHER_MONTHLY_EXPENSES_MENSSAGE' | translate }}
+                                        <a (click)="redirectProviders()" class="redirect point"> {{ 'VEHICLES.COSTS_TAP_VEHICLE.PROVIDERS' | translate }}</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row pl-2">
+                                <div class="container-fluid" *ngIf="conceptOtherMonthlyExpenses.length > 0">
+                                    <div class="row mt-3">
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.TYPE' | translate }} </label>
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.PROVIDER' | translate }} </label>
+                                        <label for="type" class="mb-2 title-label col-xl col-12 col-md col-sm"> {{ 'USERS.COSTS.CONCEPT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm"> {{ 'USERS.COSTS.AMOUNT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl col-9 col-md col-sm" *ngIf="companyPreferenceCoste.allowApplyAnnualCost"> {{ 'USERS.COSTS.TYPE_PAYMENT' | translate }} </label>
+                                        <label for="first" class="mb-2 title-label col-xl-1 col-3 col-md-1 col-sm-1"> &nbsp; </label>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+
+                                    <ng-container *ngIf="conceptOtherMonthlyExpenses.length > 0">
+
+                                        <ng-container formArrayName="conceptOtherMonthlyExpenses">
+
+                                            <ng-container *ngFor="let conceptOtherMonthlyExpense of conceptOtherMonthlyExpenses.controls; let p = index;" [formGroup]="conceptOtherMonthlyExpense">
+
+                                                <div class="form-row" [ngClass]="{'mt-3': p > 0}">
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+
+                                                        <ng-container *ngIf="showProvidersType">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeId" (change)="changeSelectProviderTypeExpense($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+                                                                        
+                                                                     <option *ngFor="let X of providerTypeListExpense" [value]="X.id">
+
+                                                                        {{ X.name }}
+
+                                                                    </option>
+
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showProvidersType">
+
+                                                            <div class="col-12 text-center mt-2">
+
+                                                                <div class="fa-4x">
+
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                        <ng-container *ngIf="showProviders">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerId" (change)="changeSelectProviderExpense($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of providerList[conceptOtherMonthlyExpenses.controls[p].get('providerTypeId').value]" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showProviders">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1">
+                                                        <ng-container *ngIf="showConcept">
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="providerTypeConceptId" (change)="changeSelectConceptExpense($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option *ngFor="let X of conceptList[conceptOtherMonthlyExpenses.controls[p].get('providerId').value]" [value]="X.id">
+                                                                    {{X.name}}
+                                                                </option>
+    
+                                                            </select>
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showConcept">
+                                                            <div class="col-12 text-center mt-2">
+                                                                <div class="fa-4x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-container>
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-9 col-md col-sm m-0 mt-1">
+                                                        <input class="form-control form-control-input" type="number" formControlName="price" (change)="changeImporteProviderExpense($event.target.value, conceptOtherMonthlyExpense, p)" placeholder="Importe" />
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl col-12 col-md col-sm m-0 mt-1" *ngIf="companyPreferenceCoste.allowApplyAnnualCost">
+
+
+                                                        <ng-container *ngIf="showConcept">
+
+                                                            <select class="form-select form-control form-control-select" [id]="'itemSelect'+ p" formControlName="paymentType" (change)="changeSelectConceptExpense($event.target.value, conceptOtherMonthlyExpense, p, 'itemSelect'+ p)">
+    
+                                                                <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+    
+                                                                <option value="1">
+                                                                    Mensual
+                                                                </option>
+
+                                                                <option value="2">
+                                                                    Anual
+                                                                </option>
+    
+                                                            </select>
+
+                                                        </ng-container>
+
+                                                        <ng-container *ngIf="!showConcept">
+
+                                                            <div class="col-12 text-center mt-2">
+
+                                                                <div class="fa-4x">
+
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+                                                    </div>
+
+                                                    <div class="form-group input-group col-xl-1 col-3 col-md-1 col-sm-1 m-0 mt-1">
+                                                        <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteOtherMonthlyExpense(conceptOtherMonthlyExpense,p)">
+                                                        <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+                                                    </button>
+                                                    </div>
+                                                </div>
+
+                                            </ng-container>
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                    <div class="col-12 mt-3 text-xl-left text-sm-left text-md-left text-center add-margin p-0">
+                                        <button type="button" class="btn btn-add-concept p-0" (click)="addConceptOtherMonthlyExpenses()">
+                                        <label for="concept" class="add-concept point">{{'USERS.COSTS.ADD_MONTHLY_EXPENDITURE' | translate }}</label>
+                                    </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!-- end otros gatos mensuales -->
+
+        </div>
+
+    </div>
+
+</div>

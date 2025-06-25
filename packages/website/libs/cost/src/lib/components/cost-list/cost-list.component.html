@@ -1,0 +1,195 @@
+<div class="cost-list  main-container container-fluid p-0 pt-4 pb-4">
+
+    <!-- header -->
+
+    <div class="d-flex row align-items-center justify-content-between pl-3 pr-3">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-xl-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title">
+                <img src="assets/icons/cost.svg" class="header-brand-img img-providers" alt="cost">
+                <span class="ml-3">Costes  | </span>
+            </div>
+
+            <!-- descomentar  -->
+            <button class="mt-xl-0 mt-3 ml-xl-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'drivers'}" (click)="changePage('drivers')">
+
+                <label class="title-selected point" for=""> {{ 'COST.DRIVERS' | translate }} </label>
+
+            </button>
+
+            <button class="mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'vehicles'}" (click)="changePage('vehicles')">
+
+                <label class="title-selected point" for=""> {{'COST.VEHICLES' | translate }} </label>
+
+            </button>
+
+            <button class="mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'unemployment'}" (click)="changePage('unemployment')">
+
+                <label class="title-selected point" for=""> {{'COST.UNEMPLOYMENT' | translate }} </label>
+
+            </button>
+
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right mt-xl-0 mt-2">
+
+            <div class="d-flex flex-row align-items-center justify-content-end">
+
+
+
+
+
+                <div class="dropdown">
+                    <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2 ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                </button>
+
+                    <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                        <!-- <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/cloudDonwnload.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_PDF' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/cloudDonwnload.svg" class="pr-2"> {{ 'SHEET_ROUTE.DOWNLOAD_EXCEL' | translate }}
+
+                    </a> -->
+
+                        <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                            <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                        </a>
+
+                    </div>
+                </div>
+
+                <ng-container *ngIf="select === 'drivers'">
+
+                    <div class="dropdown poin">
+
+                        <button class="btn btn-icon btn-icon-white size-load-albaran ml-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           
+                            {{ 'COST.CHARGE_COST' | translate }}
+                            
+                        </button>
+
+                        <button class="btn btn-icon btn-icon-white size-open" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/icons/donw.svg">
+                        </button>
+
+                        <form>
+                            <div class="form-group">
+                                <input #fileImportSalary hidden type="file" class="form-control-file" accept=".xlsx, .xls, .ods" (change)="importSalary($event.target.files[0])" />
+                            </div>
+                        </form>
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point border-drop" (click)="openModalApplySalaryCost()">
+
+                                <img src="assets/icons/hand.svg " class="pr-2"> {{ 'USERS.LOAD_SALARY_BY_HAND' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title  pt-3 pb-3 point" (click)="fileImportSalary.click()">
+
+                                <img src="assets/icons/import.svg " class="pr-2"> {{ 'USERS.LOAD_SALARY_BY_EXCEL' | translate }}
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </ng-container>
+
+
+                <ng-container *ngIf="select === 'vehicles'">
+
+                    <div class="dropdown poin">
+
+                        <button class="btn btn-icon btn-icon-white size-load-albaran ml-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- <img class="img-anclar mr-1" src="assets/icons/fuel.svg"> -->    {{ 'COST.CHARGE_COST' | translate }}
+                        </button>
+                        <button class="btn btn-icon btn-icon-white size-open" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/icons/donw.svg">
+                        </button>
+
+                        <form>
+                            <div class="form-group">
+                                <input #fileImportFuel hidden type="file" class="form-control-file" accept=".xlsx, .xls, .ods" (change)="importFuel($event.target.files[0])" />
+                            </div>
+                        </form>
+
+                        <form>
+                            <div class="form-group">
+                                <input #fileImportRenting hidden type="file" class="form-control-file" accept=".xlsx, .xls, .ods" (change)="importRenting($event.target.files[0])" />
+                            </div>
+                        </form>
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point  border-drop" (click)="openModalModifyFuel()">
+
+                                <img src="assets/icons/hand.svg " class="pr-2"> {{ 'COST.REFUEL_MASTER' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="fileImportFuel.click()">
+
+                                <img src="assets/icons/import.svg " class="pr-2"> {{ 'COST.LOAD_FUEL_BY_EXCEL' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point  border-drop" (click)="openModalLoadRentingCost()">
+
+                                <img src="assets/icons/hand.svg " class="pr-2"> {{ 'VEHICLES.LOAD_RENTING_BY_HAND' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="fileImportRenting.click()">
+
+                                <img src="assets/icons/import.svg " class="pr-2"> {{ 'VEHICLES.LOAD_RENTING_BY_EXCEL' | translate }}
+
+                            </a>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </ng-container>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <ng-container *ngIf="select === 'drivers'">
+
+        <easyroute-table-drivers [refreshDrivers]="refreshDrivers"></easyroute-table-drivers>
+
+    </ng-container>
+
+    <ng-container *ngIf="select === 'vehicles'">
+
+        <easyroute-table-vehicles [refreshVehicle]="refreshVehicle"></easyroute-table-vehicles>
+
+    </ng-container>
+
+    <ng-container *ngIf="select === 'unemployment'">
+
+        <easyroute-table-unemployment></easyroute-table-unemployment>
+
+    </ng-container>
+
+</div>

@@ -1,0 +1,133 @@
+<div class="moveClinetComponent font-general">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-6 text-xl-left text-left">
+
+                <label class="title-modal"> {{ 'CLIENTS.CLIENTS_DUPLICATE.MOVE_CLIENT' |translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-6 text-xl-right text-right point">
+
+                <img src="assets/icons/close-cost.svg" (click)="closeDialog(false)">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body modal-p-b">
+
+        <!-- selecter -->
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 lines-conteiner">
+
+                <div class="row">
+
+                    <div class="col-xl-3 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'moveAnotherGroup'}" (click)="changePage('moveAnotherGroup')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'moveAnotherGroup'}">
+    
+                            {{ 'CLIENTS.CLIENTS_DUPLICATE.MOVE_TO_ANOTHER_GROUP' | translate }}
+    
+                        </label>
+                    </div>
+
+                    <div class="col-xl-4 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'doesNotBelongToGroup'}" (click)="changePage('doesNotBelongToGroup')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'doesNotBelongToGroup'}">
+    
+                            {{ 'CLIENTS.CLIENTS_DUPLICATE.DOES_NOT_BELONG_TO_A_GROUP' | translate }}
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <ng-container *ngIf="default === 'moveAnotherGroup'">
+            <div class="row pt-2">
+                <div class="input-group datatables-input-group-width ml-xl-2 mr-xl-2 mr-2 ml-1">
+                    <input id="search-modal" type="text" class="form-control search-general
+                        pull-right input-personalize-datatable" placeholder="Buscar" style="max-width: initial;">
+                    <span class="input-group-append input-group-appenda">
+                        <span class="input-group-text input-group-text-general table-append">
+                            <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row optimroute-move-client-table pt-1">
+                <div class="col-12 p-0">
+                    <table class="table table-striped table-bordered mb-0 mt-1 table-content-general"
+                        id="delivery_points_move" style="text-align: center; width: 100%">
+                        <thead class="thead-new">
+                            <tr>
+                                <th style="border-left: 1px solid #7387c2 !important;"></th>
+                                <th>{{ 'GENERAL.NAME' | translate }}</th>
+                                <th class="text-left" style="border-right: 2px solid #7387c2 !important;">{{ 'GENERAL.ADDRESS' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="default === 'doesNotBelongToGroup'">
+            <div class="row p-xl-5 m-xl-3 ml-xl-5 mr-xl-5 mt-5 mb-5 ml-2 mr-2 text-center">
+                <div class="col-12 col-md-12 col-xl-12 justify-content-center">
+                    <p class="separate">{{'CLIENTS.CLIENTS_DUPLICATE.SEPARATE_CLIENT' | translate}} </p>
+                    <p class="separate-message ml-xl-5 mr-xl-5">{{'CLIENTS.CLIENTS_DUPLICATE.SEPARATE_CLIENT_MESSAGE' | translate}} </p>
+                </div>
+                
+                <div class="col-12 col-md-12 col-xl-12 justify-content-center">
+                    <img src="assets/icons/separate-client.svg" alt="">
+                </div>
+
+            </div>
+        </ng-container>
+        
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+
+            <div class="col-12 text-xl-right text-center p-xl-0">
+
+                <button class="btn btn-default mr-2 size-btn" (click)="closeDialog(false)"> 
+                    {{'GENERAL.CANCEL' | translate}} 
+                </button>
+
+                <ng-container *ngIf="default === 'moveAnotherGroup'">
+
+                    <button class="btn btn-primary mr-2 size-btn" (click)="moveCliente()" [ngClass]="{'btn-primary-desabled': selectedGroup.length === 0}"
+                        [disabled]="default == 'moveAnotherGroup' && selectedGroup.length === 0"> 
+                        {{'CLIENTS.CLIENTS_DUPLICATE.MOVE_CLIENT' | translate}} 
+                    </button>
+
+                </ng-container>
+
+                <ng-container *ngIf="default === 'doesNotBelongToGroup'">
+
+                    <button class="btn btn-primary mr-2 size-btn" (click)="separateClient()"> 
+                        {{'CLIENTS.CLIENTS_DUPLICATE.SEPARATE_CLIENT' | translate}} 
+                    </button>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,142 @@
+@import '~@angular/material/theming';
+
+// Component themes
+@import 'shared/src/lib/components/info-chip/info-chip.theme';
+@import 'shared/src/lib/components/menu/menu.theme';
+@import 'shared/src/lib/components/panel/panel.theme';
+@import 'shared/src/lib/components/side-menu/side-menu.theme';
+@import 'shared/src/lib/components/editable-field/editable-field.theme';
+@import 'shared/src/lib/components/editable-field/editable-field-popover/editable-field-popover.theme';
+@import 'shared/src/lib/components/toolbar/toolbar.theme';
+@import 'shared/src/lib/components/sidenav/sidenav.theme';
+@import 'shared/src/lib/components/filter-input/filter-input.theme';
+@import 'shared/src/lib/directives/button-icon/button-icon.directive';
+@import 'shared/src/lib/directives/progress-spinner-percentage/progress-spinner-percentage.directive';
+
+@import '../../../libs/route-planning/src/theming';
+@import '../../../libs/profile/src/theming';
+@import '../../../libs/help/src/theming';
+@import '../../../libs/preferences/src/theming';
+@import '../../../libs/management/src/theming';
+@import '../../../libs/users-management/src/theming';
+
+@import './app/layout/header/header.theme';
+
+@include mat-core();
+
+$my-accent: (
+    50: #fff,
+    100: #F2F2F2,
+    200: #737373,
+    300: #737373,
+    400: #404040,
+    500: #404040,
+    600: #c5551a,
+    700: #bd4b16,
+    800: #b74112,
+    900: #ab300a,
+    A100: #ffdfd7,
+    A200: #ffb5a4,
+    A400: #ff8c71,
+    A700: #ff7858,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #ffffff,
+        300: #ffffff,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000,
+    ),
+);
+
+$my-primary: (
+    50: #404040,
+    100: #F2F2F2,
+    200: #404040,
+    300: #ff9e4d,
+    400: #ff9e4d,
+    500: #ff9e4d,
+    600: #c5551a,
+    700: #bd4b16,
+    800: #b74112,
+    900: #949494,
+    A100: #ffdfd7,
+    A200: #ffb5a4,
+    A400: #ff8c71,
+    A700: #ff7858,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #ffffff,
+        300: #ffffff,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000,
+    ),
+);
+
+// Material palette colors
+$app-primary: mat-palette($my-primary);
+//$app-accent: mat-palette($mat-blue-grey);
+$app-warn: mat-palette($mat-red);
+$app-accent: mat-palette($my-accent);
+
+// Define a custom typography config that overrides the font-family
+// as well as the `headlines` and `body-1` levels.
+$app-typography: mat-typography-config(
+    $font-family: 'Helvetica',
+);
+
+// Material theme mixin
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme);
+
+// Component theme mixins
+@include menu-theme($app-theme);
+@include panel-theme($app-theme);
+@include info-chip-theme($app-theme);
+@include side-menu-theme($app-theme);
+@include editable-field-theme($app-theme);
+@include editable-field-popover-theme($app-theme);
+@include toolbar-theme($app-theme);
+@include sidenav-theme($app-theme);
+@include filter-input-theme($app-theme);
+
+// Component typography mixins
+@include menu-typography($app-typography);
+@include panel-typography($app-typography);
+@include info-chip-typography($app-typography);
+@include editable-field-typography($app-typography);
+@include editable-field-popover-typography($app-typography);
+@include toolbar-typography($app-typography);
+@include filter-input-typography($app-typography);
+@include panel-typography($app-typography);
+
+// Directive style mixins
+@include progress-spinner-percentage-styles($app-typography);
+@include button-icon-styles();
+
+@include route-planning-theming($app-theme, $app-typography);
+@include profile-theming($app-theme, $app-typography);
+@include help-theming($app-theme, $app-typography);
+@include preferences-theming($app-theme, $app-typography);
+@include management-theming($app-theme, $app-typography);
+@include users-management-theming($app-theme, $app-typography);
+
+@include header-theme($app-theme);
+@include header-typography($app-typography);

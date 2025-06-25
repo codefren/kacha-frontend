@@ -1,0 +1,40 @@
+<div class="modal-confirm-new">
+
+    <div class="row pl-4 pr-4 mt-4">
+
+        <div class="col-12 pt-3 pl-4">
+
+            <label class="title-route pl-3"> {{ title }} </label>
+
+        </div>
+
+        <div class="col-12 pt-2 pl-4">
+
+            <p class="paragran-info"> {{ subTitle }} </p>
+
+        </div>
+
+        <div class="col-12 pl-4 pr-4">
+
+            <p class="sub-title-p" [innerHtml]="message"> </p>
+
+        </div>
+    </div>
+
+    <div class="row pb-5 mt-3 pl-4 pr-4">
+
+        <div class="col-xl-6 col-12 text-center text-md-left">
+
+            <button type="button" class="btn btn-gray btn-block" (click)="activeModal.close(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-center text-md-right mt-2 mt-md-0" (click)="activeModal.close(true)">
+
+            <button type="button" class="btn btn-primary btn-block"> {{ titleBotton }} </button>
+
+        </div>
+
+    </div>
+
+</div>

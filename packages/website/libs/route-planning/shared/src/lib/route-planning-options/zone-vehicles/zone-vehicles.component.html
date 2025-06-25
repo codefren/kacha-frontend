@@ -1,0 +1,317 @@
+<div class="easyroute-zone-vehicles">
+    <div class="card bg-color">
+        <div class="row pl-4 pb-2 pt-2" *ngIf="ownVehicles.length == 0">
+            <ng-container>
+                <div class="col-2 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Asignar Vehículo</label>
+                        <div class="hack-select">
+                            <select class="form-control form-size" disabled="true">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <!--   <label class="text-muted">Nombre</label>
+                        <input type="text" class="form-control form-size" disabled="true" /> -->
+                    </div>
+                </div>
+
+                <div class="col-2 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">H. inicio</label>
+
+                        <input type="time" class="form-control form-size" disabled="true" />
+                    </div>
+                </div>
+
+                <div class="col-2 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">H. llegada</label>
+
+                        <input type="time" class="form-control form-size" disabled="true" />
+                    </div>
+                </div>
+
+                <div class="col-1 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Capacidad</label>
+
+                        <input type="text" class="form-control form-size p-1" disabled="true" />
+                    </div>
+                </div>
+
+                <div class="col-1 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Volumen</label>
+
+                        <input type="text" class="form-control form-size p-1" disabled="true" />
+                    </div>
+                </div>
+
+                <div class="col-2 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Asignar Chofer</label>
+
+                        <div class="hack-select">
+                            <select class="form-control form-size" disabled="true">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 d-flex justify-content-start align-items-center flex-row">
+                    <button class="btn btn-add-grey btn-sm mt-4" [disabled]="ownVehicles.length > 0" (click)="addVehicles()">
+                        <i class="fas fa-plus addVehicleIcon"></i> Vehículo
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+
+        <ng-container *ngIf="ownVehicles.length > 0">
+
+            <div class="row pl-4 pb-2 pt-2" *ngFor="let v of ownVehicles; trackBy: trackById">
+
+                <div class="col-2 pl-1 pr-1">
+
+                    <label class="text-muted">Asignar Vehículo</label>
+
+                    <div class="hack-select">
+
+                        <select (change)="changeVehicleDisponible($event.target.value, v)" class="form-control form-size">
+
+                            <option *ngFor="let item of availableVehicles; trackBy: trackById" [value]="item.id" [selected]="v.id === item.id" >
+
+                                {{ item.name }} ({{ item.capacity }}u {{ item?.user?.name }} {{ item?.user?.surname }})
+
+                            </option>
+
+
+                        </select>
+                    </div>
+
+
+                </div>
+                <ng-container *ngIf="!v.activateDeliverySchedule">
+                    <div class="col-2 pl-1 pr-1">
+                        <div class="form-group">
+                            <label class="text-muted">H. inicio</label>
+
+                            <input value="{{ v.deliveryWindowStart | dayTime }}" type="time" class="form-control form-size" (focusout)="onChangeVehicleDeliveryWindowStart($event.target.value, v.id)" />
+                        </div>
+                    </div>
+
+                    <div class="col-2 pl-1 pr-1">
+                        <div class="form-group">
+                            <label class="text-muted">H. llegada</label>
+
+                            <input type="time" class="form-control form-size" value="{{ v.deliveryWindowEnd | dayTime }}" (focusout)="onChangeVehicleDeliveryWindowEnd($event.target.value, v.id)" />
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="v.deliveryPointScheduleTypeId === 2 && v.activateDeliverySchedule && v.vehicleScheduleSpecification && v.vehicleScheduleSpecification.length > 0">
+                    <div class="col-4 pl-1 pr-1">
+                        <label class="text-muted">Horario</label>
+                        <select [ngModel]="+v.vehicleScheduleSpecificationId" (change)="changeSpecificationSchedule($event.target.value, v)" class="form-control form-size">
+                            <option *ngFor="let item of v.vehicleScheduleSpecification" [value]="+item.id">
+                                {{ item.company_time_zone.name }} ({{
+                                convertSecondsToDayTime(item.company_time_zone.timeStart) }} - {{
+                                convertSecondsToDayTime(item.company_time_zone.timeEnd) }})
+                            </option>
+                        </select>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="v.deliveryPointScheduleTypeId === 2 && v.activateDeliverySchedule && (!v.vehicleScheduleSpecification || v.vehicleScheduleSpecification.length === 0)">
+                    <div class="col-4 pl-1 pr-1">
+                        <label class="text-muted">Horario</label>
+                        <select [value]="v.vehicleScheduleSpecificationId" (change)="changeSpecificationSchedule($event.target.value, v)" class="form-control form-size">
+                            <option [value]="null">
+                                Libre
+                            </option>
+                        </select>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="v.deliveryPointScheduleTypeId === 1 && v.schedules && v.schedules[indexDay(v)] && v.schedules[indexDay(v)].isActive">
+                    <div class="col-2 pl-1 pr-1">
+                        <div class="form-group">
+                            <label class="text-muted">H. inicio</label>
+
+                            <input value="{{
+                                    (v.schedules[indexDay(v)].hours
+                                    &&  v.schedules[indexDay(v)].hours.length > 0
+                                    ? v.schedules[indexDay(v)].hours[0].timeStart : v.deliveryWindowStart ) | dayTime
+                                }}" type="time" class="form-control form-size" (focusout)="changeHourPerDay($event.target.value, 'start', v )" />
+                        </div>
+                    </div>
+
+                    <div class="col-2 pl-1 pr-1">
+                        <div class="form-group">
+                            <label class="text-muted">H. llegada</label>
+
+                            <input type="time" class="form-control form-size" value="{{
+                                        (v.schedules[indexDay(v)].hours
+                                        &&  v.schedules[indexDay(v)].hours.length > 0
+                                        ? v.schedules[indexDay(v)].hours[0].timeEnd : v.deliveryWindowEnd ) | dayTime
+                                    }}" (focusout)="changeHourPerDay($event.target.value, 'end', v )" />
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="col-1 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Capacidad</label>
+                        <input type="text" class="form-control form-size p-1" [disabled]="managementPreferences && managementPreferences.activateCubicMeterConverter" value="{{ managementPreferences && managementPreferences.activateCubicMeterConverter && managementPreferences.cubicMeterConverter > 0  ?   convertToDecimal(v.capacity / managementPreferences.cubicMeterConverter) :  v.capacity }}"
+                            (focusout)="onChangeVehicleCapacity($event.target.value, v.id)" />
+                    </div>
+                </div>
+
+                <div class="col-1 pl-1 pr-1">
+                    <div class="form-group">
+                        <label class="text-muted">Volumen</label>
+                        <input type="text" [disabled]="true" class="form-control form-size p-1" value="{{ v.totalVolumetricCapacity }}"
+                            (focusout)="onChangeVehicleCapacity($event.target.value, v.id)" />
+                    </div>
+                </div>
+
+                <ng-container *ngIf="v && ownVehicles && drivers | async ">
+                    <div class="col-3 pl-1 pr-1" *ngIf="drivers | async ">
+                        <div class="form-group">
+                            <label class="text-muted">Asignar Chofer</label>
+
+                            <div class="hack-select">
+                                <select class="form-control form-size" [ngModel]="v.userId" (ngModelChange)="onChangeDriver($event, v.id)">
+                                    <option *ngFor="let user of (drivers | async); trackBy: trackById"
+                                        [value]="user.id">
+                                        {{ user.name }} {{ user.surname }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="col-1 pl-1 pr-1 mt-4 d-flex justify-content-start align-items-center flex-row">
+                    <i class="far fa-trash-alt p-1 pointer" style="color: #24397C;" (click)="stopUsingVehicle(v.id); $event.stopPropagation()"></i>
+
+                    <i class="fas fa-pen p-1 pointer" style="color: #24397C;" (click)="editVehicle(v.id); $event.stopPropagation()"></i>
+                </div>
+                <div class="col-4" *ngIf="v.vehicleServiceType && v.vehicleServiceType.length > 0">
+                    <button class="btn link espe-servicio pl-0" (click)="viewService(v)">
+                        <img src="assets/icons/skill.svg" class="pr-1" title="Especificación de servicio" />
+                        Ver esp. de servicio
+                    </button>
+                </div>
+
+                <ng-container *ngIf="feetUser &&  feetUser[v.id] && feetUser[v.id].length > 0">
+                    <div class="col-3 pl-1 pr-1">
+                        <div class="form-group">
+                            <label class="text-muted">Tarifa</label>
+
+                            <div class="hack-select" *ngIf="feetUser && feetUser[v.id].length > 0">
+                                <select class="form-control form-size" [ngModel]="v.userFeeCostId" (ngModelChange)="changeFee($event, v.id)">
+                                    <option *ngFor="let feet of feetUser[v.id]; trackBy: trackById" [value]="feet.id">
+                                        {{ feet.company_fee_cost.name }} ({{ feet.price | number: '1.2' }}€)
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+
+
+
+        <hr class="separator-table">
+
+        <div class="row toggle-row d-flex flex-row justify-content-start align-items-center">
+            <div class="col-4 d-flex flex-row justify-content-between">
+                <div class="switch float-left">
+                    <label>
+                        <input type="checkbox" [checked]="zone.settings.ignoreCapacityLimit"
+                            (change)="toggleIgnoreCapacityLimit($event.target.checked)" />
+
+                        <span class="lever switch-col-primary"></span>
+                        {{ '' }}
+                    </label>
+                </div>
+                <span class="label-switch">{{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.IGNORE_CAPACITY_LIMIT' |
+                    translate }}</span>
+            </div>
+            <div class="col-3 d-flex flex-row justify-content-between">
+                <div class="switch float-left">
+                    <label>
+                        <input type="checkbox" [checked]="zone.settings.settingsUseSkills"
+                            (change)="toggleUserSkills($event.target.checked)" />
+
+                        <span class="lever switch-col-primary"></span>
+                        {{ '' }}
+                    </label>
+                </div>
+                <span class="label-switch"> Usar esp. de servicio </span>
+            </div>
+            <div class="col-5 align-self-end pr-2">
+                <div class="row">
+                    <div class="col-4 pl-1 pr-1 offset-5">
+                        <div class="d-flex form-row flex-row align-items-center justify-content-end">
+                            <div class="dropdown">
+                                <button class="btn btn-primary btn-large ml-2 btn-actios mt-xl-0 mt-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}">
+
+                                    <img src="assets/icons/plus.svg" class="pr-2">
+
+                                    Añadir
+
+                                </button>
+
+                                <button class="btn btn-primary  size-open btn-large mt-xl-0 mt-2 btn-actios pl-2 pr-2" type="button" id="dropdownMenuButton1" style="margin-left: 1px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                    <img src="assets/icons/donwWrite.svg">
+
+                                </button>
+
+
+
+                                <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+
+                                    <a class="dropdown-item drop-title  pt-2 pb-2 point" *ngIf="(zoneState$ | async)" (click)="addDeliveryPoint()">
+
+                                        <img src="assets/icons/addActios.svg" class="pr-2"> {{ 'DELIVERY_POINTS.CLIENT' | translate }}
+
+                                    </a>
+
+                                    <a class="dropdown-item drop-title  pt-2 pb-2 point" (click)="addVehicles()">
+
+                                        <img src="assets/icons/addActios.svg" class="pr-2"> Vehículo
+
+                                    </a>
+
+                                    <a class="dropdown-item drop-title  pt-2 pb-2 point" (click)="addCrossDocking()" *ngIf="ModuleCost() && showNotTraffic()">
+
+                                        <img src="assets/icons/addActios.svg" class="pr-2"> Cross docking
+
+                                    </a>
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-1 pr-1">
+                        <button class="btn btn-add-grey btn-sm" (click)="moveDeliveryPoint()">
+                            <i class="fas fa-list-ol pr-1"></i>{{ 'GENERAL.MOVE_DELIVERY_POINTS' | translate }}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,43 @@
+<div class="annual-comparison">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-4 col-12 text-left mb-3 form-inline ps-1">
+                    <label class="title-card-anual pr-4 pl-2" for="title-card"> {{ 'DASHBOARD.ANNUAL_COMPARISON.NAME' | translate }} </label>
+                    <select class="form-control form-control-select letter-app point"
+                    style="width: 100px !important;"
+                    (change)="getChangeSelect($event.target.value)">
+
+                        <option value="cost" selected> Coste </option>
+
+                        <option value="hour"> {{ 'DASHBOARD.ANNUAL_COMPARISON.HOURS' | translate }}</option>
+
+                        <option value="km">{{ 'DASHBOARD.ANNUAL_COMPARISON.KM' | translate }}</option>
+                    </select>
+                    <select class="form-control form-control-select letter-app point ml-3"
+                    style="width: 100px !important;" [(ngModel)]="yearSelected"
+                    (change)="changeYearData($event.target.value)">
+                        <option [value]="year" *ngFor="let year of years"> {{ year }}</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-8 col-12 text-right mb-3">
+                    <span class="title-radial mr-3" [ngClass]="{'disable-radial': !stadistic[0].visible }"  (click)="modifyView(0)"><img class="img-circle align-middle" src="assets/icons/report/cost/orange.svg"> Ejecutado </span>
+                    <span class="title-radial mr-3" [ngClass]="{'disable-radial': !stadistic[1].visible }"  (click)="modifyView(1)"><img class="img-circle align-middle" src="assets/icons/report/cost/blue.svg">  Planificado </span>
+                    <span class="title-radial mr-3" [ngClass]="{'disable-radial': !stadistic[2].visible }"  (click)="modifyView(2)" *ngIf="filterSelect === 'cost'"><img class="img-circle align-middle" src="assets/icons/report/cost/gray.svg"> Total logístico </span>
+                    <span class="title-radial mr-3" [ngClass]="{'disable-radial': !stadistic[3].visible }"  (click)="modifyView(3)" *ngIf="filterSelect === 'cost'"><img class="img-circle align-middle" src="assets/icons/report/cost/red.svg"> Facturación perdida</span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="chart chart-md" id="morrisLine"></div>
+                </div>
+            </div>      
+
+        </div>
+    </div>
+        
+</div>

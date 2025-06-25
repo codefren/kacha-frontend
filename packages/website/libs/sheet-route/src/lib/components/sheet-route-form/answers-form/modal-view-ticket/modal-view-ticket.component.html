@@ -1,0 +1,34 @@
+<div class="model-ticket">
+
+    <div class="row align-items-center mt-3 mb-3">
+
+        <div class="col-xl-6 col-12 pl-xl-5 text-xl-left text-center">
+
+            <label class="title-ticket"> {{ 'SHEET_ROUTE.FUEL_TICKET' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-xl-rigth text-center">
+
+            <button class="btn btn-default mr-2" (click)="donwload()"> 
+                {{'SHEET_ROUTE.DISCHARGE' | translate }} 
+                
+            </button>
+
+            <button class="btn btn-default mr-2" (click)="downloadPdf()"> {{'SHEET_ROUTE.TO_PRINT' | translate }} </button>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3 mb-4">
+
+        <div class="col-12 text-center" *ngIf="imageLoaded">
+
+            <img class="img-ticket" [src]="imageLoaded">
+
+        </div>
+
+    </div>
+
+</div>

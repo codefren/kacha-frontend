@@ -1,0 +1,49 @@
+<div class="integration-update" *ngIf="form">
+
+    <div class="row">
+        <div class="col-12 text-center pt-4">
+            <p class="title">
+                {{ 'GENERAL.UPDATE' | translate }}
+            </p>
+        </div>
+    </div>
+
+    <form [formGroup]="form" novalidate>
+        <div class="form-row padding-col">
+
+            <div class="col-12">
+
+                <div class="form-group" [ngClass]="
+                        { 'has-danger': form.controls['orderNumber'].invalid && 
+                            (form.controls['orderNumber'].dirty || 
+                            form.controls['orderNumber'].touched) 
+                        }">
+                    <label for="orderNumber">
+                        {{'DELIVERY_POINTS.NUMBER_ORDER' | translate}}
+                    </label>
+                    <input type="text" class="form-control" id="orderNumber" formControlName="orderNumber" placeholder="{{'DELIVERY_POINTS.NUMBER_ORDER' | translate}}" [ngClass]="{
+                        'form-control-danger': form.controls['orderNumber'].invalid &&
+                            (form.controls['orderNumber'].dirty ||
+                            form.controls['orderNumber'].touched)
+                        }" />
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-2 pt-4 pb-4">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn btn-cancel size-btn-modal" type="button" (click)="close()">
+                    {{ 'GENERAL.CANCEL' | translate }}</button>
+            </div>
+            <div class="col-md-6 col-12 text-center mt-2 mt-md-0 text-md-left">
+                <button class="btn btn-primary size-btn-modal" type="button" [disabled]="!form.valid" (click)="submit()">
+                    {{ 'GENERAL.SAVE' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

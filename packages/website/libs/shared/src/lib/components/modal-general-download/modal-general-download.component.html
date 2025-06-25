@@ -1,0 +1,134 @@
+<div class="modal-general-download">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-8 text-xl-left text-left pl-0">
+
+                <label class="title-modal"> {{ title }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-4 text-xl-right text-right point pr-0" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12 p-0">
+
+                <p class="title-sub m-0"> {{ message }} </p>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-2 mb-2">
+
+            <div class="col-12 p-xl-0 mt-xl-2 mt-3" *ngIf="pdf">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="radio" name="typeRoute" id="pdf" [(ngModel)]="selectDownload" id="pdf" value="pdf" />
+
+                            <label for="pdf"></label>
+
+                        </div>
+
+                        <label title="{{'USERS.DOWNLOAD_IN_PDF' | translate }}" for="pdf" class="label-check point pl-2">
+
+                            {{ 'USERS.DOWNLOAD_IN_PDF' | translate }}
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 p-xl-0 mt-xl-2 mt-3">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="radio" name="typeRoute" [(ngModel)]="selectDownload" id="excel" value="excel" />
+
+                            <label for="excel"></label>
+
+                        </div>
+
+                        <label title="{{ 'USERS.DOWNLOAD_IN_EXCEL' | translate }}" for="excel" class="label-check point pl-2">
+
+                            {{ 'USERS.DOWNLOAD_IN_EXCEL' | translate }}
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 p-xl-0 mt-xl-2 mt-3" *ngIf="etiqueta == 'json'">
+
+                <div class="border-special">
+
+                    <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                        <div class="round round-little margin-days round-1">
+
+                            <input type="radio" name="typeRoute" [(ngModel)]="selectDownload" id="json" value="json" />
+
+                            <label for="json"></label>
+
+                        </div> 
+
+                        <label title="{{ 'DELIVERY_POINTS.EXPORT_CLIENTS' | translate }}" for="json" class="label-check point pl-2">
+
+                            {{ 'DELIVERY_POINTS.EXPORT_CLIENTS' | translate }}
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="modal-footer modal-footer-">
+
+        <div class="row">
+
+            <div class="col-12 text-right">
+
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button class="btn btn-primary" [disabled]="!selectDownload" type="button" (click)="submit()"> Descargar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

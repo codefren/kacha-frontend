@@ -1,0 +1,61 @@
+<div class="optimroute-integration-table">
+
+    <section class="card p-2">
+        <div class="row justify-content-center ">
+            <div class="col-12 text-right">
+                <i class="fas fa-times close-button" (click)="activeModal.close()"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ 'DELIVERY_ZONES.SELECT_ROUTES' | translate }}</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="row justify-content-center pt-4">
+        <div class="col-11 text-left">
+            {{ 'DELIVERY_ZONES.SELECT_ROUTES' | translate }}
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <div class="table-content">
+                <table id="clients" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%">
+                    <thead class="thead-new">
+                        <tr>
+                            <th>{{ 'Cliente' }}</th>
+                            <th>{{ 'Ruta de reparto' }}</th>
+                            <th>{{ 'Hora desde' }}</th>
+                            <th>{{ 'Hora hasta' }}</th>
+                            <th>{{ 'Fecha' }}</th>
+                            <th>Borrar</th>
+                            <th style="border-right: 1px solid #7387c2 !important;">
+                                <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+                                    <div class="round round-little">
+                                        <input type="checkbox" checked="" id="checkboxExample1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+                                        <label for="checkboxExample1" class="m-0"></label>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="row justify-content-center pt-2 pb-4">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="closeDialog([])">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-6 col-12 mt-2 mt-md-0 text-center text-md-left">
+                <button class="btn btn-primary size-btn-modal modal-dismiss" [disabled]="selected.length == 0"
+                    (click)="closeDialog(selected)" >
+                    {{ 'GENERAL.ACCEPT' | translate }}
+                </button>
+            </div>
+    </footer>
+</div>

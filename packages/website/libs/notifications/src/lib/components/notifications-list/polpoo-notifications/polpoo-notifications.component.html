@@ -1,0 +1,168 @@
+<div class="polpo-notifications">
+
+    <ng-container *ngIf="showData ==='list'">
+
+        <div class="card">
+
+            <div class="card-body" style="display: block;">
+                <div class="row">
+
+                    <div class="col-xl-6 col-12">
+
+                        <div class="form-row mb-1 mt-2 pl-1 align-items-center">
+
+                            <div class="col-xl-1 col-6">
+
+                                <div class="round-style-cost  round-little-cost">
+
+                                    <input type="checkbox" class="checkboxExample1" id="checkboxExample1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+
+                                    <label for="checkboxExample1" class="m-0"></label>
+
+                                </div>
+
+                            </div>
+
+                            <ng-container *ngIf="selected.length === 0">
+
+                                <div class="col-xl-2 col-6" (click)="refrestTable()">
+
+                                    <img class="point img-refresc pr-xl-2" src="assets/icons/refreshNotification.svg">
+
+                                </div>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="selected.length > 0">
+
+                                <div class="col-xl-2 col-6 p-0" (click)="deleteNotifications()">
+
+                                    <img class="point img-trash pr-xl-2" src="assets/icons/deleteNoti.svg">
+
+                                    <span class="spand-trans point">Eliminar</span>
+
+                                </div>
+
+                                <div class="col-xl-4 col-6" (click)="SendRead()">
+
+                                    <img class="point img-no-reader pr-xl-1" src="assets/icons/noRear.svg">
+
+                                    <span class="spand-trans point">  Marcar como leído</span>
+
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-6 col-12">
+
+                        <div class="row">
+
+                            <div class="col-xl-5 col-12 text-center mt-xl-0 mt-2 pr-0">
+
+                                <ng-container *ngIf="showFilter">
+
+                                    <select [value]="filter.values.notificationTypeId" id="notificationTypeId" (change)="changeFilter($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+            
+                                        <option value=""> {{ 'GENERAL.TYPE' | translate }} </option>
+            
+                                        <option *ngFor="let item of typeListPolpoo" [value]="item.id"> {{ item.name }} </option>
+            
+                                    </select>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!showFilter">
+
+                                    <div class="col-12 text-center mt-2">
+
+                                        <div class="fa-3x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                            <div class="col-xl col-12">
+
+                                <div class="input-group datatables-input-group-width mr-xl-3 mr-3 mt-xl-0 mt-3">
+
+                                    <input id="search" type="text" class="form-control search-general
+                                            pull-right input-personalize-datatable" placeholder="{{ 'COST.SEARCH' | translate }}" style="max-width: initial;">
+
+                                    <span class="input-group-append input-group-appenda">
+            
+                                        <span class="input-group-text input-group-text-general table-append">
+            
+                                            <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+            
+                                        </span>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="col-12 p-xl-0">
+
+                        <div class="table-content table-content-general mt-2">
+
+                            <table class="table table-responsive-md mb-0 table-notification" id="notifications" style="text-align: center;  width: 100%;">
+
+                                <thead hidden>
+
+                                    <tr>
+
+                                        <th></th>
+
+                                        <th>{{ 'NOTIFICATIONS.NOTIFICATION_TYPE' | translate }}</th>
+
+                                        <th>{{ 'NOTIFICATIONS.DESCRIPTION' | translate }}</th>
+
+                                        <th style="border-right: 1px solid #7387c2 !important;">{{ 'NOTIFICATIONS.NOTIFICATION_DATE' | translate }}</th>
+
+                                        <!--  <th style="border-right: 1px solid #7387c2 !important;"></th> -->
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="showData ==='details'">
+        <easyroute-notifications-details (showDatas)="getData($event)" [notificationId]="notificationId"></easyroute-notifications-details>
+    </ng-container>
+
+
+
+</div>

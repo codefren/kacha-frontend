@@ -1,0 +1,256 @@
+<div class="report-data-update font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-1 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+
+            <label class="title-sheet pl-3"> {{ 'REPORT.NAME'| translate }} | {{ 'REPORT.DATA_UPDATE' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+
+            <button class="mb-1 mt-xl-0 mt-1 mr-1 btn btn-default dropdown-toggle point" (click)="openDonwloadPdf()">
+
+                <img src="assets/icons/report/dowloadBlack.svg">
+
+                <label class="pl-2 title-descargar point"> {{ 'REPORT.COST_EFFECTIVENESS.DOWNLOAD_REPORTS' | translate }} </label>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- card general -->
+
+    <div class="row mt-3">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div class="row">
+
+                        <div class="col-2"></div>
+
+                        <div class="col-xl-10 col-12 text-xl-right text-center">
+
+                            <div class="form-row mb-xl-0 mb-1 mt-xl-0 mt-2 pl-1 align-items-center justify-content-xl-end justify-content-center">
+
+                                <!-- typeUpdate -->
+                                <div class="col-12 col-xl col-sm-4 mb-1 point">
+
+                                    <ng-container *ngIf="showTypeList">
+
+                                        <select id="deliveryPointUpdateTypeId" [value]="filter.values.deliveryPointUpdateTypeId" (change)="changeFilterGeneral($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+            
+                                            <option value=""> {{ 'REPORT.TYPE' | translate }} </option>
+                    
+                                            <option *ngFor="let type of deliveryPointUpdateTypeList" [value]="type.id" > {{ type.name }} </option>
+                    
+                                        </select>
+
+                                    </ng-container>
+
+
+
+                                    <ng-container *ngIf="!showTypeList">
+
+                                        <div class="col-12 text-center mt-2">
+
+                                            <div class="fa-4x">
+
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                                            </div>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                                <!-- end typeUpdate -->
+                                <!-- route -->
+                                <div class="col-12 col-xl col-sm-4 mb-1 point">
+
+
+
+                                    <select id="deliveryZoneId" [value]="filter.values.deliveryZoneId" (change)="changeFilterGeneral($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+                
+                                            <option value=""> {{ 'REPORT.COST_EFFECTIVENESS.ROUTE' | translate }} </option>
+                    
+                                            <option *ngFor="let item of zone" [value]="item.id" > {{ item.name }} </option>
+                    
+                                        </select>
+
+
+                                </div>
+                                <!-- end route -->
+
+                                <!-- client -->
+
+                                <div class="col-12 col-xl col-sm-4 mb-1 point">
+
+                                    <ng-container *ngIf="!filter.values.deliveryPointId">
+
+                                        <button class="btn btn-btn btn-cancel btn-block btn-no-radios" (click)="openClient()"> {{'REPORT.SUMMARY_UPDATE_OF_DATA.CUSTOMER' | translate }}
+                
+                                            <img src="assets/images/polygon.svg">
+                
+                                        </button>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="filter.values.deliveryPointId && filter.values.nameClient">
+
+                                        <button class="btn btn-btn btn-cancel btn-block btn-no-radios" [title]="filter.values.nameClient" (click)="openClient()">
+                
+                                            {{ filter.values.nameClient | slice:0:20 }} {{ filter.values.nameClient.length > 17 ? '...' : '' }}
+                
+                                            <img src="assets/images/polygon.svg">
+                
+                                        </button>
+
+                                    </ng-container>
+
+
+
+                                </div>
+                                <!-- end client -->
+
+                                <div class="col-xl-1 col-12 mb-1 point" *ngIf="filter.values.deliveryPointId.length > 0">
+                                    <button class="btn btn-btn btn-cancel-1 btn-block" (click)="clearClient()"> 
+                
+                                        <img title="Limpiar filtro" src="assets/images/delete.svg">
+            
+                                    </button>
+                                </div>
+
+                                <!-- chofer -->
+
+                                <div class="col-12 col-xl col-sm-4 mb-1 point">
+
+                                    <ng-container *ngIf="showUserDriver">
+
+                                        <select id="userId" [value]="filter.values.userId" (change)="changeFilterGeneral($event)" class="form-control-select-datatable size-select form-control form-control-select  select-search-user point">
+                
+                                            <option value=""> {{ 'REPORT.DRIVER' | translate }} </option>
+                    
+                                            <option *ngFor="let item of usersVehicles" [value]="item.id" > {{ item.name }} {{ item.surname }} </option>
+                    
+                                        </select>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!showUserDriver">
+
+                                        <div class="col-12 text-center mt-2">
+
+                                            <div class="fa-4x">
+
+                                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                                            </div>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+
+                                <!-- end chofer -->
+
+                                <!-- date -->
+
+                                <div class="col-12 col-xl col-sm-4 mb-1">
+
+                                    <div class="dp-hidden position-absolute">
+
+                                        <div class="input-group">
+
+                                            <input name="datepicker" class="form-control  input-size date1 point" [placement]="placement" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden"
+                                                [startDate]="fromDate!" tabindex="-1" />
+
+                                            <ng-template #t let-date let-focused="focused">
+
+                                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                    {{ date.day }}
+                                                </span>
+
+                                            </ng-template>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="input-group">
+
+                                        <input #dpFromDate class="form-control form-control-date" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                                        <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+                    
+                                            <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                
+                                        </button>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body padding-card-general">
+
+                    <div class="row mb-5">
+
+                        <div class="col-12 pt-xl-2">
+
+                            <easyroute-summary-data-update [filter]="filter.values"></easyroute-summary-data-update>
+
+                        </div>
+
+
+
+                        <div class="col-xl col-12 pl-xl-2 pr-2 mt-3">
+
+                            <easyroute-summary-of-updates [filter]="filter" (filters)="getData($event)"></easyroute-summary-of-updates>
+
+                        </div>
+
+                        <div class="col-xl-3 col-12 mt-xl-3 mt-5 pl-xl-2 pr-xl-1">
+
+                            <easyroute-update-of-update [filter]="filter.values"></easyroute-update-of-update>
+
+                            <easyroute-update-data-comparison [filter]="filter.values"></easyroute-update-data-comparison>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end card general -->
+
+</div>

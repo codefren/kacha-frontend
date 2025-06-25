@@ -1,0 +1,427 @@
+<div class="table-vehicle">
+
+    <!-- Cajas informativas -->
+    <div class="row align-items-center mt-3 pl-4 pr-4">
+
+        <div class="col-xl col-md-6 col-12">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{'COST.COST_VEHICLE.TOTAL_COST' | translate }} </p>
+
+                <ng-container *ngIf="showTotalized">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ decimal(totalized.totalCost) }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showTotalized">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'COST.COST_VEHICLE.ACQUISITION_COST' | translate }} </p>
+                <ng-container *ngIf="showTotalized">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ decimal(totalized.costAcquisition) }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showTotalized">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'COST.COST_VEHICLE.FUEL_COST' | translate }} </p>
+                <ng-container *ngIf="showTotalized">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ decimal(totalized.costFuel) }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showTotalized">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'COST.COST_VEHICLE.WORKSHOP_COST' | translate }} </p>
+                <ng-container *ngIf="showTotalized">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ decimal(totalized.costWorkshop) }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showTotalized">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'COST.COST_VEHICLE.INSURANCE_COST' | translate }}</p>
+                <ng-container *ngIf="showTotalized">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ decimal(totalized.costSure) }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showTotalized">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <!-- <div class="card card-rigth"></div> -->
+            <div class="card card-left p-3">
+                <p class="p-title"> {{ 'COST.COST_VEHICLE.OTHER_EXPENSES' | translate }}</p>
+                <ng-container *ngIf="showTotalized">
+                    <p class="p-sub-number" *ngIf="totalized"> {{ decimal(totalized.costOtherExpenses) }} </p>
+                </ng-container>
+
+                <ng-container *ngIf="!showTotalized">
+                    <div class="fa-2x">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md-6 col-12 mt-xl-0 mt-2">
+
+            <div class="card card-rigth"></div>
+
+        </div>
+
+    </div>
+
+    <!-- filter -->
+    <div class="row mt-3 pl-4 pr-4 align-items-center font-row">
+
+        <div class="col-xl-10 col-12">
+            <div class="form-row mb-1 mt-2 align-items-center">
+
+                <!-- date -->
+                <div class="col-12 col-xl col-sm-4 mb-1">
+                    <div class="dp-hidden position-absolute">
+                        <div class="input-group">
+                            <input name="datepicker" class="form-control input-size date1 point" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                tabindex="-1" />
+                            <ng-template #t let-date let-focused="focused">
+                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                    {{ date.day }}
+                                </span>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+                        <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+                            <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- vehicle -->
+                <div class="col-12 col-xl col-sm-4 mb-1 point">
+                    <ng-container *ngIf="showVehicle">
+                        <select [value]="filter.values.vehicleId" id="vehicleId" (change)="changeSelectVehicle($event)" class="form-select size-select form-control form-control-select-datatable  select-search-user point">
+                            <option value="">{{'COST.COST_VEHICLE.VEHICLE' | translate }}</option>
+                            <option *ngFor="let item of vehicleList" [value]="item.id"> {{ item.registration }}</option>
+                        </select>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showVehicle">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- providerTypeId -->
+                <div class="col-12 col-xl col-sm-4 mb-1 point">
+                    <ng-container *ngIf="showProvidersType">
+                        <select [value]="filter.values.providerTypeId" id="providerTypeId" (change)="changeSelectProviderType($event)" class="form-select size-select form-control form-control-select-datatable select-search-route point">
+                            <option value=""> {{'COST.COST_VEHICLE.TYPE' | translate }} </option>
+                            <option *ngFor="let item of providerTypeList" [value]="item.id"> {{ item.name }}</option>
+                        </select>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showProvidersType">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- providerId -->
+                <div class="col-12 col-xl col-sm-4 mb-1 point">
+                    <ng-container *ngIf="showProviders">
+                        <select [value]="filter.values.providerId" id="providerId" [disabled]="disabledProviders" (change)="changeSelectProvider($event)" class="form-select form-control form-control-select-datatable" [ngClass]="{'point': !disabledProviders}">
+                            <option value="">{{'COST.COST_VEHICLE.PROVIDER' | translate }}</option>
+                            <option *ngFor="let item of providerList" [value]="item.id"> {{ item.name }}</option>
+                        </select>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showProviders">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="col-12 col-xl col-sm-4 mb-1 point">
+                    <ng-container *ngIf="showConcept">
+                        <select [value]="filter.values.providerTypeConceptId" id="providerTypeConceptId" [disabled]="disabledConcept" (change)="changeSelectConcept($event)" class="form-select form-control form-control-select-datatable" [ngClass]="{'point': !disabledConcept}">
+                            <option value="">{{'COST.COST_VEHICLE.CONCEPT' | translate }} </option>
+                            <option *ngFor="let item of conceptList" [value]="item.id"> {{ item.name }}</option>
+                        </select>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showConcept">
+                        <div class="col-12 text-center mt-2">
+                            <div class="fa-4x">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="mb-1 mr-1 ml-1 point">
+                    <button type="button" class="btn btn-default btn-filter-cost" type="button" (click)="filterStausRevision()">
+                        <img src="assets/icons/Filter.svg">
+                    </button>
+
+                    <div class="div-drop" *ngIf="showCost">
+                        <li>
+                            <ng-container *ngIf="!showSubHidden">
+                                <a class="dropdown-item title-drop p-3" (click)="openSubList()">
+                                    {{'COST.COST_VEHICLE.REVISION_STATUS' | translate }}
+                                    <img class="pl-special" src="assets/icons/next.svg">
+                                </a>
+                            </ng-container>
+
+                            <ng-container *ngIf="showSubHidden">
+                                <a class="dropdown-item title-retunrs pt-3" (click)="openSubList()">
+                                    <img class="img-retunrs" src="assets/icons/returns.svg"> Volver
+                                </a>
+
+                                <a class="dropdown-item title-drop pt-2 pb-2" id="costStatusId" [ngClass]="{'active':filter.values.costStatusId === ''}" (click)="filterSelected($event, '')"> {{'COST.COST_VEHICLE.ALL' | translate }} </a>
+
+                                <a class="dropdown-item title-drop pt-2 pb-2" id="costStatusId" [ngClass]="{'active':filter.values.costStatusId === item.id }" (click)="filterSelected($event, item)" *ngFor="let item of costStatusList"> {{ item.name }} </a>
+                            </ng-container>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-12">
+            <div class="input-group datatables-input-group-width mr-xl-3 mr-3">
+                <input id="search" type="text" class="form-control search-general
+                    pull-right input-personalize-datatable" placeholder="Buscar" style="max-width: initial;">
+                <span class="input-group-append input-group-appenda">
+                    <span class="input-group-text input-group-text-general table-append">
+                        <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-content table-content-general">
+                <table class="table table-striped table-responsive-lg mb-0" id="tableCosteVehicle" style="text-align: center; width: 100%;">
+                    <thead class="thead-cost" id="cost-v-thead-1">
+                        <tr>
+                            <th width="5%">
+                                <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+                                    <div class="round-style-cost  round-little-cost">
+                                        <input type="checkbox" checked="" id="checkboxVehicleCost" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+                                        <label for="checkboxVehicleCost" class="m-0"></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th width="8%" class="text-left">{{ 'COST.COST_VEHICLE.DATE' | translate }}</th>
+                            <th width="13%" class="text-left">{{ 'COST.COST_VEHICLE.VEHICLE' | translate }}</th>
+                            <th width="13%" class="text-left">{{ 'COST.COST_VEHICLE.TYPE' | translate }}</th>
+                            <th width="13%" class="text-left">{{ 'COST.COST_VEHICLE.PROVIDER' | translate }}</th>
+                            <th width="13%" class="text-left">{{ 'COST.COST_VEHICLE.CONCEPT' | translate }}</th>
+                            <th width="8%" class="text-left">{{ 'COST.COST_VEHICLE.UNI_LIT' | translate }}</th>
+                            <th width="11%" class="text-left">{{ 'COST.COST_VEHICLE.AMOUNT' | translate }}</th>
+                            <th width="5%" class="text-left">{{ 'COST.COST_VEHICLE.ATTACH' | translate }}</th>
+                            <th width="11%" class="text-left">{{ 'COST.COST_VEHICLE.REVISION' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <thead class="thead-cost hidden" id="cost-v-thead-2">
+                        <tr>
+                            <th width="5%">
+                                <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+                                    <div class="round-style-cost  round-little-cost">
+                                        <input type="checkbox" checked="" id="checkboxVehicleCost1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+                                        <label for="checkboxVehicleCost1" class="m-0"></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th width="8%" class="text-left" colspan="9">
+                                <img class="point img-cost" src="assets/icons/checkbtn.svg" aria-hidden="true" (click)="openModalVerifiedAll(selected)">
+                                <span (click)="openModalVerifiedAll(selected)" class="point"> {{ 'COST.VERIFY' | translate }}</span>
+
+                                <img class="point img-cost" style="margin-left: 4rem !important;" src="assets/icons/delete-cost.svg" aria-hidden="true" (click)="openModalDeleteAll(selected)">
+                                <span (click)="openModalDeleteAll(selected)" class="point"> {{ 'COST.DELETE' | translate }}</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead class="thead-cost" [formGroup]="costVehicleForm">
+                        <tr>
+
+                            <th width="5%" style="border-right: 1px solid #7F96E0 !important;"></th>
+
+                            <!-- dateTable -->
+                            <th width="8%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <div class="input-group" style="width:9rem;">
+                                    <input ngbDatepicker #f="ngbDatepicker" type="text" class="form-control form-control-date size-date" [ngClass]="{'no-point': selected.length > 0 , 'point': selected.length == 0, 'opacity-cost-select': selected.length > 0}" [placement]="'bottom'" autocomplete="off"
+                                        formControlName="creationDate" placeholder="Seleccione ..." [maxDate]="min" id="dateFrom" />
+
+                                    <button class="btn btn-calendar calendar" [disabled]="costVehicleForm.disabled" (click)="f.toggle()" type="button">
+                                        <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- vehicle -->
+                            <th width="13%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <ng-container *ngIf="showVehicle">
+                                    <select formControlName="vehicleId" id="vehicleId" class="form-select form-control form-control-select-datatable" style="width:11rem;" [ngClass]="{'no-point': selected.length > 0 , 'point': selected.length == 0, 'opacity-cost-select': selected.length > 0}">
+
+                                        <option value="">{{'COST.COST_VEHICLE.VEHICLE' | translate }}</option>
+                                        <option *ngFor="let item of vehicleList" [value]="item.id"> {{ item.registration }}</option>
+                                    </select>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showVehicle">
+                                    <div class="col-12 text-center mt-2">
+                                        <div class="fa-4x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </th>
+
+                            <!-- tipo -->
+                            <th width="13%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <ng-container *ngIf="showProvidersType">
+                                    <select formControlName="providerTypeId" id="providerTypeId" (change)="changeSelectProviderTypeTable($event.target.value, 'providerTypeId')" style="width:11rem;" class="form-select form-control form-control-select-datatable" [ngClass]="{'no-point': selected.length > 0 , 'point': selected.length == 0, 'opacity-cost-select': selected.length > 0}">
+
+                                        <option value=""> {{ 'GENERAL.SELECT_' | translate }} </option>
+
+                                        <option *ngFor="let item of providerTypeListTable" [value]="item.id"> {{ item.name }}</option>
+                                    </select>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showProvidersType">
+                                    <div class="col-12 text-center mt-2">
+                                        <div class="fa-4x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </th>
+
+                            <!-- proveedor -->
+                            <th width="13%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <ng-container *ngIf="showProvidersTable">
+                                    <select formControlName="providerId" id="providerId" style="width:11rem;" (change)="changeSelectProviderTable($event.target.value, 'providerId')" class="form-select form-control form-control-select-datatable" [ngClass]="{'no-point': selected.length > 0 , 'point': selected.length == 0, 'opacity-cost-select': selected.length > 0}">
+
+                                        <option value="">{{ 'GENERAL.SELECT_' | translate }}</option>
+
+                                        <option *ngFor="let item of providerListTable" [value]="item.id"> {{ item.name }}</option>
+                                    </select>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showProvidersTable">
+                                    <div class="col-12 text-center mt-2">
+                                        <div class="fa-4x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </th>
+
+                            <!-- concept -->
+                            <th width="13%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <ng-container *ngIf="showConceptTable">
+                                    <select formControlName="providerTypeConceptId" (change)="selectConcept($event.target.value)" style="width:11rem;" id="providerTypeConceptId" class="form-select form-control form-control-select-datatable" [ngClass]="{'no-point': selected.length > 0 , 'point': selected.length == 0, 'opacity-cost-select': selected.length > 0}">
+
+                                        <option value="">{{ 'GENERAL.SELECT_' | translate }} </option>
+
+                                        <option *ngFor="let item of conceptListTable" [value]="item.id"> {{ item.name }}</option>
+
+                                    </select>
+                                </ng-container>
+
+                                <ng-container *ngIf="!showConceptTable">
+                                    <div class="col-12 text-center mt-2">
+                                        <div class="fa-4x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </th>
+
+                            <!-- quantiy -->
+                            <th width="8%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <input class="form-control form-control-input size-cost-select size-number" style="width:6rem;" id="quantity" formControlName="quantity" value="0" min="1" type="number" placeholder="0" [ngClass]="{'opacity-cost-select': selected.length > 0}" />
+                            </th>
+
+                            <!-- import -->
+                            <th width="11%" style="padding-right: 10px !important; border-right: 1px solid #7F96E0 !important;">
+                                <input class="form-control form-control-input size-cost-select size-number" style="width:8rem;" id="import" formControlName="import" value="0" min="0" type="number" placeholder="0" [ngClass]="{'opacity-cost-select': selected.length > 0}" />
+                            </th>
+
+                            <th width="5%">
+                                <button type="button" class="btn btn-default-cost" [disabled]="selected.length > 0" [ngClass]="{'point': selected.length == 0, 'no-point': selected.length > 0}" (click)="fileAddImage.click()">
+                                    {{ 'COST.COST_VEHICLE.GOUP' | translate }}
+                                </button>
+                                <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChanceEvent($event)" />
+                            </th>
+
+                            <th width="11%" style="padding-right: 21px !important;">
+                                <button type="button" class="btn button-blue-coste" [disabled]="!costVehicleForm.valid || imageError != ''" (click)="submitCost()" [ngClass]="{'point': selected.length == 0, 'no-point': selected.length > 0}">
+                                    {{ 'COST.COST_VEHICLE.ADD_COST' | translate }}
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

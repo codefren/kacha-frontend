@@ -1,0 +1,53 @@
+<div id="modalForm">
+    <section class="card card-back">
+
+        <div class="col-md-12 col-12 text-right pt-2 ">
+            <i class="fas fa-times close-button point" (click)="closeModal(false)"></i>
+        </div>
+
+
+        <div class="container users-confirm-dialog-partners picture mt-5 h-100" style="padding-bottom: 4rem !important;" *ngIf="info">
+            <div class="row justify-content-center pb-5 mt-2">
+
+                <div class="col-12 text-center">
+                    <label class="title" for="title">{{ 'USERS.INCIDENT_DETAIL' | translate }}</label>
+
+                </div>
+
+                <div class="row w-100 mt-3 pb-1 justify-content-center">
+                    <div class="col-xl-5 col-lg-5 col-md-12 col-12 text-xl-right text-lg-right text-center ">
+                        <label class="Label-date-hour" for="date">
+                            <b>{{ 'NOTIFICATIONS.DETAILS.INCIDENT_DATE' |translate }}</b>: {{formatDate(info.created_at)}}
+                        </label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-12 text-xl-left text-lg-left text-center">
+                        <label class="Label-date-hour" for="hour">
+                            <b>{{ 'NOTIFICATIONS.DETAILS.HOUR' |translate }}</b>: {{formaHour(info.created_at)}}
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="col-7 pl-5 ml-4">
+                    <h3 class="row subtitle-general mb-2 w-100">
+                    </h3>
+                </div>
+
+                <div class="row  size">
+
+                    <div class="col-12 text-center pb-0 pl-lg-3 pr-lg-3">
+                        <p class="details-incident mt-1"> {{ 'NOTIFICATIONS.DETAILS.WHAT_HAS_HAPPENED?' |translate }} </p>
+                        <p class="breakdownTypeDetail"> {{ info.breakdownTypeDetail.name}}.</p>
+
+
+                        <p class="details-incident"> {{ 'NOTIFICATIONS.DETAILS.OBSERVATIONS' |translate }} </p>
+
+                        <p class="breakdownTypeDetail"> {{ info.observations }}.</p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

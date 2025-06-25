@@ -1,0 +1,98 @@
+<div class="chat-setting">
+
+    <div class="card">
+
+        <div class="card-body p-xl-4">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox"  [checked]="companyPreferenceChat.allowChatSending"
+                                    (change)="changeCompanyPreferenceChat('allowChatSending', $event.target.checked)" />
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="title-toggle toogle-style"> {{ 'CHAT.SETTING.SEND_FINISHED_CHAT' | translate }} </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'CHAT.SETTING.SEND_FINISHED_CHAT_MESSAGE' | translate }} </p>
+                </div>
+            </div>
+
+            <ng-container *ngIf="companyPreferenceChat.allowChatSending">
+
+                <div class="row mt-3" *ngIf="sendData && sendData.length > 0">
+
+                    <div class="col-xl-4 col-12 col-md-4 col-sm-4">
+
+                        <label for="type" class="mb-2 ml-2 title-road "> {{ 'CHAT.SETTING.EMAIL' | translate }} </label>
+
+                    </div>
+
+                    <div class="col-xl col-2 p-xl-0">
+
+                        <label for="first" class="mb-2 title-road col-xl col-12 col-md-4 col-sm-4"> </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-1" *ngFor="let data of sendData; let i = index;" [ngClass]="{'pb-4': sendData.length >= 6 && i == (sendData.length - 1)}">
+
+                    <div class="col-xl-4 col-12 mt-1 pl-3 ml-2">
+
+                        <div class="form-group input-group">
+
+                            <input class="form-control form-control-input" type="text" [(ngModel)]="data.chatEmail" placeholder="Escribir..." (change)="changeConceptItem(data)" (input)="validateEmail(data.chatEmail)">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-xl col-12 p-xl-0">
+
+                        <div class="form-group input-group m-0 mt-1">
+
+                            <button type="button" class="btn btn-icon btn-icon-gray" (click)="delete(data, i)">
+                
+                                <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+            
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <ng-container *ngIf="data.chatEmail && !validateEmail(data.chatEmail) && data.chatEmail.length > 0">
+
+                        <div class="col-xl-12 col-12 ml-2">
+                            <div class="form-group input-group m-0 mt-1">
+                                <p class="text-danger m-0">{{ 'PREFERENCES.NOTIFICATIONS.IT_SHOULD_BE_IN_THE_FORMAT' | translate }}.</p>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+                <div class="row pt-3 pb-3">
+                    <div class="col-12 ml-2">
+                        <a class="add-email point" (click)="addSendEmail()"> {{ 'CHAT.SETTING.ADD_EMAIL' | translate }} </a>
+                    </div>
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+</div>

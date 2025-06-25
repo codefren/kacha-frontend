@@ -1,0 +1,402 @@
+<div class="chat-list scroll-chat">
+
+    <div class="row">
+        <div class="col-12">
+
+            <!-- Header -->
+            <div class="card">
+
+                <div class="card-header pb-xl-3 pt-xl-3" style="display: block; height: 78px;">
+
+                    <div class="row">
+
+                        <!-- Buscar en listado de usuario -->
+
+                        <ng-container *ngIf="selectDateUser">
+
+                            <div class="pr-xl-0 col-12">
+
+                                <div class="d-flex justify-content-md-end justify-content-center pr-3">
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-append">
+
+                                            <span class="border-return-data-user input-group-text input-group-text-general table-append">
+
+                                                <img src="assets/icons/returnChat.svg" class="point" (click)="selectChatFilterDateUser(selectDateUser)">
+
+                                            </span>
+
+                                        </span>
+
+                                        <input type="text" class="form-control search-general
+                                            pull-right input-personalize-datatable border-search-data-user" placeholder="Buscar" style="max-width: initial;" (keyup)="searchChatUser($event.target.value)">
+
+                                        <span class="input-group-append">
+
+                                            <span class="input-group-text input-group-text-general table-append">
+
+                                                <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+
+                                            </span>
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </ng-container>
+
+                        <!-- Buscar en listado chat -->
+
+                        <ng-container *ngIf="!selectDateUser">
+
+                            <div class="pr-xl-0 col-xl-8 col-8">
+
+                                <div class="d-flex justify-content-md-end justify-content-center">
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control search-general
+                                            pull-right input-personalize-datatable" placeholder="Buscar" (keyup)="filterUser($event.target.value)" style="max-width: initial;">
+
+                                        <span class="input-group-append">
+
+                                            <span class="input-group-text input-group-text-general table-append">
+
+                                                <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+
+                                            </span>
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-4 col-4">
+
+                                <div class="row">
+
+                                    <div class="col-4 col-xl-4 point d-flex text-center justify-content-center">
+
+                                        <img class="ml-xl-3 mr-0 img-filter-date" src="assets/icons/filterDate.svg" [ngClass]="{'opacity-img-user-data': selectFilter}" (click)="selectChatFilterDateUser(selectDateUser)" *ngIf="!selectDateUser">
+
+                                    </div>
+
+                                    <div class="col-4 col-xl-4 point d-flex text-center justify-content-center">
+
+                                        <img src="assets/icons/chatBuscar.svg" class="ml-xl-1" (click)="selectChatFilter(selectFilter)" *ngIf="!selectFilter && !selectDateUser">
+
+                                        <img src="assets/icons/chatBuscarGris.svg" class="ml-xl-1" (click)="selectChatFilter(selectFilter)" *ngIf="selectFilter && !selectDateUser">
+
+                                    </div>
+
+                                    <div class="col-xl-4 col-4 point d-flex text-center justify-content-center">
+
+                                        <div class="d-flex flex-row align-items-center justify-content-end">
+
+                                            <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="assets/icons/point.svg">
+                                            </button>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                                <a class="dropdown-item drop-title point" (click)="openSetting()">
+
+                                                    <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                                                </a>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </ng-container>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Listado Chat -->
+            <ng-container *ngIf="!selectFilter && !selectDateUser">
+
+                <div class="card m-0 overflow-scroos">
+                    <div class="card-footer pt-xl-4 point" style="display: block;" *ngFor="let chat of chatFilter; trackBy:trackByItems" [ngClass]="{'background-selecter': selectTap === chat._id}" (click)="changeChat(chat)">
+
+                        <div class="d-flex">
+
+                            <ng-container *ngIf="!getUserImgValidate(chat)">
+
+                                <figure class="profile-picture mb-1 mr-3">
+
+                                    <div class="rows">
+
+                                        <div>
+
+                                            <span class="title-name-chat" [attr.color]="getUserColor(chat)" [ngClass]="{'color-iten-name-close': chat.status ==='close'}">
+
+                                                {{ getUserTo(chat) }}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </figure>
+
+                            </ng-container>
+
+
+                            <ng-container *ngIf="getUserImgValidate(chat)">
+
+                                <figure class="profile-picture mb-0 mr-3">
+
+                                    <div class="rows">
+
+                                        <div class="name-chat name-chat-fin">
+
+                                            <img class="img-avatar-size" [ngClass]="{'disabled-img': chat.status ==='close'}" [src]="'assets/images/pages/users/avatars/'+getUserImg(chat)">
+
+                                        </div>
+
+                                    </div>
+
+                                </figure>
+
+                            </ng-container>
+
+
+                            <div class="chat-width mt-2">
+
+                                <ng-container *ngIf="chat.status === 'new' || chat.status === 'request' || getUserMe(chat) || chat.status === 'reject' ||  (chat.status === 'close' && chat.users.length === 1)">
+
+                                    <label class="text-left name-list point" [ngClass]="{'name-list-fin': chat.status ==='close'}">{{ getUserTo(chat) }}</label>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="(chat.status === 'close' || chat.status === 'open') && chat.users.length === 2 && !getUserMe(chat)">
+
+                                    <label class="text-left name-list point" [ngClass]="{'name-list-fin': chat.status ==='close'}">{{ getUserThird(chat) }}</label>
+
+                                </ng-container>
+
+                                <label class="float-right hour point" [ngClass]="{'hour-fin': chat.status ==='close'}" *ngIf="lastMessage(chat)">{{ diffHours(lastMessage(chat).datetime) >= 1 ? (lastMessage(chat).datetime | date:"dd/MM/yyyy") : (lastMessage(chat).datetime | date:"HH:mm") }}</label>
+
+                                <ng-container *ngIf="lastMessage(chat) && !lastMessage(chat).urlChatImage">
+                                    <p class="detail point m-0" [title]="lastMessage(chat).text" [ngClass]="{'detail-fin': chat.status ==='close'}" *ngIf="lastMessage(chat)">{{ lastMessage(chat).text }} </p>
+                                </ng-container>
+
+                                <ng-container *ngIf="lastMessage(chat) && lastMessage(chat).urlChatImage">
+                                    <p class="detail point m-0" [title]="lastMessage(chat).text" [ngClass]="{'detail-fin': chat.status ==='close'}"> <img class="img-archive" src="assets/icons/adjunt.svg"> Archivo</p>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+
+            <!-- Filtros -->
+            <ng-container *ngIf="selectFilter && !selectDateUser">
+
+                <div class="card m-1">
+
+                    <!-- Filtro por fecha -->
+                    <div class="card-footer pt-xl-4 pb-xl-4 point" style="display: block;">
+
+                        <div class="row">
+
+                            <div class="col-12 col-xl-12 pb-2">
+                                <label class="title-chat" for=""> {{'CHAT.FILTER_DATE' | translate}} </label>
+                            </div>
+
+                            <div class="col-7 col-xl-7 col-sm-7 mb-1">
+
+                                <div class="dp-hidden position-absolute">
+
+                                    <div class="input-group">
+
+                                        <input name="datepicker" class="form-control input-size date1 point" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                            tabindex="-1" />
+
+                                        <ng-template #t let-date let-focused="focused">
+
+                                            <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                {{ date.day }}
+                                            </span>
+
+                                        </ng-template>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="input-group">
+
+                                    <input #dpFromDate class="form-control form-control-date" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate) + ' - ' +formatter.format(toDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)" />
+
+                                    <button class="btn btn-calendar calendar" (click)="datepicker.toggle()" type="button">
+
+                                        <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-4 col-xl-4 col-sm-4 mb-1 pl-xl-0">
+
+                                <button class="btn btn-default" type="button" (click)="applyFilter(filter)">{{'GENERAL.SEARCH' | translate}}</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Filtro por estados -->
+                    <div class="card-footer pt-xl-4 pb-xl-4 point" style="display: block;">
+
+                        <div class="row">
+                            <div class="col-12 col-xl-12 pb-2">
+                                <label class="title-chat" for=""> {{'CHAT.FILTER_STATES' | translate}} </label>
+                            </div>
+
+                            <div class="col-xl-4 col-12 pl-xl-3 p-xl-0">
+                                <div class="border-special mb-1">
+                                    <div class="row pl-4 pt-2 pb-0">
+                                        <div class="round round-little round-new-form ml-0">
+                                            <input type="radio" id="close" value="close" name="status" [checked]="filter.values.status === 'close'" style="height: 30px !important;" (change)="changeFilterGeneral($event)" />
+                                            <label for="close"></label>
+                                        </div>
+                                        <label for="close" style="margin-left: 1.3rem; margin-top: 0.3rem;" class="point title-radio">
+                                            Finalizados
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12 pl-xl-3 p-xl-0">
+                                <div class="border-special mb-1">
+                                    <div class="row pl-4 pt-2 pb-0">
+                                        <div class="round round-little round-new-form ml-0">
+                                            <input type="radio" id="open" value="open" name="status" [checked]="filter.values.status === 'open'" style="height: 30px !important;" (change)="changeFilterGeneral($event)" />
+                                            <label for="open"></label>
+                                        </div>
+                                        <label for="open" style="margin-left: 1.3rem; margin-top: 0.3rem;" class="point title-radio">
+                                            Pendientes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <!-- Filtro por usuario -->
+                    <div class="card-footer pt-xl-4 pb-xl-4 point" style="display: block;">
+
+                        <div class="row">
+                            <div class="col-12 col-xl-12 pb-2">
+                                <label class="title-chat" for=""> {{'CHAT.FILTER_USERS' | translate}} </label>
+                            </div>
+
+                            <div class="col-12 col-xl-12 col-sm-12 mb-1">
+                                <select id="userId" name="userId" [value]="filter.values.userId" (change)="changeFilterGeneral($event)" class="form-control-select-chat size-select form-control form-control-select  select-search-user point">
+
+                                    <option value="" class="select_"> {{ 'GENERAL.SELECT_' | translate }} </option>
+
+                                    <option *ngFor="let user of userChatList" [value]="user.id" > {{ user.name }} {{ user.surname }} </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 text-left mt-4 position-absolute bottom-0">
+                                <a class="clear-filters point" (click)="clearSearch()">Limpiar filtro</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </ng-container>
+
+            <!-- Listado user -->
+            <ng-container *ngIf="selectDateUser">
+
+                <div class="card m-0 overflow-scroos overflow-scroos-user" *ngIf="userAgendFilter.length > 0">
+
+                    <ng-container *ngFor="let item of userAgendFilter; let i = index">
+
+                        <div class="card-header card-header-list-user" [ngClass]="{'border-top-card-multi': i > 0}">
+
+                            <p class="title-letter-filter text-capitalize" [ngClass]="{'mb-1':  i > 0 , 'mb-0' :  i === 0 }">{{ item.initial }}</p>
+
+                        </div>
+
+                        <ng-container *ngFor="let user of item.users">
+
+                            <div class="card-footer pt-xl-3 mb-xl-0 point pl-xl-2" style="display: block;" [ngClass]="{'background-selecter': selectTapDataUser === user.id}" *ngIf="!user.me" (click)="selectUserToChat(user)">
+
+                                <div class="d-flex">
+                                    <figure class="profile-picture mb-0 mr-3">
+                                        <div class="rows">
+                                            <div class="name-chat name-chat-fin">
+                                                <span class="title-name" *ngIf="user && !user.urlImage"></span>
+                                                <img class="img-avatar-size" *ngIf="user && user.urlImage" [src]="'assets/images/pages/users/avatars/'+user.urlImage">
+                                            </div>
+                                        </div>
+                                    </figure>
+
+                                    <div class="chat-width">
+                                        <label class="text-left name-list point text-capitalize"> {{ user.name }} {{ user.surname }}</label>
+
+                                        <p class="detail point mb-0">Chófer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </ng-container>
+
+                </div>
+
+                <div class="card m-0">
+                    <div class="card-footer pt-xl-3 mb-xl-0 pl-xl-2" style="display: block;">
+                        <div class="row">
+                            <div class="col-12 col-xl-12 contact">
+                                {{totalUser}}
+                                <span *ngIf="totalUser == 0 || totalUser == 1"> contacto </span>
+                                <span *ngIf="totalUser > 1"> contactos </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+
+        </div>
+    </div>
+
+</div>

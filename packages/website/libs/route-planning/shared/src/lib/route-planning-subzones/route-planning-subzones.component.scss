@@ -1,0 +1,68 @@
+.easyroute-route-planning-subzones {
+
+    background-color: #F2F2F2;
+    
+    h3 {
+
+        margin-top: 4px !important;
+        margin-bottom: 4px !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 15px;
+        display: flex;
+        align-items: center;
+    
+        color: #000000;
+    
+    }
+
+    mat-chip {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 15px;
+        align-items: center;
+
+        color: #000000;
+
+       
+
+        mat-icon {
+            opacity: 1;
+        }
+    }
+
+    
+}
+
+.notOptimized {
+    background-color: #DCDCDC !important;
+
+        mat-icon {
+            color: #BABABA !important;
+            opacity: 1;
+        }
+}
+
+.split-zones {
+    color: #000 !important;
+}
+
+.isOptimized {
+    background-color: #FFE9D6 !important;
+}
+
+
+.MatOptimized {
+    background-color: #FFD2A8 !important;
+
+    mat-chip {
+        mat-icon {
+            color: #FFAE64 !important;
+        }
+    }
+    
+}
+
+

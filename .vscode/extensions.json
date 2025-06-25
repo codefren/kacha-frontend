@@ -1,0 +1,29 @@
+{
+  "recommendations": [
+    "coenraads.bracket-pair-colorizer",
+    "kisstkondoros.vscode-codemetrics",
+    "alefragnani.bookmarks",
+    "codezombiech.gitignore",
+    "fatihacet.gitlab-workflow",
+    "eamodio.gitlens",
+    "davidanson.vscode-markdownlint",
+    "leizongmin.node-module-intellisense",
+    "eg2.vscode-npm-script",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "esbenp.prettier-vscode",
+    "wayou.vscode-todo-highlight",
+    "gruntfuggly.triggertaskonsave",
+    "eg2.tslint",
+    "redhat.vscode-yaml",
+    "mikestead.dotenv",
+    "mikael.angular-beastcode",
+    "angular.ng-template",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "codezombiech.gitignore",
+    "ecmel.vscode-html-css",
+    "zignd.html-css-class-completion",
+    "shinnn.stylelint"
+  ]
+}

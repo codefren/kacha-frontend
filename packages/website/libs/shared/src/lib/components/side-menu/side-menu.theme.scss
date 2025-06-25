@@ -1,0 +1,123 @@
+@import '~@angular/material/theming';
+
+@mixin set-icon-color($color) {
+    mat-icon {
+        color: mat-color($color, default-contrast);
+    }
+}
+
+@mixin set-styles($color) {
+    &[ng-reflect-active='true'] {
+        @include set-icon-color($color);
+        background-color: mat-color($color, 500);
+    }
+
+    &:not([ng-reflect-active='true']) {
+        mat-icon {
+            color: mat-color($color, '300-contrast');
+        }
+
+        &:hover {
+            background-color: mat-color($color, 400);
+
+            mat-icon {
+                color: mat-color($color, '400-contrast');
+            }
+        }
+    }
+}
+
+@mixin set-styles-background($color) {
+    &[ng-reflect-active='true'] {
+        //background-color: mat-color($app-foreground, text, $lighter-transparency);
+        background-color: mat-color($color, default-contrast);
+
+        mat-icon {
+            //color: mat-color($app-foreground);
+            color: mat-color($color, default-contrast);
+        }
+    }
+
+    &:not([ng-reflect-active='true']) {
+        mat-icon {
+            color: mat-color($color, '300-contrast');
+        }
+
+        &:hover {
+            background-color: mat-color($color, '400-contrast');
+
+            mat-icon {
+                color: mat-color($color, '400-contrast');
+            }
+        }
+    }
+}
+
+@mixin set-background-theme-color($color) {
+    background-color: mat-color($color, default-contrast);
+}
+
+@mixin side-menu-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    $app-foreground: map-get($theme, foreground);
+
+    $foreground-text: mat-color($app-foreground, text);
+
+    nav.app-side-menu[app-side-menu-theme] {
+        &.primary {
+            background-color: mat-color($primary, 300);
+        }
+
+        &.accent {
+            background-color: mat-color($accent, 300);
+        }
+
+        &.warn {
+            background-color: mat-color($warn, 300);
+        }
+
+        .mat-tab-links {
+            flex-direction: column;
+
+            a {
+                &.primary {
+                    @include set-styles-background($primary);
+                    @include set-styles($primary);
+                }
+
+                &.accent {
+                    @include set-styles-background($accent);
+                    @include set-styles($accent);
+                }
+
+                &.warn {
+                    @include set-styles-background($warn);
+                    @include set-styles($warn);
+                }
+            }
+
+            .vertical-ink-bar {
+                background-color: $foreground-text;
+
+                &.primary {
+                    @include set-background-theme-color($primary);
+                }
+
+                &.accent {
+                    @include set-background-theme-color($accent);
+                }
+
+                &.warn {
+                    @include set-background-theme-color($warn);
+                }
+            }
+
+            mat-ink-bar {
+                display: none;
+            }
+        }
+    }
+}

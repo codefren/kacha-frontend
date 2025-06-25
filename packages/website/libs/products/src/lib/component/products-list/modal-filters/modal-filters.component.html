@@ -1,0 +1,96 @@
+<div class="row mb-3 border-bottom">
+    <div class="col-3 text-center">
+        <h3 for="" class="ml-4 filter-title">Filtros</h3>
+    </div>
+    <div class="col-9 text-right pt-3 pr-4">
+        <button class="btn clear" (click)="closeDialog()"> <i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+
+<!-- Filtros -->
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'PRODUCTS_GENERAL.PRODUCT_FORM.CATEGORY' | translate }}</label>
+
+        <div class="text-center p-2" *ngIf="loading == 'loading'">
+            <div class="fa-3x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+        <div class="text-center p-2" *ngIf="loading == 'success' && category.length == 0">
+            <p class="text-center text-danger">{{ 'COMMERCIAL.DONT_EXIST_COMMERCIAL' | translate }}</p>
+        </div>
+        <div class="input-group hack-select" *ngIf="loading == 'success' && category.length > 0">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.categoryId" class="form-control letter-app" #categoryId id="categoryId">
+                <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                <option *ngFor="let categorylist of category" [value]="categorylist.id">
+                    {{ categorylist.name }}
+                </option>
+            </select>
+        </div>
+        <div *ngIf="loading == 'error'">
+            <p class="text-danger text-center pointer" (click)="getCategory()">
+                {{ 'GENERAL.THERE_WAS' | translate }} <ins>{{ 'GENERAL.HERE' | translate }}</ins>!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-around pb-1 mt-4 pl-3 pr-4" *ngIf="subCategories.length > 0">
+    <div class="col-12 mt-2 mt-sm-0 ml-3">
+        <label class="control-label col-especial m-0" for="orderDate">{{ 'PRODUCTS.SUB_CATEGORIES' | translate }}</label>
+
+        <div class="text-center p-2" *ngIf="loadingSubcategory == 'loading'">
+            <div class="fa-3x">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+        <div class="text-center p-2" *ngIf="loadingSubcategory == 'success' && subCategories.length == 0">
+            <p class="text-center text-danger">{{ 'COMMERCIAL.DONT_EXIST_COMMERCIAL' | translate }}</p>
+        </div>
+        <div class="input-group hack-select" *ngIf="loadingSubcategory == 'success' && subCategories.length > 0">
+            <select (change)="ChangeFilter($event)" [(ngModel)]="filter.subCategoryId" class="form-control letter-app" #subCategoryId id="subCategoryId">
+                <option value="">{{ 'GENERAL.SELECT' | translate }}</option>
+                <option *ngFor="let subCategorylist of subCategories" [value]="subCategorylist.id">
+                    {{ subCategorylist.name }}
+                </option>
+            </select>
+        </div>
+        <div *ngIf="loadingSubcategory == 'error'">
+            <p class="text-danger text-center pointer" (click)="getSubcategory()">
+                {{ 'GENERAL.THERE_WAS' | translate }} <ins>{{ 'GENERAL.HERE' | translate }}</ins>!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-around pb-4 mt-4 pl-3 pr-4">
+    <div class="col-12 mt-2 mt-sm-0 pr-0 ml-3">
+        <div class="switch">
+            <label class="font-general">
+                {{ 'GENERAL.IMAGE' | translate }}
+                <input
+                type="checkbox"
+                [checked]="filter.image"
+                [value]="filter.image"
+                (click)="ChangeFilter($event)"
+                id="image"
+                class="mr-4"
+                />
+                <span class="lever switch-col-primary ml-6 mr-0"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 offset-3 col-md-6 text-center mt-4">
+        <button class="btn btn-primary btn-block" (click)="closeDialog()">{{ 'GENERAL.ACCEPT' | translate }}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 text-left ml-4 position-absolute bottom-0">
+        <a (click)="clearSearch()">Limpiar filtro</a>
+    </div>
+</div>

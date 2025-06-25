@@ -1,0 +1,105 @@
+<div class="companies-table bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">{{ 'COMPANIES.NAME' | translate }}</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-10 text-center mt-4">
+                <button class="btn btn-secondary mt-sm-1 ml-sm-2 btn-large" title="{{ 'COMPANIES.ADD_COMPANIES' | translate }}" style="text-transform: initial;" routerLink="new/me/true" *ngIf="me">
+                    {{ 'COMPANIES.ADD_COMPANIES' | translate }}
+                </button>
+
+                <button class="btn btn-secondary mt-sm-1 ml-sm-2 btn-large" title=" {{ 'COMPANIES.ADD_COMPANIES' | translate }}" style="text-transform: initial;" routerLink="new" *ngIf="!me">
+                    {{ 'COMPANIES.ADD_COMPANIES' | translate }}
+                </button>
+
+            </div>
+        </div>
+
+        <!-- botones que estaba anteriores -->
+
+        <!-- end botones viejos -->
+    </div>
+    <div class="row justify-content-center">
+        <!-- "order" es una clase de bootstrap que permite reordenar las columnas -->
+        <div class="col-lg-6 col-12 pl-5 d-flex align-items-end order-last order-lg-first">
+            <div class="title-table" style="margin: 0">
+                {{ 'COMPANIES.NAME' | translate }}
+            </div>
+
+        </div>
+        <div class="col-lg-6 col-12 pr-sm-5 pr-0 mt-4 mt-lg-0 mb-2 mb-md-0 order-fist order-lg-last">
+            <div class="d-block text-lg-right text-center text-dark">
+                <b>
+                    {{ 'COMPANIES.COMPANY_USERS' | translate }}:
+                    {{ totalUsuariosSuscritos }}
+                </b>
+            </div>
+            <div class="d-block text-lg-right text-center text-dark">
+                <b>
+                    {{ 'COMPANIES.MONTHLY_FEE' | translate }}:
+                    {{ totalCuotaMensual + ' €' }}
+                </b>
+            </div>
+            <br />
+            <!-- <div class="row"></div> -->
+            <div class="d-flex w-100 flex-lg-row flex-column justify-content-center align-items-center justify-content-lg-end">
+                <div class="switch padding-toggle">
+                    <label>
+                        <input
+                            type="checkbox"
+                            [checked]="showSubscribeds"
+                            (change)="onChangeShowSubscribeds()"
+                        />
+                        <span class="lever switch-col-primary"></span>
+                        {{ 'GENERAL.SHOW_SUBSCRIBED' | translate }}
+                    </label>
+                </div>
+                <div class="switch pr-2">
+                    <label>
+                        <input
+                            type="checkbox"
+                            [checked]="showActive"
+                            (change)="onChangeShowActive()"
+                        />
+                        <span class="lever switch-col-primary"></span>
+                        {{ 'GENERAL.SHOW_ACTIVE' | translate }}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="table-content mt-3">
+        <table style="width: 100%;" class="table table-striped table-bordered table-responsive-lg mb-0" id="company" style="text-align: center">
+            <thead>
+                <tr>
+
+                    <th>{{ 'GENERAL.COMPANY' | translate }}</th>
+                    <th>{{ 'USERS.NATIONALID' | translate }}</th>
+                    <th>{{ 'GENERAL.STREET_ADDRESS' | translate }}</th>
+                    <th>{{ 'GENERAL.PROVINCE' | translate }}</th>
+                    <th>{{ 'GENERAL.POSTAL_CODE' | translate }}</th>
+                    <th>{{ 'COMPANIES.BILLING_EMAIL' | translate }}</th>
+                    <th>{{ 'COMPANIES.CREAT_AT' | translate }}</th>
+                    <th>{{ 'COMPANIES.CREATED_BY' | translate }}</th>
+                    <th>{{ 'COMPANIES.SUBCRIBED' | translate }}</th>
+                    <th>{{ 'COMPANIES.COMPANY_USERS' | translate }}</th>
+                    <th>{{ 'COMPANIES.MONTHLY_FEE' | translate }}</th>
+                    <th>{{ 'COMPANIES.IS_DEMO' | translate }}</th>
+                    <th>{{ 'COMPANIES.IS_ACTIVE' | translate }}</th>
+                    <!--  <th>{{ 'COMPANIES.AUTONOMOUS' | translate }}</th>
+                    <th>{{ 'GENERAL.PROMOTION_COVID' | translate }}</th> -->
+                    <th>{{ 'USERS.LAST_CONNECTION' | translate }}</th>
+                    <th>{{ 'USERS.LAST_CONNECTION_IP' | translate }}</th>
+                    <th>{{ 'COMPANIES.PLAN' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

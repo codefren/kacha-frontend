@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <span class="exclamacion">¡Vaya!</span>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <span class="first-text">
+                Has llegado al <u>límite de usuarios disponibles</u> en tu plan.
+            </span>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-8 offset-2 text-center">
+            <span class="second-text">
+                Ponte en contacto con el soporte de Polpoo para aumentar tu número de usuarios
+            </span>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-5 offset-1 text-center">
+            <button class="btn btn-cancel block" (click)="close(false)">Cancelar</button>
+        </div>
+        <div class="col-5  text-center">
+            <button class="btn btn-primary block" (click)="close(true)">Mejora tu plan</button>
+        </div>
+    </div>
+</div>

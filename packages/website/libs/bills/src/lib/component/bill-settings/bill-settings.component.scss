@@ -1,0 +1,73 @@
+.position-content {
+    position: fixed;
+}
+
+.bill-settings {
+    .title-left-sheet {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 26px;
+        /* identical to box height */
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #363740;
+    }
+    .border-col {
+        border-right: 2px solid #D4D8E3;
+    }
+    .img-Returns {
+        vertical-align: baseline;
+    }
+    .retursList {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #3B4FFF;
+    }
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        background-color: rgba(255, 255, 255, 0);
+        border: 1px solid rgba(0, 0, 0, 0);
+    }
+    .title-selct {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+        letter-spacing: 0.2px;
+        color: #3B4FFF;
+    }
+    .title-no-select {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .background-selecter {
+        background: #FFFFFF;
+        border-radius: 5px;
+    }
+    .btn-primary {
+        width: 90px;
+        height: 45px;
+        background: #24397C;
+        border-radius: 5px;
+    }
+    .vr {
+        border-right: 2px solid #D4D8E3;
+        height: 100%;
+        position: absolute;
+        margin-left: -3px;
+        top: 0;
+    }
+}

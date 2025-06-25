@@ -1,0 +1,69 @@
+{
+    "name": "@optimroute/export-integration",
+    "version": "1.0.0",
+    "description": "Optimroute export integration",
+    "main": "dist/src/main.js",
+    "scripts": {
+        "build": "tsc -p tsconfig.build.json && cp tsconfig.json dist/",
+        "postinstall": "npm run build",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "start": "node index.js",
+        "start:dev": "nodemon | pino-pretty -t 'dd/mm HH:MM:ss.l'",
+        "start:debug": "nodemon --config nodemon-debug.json | pino-pretty -t 'dd/mm HH:MM:ss.l'",
+        "start:prod": "node dist/src/main.js",
+        "lint": "tslint -p tsconfig.json",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "clean": "rm -rf dist"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/jest": "^24.0.13",
+        "@types/lodash": "^4.14.133",
+        "@types/node": "^12.0.4",
+        "@types/pino": "^5.8.7",
+        "jest": "^24.8.0",
+        "nodemon": "^1.19.1",
+        "pino-pretty": "^3.1.0",
+        "prettier": "^1.17.1",
+        "ts-jest": "^24.0.2",
+        "ts-loader": "^6.0.2",
+        "ts-node": "^8.2.0",
+        "tslint": "^5.17.0",
+        "typescript": "^3.5.1"
+    },
+    "dependencies": {
+        "lodash": "^4.17.11",
+        "pino": "^5.12.6",
+        "tsconfig-paths": "^3.8.0"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "./",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node",
+        "modulePaths": [
+            "<rootDir>"
+        ],
+        "coverageReporters": [
+            "json",
+            "lcov"
+        ],
+        "globals": {
+            "NODE_ENV": "test"
+        },
+        "bail": true
+    }
+}

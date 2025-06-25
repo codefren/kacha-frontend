@@ -1,0 +1,40 @@
+<div
+    class="easyroute-route-planning-recalculate-route"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="15px"
+>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+        <span class="recalculate-route-text"> Recalculate from position: </span>
+        <div>
+            <mat-form-field>
+                <input
+                    #i
+                    matInput
+                    type="number"
+                    [min]="1"
+                    [max]="maxDeliveryPoints"
+                    [value]="index"
+                    [formControl]="deliveryPointsFormControl"
+                    (change)="onChange(i.value)"
+                    [errorStateMatcher]="matcher"
+                />
+                <mat-error *ngIf="deliveryPointsFormControl.hasError('max')">
+                    Maximum value is {{ maxDeliveryPoints }}
+                </mat-error>
+                <mat-error *ngIf="deliveryPointsFormControl.hasError('min')">
+                    Minimum value is 1
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <button
+        mat-flat-button
+        color="primary"
+        appButtonIcon="restore"
+        (click)="recalculateRoute()"
+        [disabled]="isDisabled()"
+    >
+        Recalculate
+    </button>
+</div>

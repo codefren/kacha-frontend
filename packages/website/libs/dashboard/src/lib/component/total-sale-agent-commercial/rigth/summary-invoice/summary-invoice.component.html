@@ -1,0 +1,48 @@
+<div class="easyroute-summary-invoice">
+
+    <div class="row text-center mt-3 mb-1">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <ng-container *ngIf="!show">
+                        <div class="col-12 mt-5">
+                            <div class="fa-5x mb-2">
+
+                                <i class="fas fa-circle-notch fa-spin"></i>
+
+                            </div>
+                        </div>
+
+
+                    </ng-container>
+
+                    <div class="row" *ngIf="show && data && data.length > 0">
+                        <div class="col-6 text-left">
+                            <label class="title-grafis">{{ 'DASHBOARD.TOTAL_SALE_AGENT_COMMERCIAL.INVOICED' | translate }}</label>
+                        </div>
+                        <div class="col-6 col-6 text-right">
+                            <img src="assets/icons/legend.svg">
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-5 pt-5 pb-5 mb-5" *ngIf="show && data && data.length === 0">
+                        <h1> No datos por mostrar </h1>
+                    </div>
+
+                    <div class="chart chart-md" id="morrisStacked"></div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

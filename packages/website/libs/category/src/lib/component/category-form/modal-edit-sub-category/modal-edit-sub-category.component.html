@@ -1,0 +1,74 @@
+<div id="modalForm">
+    <div class="col-md-12 col-12 text-right pt-2 ">
+        <i class="fas fa-times close-button point" (click)="closeDialog(false)"></i>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                <p class="title">{{ 'CONFIGURATIONS.CATEGORY.EDIT_ASSIGNED_SUBCATEGORY' | translate }}</p>
+            </div>
+        </div>
+
+        <form [formGroup]="subCategoryForm">
+            <div class="row justify-content-center mt-4">
+                <div class="col-10">
+                    <div class="form-group row">
+                        <div class="col-sm-5 pl-0">
+                            <div class="form-row form-group" [ngClass]="{ 'has-danger': subCategoryForm.controls['code'].invalid && (subCategoryForm.controls['code'].dirty || subCategoryForm.controls['code'].touched) }">
+                                <label for="code">
+                                {{ 'CONFIGURATIONS.MEASURE.CODE' | translate }}
+                            <span class="asterisco">* </span>
+                            </label>
+                                <input type="text" id="code" class="form-control" autocomplete="off" formControlName="code" [ngClass]="{'form-control-danger': subCategoryForm.controls['code'].invalid && (subCategoryForm.controls['code'].dirty || subCategoryForm.controls['code'].touched)}"
+                                />
+
+                                <ng-container *ngFor="let validation of sub_category_messages.code">
+                                    <small class="form-control-feedback text-danger" *ngIf="subCategoryForm.get('code').hasError(validation.type) && (subCategoryForm.get('code').dirty || subCategoryForm.get('code').touched)
+                            ">
+                                {{ validation.message }}
+                            </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5 offset-md-2 pl-0">
+                            <div class="form-row form-group" [ngClass]="{ 'has-danger': subCategoryForm.controls['name'].invalid && (subCategoryForm.controls['name'].dirty || subCategoryForm.controls['name'].touched) }">
+                                <label for="name">
+                                    {{ 'CONFIGURATIONS.MEASURE.NAME' | translate }}
+                                    <span class="asterisco">* </span>
+                                </label>
+                                <input type="text" id="name" class="form-control" autocomplete="off" formControlName="name" [ngClass]="{'form-control-danger': subCategoryForm.controls['name'].invalid && (subCategoryForm.controls['name'].dirty || subCategoryForm.controls['name'].touched)}"
+                                />
+                                <ng-container *ngFor="let validation of sub_category_messages.name">
+                                    <small class="form-control-feedback text-danger" *ngIf="subCategoryForm.get('name').hasError(validation.type) && (subCategoryForm.get('name').dirty || subCategoryForm.get('name').touched)
+                                        ">
+                                            {{ validation.message }}
+                                    </small>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn btn-cancel size-btn-modal" (click)="closeDialog([false, null])">
+                            {{ 'GENERAL.CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-6 text-center">
+                        <button class="btn btn-primary size-btn-modal" [disabled]="!subCategoryForm.valid" (click)="updateSubCategory()">
+                            {{ 'GENERAL.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

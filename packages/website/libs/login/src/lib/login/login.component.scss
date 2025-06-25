@@ -1,0 +1,244 @@
+.easyroute-login {
+    //  background-color: #242E5A;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("/assets/icons/fondo1.png") !important;
+    background-color: rgba(34, 42, 113, 0.3);
+    overflow-x: hidden;
+    .logo-fondo {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("/assets/icons/fondoLogin.svg") !important;
+        background-color: rgba(34, 42, 113, 0.3);
+    }
+    i {
+        color: #9FA2B4;
+    }
+    .slogan {
+        color: #F2982C;
+        font-size: 24px;
+    }
+    .sub-slogan {
+        font-size: 20px;
+    }
+    .form-label {
+        color: #24305A;
+        margin-bottom: 0rem;
+        font-size: 14px;
+    }
+    .h-100 {
+        height: 100vh;
+    }
+    .is-new {
+        color: #24305A;
+    }
+    .btn-primary {
+        background-color: #3B4FFF;
+        border-color: #3B4FFF #3B4FFF #3B4FFF;
+        color: #ffffff;
+    }
+    a {
+        cursor: pointer;
+        // color: #24305A;
+        // text-decoration: underline;
+    }
+    a:hover {
+        cursor: pointer;
+        color: #FF8D24;
+    }
+    .login {
+        font-size: 24px;
+    }
+    label {
+        color: #24305A;
+    }
+    .label-form {
+        font-style: normal;
+        font-weight: 700;
+        line-height: 14px;
+        letter-spacing: 0.3px;
+        color: #9899AA !important;
+    }
+    .input-group-text {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: 0.375rem 0.75rem;
+        margin-bottom: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        text-align: center;
+        white-space: nowrap;
+        background-color: #F6F6FA;
+        /* border: 1px solid #ced4da; */
+        border-radius: 0.25rem;
+        border-bottom: 1px solid #EFF0F6;
+        border-top: 1px solid #EFF0F6;
+        border-right: 1px solid #EFF0F6;
+    }
+    .input-group-text {
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+    }
+    .no-border {
+        border-right: 1px solid #F6F6FA !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+    }
+    .login-register {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100%;
+        width: 100%;
+        padding: 0 0;
+        position: fixed;
+    }
+    .form-control {
+        font-size: 18px !important;
+        height: 40px;
+        border: 1px solid #EFF0F6;
+        border-radius: 5px;
+        background-color: #F6F6FA;
+    }
+    .logo {
+        max-width: 50px;
+    }
+    .padding {
+        padding-left: 40%;
+        padding-right: 40%;
+        margin-top: 15vh;
+        margin-bottom: 15vh;
+    }
+    input {
+        border-radius: 5px !important;
+    }
+    .button-signin {
+        box-shadow: none !important;
+        margin-top: 10vh;
+        border-radius: 5px;
+    }
+    .btn-outline-dark:hover {
+        color: white !important;
+    }
+    .btn-outline-dark {
+        width: 93%;
+    }
+    h2 {
+        color: #24305A !important;
+        margin-bottom: 4vh;
+    }
+    h3 {
+        color: white;
+    }
+    hr {
+        /* background-color: #24305A; */
+        background-color: #3B4FFF;
+        background-image: none !important;
+    }
+    span {
+        font-size: 1.3em;
+    }
+    .form-control:focus {
+        border-color: #fc792a !important;
+        box-shadow: none !important;
+        .input-group-text:focus {
+            box-shadow: none !important;
+            border-bottom: 1px solid #fc792a;
+            border-top: 1px solid #fc792a;
+            border-right: 1px solid #fc792a;
+        }
+    }
+    .direction {
+        align-self: flex-end;
+    }
+    .inverse-button {
+        background-color: transparent !important;
+        color: #e8962a !important;
+        border-color: #e8962a;
+        border-radius: 4px;
+    }
+    .inverse-button:hover {
+        background-color: #e8962a !important;
+        color: white !important;
+        border-color: #e8962a
+    }
+    .btn-secondary {
+        // devuelve el texto a la posicion inicial sin afectar los demas
+        text-transform: initial !important;
+        font-size: 14.4px !important;
+    }
+    .title-login {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-align: center;
+        letter-spacing: 0.3px;
+        color: #363740;
+    }
+    .sub-title-login {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        /* identical to box height, or 133% */
+        text-align: center;
+        letter-spacing: 0.3px;
+        /* grayscale / gray */
+        color: #9FA2B4;
+    }
+    .forgette {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+        letter-spacing: 0.1px;
+        color: #9FA2B4;
+    }
+    .btn-primary:active,
+    .btn-primary.active,
+    .show>.btn-primary.dropdown-toggle {
+        background-color: #3B4FFF !important;
+        border-color: #3B4FFF #3B4FFF #3B4FFF !important;
+        -webkit-box-shadow: 0 0 0 0.2rem #3B4FFF!important;
+        box-shadow: 0 0 0 0.2rem #3B4FFF !important;
+    }
+    /* form .input-group .form-control {
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        border-top-left-radius: 0px !important;
+    } */
+    // mobile
+    @media screen and ( min-width: 320px) and ( max-width: 768px) {
+        .padding {
+            padding-left: 20%;
+            padding-right: 20%;
+        }
+        .direction {
+            width: 100%;
+            align-self: flex-end;
+        }
+        .border-right {
+            border-right: 0 !important;
+        }
+    }
+    // ipad
+    @media screen and ( min-width: 768px) and ( max-width: 1024px) {
+        .padding {
+            padding-left: 30%;
+            padding-right: 30%;
+        }
+    }
+}

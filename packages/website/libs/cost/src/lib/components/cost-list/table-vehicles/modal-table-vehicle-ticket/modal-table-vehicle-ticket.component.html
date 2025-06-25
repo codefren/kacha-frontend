@@ -1,0 +1,30 @@
+<div class="modal-filter">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'COST.COST_VEHICLE.ATTACH' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col text-center">
+                <img [src]="data" alt="Ticket" class="img-flud ticket">
+            </div>
+
+        </div>
+    </div>
+
+</div>

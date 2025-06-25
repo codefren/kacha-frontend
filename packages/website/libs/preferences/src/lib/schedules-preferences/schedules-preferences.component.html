@@ -1,0 +1,71 @@
+<div class="easyroute-schecules-preferences">
+
+    <p class="card-title">
+        {{ 'FRANCHISE.DELIVERY_TIMES' | translate }}
+    </p>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                        <div class="col-md-10 col-7 p-0">
+                            <span>{{ 'PREFERENCES.SCHEDULES.DELIVERY_SCHEDULES' | translate }}</span>
+                        </div>
+                        <div class="col-md-2 col-5 p-0 text-sm-right">
+                            <button class="btn btn-add card-button mt-2 mt-sm-0" type="button" (click)="addSchedule()" title="{{ 'GENERAL.ADD_DELIVERY' | translate }}">
+                                        <label>{{ 'PREFERENCES.SCHEDULES.ADD_SCHEDULE' | translate }}</label>
+                                    </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-responsive  table-responsive-lg mb-0" *ngIf="deliverySchedules.length > 0">
+                        <thead class="thead">
+                            <tr>
+                                <th style="width:30%;" class="text-center">{{ 'FRANCHISE.SCHEDULE' | translate }}</th>
+                                <th style="width:20%;" class="text-center">{{ 'FRANCHISE.HOURS_FROM' | translate }}</th>
+                                <th style="width:20%;" class="text-center">{{ 'FRANCHISE.HOURS_UNTIL' | translate }}</th>
+                                <th style="width:10%;" class="text-center">{{ 'FRANCHISE.SHOW_IN_APP' | translate }}</th>
+                                <th class="text-center">{{'FRANCHISE.DELETE_SHEDULE' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let schedule of deliverySchedules; let i = index trackBy:deliveryScheduleId" [ngClass]="{
+                                            'bg-white': i % 2 == 0,
+                                            'bg-gray': i % 2 > 0
+                                        }">
+                                <td style="width:30%;" data-title="name">
+                                    <input #input [ngClass]="{'error-schedule': !validateKeyUpName( input.value ?  input.value : '') }" class="form-control text-center" [value]="schedule?.name" type="text" (change)="handleChange( 'name', $event.target.value, schedule )" />
+                                </td>
+                                <td style="width:20%;">
+                                    <input #inputScheduleStart class="form-control text-center" [ngClass]="{'error-schedule': !validateTimeStart( schedule ) }" type="time" [value]="schedule.scheduleStart | dayTime" (focusout)="handleChange( 'scheduleStart', $event.target.value, schedule )"
+                                    />
+                                </td>
+                                <td style="width:20%;">
+                                    <input #inputScheduleEnd class="form-control text-center" [ngClass]="{'error-schedule': !validateTimeEnd( schedule ) }" type="time" [value]="schedule.scheduleEnd | dayTime" (focusout)="handleChange( 'scheduleEnd', $event.target.value, schedule )" />
+                                </td>
+                                <td style="width:100%;" class="row justify-content-center">
+                                    <div class="round">
+                                        <input type="checkbox" [id]="'isActiveSchedule' + schedule.id" [checked]="schedule.isActive" (change)="activeDeliverySchedule( $event.target.checked, schedule )" />
+                                        <label [for]="'isActiveSchedule' + schedule.id"></label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="editar m-1">
+                                        <img class="icons-datatable point" title="{{'FRANCHISE.DELETE_SHEDULE' | translate}}" (click)="confirmDeleteSchedule(schedule,i)" src="assets/icons/optimmanage/delete-blue.svg">
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <h5 class="text-center data-avalilable" *ngIf="deliverySchedules.length == 0">
+                        {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,179 @@
+.report-component {
+    .btn-secondary {
+        height: 45px;
+        border-radius: 5px
+    }
+    .page-title {
+        span {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 26px;
+            align-items: center;
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+    }
+    img {
+        vertical-align: sub;
+    }
+    .card {
+        border-radius: 5px !important;
+        .card-body {
+            border-radius: 0px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+    }
+    .card-body-img {
+        border-radius: 5px !important;
+    }
+    .card-img {
+        background: #DEE0E8;
+        border-radius: 5px;
+    }
+    .card-h {
+        background: #ffffff;
+        border-radius: 5px 5px 0 0 !important;
+        border-bottom: 1px solid #D9DBE3;
+        position: relative;
+        span {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.2px;
+            color: #363740;
+        }
+    }
+    .text-content {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .open-report {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #29CC97;
+    }
+    //hover
+    .size-hover1 {
+        width: 100% !important;
+    }
+    .show-background {
+        background: transparent;
+        position: absolute;
+        border-radius: 5px;
+        top: 0;
+        left: 0;
+        img {
+            display: none;
+        }
+        span {
+            color: transparent;
+        }
+    }
+    .show-background:hover {
+        background: rgba(54, 55, 64, 0.5);
+        transition: 0.3s ease background;
+        img {
+            display: block;
+        }
+        span {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            align-items: center;
+            letter-spacing: 0.2px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+    }
+    // posion z-index
+    .position-card {
+        z-index: 999;
+        margin-top: -215px;
+    }
+    //size donde esta la imagen
+    .size-card-img {
+        width: 337px;
+        height: 418px; //382px;
+    }
+    // end  //size donde esta la imagen
+    .size-card-no-img {
+        background: #ffffff;
+        width: 337px;
+        height: 210px;
+        flex-shrink: 0;
+    }
+    .img-lock {
+        float: right;
+    }
+    .img-color {
+        background: #ffffff;
+        padding: 10px;
+    }
+    .grises {
+        /* Versión SVG para IE10, Chrome 17, FF3.5, Safari 5.2 and Opera 11.6 */
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+        /* Para cuando es estándar funcione en todos */
+        filter: Gray();
+        /* IE4-8 and 9 */
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+    .title-no-module {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #9899AA;
+    }
+    .drop-title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #000000;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: none !important;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .dropdown-item.active,
+    .dropdown-item:active {
+        background-color: #f8f9fa;
+    }
+    .btn-group .dropdown-menu.show {
+        width: 14.5rem;
+        box-shadow: 2px 2px 10px rgb(0 0 0 / 10%);
+        border-radius: 5px;
+        border: 0px solid rgba(0, 0, 0, 0.15);
+    }
+}

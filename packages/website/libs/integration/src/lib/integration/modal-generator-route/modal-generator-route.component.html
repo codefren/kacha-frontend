@@ -1,0 +1,157 @@
+<div class="easyroute-modal-integration">
+    <section class="card p-2">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right">
+                <i class="fas fa-times close-button" (click)="closeDialog(false)"></i>
+            </div>
+            <div class="col-8 text-center">
+                <p class="title">{{ 'INTEGRATION.GENERATE_ROUTE_PLANNING' | translate }}</p>
+                <!--  <hr class="line-primary" /> -->
+            </div>
+        </div>
+
+        <div class="card-body p-lg-5 p-3">
+            <div class="container">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-7 col-sm-4 p-0 mb-1 offset-md-1">
+                        <div class="custom-control-inline ">
+                            <div class="round">
+                                <input type="radio" id="deliveryPointType" name="typeRoute" [(ngModel)]="type" [value]="1" (ngModelChange)="changeTypeOption($event)" />
+                                <label for="deliveryPointType" #gen1></label>
+                            </div>
+                            <label (click)="gen1.click()" class="ml-4 control-label">
+                          {{ 'DELIVERY_POINTS.NAME' | translate }}
+                        </label>
+                        </div>
+                    </div>
+
+                    <ng-container *ngIf="hideMultidelegation()">
+
+                        <div class="col-5 col-sm-3 p-0 mb-1" [ngClass]="{ 'pl-5': type === 2 }" *ngIf="profile && profile.company &&  profile.company.companyProfileTypeId >= 3">
+                            <div class="custom-control-inline">
+                                <div class="round">
+                                    <input type="radio" id="OrderType" name="typeRoute" [(ngModel)]="type" [value]="2" (ngModelChange)="changeTypeOption($event)" />
+                                    <label for="OrderType" #gen2></label>
+                                </div>
+                                <label (click)="gen2.click()" class="ml-4 control-label">{{ 'ORDERS.ORDERS' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 input-group p-0 mb-1" *ngIf="type === 2">
+                            <input class="form-control adapt" placeholder="{{ 'INTEGRATION.DATE_SESSION' | translate }}" autocomplete="off" [(ngModel)]="dateOrder" ngbDatepicker #d="ngbDatepicker" [minDate]="dateNow" [startDate]="dateNow" readonly (dateSelect)="changeTypeOption()"
+                            />
+                            <div class="input-group-append">
+                                <button class="btn btn-calendar calendar" (click)="d.toggle()" type="button">
+                                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                                </button>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+                <div class="row mt-2" *ngIf="type === 2">
+                    <div class="col-12 text-center" *ngIf="dataOrder && dataOrder.length === 0">
+                        {{ 'INTEGRATION.NO_HAVE_ORDERS' | translate }}
+                    </div>
+                    <div class="col-12 text-center" *ngIf="dataOrder && dataOrder.length > 0">
+                        <h3 class="text-left subtitle-general mt-5">
+                            {{ 'INTEGRATION.SUMMARY_ORDER' | translate }}
+                        </h3>
+
+                        <div class="table-wrapper">
+                            <table class="table table-responsive-md  table-striped table-bordered mb-0 mt-5 mb-5 text-left">
+                                <thead>
+                                    <tr>
+                                        <th>Agente comercial</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of dataOrder">
+                                        <td>{{ item.name + ' ' + item.surname }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="form" *ngIf="
+                        form &&
+                        ((type === 2 && dataOrder && dataOrder.length > 0) || type === 1)
+                    ">
+                    <div class="mt-2 mb-2">
+                        <h3 class="subtitle-general mb-2 mt-2">
+                            {{ 'INTEGRATION.PLANNING_DATA' | translate }}
+                        </h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-2 mb-lg-0">
+                            <label class="control-label mb-0">
+                              {{ 'INTEGRATION.DATE_SESSION' | translate }}
+                              <span class="asterisco">* </span>
+                            </label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="{{
+                                        'INTEGRATION.DATE_SESSION' | translate
+                                    }}" autocomplete="off" formControlName="dateSession" ngbDatepicker #d="ngbDatepicker" [minDate]="dateNow" readonly />
+                                <div class="input-group-append">
+                                    <button class="btn btn-calendar calendar" (click)="d.toggle()" type="button">
+                                    <img class="icons-calendar point" src="assets/icons/optimmanage/calendar-outlines.svg" aria-hidden="true">
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-container *ngFor="let validation of integration_messages.dateSession">
+                                <small class="form-control-feedback text-danger" *ngIf="
+                                        form.get('dateSession').hasError(validation.type) &&
+                                        (form.get('dateSession').dirty ||
+                                            form.get('dateSession').touched)
+                                    ">
+                                    {{ validation.message }}
+                                </small>
+                            </ng-container>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-2 mb-lg-0">
+                            <label class="mb-0 control-label">
+                              {{ 'INTEGRATION.NAME' | translate }}
+                              <span class="asterisco">*</span>
+                            </label>
+                            <div class="form-group" [ngClass]="{ 'has-danger': form.controls['name'].invalid && ( form.controls['name'].dirty || form.controls['name'].touched) }">
+                                <input type="text" class="form-control" formControlName="name" />
+                                <ng-container *ngFor="let validation of integration_messages.name">
+                                    <small class="form-control-feedback text-danger" *ngIf="
+                                          form.get('name').hasError(validation.type) &&
+                                          (form.get('name').dirty || form.get('name').touched)
+                                      ">
+                                      {{ validation.message }}
+                                  </small>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 mb-2 mb-lg-0">
+                            <label class="mb-0 control-label">{{
+                                'INTEGRATION.DESCRIPTION' | translate
+                            }}</label>
+                            <textarea class="form-control" formArrayName="description" rows="2" id="textareaDefault"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer class="row justify-content-center pt-2 pb-4">
+            <button type="button" class="btn btn-cancel size-btn-modal mr-4" (click)="closeDialog(false)">{{ 'GENERAL.CANCEL' | translate }}</button>
+            <button class="btn btn-primary size-btn-modal" (click)="createRoute()" [disabled]="
+              (form && !form.valid) || (dataOrder && dataOrder.length === 0)
+            ">
+            {{ 'GENERAL.NEXT' | translate }}
+          </button>
+        </footer>
+    </section>
+</div>

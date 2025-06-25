@@ -1,0 +1,672 @@
+<div class="use-and-storage">
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <p class="title-client mb-4">Datos de clientes</p>
+
+                    <p class="sub-title-user-storage mb-2">Uso de datos almacenados</p>
+
+                    <p class="text-information-storage">Estos son los términos que tendrán persistencia, los que estén activos prevalecerá la información que nosotros tenemos almacenada, mientras que los que estén apagados obtendrán los datos que importemos de manera externa ya sea por
+                        API o por JSON/CSV.</p>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+
+                <!-- useDeliveryPointPersistedName -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="init_average" [checked]="(managementPreferences$ | async).useDeliveryPointPersistedName" (change)="toggleManagementPreference('useDeliveryPointPersistedName',$event.target.checked)" />
+
+                                <label for="init_average"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}" for="init_average" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.NAME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end useDeliveryPointPersistedName -->
+
+                <!-- useDeliveryPointPersistedAddress -->
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).useDeliveryPointPersistedAddress" (change)="toggleManagementPreference('useDeliveryPointPersistedAddress',$event.target.checked )" id="delivery-point-direction" />
+
+                                <label for="delivery-point-direction"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.DIRECTION' | translate }}" for="delivery-point-direction" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.DIRECTION' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end useDeliveryPointPersistedAddress -->
+
+                <!-- useDeliveryPointPersistedZoneId -->
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedZoneId" (change)="toggleManagementPreference('useDeliveryPointPersistedZoneId',$event.target.checked )" id="delivery-point-zoneId" />
+
+                                <label for="delivery-point-zoneId"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.ZONE' | translate }}" for="delivery-point-zoneId" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.ZONE' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end useDeliveryPointPersistedZoneId -->
+
+                <!-- useDeliveryPointPersistedDeliveryStart -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async).useDeliveryPointPersistedDeliveryStart" (change)="toggleManagementPreference('useDeliveryPointPersistedDeliveryStart',$event.target.checked)" id="delivery-point-opening-time" />
+
+                                <label for="delivery-point-opening-time"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.OPENING_TIME' | translate }}" for="delivery-point-opening-time" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.OPENING_TIME' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedDeliveryStart -->
+
+                <!-- useDeliveryPointPersistedScheduleEnd -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$ | async ).useDeliveryPointPersistedScheduleEnd" (change)="toggleManagementPreference('useDeliveryPointPersistedScheduleEnd',$event.target.checked)" id="delivery-point-closing-time" />
+
+                                <label for="delivery-point-closing-time"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.CLOSING_TIME' | translate }}" for="delivery-point-closing-time" class="label-check point">
+        
+                               {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.CLOSING_TIME' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedScheduleEnd -->
+
+                <!-- useDeliveryPointPersistedPopulation -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedPopulation" (change)="toggleManagementPreference('useDeliveryPointPersistedPopulation',$event.target.checked)" id="delivery-point-population" />
+
+                                <label for="delivery-point-population"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.POPULATION' | translate }}" for="delivery-point-population" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.POPULATION' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedPopulation -->
+
+                <!-- useDeliveryPointPersistedServiceTime -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedServiceTime" (change)="useDeliveryPointPersistedServiceTime('useDeliveryPointPersistedServiceTime',$event.target.checked)" id="delivery-point-service-time" />
+
+                                <label for="delivery-point-service-time"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.SERVICE_TIME' | translate }}" for="delivery-point-service-time" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.SERVICE_TIME' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedServiceTime -->
+
+                <!-- useDeliveryPointDeliveryZoneSpecification -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="data-persisted-specification" [checked]="(managementPreferences$| async).useDeliveryPointDeliveryZoneSpecification" (change)="toggleManagementPreference('useDeliveryPointDeliveryZoneSpecification',$event.target.checked)" />
+
+                                <label for="data-persisted-specification"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.ZONE_SPECIFICATION' | translate }}" for="data-persisted-specification" class="label-check point">
+        
+                                 {{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.ZONE_SPECIFICATION' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointDeliveryZoneSpecification -->
+
+                <!-- useDeliveryPointPersistedEmail -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedEmail" (change)="toggleManagementPreference('useDeliveryPointPersistedEmail', $event.target.checked)" id="delivery-point-email" />
+
+                                <label for="delivery-point-email"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.EMAIL' | translate }}" for="delivery-point-email" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.EMAIL' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end useDeliveryPointPersistedEmail -->
+
+                <!-- useDeliveryPointPersistedPhoneNumber -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedPhoneNumber" (change)="toggleManagementPreference('useDeliveryPointPersistedPhoneNumber',$event.target.checked)" id="delivery-point-phone" />
+
+                                <label for="delivery-point-phone"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.PHONE' | translate }}" for="delivery-point-phone" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.PHONE' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedPhoneNumber -->
+
+                <!-- useDeliveryPointPersistedTimeSpecification -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedTimeSpecification" (change)="toggleManagementPreference('useDeliveryPointPersistedTimeSpecification',$event.target.checked)" id="delivery-point-time-specification"
+                                />
+
+                                <label for="delivery-point-time-specification"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.TIME_SPECIFICATION' | translate }}" for="delivery-point-time-specification" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.TIME_SPECIFICATION' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedTimeSpecification -->
+
+                <!-- useDeliveryPointPersistedSendDeliveryNoteMail -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedSendDeliveryNoteMail" (change)="toggleManagementPreference('useDeliveryPointPersistedSendDeliveryNoteMail',$event.target.checked)" id="delivery-point-note-mail"
+                                />
+
+                                <label for="delivery-point-note-mail"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.SEND_DELIVERY_NOTE_MAIL' | translate }}" for="delivery-point-note-mail" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.SEND_DELIVERY_NOTE_MAIL' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedSendDeliveryNoteMail -->
+
+                <!-- useDeliveryPointPersistedPostalCode -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).useDeliveryPointPersistedPostalCode" (change)="toggleManagementPreference('useDeliveryPointPersistedPostalCode',$event.target.checked)" id="delivery-point-postal-code" />
+
+                                <label for="delivery-point-postal-code"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.POSTAL_CODE' | translate }}" for="delivery-point-postal-code" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.POSTAL_CODE' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end useDeliveryPointPersistedPostalCode -->
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <div class="row mt-3">
+
+                <div class="col-12">
+
+                    <p class="sub-title-user-storage mb-2">Actualización de datos almacenados</p>
+
+                    <p class="text-information-storage">Estos son los términos que se actualizarán de manera automática siempre y cuando estén activos, en caso de estar activos cada vez que se haga una modificación desde planificación de rutas esos campos se actualizarán en la ruta. En
+                        caso de no estar marcados los campos serán modificados temporalmente.</p>
+                </div>
+
+
+            </div>
+            <div class="row mb-4">
+
+                <!-- updateDeliveryPointDeliveryStartOnOpt -->
+
+                <div class="col-xl-4 col-12">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" id="clients-opening-time" [checked]="(managementPreferences$| async).updateDeliveryPointDeliveryStartOnOpt" (change)="toggleManagementPreference('updateDeliveryPointDeliveryStartOnOpt',$event.target.checked)" />
+
+                                <label for="clients-opening-time"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.UPDATE_OPENING_TIME' | translate }}" for="clients-opening-time" class="label-check point">
+        
+                                {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.UPDATE_OPENING_TIME' | translate }}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end updateDeliveryPointDeliveryStartOnOpt -->
+
+                <!-- updateDeliveryPointDeliveryEndOnOpt -->
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="clients-delivery-point" type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointDeliveryEndOnOpt" (change)="toggleManagementPreference('updateDeliveryPointDeliveryEndOnOpt',$event.target.checked)" />
+
+                                <label for="clients-delivery-point"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.UPDATE_CLOSING_TIME'| translate }}" for="clients-delivery-point" class="label-check point">
+        
+                                {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.UPDATE_CLOSING_TIME'| translate}}
+        
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end updateDeliveryPointDeliveryEndOnOpt -->
+
+                <!-- updateDeliveryPointPopulation -->
+
+                <div class="col-xl-4 col-12 mt-xl-0 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="clients-delivery-point-population" type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointPopulation" (change)="toggleManagementPreference('updateDeliveryPointPopulation',$event.target.checked)" />
+
+                                <label for="clients-delivery-point-population"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.POPULATION' | translate }}" for="clients-delivery-point-population" class="label-check point">
+        
+                                {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.POPULATION' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end updateDeliveryPointPopulation -->
+
+                <!-- updateDeliveryPointZoneIdOnOpt -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="clients-zoneId" type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointZoneIdOnOpt" (change)="toggleManagementPreference('updateDeliveryPointZoneIdOnOpt',$event.target.checked)" />
+
+                                <label for="clients-zoneId"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.ZONE' | translate }}" for="clients-zoneId" class="label-check point">
+        
+                                {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.ZONE' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end updateDeliveryPointZoneIdOnOpt -->
+
+                <!-- updateDeliveryPointDeliveryZoneSpecification -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="update-persisted-specification" type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointDeliveryZoneSpecification" (change)="toggleManagementPreference('updateDeliveryPointDeliveryZoneSpecification',$event.target.checked)"
+                                />
+
+                                <label for="update-persisted-specification"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.ZONE_SPECIFICATION'| translate }}" for="update-persisted-specification" class="label-check point">
+        
+                                {{'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.ZONE_SPECIFICATION'| translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end updateDeliveryPointDeliveryZoneSpecification -->
+
+                <!-- updateDeliveryPointPostalCode -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointPostalCode" (change)="toggleManagementPreference('updateDeliveryPointPostalCode',$event.target.checked)" id="delivery-point-postal-code-update" />
+
+                                <label for="delivery-point-postal-code-update"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.POSTAL_CODE' | translate }}" for="delivery-point-postal-code-update" class="label-check point">
+        
+                                {{ 'PREFERENCES.INTERFACE.USE_STORE_DATA.DELIVERY_POINTS.POSTAL_CODE' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end updateDeliveryPointPostalCode -->
+
+                <!-- updateDeliveryPointEmail -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="clients-delivery-point-email" type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointEmail" (change)="toggleManagementPreference('updateDeliveryPointEmail',$event.target.checked)" />
+
+                                <label for="clients-delivery-point-email"></label>
+
+                            </div>
+
+                            <label title="{{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.EMAIL' | translate }}" for="clients-delivery-point-email" class="label-check point">
+        
+                                {{ 'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.EMAIL' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end updateDeliveryPointEmail -->
+
+                <!-- updateDeliveryPointPhoneNumber -->
+
+                <div class="col-xl-4 col-12 mt-3">
+
+                    <div class="border-special">
+
+                        <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                            <div class="round round-little margin-days round-1">
+
+                                <input id="clients-phone" type="checkbox" [checked]="(managementPreferences$| async).updateDeliveryPointPhoneNumber" (change)="toggleManagementPreference('updateDeliveryPointPhoneNumber',$event.target.checked)" />
+
+                                <label for="clients-phone"></label>
+
+                            </div>
+
+                            <label title="{{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.PHONE' | translate }}" for="clients-phone" class="label-check point">
+        
+                                {{'PREFERENCES.MANAGEMENT.HANDLING_STORED_DATA.DELIVERY_POINTS.PHONE' | translate }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- end updateDeliveryPointPhoneNumber -->
+
+                <!-- hidden -->
+
+                <div class="col-xl-4 col-12">
+
+
+
+                </div>
+
+                <!-- end hidden -->
+
+
+            </div>
+        </div>
+    </div>
+</div>

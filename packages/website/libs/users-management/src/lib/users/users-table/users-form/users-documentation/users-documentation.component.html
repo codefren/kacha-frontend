@@ -1,0 +1,29 @@
+<div class="user-documentation-form pt-4 pb-4">
+    <div class="row container-fluid m-0">
+
+        <div class="col-12 col-lg-12">
+            <p class="mb-0 title-user"> {{'USERS.DOCUMENTATION_STORAGE' | translate }} </p>
+            <p class="mb-0 sub-title-user"> {{'USERS.MESSAGE_DOCUMENTATION_STORAGE' | translate }} </p>
+        </div>
+
+        <div class="col-12 mt-4">
+            <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" id="userManamentDocument" style="text-align: center ; width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="10%" style="border-top-left-radius: 6px;">Tipo</th> 
+                        <th width="50%" class="text-justify">{{'RATES_AND_MODULES.DOCUMENT.DOCUMENT_OF_NAME' | translate }}</th>
+                        <th width="30%" class="text-justify">{{'RATES_AND_MODULES.DOCUMENT.UPLOAD_DATE' | translate }}</th>
+                        <th width="5%"></th>
+                        <th width="5%" style="border-top-right-radius: 6px;"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="col-12">
+            <p class="add-document point" (click)="addDocument()">+ Añadir otro documento</p>
+        </div>
+
+    </div>
+</div>

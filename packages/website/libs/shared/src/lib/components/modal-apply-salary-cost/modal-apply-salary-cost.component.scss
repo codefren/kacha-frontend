@@ -1,0 +1,91 @@
+.modal-salary-cost {
+    .title-modal {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #363740;
+    }
+    .title-sub {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #7F8198;
+    }
+    .title-label {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740 !important;
+    }
+    .border-special {
+        border: 1px solid #CECECE;
+        border-radius: 5px;
+    }
+
+    .btn-default {
+        background: #E9E9E9;
+        border-radius: 5px;
+    }
+    .modal-footer {
+        display: block;
+        padding: 1rem;
+    }
+    .modal-header {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .modal-body {
+        padding: 1rem 1rem;
+    }
+    .form-control-input {
+        height: 45px !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px !important;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #363740;
+        border-radius: 5px !important;
+    }
+
+    .btn-primary {
+        border-radius: 5px !important;
+    }
+
+    /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+    .modalScrollAuto {
+        width: 100%;
+        vertical-align: middle;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .modalScrollAuto::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .modalScrollAuto::-webkit-scrollbar:vertical {
+        width: 10px;
+    }
+    .modalScrollAuto::-webkit-scrollbar-button:increment,
+    .modalScrollAuto::-webkit-scrollbar-button {
+        display: none;
+    }
+    .modalScrollAuto::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+    .modalScrollAuto::-webkit-scrollbar-thumb {
+        background-color: #79797900;
+        border-radius: 20px;
+        border: 2px solid #f1f2f300;
+    }
+    .modalScrollAuto::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+}

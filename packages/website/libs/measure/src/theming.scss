@@ -1,0 +1,9 @@
+@import './lib/measure.theme.scss';
+
+@mixin measure-theming($theme, $typo) {
+    // Theme
+    @include measure-theme($theme);
+
+    // Typography
+    @include measure-typography($typo);
+}

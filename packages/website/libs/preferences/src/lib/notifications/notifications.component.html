@@ -1,0 +1,514 @@
+<div class="easyroute-notification-preferences">
+
+    <!-- integración -->
+
+    <div class="card mt-2">
+
+        <div class="card-body">
+
+            <div class="row p-2 p-md-0">
+
+                <!-- toogle de notidicaciones -->
+
+                <div class="col-xl-12 col-md-12 col-12 pb-2">
+
+                    <div class="form-group" *ngIf="data">
+
+                        <div class="form-row">
+
+                            <div class="switch w-100 col-12">
+
+                                <label class="switch-width">
+
+                                    <input type="checkbox" [checked]="data.notifyIntegrationError" (change)="activatePreferencesEmailIntegration($event.target.checked)" />
+
+                                    <span class="lever lever-general switch-col-primary m-2" ></span>
+
+                                    <span class="title-toggle toogle-style">
+                                        {{ 'PREFERENCES.NOTIFICATIONS.REPORT_INTEGRATION_ERRORS'| translate }}
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end toogle de notificaciones -->
+
+                <!-- text informative -->
+
+                <div class="col-12 padding-l-hidden">
+
+                    <p class="title-new-notification text-justify">{{'PREFERENCES.NOTIFICATIONS.TEXT_1'| translate}}</p>
+
+                </div>
+
+                <!-- end text Informative -->
+
+                <!-- nuevo modelo de enviar varios corre los errores de integración -->
+
+                <ng-container *ngIf="data && data.notifyIntegrationError">
+
+
+
+
+                    <div class="col-12 padding-l-hidden">
+
+                        <label class="title-label-email"> {{'PREFERENCES.NOTIFICATIONS.EMAIL' | translate }} </label>
+
+                        <div class="row pb-1" *ngFor="let comment of integrationSendList; let i = index;" [ngClass]="{'pb-4': integrationSendList.length >= 6 && i == (integrationSendList.length - 1)}">
+
+                            <div class="col-xl-4 col-md-6 col-10 mt-1">
+
+                                <input class="form-control size-input" type="text" disabled [(ngModel)]="comment.integrationEmail">
+
+                            </div>
+
+                            <div class="col-xl-2 col-md-6 col-2 pl-xl-0">
+
+                                <div class="form-group input-group mt-1">
+
+                                    <button type="button" class="btn btn-icon btn-icon-gray" (click)="deleteIntegrationSendEmail(i, comment)">
+
+                                    <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+
+                                </button>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row pb-1 mt-2">
+
+                            <div class="col-xl-4 col-md-6 col-12 mt-1">
+
+                                <input class="form-control size-input" type="text" #inputIntegration (input)="validateEmil(inputIntegration.value)">
+
+                                <ng-container *ngIf="!validateEmil(inputIntegration.value) && inputIntegration.value.length >0">
+
+                                    <p class="text-danger m-0">{{ 'PREFERENCES.NOTIFICATIONS.IT_SHOULD_BE_IN_THE_FORMAT' | translate }}.</p>
+
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1 pr-4 pt-1 pb-4 " [ngClass]="{'pb-3': integrationSendList.length === 5}">
+
+                            <div class="col-xl-4 col-md-4 col-12 mt-1 pl-3 pr-5">
+
+                                <a class="add-emails point" (click)="createIntegrationSendEmail(inputIntegration.value); inputIntegration.value = '';">{{'PREFERENCES.NOTIFICATIONS.ADD_EMAIL' | translate }}</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <!-- end !-- nuevo modelo de enviar varios corre los errores de integración -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- recibir avisos por caducidad -->
+    <div class="card mt-3">
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+
+                                <input type="checkbox"  [checked]="companyPreferenceNotification.showReceiveExpirationNotices" 
+                                (change)="changeCompanyPreferenceNotification('showReceiveExpirationNotices', $event.target.checked)"/>
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                                <span class="title-toggle toogle-style"> {{ 'NOTIFICATIONS.SETTINGS.RECEIVE_EXPIRATION_NOTICES' | translate }} </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <p class="sub-title-text mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'NOTIFICATIONS.SETTINGS.RECEIVE_EXPIRATION_NOTICES_MESSAGE' | translate }} </p>
+                </div>
+
+            </div>
+
+            <ng-container *ngIf="companyPreferenceNotification.showReceiveExpirationNotices">
+
+                <!-- Avisar 30 dias -->
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifyThirtyDaysBefore" [checked]="companyPreferenceNotification.notifyThirtyDaysBefore" (change)="changeCompanyPreferenceNotification('notifyThirtyDaysBefore', $event.target.checked)" />
+
+                                    <label for="notifyThirtyDaysBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_THIRTY_DAYS_BEFORE' | translate }}" for="notifyThirtyDaysBefore" class="label-check style-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_THIRTY_DAYS_BEFORE' | translate }}
+            
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- End Avisar 30 dias -->
+
+                <!-- Avisar 15 días antes -->
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifyFifteenDaysBefore" [checked]="companyPreferenceNotification.notifyFifteenDaysBefore" (change)="changeCompanyPreferenceNotification('notifyFifteenDaysBefore', $event.target.checked)" />
+
+                                    <label for="notifyFifteenDaysBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_FIFTEEN_DAYS_BEFORE' | translate }}" for="notifyFifteenDaysBefore" class="label-check style-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_FIFTEEN_DAYS_BEFORE' | translate }}
+            
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end Avisar 15 días antes -->
+
+                <!-- Avisar 7 días antes -->
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifySevenDaysBefore" [checked]="companyPreferenceNotification.notifySevenDaysBefore" (change)="changeCompanyPreferenceNotification('notifySevenDaysBefore', $event.target.checked)" />
+
+                                    <label for="notifySevenDaysBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_SEVEN_DAYS_BEFORE' | translate }}" for="notifySevenDaysBefore" class="label-check style-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_SEVEN_DAYS_BEFORE' | translate }}
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- end Avisar 7 días antes -->
+
+                <!-- Avisar 1 día antes -->
+
+                <div class="row mb-4">
+
+                    <div class="col-xl-4 col-12 padding-l-hidden">
+
+                        <div class="border-special">
+
+                            <div class="row pl-4 pb-0 mb-0 pt-1 pb-2">
+
+                                <div class="round round-little margin-days round-1">
+
+                                    <input type="checkbox" id="notifyOneDayBefore" [checked]="companyPreferenceNotification.notifyOneDayBefore" (change)="changeCompanyPreferenceNotification('notifyOneDayBefore', $event.target.checked)" />
+
+                                    <label for="notifyOneDayBefore"></label>
+
+                                </div>
+
+                                <label title="{{ 'NOTIFICATIONS.SETTINGS.NOTIFY_A_DAY_BEFORE' | translate }}" for="notifyOneDayBefore" class="label-check style-check point pl-2">
+            
+                                    {{ 'NOTIFICATIONS.SETTINGS.NOTIFY_A_DAY_BEFORE' | translate }}
+                                </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- end Avisar 1 día antes -->
+
+            </ng-container>
+
+        </div>
+
+    </div>
+    <!-- end recibir avisos por caducidad -->
+
+    <!-- activar notificaciones de facturación -->
+
+    <div class="card mt-3">
+
+        <div class="card-body p-4">
+
+            <div class="row">
+
+                <!-- activar carga de albarares -->
+
+                <div class="col-xl-12 col-12">
+
+                    <div class="switch w-100">
+
+                        <label class="switch-width mb-0">
+
+                            <input type="checkbox" id="allowBillNotification"  [checked]="companyPreferenceBill.allowBillNotification"
+                            (change)="changeCompanyPreferenceBill('allowBillNotification', $event.target.checked)"/>
+
+                            <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            <span class="title-toggle toogle-style"> Activar notificaciones de facturación </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+                <!-- end activar cargar de albaranes -->
+
+                <div class="col-12">
+
+                    <p class="sub-title-text mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> Activa las notificaciones si deseas recibir notificaciones en Polpoo y en una dirección de correo electrónico. </p>
+
+                </div>
+
+                <ng-container *ngIf="companyPreferenceBill && companyPreferenceBill.allowBillNotification">
+
+                    <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3">
+                        <div class="form-group">
+
+                            <div class="form-group input-group">
+                                <span class="has-float-label w-100">
+                                    <input class="form-control form-input"
+                                   
+                                     type="email" placeholder="info@gmail.com" [value]="companyPreferenceBill.emailBillNotification" (change)="changeCompanyPreferenceEmail('emailBillNotification', $event.target.value)"/>
+        
+                                    <label for="first" class="mt-2 title-col size-secund"> Correo electrónico </label>
+                                </span>
+                                <div class="w-100 text-left" *ngIf="showErrorEmail">
+                                    <small class="form-control-feedback text-danger">
+                                        Debe tener el formato abcd@gmail.com.
+                                </small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end activar notificaciones de facturación -->
+
+    <ng-container *ngIf="hideMultidelegation()">
+
+        <!-- Pedidos -->
+
+        <div class="card mt-3" *ngIf="activeMultiStore">
+            <div class="card-body p-4">
+
+                <p class="title-toggle toogle-style mb-0 pl-xl-2">
+
+                    {{ 'ORDERS.ORDERS' | translate }}
+
+                </p>
+
+                <div class="col-sm-12 pl-0 pt-2 pl-xl-2">
+
+                    <label class="style-descrip text-justify">Notificación entrada de pedidos</label>
+
+                    <p class="sub-title text-justify  mt-1">Correo electrónico al que llegará los nuevos pedidos</p>
+
+                </div>
+
+                <form *ngIf="orderNotifications" [formGroup]="orderNotifications">
+
+                    <div class="row pl-xl-2">
+
+                        <div class="col-12 col-lg-4 col-md-4 mb-4 mt-xl-2 mt-3">
+                            <div class="form-group" [ngClass]="{'has-danger': orderNotifications.controls['orderNotificationMail'].invalid && (orderNotifications.controls['orderNotificationMail'].dirty || orderNotifications.controls['orderNotificationMail'].touched)}">
+
+                                <div class="form-group input-group">
+                                    <span class="has-float-label w-100">
+                                        <input class="form-control form-input"
+                                       
+                                         type="email" placeholder="info@gmail.com"  id="orderNotificationMail" formControlName="orderNotificationMail"/>
+            
+                                        <label for="first" class="mt-2 title-col size-secund"> Correo electrónico </label>
+                                    </span>
+                                    <ng-container *ngFor=" let validation of validationMessages.preferencesMailIntegrationError">
+                                        <div class="w-100 text-center">
+                                            <small class="form-control-feedback text-danger" *ngIf="orderNotifications.get('orderNotificationMail').hasError(validation.type) && (orderNotifications.get('orderNotificationMail').dirty || orderNotifications.get('orderNotificationMail').touched) ">
+                                            {{ validation.message }}
+                                        </small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="row pl-xl-2">
+
+                        <div class="col-md-4 col-12 text-md-left text-center">
+
+                            <button [disabled]="orderNotifications.invalid || !orderNotifications.dirty" class="btn btn-secondary size-btn" type="button" (click)="submitOrderNotification()">
+
+                                {{ 'GENERAL.UPDATE' | translate }}
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Comentario desde app  -->
+
+        <div class="card mt-3" *ngIf="activeMultiStore">
+
+            <div class="card-body p-4">
+
+                <p class="title-toggle toogle-style mb-0 pl-xl-2">
+                    {{'PREFERENCES.NOTIFICATIONS.COMMENT_FRON_APP' | translate }}
+                </p>
+
+                <div class="col-sm-12 pl-0 pt-3 pl-xl-2">
+
+                    <label class="style-descrip text-justify">{{ 'PREFERENCES.NOTIFICATIONS.NOTIFICATION_OF_COMMENTS_FROM_THE_APP' | translate }} </label>
+
+                    <p class="sub-title text-justify mt-1">{{ 'PREFERENCES.NOTIFICATIONS.EMAIL_THAT_WILL_RECEIVE_THE_COMMENTS_THAT_USERS_WRITE_FROM_THE_MULTISTORE_APP' | translate }}</p>
+
+                </div>
+
+                <div class="col-12 pl-xl-2">
+
+                    <div class="row pb-1" *ngFor="let comment of commentApp; let i = index;" [ngClass]="{'pb-4': commentApp.length >= 6 && i == (commentApp.length - 1)}">
+
+                        <div class="col-xl-4 col-md-6 col-10 mt-1">
+
+                            <input class="form-control size-input" type="text" disabled [(ngModel)]="comment.notificationMail">
+
+                        </div>
+
+                        <div class="col-xl-2 col-md-6 col-2">
+
+                            <div class="form-group input-group mt-1">
+
+                                <button type="button" class="btn btn-icon btn-icon-gray" title="Eliminar" (click)="deleteCommentary(i, comment)">
+
+                                <img src="assets/images/delete.svg" class="header-brand-img" alt="delete" [title]="'GENERAL.DELETE' | translate">
+
+                            </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row pb-1 mt-2">
+
+                        <div class="col-xl-4 col-md-6 col-12 mt-1">
+
+                            <input class="form-control size-input" type="text" #inputcomment (input)="validateEmil(inputcomment.value)">
+
+                            <ng-container *ngIf="!validateEmil(inputcomment.value) && inputcomment.value.length >0">
+
+                                <p class="text-danger m-0">{{ 'PREFERENCES.NOTIFICATIONS.IT_SHOULD_BE_IN_THE_FORMAT' | translate }}.</p>
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-1 pr-4 pt-1 pb-4" [ngClass]="{'pb-3': commentApp.length === 5}">
+
+                        <div class="col-xl-4 col-md-4 col-12 mt-1 pl-3 pr-5">
+
+                            <a class="add-other" (click)="addOthers(inputcomment.value); inputcomment.value = '';">{{'PREFERENCES.NOTIFICATIONS.ADD_ANOTHER' | translate }}</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>

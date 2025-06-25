@@ -1,0 +1,180 @@
+.easyroute-login {
+
+    background-color: #242E5A;
+    overflow-x: hidden;
+    i {
+        color:#24305A;
+    }
+    .card-title {
+        color:#F2982C;
+    }
+    .slogan {
+        color:#F2982C;
+        font-size: 24px;
+    }
+
+
+    .bottom-0 {
+        bottom: 0;
+    }
+
+    .sub-slogan {
+        font-size: 20px;
+    }
+
+    .form-label {
+        color: #24305A;
+        margin-bottom: 0rem;
+        font-size: 14px;
+    }
+
+    .h-100 {
+        height: 100vh;
+    } 
+
+    .is-new {
+        color: #24305A;
+    }
+
+    a {
+        cursor: pointer;
+        color: #24305A;
+        text-decoration: underline;
+    }
+
+    .login {
+        font-size: 24px;
+    }
+
+    label {
+        color: #24305A;
+    }
+    
+    .login-register {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100%;
+        width: 100%;
+        padding: 0 0;
+        position: fixed;
+    }
+    
+    .form-control {
+        font-size: 18px !important;
+        height: 40px;
+        border: 2px solid #DADADA;
+        border-radius: 5px;
+    }
+
+    .logo {
+        max-width: 50px;
+    }
+
+    .padding {
+        padding-left: 40%;
+        padding-right: 40%;
+        margin-top: 15vh;
+        margin-bottom: 15vh;
+    }
+
+    input {
+        border-radius: 10px;
+    }
+
+    .button-signin {
+        box-shadow: none !important;
+        margin-top: 10vh;
+        border-radius: 25px;
+        width:  150px;
+    }
+
+    .btn-outline-dark:hover {
+        color: white !important;
+    }
+
+    .btn-outline-dark {
+        width: 93%;
+    }
+
+    .fa-arrow-left:hover {
+        color: #e8962a;
+        transition: color 0.2s ease;
+    }
+
+    h2 {
+        color: #24305A !important;
+        margin-bottom: 3vh;
+    }
+
+    h3 {
+        color: white;
+    }
+
+    hr {
+        background-color: #24357C;
+        background-image: none !important;
+    }
+
+    span {
+        font-size: 1.3em;
+    }
+
+    .form-control:focus {
+        border-color: #fc792a !important;
+        box-shadow: none !important;
+    }
+
+    .direction {
+      align-self: flex-end;
+    }
+
+    .inverse-button {
+        background-color: transparent !important; 
+        color: #e8962a !important;
+        border-color: #e8962a;
+        border-radius: 4px; 
+    }
+
+    .inverse-button:hover {
+        background-color: #e8962a !important; 
+        color: white !important;
+        border-color: #e8962a 
+    }
+
+    .btn-secondary {
+        // devuelve el texto a la posicion inicial sin afectar los demas
+        text-transform: initial !important;
+        font-size: 14.4px !important;
+    }
+
+    // mobile
+    @media screen and ( min-width: 320px ) and ( max-width: 768px ) {
+      .padding {
+        padding-left: 20%;
+        padding-right: 20%;
+      }
+
+      .direction {
+        width: 100%;
+        align-self: flex-end;
+      }
+      .border-right {
+          border-right: 0 !important;
+      }
+    }
+
+    // ipad
+    @media screen and ( min-width: 768px ) and ( max-width: 1024px ) {
+        .padding {
+            padding-left: 30%;
+            padding-right: 30%;
+        }
+    }
+
+    .logo {
+        max-width: 50px;
+    }
+
+}
+

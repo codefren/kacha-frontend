@@ -1,0 +1,99 @@
+<div class="expense-type">
+
+    <div class="card">
+
+        <div class="card-body p-xl-4">
+
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label class="title-road" for=""> {{ 'SHEET_ROUTE.TYPE_OF_EXPENSES' | translate }} </label>
+
+                    <p class="sub-title-road mt-1 mb-0"> {{'SHEET_ROUTE.THESE_EXPENSES_ARE_LINKED_TO_THE' | translate }} <a class="point" (click)="goProviders()">haz clic aquí.</a> </p>
+
+                </div>
+
+
+            </div>
+
+            <!-- tables -->
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <table class="table table-striped table-responsive-lg table-responsive-md  table-bordered mb-0 mt-4" id="tableFirtRoad" style="text-align: center ; width: 100%;">
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="border-top-left-radius: 6px;"> {{'SHEET_ROUTE.CONDITION' | translate }} </th>
+
+                                <th> {{'SHEET_ROUTE.GUY' | translate }} </th>
+
+                                <th>{{'SHEET_ROUTE.SUPPLIER' | translate }} </th>
+
+                                <th> {{'SHEET_ROUTE.CONCEPTS' | translate }} </th>
+
+                                <th style="border-top-right-radius: 6px;"></th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <ng-container *ngIf="conceptList && conceptList.length >0 ">
+                                <tr class="text-center" *ngFor="let concept of conceptList; let i=index">
+
+                                    <td>
+
+                                        <div class="switch w-100">
+
+                                            <label class="switch-width mb-0">
+
+                                <input type="checkbox" [id]="'isActiveitem' + concept.id" [checked]='concept.isActive' [value]="concept.isActive" (change)='activateToogle($event.target.checked, concept)'/>
+
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+
+                            </label>
+
+                                        </div>
+                                    </td>
+                                    <td>{{concept.providerTypeName}}</td>
+
+                                    <td>{{concept.providerName}}</td>
+
+                                    <td>{{concept.providerTypeConceptName}}</td>
+
+                                    <td title="Eliminar"><img class="icons-datatable point" src="assets/icons/trashSetting.svg" (click)="deleteConcept(concept)"></td>
+
+                                </tr>
+                            </ng-container>
+
+                            <ng-container *ngIf="conceptList && conceptList.length == 0 ">
+                                <tr>
+                                    <td colspan="7" class="center">
+                                        {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }} </td>
+                                </tr>
+
+                            </ng-container>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row pt-3 pb-3">
+                <div class="col-12">
+                    <a class="add-expenses-type point" (click)="modalAddExpenses()"> + {{ 'SHEET_ROUTE.ADD_EXPENSE_TYPE' | translate }} </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

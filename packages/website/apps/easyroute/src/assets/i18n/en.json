@@ -1,0 +1,717 @@
+{
+    "LOGIN": {
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "FORGOT_YOUR_PASSWORD ?": "Forgot your password?",
+        "RECOVER": {
+            "ENTER_YOUR_EMAIL": "Enter your email below and we will send you the restart instructions!"
+        },
+        "RESET_PASSWORD": {
+            "PASSWORD_CONFIRMATION": "Password Confirmation",
+            "RECOVER": "Recover",
+            "AN_ERROR_HAS": "An error has occurred, please refresh the page!"
+        }
+    },
+    "ROUTE_PLANNING": {
+        "NAME": "Route planning",
+        "TOOLBAR": {
+            "SELECT_ALL_ZONES": "Select all zones",
+            "DESELECT_ALL_ZONES": "Deselect all zones",
+            "SHOW_ONLY_SELECTED": "Show only selected",
+            "SELECT_ALL_ROUTES": "Select all routes",
+            "DESELECT_ALL_ROUTES": "Deselect all routes",
+            "JOIN_ZONES": "Join zones",
+            "IMPORT": "Import",
+            "SIMULATE": "Simulate",
+            "STOP_SIMULATION": "Stop simulation",
+            "OPTIMIZE": "Optimize",
+            "EVALUATE": "Evaluate",
+            "SHOW_ALL_USERS": "Show all users"
+        },
+        "MODAL_INTEGRATION": {
+            "ID": "Id",
+            "NAME": "Name",
+            "DESCRIPTION": "Description",
+            "DATE": "Date",
+            "SESSION_LIST": "Session list",
+            "ACTIONS": "Actions",
+            "IMPORT_FROM_CLOUD": "Import from cloud"
+        },
+        "MODAL_SELECT_DATE": {
+            "SELECT_DATE": "Select date"
+        },
+        "ZONE": {
+            "OPTIMIZED": "Optimized Zone",
+            "DISPLAY_TITLE": "Show evaluation of this zone's delivery points",
+            "SETTINGS": {
+                "NAME": "Settings",
+                "DELIVERY_SCHEDULE": {
+                    "NAME": "DELIVERY SCHEDULE",
+                    "FORCE_DEPARTURE": "Force departure"
+                },
+                "ASSIGNED_VEHICLES": {
+                    "NAME": "ASSIGNED VEHICLES",
+                    "FORCE_USE_SELECTED": "Force use of all selected vehicles",
+                    "IGNORE_CAPACITY_LIMIT": "Ignore capacity limit",
+                    "ALREADY_IN_USE": "Vehicles already in use",
+                    "CAPACITY": "Capacity",
+                    "AVAILABLE": "Available vehicles",
+                    "ALL_USED_VEHICLES": "All vehicles are being used",
+                    "NO_USED_VEHICLES": "No vehicles are being used",
+                    "CHANGE_VEHICLE": "Change vehicle"
+                },
+                "PARAMETERS_TO_OPTIMIZE": {
+                    "ENABLED": "Ordered by preference",
+                    "DISABLED": "Disabled preferences",
+                    "NAME": "PARAMETERS TO OPTIMIZE",
+                    "NUM_VEHICLES": "Number of vehicles",
+                    "TRAVEL_DISTANCE": "Travel distance",
+                    "CUSTOMER_SATISFACTION": "Customer's satisfaction",
+                    "ROUTE_BALANCE": "Balanced rutes",
+                    "DISTANCE": "Distance",
+                    "COST_DISTANCE": "Distance cost",
+                    "COST_DISTANCE_MESSAGE": "At higher cost, optimize looking for less distance",
+                    "DURATION": "Duration",
+                    "COST_DURATION": "Duration cost",
+                    "COST_DURATION_MESSAGE": "A higher cost optimizes looking for the shortest delivery time",
+                    "VEHICLE_WAIT_TIME": "Vehicle wait time",
+                    "COST_VEHICLE_WAIT_TIME": "Vehicle wait time cost",
+                    "COST_VEHICLE_WAIT_TIME_MESSAGE": "At a higher cost, it optimizes looking for a shorter stationary vehicle"
+                },
+                "EXPLORATION_LEVEL": "Exploration level",
+                "EXPLORATION_LEVEL_MESSAGE": "At a higher level, the calculation time will increase and the result will be better",
+                "CUSTOMER_PARAMETERS": "Customer parameters",
+                "WAIT_FOR_OPENING": "Wait for opening"
+            },
+            "EDIT_DELIVERY_POINT": {
+                "CHANGE_VEHICLE": "CHANGE VEHICLE",
+                "CHANGE_ORDER": "CHANGE ORDER",
+                "CHANGE_DELIVERY_WINDOW": {
+                    "NAME": "CHANGE DELIVERY WINDOW",
+                    "OPENING_TIME": "Opening time",
+                    "CLOSING_TIME": "Closing time"
+                }
+            },
+            "DELIVERY_POINTS_TABLE": {
+                "TITLE": "Delivery points",
+                "WAREHOUSE": "Warehouse",
+                "DELIVERY_POINT": "Delivery Point",
+                "DELIVERY_TIME": {
+                    "DESCRIPTION": "Delivery<br>time",
+                    "NAME": "Delivery time"
+                },
+                "OPENING_TIME": "Opening<br>Time",
+                "CLOSING_TIME": "Closing<br>Time",
+                "TRAVEL_TIME": "Travel<br>Time",
+                "TRAVEL_DISTANCE": "Travel<br>Distance",
+                "ARRIVAL_TIME": "Arrival<br>Time",
+                "WAIT_TIME": {
+                    "NAME": "Wait<br>Time",
+                    "DESCRIPTION": "Elapsed time between the opening time of the delivery point and the arrival time of the vehicle"
+                },
+                "DELAY_TIME": {
+                    "NAME": "Delay<br>Time",
+                    "DESCRIPTION": "Elapsed time between the closing time of the delivery point and the arrival time of the vehicle, when arriving too late"
+                },
+                "VEHICLE_WAIT_TIME": {
+                    "NAME": "Vehicle<br>Wait",
+                    "DESCRIPTION": "Time the vehicle has to wait until the delivery point's opening time, when arriving too soon"
+                },
+                "PRIORITY": "Priority<br><i>(1..3)</i>",
+                "DEMAND": "Demand"
+            },
+            "CALCULATED_ROUTES_SETTINGS": {
+                "NAME": "Route Settings"
+            },
+            "CALCULATED_ROUTES": {
+                "NAME": "Calculated route(s)",
+                "ROUTE": "Route",
+                "NO_CALCULATED_ROUTE": "There are no calculated routes"
+            },
+            "NAVIGATION_BUTTONS": {
+                "TO_ZONES": "Show Zones",
+                "TO_ROUTES": "Show Rutes"
+            }
+        },
+        "MAP": {
+            "OTHER": "Other",
+            "OTHERS": "Others",
+            "ZONE_DISPLAY_SHORTCUT": "Zones Visualization",
+            "ROUTE_DISPLAY_SHORTCUT": "Routes Visualization",
+            "USE_ROUTE_COLORS": "Use Route defined colors",
+            "HIDE_NON_OPTIMIZED_ZONES": "Hide non optimized zones",
+            "MAP_CARD": {
+                "ADDRESS": "Delivery point's address",
+                "DELIVERY_WINDOW": "Delivery window",
+                "DEMAND": "Delivery point's demand",
+                "SERVICE_TIME": "Service time",
+                "VEHICLE": "Route's vehicle",
+                "EXPECTED_DELIVERY_TIME": "Expected delivery time",
+                "POINT_IDENTIFIER": "Delivery Point's Identifier",
+                "ZONE_NAME": "Delivery Zone of this point"
+            }
+        }
+    },
+    "MANAGEMENT": {
+        "NAME": "Management"
+    },
+    "DELIVERY_POINTS": {
+        "ID": "ID",
+        "NAME": "Delivery points",
+        "CLIENT_CODE": "Client code",
+        "POINT": "Point",
+        "NAME_": "Name",
+        "ADDRESS": "Address",
+        "POSTAL_CODE": "Postal code",
+        "PROVINCE": "Province",
+        "PHONE": "Phone",
+        "EMAIL": "Email",
+        "START": "Start",
+        "END": "End",
+        "KEY_OPEN": "Key Open",
+        "DEMAND": "Demand",
+        "SERVICE_TIME": "Service Time",
+        "ADD_CLIENT": "Add client",
+        "DEFAULT_SCHEDULE": "Default Schedule",
+        "COORDINATES": "Coordinates",
+        "ADD_DELIVERY_POINT": "AD DELIVERY POINT",
+        "NIF": "Identification document",
+        "ROUTE_DETAILS": "route details",
+        "DELIVERY_DETAILS": "Delivery details",
+        "END_DELIVERY_NOTE_EMAIL": "Send delivery notes by email",
+        "EXCEL": "Excel",
+        "IMPORT": "Import",
+        "LATITUDE": "Latitude",
+        "LONGITUDE": "Longitud",
+        "LENGTH": "Length",
+        "OTHER_COORDINATES": "Other coordinates?",
+        "DELIVERY_POINTS_WITHOUT_COORDINATES": "Delivery points without coordinates",
+        "THE_POINT": "Point",
+        "WITH_DIRECTION": "with direction",
+        "COORDINATE_ERROR": "coordinate error",
+        "VERIFIED_BY_DRIVER": "Verified by driver",
+        "NIF_": "NIF",
+        "ACTIVATE_BILLING_MESSAGE":"* If you activate the billing address, in the new field that appears, the address that is entered will be the one that will appear on the delivery note."
+    },
+    "DELIVERY_ZONES": {
+        "ZONE": "Delivery route",
+        "NAME": "Delivery zones",
+        "NAME_": "NAme",
+        "COLOR": "Color",
+        "START": "Start",
+        "END": "En",
+        "ID": "ID",
+        "FORCEDE_PERTURE": "Force perture",
+        "IGNORE_CAPACITY_LIMIT": "Ignore the capacity limit",
+        "USE_ALL_VEHICLES": "Force the use of all vehicles",
+        "ORDER": "Order",
+        "FROM_NO_GREATER_TO": "The time from cannot be longer than the hour until"
+    },
+    "VEHICLES": {
+        "NAME": "Vehicles",
+        "VEHICLE_NAME": "Name",
+        "DELIVERY_ZONE": "Delivery zone",
+        "CAPACITY": "Capacity",
+        "DRIVER_ASSIGNED": "Driver Assigned",
+        "DELETE_VEHICLE?": "Are you sure to remove the vehicle?",
+        "VEHICLES_QUANTITY": "Maximum amount of vehicles",
+        "CURRENT_VEHICLES": "Current vehicles"
+    },
+    "USERS": {
+        "ALL": "All",
+        "NAME": "Users",
+        "USERS_DATA": "Users Data",
+        "USER": "User",
+        "NATIONALID": "National Id",
+        "EMAIL": "Email",
+        "NAME_USER": "Name",
+        "SURNAME_USER": "Surname",
+        "PASSWORD_CONFIRMATION": "Password confirmation",
+        "PASSWORD": "Password new",
+        "PASSWORD_OLD": "Old password",
+        "PROFILES": "Profiles",
+        "COSTS": {
+            "ADD_CONCEPT": "+ Add concept",
+            "FIXED_USER_COSTS": "Fixed user costs",
+            "FIXED_USER_COSTS_MESSAGE": "Configure the fixed costs of the employee that will automatically be reflected monthly in the cost table. You can add variable costs from the costs section.",
+            "SALARY": "Salary",
+            "SALARY_MESSAGE": "Indicates the salary and monthly social security of this user.",
+            "GROSS_SALARY": "Net salary",
+            "SOCIAL_SECURITY": "Social segurity",
+            "TOTAL_COMPANY_COST": "Total company cost",
+            "EXTRA_COSTS": "Extra costs",
+            "EXTRA_COSTS_MENSSAGE": "Add additional costs as extras that have a direct impact on payroll.",
+            "AMOUNT": "Amount",
+            "EXTRA_HOURS": "Extra hours",
+            "EXTRA_HOUR": "Extra hour",
+            "EXTRA_HOURS_MENSSAGE": "Activate overtime and enter the corresponding amount.",
+            "ADD_TYPE": "+ Add type",
+            "OTHER_MONTHLY_EXPENSES": "Other monthly expenses",
+            "OTHER_MONTHLY_EXPENSES_MENSSAGE": "Add other fixed monthly costs that are registered in the section ",
+            "PROVIDERS": "Providers",
+            "PROVIDER": "Provider",
+            "CONCEPT": "Concept",
+            "ADD_MONTHLY_EXPENDITURE": "+ Add monthly expenditure",
+            "TYPE": "type",
+            "OVERTIME_MORNING_SHIFT": "Overtime (morning shift)",
+            "OVERTIME_NIGHT_SHIFT": "Overtime (Night Shift)",
+            "PUBLIC_HOLIDAY": "Public holiday",
+            "EXTRA_DAY": "Extra day"
+        }
+    },
+    "COMPANIES": {
+        "NAME": "Companies",
+        "BILLING_EMAIL": "Billing email",
+        "SERVICE_TYPE": "Service type",
+        "IS_ACTIVE": "Active",
+        "IS_DEMO": "Demo",
+        "IS_SUPPORT": "Support",
+        "ACTIVATE_DEMO?": "Do you want to activate the demo?",
+        "SELECT_DATE_FROM_DATE_TO": "select date from and date to",
+        "DATE_FROM": "Date from",
+        "DATE_TO": "Date to",
+        "ACTIVATE_COMPANY?": "Do you want to activate the company?",
+        "DEACTIVATE_COMPANY": "Do you want to deactivate the company?",
+        "COMPANY": "Company",
+        "SETTING_COMPANY": "Setting company",
+        "ACCOUNT_NUMBER": "Account number",
+        "CREATED_AT": "Creat at",
+        "CREATED_BY": "Creado por",
+        "ME": "My companies",
+        "CURRENT_PLAN": "Tu plan actual",
+        "SELECT": "Select",
+        "COMPANY_DATA": "Company Data",
+        "MAXIMUM_NUMBER_VEHICLES": "Maximum number of vehicles",
+        "INSTALLATION": "Installation",
+        "MONTHLY_AMOUNT": "Monthly amount",
+        "PRICE_FOR_VEHICLE": "Price FOR vehicle",
+        "PLAN": "Plan",
+        "ALL": "All",
+        "ACTIVATED": "Actives",
+        "DEACTIVATED": "Deactivated"
+    },
+    "PREFERENCES": {
+        "NAME": "Preferences",
+        "ROUTES": "ROUTES",
+        "ORDERS": "Orders",
+        "INTEGRATIONS": "Integrations",
+        "CLIENTS": "CLIENTS",
+        "MESSAGE": {
+            "ROUTES_AND_CALCULATED_ROUTES": "These are the attributes that will be shown in the routes and calculated routes sections, select the ones you want to appear by default.",
+            "INTERFACE": "With this parameter you can configure what type of general interface you use on a daily basis, and thus have direct access to the functionalities you need.",
+            "ORDERS_PROCESSED": "This option should only be applied to companies that are integrated by FTP / API.",
+            "USE_STORE_DATA": "These are the fields that will have persistence, in which the information that we have stored will prevail will prevail, while those that are off will obtain the data that we export externally either by API or by JSON / CSV.",
+            "HANDLING_STORED_DATA": "These are the fields that will be updated automatically as long as they are active, if they are active every time a modification is made from route planning, these fields will be updated in management. In case of not being marked the fields will be modified temporarily.",
+            "ERRORS_IN_INTEGRATION": "These are the email addresses where you will be notified of the actions generated from our platform."
+        },
+        "OPTIMIZATION": {
+            "NAME": "Optimization",
+            "MAP_POINTS": {
+                "NAME": "Map points",
+                "WAREHOUSE_ADDRESS": "Warehouse address",
+                "DISCHARGING_TIME": "Discharging time per load unit",
+                "DEFAULT_INITIAL_DELIVERY_TIME": "Default initial delivery time",
+                "DEFAULT_FINAL_DELIVERY_TIME": "Default final delivery time",
+                "DECISION_TIME_LIMIT": "Decision time limit"
+            },
+            "IMPORT_FILE": {
+                "NAME": "Import file",
+                "CREATE_DELIVERY_POINTS": {
+                    "NAME": "Create delivery points",
+                    "DESCRIPTION": "Delivery points that do not exist will be created"
+                },
+                "UPDATE_DELIVERY_POINTS": {
+                    "NAME": "Update delivery points",
+                    "DESCRIPTION": "Delivery points that already exist will be overwritten"
+                },
+                "CREATE_DELIVERY_ZONES": {
+                    "NAME": "Create delivery zones",
+                    "DESCRIPTION": "Delivery zones that do not exist will be created with default configuration"
+                },
+                "CREATE_UNASSIGNED_ZONE": {
+                    "NAME": "Create unassigned zone",
+                    "DESCRIPTION": "It will create a zone named 'Unassigned' for all delivery points without a zone assigned or without a default zone assigned"
+                },
+                "SET_UNASSIGNED_ZONE": {
+                    "NAME": "Set unassigned zone",
+                    "DESCRIPTION": "If create unassigned zone is true, non existing delivery points will have assigned 'Unassigned' zone by default"
+                }
+            }
+        },
+        "INTERFACE": {
+            "NAME": "Interface",
+            "ROUTE_PLANNING": {
+                "NAME": "Route Planning",
+                "DELIVERY_POINTS": {
+                    "NAME": "DELIVERY POINTS",
+                    "MINIMIZE_ZONES": "Zones will be automatically minimized",
+                    "DO_NOT_MINIMIZE_ZONES": "Zones will not be automatically minimized",
+                    "MINIMIZE_ZONES_OPTIONS": "Zones' options will be automatically minimized",
+                    "DO_NOT_MINIMIZE_ZONES_OPTIONS": "Zones' options will not be automatically minimized"
+                },
+                "ROUTES": {
+                    "NAME": "ROUTES",
+                    "MINIMIZE_ROUTES": "Routes will be automatically minimized",
+                    "DO_NOT_MINIMIZE_ROUTES": "Routes will not be automatically minimized",
+                    "MINIMIZE_ROUTES_OPTIONS": "Routes' options will be automatically minimized",
+                    "DO_NOT_MINIMIZE_ROUTES_OPTIONS": "Routes' options will not be automatically minimized"
+                },
+                "FIELDS_TO_SHOW": {
+                    "ALLOWED_DELAY_TIME": "Permitir retraso en cliente",
+                    "NAME": "Fields to display in the customer list",
+                    "OPEN_TIME": "Open time",
+                    "CLOSING_TIME": "Closing time",
+                    "TRAVEL_TIME": "Travel time",
+                    "ARRIVAL_TIME": "Arrival time",
+                    "CLIENT_DELAY": "Client delay",
+                    "VEHICLE_DELAY": "Vehicle delay",
+                    "TRAVEL_DISTANCE": "Travel distance",
+                    "WAIT_TIME": "Wait time",
+                    "DEMAND": "Demand",
+                    "DELIVERYTIME": "Delivery time",
+                    "SERVICE_COST": "Service cost"
+                },
+                "EVALUATE_ZONES": {
+                    "NAME": "EVAULATE ZONES AUTOMATICALLY WHEN LOADED",
+                    "EVALUATE_ZONES": "Zones will be automatically evaluated",
+                    "DO_NOT_EVALUATE_ZONES": "Zones will not be automatically evaluated"
+                },
+                "TYPE_OF_USE": {
+                    "NAME": "TYPE OF USE",
+                    "All_FEATURE": "All Feature",
+                    "COMMERCIAL": "Commercial",
+                    "LOGISTICS": "Logistics"
+                }
+            },
+            "MANAGEMENT": {
+                "NAME": "Management",
+                "DELIVERY_POINTS": {
+                    "NAME": "DELIVERY POINTS",
+                    "MINIMIZE_ZONES": "Zones will be automatically minimized",
+                    "DO_NOT_MINIMIZE_ZONES": "Zones will not be automatically minimized"
+                }
+            }
+        },
+        "PRINTING": {
+            "NAME": "Printing",
+            "PRINTING_PREFERENCES": {
+                "NAME": "Printing preferences",
+                "DELIVERY_POINT_PRINTED_PROPERTIES": {
+                    "NAME": "DELIVERY POINT PRINTED PROPERTIES",
+                    "SUMMARY_PAGE": "Summary page",
+                    "CUSTOMER_NAME": "Customer name",
+                    "ORDER": "Order",
+                    "PLANNED_ARRIVAL_TIME": "Planned arrival time",
+                    "CUSTOMER_WAIT_TIME": "Customer wait time",
+                    "ORIGINAL_ZONE": "Original zone",
+                    "CUSTOMER_CODE": "Customer code",
+                    "DELIVERY_TIME_LIMIT": "Delivery time limit",
+                    "LOAD": "load",
+                    "OPENING": "Opening"
+                },
+                "VISUALITZATION_PREFERENCES": {
+                    "NAME": "VISUALIZATION PREFERENCES",
+                    "SHOW_GRID": "Show in grid",
+                    "SHOW_LINES": "Show in lines"
+                }
+            },
+            "PRINTING_PREVIEW": {
+                "NAME": "Printing preview",
+                "INCOMPATIBLE_BROWSER_MESSAGE": "This browser does not support this previsualization. Please switch to Google Chrome, Safari or Internet Explorer for full support, or click the button below to view it in a dedicated window.",
+                "ROUTES": "Routes",
+                "TOTAL_DELIVERY_POINTS": "Total delivery points",
+                "TOTAL_PAYLOAD": "Total payload",
+                "ALL_ROUTE_TIMES": "Sum of all route times",
+                "AVERAGE_DELAY": "Average delay per delivery point",
+                "ALL_WAITING_TIMES": "Sum of all waiting times",
+                "TOTAL_DISTANCE": "Total distance",
+                "CLIENTS_NUMBER": "Number of clients",
+                "DEMAND_UNITS": "packaging units",
+                "SECONDS": "seconds",
+                "VEHICLE": "Vehicle",
+                "ZONE": "Zone",
+                "ZONES": "Zones",
+                "DELIVERY_POINTS": "Delivery points (clients)",
+                "TOTAL_TRAVEL_TIME": "Total travel time",
+                "START_TIME": "Time to leave the depot (beginning of route)",
+                "EXPECTED_ARRIVAL": "Expected arrival time to depot",
+                "CLIENT": "Client",
+                "CLIENT_ID": "Client ID",
+                "ORDER": "Order",
+                "OPENS_AT": "Opens at",
+                "CLOSES_AT": "Closes at",
+                "DELIVERY_AT": "Delivery at",
+                "LOAD": "Load",
+                "PRINT": "Print"
+            }
+        }
+    },
+    "HELP": {
+        "NAME": "Help",
+        "CONFIGURATE_ACCOUNT": "Configurate account",
+        "TYPES_OF_OPTIMIZATION": "Types of optimization",
+        "INTERFACE_DESIGN": "Interface design",
+        "MANAGEMENT_MODIFICATIONS": "Management modifications",
+        "DELIVERY_SIMULATION": "Delivery simulation",
+        "IMPORT_FILE": "Import file",
+        "OTHER": "Others"
+    },
+    "PROFILE": {
+        "NAME": "Profile",
+        "PROFILE_SETTINGS": {
+            "NAME": "Profile settings"
+        },
+        "SESSION_SETTINGS": {
+            "NAME": "Session settings",
+            "SESSION_STARTED": "Session started as",
+            "LINKED_EMAIL": "Linked email",
+            "LAST_ACCESS": "Last access",
+            "CHANGE_PASSWORD": "Change password"
+        },
+        "CHANGE_PLANS": {
+            "CHANGE_PLAN": "Update version",
+            "SELECT": "Select",
+            "NUMBER_OF_VEHICLES": "Number of vehicles",
+            "PLAN": "Plan to change",
+            "CHANGE_PLANS": "Update"
+        },
+        "CONFIRM_CHANGE_PLAN": {
+            "CHANGE_PLAN?": "¿Are you sure you are updating the current version?"
+        }
+    },
+    "USER_MANAGEMENT": {
+        "NAME": "User management"
+    },
+    "INVOICING": {
+        "NAME": "Invoicing",
+        "SUSCRIPTION": "Suscription",
+        "MY_INVOICES": {
+            "NAME": "My invoices",
+            "LAST_INVOICES": "LAST INVOICES",
+            "SEARCH_INVOICE": "SEARCH INVOICE",
+            "NO_INVOICES_FOUND": "No invoices found",
+            "TO_GREATER_THAN_EQUAL_TO_FROM": "The Date to field must be greater than or equal to Date from"
+        },
+        "SUBSCRIPTION_STATUS": {
+            "NAME": "Subscription status",
+            "INITIAL_FEE": "Initial Fee",
+            "MONTHLY_FEE": "Monthly Fee",
+            "PERMANENCE_ESTABLISHED": "Permanence established until",
+            "NEXT_CHARGE": "Next charge schedule for",
+            "FREE_TRIAL_EXPIRATION": "Your free trial expires on the",
+            "MAKE_PAYMENT_NOW": "Make payment now",
+            "MONTHLY_AMOUNT": "Monthly Amount"
+        }
+    },
+    "INFOCHIPS": {
+        "ZONE": {
+            "DELIVERY_POINTS": "Total number of delivery points",
+            "DEMAND": "Total demand of all delivery points",
+            "VEHICLES": "Total number of vehicles"
+        },
+        "ROUTE": {
+            "WAIT_TIME": "Sum of all the elapsed times between the opening time of each delivery point and the arrival time of the vehicle to it",
+            "DELAY_TIME": "Sum of all the delay times with respect to each delivery point's closing time",
+            "VEHICLE_WAIT_TIME": "Sum of the all the time during which the vehicles remain stopped, waiting for a delivery point opening time"
+        }
+    },
+    "GENERAL": {
+        "NAME": "Name",
+        "SURNAMES": "Surnames",
+        "COMPANY": "Company",
+        "TIN": "TIN",
+        "NIF": "Identification document",
+        "ROUTE": "Route",
+        "CLIENTS": "Clients",
+        "CITY": "City",
+        "POSTAL_CODE": "Postal code",
+        "EMAIL": "Email",
+        "ADDRESS": "Address",
+        "COUNTRY": "Country",
+        "STATE_ORDER": "State",
+        "PHONE_NUMBER": "Phone number",
+        "SECONDARY_PHONE_NUMBER": "Secondary phone number",
+        "CANCEL": "Cancel",
+        "CHANGE": "Change",
+        "CLOSE": "Close",
+        "ACCEPT": "Accept",
+        "APPLY": "Apply",
+        "PRINT": "Print",
+        "DOWNLOAD": "Download",
+        "UPDATE": "Update",
+        "ADD": "Add",
+        "LOG_OUT": "Log out",
+        "FROM": "From",
+        "TO": "To",
+        "ALL": "All",
+        "SELECTED": "Selected",
+        "NEW": "New",
+        "CHANGE_ROUTE": "Change route",
+        "SELECT_ROUTE": "Select route",
+        "DOWNLOAD_ALL": "Download all",
+        "SELECT_ALL": "Select all",
+        "DESELECT_ALL": "Deselect all",
+        "SHOW_SELECTED": "Show selected",
+        "HOURS": "Hours",
+        "MINUTES": "Minutes",
+        "DISCOUNT": "Discount",
+        "SECONDS": "Seconds",
+        "PROVINCE": "Province",
+        "FIELD_REQUIRED": "Field Required",
+        "STREET_ADDRESS": "Street Address",
+        "PHONE": "Phone",
+        "IS_ACTIVE": "Active",
+        "IS_INACTIVE": "Inactive",
+        "STATUS": "Status",
+        "PROFILES": "Profiles",
+        "LOGIN": "Log in",
+        "ENTER": "Enter",
+        "REMEMBERME": "Remember me",
+        "TYPE": "TIPO",
+        "DNI": "Identification document",
+        "ACTIONS": "Actions",
+        "SHOW/HIDE": "Show/Hide Columns",
+        "YES": "Yes",
+        "NO": "No",
+        "FORGETPASSWORD": "Do you forgot your password?",
+        "BILLING_EMAIL": "Billing Mail",
+        "CONFIRMATION": "Confirmation",
+        "ERROR": "Error",
+        "DESCRIPTION": "Description",
+        "CONFIRM_REQUEST": "Confirm request",
+        "YOUR_PASSWORD_HAS_BEEN_RESET": "Your password has been reset",
+        "THE_REQUEST_WAS_SENT_TO_YOUR_EMAIL": "The request was sent to your email",
+        "SEND_FROM_CLOUD": "Send to cloud",
+        "FILE_SENT_SUCCESSFULLY": "File sent successfully",
+        "OPTIONS": "Options",
+        "PROMOTION_COVID": "Promotion covid",
+        "VERIFY_YOUR_ACCOUNT": "Verify your account and start working with us",
+        "THANKS_USER": "Thank you for trusting Polpoo.",
+        "VERIFY_TOAST": "A validation email has been sent, to continue with the registration",
+        "FILTER_NAME": "Filter",
+        "IMAGE": "Image",
+        "SELECT_AN_OPTION": "Select an option",
+        "DATE": "Date"
+    },
+    "CONTROL_PANEL": {
+        "NAME": "Panel de control",
+        "ASSIGNED_ROUTES": "Assigned routes",
+        "ASSIGNMENT_COMPLETED": "Assignment completed",
+        "ASSIGN_PRODUCTS": "Assign products",
+        "CHANGE_VEHICLE": "Change vehicle",
+        "ROUTE_CHANCE": "Route chance",
+        "ROUTE_HISTORY": "Route history",
+        "DOWNLOAD_JSON_ROUTES": "Download Json from routes",
+        "JSON_ROUTES": "Json from routes",
+        "DELIVERY_CONFIRMATION": "Delivery confirmation",
+        "SERVICE_TIME_CLIENT": "Client service time",
+        "ROUTE": "Route",
+        "DATE": "Date",
+        "DOWNLOAD_DELIVERY_DETAILS": "Download .Json of delivery details"
+    },
+    "DETAIL_CONTROL": {
+        "DNI_ALBARAN": "Identification document in albaran",
+        "ALBARAN_NAME": "Albaran name",
+        "BOXES_DELIVERD": "Boxes deliverd",
+        "RETURN": "Return",
+        "STATE": "State",
+        "EXTRA_BOXES": "Extra boxes",
+        "OBSERVATION": "Observation",
+        "RETURNED_BOXES": "Returned boxes"
+    },
+    "ASSIGNED_ROUTES": {
+        "STATE": "State",
+        "VEHICLE": "Vehicle",
+        "DRIVER": "Driver",
+        "DRIVER_START_TIME": "Route start"
+    },
+    "PRODUCTS": {
+        "NAME": "Product",
+        "PRICE": "Price",
+        "UD": "Ud.",
+        "CODE_PRODUCT": "Code Product",
+        "NAME_": "Product"
+    },
+    "RECOVER_SESSION": {
+        "SESSION_ID": "Session ID",
+        "NAME": "name",
+        "DESCRIPTION": "Description",
+        "DATE": "Date",
+        "RECOVER_SESSION": "Recover session"
+    },
+    "SESSION": {
+        "TITLE": "Save session",
+        "NAME": "Name",
+        "DESCRIPTION": "Description"
+    },
+    "REGISTER": {
+        "TERMS_AND_CONDITIONS_OPTIMMANAGE": "Terms and conditions for the use of Polpoo"
+    },
+    "MODULES": {
+        "MODULES": "Modules",
+        "GEOLOCATION": "Geolocation",
+        "REPORTS": "Reports",
+        "FRANCHISES": "Franchises",
+        "MODULE_4": " Module 4",
+        "MODULE_5": "Module 5",
+        "CONTRACT": "CONTRACT",
+        "YOU_ARE_GOING_TO_HIRE_THE_MODULE": " You are going to here the module",
+        "BY": "by",
+        "TAX_INCLUDED": "tax included",
+        "THE": "The",
+        "BILL": "Bill",
+        "WILL_BE_AVAILABLE": "Will be available",
+        "IN_THE_USER_PROFILE": "In the user profile",
+        "BY_HIRING_THE_MODULE_YOU_ACEEPT_THE": "By hiring the module you acept the",
+        "TERMS_AND_CONDITIONS": "terms and conditions",
+        "BY_OPTIMANAGE": "by optimanage",
+        "TAX": "tax",
+        "YOU_WILL_BE_ABLE_TO_CONSULT_THE": "You will be able to consult the",
+        "FROM_YOUR_USER_PROFILE": "from your user profile.",
+        "KNOW_MORE": "Know more"
+    },
+    "FRANCHISE": {
+        "NAME": "Franchise",
+        "CREATE_FRANCHISE": "Create franchise",
+        "MANAGE_FRANCHISE": "Manage franchise",
+        "FRANCHISE_MANAGEMENT": {
+            "DIRECTION": "Direction",
+            "SCHEDULE": "Schedule",
+            "ACTIVE_APP": "Active APP",
+            "MODIFY": "Modify"
+        },
+        "DO_YOU_WANT_TO_DEACTIVATE_THE_FRANCHISE": "Do you want to deactivate the franchise selected in the APP?",
+        "DO_YOU_WANT_TO_ACTIVATE_THE_FRANCHISE": "Do you want to activate the franchise selected in the APP?"
+    },
+    "DESCRIPTIONS": {
+        "DISCHARGE_TIME": "The default time it takes a driver to download products to a client.",
+        "ENDING_TIME": "Default time at which all routes will be terminated. In the event that there are deliveries scheduled to be made, they will be considered completed.",
+        "ROUTES_NEXT_DAY": "If checked, route optimization is assigned for the next day and not for the same day.",
+        "DRIVER_VERIFY_CLIENT_TIME": "If it is checked, the driver to reach a customer will have to verify the time he arrives at that customer.",
+        "FIELDS_TO_SHOW": "These are the attributes that will be shown in the routes and calculated routes sections, select the ones you want to appear by default.",
+        "USE_STORE_DATA": "These are the fields that will have persistence, in which the information that we have stored will prevail will prevail, while those that are off will obtain the data that we export externally either by API or by JSON / CSV.",
+        "HANDLING_STORED_DATA": "These are the fields that will be updated automatically as long as they are active, if they are active every time a modification is made from route planning, these fields will be updated in management. In case of not being marked the fields will be modified temporarily.",
+        "MIN_AVG_SERVICE_TIME": "This is the minimum time for a service to be taken into account when calculating the average time it takes to place orders.",
+        "MAX_ORDER_TIME": "Maximum time in which customer orders will be accepted. In case of placing an order later than this time, it will be added for the next day.",
+        "TINE_SEND_ORDERS_FOR_FTP": "Time when all orders that have been processed will be sent to the RP. In case of receiving an order later than that time, it will be added for the next day.",
+        "INTEGRATION_ERRORS": "E-mail to which the possible incidents of the integration will arrive (uploading files to the platform)."
+    },
+    "COST": {
+        "COST_VEHICLE": {
+            "TOTAL_COST": "Total cost",
+            "ACQUISITION_COST": "Acquisition cost",
+            "FUEL_COST": "Fuel cost",
+            "WORKSHOP_COST": "Workshop cost",
+            "INSURANCE_COST": "Insurance cost",
+            "DATE": "Date",
+            "VEHICLE": "Vehicle",
+            "TYPE": "type",
+            "PROVIDER": "Provider",
+            "CONCEPT": "Concept",
+            "UNI_LIT": "Uni/Lit",
+            "AMOUNT": "Amount",
+            "ATTACH": "Attach",
+            "REVISION": "Revision"
+        }
+    }
+}

@@ -1,0 +1,140 @@
+.modal-change-company {
+    @media (min-width: 576px) {
+        .modal-sm {
+            max-width: 342px;
+        }
+    }
+    .title-route {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 21px;
+        align-items: center;
+        color: #363740;
+    }
+    img {
+        vertical-align: sub;
+    }
+    .paragran-info {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        /* or 144% */
+        color: #000000;
+    }
+    .sub-title-p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+        /* or 144% */
+        color: #9899AA;
+        text-align: justify;
+    }
+    .btn-gray {
+        background: #E9E9E9;
+        border-radius: 5px !important;
+        color: #000000;
+        height: 40px;
+    }
+    .btn-primary {
+        height: 40px;
+        background: #24397C !important;
+        border-radius: 5px !important;
+    }
+    .company-selected {
+        // background-color: #eeeeee !important;
+        color: #24397c !important;
+        font-size: 16px !important;
+        line-height: 19px !important;
+        font-weight: 700 !important;
+        .company-address-menu {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            align-items: center;
+            color: #24397c;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .company-menu {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            align-items: center;
+            color: #24397c !important;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+    .company-select {
+        cursor: pointer;
+        max-width: 25.5rem !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        font-family: 'Roboto';
+        font-style: normal;
+        letter-spacing: 0.2px;
+        color: #000000;
+        .company-address-menu {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            align-items: center;
+            color: #9899AA;
+            ;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .company-menu {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            align-items: center;
+            color: #000000;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+    .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+        width: 100%;
+    }
+    .border-bottom-company {
+        border-bottom: 1px solid #DCE1E6;
+    }
+    .search {
+        width: 100%;
+        //display: inline-grid;
+        vertical-align: middle;
+        max-height: 399px;
+        overflow: auto;
+    }
+    .input-personalize-change {
+        border-radius: 5px !important;
+        padding: 10px 20px !important;
+        height: 34px !important;
+    }
+    .input-group-text {
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+    }
+}

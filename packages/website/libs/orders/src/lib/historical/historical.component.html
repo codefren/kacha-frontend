@@ -1,0 +1,65 @@
+<div class="easyroute-historical">
+
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-3">
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+            <div class="d-flex flex-row align-items-center justify-content-end pt-3">
+
+                <button class=" btn btn-icon btn-icon-white dropdown-toggle p-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                </button>
+
+                <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openPdf()">
+
+                        <img src="assets/icons/pdf1.svg" class="pr-2"> {{'ORDERS.DOWNLOAD_PREPARATION_HISTORY' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="openImportOrders()">
+
+                        <img src="assets/icons/import.svg" class="pr-2"> {{'ORDERS.IMPORT_PREPARATION_HISTORY' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="redirectOrder()">
+
+                        <img src="assets/icons/iconOrders.svg" class="pr-2"> {{ 'MENU.ORDERS' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="redirectPreparations()">
+
+                        <img src="assets/icons/iconPreparation.svg" class="pr-2"> {{ 'GENERAL.PREPARAION' | translate }}
+
+                    </a>
+
+                    <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="openSetting()">
+
+                        <img src="assets/icons/setting.svg" class="pr-2"> {{ 'SHEET_ROUTE.SETTING' | translate }}
+
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-xl-0 mt-5 text-center">
+                <p class="title">{{ 'ORDERS.ORDERS_HISTORICAL.HISTORICAL' | translate }}</p>
+            </div>
+        </div>
+    </div>
+
+    <easyroute-historical-preparation-list></easyroute-historical-preparation-list>
+
+</div>

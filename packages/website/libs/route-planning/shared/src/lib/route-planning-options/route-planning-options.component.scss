@@ -1,0 +1,88 @@
+.easyroute-route-planning-options {
+    .exploration-level-slider-container {
+        padding: 12px 24px;
+    }
+
+    .easyroute-common-options,
+    .easyroute-route-common-options {
+        width: 100%;
+
+        easyroute-route-delivery-schedule {
+            display: inherit;
+            padding: 0 24px;
+        }
+
+    }
+
+    .ordered-optimization-parameters-container {
+        height: fit-content;
+        padding: 8px 24px 0;
+
+        .optimization-parameters-list-outer {
+            height: 80%;
+        }
+
+        .title {
+            width: 100%;
+
+            h4 {
+                margin: 6px auto;
+            }
+        }
+    }
+
+    .app-input-number > mat-form-field {
+        margin-left: 10px;
+        width: 50px;
+    }
+
+    .exploration-level-container {
+        padding: 4px 24px;
+
+        .exploration-level-label {
+            margin-bottom: 6px;
+        }
+
+        .exploration-level-slider-container {
+            span {
+                margin: auto;
+                padding: 0 2px;
+            }
+
+            .mat-slider {
+                width: 230px;
+            }
+        }
+    }
+
+    .recalculate-route {
+        padding: 10px 24px;
+
+        .recalculate-route-label {
+            margin-bottom: 6px;
+            margin-top: 6px;
+        }
+
+        .recalculate-route-container {
+            .mat-form-field-infix {
+                width: 80px;
+            }
+        }
+    }
+
+    .custom-range::-webkit-slider-thumb {
+        background: #ff9e4d;
+      }
+      
+      .custom-range::-moz-range-thumb {
+        background: #ff9e4d;
+      }
+      
+      .custom-range::-ms-thumb {
+        background: #ff9e4d;
+      }
+
+      .free-optimization-parameters-container{
+          margin-top: 12px;
+      }
+}

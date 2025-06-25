@@ -1,0 +1,99 @@
+<div class="easyroute-add-vehicles-dialog">
+    <div id="modalForm">
+        <div class="col-md-12 col-12 text-right pt-2 ">
+            <i class="fas fa-times close-button point" (click)="cancelSelection()"></i>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10 text-center">
+                    <p class="title">
+                        {{ 'VEHICLES.ADD_VEHICLE' | translate }}
+                    </p>
+                    <!--   <hr class="line-primary" /> -->
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-10">
+                    <p class="title-page-add-vehicles-dialog line">
+                        {{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.AVAILABLE' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-10 mt-3">
+                    <div *ngFor="let v of availableVehicles; let j = index">
+                        <div class="custom-control-inline">
+                            <div class="round mr-4">
+                                <input (change)="addToSelected($event.target.checked, v.id)" type="checkbox" [id]="v.id" [value]="v.id" name="Vehicle" />
+                                <label [for]="v.id"></label>
+                            </div>
+
+                            <label class="options pointer" [for]="v.id">
+                                <p>
+                                    {{ v.name }} ({{ v.capacity }}u {{ v?.user?.name }} {{ v?.user?.surname }})
+                                </p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="availableVehicles.length === 0">
+                        <p class="text-justify">
+                            {{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.NO_VEHICLES_AVAILABLE' | translate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-10">
+                    <p class="title-page-add-vehicles-dialog line">
+                        {{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.ALREADY_IN_USE' | translate }}
+                    </p>
+                </div>
+
+                <div class="col-10 mt-3">
+                    <div *ngFor="let v of vehiclesInUse; let i = index">
+                        <div class="custom-control-inline">
+                            <div class="round mr-4">
+                                <input (change)="addToSelected($event.target.checked, v.id)" type="checkbox" [id]="v.id" [value]="v.id" name="Vehicle" />
+                                <label [for]="v.id"></label>
+                            </div>
+
+                            <label [for]="v.id">
+                                <p class="options pointer">
+                                    {{ v.name }} ({{ v.capacity }}u {{ v?.user?.name }} {{ v?.user?.surname }})
+                                </p>
+                            </label>
+                            
+                        </div>
+                    </div>
+
+                    <div *ngIf="vehiclesInUse.length === 0">
+                        <p class="text-justify">
+                            {{ 'ROUTE_PLANNING.ZONE.SETTINGS.ASSIGNED_VEHICLES.NO_USED_VEHICLES' | translate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-md-6 col-12 text-center text-md-right">
+                            <button class="btn btn-cancel size-btn-modal " (click)="cancelSelection()">
+                                {{ 'GENERAL.CANCEL' | translate }}
+                            </button>
+                        </div>
+
+                        <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                            <button class="btn size-btn-modal size-btn-modal-confirm" (click)="addSelection()">
+                                {{ 'GENERAL.ADD' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

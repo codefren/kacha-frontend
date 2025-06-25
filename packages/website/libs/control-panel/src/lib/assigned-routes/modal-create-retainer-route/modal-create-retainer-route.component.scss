@@ -1,0 +1,84 @@
+.title  {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 29px;
+
+    color: #000000 !important;
+
+
+}
+
+.optimroute-integration-table {
+    button {
+        font-size: 16px;
+    }
+    .btn-sm {
+        border-radius: 50%;
+        border: none;
+    }
+    .w {
+        width: 35%;
+    }
+    .withdTo {
+        width: 70px;
+    }
+    #search-modal {
+        height: 34px !important;
+    }
+}
+.btn-outline-primary {
+    border-radius: 20px !important;
+}
+
+
+.list {
+    border: 1px solid #DBE2E7;
+    border-radius: 20px;
+    max-height: 300px;
+    overflow-x: hidden;
+
+    .row {
+        padding-inline-start: 1rem;
+        padding-inline-end: 1rem;
+        
+        border: 0px !important;
+
+        .col-12 {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #DBE2E7;
+        }
+    }
+
+    span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        /* identical to box height */
+
+        letter-spacing: 0.2px;
+
+        color: #363740;
+
+    }
+
+    
+}
+
+.name-step {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    letter-spacing: 0.2px;
+
+    color: #3B4FFF;
+}

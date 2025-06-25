@@ -1,0 +1,337 @@
+<div class="general-merge-record font-general">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal"> {{ 'CLIENTS.DUPLICATE_CONTROL.MERGE_RECORD' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point">
+
+                <img src="assets/icons/close-cost.svg" (click)="closeDialog(false)">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal-body modal-p-b">
+
+        <!-- selecter -->
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 lines-conteiner">
+
+                <div class="row">
+
+                    <div class="col-xl-3 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'createGrouping'}" (click)="changePage('createGrouping')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'createGrouping'}">
+    
+                            {{ 'CLIENTS.DUPLICATE_CONTROL.CREATE_GROUPING' | translate }}
+    
+                        </label>
+                    </div>
+
+                    <div class="col-xl-4 col-6 text-center d-flex align-items-center flex-row justify-content-center point" [ngClass]="{'col-selecter': default === 'MergeWithExistingGroup'}" (click)="changePage('MergeWithExistingGroup')">
+
+                        <label class="no-selecter d-flex flex-row justify-content-center align-items-end point" [ngClass]="{'selecter': default === 'MergeWithExistingGroup'}">
+    
+                            {{ 'CLIENTS.DUPLICATE_CONTROL.MERGE_WITH_EXISTING_GROUP' | translate }}
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- END SELETER -->
+
+        <ng-container *ngIf="default === 'MergeWithExistingGroup'">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="row pt-2">
+                        <div class="input-group datatables-input-group-width ml-xl-2 mr-xl-2 mr-2 ml-1">
+                            <input id="search-modal" type="text" class="form-control search-general
+                                pull-right input-personalize-datatable" placeholder="Buscar" style="max-width: initial;">
+                            <span class="input-group-append input-group-appenda">
+                                <span class="input-group-text input-group-text-general table-append">
+                                    <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row optimroute-move-client-table pt-1">
+                        <div class="col-12 p-0">
+                            <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" id="merge_with_existing_group" style="text-align: center; width: 100%">
+                                <thead class="thead-new">
+                                    <tr>
+                                        <th style="border-left: 1px solid #7387c2 !important;"></th>
+                                        <th>ID</th>
+                                        <th>{{ 'GENERAL.NAME' | translate }}</th>
+                                        <th class="text-left" style="border-right: 2px solid #7387c2 !important;">{{ 'GENERAL.ADDRESS' | translate }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="default === 'createGrouping'">
+
+            <div class="row">
+
+                <!-- formulario  -->
+                <div class="col-xl-6 col-12">
+                    <form *ngIf="mergeRecordForm" [formGroup]="mergeRecordForm">
+                        <div class="row pl-2 pr-2">
+
+                            <div class="col-xl-12 col-12 mt-4">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger':mergeRecordForm.controls['name'].invalid 
+                                    && (mergeRecordForm.controls['name'].dirty 
+                                    || mergeRecordForm.controls['name'].touched) }">
+
+                                    <span class="has-float-label w-100">
+            
+                                    <input class="form-control point" formControlName="name"  id="name" type="text"  placeholder="{{ 'CLIENTS.DUPLICATE_CONTROL.BUSINESS_NAME' | translate }}"/>
+            
+                                    <label for="name" class="mt-2 title-col"> {{ 'CLIENTS.DUPLICATE_CONTROL.BUSINESS_NAME' | translate }} <span class="asterisco">* </span> </label>
+
+                                    </span>
+
+                                </div>
+
+                                <ng-container *ngFor="let validation of mergeRecord_messages.name">
+                                    <small class="form-control-feedback text-danger" *ngIf="mergeRecordForm.get('name').hasError(validation.type) 
+                                        && (mergeRecordForm.get('name').dirty || mergeRecordForm.get('name').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+
+                            <div class="col-xl-12 col-12 mt-3">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger':mergeRecordForm.controls['phone'].invalid 
+                                    && (mergeRecordForm.controls['phone'].dirty 
+                                    || mergeRecordForm.controls['phone'].touched) }">
+
+                                    <span class="has-float-label w-100">
+                
+                                        <input class="form-control point" formControlName="phone"  id="phone" type="text" placeholder="{{ 'CLIENTS.DUPLICATE_CONTROL.PHONE' | translate }}"/>
+                
+                                        <label for="phone" class="mt-2 title-col"> {{ 'CLIENTS.DUPLICATE_CONTROL.PHONE' | translate }} <span class="asterisco">* </span></label>
+
+                                    </span>
+
+                                </div>
+                                <ng-container *ngFor="let validation of mergeRecord_messages.phone">
+                                    <small class="form-control-feedback text-danger" *ngIf="mergeRecordForm.get('phone').hasError(validation.type) 
+                                        && (mergeRecordForm.get('phone').dirty || mergeRecordForm.get('phone').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+
+                            <div class="col-xl-12 col-12 mt-3">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger':mergeRecordForm.controls['address'].invalid 
+                                    && (mergeRecordForm.controls['address'].dirty 
+                                    || mergeRecordForm.controls['address'].touched) }">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" formControlName="address"  id="address" type="text" placeholder="{{ 'CLIENTS.DUPLICATE_CONTROL.ADDRESS' | translate }}" />
+                
+                                        <label for="address" class="mt-2 title-col"> {{ 'CLIENTS.DUPLICATE_CONTROL.ADDRESS' | translate }} <span class="asterisco">* </span></label>
+
+                                    </span>
+
+                                </div>
+
+                                <ng-container *ngFor="let validation of mergeRecord_messages.address">
+                                    <small class="form-control-feedback text-danger" *ngIf="mergeRecordForm.get('address').hasError(validation.type) 
+                                        && (mergeRecordForm.get('address').dirty || mergeRecordForm.get('address').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+
+                            <div class="col-xl-12 col-12 mt-3">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger':mergeRecordForm.controls['zipCode'].invalid 
+                                    && (mergeRecordForm.controls['zipCode'].dirty 
+                                    || mergeRecordForm.controls['zipCode'].touched) }">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" formControlName="zipCode"  id="zipCode" type="text" placeholder="{{ 'CLIENTS.DUPLICATE_CONTROL.POSTAL_CODE' | translate }}" />
+                
+                                        <label for="zipCode" class="mt-2 title-col"> {{ 'CLIENTS.DUPLICATE_CONTROL.POSTAL_CODE' | translate }} <span class="asterisco">* </span></label>
+
+                                    </span>
+
+                                </div>
+
+                                <ng-container *ngFor="let validation of mergeRecord_messages.zipCode">
+                                    <small class="form-control-feedback text-danger" *ngIf="mergeRecordForm.get('zipCode').hasError(validation.type) 
+                                        && (mergeRecordForm.get('zipCode').dirty || mergeRecordForm.get('zipCode').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+
+                            <div class="col-xl-12 col-12 mt-3 mb-4">
+
+                                <div class="form-group input-group" [ngClass]="{'has-danger':mergeRecordForm.controls['population'].invalid 
+                                    && (mergeRecordForm.controls['population'].dirty 
+                                    || mergeRecordForm.controls['population'].touched) }">
+
+                                    <span class="has-float-label w-100">
+            
+                                        <input class="form-control point" formControlName="population" id="population" type="text" placeholder="{{ 'CLIENTS.DUPLICATE_CONTROL.POPULATION' | translate }}" />
+                
+                                        <label for="population" class="mt-2 title-col"> {{ 'CLIENTS.DUPLICATE_CONTROL.POPULATION' | translate }} <span class="asterisco">* </span></label>
+
+                                    </span>
+
+                                </div>
+
+                                <ng-container *ngFor="let validation of mergeRecord_messages.population">
+                                    <small class="form-control-feedback text-danger" *ngIf="mergeRecordForm.get('population').hasError(validation.type) 
+                                        && (mergeRecordForm.get('population').dirty || mergeRecordForm.get('population').touched)
+                                    ">
+                                        {{ validation.message }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex">
+
+                    <div class="vr"></div>
+
+                </div>
+
+                <div class="col-xl-6 col-12 overflow-scroos">
+
+                    <div class="row ">
+
+                        <div class="col-xl-12 col-12  mt-3" *ngFor="let item of dataClient; let i = index;">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-1 d-flex flex-row">
+                                    <div class="round round-little margin-days">
+                                        <input type="radio" [id]="item.id + '-' + i" name="checkbox" (change)="changeSelect(item)" [checked]="firstRegister(item)" />
+
+                                        <label [for]="item.id + '-' + i"></label>
+                                    </div>
+
+                                    <label [for]="item.id + '-' + i" class="title-clients point">
+                                       {{ item.name}}
+                                    </label>
+                                </div>
+
+                                <div class="col-12">
+
+                                    <label for="allowVerifcationProductScanner" class="sub-title-phone point">
+                                        +{{ item.phone}}
+                                    </label>
+
+                                    <br>
+
+                                    <label for="allowVerifcationProductScanner" class="title-address point">
+                                        <span *ngIf="item.address">{{ item.address}}</span>
+                                        <span *ngIf="item.zipCode">, {{item.zipCode}}</span>
+                                        <span *ngIf="item.poputation">, {{item.poputation}}</span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+
+
+
+    <ng-container *ngIf="default === 'MergeWithExistingGroup'">
+
+        <div class="modal-footer">
+
+            <div class="row">
+
+                <div class="col-12 text-xl-right text-center">
+
+                    <button class="btn btn-cancel size-btn-modal modal-dismiss mr-2 mb-xl-0 mb-2" (click)="closeDialog(false)"> 
+                        {{ 'CLIENTS.DUPLICATE_CONTROL.CANCEL' | translate }} 
+                    </button>
+
+                    <button class="btn btn-primary btn-primary-grps size-btn-modal modal-confirm mb-xl-0 mb-2" (click)="acceptExistingGroup()" type="button" [ngClass]="{'btn-primary-desabled': selectedMerge.length === 0}"> 
+                        {{ 'CLIENTS.DUPLICATE_CONTROL.COMBINE_WITH_GROUP' | translate }} 
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="default === 'createGrouping'">
+
+        <div class="modal-footer">
+
+            <div class="row">
+
+                <div class="col-12 text-xl-right text-center">
+
+                    <button class="btn btn-cancel size-btn-modal modal-dismiss mr-2 mb-xl-0 mb-2" (click)="closeDialog(false)"> {{ 'CLIENTS.DUPLICATE_CONTROL.CANCEL' | translate }} </button>
+
+                    <button class="btn btn-primary size-btn-modal modal-confirm mb-xl-0 mb-2" [disabled]="mergeRecordForm && !mergeRecordForm.valid" (click)="acceptCreateGroup()" type="button"> {{ 'CLIENTS.DUPLICATE_CONTROL.CREATE_GROUP' | translate }} </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+</div>

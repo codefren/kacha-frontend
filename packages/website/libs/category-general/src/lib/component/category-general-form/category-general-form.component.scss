@@ -1,0 +1,41 @@
+.category-form {
+    .btn {
+        width: 100%;
+        text-transform: uppercase;
+    }
+    .btn-cancel {
+        color: white;
+        background-color: #cdcdcf;
+        border: none;
+    }
+    .card-img {
+        height: 93px;
+        width: 226px;
+        background: #f9f9f9;
+        display: inline-block;
+        margin: 0 auto;
+    }
+    .card-img+.card-img {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .card-add {
+        background: black;
+        opacity: 0.3;
+        color: white;
+    }
+    .img-load {
+        height: 91px;
+        width: 222px;
+    }
+    .btn-default {
+        color: white;
+        background-color: #ff9e4d;
+        border: none;
+    }
+    .style-subtitle-sub {
+        font-size: 15px;
+        color: #d1d1d1;
+        border-bottom: 1px solid #c1c1c1;
+    }
+}

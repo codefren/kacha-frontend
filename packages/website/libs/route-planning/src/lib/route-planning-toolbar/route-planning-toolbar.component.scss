@@ -1,0 +1,203 @@
+easyroute-route-planning-toolbar {
+
+    .btn {
+        min-height: 35px;
+        border-radius: 2px;
+    }
+
+    .btn-gris {
+        font-size: 0.8rem !important;
+        background-color: #fbfbfb;
+        color: black;
+        border: 1px solid #c2c2c2;
+        line-height: 12px;
+        height: 40px !important;
+
+        i,
+        img {
+            color: #f9b376 !important;
+        }
+    }
+    .width-28 {
+        width: 13.85vw !important;
+    }
+
+    .btn-primary {
+        font-size: 13px;
+    }
+
+    .input-group-text {
+        background-color: #fff;
+    }
+    .form-control:focus {
+        border-color: transparent !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    .checkbox-custom {
+        position: relative;
+        padding: 0 0 0 22px !important;
+        margin-bottom: 7px;
+        margin-top: 0;
+    }
+    .checkbox-custom input[type='checkbox']:checked + label:after {
+        position: absolute;
+        display: inline-block;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: '\F00C';
+        top: 50%;
+        left: 1px;
+        margin-top: -5px;
+        font-size: 11px;
+        line-height: 1;
+        width: 16px;
+        height: 16px;
+        color: #ffffff !important;
+    }
+    .checkbox-custom label:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -7px;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        border: 1px solid #ffffff;
+        background: #727272 !important;
+    }
+
+    .btn-loading {
+        color: #333;
+        background-color: transparent;
+        border-color: #ccc;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: none;
+    }
+    /* .button-plus {
+        padding-right: 12px;
+        // border-right: 1px solid #ddac864a;
+    } */
+
+    .margin-switch {
+        margin: 0 !important;
+    }
+
+    .btn-warning {
+        background-color: #ff9e4d;
+        color: #ffffff;
+    }
+
+    /* .btn-round {
+        border-radius: 10%;
+    } */
+
+    .row-nav {
+        min-height: 50px;
+        background-color: #e0e0e0; //#737373;
+        color: #151515; //#ffffff;
+    }
+
+    .rounded-button {
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+            0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+    }
+    .btn-import-plus {
+        font-size: 13px;
+    }
+    .btn-rounded-medium {
+        height: 40px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .btn-secondary {
+        font-size: 13px;
+    }
+    .btn-cancel {
+        font-size: 13px;
+        background-color: #aaaaaa;
+    }
+    .btn-dark {
+        background-color: #9B9B9B;;
+        border: none;
+        color: #ffffff;
+        font-size: 13px;
+        padding: 0.47rem 1.25rem;
+    }
+    .btn-gray-font {
+        font-size: 13px;
+        color: #797979;
+    }
+    .btn-white-font {
+        font-size: 13px;
+        color: #ffffff;
+    }
+    /* .bordered-col {
+        border-right: 1px solid #ddac864a;
+    } */
+
+    /* ipad Prod */
+
+    @media only screen and (max-width: 1024px) {
+    }
+
+    /* ipad custon */
+
+    @media only screen and (max-width: 768px) {
+        .checkbox-custom label {
+            cursor: pointer;
+            margin-bottom: 0;
+            text-align: left;
+            line-height: 1.5;
+            font-size: 8px;
+        }
+        .switch label {
+            cursor: pointer;
+            font-size: 10px;
+        }
+        .btn {
+            font-size: 12px;
+        }
+        .switch label .lever {
+            width: 18px;
+            height: 9px;
+        }
+        .switch label .lever:after {
+            width: 13px;
+            height: 13px;
+        }
+        .switch,
+        .switch * {
+            margin-left: 2px;
+        }
+        .btn-rounded-medium {
+            height: 30px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    .divider-asign {
+        color: #ff9e4d;
+    }
+
+    .searchBar-icon {
+        color: #989898 !important;
+    }
+
+    .result-search {
+        position: absolute;
+        top: 40px;
+        width: 100%;
+        z-index: 99999999;
+        max-height: 190px;
+        overflow-y: auto;
+    }
+}

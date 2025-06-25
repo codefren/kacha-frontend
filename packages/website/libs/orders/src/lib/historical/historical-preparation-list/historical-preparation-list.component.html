@@ -1,0 +1,76 @@
+<div class="easyroute-historical-preparation-list">
+
+
+
+
+
+    <!-- navs donde como va ir-->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 text-center mb-3">
+                <div class="row justify-content-center mb-3">
+                    <nav class="row group-btn">
+                        <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='preparation' }" (click)="changePage( 'preparation' )">
+                            <a class="text-center">{{ 'ORDERS.ORDERS_HISTORICAL.PREPARATION' | translate }}</a>
+                        </div>
+                        <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='orders' }" (click)="changePage( 'orders' )">
+                            <a class="text-center">{{ 'ORDERS.ORDERS_HISTORICAL.ORDERS' | translate }}</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center align-items-end">
+        <!-- <div class="col-md-9 col-12">
+            <span class="title-table">
+                {{ 'ORDERS.ORDERS_HISTORICAL.PREPARATION' | translate }}
+            </span>
+        </div> -->
+        <!--  <div class class="col-lg-3 col-sm-12 col-xs-12 text-center" (click)="filterOpen()">
+            <button class="btn btn-filter  pr-2 ml-3" >
+                <i class="fas fa-sliders-h"></i>
+                {{ 'GENERAL.FILTERS' | translate  }}
+            </button>
+        </div> -->
+        <div class="col-12 col-md-9 col-xl-10 col-lg-9 mt-3 mt-md-0 order-last order-md-first">
+            <span class="title-table">
+                {{ 'ORDERS.ORDERS_HISTORICAL.PREPARATION' | translate }}
+            </span>
+        </div>
+        <div class class="col-md-3 col-xl-2 col-lg-3 col-12 text-center pl-1 pl-sm-1 pl-md-1 pl-lg-5 pl-xs-1 pl-xl-5">
+            <button class="btn btn-filter  pr-2 ml-3" (click)="filterOpen()">
+                <i class="fas fa-sliders-h"></i>
+                {{ 'GENERAL.FILTERS' | translate  }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Datatable -->
+    <div class="table-content mt-2">
+        <table class="table table-striped table-bordered table-responsive-lg mb-0" id="historical_preparation" style="text-align: center; width: 100%;">
+            <thead>
+                <tr>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.STORE' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_LIST.ORDER' |translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_LIST.DATE' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.CLIENT' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.RECEPTION_DATE' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.DELIVER_DATE' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.ASSIGNED' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.ENTRY_TIME' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.ASSIGNED_ORDER' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.TICKET_ATTACHED' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.ORDER_DELIVERED' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.PREPARATION_TIME' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.TICKET_COST' | translate }}</th>
+                    <th>{{ 'ORDERS.ORDERS_HISTORICAL.SEE_TICKET' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+</div>

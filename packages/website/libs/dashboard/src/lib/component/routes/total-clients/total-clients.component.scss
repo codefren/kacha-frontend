@@ -1,0 +1,23 @@
+.easyroute-total-client {
+    .chart {
+        width: 100%;
+    }
+    .chart.chart-md {
+        height: 175px;
+    }
+    .total {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 20px;
+    }
+    .total-client-label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.25px;
+        color: #808080;
+    }
+}

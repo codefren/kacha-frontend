@@ -1,0 +1,190 @@
+<div class="modal-general-warning">
+
+    <div class="modal-header">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-12 text-xl-left text-center">
+
+                <label class="title-modal">  {{ 'DELIVERY_POINTS.ROUTE_DETAILS' | translate }} </label>
+
+            </div>
+
+            <div class="col-xl-6 col-12 text-xl-right text-center point" (click)="closeDialog()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <form [formGroup]="detailRouteForm" class="font-general">
+
+                <div class="col-12">
+
+                    <div class="form-row mt-3">
+
+                        <div class="col-xl-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" id="name" readonly type="text" placeholder="{{ 'DETAIL_CONTROL.NAME' | translate }}" formControlName="name"/>
+
+                                    <label for="name" class="mt-2 title-col"> {{ 'DETAIL_CONTROL.NAME' | translate }} </label>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" readonly id="statuId" type="text" placeholder="{{ 'DETAIL_CONTROL.STATE' | translate }}" formControlName="statuId"/>
+
+                                    <label for="statuId" class="mt-2 title-col"> {{ 'DETAIL_CONTROL.STATE' | translate }} </label>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-12 mt-3">
+
+                            <div class="form-group input-group">
+
+                                <span class="has-float-label w-100">
+
+                                    <input class="form-control point" readonly id="address" type="text" placeholder="{{ 'USERS.EMPLOYEE_NAME' | translate }}" formControlName="address"/>
+
+                                    <label for="address" class="mt-2 title-col"> {{ 'DETAIL_CONTROL.DIRECTION' | translate }} </label>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="row mt-2">
+
+        <div class="col-12">
+
+            <div class="table-content">
+
+                <table id="movementss" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%">
+
+                    <thead>
+                        <tr>
+                            <th style="border-left: 2px solid #7387c2 !important;">{{ "DETAIL_CONTROL.STATE" | translate }}</th>
+
+                            <th>{{ "DETAIL_CONTROL.UNAVAIBLE_CLIENT" | translate }}</th>
+
+                            <th>{{ "DETAIL_CONTROL.OBSERVATION" | translate }}</th>
+
+                            <th style="border-right: 1px solid #7387c2 !important;">{{ "DETAIL_CONTROL.DATETIME" | translate }}</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-right pt-2 pr-4">
+            <i class="fas fa-times close-button" (click)="closeDialog()"></i>
+        </div>
+        <div class="col-8 text-center">
+            <p class="title">{{ 'DELIVERY_POINTS.ROUTE_DETAILS' | translate }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-3 justify-content-center">
+        <form [formGroup]="detailRouteForm" class="font-general">
+            <div class="form-row form-group">
+                <div class="col-md-6 col-12 pl-0 pr-0">
+                    <div class="col-md-12">
+                        <label for="name">
+                            <b>{{ 'DETAIL_CONTROL.NAME' | translate }}</b>
+                        </label>
+                        <input type="text" id="name" readonly class="form-control" formControlName="name" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="address">
+                            <b>{{ 'DETAIL_CONTROL.DIRECTION' | translate }}</b>
+                        </label>
+                        <input type="text" id="address" readonly class="form-control" formControlName="address" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-12 pl-0 pr-0">
+                    <div class="col-md-12">
+                        <label for="statuId">
+                            <b>{{ 'DETAIL_CONTROL.STATE' | translate }}</b>
+                        </label>
+                        <input type="text" id="statuId" readonly class="form-control" formControlName="statuId" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row p-2 mt-5">
+                <div class="col-12">
+                    <div class="table-content">
+                        <table id="movementss" class="table table-bordered table-striped mb-0" style="text-align: center; width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>{{ "DETAIL_CONTROL.STATE" | translate }}</th>
+                                    <th>{{ "DETAIL_CONTROL.UNAVAIBLE_CLIENT" | translate }}</th>
+                                    <th>{{ "DETAIL_CONTROL.OBSERVATION" | translate }}</th>
+                                    <th style="border-right: 1px solid #7387c2 !important;">{{ "DETAIL_CONTROL.DATETIME" | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div> -->

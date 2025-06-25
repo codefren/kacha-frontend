@@ -1,0 +1,58 @@
+<div class="client-duplicate">
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="col-12 p-0 pt-2">
+                <p class="title-user mb-1"> {{'CLIENTS.CLIENTS_DUPLICATE.CLIENT_DUPLICATES' | translate }} </p>
+                <p class="sub-title-user mb-0"> {{'CLIENTS.CLIENTS_DUPLICATE.CLIENT_DUPLICATES_MESSAGE' | translate }} </p>
+            </div>
+        </div>
+    
+        <div class="card-footer pl-4 pr-4 pt-3">
+            <div class="col-md-12 col-12 pb-1 pr-0 pl-0 m-0">
+                <div class="form-row d-flex justify-content-xl-start justify-content-center align-items-end mb-2">
+
+                    <div class="m-1 size-btn">
+
+                        <div class="input-group datatables-input-group-width mr-xl-3 mr-3">
+                            <input id="search" type="text" class="form-control search-general
+                                pull-right input-personalize-datatable" placeholder="Buscar" style="max-width: initial;">
+                            <span class="input-group-append input-group-appenda">
+                                <span class="input-group-text input-group-text-general table-append">
+                                    <img class="icons-search" src="assets/icons/optimmanage2/icono-lupanaranja.svg">
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped table-bordered mb-0 mt-1 table-content-general" 
+                id="clientDuplicateTable" style="text-align: center ; width: 100%;">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="border-top-left-radius: 6px;">{{'CLIENTS.CLIENTS_DUPLICATE.NAME' | translate }}</th>
+
+                        <th>{{ 'CLIENTS.CLIENTS_DUPLICATE.PHONE' |translate }}</th>
+
+                        <th>{{ 'CLIENTS.CLIENTS_DUPLICATE.ADDRESS' |translate }}</th>
+
+                        <th>{{ 'CLIENTS.CLIENTS_DUPLICATE.POPULATION' | translate }}</th>
+
+                        <th >{{ 'CLIENTS.CLIENTS_DUPLICATE.POSTAL_CODE' | translate }}</th>
+                        
+                        <th style="border-top-right-radius: 6px;"></th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

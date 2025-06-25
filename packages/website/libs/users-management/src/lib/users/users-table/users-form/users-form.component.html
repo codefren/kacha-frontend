@@ -1,0 +1,162 @@
+<div class="optimroute-users-form p-3">
+
+    <!-- header -->
+    <div class="row mt-1 align-items-center">
+        <div class="col-xl-6 col-12">
+            <!-- <img class="img-returns point" src="assets/icons/retunrs.svg" *ngIf="me" routerLink="/management/users">
+            <img class="img-returns point" src="assets/icons/retunrs.svg" *ngIf="!me" routerLink="/users-management/users"> -->
+            <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()">
+            <label class="title-sheet pl-3"> {{ 'USERS.NAME' | translate }} </label>
+        </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="user">
+
+        <!-- division izquierda -->
+        <div class="col-xl-3 col-12 pr-xl-0">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="border-bottom p-4">
+                        <label class="style-info-1">Avatar Polpoo</label>
+                        <div class="row">
+                            <div class="col-12 col-lg-12 mt-2">
+                                <div class="card" (click)="loadImage()">
+                                    <img class="img-avatar-size" [src]="'assets/images/pages/users/avatars/'+imgLoad">
+
+                                    <div class="w-100 d-flex show-background point h-100 flex-column justify-content-end align-items-center pb-4">
+                                        <img class="point pb-2" src="assets/images/pages/users/icon-cambiar.svg">
+                                        <span>CAMBIAR AVATAR</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end error -->
+                        </div>
+                        <input type="file" hidden #fileAvatar accept="image/png, image/jpeg" (change)="fileChangeEvent($event)" />
+                    </div>
+                    <div class="border-bottom p-4">
+                        <label class="style-info-1">{{'USERS.NAME_AND_SURNAME' | translate }}</label>
+                        <p class="m-0 name-title ">{{ user.name }} {{ user.surname }}</p>
+                    </div>
+
+                    <ng-container *ngIf="!isPartnerType">
+
+                        <div class="border-bottom p-4">
+
+                            <label class="style-info-1">{{'USERS.TYPE_OF_EMPLOYEE' | translate }}</label>
+                            <br/>
+    
+                            <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
+                                <ng-container *ngFor="let item of userType">
+                                    <label class="btn btn-outline-primary btn-toggle" (click)="changeUserType(item.id)" [ngClass]="{'btnradio111': item.id == 1, 'btnradio112': item.id == 2, 'active':user && user.userType && user.userType.id === item.id}">
+                                   <input type="radio" [id]="'setting' + item.id" autocomplete="off"  [value]="item.id"> {{changeText(item.name)}}
+                                </label>
+                                </ng-container>
+    
+                            </div>
+    
+                        </div>
+                        
+                    </ng-container>
+                   
+                    <div class="border-bottom p-4">
+                        <label class="style-info-1">{{ 'USERS.STATE_USER' | translate }}</label>
+                        <div class="border-special">
+                            <div class="switch w-100">
+                                <label class="switch-width mb-0">
+                                    <input type="checkbox" [checked]="user.isActive" (change)="changeActive($event.target.checked)"/>
+                                    <span class="lever lever-general switch-col-primary m-2"></span>
+                                    <span class="lever-text">{{ 'GENERAL.ACTIVE' | translate }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom p-4">
+                        <label class="style-info-1">ID</label>
+                        <p class="m-0 name-title ">#{{user.id}}</p>
+                    </div>
+                    <div class="border-bottom p-4">
+                        <label class="style-info-1">{{ 'GENERAL.CREATION_DATE' | translate }}</label>
+                        <p class="m-0 name-title">{{returnsDate( user.createdAt )}}</p>
+                    </div>
+
+                    <div class="p-4">
+                        <label class="style-info-1">{{ 'GENERAL.CREATED_BY' | translate }}</label>
+                        <p class="m-0 name-title">{{ (user.created_by_user != '') ? user.created_by_user : 'No disponible' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- divison derecha -->
+        <div class="col-xl-9 col-12">
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'generic_information'}" (click)="changePage('generic_information')">
+                <label class="title-selected point" for=""> Información genérica </label>
+            </button>
+
+            <ng-container *ngIf="!isPartnerType">
+
+                <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'hours', 'no-point': user.id == 0}" (click)="changePage('hours')" [disabled]="user.id == 0">
+                    <label class="title-selected" [ngClass]="{'point': user.id > 0}" for=""> Actividad </label>
+                </button>
+    
+                <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'carnets', 'no-point': user.id == 0}" (click)="changePage('carnets')" [disabled]="user.id == 0">
+                    <label class="title-selected" [ngClass]="{'point': user.id > 0}" for=""> Ajustes </label>
+                </button>
+    
+                <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'documentation', 'no-point': user.id == 0}" (click)="changePage('documentation')" [disabled]="user.id == 0">
+                    <label class="title-selected" [ngClass]="{'point': user.id > 0}" for=""> Documentación </label>
+                </button>
+    
+                <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default" [ngClass]="{'no-selecter': select != 'costs', 'no-point': user.id == 0}" (click)="changePage('costs')" [disabled]="user.id == 0" *ngIf="ModuleCost() && showNotTraffic()">
+                    <label class="title-selected" [ngClass]="{'point': user.id > 0}" for=""> <img [ngClass]="{'point': user.id > 0}" src="assets/icons/coste.svg"> Costes </label>
+                </button>
+
+            </ng-container>
+           
+
+
+            <ng-container *ngIf="select === 'generic_information'">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <easyroute-users-generic-information [userTypeSelect]="userTypeSelect" [idParam]="idParam" [me]="me" [isActiveUser]="isActiveUser" [imgLoad]="imgLoad"></easyroute-users-generic-information>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'carnets'">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <easyroute-users-carnets [idParam]="idParam" [me]="me"></easyroute-users-carnets>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'hours'">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <easyroute-users-hours [idParam]="idParam" [userTypeSelect]="userTypeSelect" [isActiveUser]="isActiveUser"></easyroute-users-hours>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'documentation'">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <easyroute-users-documentation [idParam]="idParam"></easyroute-users-documentation>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="select === 'costs' && ModuleCost()">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <easyroute-users-costs [idParam]="idParam" [me]="me" [userTypeSelect]="userTypeSelect"></easyroute-users-costs>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+
+    </div>
+</div>

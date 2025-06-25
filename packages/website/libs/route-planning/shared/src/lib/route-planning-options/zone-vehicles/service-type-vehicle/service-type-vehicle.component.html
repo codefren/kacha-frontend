@@ -1,0 +1,21 @@
+<div class="row p-4">
+    <div class="col-11" *ngIf="vehicle">
+        <label class="vehicle-name">{{ vehicle.name }}</label>
+    </div>
+    <div class="col-1">
+        <img src="assets/icons/close.svg" (click)="close()">
+    </div>
+    <div class="col-12">
+        <div class="border-bottom pb-3">
+            <span class="esp-service">Especificaciones de servicios</span>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="vehicle">
+    <div class="row pl-4 pb-2 pr-4" *ngFor="let service of vehicle.vehicleServiceType">
+        <div class="col-12">
+            <span class="service-name"> {{ service.name }} </span>
+        </div>
+    </div>
+</ng-container>
+

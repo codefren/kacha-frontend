@@ -1,0 +1,60 @@
+<div class="modal-discard">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xl-8 col-12 text-xl-left text-center p-0">
+
+                <label class="title-modal"> {{ title }} </label>
+
+            </div>
+
+            <div class="col-xl-4 col-12 text-xl-right text-center point p-0" (click)="close()">
+
+                <img src="assets/icons/close-cost.svg">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="title-infor"> {{ Subtitle }} </p>
+
+            </div>
+
+            <!-- sumary -->
+
+            <div class="col-12 mt-xl-0 mt-2">
+
+                <p class="sub-title">{{message}}</p>
+            </div>
+
+
+
+            <!-- end sumary -->
+
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-12 text-xl-right text-center p-xl-0">
+                <button class="btn btn-default mr-2" (click)="close()"> {{ 'REPORT.CLOSE'| translate }} </button>
+
+                <button [className]="cssStyle" (click)="donwloadFilter()"> {{ accept }} </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

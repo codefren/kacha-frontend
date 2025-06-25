@@ -1,0 +1,630 @@
+<ng-container *ngIf="hideMultidelegation()">
+
+    <div class="multi-storage" *ngIf="showStoreManagent()">
+
+        <!--PREGO_MANAGEMENT-->
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                <label class="title-left-sheet"> {{ 'MODULES.PREGO_APP_MANAGEMENT' | translate }} </label>
+            </div>
+        </div>
+
+        <!-- Rebotar pedido automáticamente -->
+        <div class="card mt-3">
+
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <div class="col-xl-12 col-12">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+    
+                                <input type="checkbox"
+                                            (change)="changeaReturnToMailBoxOrder($event.target.checked)"
+                                            [checked]="(appPreferences$ | async).returnToMailBoxOrder" />
+    
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                <span class="title-toggle toogle-style"> {{ 'MODULES.AUTOMATIC_REBOUND_ORDER' | translate }} </span>
+    
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <p class="sub-title-road mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> {{ 'MODULES.TEXT_AUTOMATIC_REBOUND_ORDER' | translate }} </p>
+
+                    </div>
+
+                    <ng-container *ngIf="(appPreferences$ | async).returnToMailBoxOrder">
+
+                        <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3">
+                            <div class="form-group">
+
+                                <div class="form-group input-group">
+                                    <span class="has-float-label w-100">
+                                        <input type="text" class="form-control form-input" type="number" [value]="(appPreferences$ | async).timeReturnToMailBoxOrder" (focusout)="changeaTimeReturnToMailBoxOrder($event.target.value)" placeholder="{{
+                                            'MODULES.MAX_TIME_REBOUND'
+                                                | translate
+                                        }}" />
+            
+                                        <label for="first" class="mt-2 title-col size-secund"> {{'MODULES.MAX_TIME_REBOUND' | translate }} </label>
+                                    </span>
+                                    <div class="w-100 text-left" *ngIf="showErrorEmail">
+                                        <small class="form-control-feedback text-danger">
+                                            Debe tener el formato abcd@gmail.com.
+                                    </small>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <ng-container *ngIf="(payment$ | async)">
+
+            <!-- Aplicar cargo por envío de pedido -->
+            <div class="card mt-3">
+
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-12">
+
+                            <div class="">
+
+                                <div class="border-special">
+
+                                    <div class="switch w-100">
+
+                                        <label class="switch-width mb-0">
+            
+                                                <input type="checkbox"
+                                                (change)="changeSumDeliveryPriceToTicket($event.target.checked)"
+                                                [checked]="(payment$ | async).sumDeliveryPriceToTicket" />
+            
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+                    
+                                                <span class="lever-text toogle-style"> {{ 'MODULES.APPLY_CHARGE_OF_DELIVERY' | translate }} </span>
+                    
+                                            </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <p class="sub-title-road mb-0 mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'MODULES.TEXT_CHARGE_OF_DELIVERY' | translate }}{{ moneySymbol }}. </p>
+                            <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'MODULES.TEXT_CHARGE_OF_DELIVERY_1' | translate }}. </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Aplicar cargo de pedido mínimo no superado -->
+            <div class="card mt-3">
+
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-12">
+
+                            <div class="">
+
+                                <div class="border-special">
+
+                                    <div class="switch w-100">
+
+                                        <label class="switch-width mb-0">
+            
+                                                <input type="checkbox"
+                                                (change)="changeSumQuantityBuyWithoutMinimunToTicket($event.target.checked)"
+                                                [checked]="(payment$ | async).sumQuantityBuyWithoutMinimunToTicket" />
+            
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+                    
+                                                <span class="lever-text toogle-style"> {{ 'MODULES.APPLY_MINIMUM_ORDER_CHARGES_NOT_EXCEEDED' | translate }} </span>
+                    
+                                            </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <p class="sub-title-road mb-0 mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'MODULES.TEXT_CHARGE_OF_MINIUM_WITHOUT_AMOUNT' | translate }}. </p>
+                            <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'MODULES.TEXT_CHARGE_OF_MINIUM_WITHOUT_AMOUNT_1' | translate }} </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modificar el estado del pedido -->
+            <div class="card mt-3">
+
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-12">
+
+                            <div class="">
+
+                                <div class="border-special">
+
+                                    <div class="switch w-100">
+
+                                        <label class="switch-width mb-0">
+            
+                                                <input type="checkbox"
+                                                (change)="changeAllowChangeOrderPaymentStatus($event.target.checked)"
+                                                [checked]="(payment$ | async).allowChangeOrderPaymentStatus" />
+            
+                                                <span class="lever lever-general switch-col-primary m-2"></span>
+                    
+                                                <span class="lever-text toogle-style"> {{ 'MODULES.MODIFY_ORDER_STATUS' | translate }} </span>
+                    
+                                            </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <p class="sub-title-road mb-0 mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'MODULES.IF_YOU_ACTIVATE_THIS_OPTION_YOU_ALLOW_THE_PREPARERS_TO_MODIFY_THE_STATUS_OF_THE_ORDER_ONLY_AND_THE_OR' | translate }} </p>
+                            <p class="sub-title-road mt-xl-0 mt-1 pl-xl-5 ml-xl-4"> {{ 'MODULES.IF_A_PREPARER_CHANGES_THE_STATUS_OF_THE_ORDER_IT_WLL_BE_NOTIFIED_THROUGH_THE_POLPOO_NOTIFICATION_PANEL' | translate }} </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </ng-container>
+
+
+
+        <!-- STORE_MANAGEMENT -->
+        <div class="row">
+            <div class="col-xl-6 col-12 text-xl-left text-center mt-4 mb-4">
+                <label class="title-left-sheet"> {{ 'MODULES.STORE_MANAGEMENT' | translate }} </label>
+            </div>
+        </div>
+
+        <!-- Radio de alcance -->
+        <div class="card">
+
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <div class="col-xl-12 col-12 pl-xl-4">
+
+                        <p class="toogle-style"> {{ 'MODULES.RANGE_RADIUS' | translate }} </p>
+
+                        <p class="sub-title-road m-0"> {{ 'MODULES.THE_RADIUS_OF_REACH_IS_THE_MAXIMUN_DISTANCE' | translate }} </p>
+                        <p class="sub-title-road mt-xl-0 mt-0"> {{ 'MODULES.ADD_THE_DIRECTION_THAT_WILL_DETERMINE_THE_MIDPOINT' | translate }} </p>
+
+                    </div>
+
+                </div>
+
+                <div class="row pl-xl-3">
+
+                    <div class="col-xl-4 col-md-6 col-12 pl-xl-1">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+    
+                                <input type="text" class="form-control form-input" [(ngModel)]="directionCalculations" (change)="
+                                    directionCalculationChanged = true
+                                    " type="text" (blur)="directionCalculation()" (keyup.enter)="directionCalculation()" placeholder="{{
+                                        'MODULES.DIRECTION_FOR_RADIUS_CALCULATION'
+                                            | translate
+                                    }}" />
+    
+                                <label for="first" class="mt-2 title-col"> {{ 'MODULES.DIRECTION_FOR_RADIUS_CALCULATION' | translate }} </label>
+    
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 col-12 mt-xl-0 mt-md-0 mt-3">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+    
+                                <input type="number" class="form-control form-input" id="rangeDistances" type="number" min="0" max="9999999" onKeyPress="if(this.value.length==8) return false;" (change)="rangeDistanceChange = true" [(ngModel)]="rangeDistances" (blur)="rangeDistance()"
+                                (keyup.enter)="
+                                    rangeDistance(rangeDistances)
+                                " placeholder="{{
+                                    'MODULES.DEFINES_THE_RANGE_DISTANCE_IN_KM'
+                                        | translate
+                                }}" required step="0.01" />
+    
+                                <label for="first" class="mt-2 title-col"> {{ 'MODULES.DEFINES_THE_RANGE_DISTANCE_IN_KM' | translate }} </label>
+    
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Cobros -->
+        <div class="card mt-3">
+
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <div class="col-xl-12 col-12 pl-xl-4">
+
+                        <p class="toogle-style"> {{ 'MODULES.PAYMENT' | translate }} </p>
+
+                    </div>
+
+                </div>
+
+                <div class="row pl-xl-3">
+
+                    <div class="col-xl-4 col-md-6 col-12 pl-xl-1">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+    
+                                <input type="number" class="form-control form-input" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;" [(ngModel)]="minPayment" (input)="
+                                        onchangeEvent(
+                                            $event.target.value,
+                                            'minPayment'
+                                        )
+                                    " (change)="minPaymentChange = true" (blur)="RangeMinPayment()" (keyup.enter)="RangeMinPayment()" placeholder="{{
+                                        'MODULES.MINIMUN_AMOUNT_OF_PURCHASE'
+                                            | translate
+                                    }}" required step="0.01" />
+    
+                                <label for="first" class="mt-2 title-col"> {{ 'MODULES.MINIMUN_AMOUNT_OF_PURCHASE' | translate }} </label>
+
+                                <ng-container *ngIf="!patter() && minPayment > 0">
+                                    <small class="form-control-feedback text-danger">
+                                        {{
+                                        'GENERAL.THE_MINIMUN_PURCHASE_QUANTITY_CANNONT_BE_GREAR_THAN'
+                                        | translate
+                                        }}
+                                    </small>
+                                </ng-container>
+    
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 col-12 mt-xl-0 mt-md-0 mt-3">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+    
+                                <input type="number" class="form-control form-input" id="prepaidPayment" type="number" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;" [(ngModel)]="prepaidPayment" (input)="
+                                    onchangeEvent(
+                                        $event.target.value,
+                                        'prepaidPayment'
+                                    )
+                                    " (change)="prepaidPaymentChange = true" (blur)="RangePrepaidPayment()" (keyup.enter)="RangePrepaidPayment()" placeholder="{{
+                                        'MODULES.PREPAID_AMOUNT' | translate
+                                    }}" required step="0.01" />
+
+
+                                <label for="first" class="mt-2 title-col"> {{ 'MODULES.PREPAID_AMOUNT' | translate }} </label>
+
+                                <ng-container *ngIf="
+                                            !patterMinPayment() &&
+                                            prepaidPayment > 0
+                                        ">
+                                    <small class="form-control-feedback text-danger">
+                                        {{
+                                        'GENERAL.THE_PREPAYMENT_AMOUNT_CANNOT_BE_MORE_THAN'
+                                        | translate
+                                        }}
+                                    </small>
+                                </ng-container>
+    
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+
+                    <div class="col-xl-12 col-12">
+
+                        <div class="switch w-100">
+
+                            <label class="switch-width mb-0">
+    
+                                <input type="checkbox"
+                                            (change)="changeallowBuyWithoutMinimun($event.target.checked)"
+                                            [checked]="allowBuyWithoutMinimun" />
+    
+                                <span class="lever lever-general switch-col-primary m-2"></span>
+    
+                                <span class="title-toggle toogle-style"> {{ 'MODULES.ALLOW_CHARGING_WITHOUT_MEETING_THE_PURCHASE_AMOUNT' | translate }} </span>
+    
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <p class="sub-title-road mb-2 mt-xl-0 mt-0 pl-xl-5 ml-xl-4"> Si activas esta opción permites que los usuarios puedan realizar compras sin cumplir con la cantidad mínima requerida en la configuración. </p>
+
+                    </div>
+
+                    <ng-container *ngIf="allowBuyWithoutMinimun">
+
+                        <div class="col-12 col-lg-4 col-md-4 padding-l-hidden mt-xl-2 mt-3">
+                            <div class="form-group">
+
+                                <div class="form-group input-group">
+                                    <span class="has-float-label w-100">
+                                        <input type="number" class="form-control form-input" id="quantityBuyWithoutMinimum" type="number" min="1" max="9999999" onKeyPress="if(this.value.length==9) return false;" [(ngModel)]="quantityBuyWithoutMinimun" (input)="
+                                            onchangeEvent(
+                                                $event.target.value,
+                                                'quantityBuyWithoutMinimum'
+                                            )
+                                        " (change)="allowBuyWithoutMinimumChange = true" (blur)="ChangequantityBuyWithoutMinimumt()" (keyup.enter)="ChangequantityBuyWithoutMinimumt()" placeholder="{{'MODULES.QUANTITY_IF_IT_DOES_NOT_EXCEED_THE_MINIMUN_QUANTITY' |translate }}"
+                                        required step="0.01" />
+            
+                                        <label for="first" class="mt-2 title-col size-secund"> {{'MODULES.QUANTITY_IF_IT_DOES_NOT_EXCEED_THE_MINIMUN_QUANTITY' | translate }} </label>
+                                    </span>
+                                </div>
+                                <ng-container *ngIf="
+                                        !patterQuantityBuyWithoutMinimum() &&
+                                        quantityBuyWithoutMinimun > 0
+                                    ">
+                                    <small class="form-control-feedback text-danger">
+                                        {{
+                                        'GENERAL.THE_MINIMUN_QUANTITY_CANNOT_BE_GREATER'
+                                        | translate
+                                        }}
+                                    </small>
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Fecha límite de pedido -->
+        <div class="card mt-3">
+
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <div class="col-xl-12 col-12 pl-xl-4">
+
+                        <p class="toogle-style"> {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.SUBTITLE' | translate }} </p>
+
+                        <p class="sub-title-road"> {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.MESSAGE' | translate }} </p>
+
+                    </div>
+
+                </div>
+
+                <div class="row pl-xl-3">
+
+                    <div class="col-xl-4 col-md-6 col-12 pl-xl-1">
+
+                        <div class="form-group input-group">
+
+                            <span class="has-float-label w-100">
+    
+                                <input type="number" class="form-control form-input" #orderLimitDay min="1" max="9999999" [value]="(appPreferences$ | async)
+                                .orderLimitDay" (focusout)="rangeAppOrderLimitDay(
+                                    $event.target.value
+                                )" placeholder="{{ 'PREFERENCES.APP.ORDER_APP_LIMIT.INPUT_PLACEHOLDER' | translate }}" step="1.00" />
+    
+                                <label for="first" class="mt-2 title-col"> {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.INPUT_LABEL' | translate }} </label>
+
+                                <ng-container *ngIf="orderLimitDay.value < 0">
+                                    <small class="form-control-feedback text-danger">
+                                        {{ 'PREFERENCES.APP.ORDER_APP_LIMIT.ERROR_1' | translate }}
+                                    </small>
+                                </ng-container>
+    
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Manejo de tarifas de entregas -->
+        <div class="card mt-3" *ngIf="showStoreManagent() && PreferenceDelivery">
+
+            <div class="card-body p-4">
+                <p class="card-title"> {{ 'MODULES.HANDLING_OF_DELEVERY_RATES' | translate }} </p>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <div class="w-100 d-flex flex-sm-row flex-column align-items-center justify-content-sm-between m-0 p-0">
+                                    <div class="col-md-10 col-7 p-0">
+                                        <span>{{ 'MODULES.DELIVERY_RATES' | translate }}</span>
+                                    </div>
+                                    <div class="col-md-2 col-5 p-0 text-sm-right">
+                                        <button class="btn btn-add card-button mt-2 mt-sm-0" type="button" title="{{ 'GENERAL.ADD_DELIVERY' | translate }}" (click)="addDeliveryRate()">
+                                            <label>{{ 'GENERAL.ADD_RATE' | translate }}</label>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-content">
+                                    <table class="table table-responsive table-responsive-lg mb-0" *ngIf="(delivery$ | async) &&  (delivery$ | async).length > 0">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="text-center" style="width:10%;">{{ 'MODULES.ORDER_IN_THE_APP' | translate }}</th>
+                                                <th class="text-center" style="width:20%;">{{ 'MODULES.DELIVERY_NAME' | translate }}</th>
+                                                <th class="text-center" style="width:15%;">{{ 'MODULES.MINIMUN_TIME' | translate }}</th>
+                                                <th class="text-center" style="width:15%;">{{ 'MODULES.MAXIMUN_TIME' | translate }}</th>
+                                                <th class="text-center" style="width:20%;">{{ 'GENERAL.PRICE' | translate }}</th>
+                                                <th class="text-center" style="width:10%;">{{ 'MODULES.SHOW_IN_APP' | translate }}</th>
+                                                <th class="text-center" style="width:10%;">{{ 'MODULES.EXPRESS_DELIVERY' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let item of orderby(delivery$ | async); let i = index; trackBy:deliveryId" [ngClass]="{'bg-white': i % 2 == 0, 'bg-gray': i % 2 > 0 }">
+                                            <tr>
+                                                <td class="input-table">
+                                                    <input class="input-table text-center td-price " size="20" style="text-align: center;" type="number" min="0" (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        item,
+                                                        'order'
+                                                    )" class="form-control" [value]="item.order ? item.order:0" />
+                                                </td>
+                                                <td data-title="Company" class="text-center">
+                                                    <input class="input-table" style="text-align: center;" type="text" (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        item,
+                                                        'name'
+                                                    )" class="form-control" [value]="item?.name" />
+                                                </td>
+                                                <td data-title="Company" class="text-center">
+                                                    <input class="input-table text-center" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        item,
+                                                        'minTime'
+                                                    )" class="form-control" [value]="item?.minTime | dayTime" />
+                                                </td>
+                                                <td data-title="Company" class="text-center">
+                                                    <input class="input-table text-center" style="text-align: center;" type="time" format="HH:mm" (focusout)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        item,
+                                                        'maxTime'
+                                                    )" class="form-control" [value]="item?.maxTime | dayTime" />
+                                                </td>
+                                                <td data-title="Company" class="text-center pl-1">
+                                                    <input class="input-table text-center" #input [ngClass]="{
+                                                    'error-price':!patterPrice(input.value ?  input.value : '') || input.value > 99999 }" title="" style=" text-align: center;" type="number" min="1" max="99999" onKeyPress="if(this.value.length==9) return false;"
+                                                        (change)="
+                                                    changePrice(
+                                                        $event.target.value,
+                                                        item,
+                                                        'price'
+                                                    )" class="form-control" (blur)="patterPrice(input.value)" (keyup.enter)="patterPrice(input.value)" [value]="item?.price" required step="0.01" />
+
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <div class="round">
+                                                        <input type="checkbox" [id]="'isActiveitem' + item.id" [checked]="item.isActive" (change)="activeDeliveryRates($event.target.checked,item)" />
+                                                        <label [for]="'isActiveitem'+ item.id"></label>
+                                                    </div>
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <div class="round">
+                                                        <input type="checkbox" [id]="'expresstem' + item.id" [checked]="item.express" (change)="activeExpressDeliveryRates($event.target.checked,item)" />
+                                                        <label [for]="'expresstem'+ item.id"></label>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                    <h5 class="text-center data-avalilable" *ngIf="(delivery$ | async) && (delivery$ | async).length === 0">
+                                        {{ 'GENERAL.NO_CUSTOMER_DATA_AVALILABLE' | translate }}
+                                    </h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- preferencias de horarios -->
+        <div class="card mt-3" *ngIf="showStoreManagent() && PreferenceDelivery">
+            <div class="card-body p-4">
+
+                <easyroute-schedules-preferences></easyroute-schedules-preferences>
+
+            </div>
+        </div>
+
+    </div>
+
+</ng-container>

@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.org/websocket-services: staging-jobs-api
+  labels:
+    app: staging
+    release: staging
+  name: staging-jobs-api
+  namespace: jobs-api
+spec:
+  rules:
+  - host: staging.jobs.optimroute.com
+    http:
+      paths:
+      - backend:
+          serviceName: staging-jobs-api
+          servicePort: 5000
+        path: /
+  tls:
+  - hosts:
+    - staging.jobs.optimroute.com
+    secretName: staging-jobs-api-tls

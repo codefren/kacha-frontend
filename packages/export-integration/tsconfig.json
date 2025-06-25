@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "declaration": true,
+        "strict": true,
+        "strictNullChecks": false,
+        "noImplicitReturns": true,
+        "skipLibCheck": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": false,
+        "removeComments": true,
+        "resolveJsonModule": true,
+        "noLib": false,
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es6",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "noImplicitAny": false,
+    },
+    "exclude": ["node_modules", "dist", "fixtures"]
+}

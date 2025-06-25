@@ -1,0 +1,176 @@
+<div class="company-profile-form font-new-style p-3">
+
+    <!-- header -->
+
+    <div class="row mt-3 align-items-center">
+
+        <div class="col-xl-6 col-12">
+
+            <!--   <img class="img-returns point" src="assets/icons/retunrs.svg" (click)="returnsList()"> -->
+
+            <label class="title-sheet pl-3"> {{ 'COMPANY_PROFILE.NAME' | translate }} </label>
+
+        </div>
+
+        <div class="col-xl-6 col-12 text-right">
+
+
+
+            <!--  <button class="mb-1 mt-xl-0 mt-1 mr-2 btn btn-default" (click)="openModalViewPdf()">
+
+                <img src="assets/icons/donwload.svg">
+
+            </button> -->
+
+            <!-- <button class="btn btn-primary">
+
+                <img src="assets/icons/text.svg">
+
+                {{ 'SHEET_ROUTE.CHECK_ROUTES' | translate }}
+
+            </button> -->
+        </div>
+
+    </div>
+
+    <!-- end header -->
+
+    <div class="row mt-3">
+
+        <!-- division izquierda -->
+
+        <div class="col-xl-3 col-12 pr-xl-0">
+
+            <div class="card">
+
+                <div class="card-body" style="display: block;">
+
+
+                    <div class="row">
+
+
+                        <div class="col-12">
+
+                            <p class="title-add"> {{ 'COMPANY_PROFILE.IMG_' | translate }} </p>
+
+                        </div>
+
+
+
+                        <!-- cargar y ver imagen -->
+
+                        <div class="col-12 text-center">
+
+
+
+
+                            <div class="card">
+
+                                <!-- si no hay nada -->
+
+                                <ng-container *ngIf="profile && profile.company && profile.company.urlLogo === null && !cardImageBase64">
+
+                                    <img class="size-img point" src="assets/icons/logo.svg" (click)="fileAddImage.click()">
+
+                                </ng-container>
+
+                                <!-- end si no hay nada -->
+
+                                <!-- si hay imagen -->
+
+                                <ng-container *ngIf="(profile && profile.company && profile.company.urlLogo && profile.company.urlLogo !== null) || cardImageBase64">
+
+                                    <div class="size-hover1 d-flex show-background point h-100 flex-column justify-content-center align-items-center">
+
+                                        <i class="fas fa-camera fa-3x" title="{{ 'GENERAL.ADD' | translate }}" (click)="fileAddImage.click()"></i>
+
+                                    </div>
+
+                                    <img class="size-profile point" [src]="cardImageBase64" *ngIf="cardImageBase64" (click)="fileAddImage.click()">
+
+                                    <img class="size-profile point" [src]="profile.company.urlLogo + '?' + date.getTime()" (click)="fileAddImage.click()" *ngIf="profile && profile.company && profile.company.urlLogo !== null && !cardImageBase64">
+
+                                </ng-container>
+
+                                <!-- en si hay imagenes -->
+
+                            </div>
+
+                        </div>
+
+                        <!-- end cargar y ver imagen -->
+
+                        <!-- error -->
+
+                        <div class="col-12 text-center mt-3" *ngIf="imageError && imageError.length > 0">
+
+                            <span class="text-danger">{{ imageError }}</span>
+
+                        </div>
+
+                        <!-- end error -->
+
+
+
+                        <!-- input hidden type file -->
+
+                        <input type="file" hidden #fileAddImage accept="image/png, image/jpeg" (change)="fileChanceEvent($event)" />
+
+                        <!-- end input hidden type file -->
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'COMPANY_PROFILE.PROFILE' | translate }} </label>
+
+                    <p class="mb-2 name-title "> {{ email }} </p>
+
+                </div>
+
+                <div class="card-footer" style="display: block;">
+
+                    <label class="style-info"> {{'COMPANY_PROFILE.DISCHARGE_DATE' | translate }} </label>
+
+                    <p class="m-0 name-title "> {{returmDatehigh(profile.company.createdAt)}} </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end division izquierda -->
+
+        <!-- divison derecha -->
+
+        <div class="col-xl-9 col-12">
+
+            <!--   <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'sheetRoute'}" (click)="changePage('sheetRoute')">
+
+                <label class="title-selected point" for=""> {{ 'COMPANY_PROFILE.GENERIC_INFORMATION' | translate }} </label>
+
+            </button>
+
+            <button class="mb-2 mt-xl-0 mt-3 mr-2 btn btn-default alt-btn-default point" [ngClass]="{'no-selecter': select != 'deliveryNotes'}" (click)="changePage('deliveryNotes')">
+
+                <label class="title-selected point" for=""> {{'COMPANY_PROFILE.EXERCISE' | translate }} </label>
+
+            </button> -->
+
+            <easyroute-generic-information></easyroute-generic-information>
+
+            
+
+            <easyroute-exercise  *ngIf="ModuleCost()"></easyroute-exercise>
+
+        </div>
+
+        <!-- end divison derecha -->
+
+    </div>
+
+</div>

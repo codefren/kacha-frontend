@@ -1,0 +1,51 @@
+.StripeElement {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+
+.btn {
+    width: 100%;
+}
+
+.btn-default {
+    color: white;
+    background-color: #ff9e4d;
+    border: none;
+}
+
+.card-header{
+    border-bottom: 0px solid #dadada;
+    background: #ffffff;
+}
+
+.title {
+    color: #494747 !important;
+    font-size: 15px !important;
+}
+
+img {
+    width: 90px;
+}

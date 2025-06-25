@@ -1,0 +1,87 @@
+@import '../../../../../apps/easyroute/src/common';
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    line-height: 1.3 !important;
+}
+
+@media (max-width: 576px) {
+    .break-line {
+        margin-top: 1.2em;
+    }
+    .row-card {
+        margin-bottom: 45px;
+    }
+    .session-button {
+        margin-top: 20px;
+    }
+    .space-between {
+        margin-top: 20px;
+    }
+}
+
+.description {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.easyroute-profile-settings {
+    .title {
+        color: #000000 !important;
+        margin: 0 0px !important;
+        font-size: 15px !important;
+        border-bottom: 0.5px solid #24397C;
+    }
+    .line-primary {
+        background-color: #24397c !important;
+        margin: 4px 0 !important;
+    }
+    .form-row {
+        margin-bottom: 10px !important;
+    }
+    .form-label,
+    .form-input,
+    .form-select,
+    .form-select-option,
+    small {
+        font-size: 14px !important;
+    }
+    .thumbnail {
+        max-width: 300px;
+        border-radius: 1px;
+        position: relative;
+        margin-bottom: 0px !important;
+    }
+    img {
+        max-height: 150px;
+    }
+    .show-background {
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        i {
+            color: transparent;
+        }
+    }
+    .show-background:hover {
+        background: rgba(0, 0, 0, 0.6);
+        transition: 0.3s ease background;
+        i {
+            color: white;
+        }
+    }
+    .note {
+        color: #8e8e8e;
+        font-size: 12px;
+    }
+    .profile-key {
+        font-size: 16px !important;
+        color: #4c4c4c;
+    }
+    @media screen and (min-width: 320px) and (max-width: 767px) {
+        button {
+            margin-bottom: 10px;
+        }
+    }
+}

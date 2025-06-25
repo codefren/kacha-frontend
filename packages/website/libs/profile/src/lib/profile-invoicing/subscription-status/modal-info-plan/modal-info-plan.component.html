@@ -1,0 +1,36 @@
+<div clas="container">
+    <div class="row mt-5">
+        <div class="col-8 offset-2 text-left" [style.borderColor]="plan.color">
+            <div style="display: inline-grid;">
+                <img [src]="'/assets/icons/software.svg'" class="icon-software text-left">
+                <h3 class="font-weight-bold name-plan mt-0" [style.color]="plan.color">
+                    {{ plan.name }}
+                </h3>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2 text-left description">
+            <p class="m-0" [innerHTML]="plan.description">
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2 text-left description">
+            <hr style="height:1px; width:50%; border-width:0" [style.backgroundColor]="plan.color"
+                [style.color]="plan.color">
+        </div>
+    </div>
+    <div class="row pb-5">
+        <div class="col-9 offset-2 text-left benefits">
+            <ul>
+                <li class="p-0 pb-3" *ngFor="let benefit of benefits(plan.benefits)">
+                    <i class="fas fa-check pr-1" [style.color]="plan.color"></i> {{benefit}}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>

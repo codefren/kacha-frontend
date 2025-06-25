@@ -1,0 +1,42 @@
+<div class=" easyroute-note-list bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <p class="title">
+                    {{ 'NOTES.NOTES' | translate }}
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8 mt-4 text-center">
+                <button class="btn btn-secondary mt-1 ml-2 btn-large" title="{{ 'NOTES.NOTES_LIST.ADD_NEW_NOTES' | translate }}" routerLink="new">
+                    {{ 'NOTES.ADD_NOTE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 title-table">
+      {{ 'NOTES.NOTES' | translate }}
+    </div>
+
+    <div class="table-content mt-3">
+        <table style="width: 100%;" class="table table-bordered table-striped table-responsive-lg mb-0" id="notes"
+            style="text-align: center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="border-right: 1px solid #7387c2 !important;"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div> 

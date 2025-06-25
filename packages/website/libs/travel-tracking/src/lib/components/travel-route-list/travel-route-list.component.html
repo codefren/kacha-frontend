@@ -1,0 +1,1180 @@
+<div class="travel-route-list main-container container-fluid p-0 pt-4 pb-4">
+
+    <!-- Header -->
+    <div class="d-flex row align-items-center justify-content-between pl-4 pr-4">
+
+        <!-- lado izquierdo -->
+
+        <div class="col-12 col-xxl col-lg-6 col-sm-6 d-flex flex-row align-items-center justify-content-start">
+
+            <div class="page-title point" (click)="returnsList()">
+
+                <img src="assets/icons/retunrs.svg" class="header-brand-img img-providers img-returns point" alt="Provider">
+
+                <span class="ml-2 point" *ngIf="dataSelect"> {{ dataSelect.name }} </span>
+
+
+            </div>
+
+            <div class="d-flex flex-row align-items-center justify-content-end ml-3" *ngIf="dataSelect">
+
+                <button class="btn btn-status btn-large p-2" [ngClass]=" {'btn-secondary': dataSelect.statusRouteId == 2, 'btn-finish': dataSelect.statusRouteId == 3 }" type="button">
+
+                    <ng-container *ngIf="dataSelect.statusRouteId == 2" >
+                        En proceso
+                    </ng-container>
+
+                    <ng-container *ngIf="dataSelect.statusRouteId == 3" >
+                        Finalizada
+                    </ng-container>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- end lado izquierdo -->
+
+        <!-- lado derecho -->
+
+        <div class="col-xl-6 col-12 text-right">
+
+
+            <div class="d-flex form-row align-items-center justify-content-end ">
+
+                <!-- refresh -->
+
+                <button class="btn btn-icon btn-icon-white p-2 mr-2 mt-xl-0 mt-2" type="button" (click)="refresh()" *ngIf="dataSelect">
+
+                    <img class="style-img" src="assets/icons/refresh.svg">
+
+                </button>
+
+                <!-- end refresh -->
+
+                <ng-container *ngIf="dataSelect && dataSelect.statusRouteId != 3">
+
+                    <!-- opciones de descargar -->
+
+                    <button class="btn btn-icon btn-icon-white dropdown-toggle p-2 mt-xl-0 mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/icons/point.svg">
+                    </button>
+
+                    <div class="dropdown-menu letdrop" aria-labelledby="dropdownMenuButton">
+
+                        <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="downloadRouteSelected()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'CONTROL_PANEL.PRINT_SELECTED_ROUTE' | translate }}
+
+                        </a>
+
+                        <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="donwnloadAllRoute()">
+
+                            <img src="assets/icons/pdf1.svg" class="pr-2"> {{ 'CONTROL_PANEL.PRINT_ALL_ROUTES' | translate }}
+
+                        </a>
+
+                    </div>
+
+                    <!-- end opciones de descargar -->
+
+                    <!-- cargar albares -->
+
+
+
+                    <div class="dropdown">
+
+                        <button class="btn btn-icon btn-icon-white size-load-albaran btn-large ml-2 mt-xl-0 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            {{'TRAVEL_TRACKING.UPLOAD_DELIVERY_NOTE' | translate }}
+
+                        </button>
+
+                        <button class="btn btn-icon btn-icon-white size-open btn-large mt-xl-0 mt-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <img src="assets/icons/donw.svg">
+
+                        </button>
+
+                        <form>
+                            <div class="form-group">
+                                <input #fileImportProductGlobal hidden type="file" class="form-control-file" accept=".json" (change)="
+                                    importProductGlobal(
+                                        $event.target.files[0]
+                                    );
+                                    $event.target.value = null
+                                " />
+                            </div>
+                        </form>
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="fileImportProductGlobal.click()">
+
+                                <img src="assets/icons/pdf1.svg " class="pr-2"> {{ 'TRAVEL_TRACKING.TO_IMPORT' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="ImportProductFromCloudGlobal()">
+
+                                <img src="assets/icons/pdf1.svg " class="pr-2"> {{ 'TRAVEL_TRACKING.IMPORT_FROM_CLOUD' | translate }}
+
+                            </a>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- end cargar albares -->
+
+                    <!-- fINALIZAR RUTA -->
+
+                    <button class="btn btn-icon btn-icon-white img-dash btn-large ml-2 mt-xl-0 mt-2" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}" (click)="endRoute()">
+
+                        <img src="assets/icons/bandera.svg" class="pr-1">
+
+                        <span class="style-finish"> {{'TRAVEL_TRACKING.ROUTE_LIST.FINISH_ROUTE' | translate }}</span>
+
+
+                    </button>
+
+                    <!--
+                    <button class="btn btn-secondary btn-large ml-2 btn-actios mt-xl-0 mt-2" type="button" aria-haspopup="true" aria-expanded="false" *ngIf="zones && zones.length > 0 && dataSelect.statusRouteId !== 3" title="{{ 'TRAVEL_TRACKING.ADD_CLIENT'  | translate }}"
+                        (click)="createClient()">
+
+                        <img src="assets/icons/plus.svg" class="pr-2">
+
+                        {{ 'TRAVEL_TRACKING.ADD_CLIENT'  | translate }}
+
+                    </button> -->
+
+                    <!-- actiones -->
+                    <ng-container *ngIf="zones && zones.length > 0 && dataSelect.statusRouteId !== 3">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-large ml-2 btn-actios mt-xl-0 mt-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="zones && zones.length > 0" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}">
+
+                                <img src="assets/icons/plus.svg" class="pr-2">
+
+                                {{ 'TRAVEL_TRACKING.ACTIONS' | translate }}
+
+                            </button>
+
+                            <button class="btn btn-secondary  size-open btn-large mt-xl-0 mt-2" type="button" *ngIf="zones && zones.length > 0" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <img src="assets/icons/donwWrite.svg">
+
+                            </button>
+
+
+
+                            <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1" *ngIf="zones && zones.length > 0">
+
+
+
+                                <a class="dropdown-item drop-title border-drop  pt-3 pb-3 point" (click)="createRetainerRoute()">
+
+                                    <img src="assets/icons/addActios.svg" class="pr-2"> {{ 'TRAVEL_TRACKING.CREATE_TRIP_CATCH' | translate }}
+
+                                </a>
+
+
+
+
+
+                                <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="createClient()" *ngIf="zones && zones.length > 0">
+
+                                    <img src="assets/icons/addActios.svg" class="pr-2"> {{ 'TRAVEL_TRACKING.ADD_CLIENT' | translate }}
+
+                                </a>
+
+
+
+                            </div>
+
+                        </div>
+                    </ng-container>
+
+
+                    <!-- end actiones -->
+
+                    <!-- end fINALIZAR RUTA -->
+
+                    <!-- acciones -->
+
+                    <!--   <button class="btn btn-secondary btn-large ml-2" title="{{ 'LOADING_DOCK.FORCE_FINISHED' | translate }}">
+
+                        <img src="assets/icons/plus.svg" class="pr-2">
+
+                        Añadir cliente
+
+                    </button> -->
+
+                    <!-- end acciones -->
+
+                </ng-container>
+
+                <ng-container *ngIf="dataSelect && dataSelect.statusRouteId === 3">
+
+                    <!-- Descargar todas -->
+
+                    <button class="btn btn-icon btn-icon-white size-all-donwload btn-large ml-2 mt-xl-0 mt-2">
+
+                        {{ 'INVOICING.MY_INVOICES.DOWNLOAD_ALL' | translate }}
+
+                    </button>
+
+                    <div class="dropdown">
+
+
+                        <button class="btn btn-icon btn-icon-white size-open btn-large" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <img src="assets/icons/donw.svg">
+
+                    </button>
+
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="exportJsonRouteGeneral()">
+
+                                <img src="assets/icons/pdf1.svg " class="pr-2"> {{ 'CONTROL_PANEL.JSON_ROUTES' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="ftpJsonRouteGeneral()">
+
+                                <img src="assets/icons/pdf1.svg " class="pr-2"> {{ 'GENERAL.SEND_FROM_CLOUD' | translate }}
+
+                            </a>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- end  Descargar todas -->
+
+                    <!-- Descargar izquierdo -->
+
+                    <button class="btn btn-icon btn-icon-white size-all-albaran btn-large ml-2 mt-xl-0 mt-2">
+
+                        Descargar albaranes
+
+                    </button>
+
+                    <div class="dropdown">
+
+
+                        <button class="btn btn-icon btn-icon-white size-open btn-large" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <img src="assets/icons/donw.svg">
+
+                    </button>
+
+
+                        <div class="dropdown-menu notification-menu-1" aria-labelledby="dropdownMenuButton1">
+
+                            <a class="dropdown-item drop-title border-drop pt-3 pb-3 point" (click)="exportJsonRoute()">
+
+                                <img src="assets/icons/pdf1.svg " class="pr-2"> {{ 'CONTROL_PANEL.JSON_ROUTES' | translate }}
+
+                            </a>
+
+                            <a class="dropdown-item drop-title pt-3 pb-3 point" (click)="ftpJsonRoute()">
+
+                                <img src="assets/icons/pdf1.svg " class="pr-2"> {{ 'GENERAL.SEND_FROM_CLOUD' | translate }}
+
+                            </a>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- end descargar izquierdo -->
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+        <!-- end lado derecho -->
+
+        <div class="col-12" *ngIf="!dataSelect">
+
+            <div class="page-title point">
+
+                <span class="point"> No hay rutas para esta fecha</span>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Cuadros informativos -->
+
+    <div class="d-flex justify-content-around pl-2 pr-1 margin-top-general-spacing">
+        <ng-container *ngIf="routeSeleted && (optimizationPreferences$ | async).showInformativeTableAssignedRoutes && (!validateSAC() || isControlPanel() || isAdminCompany())">
+            <div class="div-3" (click)="moveToLeft()">
+                <div class="card card-left  justify-content-center point" style="width: 15px;">
+
+                    <img src="assets/icons/travelIcons/izquie.svg" style="max-width: 20px; vertical-align: bottom; margin: 0 auto;">
+
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="div-3 size-element">
+            <div id="scroller-wrapper">
+
+                <div id="scroller" class="items point">
+
+                    <ng-container *ngIf="routeSeleted && (optimizationPreferences$ | async).showInformativeTableAssignedRoutes && (!validateSAC() || isControlPanel() || isAdminCompany())">
+
+
+                        <!-- hora de inicio -->
+
+                        <div class="elem">
+
+                            <div class="card card-left p-3 mr-2 size-card-test">
+
+                                <div class="page-title-span point">
+
+                                    <img src="assets/icons/travelIcons/Group 7230.jpg" style="max-width: 20px; vertical-align: bottom;">
+
+
+                                    <span class="ml-2 point spand-title-card"> Hora inicio  </span>
+
+                                </div>
+
+                                <ng-container *ngIf="show">
+
+                                    <p class="p-sub-number mt-3" *ngIf="routeSeleted"> {{ routeSeleted.driverStartTime ? convertTime(routeSeleted.driverStartTime) : '--:--' }} </p>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!show">
+
+                                    <div class="fa-2x mt-3">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+                        <!-- Resumen cargas -->
+                        <ng-container *ngIf="preferenceTravelCash.summaryLoads">
+
+                            <!-- facturacion -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <div class="page-title-span point">
+
+                                        <img src="assets/icons/travelIcons/Ticket.svg" style="vertical-align: bottom;">
+
+
+                                        <span class="ml-2 point spand-title-card"> Facturación  </span>
+
+                                    </div>
+
+
+                                    <ng-container *ngIf="show">
+
+
+                                        <div class="size-price">
+
+                                            <p class="profile-menu mt-3 text-no-wrap" [title]="decimal(routeStartData.totalBilling)" *ngIf="routeStartData"> {{ decimal(routeStartData.totalBilling) }} </p>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x mt-3">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- en facturación -->
+
+                            <!-- carga -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <div class="page-title-span point">
+
+                                        <img src="assets/icons/travelIcons/kg.svg" style="vertical-align: top; height: 19px">
+
+
+                                        <span class="ml-2 point spand-title-card"> Carga  </span>
+
+                                        <img class="float-load" src="assets/icons/travelIcons/addLoad2.svg" (click)="openModalTotalLoad(routeStartData.totalLoadMeasures, routeStartData.totalMeasure)">
+
+                                    </div>
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <div class="size-price">
+
+                                            <p class="profile-menu mt-3 text-no-wrap" [title]="formatEuro(routeStartData.totalMeasure)" *ngIf="routeStartData"> {{ formatEuro(routeStartData.totalMeasure) }} </p>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x mt-3">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end carga -->
+
+
+                            <!-- volumen -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <div class="page-title-span point">
+
+                                        <img src="assets/icons/travelIcons/metro_cubico.svg" style="vertical-align: top; height: 19px">
+
+                                        <span class="ml-2 point spand-title-card"> Volumen  </span>
+
+                                    </div>
+
+                                    <ng-container *ngIf="show">
+
+                                        <div class="size-price">
+
+                                            <p class="profile-menu mt-3 text-no-wrap" [title]="formatEuro(routeStartData.totalVolumetric)" *ngIf="routeStartData"> {{ formatEuro(routeStartData.totalVolumetric) }} </p>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x mt-3">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end volumen -->
+
+
+
+                            <!-- km -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <div class="page-title-span point">
+
+                                        <img src="assets/icons/travelIcons/km.svg" style="vertical-align: top; height: 19px">
+
+
+                                        <span class="ml-2 point spand-title-card"> Km  </span>
+
+
+                                    </div>
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <!-- <p class="p-sub-number mt-3" *ngIf="routeStartData"> {{ formatEuro(routeStartData.totalDistance) }} </p> -->
+
+                                        <div class="size-price">
+
+                                            <p class="profile-menu mt-3 text-no-wrap" [title]="formatEuro(routeStartData.totalDistance)" *ngIf="routeStartData"> {{ formatEuro(routeStartData.totalDistance) }} </p>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x mt-3">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end km -->
+
+
+                        </ng-container>
+
+                        <!-- Resumen costes -->
+                        <ng-container *ngIf="ModuleCost() && preferenceTravelCash.summaryCosts">
+
+                            <!-- coste estimado -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <div class="page-title-span point">
+
+                                        <img src="assets/icons/travelIcons/Vector.svg" style="vertical-align: initial; height: 14px">
+
+
+                                        <span class="ml-2 point spand-title-card"> Coste estimado  </span>
+
+                                    </div>
+
+                                    <ng-container *ngIf="show">
+
+                                        <!-- <p class="p-sub-number mt-3" *ngIf="dataDuringDelivery"> {{decimal(dataDuringDelivery.TotalEstimatedCost) }} </p> -->
+
+                                        <div class="size-price">
+
+                                            <p class="profile-menu mt-3 text-no-wrap" [title]="decimal(dataDuringDelivery.TotalEstimatedCost)" *ngIf="dataDuringDelivery"> {{ decimal(dataDuringDelivery.TotalEstimatedCost) }} </p>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x mt-3">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end conte estimado -->
+
+                            <!-- Coste real -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <div class="page-title-span point">
+
+                                        <img src="assets/icons/travelIcons/Vector.svg" style="vertical-align: initial; height: 14px">
+
+
+                                        <span class="ml-2 point spand-title-card"> Coste real  </span>
+
+                                        <!--  -->
+                                        <ng-container *ngIf="dataDuringDelivery && dataSelect.statusRouteId == 3 && dataSelect.userTypeId === 2">
+
+                                            <img class="float-load" src="assets/icons/travelIcons/editCost.svg" (click)="openModalEditCostActual(dataDuringDelivery.TotalRealCost)">
+
+                                        </ng-container>
+
+
+
+
+                                    </div>
+
+                                    <ng-container *ngIf="show">
+
+                                        <!-- <p class="p-sub-number mt-3" *ngIf="dataDuringDelivery"> {{decimal(dataDuringDelivery.TotalEstimatedCost) }} </p> -->
+
+                                        <div class="size-price">
+
+                                            <p class="profile-menu mt-3 text-no-wrap" [title]="decimal(dataDuringDelivery.TotalRealCost)" *ngIf="dataDuringDelivery"> {{ decimal(dataDuringDelivery.TotalRealCost) }} </p>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x mt-3">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                            <!-- end Coste real -->
+                        </ng-container>
+
+
+                        <!-- Repostaje -->
+
+                        <div class="elem">
+
+                            <div class="card card-left p-3 mr-2 size-card-test">
+
+                                <div class="page-title-span point">
+
+                                    <img src="assets/icons/travelIcons/fuel.svg" style="vertical-align: top; height: 19px">
+
+                                    <span class="ml-2 point spand-title-card"> Repostaje </span>
+
+                                    <ng-container *ngIf="totalRefueling && totalRefueling.total_import > 0">
+                                        <img class="float-load" src="assets/icons/travelIcons/addLoad2.svg" (click)="openModalRepostaje()">
+                                    </ng-container>
+
+                                </div>
+
+
+                                <ng-container *ngIf="show">
+
+                                    <div class="size-price">
+
+                                        <p class="profile-menu mt-3 text-no-wrap" [title]="decimal(totalRefueling.total_import)" *ngIf="totalRefueling"> {{ decimal(totalRefueling.total_import) }} </p>
+
+                                    </div>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="!show">
+
+                                    <div class="fa-2x mt-3">
+
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Estado entregas -->
+                        <ng-container *ngIf="preferenceTravelCash.deliveryStatus">
+
+                            <!-- Entregas pendientes -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <p class="p-title"> Entregas pendientes </p>
+
+                                    <ng-container *ngIf="show">
+
+                                        <p class="p-sub-number" *ngIf="dataDuringDelivery"> {{dataDuringDelivery.TotalPendingDeliveries}} </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end Entregas pendientes -->
+
+                            <!-- entregas finalizadas -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <p class="p-title"> Entregas finalizadas </p>
+
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <p class="p-sub-number" *ngIf="dataDuringDelivery"> {{ dataDuringDelivery.TotalFinishedDeliveries}} </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end entregas finalizadas -->
+
+                            <!-- devoluciones -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <p class="p-title"> Devoluciones </p>
+
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <p class="p-sub-number" *ngIf="dataDuringDelivery"> {{ dataDuringDelivery.TotalDevolutions }} </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end devoluciones -->
+
+                            <!-- Envases retonable -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <p class="p-title"> Envases retornables </p>
+
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <p class="p-sub-number" *ngIf="routeStartData"> {{ dataDuringDelivery && dataDuringDelivery.TotalBoxes ? dataDuringDelivery && dataDuringDelivery.TotalBoxes: 0 }} </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end Envases retonable -->
+
+                            <!-- REtraso -->
+
+                            <div class="elem">
+
+                                <div class="card card-left p-3 mr-2 size-card-test">
+
+                                    <p class="p-title"> {{ 'CONTROL_PANEL.DELAYS' | translate }} </p>
+
+
+                                    <ng-container *ngIf="show">
+
+                                        <p class="p-sub-number" *ngIf="dataDuringDelivery"> {{ dataDuringDelivery.TotalDelay }} </p>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!show">
+
+                                        <div class="fa-2x">
+
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                            <!-- end REtraso -->
+
+                        </ng-container>
+
+                    </ng-container>
+
+                </div>
+
+            </div>
+        </div>
+
+        <ng-container *ngIf="routeSeleted && (optimizationPreferences$ | async).showInformativeTableAssignedRoutes && (!validateSAC() || isControlPanel() || isAdminCompany())">
+            <div class="div-3" (click)="moveToRight()">
+                <div class="card card-left  justify-content-center point" style="width: 15px;">
+
+                    <img src="assets/icons/travelIcons/dere.svg" style="max-width: 20px; vertical-align: bottom; margin: 0 auto;">
+
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <!-- end Cuadros informativos -->
+
+    <!-- table-no route -->
+
+
+    <!-- end no route -->
+
+    <!-- table -->
+
+
+    <div class="row margin-top-general-spacing">
+
+        <ng-container *ngIf="routes && routes.length > 0 && dataSelect.statusRouteId != 3">
+
+            <div class="col-12">
+
+                <div class="table-content table-content-general">
+
+                    <table class="table table-striped table-bordered display  mb-0" style="text-align: center; width: 100%" id="assigned">
+
+                        <thead class="text-center" id="thead-1">
+                            <tr>
+                                <th>
+
+                                    <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+                                        <div class="round-style-cost  round-little-cost">
+                                            <input type="checkbox" checked="" id="checkboxDriverCost" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+                                            <label for="checkboxDriverCost" class="m-0"></label>
+                                        </div>
+                                    </div>
+                                </th>
+
+
+
+                                <th>
+
+                                    {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.ORDER' | translate }}
+
+                                </th>
+
+                                <th>
+
+                                    {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.ORDER_POLPO' | translate }}
+
+                                </th>
+
+                                <th>
+                                    ID
+                                </th>
+                                <!-- <th> {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.REAL' | translate }} </th> -->
+
+                                <th> {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.DELIVERY_COLLECTION_POINT' | translate }} </th>
+
+                                <th></th>
+
+                                <th> {{ 'DELIVERY_POINTS.POPULATION' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.ADDRESS' | translate }} </th>
+
+                                <th> {{'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.OPENING_TIME' | translate }} </th>
+
+                                <th> {{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.CLOSING_TIME_'| translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.TRAVEL_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.ARRIVAL_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.CLIENT_DELAY' | translate }} </th>
+
+                                <th></th>
+
+                                <th></th>
+
+                                <th> {{ 'DELIVERY_POINTS.VEHICLE_WAIT_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.DELIVERY_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.TOTAL_KM' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.WAIT_TIME' | translate }} </th>
+
+                                <th> {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.ARRIVAL' | translate }} </th>
+
+                                <th> {{'CONTROL_PANEL.DELIVERY_CONFIRMATION' | translate }} </th>
+
+                                <th> {{ 'CONTROL_PANEL.SERVICE_TIME_CLIENT' | translate }} </th>
+
+
+
+                                <th>{{ 'DELIVERY_POINTS.STATE' | translate }}</th>
+
+                                <th> {{'DELIVERY_POINTS.PAYMENT' | translate }} </th>
+
+                                <th></th>
+
+                                <th></th>
+
+                                <th style="border-right: 1px solid #7387c2 !important;" class="widthAccionDatatable "></th>
+                            </tr>
+                        </thead>
+
+                        <thead class="thead-cost hidden" id="thead-2">
+
+                            <tr>
+
+                                <th style="border-right: 1px solid #6d88bf00 !important; width:1rem;">
+
+                                    <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+
+                                        <div class="round-style-cost  round-little-cost">
+
+                                            <input type="checkbox" checked="" id="checkboxDriverCost1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+
+                                            <label for="checkboxDriverCost1" class="m-0"></label>
+
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <!--  <th width="8%" class="text-left point" colspan="8" style="border-right: 1px solid #7F96E0 !important;" (click)="openModalVerifiedAll(selected)">
+
+                                        <img class="img-option pr-1" src="assets/icons/checkCost.svg"> {{'COST.VERIFY' | translate }}
+
+                                    </th> -->
+
+                                <th class="text-left point" colspan="24" style="border-right: 1px solid #7F96E0 !important;" (click)="routeChange()">
+
+                                    <img class="img-option pr-1" src="assets/icons/changeRoute.svg"> Cambiar punto de ruta
+
+                                </th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody class="point"></tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="routes && routes.length > 0 && dataSelect.statusRouteId === 3">
+            <div class="col-12">
+                <div class="table-content table-content-general">
+                    <table class="table table-striped table-bordered display  mb-0" style="text-align: center; width: 100%" id="history">
+                        <thead class="text-center" id="thead-1">
+                            <tr>
+                                <th>
+
+                                    {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.ORDER' | translate }}
+
+                                </th>
+
+                                <th>
+
+                                    {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.ORDER_POLPO' | translate }}
+
+                                </th>
+
+                                <th>
+
+                                    {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.REAL' | translate }}
+
+                                </th>
+
+                                <th>
+                                    ID
+                                </th>
+
+
+
+                                <th> {{ 'TRAVEL_TRACKING.DELIVERY_POINTS.DELIVERY_COLLECTION_POINT' | translate }} </th>
+
+                                <th></th>
+
+                                <th> {{ 'DELIVERY_POINTS.POPULATION' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.ADDRESS' | translate }} </th>
+
+                                <th> {{'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.OPENING_TIME' | translate }} </th>
+
+                                <th> {{ 'ROUTE_PLANNING.ZONE.DELIVERY_POINTS_TABLE.CLOSING_TIME_'| translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.TRAVEL_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.ARRIVAL_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.CLIENT_DELAY' | translate }} </th>
+
+                                <th></th>
+
+                                <th></th>
+
+                                <th> {{ 'DELIVERY_POINTS.VEHICLE_WAIT_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.DELIVERY_TIME' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.TOTAL_KM' | translate }} </th>
+
+                                <th> {{ 'DELIVERY_POINTS.WAIT_TIME' | translate }} </th>
+
+                                <th> {{'DELIVERY_POINTS.DRIVER_ARRIVAL_TIME' | translate }} </th>
+
+                                <th> {{'CONTROL_PANEL.DELIVERY_CONFIRMATION' | translate }} </th>
+
+                                <th> {{ 'CONTROL_PANEL.SERVICE_TIME_CLIENT' | translate }} </th>
+
+                                <th style="width: 180px !important"></th>
+
+                                <th>{{ 'DELIVERY_POINTS.STATE' | translate }}</th>
+
+                                <th></th>
+
+                                <th> {{'DELIVERY_POINTS.PAYMENT' | translate }} </th>
+
+                                <th style="border-right: 1px solid #7387c2 !important;" class="widthAccionDatatable "></th>
+                            </tr>
+                        </thead>
+
+                        <thead class="thead-cost hidden" id="thead-2">
+
+                            <tr>
+
+                                <th style="border-right: 1px solid #6d88bf00 !important; width:1rem;">
+
+                                    <div class="row justify-content-center align-items-center p-0" style="background-color: transparent;">
+
+                                        <div class="round-style-cost  round-little-cost">
+
+                                            <input type="checkbox" checked="" id="checkboxDriverCost1" [(ngModel)]="selectAll" (change)="selectAllFunc()">
+
+                                            <label for="checkboxDriverCost1" class="m-0"></label>
+
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <!--  <th width="8%" class="text-left point" colspan="8" style="border-right: 1px solid #7F96E0 !important;" (click)="openModalVerifiedAll(selected)">
+
+                                        <img class="img-option pr-1" src="assets/icons/checkCost.svg"> {{'COST.VERIFY' | translate }}
+
+                                    </th> -->
+
+                                <th class="text-left point" colspan="24" style="border-right: 1px solid #7F96E0 !important;" (click)="routeChange()">
+
+                                    <img class="img-option pr-1" src="assets/icons/changeRoute.svg"> Cambiar punto de ruta
+
+                                </th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody class="point"></tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+
+
+    <!-- end table -->
+
+    <ng-container *ngIf="routes && routes.length === 0">
+
+        <div class="row mt-3 pl-4 pr-4 align-items-center font-row mb-xl-0 mb-2">
+
+
+            <div class="col-xl-12 col-12">
+
+                <div class="form-row mb-1 mt-2 pl-1 align-items-center">
+
+                    <!-- date -->
+
+                    <div class="col-12 col-xl-2 col-sm-4 mb-1">
+
+                        <div class="input-group">
+
+                            <input ngbDatepicker #f="ngbDatepicker" type="text" class="form-control form-control-date size-date" autocomplete="off" [min]="min" [formControl]="dateSearchFrom" (dateSelect)="changeDate('from', $event)" placeholder="Seleccione ..." id="dateDeliveryStart"
+                            />
+
+                            <button class="btn btn-calendar calendar" (click)="f.toggle()" type="button">
+
+                                <img class="icons-calendar point" src="assets/icons/Vector.svg" aria-hidden="true">
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- end date -->
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </ng-container>
+
+
+
+</div>

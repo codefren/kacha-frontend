@@ -1,0 +1,343 @@
+<div class="easyroute-management-associated-companies-form padding-body bg-white2" *ngIf="company">
+
+    <div class="container">
+        <!-- title -->
+        <div class="row pt-5 align-content-center justify-content-center ">
+            <div class="return-left mr-3 point" routerLink="/management/associated-companies">
+                <i class="fas fa-angle-left addVehicleIcon p-1"></i>
+            </div>
+            <div *ngIf="company.id == 0">
+                <p class="title m-0">{{ 'COMPANIES.ADD_COMPANY' | translate }}</p>
+            </div>
+            <div *ngIf="company.id && company.id > 0">
+                <p class="title m-0">{{ 'COMPANIES.EDIT_COMPANY' | translate }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 font-general p-0">
+
+                <form [formGroup]="formCompanyAssociated" class="padding-form font-general" *ngIf="formCompanyAssociated && companiesMessages">
+
+                    <div class="mb-5 images">
+                        <div class="row justify-content-center">
+                            <div class="d-flex flex-column justify-content-around">
+                                <div class="card border card-img point" *ngIf=" (company && company.urlLogo !== null) || cardImageBase64" (click)="fileAddProduct.click()">
+                                    <div class="w-100 h-100 show-background point" *ngIf="company && company.urlLogo === null && !cardImageBase64">
+                                        <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                            <i class="fas fa-trash fa-2x"></i>
+                                        </div>
+                                    </div>
+                                    <img [src]="convertToSafeUrl( cardImageBase64 )" alt="" *ngIf="cardImageBase64" class="img-flud img-render img-upload img-load" alt="Project" />
+                                    <img #urlLogo [src]="convertToSafeUrl( company.urlLogo + '?' + date.getTime())" alt="" *ngIf="company.urlLogo !== null && !cardImageBase64" class="img-flud img-render img-upload w-100 img-load" alt="Project" />
+                                    <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                                </div>
+                                <div class="card border card-img  point" *ngIf="(company && company.urlLogo === null) && !cardImageBase64" (click)="fileAddProduct.click()">
+                                    <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                                        <i class="color-icon fas fa-camera"></i>
+                                    </div>
+                                    <input type="file" hidden #fileAddProduct (change)="fileChangeEvent($event)" />
+                                </div>
+                                <p class="color-alert text-center mt-1 mb-0" style="font-size: 13px;">máximo 1MB</p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <span class="text-danger text-center w-100 title-info">{{ imageError }}</span>
+                        </div>
+                        <div class="row m-2">
+                            <p class="font-italic text-center w-100 title-info">"En caso de que se suba una imagen de logotexto cuadrada, no dejar márgenes blancos arriba y abajo"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-6 col-12 padding-col">
+                            <!--Code-->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['code'].invalid && ( formCompanyAssociated.controls['code'].dirty || formCompanyAssociated.controls['code'].touched) }">
+                                <label for="code">
+                                    {{ 'COMPANIES.CODE' | translate }}  
+                                </label>
+                                <!--   <input type="text" class="form-control" formControlName="code" autocomplete="off" placeholder="{{'COMPANIES.CODE' | translate}}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['code'].invalid &&
+                                        (formCompanyAssociated.controls['code'].dirty ||
+                                            formCompanyAssociated.controls['code'].touched)
+                                }" /> -->
+                                <input *ngIf="!company.id" type="text" class="form-control" id="code" formControlName="code" placeholder="{{'COMPANIES.CODE' | translate}}" [ngClass]="{
+                                    'form-control-danger':
+                                    formCompanyAssociated.controls['code'].invalid &&
+                                        (formCompanyAssociated.controls['code'].dirty ||
+                                        formCompanyAssociated.controls['code'].touched)
+                                }" />
+                                <input *ngIf="company.id > 0" type="text" readonly class="form-control" id="code" autocomplete="off" formControlName="code" placeholder="{{'COMPANIES.CODE' | translate}}" [ngClass]="{
+                                    'form-control-danger':
+                                    formCompanyAssociated.controls['code'].invalid &&
+                                        (formCompanyAssociated.controls['code'].dirty ||
+                                        formCompanyAssociated.controls['code'].touched)
+                                }" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.billingEmail">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('code').hasError( validation.type ) && (formCompanyAssociated.get('code').dirty || formCompanyAssociated.get('code').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-6 col-12 padding-col">
+
+
+                            <!-- billing email -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['billingEmail'].invalid && ( formCompanyAssociated.controls['billingEmail'].dirty || formCompanyAssociated.controls['billingEmail'].touched) }">
+                                <label for="billingEmail">
+                                    {{ 'COMPANIES.BILLING_EMAIL' | translate }}  
+                                    <span class="asterisco"> * </span>
+                                </label>
+                                <input type="email" class="form-control" formControlName="billingEmail" autocomplete="off" placeholder="{{'COMPANIES.BILLING_EMAIL' | translate}}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['billingEmail'].invalid &&
+                                        (formCompanyAssociated.controls['billingEmail'].dirty ||
+                                            formCompanyAssociated.controls['billingEmail'].touched)
+                                }" />
+
+                                <ng-container *ngFor="let validation of companiesMessages.billingEmail">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('billingEmail').hasError( validation.type ) && (formCompanyAssociated.get('billingEmail').dirty || formCompanyAssociated.get('billingEmail').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- company -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['name'].invalid && ( formCompanyAssociated.controls['name'].dirty || formCompanyAssociated.controls['name'].touched) }">
+
+                                <label for="name">
+                                    {{ 'GENERAL.COMPANY' | translate }}  <span class="asterisco"> * </span>
+                                </label>
+
+                                <input type="text" class="form-control" formControlName="name" autocomplete="off" placeholder="{{ 'GENERAL.COMPANY' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['name'].invalid &&
+                                        (formCompanyAssociated.controls['name'].dirty ||
+                                            formCompanyAssociated.controls['name'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.name">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('name').hasError( validation.type ) && (formCompanyAssociated.get('name').dirty || formCompanyAssociated.get('name').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- country -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['country'].invalid && ( formCompanyAssociated.controls['country'].dirty || formCompanyAssociated.controls['country'].touched) }">
+                                <label for="country">
+                                    {{ 'GENERAL.COUNTRY' | translate }} <span class="asterisco">* </span>
+                                </label>
+                                <select formControlName="country" class="form-control" (change)="changeCountry($event.target.value)">
+                                    <option value="null">
+                                        {{ 'GENERAL.SELECT' | translate }}
+                                    </option>
+                                    <option *ngFor="let country of countrys" [value]="country">
+                                        {{ country }}
+                                    </option>
+                                </select>
+                                <ng-container *ngFor="let validation of companiesMessages.countryCode">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('country').hasError( validation.type ) && (formCompanyAssociated.get('country').dirty || formCompanyAssociated.get('country').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- nif -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['nif'].invalid && ( formCompanyAssociated.controls['nif'].dirty || formCompanyAssociated.controls['nif'].touched) }">
+                                <label for="nif">
+                                    {{ 'GENERAL.NIF' | translate }} <span class="asterisco">* </span>
+                                </label>
+                                <input type="text" class="form-control" id="nif" formControlName="nif" placeholder="{{ 'GENERAL.NIF' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['nif'].invalid &&
+                                        (formCompanyAssociated.controls['nif'].dirty ||
+                                            formCompanyAssociated.controls['nif'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.nif">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('nif').hasError( validation.type ) && (formCompanyAssociated.get('nif').dirty || formCompanyAssociated.get('nif').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- city -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['city'].invalid && ( formCompanyAssociated.controls['city'].dirty || formCompanyAssociated.controls['city'].touched) }">
+                                <label for="city">
+                                    {{ 'GENERAL.CITY' | translate }}
+                                </label>
+                                <input type="text" class="form-control" id="city" formControlName="city" placeholder="{{ 'GENERAL.CITY' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['city'].invalid &&
+                                        (formCompanyAssociated.controls['city'].dirty ||
+                                            formCompanyAssociated.controls['city'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.city">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('city').hasError( validation.type ) && (formCompanyAssociated.get('city').dirty || formCompanyAssociated.get('city').touched)">
+                                             {{ validation.message }}
+                                         </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12 padding-col">
+
+                            <!-- province -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['province'].invalid && ( formCompanyAssociated.controls['province'].dirty || formCompanyAssociated.controls['province'].touched) }">
+                                <label for="province">
+                                    {{ 'GENERAL.PROVINCE' | translate }} <span class="asterisco"> * </span>
+                                </label>
+                                <input type="text" class="form-control" id="province" formControlName="province" placeholder="{{ 'GENERAL.PROVINCE' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['province'].invalid &&
+                                        (formCompanyAssociated.controls['province'].dirty ||
+                                            formCompanyAssociated.controls['province'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.province">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('province').hasError( validation.type ) && (formCompanyAssociated.get('province').dirty || formCompanyAssociated.get('province').touched)">
+                                             {{ validation.message }}
+                                         </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- zip-code -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['zipCode'].invalid && ( formCompanyAssociated.controls['zipCode'].dirty || formCompanyAssociated.controls['zipCode'].touched) }">
+                                <label for="zipCode">
+                                    {{ 'GENERAL.POSTAL_CODE' | translate }} <span class="asterisco"> * </span>
+                                </label>
+                                <input type="text" class="form-control" id="zipCode" autocomplete="off" formControlName="zipCode" placeholder="{{ 'GENERAL.POSTAL_CODE' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['zipCode'].invalid &&
+                                        (formCompanyAssociated.controls['zipCode'].dirty ||
+                                            formCompanyAssociated.controls['zipCode'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.zipCode">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('zipCode').hasError( validation.type ) && (formCompanyAssociated.get('zipCode').dirty || formCompanyAssociated.get('zipCode').touched)">
+                                             {{ validation.message }}
+                                         </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <!-- phone -->
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['phone'].invalid && ( formCompanyAssociated.controls['phone'].dirty || formCompanyAssociated.controls['phone'].touched) }">
+                                <label for="phone">
+                                    {{ 'GENERAL.PHONE_NUMBER' | translate }} <span class="asterisco"> * </span>
+                                </label>
+                                <input type="text" class="form-control" id="phone" autocomplete="off" formControlName="phone" mask="999999999999" prefix="+" placeholder="{{ 'GENERAL.PHONE_NUMBER' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['phone'].invalid &&
+                                        (formCompanyAssociated.controls['phone'].dirty ||
+                                            formCompanyAssociated.controls['phone'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.phone">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('phone').hasError( validation.type ) && (formCompanyAssociated.get('phone').dirty || formCompanyAssociated.get('phone').touched)">
+                                             {{ validation.message }} {{
+                                                validation.type === 'invalidPhone'
+                                                    ? ' ' +
+                                                      formCompanyAssociated.get('country').value
+                                                    : ''
+                                            }}
+                                         </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['serviceTypeId'].invalid && ( formCompanyAssociated.controls['serviceTypeId'].dirty || formCompanyAssociated.controls['serviceTypeId'].touched) }">
+                                <label for="country">
+                                    {{ 'COMPANIES.SERVICE_TYPE' | translate }}
+                                </label>
+                                <ng-container *ngIf="!showSelect">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                        <div class="fa-3x">
+                                            <i class="fas fa-circle-notch fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="showSelect">
+                                    <select formControlName="serviceTypeId" class="form-control">
+                                        <option value=null>
+                                            {{ 'GENERAL.SELECT' | translate }}
+                                        </option>
+                                        <option
+                                            *ngFor="let item of serviceTypes"
+                                            [value]="item.id"
+                                        >
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+
+                                </ng-container>
+                                <ng-container *ngFor="let validation of companiesMessages.serviceTypeId">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('serviceTypeId').hasError( validation.type ) && (formCompanyAssociated.get('serviceTypeId').dirty || formCompanyAssociated.get('serviceTypeId').touched)">
+                                            {{ validation.message }}
+                                        </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <div class="form-group" [ngClass]="{ 'has-danger': formCompanyAssociated.controls['streetAddress'].invalid && ( formCompanyAssociated.controls['streetAddress'].dirty || formCompanyAssociated.controls['streetAddress'].touched) }">
+                                <!-- class="col-form-label col-6"  old for label-->
+                                <label for="streetAddress">
+                                    {{ 'GENERAL.ADDRESS' | translate }} <span class="asterisco"> * </span>
+                                </label>
+                                <input type="text" class="form-control" id="streetAddress" autocomplete="off" formControlName="streetAddress" placeholder="{{ 'GENERAL.ADDRESS' | translate }}" [ngClass]="{
+                                    'form-control-danger':
+                                        formCompanyAssociated.controls['streetAddress'].invalid &&
+                                        (formCompanyAssociated.controls['streetAddress'].dirty ||
+                                            formCompanyAssociated.controls['streetAddress'].touched)
+                                }" />
+                                <ng-container *ngFor="let validation of companiesMessages.streetAddress">
+                                    <div class="w-100 text-left">
+                                        <small class="form-control-feedback text-danger" *ngIf="formCompanyAssociated.get('streetAddress').hasError( validation.type ) && (formCompanyAssociated.get('streetAddress').dirty || formCompanyAssociated.get('streetAddress').touched)">
+                                             {{ validation.message }}
+                                         </small>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row pt-5">
+                        <div class="col-sm-6 col-12 text-sm-right text-center mt-1">
+                            <button class="btn btn-cancel size-btn-form" type="button" routerLink="/management/associated-companies">{{ 'GENERAL.CANCEL' | translate }}</button>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-left text-center  mt-1 pb-2">
+                            <button class="btn btn-primary size-btn-form" [disabled]="formCompanyAssociated.invalid" (click)="createCompany()">
+                                    <span class="mb-0"  *ngIf="company.id > 0">
+                                        {{ 'GENERAL.SAVE' | translate }}
+                                    </span>
+                                    <span class="mb-0" *ngIf="company.id == 0">
+                                        {{ 'GENERAL.ADD' | translate }}
+                                    </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>

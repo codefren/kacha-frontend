@@ -1,0 +1,339 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-AlgorithmEventsViewer<jsprit-analysis>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.analysis.toolbox.AlgorithmEventsViewer",
+            "projectName": "jsprit-analysis"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestJobDistanceAvgCosts<jsprit-core>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.core.algorithm.ruin.distance.TestJobDistanceAvgCosts",
+            "projectName": "jsprit-core"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-AdditionalDistanceConstraintExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.AdditionalDistanceConstraintExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-BicycleMessenger<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.BicycleMessenger",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-BreakExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.BreakExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-BuildAlgorithmFromScratch<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.BuildAlgorithmFromScratch",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-CircleExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.CircleExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ConfigureAlgorithmInCodeInsteadOfPerXml<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.ConfigureAlgorithmInCodeInsteadOfPerXml",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-CostMatrixExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.CostMatrixExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-EnRoutePickupAndDeliveryWithMultipleDepotsAndOpenRoutesExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.EnRoutePickupAndDeliveryWithMultipleDepotsAndOpenRoutesExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-HVRPExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.HVRPExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-JobAndActivityDependenciesExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.JobAndActivityDependenciesExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MultipleDepotExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.MultipleDepotExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MultipleDepotExample2<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.MultipleDepotExample2",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MultipleDepotWithInitialRoutesExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.MultipleDepotWithInitialRoutesExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MultipleProductsWithLoadConstraintExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.MultipleProductsWithLoadConstraintExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MultipleTimeWindowExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.MultipleTimeWindowExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MultipleTimeWindowExample2<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.MultipleTimeWindowExample2",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PickupAndDeliveryExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.PickupAndDeliveryExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PickupAndDeliveryExample2<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.PickupAndDeliveryExample2",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PickupAndDeliveryOpenExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.PickupAndDeliveryOpenExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-RefuseCollectionExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.RefuseCollectionExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-RefuseCollectionWithFastMatrixExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.RefuseCollectionWithFastMatrixExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ServicePickupsWithMultipleDepotsExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.ServicePickupsWithMultipleDepotsExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleDepotBoundedPickupAndDeliveryExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleDepotBoundedPickupAndDeliveryExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleEnRoutePickupAndDeliveryExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleEnRoutePickupAndDeliveryExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleEnRoutePickupAndDeliveryOpenRoutesExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleEnRoutePickupAndDeliveryOpenRoutesExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleEnRoutePickupAndDeliveryWithDepotBoundedDeliveriesExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleEnRoutePickupAndDeliveryWithDepotBoundedDeliveriesExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleExampleOpenRoutes<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleExampleOpenRoutes",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleExampleWithPriorities<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleExampleWithPriorities",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleExampleWithSkills<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleExampleWithSkills",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SimpleVRPWithBackhaulsExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SimpleVRPWithBackhaulsExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SolomonExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SolomonExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SolomonExampleWithSpecifiedVehicleEndLocations<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SolomonExampleWithSpecifiedVehicleEndLocations",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SolomonExampleWithSpecifiedVehicleEndLocationsWithoutTWs<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SolomonExampleWithSpecifiedVehicleEndLocationsWithoutTWs",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SolomonOpenExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SolomonOpenExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SolomonR101Example<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SolomonR101Example",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SolomonWithSkillsExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.SolomonWithSkillsExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TransportOfDisabledPeople<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.TransportOfDisabledPeople",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-VRPWithBackhaulsExample<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.VRPWithBackhaulsExample",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-VRPWithBackhaulsExample2<jsprit-examples>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.examples.VRPWithBackhaulsExample2",
+            "projectName": "jsprit-examples"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-LopezIbanezBlumReader<jsprit-instances>",
+            "request": "launch",
+            "mainClass": "com.graphhopper.jsprit.instance.reader.LopezIbanezBlumReader",
+            "projectName": "jsprit-instances"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MainOptimroute<jsprit-instanoptimrouteces>",
+            "request": "launch",
+            "args": [
+                "random_seed=1",
+                "print_arguments=true",
+                "osrm_host=osrm.polpoo.com",
+                "distance_objective_preference=1",
+                "num_vehicles_objective_preference=1",
+                "customer_satisfaction_objective_preference=1",
+                "vehicle_time_balance_objective_preference=1",
+                "ignore_capacity_constraint=false",
+                "min_vehicles=0",
+                "input_file_path=./jsprit-optimroute/src/main/java/com/graphhopper/jsprit/optimizations/input_test.json",
+                "output_file_path=./jsprit-optimroute/src/main/java/com/graphhopper/jsprit/optimizations/output_test.json",
+                "print_instance_to_file_path=../optimizations/instance_test.json",
+                "print_input=true",
+                "print_progress=false",
+                "readable_output_verbosity=true",
+            ],
+            "mainClass": "com.graphhopper.jsprit.optimroute.MainOptimroute",
+            "projectName": "jsprit-optimroute"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+<div class="easyroute-products-modal-measure">
+    <section class="card">
+        <div class="row justify-content-center">
+            <div class="col-12 text-right pt-2 pr-4">
+                <i class="fas fa-times close-button point" (click)="closeDialog( false )"></i>
+            </div>
+            <div class="col-sm-8 col-12 text-center">
+                <p class="title">{{ 'PRODUCTS_GENERAL.ADD_FORMAT' | translate }}</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center pt-4">
+            <div class="col-md-11 col-12 text-center text-md-left">
+                {{ 'PRODUCTS_GENERAL.ADD_FORMAT' | translate }}
+            </div>
+        </div>
+        <div class="card-body pl-0 pr-0 pt-1">
+            <div class="table-content mt-3">
+                <table id="measure" style="width: 100%" class="table table-bordered table-striped mb-0" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>{{ 'GENERAL.NAME' | translate }}</th>
+                            <th class="text-center p-0">Cantidad equivalente activa</th>
+                            <th class="text-center p-0">Cantidad equivalente</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-6 col-12 text-center text-md-right">
+                <button class="btn size-btn-modal btn-cancel modal-dismiss" (click)="activeModal.close(false)">
+                    {{ 'GENERAL.CANCEL' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-6 col-12 text-center text-md-left mt-2 mt-md-0">
+                <button class="btn btn-primary size-btn-modal modal-confirm" (click)="activeModal.close(measure)">
+                    {{ 'ROUTE_PLANNING.MODAL_INTEGRATION.TO_SELECT' | translate }}
+                </button>
+            </div>
+        </div>
+
+    </section>
+</div>

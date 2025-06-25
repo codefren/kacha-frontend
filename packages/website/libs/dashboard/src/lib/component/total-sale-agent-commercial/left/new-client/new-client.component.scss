@@ -1,0 +1,60 @@
+.easyroute-new-client {
+    .card {
+        border-radius: 5px !important;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+        /*  .card-body {
+            border-radius: 5px !important;
+           
+        } */
+    }
+    .border-card {
+        border-color: #24397c;
+        border-left: 5px solid #24397c;
+    }
+    .style-info-card {
+        font-size: 38px;
+        font-weight: 700;
+        color: #686868;
+        /* line-height: 40px; */
+    }
+    .col-border {
+        border-right: 1px solid #a7a7a7;
+    }
+    // lo nuevo
+    .title-invoiced {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 19px;
+        color: #000000;
+    }
+    .tot-invoice {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 34px;
+        color: #000000;
+    }
+    .progress {
+        border-radius: 50px !important;
+    }
+    .total-end {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 17px;
+        line-height: 23px;
+        color: #000000;
+    }
+    .label-end {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+        text-align: center;
+        color: #5E5E5E;
+    }
+    .border-end {
+        border-right: 1px solid #DADADA;
+    }
+}

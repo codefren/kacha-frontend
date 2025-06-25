@@ -1,0 +1,38 @@
+{
+    "name": "optimroute",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "bootstrap": "yarn install",
+        "start:dev": "node index.js",
+        "start-api:dev": "yarn workspace @optimroute/api start:dev",
+        "start-jobs-api:dev": "yarn workspace @optimroute/jobs-api start:dev",
+        "start-engine:dev": "yarn workspace @optimroute/engine start:dev",
+        "start-website:dev": "yarn workspace @optimroute/website start:local",
+        "test": "lerna run test",
+        "test:e2e": "lerna run test:e2e",
+        "lint": "lerna run lint",
+        "clean": "lerna clean -y && lerna run clean && rm -rf node_modules",
+        "isolate": "isolate-workspace",
+        "start-local-website": "ng serve --proxy-config proxy.conf.json"
+    },
+    "devDependencies": {
+        "@nrwl/angular": "8.11.2",
+        "@nrwl/workspace": "8.11.2",
+        "concurrently": "^4.1.0",
+        "jasmine-marbles": "~0.6.0",
+        "lerna": "^3.14.1",
+        "prettier": "^1.18.2",
+        "rxjs": "6.4.0",
+        "typescript": "~3.4.1",
+        "webpack": "^4.18.1",
+        "yarn-workspace-isolator": "^0.1.0-rc1"
+    },
+    "dependencies": {
+        "@godaddy/terminus": "^4.2.0",
+        "laravel-echo": "^1.15.2",
+        "lzma-native": "^8.0.6"
+    }
+}

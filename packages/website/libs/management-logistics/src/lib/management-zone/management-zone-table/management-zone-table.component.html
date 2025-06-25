@@ -1,0 +1,70 @@
+<div class="management-zone-table">
+    <div class="container">
+
+
+        <!-- navs -->
+
+        <div class="row justify-content-center mb-1 mt-5 pt-5">
+            <nav class="row p-0 m-0 group-btn">
+                <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='route' }" (click)="changePage( 'route' )">
+                    <a class="text-center">{{ 'DELIVERY_ZONES.ROUTE' | translate }}</a>
+                </div>
+                <div class="col-md-6 col-6 point d-flex flex-column justify-content-center align-content-center" [ngClass]="{'option-selected' : change ==='specification' }" (click)="openSettngs()">
+                    <a class="text-center">{{ 'DELIVERY_ZONES.ESP_ROUTE' | translate }}</a>
+                </div>
+
+            </nav>
+        </div>
+
+        <!-- end navs -->
+        <div class="row mt-4 pl-3 pr-3">
+            <div class="col-md-12 col-12 pb-2 pr-0 pl-0 m-0">
+                <div class="form-row d-flex justify-content-center align-items-center">
+
+                    <!-- Filter isActive -->
+                    <div class="m-1">
+                        <label class="control-label col-especial m-0" for="orderDate">{{ 'USERS.SHOW' | translate }}</label>
+                        <div class="input-group hack-select">
+                            <select (change)="ChangeFilter($event)" [value]="filterTable.values.isActive" class="form-control letter-app" id="isActive">
+                                <option value="all">{{ 'USERS.ALL' | translate }}</option>
+                                <option value="active">{{ 'USERS.ACTIVES' | translate }}</option>
+                                <option value="inactive">{{ 'USERS.DEACTIVES' | translate }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Añadir producto -->
+                    <div class="m-1 mt-4">
+                        <button class="btn btn-secondary size-btn-form" style="text-transform: initial;" routerLink="new">
+                            {{ 'DELIVERY_ZONES.ADD_ZONE' | translate }}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <span class="title-table">
+            {{ 'DELIVERY_ZONES.NAME' | translate }}
+        </span>
+    </div>
+
+    <div class="table-content mt-3">
+        <table id="delivery-zones" style="width: 100%" class="table table-bordered table-striped mb-0" style="text-align: center">
+            <thead class="row-center">
+                <tr>
+                    <th>{{ 'DELIVERY_ZONES.ID' | translate }}</th>
+                    <th>{{ 'DELIVERY_ZONES.NAME_' | translate }}</th>
+                    <th>{{ 'DELIVERY_ZONES.ORDER' | translate }}</th>
+                    <th>{{ 'DELIVERY_ZONES.COLOR' | translate }}</th>
+                    <th>{{ 'DELIVERY_ZONES.IGNORE_CAPACITY_LIMIT' | translate }}</th>
+                    <th></th>
+                    <th style="border-right: 1px solid #7387c2 !important;"></th>
+                </tr>
+            </thead>
+            <tbody class="row-center"></tbody>
+        </table>
+    </div>
+</div>

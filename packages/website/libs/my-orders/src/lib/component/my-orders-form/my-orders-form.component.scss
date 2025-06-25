@@ -1,0 +1,83 @@
+.col-especial {
+    padding-right: 0px;
+    padding-left: 0px;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.input-table {
+    text-align: center;
+}
+
+.modal-block-warning .fa,
+.modal-block-warning .fab,
+.modal-block-warning .fal,
+.modal-block-warning .far,
+.modal-block-warning .fas {
+    color: #0088cc !important;
+}
+
+.print {
+    text-align: -webkit-right;
+    font-size: 2em;
+    color: #f89e4c;
+    padding-top: 0.5em;
+    cursor: pointer;
+}
+
+.td-price {
+    width: 100px;
+}
+
+.td-quantity {
+    width: 100px;
+}
+
+.date-size {
+    font-size: 12px;
+}
+
+.card-style-general {
+    border: 1px solid #d7dce1;
+}
+
+.thead>tr {
+    background-color: #737373 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.style-text-area {
+    height: 91px !important;
+}
+
+.style-tfoot {
+    border: 1px solid #dee2e6 !important;
+}
+
+.general-panel-table {
+    background: #fdfdfd !important;
+    border-radius: 5px 5px 0 0 !important;
+    border-bottom: 1px solid #DADADA !important;
+    padding: 8px !important;
+    position: relative !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    font-weight: 300;
+    max-height: 50px;
+}
+
+.general-h2-table {
+    color: rgba(0, 0, 0, 0.87) !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+}
+
+.table td {
+    padding: 0.4rem !important;
+    vertical-align: baseline !important;
+    border-top: 1px solid #dee2e6 !important;
+}
+
+.table-bordered{
+    border: 0px solid #dee2e6 !important;
+}

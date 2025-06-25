@@ -1,0 +1,27 @@
+<mat-expansion-panel
+    #panel
+    [disabled]="!isExpandable || disabled"
+    [expanded]="true"
+    hideToggle="true"
+    class="easyroute-route-panel"
+>
+    <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+    >
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="" fxLayoutGap="12px">
+            <div fxLayout="column" fxFlex="">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <ng-content select="[easyroute-route-panel-header-left]"></ng-content>
+                    <div fxFlex="" fxLayoutAlign="center center"></div>
+                    <ng-content select="[easyroute-route-panel-header-right]"></ng-content>
+                </div>
+                <ng-content
+                    select="[easyroute-route-panel-header-below-title]"
+                ></ng-content>
+            </div>
+            <ng-content select="[easyroute-route-panel-header-centered-right]"></ng-content>
+        </div>
+   </div>
+    <div><ng-content></ng-content></div>
+</mat-expansion-panel>

@@ -1,0 +1,83 @@
+.annual-comparison {
+    .card-body {
+        background: #FFFFFF;
+        border: 1px solid #DFE1E8;
+        border-radius: 12px;
+    }
+    .style-rent {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 42px;
+        color: #202020;
+    }
+    .style-card-lef {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 41px;
+        color: #202020;
+    }
+    .title-final {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #202020;
+    }
+    .title-card-anual{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 21px;
+        color: #202020;
+    }
+    .form-control-select{
+        background-image: url(/assets/images/polygon.svg) !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        background-size: 12px 12px !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        height: 45px !important;
+    }
+    .img-circle {
+        vertical-align: text-top;
+    }
+
+    .disable-radial {
+        opacity: 0.5;
+    }
+
+    .title-radial {
+        cursor: pointer;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #9899AA;
+        padding: 4px 6px 6px 8px;
+        border: 1px solid #9899AA;
+        border-radius: 18px;
+    }
+    /* .title-footer {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        color: #9899AA;
+    }
+    .title-price {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        text-align: right;
+        color: #9899AA;
+    }
+    */
+
+}

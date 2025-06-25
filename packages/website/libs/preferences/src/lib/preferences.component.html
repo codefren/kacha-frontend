@@ -1,0 +1,1670 @@
+<div class="preference bg-white p-3">
+    <div class="row">
+
+        <!-- mini menu seleccionable -->
+        <div class="col-xl-3 col-12">
+
+            <div class="row accordion" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <!-- ****************************** -->
+                <!-- ******* CONFIGURACIÓN ******** -->
+                <!-- ****************************** -->
+                <div class="col-12">
+                    <label class="title-left-sheet"> {{'PREFERENCES.NAME' | translate }} </label>
+                </div>
+
+                <!-- Planificador -->
+                <ng-container *ngIf="canUser() &&
+                        (authLocal.isLogged() && (isAdmin() ||
+                        isAdminCompany() || isControlPartners()) &&
+                        (isActive() ||  defeatedDemo() || inTrial() || isAdmin() || isFranchise())) &&
+                        validatelogistics() || multivalidation() || isTraffic() || isControlPartners()">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-1" (click)="changePage('planRoutes')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#planner" aria-expanded="true" aria-controls="planner">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/1-planificador.svg"> Planificador
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="planner" class="collapse" [ngClass]="{'show': paramsChange === 'planRoutes' || paramsChange === 'plannerDisplay'}" data-parent="#accordion" aria-labelledby="heading-1">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'planRoutes'}" (click)="changePage('planRoutes')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'planRoutes'}">
+                                                    Planificar rutas
+                                                </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'plannerDisplay'}" (click)="changePage('plannerDisplay')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'plannerDisplay'}">
+                                                    Visualización planificador
+                                                </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Seguimiento de viajes -->
+                <div class="card card-default cart-to col-12">
+                    <div class="card-header d pl-3" id="heading-2" (click)="changePage('summaryBoxes')">
+                        <h4 class="card-title m-0">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" href="#travel" aria-expanded="false" aria-controls="travel">
+                                <img class="img-Returns point mr-1" src="assets/icons/preference/2-travel.svg"> Seguimiento de viajes
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="travel" class="collapse" [ngClass]="{'show': paramsChange === 'summaryBoxes' || 
+                     paramsChange === 'deleveryNote' ||
+                     paramsChange === 'timesShedules' || 
+                     paramsChange === 'dashboardRoutes'}" data-parent="#accordion" aria-labelledby="heading-2">
+                        <div class="card-body p-0">
+
+                            <ul class="list-group">
+
+                                <li class="list-group-item point p-0 pr-2">
+                                    <ul class="sub-ul">
+
+                                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'summaryBoxes'}" (click)="changePage('summaryBoxes')">
+                                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'summaryBoxes'}">
+                                                    Cajas resumen
+                                                </label>
+                                        </li>
+
+                                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'deleveryNote'}" (click)="changePage('deleveryNote')">
+                                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'deleveryNote'}">
+                                                    Albarán y factura
+                                                </label>
+                                        </li>
+
+                                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'timesShedules'}" (click)="changePage('timesShedules')">
+                                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'timesShedules'}">
+                                                    Tiempos y horarios
+                                                </label>
+                                        </li>
+
+                                        <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'dashboardRoutes'}" (click)="changePage('dashboardRoutes')">
+                                            <label class="title-selct point" [ngClass]="{'title-no-select': select != 'dashboardRoutes'}">
+                                                    Dashboard rutas
+                                                </label>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Rutas -->
+                <ng-container *ngIf="(authLocal.isLogged() && (isControlPanel() || isAdmin() || 
+                        isAdminCompany() || isControlPartners() || isCommercialDirector()) &&
+                        (isActive() ||  defeatedDemo() || inTrial() || isAdmin() || isFranchise())) &&
+                        validatelogistics() || multivalidation() || isTraffic() || isControlPartners()">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-3" (click)="changePage('routeSpecification')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#route" aria-expanded="false" aria-controls="route">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/3-route.svg"> Rutas
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="route" class="collapse" [ngClass]="{'show': paramsChange === 'routeSpecification' || paramsChange === 'dataUsageStorage'}" data-parent="#accordion" aria-labelledby="heading-3">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'routeSpecification'}" (click)="changePage('routeSpecification')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'routeSpecification'}">
+                                                    Especificación de ruta
+                                                </label>
+                                            </li>
+
+                                            <ng-container *ngIf="canUser()">
+
+                                                <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'dataUsageStorage'}" (click)="changePage('dataUsageStorage')">
+                                                    <label class="title-selct point" [ngClass]="{'title-no-select': select != 'dataUsageStorage'}">
+                                                        Uso y almacenamiento de datos
+                                                    </label>
+                                                </li>
+
+                                            </ng-container>
+
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Vehículos -->
+                <ng-container *ngIf="authLocal.isLogged() && !(isControlPanel() || isCommercialDirector() || isCommercialAgent())">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-4" (click)="changePage('vehicleSpecification')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#vehicle" aria-expanded="false" aria-controls="vehicle">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/4-vehicle.svg"> Vehículos
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="vehicle" class="collapse" [ngClass]="{'show': paramsChange === 'vehicleSpecification' 
+                            || paramsChange === 'vehicleTypes' ||
+                            paramsChange === 'digitalAccessories' ||
+                            paramsChange === 'materialAccessories' || 
+                            paramsChange === 'mandatoryReviews' || 
+                            paramsChange === 'supplements'}" data-parent="#accordion" aria-labelledby="heading-4">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'vehicleSpecification'}" (click)="changePage('vehicleSpecification')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'vehicleSpecification'}">
+                                                Especificación de servicios
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'vehicleTypes'}" (click)="changePage('vehicleTypes')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'vehicleTypes'}">
+                                                Tipos de vehículos
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'digitalAccessories'}" (click)="changePage('digitalAccessories')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'digitalAccessories'}">
+                                                Complementos digitales
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'materialAccessories'}" (click)="changePage('materialAccessories')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'materialAccessories'}">
+                                                Complementos materiales
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'mandatoryReviews'}" (click)="changePage('mandatoryReviews')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'mandatoryReviews'}">
+                                                Revisiones obligatorias
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'supplements'}" (click)="changePage('supplements')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'supplements'}">
+                                                Suplementos
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Mantenimiento de vehículos -->
+                <ng-container *ngIf="activeMaintenance && authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany()) &&
+                        (isActive() || defeatedDemo() || inTrial() || (isAdmin() && !isControlPanel()))">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('vehicleStatus')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#maintenance" aria-expanded="false" aria-controls="maintenance">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/5-mantenance.svg"> Mantenimiento de vehículos
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="maintenance" class="collapse" [ngClass]="{'show': paramsChange === 'vehicleStatus' || paramsChange === 'predefinedRevisions'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'vehicleStatus'}" (click)="changePage('vehicleStatus')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'vehicleStatus'}">
+                                                Estado del vehículo 
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'predefinedRevisions'}" (click)="changePage('predefinedRevisions')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'predefinedRevisions'}">
+                                                Revisiones predefinidas
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Usuario -->
+                <ng-container *ngIf="authLocal.isLogged() && !(isControlPanel() || isCommercialDirector() || isCommercialAgent())">
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-3" (click)="changePage('drivingLicenses')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/6-user.svg"> Usuarios
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="user" class="collapse" [ngClass]="{'show': paramsChange === 'drivingLicenses' || paramsChange === 'otherCards'}" data-parent="#accordion" aria-labelledby="heading-3">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'drivingLicenses'}" (click)="changePage('drivingLicenses')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'drivingLicenses'}">
+                                                Carnets de conducir
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'otherCards'}" (click)="changePage('otherCards')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'otherCards'}">
+                                                Otros carnets
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <!-- Cliente -->
+                <ng-container *ngIf="authLocal.isLogged() && !(isControlPanel())">
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-4" (click)="changePage('timeSpecification')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#client" aria-expanded="false" aria-controls="client">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/7-client.svg"> Clientes
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="client" class="collapse" [ngClass]="{'show': paramsChange === 'timeSpecification' || 
+                         paramsChange === 'downloadTimes' ||
+                         paramsChange === 'delays' || 
+                         paramsChange === 'dataUsageStorageClient' ||  
+                         paramsChange === 'dataUpdate'}" data-parent="#accordion" aria-labelledby="heading-4">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'timeSpecification'}" (click)="changePage('timeSpecification')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'timeSpecification'}">
+                                                Especificación horaria
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'downloadTimes'}" (click)="changePage('downloadTimes')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'downloadTimes'}">
+                                                Tiempos de descarga
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'delays'}" (click)="changePage('delays')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'delays'}">
+                                                Retrasos
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'dataUsageStorageClient'}" (click)="changePage('dataUsageStorageClient')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'dataUsageStorageClient'}">
+                                                Uso y almacenamiento de datos
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'dataUpdate'}" (click)="changePage('dataUpdate')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'dataUpdate'}">
+                                                Actualización de datos
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <!-- App -->
+                <ng-container *ngIf="authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany() || isControlPartners()) &&
+                        (isActive() || defeatedDemo() || inTrial() || isAfiliateFranchise() || (isAdmin() && !isControlPanel()))">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('driverApp')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#app" aria-expanded="false" aria-controls="app">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/8-app.svg"> App
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="app" class="collapse" [ngClass]="{'show': paramsChange === 'driverApp' || paramsChange === 'commercialApp'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'driverApp'}" (click)="changePage('driverApp')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'driverApp'}">
+                                                App chófer
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'commercialApp'}" (click)="changePage('commercialApp')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'commercialApp'}">
+                                                App comercial
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Notificacion -->
+                <ng-container *ngIf="authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany() || isControlPartners()) &&
+                        (isActive() || defeatedDemo() || inTrial() || isAfiliateFranchise() || (isAdmin() && 
+                        !isControlPanel()))">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'notification' || paramsChange === 'notification'}" (click)="changePage('notification')">
+                                <span [ngClass]="{'title-no-select': select != 'notification'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'notification'" src="assets/icons/preference/9-notification.svg">
+                                <img class="img-Returns point mr-1" *ngIf="select === 'notification'" src="assets/icons/preference/9-notification-blue.svg">
+                                 Notificación
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Informe -->
+                <div class="card card-default cart-to col-12">
+                    <div class="card-header d pl-3" id="heading-5">
+                        <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'report'}" (click)="changePage('report')">
+                            <span [ngClass]="{'title-no-select': select != 'report'}">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/10-informe.svg"  *ngIf="select !== 'report'"> 
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/10-informe-blue.svg"  *ngIf="select === 'report'">
+                                    Informes
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+
+                <!-- Geolocalización -->
+                <ng-container *ngIf="activeGeolocation && authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany() || isControlPartners()) &&
+                        (isActive() || defeatedDemo() || inTrial() || (isAdmin() && !isControlPanel()))">
+
+                    <div class="card card-default cart-to col-12" *ngIf="activeGeolocation">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('schedule')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#geolocation" aria-expanded="false" aria-controls="geolocation">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/11-geolocation.svg"> Geolocalización
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="geolocation" class="collapse" [ngClass]="{'show': paramsChange === 'schedule' || paramsChange === 'stopAlerts'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'schedule'}" (click)="changePage('schedule')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'schedule'}">
+                                                Horario
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'stopAlerts'}" (click)="changePage('stopAlerts')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'stopAlerts'}">
+                                                Alertas de parada
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Facturación -->
+                <ng-container *ngIf="aciveCompanyBill && authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany() || isControlPartners()) &&
+                        (isActive() || defeatedDemo() || inTrial() || (isAdmin() && !isControlPanel()))">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'bill' || paramsChange === 'bill'}" (click)="changePage('bill')">
+                                <span [ngClass]="{'title-no-select': select != 'bill'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'bill'" src="assets/icons/preference/12-bill.svg"> 
+                                <img class="img-Returns point mr-1" *ngIf="select === 'bill'" src="assets/icons/preference/12-bill-blue.svg">
+                                Facturación
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Productos -->
+                <ng-container *ngIf="authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany() || isControlPartners() || isCommercialAgent() || isCommercialDirector()) 
+                        && (isActive() || defeatedDemo() || inTrial() || isAfiliateFranchise() || (isAdmin() && !isControlPanel())) 
+                        && profile.company.companyProfileTypeId >= 2 
+                        && hideMultidelegation()">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('productSettings')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#product" aria-expanded="false" aria-controls="product">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/13-product.svg"> Productos
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="product" class="collapse" [ngClass]="{'show': paramsChange === 'productSettings' || 
+                        paramsChange === 'formats' || 
+                        paramsChange === 'categories' || 
+                        paramsChange === 'subcategories' || 
+                        paramsChange === 'filters'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'productSettings'}" (click)="changePage('productSettings')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'productSettings'}">
+                                                Ajustes de productos
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'categories'}" (click)="changePage('categories')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'categories'}">
+                                                Categorías
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'subcategories'}" (click)="changePage('subcategories')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'subcategories'}">
+                                                Subcategorías
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'filters'}" (click)="changePage('filters')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'filters'}">
+                                                Filtros
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'formats'}" (click)="changePage('formats')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'formats'}">
+                                                Formatos
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Productos franquicia -->
+                <ng-container *ngIf="activeProducts && authLocal.isLogged() && !isControlPanel() &&
+                        (isAdmin() || isAdminCompany() || isControlPartners()) 
+                        && ( isActive() || defeatedDemo() || inTrial() || isAfiliateFranchise() || (isAdmin() && !isControlPanel())) 
+                        && profile.company.companyProfileTypeId >= 2">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'productFranchise' || paramsChange === 'productFranchise'}" (click)="changePage('productFranchise')">
+                                <span [ngClass]="{'title-no-select': select != 'productFranchise'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'productFranchise'" src="assets/icons/preference/14-product-franchise.svg">
+                                <img class="img-Returns point mr-1" *ngIf="select === 'productFranchise'" src="assets/icons/preference/14-product-franchise-blue.svg">
+                                 Productos franquicia
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <!-- Promociones -->
+                <ng-container *ngIf="authLocal.isLogged() && !isControlPanel() && (isAdmin() || isAdminCompany() || isControlPartners()) 
+                        &&(isActive() || defeatedDemo() || inTrial() || isAfiliateFranchise() || (isAdmin() && !isControlPanel())) 
+                        && profile.company.companyProfileTypeId >= 2
+                        && hideMultidelegation()">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'promotion' || paramsChange === 'promotion'}" (click)="changePage('promotion')">
+                                <span [ngClass]="{'title-no-select': select != 'promotion'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'promotion'" src="assets/icons/preference/15-promotion.svg">
+                                <img class="img-Returns point mr-1" *ngIf="select === 'promotion'" src="assets/icons/preference/15-promotion-blue.svg"> 
+                                 Promociones
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Pedidos -->
+                <ng-container *ngIf="authLocal.isLogged() && !isControlPanel() && (isAdmin() || isAdminCompany() || isControlPartners() 
+                        || isCommercialAgent() || isCommercialDirector()) 
+                        && (isActive() || defeatedDemo() || inTrial()|| isAfiliateFranchise() || (isAdmin() && !isControlPanel())) 
+                        && profile.company.companyProfileTypeId >= 2
+                        && hideMultidelegation()">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'order' || paramsChange === 'order'}" (click)="changePage('order')">
+                                <span [ngClass]="{'title-no-select': select != 'order'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'order'" src="assets/icons/preference/16-order.svg"> 
+                                <img class="img-Returns point mr-1" *ngIf="select === 'order'" src="assets/icons/preference/16-order-blue.svg"> 
+                                Pedidos
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <!-- Integración -->
+
+                <ng-container>
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('routeIntegration')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#integration" aria-expanded="false" aria-controls="integration">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/integration.svg"> Integración
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="integration" class="collapse" [ngClass]="{'show': paramsChange === 'routeIntegration' || paramsChange === 'deliveryNoteIntegration'}" data-parent="#accordion" aria-labelledby="heading-5">
+
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'routeIntegration'}" (click)="changePage('routeIntegration')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'routeIntegration'}">
+                                                    Integración rutas
+                                                 </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'deliveryNoteIntegration'}" (click)="changePage('deliveryNoteIntegration')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'deliveryNoteIntegration'}">
+                                                    Integración albaranes
+                                                 </label>
+                                            </li>
+
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <!-- end Integración -->
+
+
+                <!-- ****************************** -->
+                <!-- ********** MODULOS *********** -->
+                <!-- ****************************** -->
+                <div class="col-12 pt-5">
+                    <label class="title-left-sheet"> {{'PREFERENCES.MODULE' | translate }} </label>
+                </div>
+
+
+                <!-- App Lite (cliente) -->
+                <ng-container *ngIf="activeAppLite && authLocal.isLogged() && !(isControlPanel() || isCommercialDirector() || isCommercialAgent()) &&
+                    (isAdmin() || isAdminCompany() || isControlPartners()) &&
+                    (isActive() || defeatedDemo() || inTrial() || (isAdmin() && !isControlPanel()))">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'appLite' || paramsChange === 'appLite'}" (click)="changePage('appLite')">
+                                <span [ngClass]="{'title-no-select': select != 'appLite'}">
+                                <img class="img-Returns point mr-1" src="assets/icons/preference/17-app-lite.svg"> App Lite (cliente)
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Coste -->
+                <ng-container *ngIf="activeCost">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('costStructure')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#cost" aria-expanded="false" aria-controls="cost">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/18-cost.svg"> Coste
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="cost" class="collapse" [ngClass]="{'show': paramsChange === 'costStructure' || paramsChange === 'costRates' || paramsChange === 'costAutomation'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'costStructure'}" (click)="changePage('costStructure')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'costStructure'}">
+                                                Estructura
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'costRates'}" (click)="changePage('costRates')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'costRates'}">
+                                                Tarifas
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'costAutomation'}" (click)="changePage('costAutomation')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'costAutomation'}">
+                                                Automatización
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Chat -->
+                <ng-container *ngIf="activeChat && isChat()">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('chatStorage')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#chat" aria-expanded="false" aria-controls="chat">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/19-chat.svg"> Chat
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="chat" class="collapse" [ngClass]="{'show': paramsChange === 'chatStorage' || paramsChange === 'chatSending'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'chatStorage'}" (click)="changePage('chatStorage')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'chatStorage'}">
+                                                Almacenamiento
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'chatSending'}" (click)="changePage('chatSending')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'chatSending'}">
+                                                    Envío de chat
+                                                </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Muelle -->
+                <ng-container *ngIf="activeLoadingDock">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('dockTypePackage')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#dock" aria-expanded="false" aria-controls="dock">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/20-muelle.svg"> Muelle
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="dock" class="collapse" [ngClass]="{'show': paramsChange === 'dockTypePackage' || paramsChange === 'dockVehicleStatus'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'dockTypePackage'}" (click)="changePage('dockTypePackage')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'dockTypePackage'}">
+                                                {{ 'LOADING_DOCK.SETTING.TYPES_PACKAGES' | translate }}
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'dockVehicleStatus'}" (click)="changePage('dockVehicleStatus')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'dockVehicleStatus'}">
+                                                {{ 'LOADING_DOCK.SETTING.VEHICLE_STATUS' | translate }}
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Paquetería -->
+                <ng-container *ngIf="activeParcel">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'parcel' || paramsChange === 'parcel'}" (click)="changePage('parcel')">
+                                <span [ngClass]="{'title-no-select': select != 'parcel'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'parcel'" src="assets/icons/preference/21-parcel.svg">
+                                <img class="img-Returns point mr-1" *ngIf="select === 'parcel'" src="assets/icons/preference/21-parcel-blue.svg">
+                                 Paquetería
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Hola de ruta -->
+                <ng-container *ngIf="activeSheetRoute">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5" (click)="changePage('sheetRouteFirst')">
+                            <h4 class="card-title m-0">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#sheet" aria-expanded="false" aria-controls="sheet">
+                                    <img class="img-Returns point mr-1" src="assets/icons/preference/22-sheet.svg"> Hoja de ruta
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="sheet" class="collapse" [ngClass]="{'show': paramsChange === 'sheetRouteFirst' || 
+                        paramsChange === 'sheetRouteLast' || 
+                        paramsChange === 'sheetRouteConcept'}" data-parent="#accordion" aria-labelledby="heading-5">
+                            <div class="card-body p-0">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item point p-0 pr-2">
+                                        <ul class="sub-ul">
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'sheetRouteFirst'}" (click)="changePage('sheetRouteFirst')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'sheetRouteFirst'}">
+                                                {{ 'SHEET_ROUTE.FIRST_ROADMAP' | translate }}
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'sheetRouteLast'}" (click)="changePage('sheetRouteLast')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'sheetRouteLast'}">
+                                                {{ 'SHEET_ROUTE.LASTEST_RADMAP' | translate }}
+                                            </label>
+                                            </li>
+
+                                            <li class="list-group-item sub-li point" [ngClass]="{'background-selecter': select === 'sheetRouteConcept'}" (click)="changePage('sheetRouteConcept')">
+                                                <label class="title-selct point" [ngClass]="{'title-no-select': select != 'sheetRouteConcept'}">
+                                                {{ 'SHEET_ROUTE.EXPENSE_CONCEPTS' | translate }}
+                                            </label>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Multi tienda -->
+                <ng-container *ngIf="activeMultiStore && hideMultidelegation() && (isAdmin() ||  isTraffic() ||
+                isAdminCompany() || isControlPartners() && (isActive() || inTrial() || isAdminGlobal() || defeatedDemo()) && showStoreFranchise())">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'multiStore' || paramsChange === 'multiStore'}" (click)="changePage('multiStore')">
+                                <span [ngClass]="{'title-no-select': select != 'multiStore'}">
+                                    <img class="img-Returns point mr-1" *ngIf=" select !== 'multiStore'" src="assets/icons/preference/23-multi-store.svg">
+                                    <img class="img-Returns point mr-1" *ngIf=" select === 'multiStore'" src="assets/icons/preference/23-multi-store-blue.svg">
+                                     Multi tienda
+                                </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+
+
+                <!-- ****************************** -->
+                <!-- ********** AYUDA *********** -->
+                <!-- ****************************** -->
+                <div class="col-12 pt-5">
+                    <label class="title-left-sheet"> Ayuda </label>
+                </div>
+
+                <!-- Concepto -->
+                <ng-container *ngIf="authLocal.isLogged() && (isActive() ||
+                    defeatedDemo() || inTrial() || isAdmin())">
+
+                    <div class="card card-default cart-to col-12">
+                        <div class="card-header d pl-3" id="heading-5">
+                            <h4 class="card-title m-0 pt-2 pb-2 title-selct point" [ngClass]="{'background-selecter': select === 'helpConcept'}" (click)="changePage('helpConcept')">
+                                <span [ngClass]="{'title-no-select': select != 'helpConcept'}">
+                                <img class="img-Returns point mr-1" *ngIf="select !== 'helpConcept'" src="assets/icons/preference/24-concept.svg">
+                                <img class="img-Returns point mr-1" *ngIf="select === 'helpConcept'" src="assets/icons/preference/24-concept-blue.svg"> Concepto
+                            </span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <!-- academy -->
+                <div class="card card-default cart-to col-12">
+                    <div class="card-header d pl-3" id="heading-5">
+                        <h4 class="card-title m-0 pt-2 pb-2 point" (click)="goToLinkAcademyHome(urlAcademy)">
+                            <span>
+                                <img class="img-Returns point mr-1" src="assets/icons/preference/25-academy.svg"> Academy
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Linea divisora -->
+        <div class="d-flex" style="height: 200px;">
+            <div class="vr"></div>
+        </div>
+
+        <!-- Lado derecho -->
+        <div class="col-xl-9 col-12">
+
+            <!-- ****************************** -->
+            <!-- ******* CONFIGURACIÓN ******** -->
+            <!-- ****************************** -->
+
+            <div class="row align-items-center">
+
+                <!-- Planificador -->
+
+                <ng-container *ngIf="select === 'planRoutes'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Planificar rutas </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-plan-routes></easyroute-plan-routes>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'plannerDisplay'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Visualización planificador</label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-planner-visualization></easyroute-planner-visualization>
+                    </div>
+                </ng-container>
+
+                <!-- Seguimiento de viajes -->
+
+                <ng-container *ngIf="select === 'summaryBoxes'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'TRAVEL_TRACKING.SUMMARY_BOXES' | translate }}</label>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <easyroute-summary-boxes></easyroute-summary-boxes>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'deleveryNote'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'TRAVEL_TRACKING.DELIVERY_NOTE' | translate }}</label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-delivery-note-invoice [showSharedInformation]=" showShareInformation() "></easyroute-delivery-note-invoice>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'timesShedules'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> {{ 'TRAVEL_TRACKING.TIMES_SCHEDULES' | translate }}</label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-times-schedules></easyroute-times-schedules>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'dashboardRoutes'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Dashboard </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-dashboard-settings></easyroute-dashboard-settings>
+                    </div>
+                </ng-container>
+
+                <!-- Rutas -->
+                <ng-container *ngIf="select === 'routeSpecification'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Especificación de ruta </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-route-specification></easyroute-route-specification>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'dataUsageStorage'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Uso y almacenamiento de datos </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-data-usage-storage-route></easyroute-data-usage-storage-route>
+                    </div>
+                </ng-container>
+
+                <!-- Vehículos -->
+                <ng-container *ngIf="select === 'vehicleSpecification'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Especificación de servicios </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-specification></easyroute-vehicle-specification>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'vehicleTypes'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Tipos de vehículos </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-types></easyroute-vehicle-types>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'digitalAccessories'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Complementos digitales </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-digital-accessories></easyroute-vehicle-digital-accessories>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'materialAccessories'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Complementos materiales </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-material-accessories></easyroute-vehicle-material-accessories>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'mandatoryReviews'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Revisiones obligatorias </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-mandatory-reviews></easyroute-vehicle-mandatory-reviews>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'supplements'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Suplementos </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-supplements></easyroute-vehicle-supplements>
+                    </div>
+                </ng-container>
+
+
+                <!-- Mantenimiento de vehiculo -->
+
+                <ng-container *ngIf="select === 'vehicleStatus'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Estado del vehículo  </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-status></easyroute-vehicle-status>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'predefinedRevisions'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> Revisiones predefinidas </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-predefined-revisions></easyroute-predefined-revisions>
+                    </div>
+                </ng-container>
+
+                <!-- User -->
+
+                <ng-container *ngIf="select === 'drivingLicenses'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'USERS.SETTINGS.DRIVING_LICENSES' | translate }}  </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-driving-licenses></easyroute-driving-licenses>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select === 'otherCards'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2 ">
+                        <label class="title-left-sheet "> {{ 'USERS.SETTINGS.OTHER_LICENSES' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-other-licenses></easyroute-other-licenses>
+                    </div>
+                </ng-container>
+
+
+                <!-- Cliente -->
+                <ng-container *ngIf="select==='timeSpecification'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'DELIVERY_POINTS.SETTINGS.TIME_SPECIFICATION' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-time-specification></easyroute-time-specification>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select==='downloadTimes'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'DELIVERY_POINTS.SETTINGS.DOWNLOAD_TIMES' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-download-times></easyroute-download-times>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select==='delays'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'DELIVERY_POINTS.SETTINGS.DELAYS' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-delays></easyroute-delays>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select==='dataUsageStorageClient' ">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'DELIVERY_POINTS.SETTINGS.USE_AND_STORAGE_OF_DATA' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-use-and-storage></easyroute-use-and-storage>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select==='dataUpdate'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'DELIVERY_POINTS.SETTINGS.DATA_UPDATE' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-data-update></easyroute-data-update>
+                    </div>
+                </ng-container>
+
+
+                <!-- app  -->
+                <ng-container *ngIf="select==='driverApp'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> App chófer </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-driver-app></easyroute-driver-app>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="select==='commercialApp'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> App comercial </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-commercial-app></easyroute-commercial-app>
+
+                    </div>
+
+                </ng-container>
+                <!-- end app -->
+
+                <!-- Notificaciones -->
+
+                <ng-container *ngIf="select==='notification'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Notificaciones </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <easyroute-notifications></easyroute-notifications>
+                    </div>
+
+                </ng-container>
+
+                <!-- end Notificaciones -->
+
+
+                <!-- Informe -->
+                <ng-container *ngIf="select==='report'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Envío de informes </label>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <easyroute-reports-settings></easyroute-reports-settings>
+                    </div>
+                </ng-container>
+
+                <!-- Geolocalizacion -->
+                <ng-container *ngIf="select==='schedule'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Horario </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-schedule-configuration></easyroute-schedule-configuration>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="select==='stopAlerts' ">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Alertas de parada </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-alert-time></easyroute-alert-time>
+                    </div>
+                </ng-container>
+
+                <!-- Facturación -->
+
+                <ng-container *ngIf="select==='bill'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Control de facturas </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-bills-settings></easyroute-bills-settings>
+
+                    </div>
+
+                </ng-container>
+
+                <!-- end facturación -->
+
+                <!-- productos -->
+
+                <!-- configuracíón de productos -->
+
+                <ng-container *ngIf="select==='productSettings'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Ajustes de productos </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-product-settings></easyroute-product-settings>
+
+                    </div>
+
+                </ng-container>
+
+                <!-- end configuración de productos -->
+
+                <!-- categorias -->
+
+                <ng-container *ngIf="select==='categories'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Categorías </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-categories></easyroute-categories>
+
+                    </div>
+
+                </ng-container>
+
+                <!-- end categorias -->
+
+                <!-- subCategories -->
+
+                <ng-container *ngIf="select==='subcategories'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Subcategorías </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-sub-categories></easyroute-sub-categories>
+
+                    </div>
+
+                </ng-container>
+
+                <!-- end subCategories -->
+
+                <!-- Filters -->
+
+                <ng-container *ngIf="select==='filters'">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Filtros </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-filters></easyroute-filters>
+
+                    </div>
+
+                </ng-container>
+
+                <!-- End Filters -->
+
+                <!-- Formats -->
+
+                <ng-container *ngIf="select==='formats'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+
+                        <label class="title-left-sheet"> Formatos </label>
+
+                    </div>
+
+                    <div class="col-12 mt-3">
+
+                        <easyroute-formats></easyroute-formats>
+
+                    </div>
+                </ng-container>
+
+                <!-- end Formats -->
+
+                <!-- end productos -->
+
+
+                <!-- productos Franquicia -->
+                <ng-container *ngIf="select === 'productFranchise' && activeProducts">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'PREFERENCES.OPTIONS.PRODUCTS_FRANCHISE' | translate }} </label>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <easyroute-franchise-product></easyroute-franchise-product>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select==='promotion' ">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Visualización de promociones </label>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <easyroute-promotion-preferences></easyroute-promotion-preferences>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select==='order' ">
+
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Pedidos </label>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <easyroute-order-setting></easyroute-order-setting>
+                    </div>
+
+                </ng-container>
+
+                <!-- Integración -->
+
+                <ng-container *ngIf="select==='routeIntegration' ">
+
+                    <div class="col-12 mt-2">
+
+                        <easyroute-route-integration></easyroute-route-integration>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="select==='deliveryNoteIntegration' ">
+
+                    <div class="col-12 mt-2">
+
+                        <easyroute-delivery-note-integration></easyroute-delivery-note-integration>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+            <!-- ****************************** -->
+            <!-- ********** MODULOS *********** -->
+            <!-- ****************************** -->
+
+            <div class="row align-items-center">
+
+                <ng-container *ngIf="select === 'appLite'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> App Lite (cliente) </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-app-lite-preferences></easyroute-app-lite-preferences>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'costStructure'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Estructura </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-structure></easyroute-structure>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'costRates'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Rates </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-rates></easyroute-rates>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'costAutomation'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Automatización </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-automation></easyroute-automation>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'chatStorage'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'CHAT.SETTING.STORAGE' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-chat-storage-setting></easyroute-chat-storage-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'chatSending'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'CHAT.SETTING.CHAT_SENDING' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-chat-sending-setting></easyroute-chat-sending-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'dockTypePackage'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'LOADING_DOCK.SETTING.TYPES_PACKAGES' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-type-package-setting></easyroute-type-package-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'dockVehicleStatus'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'LOADING_DOCK.SETTING.VEHICLE_STATUS' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-vehicle-status-setting></easyroute-vehicle-status-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'parcel'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'PARCEL.SCAN_PACKAGES' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-parcel-scan-package-setting></easyroute-parcel-scan-package-setting>
+                    </div>
+                </ng-container>
+
+
+
+
+
+
+                <ng-container *ngIf="select === 'sheetRouteFirst'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'SHEET_ROUTE.FIRST_ROADMAP' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-first-sheet-setting [routeSheet]="routeSheet" (routeSheets)="getData($event)"></easyroute-first-sheet-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'sheetRouteLast'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'SHEET_ROUTE.LASTEST_RADMAP' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-last-sheet-setting [routeSheet]="routeSheet" (routeSheets)="getData($event)"></easyroute-last-sheet-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="select === 'sheetRouteConcept'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> {{ 'SHEET_ROUTE.EXPENSE_CONCEPTS' | translate }} </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-expenses-concept-setting [routeSheet]="routeSheet" (routeSheets)="getData($event)"></easyroute-expenses-concept-setting>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="hideMultidelegation()">
+                    <ng-container *ngIf="select === 'multiStore'">
+                        <div class="col-12 mt-3">
+                            <easyroute-multi-store></easyroute-multi-store>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+            </div>
+
+
+
+            <!-- ****************************** -->
+            <!-- ************ AYUDA *********** -->
+            <!-- ****************************** -->
+            <div class="row align-items-center">
+
+                <ng-container *ngIf="select === 'helpConcept'">
+                    <div class="col-xl-6 col-12 text-xl-left text-center mt-2">
+                        <label class="title-left-sheet"> Conceptos </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <easyroute-help></easyroute-help>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
