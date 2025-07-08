@@ -1,0 +1,11 @@
+name: Prueba runner autohospedado
+
+on:
+  workflow_dispatch:        # lo lanzas manualmente desde la pestaña Actions
+
+jobs:
+  build:
+    runs-on: [poolpo-frontend, angular]
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "¡Hola desde mi runner!"
