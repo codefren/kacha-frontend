@@ -25,9 +25,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Activar Yarn 1.22.19 con Corepack   # ← NUEVO
+      - name: Activar Yarn classic 1.22.19         # ← sustituye aquí
         run: |
-          corepack disable || true
+          corepack enable
           corepack prepare yarn@1.22.19 --activate
           yarn -v
 
