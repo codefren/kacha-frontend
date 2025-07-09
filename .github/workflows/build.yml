@@ -38,9 +38,11 @@ jobs:
           restore-keys: yarn-${{ runner.os }}-
 
       - name: Install deps & build
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096   # 4 GB (ajusta si hace falta)
         run: |
           yarn install --frozen-lockfile
-          npx lerna run build --stream    # o yarn build si prefieres
+          yarn build
 
       - uses: actions/upload-artifact@v4
         with:
