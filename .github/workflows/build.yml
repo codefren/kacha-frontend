@@ -15,20 +15,23 @@ env:
   BUILD_DIR: packages/website/apps/easyroute   # ← carpeta de salida de tu build
 
 jobs:
-# ──────────────────────────────────────────
-# 1) BUILD
-# ──────────────────────────────────────────
   build:
     runs-on: [self-hosted, linux, poolpo-frontend]
 
     steps:
-      - uses: actions/checkout@v4          # clona en $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - uses: actions/cache@v4             # acelera Yarn
+      - name: Activar Yarn 1.22.19 con Corepack   # ← NUEVO
+        run: |
+          corepack disable || true
+          corepack prepare yarn@1.22.19 --activate
+          yarn -v
+
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/yarn
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
@@ -36,16 +39,13 @@ jobs:
 
       - name: Install deps & build
         run: |
-          npm install -g yarn@1.22.19
           yarn install --frozen-lockfile
-          # lanzamos Lerna directamente
-          npx lerna run build --stream
+          npx lerna run build --stream    # o yarn build si prefieres
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: website-build
-          path: ${{ env.BUILD_DIR }}/      # ➜ artefacto
+          path: ${{ env.BUILD_DIR }}/
 
 # ──────────────────────────────────────────
 # 2) DEPLOY
