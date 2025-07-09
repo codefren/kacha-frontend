@@ -1,11 +1,12 @@
-name: Prueba runner autohospedado
+name: Frontend CI/CD
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:        # lo lanzas manualmente desde la pestaña Actions
+  workflow_dispatch:        # permite lanzarlo manualmente
 
 jobs:
+  # 1) COMPILA LA APLICACIÓN
   build:
     runs-on: [self-hosted, linux, poolpo-frontend]
     steps:
@@ -18,17 +19,36 @@ jobs:
           node-version: '18'
           cache: 'yarn'
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      - name: Install dependencies
-        run: yarn install
+      - name: Enable Corepack and install dependencies
+        run: |
+          corepack enable        # habilita Yarn con Node 18
+          yarn install
 
       - name: Build project
-        run: npm run build
+        run: yarn build          # ejecuta el script "build" de la raíz
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: website-build
           path: packages/website/dist/
+
+  # 2) DESPLIEGA LOS ARCHIVOS A NGINX
+  deploy:
+    needs: build
+    runs-on: [self-hosted, linux, poolpo-frontend]
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: website-build
+          path: ./website-build
+
+      - name: Copy files to Nginx web root
+        run: |
+          sudo rm -rf /var/www/kacha-frontend/*
+          sudo cp -r ./website-build/* /var/www/kacha-frontend/
+          sudo chown -R www-data:www-data /var/www/kacha-frontend
+
+      - name: Reload Nginx
+        run: sudo systemctl reload nginx
