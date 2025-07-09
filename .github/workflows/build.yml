@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: poolpo-frontend
+    runs-on: [self-hosted,linux,poolpo-frontend]
     steps:
       - uses: actions/checkout@v4
       - run: echo "¡Hola desde mi runner!"
