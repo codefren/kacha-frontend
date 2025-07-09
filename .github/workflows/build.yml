@@ -2,53 +2,70 @@ name: Frontend CI/CD
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:        # permite lanzarlo manualmente
+    branches: [main]          # despliega cada push a main
+  workflow_dispatch:
+
+# Evita jobs simultáneos en la misma rama
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 20
+  BUILD_DIR: packages/website/apps/easyroute   # ← carpeta de salida de tu build
 
 jobs:
-  # 1) COMPILA LA APLICACIÓN
+# ──────────────────────────────────────────
+# 1) BUILD
+# ──────────────────────────────────────────
   build:
     runs-on: [self-hosted, linux, poolpo-frontend]
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4          # clona en $GITHUB_WORKSPACE
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'yarn'
+          node-version: ${{ env.NODE_VERSION }}
 
-      - name: Enable Corepack and install dependencies
+      - uses: actions/cache@v4             # acelera Yarn
+        with:
+          path: ~/.cache/yarn
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-${{ runner.os }}-
+
+      - name: Install deps & build
         run: |
-          corepack enable        # habilita Yarn con Node 18
-          yarn install
-
-      - name: Build project
-        run: yarn build          # ejecuta el script "build" de la raíz
+          corepack enable
+          yarn install --immutable
+          yarn build                       # produce $BUILD_DIR/
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: website-build
-          path: packages/website/dist/
+          path: ${{ env.BUILD_DIR }}/      # ➜ artefacto
 
-  # 2) DESPLIEGA LOS ARCHIVOS A NGINX
+# ──────────────────────────────────────────
+# 2) DEPLOY
+# ──────────────────────────────────────────
   deploy:
     needs: build
     runs-on: [self-hosted, linux, poolpo-frontend]
+
     steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: website-build
-          path: ./website-build
+          path: ./website-build            # se descarga aquí mismo
 
-      - name: Copy files to Nginx web root
+      - name: Sync to Nginx (atomic)
         run: |
-          sudo rm -rf /var/www/kacha-frontend/*
-          sudo cp -r ./website-build/* /var/www/kacha-frontend/
-          sudo chown -R www-data:www-data /var/www/kacha-frontend
+          NEXT=/var/www/kacha-frontend_next
+          sudo mkdir -p "$NEXT"
+          sudo rsync -av --delete ./website-build/ "$NEXT"/
+          sudo chown -R www-data:www-data "$NEXT"
+          sudo ln -sfn "$NEXT" /var/www/kacha-frontend
 
       - name: Reload Nginx
         run: sudo systemctl reload nginx
