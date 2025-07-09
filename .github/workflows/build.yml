@@ -36,9 +36,10 @@ jobs:
 
       - name: Install deps & build
         run: |
-          corepack enable
-          yarn install --immutable
-          yarn build                       # produce $BUILD_DIR/
+          npm install -g yarn@1.22.19
+          yarn install --frozen-lockfile
+          # lanzamos Lerna directamente
+          npx lerna run build --stream
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
