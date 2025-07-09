@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 18
   BUILD_DIR: packages/website/apps/easyroute   # ← carpeta de salida de tu build
 
 jobs:
