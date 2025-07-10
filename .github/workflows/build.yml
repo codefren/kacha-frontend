@@ -42,10 +42,14 @@ jobs:
 
       - name: Install deps & build (website only)
         env:
-          NODE_OPTIONS: --max_old_space_size=8192     # 8 GB
+            NODE_OPTIONS: --max_old_space_size=8192      # 8 GB de heap
         run: |
-          yarn install --frozen-lockfile
-          yarn build
+            yarn install --frozen-lockfile
+            # compila SÓLO @optimroute/website en serie (picos de RAM más bajos)
+            npx lerna run build --stream \
+            --scope @optimroute/website \
+            --concurrency 1
+
 
 
 
