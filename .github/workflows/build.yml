@@ -40,12 +40,13 @@ jobs:
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-${{ runner.os }}-
 
-      - name: Install deps & build   # ← aquí llamamos a Lerna
+      - name: Install deps & build
         env:
-          NODE_OPTIONS: --max_old_space_size=4096
+          NODE_OPTIONS: --max_old_space_size=6144      # 6 GB
         run: |
           yarn install --frozen-lockfile
-          npx lerna run build --stream
+          npx lerna run build --stream --concurrency 1 # 1→serial, menos pico de RAM
+
 
 # ──────────────────────────────────────────
 # 2) DEPLOY
