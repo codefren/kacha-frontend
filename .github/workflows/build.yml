@@ -56,6 +56,10 @@ jobs:
           name: website-build
           path: ${{ env.BUILD_DIR }}/
 
+      - name: Inspect build folder
+        run: |
+          ls -R packages/website/apps/easyroute | head
+
 # ──────────────────────────────────────────
 # 2) DEPLOY
 # ──────────────────────────────────────────
