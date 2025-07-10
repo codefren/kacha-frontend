@@ -124,3 +124,4 @@ jobs:
                -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
                -d text="❌ *Despliegue fallido* – commit \`${{ github.sha }}\`\nRevisa los logs en Actions." \
                -d parse_mode=Markdown
+
