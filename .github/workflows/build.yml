@@ -34,6 +34,12 @@ jobs:
           echo "TG_TOKEN length: ${#TG_TOKEN}"
           true                     # garantiza exit 0
 
+      # Depuración: confirma que llega el token
+      - name: Debug secret length
+        run: |
+          echo "TELEGRAM_CHAT_ID length: ${#TELEGRAM_CHAT_ID}"
+          true                     # garantiza exit 0
+
       # Aviso: comienza el build
       - name: Notify Telegram – build started
         if: github.ref == 'refs/heads/main'
