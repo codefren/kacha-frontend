@@ -31,14 +31,9 @@ jobs:
           TG_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          # Longitud del token (GitHub oculta el valor real en los logs)
           echo "TOKEN length: ${#TG_TOKEN}"
-          
-          # Muestra el chat_id para confirmar que es el correcto
-          echo "CHAT_ID: $TG_CHAT_ID"
-          
-          # Prueba rápida contra la API 'getMe' (debe devolver ok:true)
-          curl -s "https://api.telegram.org/bot$TG_TOKEN/getMe" | jq .
+          echo "CHAT_ID head: ${TG_CHAT_ID:0:5}… tail: …${TG_CHAT_ID: -5}"
+          curl -s "https://api.telegram.org/bot$TG_TOKEN/getMe"
 
       - run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
