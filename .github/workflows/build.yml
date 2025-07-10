@@ -2,42 +2,46 @@ name: Frontend CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main]     # despliega cada push a main
   workflow_dispatch:
 
+# Evita ejecuciones simultáneas en la misma rama
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# ───────────── Variables globales ─────────────
 env:
   NODE_VERSION: 16
-  BUILD_DIR: packages/website/dist/apps/easyroute
+  BUILD_DIR: packages/website/dist/apps/easyroute   # carpeta con index.html final
 
-# ──────────────────────────────────────────
+# ───────────────────────────────────────────────
 # 1) BUILD
-# ──────────────────────────────────────────
+# ───────────────────────────────────────────────
 jobs:
   build:
     runs-on: [self-hosted, linux, poolpo-frontend]
-    environment: prod
+    environment: prod          # secrets del entorno «prod»
+
+    env:                       # expone secrets como variables de shell
+      TG_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+      TG_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
     steps:
-
+      # Depuración: confirma que llega el token
       - name: Debug secret length
-        env:
-          TG_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}   # ← pasamos el secret al shell
         run: |
           echo "TG_TOKEN length: ${#TG_TOKEN}"
-          [ -z "$TG_TOKEN" ] && echo "::error::El token está vacío"
+          true                     # garantiza exit 0
 
-      # ----- aviso: comienza build -----
+      # Aviso: comienza el build
       - name: Notify Telegram – build started
         if: github.ref == 'refs/heads/main'
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d text="🚀 *Build iniciado* – commit `${{ github.sha }}`" \
-            -d parse_mode=Markdown
+          curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
+               -d chat_id=$TG_CHAT_ID \
+               -d text="🚀 *Build iniciado* – commit \`${{ github.sha }}\`" \
+               -d parse_mode=Markdown
 
       - uses: actions/checkout@v4
 
@@ -58,12 +62,12 @@ jobs:
 
       - name: Install deps & build (website only)
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
+          NODE_OPTIONS: --max_old_space_size=8192     # 8 GB de heap
         run: |
           yarn install --frozen-lockfile
           npx lerna run build --stream \
-            --scope @optimroute/website \
-            --concurrency 1
+              --scope @optimroute/website \
+              --concurrency 1
 
       - name: Upload website artifact
         uses: actions/upload-artifact@v4
@@ -71,22 +75,25 @@ jobs:
           name: website-build
           path: ${{ env.BUILD_DIR }}/
 
-      # ----- aviso: build fallido -----
+      # Aviso: build fallido
       - name: Notify Telegram – build failed
         if: failure() && github.ref == 'refs/heads/main'
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d text="❌ *Build fallido* – commit `${{ github.sha }}`\nRevisa los logs en GitHub Actions." \
-            -d parse_mode=Markdown
+          curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
+               -d chat_id=$TG_CHAT_ID \
+               -d text="❌ *Build fallido* – commit \`${{ github.sha }}\`\nRevisa los logs en Actions." \
+               -d parse_mode=Markdown
 
-# ──────────────────────────────────────────
+# ───────────────────────────────────────────────
 # 2) DEPLOY
-# ──────────────────────────────────────────
+# ───────────────────────────────────────────────
   deploy:
     needs: build
     runs-on: [self-hosted, linux, poolpo-frontend]
     environment: prod
+    env:
+      TG_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+      TG_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
     steps:
       - uses: actions/download-artifact@v4
@@ -105,20 +112,20 @@ jobs:
       - name: Reload Nginx
         run: sudo systemctl reload nginx
 
-      # ----- aviso: deploy exitoso -----
+      # Aviso: deploy exitoso
       - name: Notify Telegram – deploy success
         if: success() && github.ref == 'refs/heads/main'
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d text="✅ *Despliegue completado* – commit `${{ github.sha }}` en producción" \
-            -d parse_mode=Markdown
+          curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
+               -d chat_id=$TG_CHAT_ID \
+               -d text="✅ *Despliegue completado* – commit \`${{ github.sha }}\` en producción" \
+               -d parse_mode=Markdown
 
-      # ----- aviso: deploy fallido -----
+      # Aviso: deploy fallido
       - name: Notify Telegram – deploy failed
         if: failure() && github.ref == 'refs/heads/main'
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d text="❌ *Despliegue fallido* – commit `${{ github.sha }}`\nRevisa los logs en GitHub Actions." \
-            -d parse_mode=Markdown
+          curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
+               -d chat_id=$TG_CHAT_ID \
+               -d text="❌ *Despliegue fallido* – commit \`${{ github.sha }}\`\nRevisa los logs en Actions." \
+               -d parse_mode=Markdown
