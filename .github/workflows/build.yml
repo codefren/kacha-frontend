@@ -2,28 +2,28 @@ name: Frontend CI/CD
 
 on:
   push:
-    branches: [main]          # despliega cada push a main
+    branches: [main]            # despliega cada push a main
   workflow_dispatch:
 
-# Evita jobs simultáneos en la misma rama
+# Evita ejecuciones simultáneas en la misma rama
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: 16
-  BUILD_DIR: packages/website/apps/easyroute   # ← carpeta de salida de tu build
+  NODE_VERSION: 16              # mismo Node que usas localmente
+  BUILD_DIR: dist/apps/easyroute # carpeta donde Angular deja index.html
 
+# ──────────────────────────────────────────
+# 1) BUILD
+# ──────────────────────────────────────────
 jobs:
   build:
     runs-on: [self-hosted, linux, poolpo-frontend]
 
-    env:
-      NODE_VERSION: 16
-      BUILD_DIR: packages/website/apps/easyroute
-
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -34,24 +34,27 @@ jobs:
           corepack prepare yarn@1.22.19 --activate
           yarn -v
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v4           # acelera yarn install
         with:
           path: ~/.cache/yarn
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-${{ runner.os }}-
 
-      - name: Install deps & build (website only)
+      - name: Install deps & build  (website only)
         env:
-            NODE_OPTIONS: --max_old_space_size=8192      # 8 GB de heap
+          NODE_OPTIONS: --max_old_space_size=8192   # 8 GB de heap
         run: |
-            yarn install --frozen-lockfile
-            # compila SÓLO @optimroute/website en serie (picos de RAM más bajos)
-            npx lerna run build --stream \
+          yarn install --frozen-lockfile
+          npx lerna run build --stream \
             --scope @optimroute/website \
             --concurrency 1
 
-
-
+      # ⬇️ SUBE EL ARTEFACTO QUE USARÁ EL JOB deploy
+      - name: Upload website build
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-build
+          path: ${{ env.BUILD_DIR }}/     # debe existir y contener index.html
 
 # ──────────────────────────────────────────
 # 2) DEPLOY
@@ -64,7 +67,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: website-build
-          path: ./website-build            # se descarga aquí mismo
+          path: ./website-build           # se descarga aquí
 
       - name: Sync to Nginx (atomic)
         run: |
