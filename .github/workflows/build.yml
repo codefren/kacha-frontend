@@ -45,7 +45,7 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192     # 8 GB
         run: |
           yarn install --frozen-lockfile
-          npx lerna run build --stream --scope @optimroute/website --concurrency 1
+          yarn build
 
 
 
