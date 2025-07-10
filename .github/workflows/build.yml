@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: website-build
-          path: ${{ env.BUILD_DIR }}/     # debe existir y contener index.html
+          path: ${{ env.BUILD_DIR }}/
 
 # ──────────────────────────────────────────
 # 2) DEPLOY
