@@ -22,6 +22,14 @@ jobs:
     environment: prod
 
     steps:
+
+      - name: Debug secret length
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}   # ← pasamos el secret al shell
+        run: |
+          echo "TG_TOKEN length: ${#TG_TOKEN}"
+          [ -z "$TG_TOKEN" ] && echo "::error::El token está vacío"
+
       # ----- aviso: comienza build -----
       - name: Notify Telegram – build started
         if: github.ref == 'refs/heads/main'
