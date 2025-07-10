@@ -40,12 +40,13 @@ jobs:
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-${{ runner.os }}-
 
-      - name: Install deps & build
+      - name: Install deps & build (website only)
         env:
-          NODE_OPTIONS: --max_old_space_size=8192    # 8 GB
+          NODE_OPTIONS: --max_old_space_size=8192     # 8 GB
         run: |
           yarn install --frozen-lockfile
           npx lerna run build --stream --scope @optimroute/website --concurrency 1
+
 
 
 # ──────────────────────────────────────────
