@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     //apiUrl: 'https://dev.api.optimroute.com',
-    apiUrl: 'http://localhost/optimroute-api/public/api/',
+    apiUrl: 'https://api.kachadigitalbcn.com/api/',
     jobsUrl: 'wss://dev.jobs.optimroute.com',
     geolocationWss: {
         pusher_key: 'key_JdwDDV9sWV7kEhXgFGbEKtfjrkPdFeyc',
@@ -19,7 +19,7 @@ export const environment = {
         enableStats: true,
         enabledTransports: ['ws'],
         forceTLS: false,
-        authEndpoint: 'http://localhost/optimroute-api/public/api/broadcasting/auth',
+        authEndpoint: 'https://api.kachadigitalbcn.com/api/broadcasting/auth',
     },
     name: 'local-dev',
     sessionTimeOut: 1,
