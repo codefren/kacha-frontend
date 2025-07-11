@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     // apiUrl: 'http://localhost:3000',
-    apiUrl: 'http://localhost:8000/api/',
+    apiUrl: 'https://api.kachadigitalbcn.com/api/',
     jobsUrl: 'ws://localhost:9000',
     geolocationWss: {
         pusher_key: 'key_JdwDDV9sWV7kEhXgFGbEKtfjrkPdFeyc',
@@ -15,7 +15,7 @@ export const environment = {
         enableStats: true,
         enabledTransports: ['ws'],
         forceTLS: false,
-        authEndpoint: 'http://localhost:8000/api/broadcasting/auth',
+        authEndpoint: 'https://api.kachadigitalbcn.com/api/broadcasting/auth',
     },
     name: 'local',
     sessionTimeOut: 1,

@@ -63,7 +63,7 @@ export class Config {
         return (
             this.envConfig.BACKEND_URL ||
             (this.isProduction
-                ? 'https://dev.restapi.optimroute.com/api/'
+                ? 'https://api.kachadigitalbcn.com/api/'
                 : 'http://localhost:8000/api/')
         );
     }
