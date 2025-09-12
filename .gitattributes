@@ -1,0 +1,5 @@
+# Configura los finales de línea por defecto para archivos de texto
+* text=auto
+
+# Asegura que todos los scripts .sh usen finales de línea LF
+*.sh text eol=lf
