@@ -252,7 +252,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
         } else {
 
-            this.logo = 'assets/images/pages/header/Logo_polpoo.png';
+            this.logo = 'assets/images/pages/header/ICONO-LOGO-01.png'; //logo_polpoo.png
 
         }
 
