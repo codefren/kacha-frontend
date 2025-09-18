@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     detectorDeviceIpad: boolean = false;
     detectorDeviceWidth: boolean = false;
     dropdownMenuItems = [];
-    logo: string = '';//'assets/images/optimroute-logo.png';
+    logo: string = '';//'assets/images/logo_optimmanage.png'; // optimroute-logo.png
     menuItems = [];
     menuItemsBack = [];
     menuItemsHidden = [];
@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     helpGuideStep: HelpGuide;
     openModalEnd: boolean = false;
     unReadCount: number = 0;
-    notificationsLast: any =[];
+    notificationsLast: any = [];
     companies: any = [];
     companiesFilter: any = [];
     companyId;
@@ -75,8 +75,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     names: any = [];
     showNotificactios: boolean = false;
     showChats: boolean = false;
-    roles:any[];
-    urlAcademy :string ='https://academy.polpoo.com/';
+    roles: any[];
+    urlAcademy: string = 'https://academy.polpoo.com/';
     chats: any[];
     opens: any = 0;
 
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         private ws: WebSocketService,
         private backend: BackendService,
         private loading: LoadingService,
-        private translate:TranslateService
+        private translate: TranslateService
     ) {
         this.showSubscriptionAlert =
             localStorage.getItem('showSubscriptionAlert') == 'true' ? true : false;
@@ -106,7 +106,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnInit() {
-       
+
         this.companyId = undefined;
 
         this.ws.connect();
@@ -128,17 +128,17 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         })
 
 
-        if(this.haveChat()){
+        if (this.haveChat()) {
             this.showChats = false;
-            this.backend.get('chat?isChatNotification=true&limit=3').pipe(take(1)).subscribe( (resp)=>{
-                
+            this.backend.get('chat?isChatNotification=true&limit=3').pipe(take(1)).subscribe((resp) => {
+
                 this.chats = resp.data;
 
                 this.opens = resp.opens;
 
                 this.showChats = true;
 
-                
+
             });
         }
 
@@ -156,11 +156,11 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
                 this.showNotificactios = true;
 
-                try{
+                try {
 
                     this.detectChange.detectChanges();
 
-                }catch(e){
+                } catch (e) {
 
                 }
             }
@@ -168,20 +168,20 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.ws.chats.pipe(takeUntil(this.unsubscribe$)).subscribe((data: any) => {
 
-            
+
             if (data && data.companyId && data.chats) {
 
-              this.opens = data.opens;
-              this.chats = data.chats;
+                this.opens = data.opens;
+                this.chats = data.chats;
 
-                try{
+                try {
 
                     this.detectChange.detectChanges();
 
-                }catch(e){
+                } catch (e) {
 
                 }
-            
+
             }
         })
         this.router.events.subscribe((event: Event) => {
@@ -198,13 +198,13 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                     .pipe(takeUntil(this.unsubscribe$))
                     .subscribe((data) => {
 
-                        this.names =[];
+                        this.names = [];
 
                         this.profile = data;
 
                         if (this.names.length === 0) {
 
-                            this.names.push (data.profile.name + ' ' + data.profile.surname);
+                            this.names.push(data.profile.name + ' ' + data.profile.surname);
                         }
 
                         this.companyId = this.profile.company.id;
@@ -259,29 +259,29 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     bookForUrlCompanyPartner(value: any) {
-        
+
         this.logo = '';
 
         this.backend.post_client('company_parents_data_url',
-        {
-            urlPartnerType: value
-        })
-        .pipe(take(1))
-        .subscribe(( data ) => {
+            {
+                urlPartnerType: value
+            })
+            .pipe(take(1))
+            .subscribe((data) => {
 
-            if (data && data.activeLogoNomenclature && data.urlLogoTypePartner != null) {
-                
-                this.logo = data.urlLogoTypePartner;
-                
-            } else {
+                if (data && data.activeLogoNomenclature && data.urlLogoTypePartner != null) {
 
-                this.logo = 'assets/images/pages/header/Logo_polpoo.png';
+                    this.logo = data.urlLogoTypePartner;
 
-            }
+                } else {
 
-            this.detectChange.detectChanges();
+                    this.logo = 'assets/images/pages/header/Logo_polpoo.png';
 
-        })
+                }
+
+                this.detectChange.detectChanges();
+
+            })
 
     }
 
@@ -304,16 +304,16 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         if (!this.isAdminGlobal() && this.profile &&
             this.profile.email !== '' &&
             this.profile.company &&
-            this.profile.company.active_modules && 
+            this.profile.company.active_modules &&
             this.profile.company.active_modules.find(x => x.id === 2) &&
             this.profile.company.hideMultidelegation) {
-    
+
             return false;
 
-        } 
+        }
 
         return true;
-        
+
     }
 
     changeCompany(value) {
@@ -361,7 +361,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
             this.detectorDeviceWidth = true;
 
         } else {
-        
+
             this.detectorDeviceWidth = false;
 
         }
@@ -400,7 +400,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.companies = data;
 
                 this.companiesFilter = data;
-           
+
                 if (!this.detectChange['destroyed']) {
                     this.detectChange.detectChanges();
                     this.checkCalculcation();
@@ -416,7 +416,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 iconName: 'directions',
                 showDropdown: false,
                 route: '/route-planning',
-                show:this.canUser() &&
+                show: this.canUser() &&
                     (this.authLocal.isLogged() &&
                         (this.isControlPanel() ||
                             this.isAdmin() ||
@@ -428,35 +428,35 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                             this.inTrial() ||
                             this.isAdmin() ||
                             this.isFranchise())
-                        ) &&
-                    this.validatelogistics() || this.multivalidation() || this.isTraffic() ||   this.isControlPartners()
-            }, 
+                    ) &&
+                    this.validatelogistics() || this.multivalidation() || this.isTraffic() || this.isControlPartners()
+            },
             {
                 name: 'MENU.ROUTE',
                 iconName: '',
                 showDropdown: true,
                 route: '/#',
                 show: this.validateSAC() || (this.isControlPanel() ||
-                this.isAdmin() ||
-                this.isTraffic() ||
-                this.isAdminCompany() ||
-                this.isControlPartners() ||
-                this.isCommercialDirector() ||
-                this.isCommercialAgent() ),
+                    this.isAdmin() ||
+                    this.isTraffic() ||
+                    this.isAdminCompany() ||
+                    this.isControlPartners() ||
+                    this.isCommercialDirector() ||
+                    this.isCommercialAgent()),
                 subMenu: [
-                  
+
                     {
                         name: 'CONTROL_PANEL.TRAVEL_TRACKING',
                         route: '/travel-tracking',
-                        show:this.validateSAC() || (this.isControlPanel() ||
+                        show: this.validateSAC() || (this.isControlPanel() ||
                             this.isAdmin() ||
                             this.isTraffic() ||
                             this.isAdminCompany() ||
                             this.isControlPartners() ||
                             this.isCommercialDirector() ||
-                            this.isCommercialAgent() ),
+                            this.isCommercialAgent()),
                     },
-                  
+
                     {
                         name: 'CONTROL_PANEL.DEVOLUTION',
                         route: '/control-panel/devolution',
@@ -465,7 +465,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                             this.isTraffic() ||
                             this.isAdminCompany() ||
                             this.isControlPartners() ||
-                            this.isCommercialDirector() ),
+                            this.isCommercialDirector()),
                     },
                     {
                         name: 'DELIVERY_ZONES.NAME',
@@ -475,7 +475,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                             this.isTraffic() ||
                             this.isAdminCompany() ||
                             this.isControlPartners() ||
-                            this.isCommercialDirector() ),
+                            this.isCommercialDirector()),
                     },
                     {
                         name: 'DELIVERY_PLANNER.NAME',
@@ -523,17 +523,17 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                         this.inTrial() ||
                         this.isAdmin() ||
                         this.isFranchise()),
-              
+
                 subMenu: [
                     {
                         name: 'USERS.NAME',
                         route: '/management/users',
-                        show: this.canUser() || this.validateSAC() ||  this.isTraffic() || this.isControlPartners() || this.Partners(),
+                        show: this.canUser() || this.validateSAC() || this.isTraffic() || this.isControlPartners() || this.Partners(),
                     },
                     {
                         name: 'PROVIDERS.NAME',
                         route: '/providers',
-                        show:this.validateSAC() ||
+                        show: this.validateSAC() ||
                             this.canUser() ||
                             this.isCommercialDirector() ||
                             this.isCommercialAgent() || this.isControlPartners(),
@@ -541,7 +541,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                     {
                         name: 'GENERAL.CLIENTS',
                         route: '/management/clients',
-                        show:this.validateSAC() ||
+                        show: this.validateSAC() ||
                             this.canUser() ||
                             this.isTraffic() ||
                             this.isCommercialDirector() ||
@@ -559,39 +559,39 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                             this.isCommercialDirector()) &&
                             this.validatelogistics()
                     },
-                   /*  {
-                        name: 'COMPANIES.PENDING_VINCULATION',
-                        route: '/miwigo-unlinked',
-                        show: this.canUser() || this.isCommercialDirector() ,
-                    }, */
+                    /*  {
+                         name: 'COMPANIES.PENDING_VINCULATION',
+                         route: '/miwigo-unlinked',
+                         show: this.canUser() || this.isCommercialDirector() ,
+                     }, */
                     {
                         name: 'MENU.PRODUCTS',
                         route: '/products',
                         show: (this.isCommercialDirector() ||
-                        this.canUser() ||
-                        this.isAdmin() ||
-                        this.isTraffic() ||
-                        this.isCommercialAgent() ||
-                        this.isAdminCompany() || this.isControlPartners()) &&
-                        this.validateCommercial() &&
-                        (this.isActive() || this.inTrial() || this.isAdminGlobal() || this.defeatedDemo() ||
-                            this.isFranchise()) && 
-                        this.hideMultidelegation(),
+                            this.canUser() ||
+                            this.isAdmin() ||
+                            this.isTraffic() ||
+                            this.isCommercialAgent() ||
+                            this.isAdminCompany() || this.isControlPartners()) &&
+                            this.validateCommercial() &&
+                            (this.isActive() || this.inTrial() || this.isAdminGlobal() || this.defeatedDemo() ||
+                                this.isFranchise()) &&
+                            this.hideMultidelegation(),
                     },
                     {
                         name: 'MENU.ORDERS',
                         route: '/orders/orders-list',
                         show: (this.isCommercialDirector() ||
-                        this.canUser() ||
-                        this.isTraffic() ||
-                        this.isAdmin() ||
-                        this.isAdminCompany() ||
-                        this.isControlPartners() ||
-                        this.isCommercialAgent()) &&
-                        this.validateCommercial() &&
-                        (this.isActive() || this.inTrial() || this.isAdminGlobal() || this.defeatedDemo() ||
-                            this.isFranchise())
-                        && this.hideMultidelegation(),
+                            this.canUser() ||
+                            this.isTraffic() ||
+                            this.isAdmin() ||
+                            this.isAdminCompany() ||
+                            this.isControlPartners() ||
+                            this.isCommercialAgent()) &&
+                            this.validateCommercial() &&
+                            (this.isActive() || this.inTrial() || this.isAdminGlobal() || this.defeatedDemo() ||
+                                this.isFranchise())
+                            && this.hideMultidelegation(),
                     }
 
                 ]
@@ -601,7 +601,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 // iconName: 'directions',
                 showDropdown: false,
                 route: '/#',
-                show: this.franchisesActive() && (this.isAdmin() ||  this.isTraffic() ||
+                show: this.franchisesActive() && (this.isAdmin() || this.isTraffic() ||
                     this.isAdminCompany() || this.isControlPartners() && (this.isActive() || this.inTrial() || this.isAdminGlobal() || this.defeatedDemo()) && this.showStoreFranchise()),
                 subMenu: [
                     {
@@ -610,8 +610,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                         show:
                             this.franchisesActive() && (this.isAdmin() ||
                                 //this.defeatedDemo() ||
-                                this.isAdminCompany() ||  this.isControlPartners() ||  this.isTraffic())
-                                && this.hideMultidelegation(),
+                                this.isAdminCompany() || this.isControlPartners() || this.isTraffic())
+                            && this.hideMultidelegation(),
                     },
                     {
                         name: 'FRANCHISE.MANAGE_STORES',
@@ -619,7 +619,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                         show:
                             this.franchisesActive() && (this.isAdmin() ||
                                 //this.defeatedDemo() ||
-                                this.isAdminCompany() || this.isControlPartners() ||  this.isTraffic()),
+                                this.isAdminCompany() || this.isControlPartners() || this.isTraffic()),
                     },
                     {
                         name: 'FRANCHISE.MANAGE_USERS',
@@ -627,30 +627,30 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                         show:
                             this.franchisesActive() && (this.isAdmin() ||
                                 //this.defeatedDemo() ||
-                                this.isAdminCompany() || this.isControlPartners() ||  this.isTraffic()),
+                                this.isAdminCompany() || this.isControlPartners() || this.isTraffic()),
                     },
                     {
                         name: 'FRANCHISE.ORDERS_SUMARY',
                         route: '/franchise/summary-orders',
                         show: this.franchisesActive() && (this.isAdmin() ||
                             //this.defeatedDemo() ||
-                            this.isAdminCompany() || this.isControlPartners() ||  this.isTraffic())
+                            this.isAdminCompany() || this.isControlPartners() || this.isTraffic())
                             && this.hideMultidelegation(),
                     },
-                   /*  {
-                        name: 'FRANCHISE.PREPARATION_SUMMARY',
-                        route: '/franchise/summary-preparation',
-                        show: this.franchisesActive() && (this.isAdmin() ||
-                            //this.defeatedDemo() ||
-                            this.isAdminCompany())
-                    }, */
-                   /*  {
-                        name: 'FRANCHISE.DELIVERY_SUMMARY',
-                        route: '/franchise/summary-deliveries',
-                        show: this.franchisesActive() && (this.isAdmin() ||
-                            //this.defeatedDemo() ||
-                            this.isAdminCompany()),
-                    }, */
+                    /*  {
+                         name: 'FRANCHISE.PREPARATION_SUMMARY',
+                         route: '/franchise/summary-preparation',
+                         show: this.franchisesActive() && (this.isAdmin() ||
+                             //this.defeatedDemo() ||
+                             this.isAdminCompany())
+                     }, */
+                    /*  {
+                         name: 'FRANCHISE.DELIVERY_SUMMARY',
+                         route: '/franchise/summary-deliveries',
+                         show: this.franchisesActive() && (this.isAdmin() ||
+                             //this.defeatedDemo() ||
+                             this.isAdminCompany()),
+                     }, */
 
 
                 ]
@@ -659,14 +659,14 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 name: 'MENU.SUPER_ADMIN',
                 iconName: 'fas fa-user',
                 showDropdown: false,
-                route: this.returUrlSuperAdmin() ,
+                route: this.returUrlSuperAdmin(),
                 show:
                     this.authLocal.isLogged() &&
                     (this.isAdmin() || this.isSalesman()) &&
                     (this.isActive() ||
                         this.defeatedDemo() ||
                         this.inTrial() ||
-                        this.isAdmin() ) || this.isControlPartners() || this.Partners() ,
+                        this.isAdmin()) || this.isControlPartners() || this.Partners(),
             },
             {
                 name: 'MENU.COST',
@@ -678,10 +678,10 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 name: 'MENU.REPORT',
                 showDropdown: false,
                 route: '/report',
-                show:  (this.isControlPartners() || !this.Partners()) && !this.onlyChat()
+                show: (this.isControlPartners() || !this.Partners()) && !this.onlyChat()
             },
 
-           
+
 
         ];
 
@@ -704,7 +704,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 route: '/preferences',
                 show:
                     this.authLocal.isLogged() &&
-                    (this.isControlPanel() || this.isAdmin() || this.isAdminCompany() ||  this.isTraffic()) &&
+                    (this.isControlPanel() || this.isAdmin() || this.isAdminCompany() || this.isTraffic()) &&
                     (this.isActive() ||
                         this.defeatedDemo() ||
                         this.inTrial() ||
@@ -737,7 +737,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
             init_plugins();
         }, 1);
 
-        
+
     }
 
     setProfileIconColor(): boolean {
@@ -777,18 +777,18 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     getUserTo(item) {
-        if(item && item.status === 'request'){
+        if (item && item.status === 'request') {
             return 'En espera por aceptación'
         } else {
             let user = item.users.find(x => x.me == false)
             return user.name + ' ' + user.surname;
         }
-        
+
     }
-    
+
 
     showChangeCompanyToAdminCompany() {
-       
+
         return this.isAdmin() || this.isAdminCompany() || this.Partners();
     }
 
@@ -835,15 +835,15 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
             : false;
     }
 
-    filterCompany(filter){
+    filterCompany(filter) {
         if (filter && filter.trim() !== '' && filter.length > 2) {
             this.companiesFilter = this.companies.filter((item) => {
 
-              return (item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1  );
+                return (item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1);
             });
-          } else {
+        } else {
             this.companiesFilter = this.companies;
-          }
+        }
     }
 
     isAdmin() {
@@ -905,14 +905,14 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
     multivalidation() {
         return this.authLocal.getRoles()
-            ? this.authLocal.getRoles().find((role) => role === 4 || role === 1 || role ===3) !== undefined
+            ? this.authLocal.getRoles().find((role) => role === 4 || role === 1 || role === 3) !== undefined
             : false;
     }
 
     Partners() {
         return this.authLocal.getRoles()
-        ? this.authLocal.getRoles().find((role) => role === 17 ) !== undefined
-        : false;
+            ? this.authLocal.getRoles().find((role) => role === 17) !== undefined
+            : false;
     }
 
     isTraffic() {
@@ -1003,9 +1003,9 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
 
-    onlyChat(){
+    onlyChat() {
         return this.authLocal.getRoles()
-            ?  this.authLocal.getRoles().length === 1 && this.authLocal.getRoles().find((role) => role === 18) !== undefined
+            ? this.authLocal.getRoles().length === 1 && this.authLocal.getRoles().find((role) => role === 18) !== undefined
             : false;
     }
 
@@ -1206,7 +1206,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
             return false;
         }
     }
-    billsModuleActive(){
+    billsModuleActive() {
 
         if (this.profile &&
             this.profile.email !== '' &&
@@ -1219,7 +1219,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     }
 
-    ModuleSheetRoute(){
+    ModuleSheetRoute() {
 
         if (this.profile &&
             this.profile.email !== '' &&
@@ -1232,34 +1232,34 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     }
 
-    redirectNotifications(){
+    redirectNotifications() {
         this.router.navigateByUrl('notifications');
     }
 
-    redirectChat(){
+    redirectChat() {
         this.router.navigateByUrl('chat');
     }
 
 
 
-    getInitials(nameString , i){
+    getInitials(nameString, i) {
 
-      const fullName = nameString.split(' ');
+        const fullName = nameString.split(' ');
 
-      const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+        const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
 
-      return initials.toUpperCase();
+        return initials.toUpperCase();
 
     }
 
 
-    openModalChangeCompany(){
+    openModalChangeCompany() {
         const modal = this.modalService.open(ModalChangeCompanyComponent, {
             backdrop: 'static',
             backdropClass: 'modal-backdrop-ticket',
             centered: true,
-            windowClass:'modal-change-company',
-            size:'md'
+            windowClass: 'modal-change-company',
+            size: 'md'
         });
 
         modal.componentInstance.companiesFilter = this.companiesFilter;
@@ -1280,20 +1280,20 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         );
     }
 
-    date(date: any){
+    date(date: any) {
         moment.locale('es');
 
-        return moment(date).fromNow().replace( this.translate.instant('GENERAL.IN'), this.translate.instant('GENERAL.DOES'));
+        return moment(date).fromNow().replace(this.translate.instant('GENERAL.IN'), this.translate.instant('GENERAL.DOES'));
     }
 
-    showNotTraffic(){
+    showNotTraffic() {
         return this.authLocal.getRoles()
-        ? this.authLocal.getRoles().find((role) => role != 16 && role != 18) !==
-        undefined
-        : false;
+            ? this.authLocal.getRoles().find((role) => role != 16 && role != 18) !==
+            undefined
+            : false;
     }
 
-    ModuleCost(){
+    ModuleCost() {
 
         if (this.profile &&
             this.profile.email !== '' &&
@@ -1307,7 +1307,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
 
-    ModuleParcel(){
+    ModuleParcel() {
 
         if (this.profile &&
             this.profile.email !== '' &&
@@ -1320,7 +1320,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     }
 
-    ModuleLoadingDock(){
+    ModuleLoadingDock() {
 
         if (this.profile &&
             this.profile.email !== '' &&
@@ -1334,7 +1334,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     isControlPartners() {
-        
+
         const prefereces = JSON.parse(localStorage.getItem('company'));
 
         return this.authLocal.getRoles()
@@ -1343,14 +1343,14 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     openModalMyProfile() {
-        
+
         const modal = this.modalService.open(ModalMyProfileComponent, {
 
             backdropClass: 'modal-backdrop-ticket',
 
-            windowClass:'modal-my-profile',
-  
-            size:'md',
+            windowClass: 'modal-my-profile',
+
+            size: 'md',
 
             backdrop: 'static'
 
@@ -1358,18 +1358,18 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
         modal.result.then((data) => {
             this.openModalEnd = false
-           
+
         }, (error) => {
         });
     }
 
-    goToLinkAcademy(url: string){
+    goToLinkAcademy(url: string) {
 
         window.open(url, "_blank");
 
     }
 
-    showCompanyPanertsSelecter(data:any){
+    showCompanyPanertsSelecter(data: any) {
 
         /* console.log(data ,'any');
 
@@ -1379,12 +1379,12 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
         let companySelecter = this.companies.find(x => x.id == data.profile.companyId)
 
-       /*  console.log(companySelecter, 'companySelecter'); */
+        /*  console.log(companySelecter, 'companySelecter'); */
 
         if (companySelecter) {
             return companyName = companySelecter.name;
         } else {
-            return companyName ='';
+            return companyName = '';
         }
 
     }
@@ -1398,30 +1398,30 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
     } */
 
-    returUrlSuperAdmin(){
+    returUrlSuperAdmin() {
 
-        let url : any ='';
-    
+        let url: any = '';
+
         if (this.isControlPartners()) {
-            
+
             url = '/partners-super-admin';
 
-        } else if( this.Partners()){
-            
+        } else if (this.Partners()) {
+
             url = '/partners-super-admin';
 
         } else {
-            
-            url =   '/super-admin'
+
+            url = '/super-admin'
         }
 
         return url;
     }
 
-    openSettings(){
+    openSettings() {
         this.router.navigateByUrl('/preferences?option=planRoutes');
     }
-    
-    
+
+
 
 }
