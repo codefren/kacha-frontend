@@ -15,16 +15,19 @@
             }}
         </b> {{ 'INVOICING.SUBSCRIPTION_STATUS.LATE_PAYMENT5' | translate }}
     </div>
-    <header class="header" id="header" (click)="reverseColor()" [ngClass]="{ 'header-position': defeatedDemo() && demoDay() <= 15 }">
+    <header class="header" id="header" (click)="reverseColor()"
+        [ngClass]="{ 'header-position': defeatedDemo() && demoDay() <= 15 }">
 
 
         <div class="logo-container" [ngClass]="{ 'logo-container-responsive': defeatedDemo() && demoDay() <= 15 }">
 
             <a routerLink="" class="logo" id="logo">
-                <img class="logo-img text-center p-t-20 p-r-10" [src]="logo" alt="Porto Admin" *ngIf="logo" />
+                <!--<img class="logo-img text-center p-t-20 p-r-10" [src]="logo" alt="Porto Admin" *ngIf="logo" />-->
+                Hola Mundo! desde Polpoo
             </a>
 
-            <button class="btn header-btn-collapse-nav d-lg-none" data-toggle-class="collapse" data-target=".header-nav" (click)="hideUserbox()">
+            <button class="btn header-btn-collapse-nav d-lg-none" data-toggle-class="collapse" data-target=".header-nav"
+                (click)="hideUserbox()">
                 <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
             </button>
 
@@ -40,7 +43,8 @@
                                     (!detectorDeviceIpad && detectorDeviceWidth)
                                 ">
                                 <ng-container *ngFor="let menu of menuItems; let i = index">
-                                    <li class="dropdown point" [ngClass]="{ showed: menu.showDropdown }" *ngIf="menu.show" routerLinkActive="active" [ngClass]="{
+                                    <li class="dropdown point" [ngClass]="{ showed: menu.showDropdown }"
+                                        *ngIf="menu.show" routerLinkActive="active" [ngClass]="{
                                             'border-right':
                                                 (i === 3 && validateCommercial()) ||
                                                 (menu.iconName === 'logistics' &&
@@ -80,7 +84,8 @@
                                                             !item.dropdownMenu ||
                                                             item.dropdownMenu.length === 0
                                                         ">
-                                                        <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
+                                                        <a class="nav-link" [routerLink]="item.route"
+                                                            routerLinkActive="active">
                                                             {{ item.name | translate }}
                                                         </a>
                                                     </ng-container>
@@ -116,7 +121,8 @@
                                     (detectorDeviceIpad && detectorDeviceWidth)
                                 ">
                                 <ng-container *ngFor="let menu of menuItems; let i = index">
-                                    <li class="dropdown" *ngIf="menu.show" routerLinkActive="active" [ngClass]="{ 'border-right': i === 3 }">
+                                    <li class="dropdown" *ngIf="menu.show" routerLinkActive="active"
+                                        [ngClass]="{ 'border-right': i === 3 }">
                                         <a href="#" class="nav-link" *ngIf="!menu.subMenu" [routerLink]="menu.route">
                                             {{ menu.name | translate }}
                                         </a>
@@ -145,7 +151,8 @@
                                                             !item.dropdownMenu ||
                                                             item.dropdownMenu.length === 0
                                                         ">
-                                                        <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
+                                                        <a class="nav-link" [routerLink]="item.route"
+                                                            routerLinkActive="active">
                                                             {{ item.name | translate }}
                                                         </a>
                                                     </ng-container>
@@ -192,7 +199,8 @@
                                                 {{ menu.name | translate }}
                                             </a>
 
-                                            <a class="nav-link" [routerLink]="menu.route" routerLinkActive="active" *ngIf="
+                                            <a class="nav-link" [routerLink]="menu.route" routerLinkActive="active"
+                                                *ngIf="
                                                     !menu.subMenu ||
                                                     menu.subMenu.length === 0
                                                 ">
@@ -202,7 +210,8 @@
                                             <ul class="dropdown-menu" *ngIf="menu.subMenu">
                                                 <ng-container *ngFor="let subMenu of menu.subMenu">
                                                     <li *ngIf="subMenu.show">
-                                                        <a class="nav-link" [routerLink]="subMenu.route" routerLinkActive="active">
+                                                        <a class="nav-link" [routerLink]="subMenu.route"
+                                                            routerLinkActive="active">
                                                             {{ subMenu.name | translate }}
                                                         </a>
                                                     </li>
@@ -219,7 +228,8 @@
 
 
 
-            <div class="header-right" id="header-right" [ngClass]="{ 'Header-rigth-responsive': defeatedDemo() && demoDay() <= 15 }">
+            <div class="header-right" id="header-right"
+                [ngClass]="{ 'Header-rigth-responsive': defeatedDemo() && demoDay() <= 15 }">
 
                 <span class="espacing"></span>
 
@@ -227,7 +237,9 @@
 
                     <li class="show" *ngIf="isChat()">
 
-                        <a class="dropdown-toggle no-selecter-link notification-icon point" *ngIf="haveChat() && ChatModule()" [class.selecter-link-chat]="router.isActive('/chat')" data-toggle="dropdown" aria-expanded="true">
+                        <a class="dropdown-toggle no-selecter-link notification-icon point"
+                            *ngIf="haveChat() && ChatModule()" [class.selecter-link-chat]="router.isActive('/chat')"
+                            data-toggle="dropdown" aria-expanded="true">
 
                             <picture>
 
@@ -246,11 +258,13 @@
                                 <ng-container *ngIf=" opens > 100">
                                     1
                                 </ng-container> -->
-                                
+
                             </span>
                         </a>
 
-                        <div class="dropdown-menu notification-menu notification-menu-1 card-notifications notifications-no-lines" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 11px; left: 0px; transform: translate3d(0px, 30px, 0px);">
+                        <div class="dropdown-menu notification-menu notification-menu-1 card-notifications notifications-no-lines"
+                            x-placement="bottom-start"
+                            style="position: absolute; will-change: transform; top: 11px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                             <div class="p-3">
                                 <label class="title-notification"> Chat </label>
                             </div>
@@ -269,24 +283,31 @@
 
                                                         <div class="company-select">
 
-                                                            <p class="company-address-menu mt-2 text-no-wrap mb-1" [title]="getUserTo(item)"> <b> {{getUserTo(item)}} </b> <br>
+                                                            <p class="company-address-menu mt-2 text-no-wrap mb-1"
+                                                                [title]="getUserTo(item)"> <b> {{getUserTo(item)}} </b>
+                                                                <br>
 
-                                                                <ng-container *ngIf="lastMessage(item) && !lastMessage(item).urlChatImage">
+                                                                <ng-container
+                                                                    *ngIf="lastMessage(item) && !lastMessage(item).urlChatImage">
 
                                                                     {{ lastMessage(item).text }}
 
                                                                 </ng-container>
 
-                                                                <ng-container *ngIf="lastMessage(item) && lastMessage(item).urlChatImage">
+                                                                <ng-container
+                                                                    *ngIf="lastMessage(item) && lastMessage(item).urlChatImage">
 
-                                                                    <img class="size-img-file-chat" src="assets/icons/adjunt.svg"> <b class="b-file-style">Archivo</b>
+                                                                    <img class="size-img-file-chat"
+                                                                        src="assets/icons/adjunt.svg"> <b
+                                                                        class="b-file-style">Archivo</b>
 
                                                                 </ng-container>
 
                                                             </p>
                                                         </div>
 
-                                                        <span class="message">{{date(lastMessage(item).datetime)}} </span>
+                                                        <span class="message">{{date(lastMessage(item).datetime)}}
+                                                        </span>
 
                                                     </a>
 
@@ -301,7 +322,8 @@
 
                                             <div class="col-12 text-center">
 
-                                                <div class="pt-3 pb-3"> {{'GENERAL.NO_CHAT_AVAILABLE' | translate }} </div>
+                                                <div class="pt-3 pb-3"> {{'GENERAL.NO_CHAT_AVAILABLE' | translate }}
+                                                </div>
 
                                             </div>
 
@@ -324,7 +346,8 @@
                                 <hr>
 
                                 <div class="text-center pt-2 pb-3">
-                                    <span class="view-mas point" routerLink="/chat" routerLinkActive="selecter-link-chat"> {{'GENERAL.SEE_ALL' | translate }}</span>
+                                    <span class="view-mas point" routerLink="/chat"
+                                        routerLinkActive="selecter-link-chat"> {{'GENERAL.SEE_ALL' | translate }}</span>
                                 </div>
                             </div>
                         </div>
@@ -348,20 +371,23 @@
 
                             <span class="badge badge-asc" *ngIf="unReadCount && unReadCount > 0">
 
-                                <ng-container *ngIf="unReadCount < 100" >
+                                <ng-container *ngIf="unReadCount < 100">
                                     {{ unReadCount }}
                                 </ng-container>
 
                                 <ng-container *ngIf="unReadCount > 100">
                                     +99
                                 </ng-container>
-                                
+
                             </span>
                         </a>
 
-                        <div class="dropdown-menu notification-menu notification-menu-1 card-notifications notifications-no-lines" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 11px; left: 0px; transform: translate3d(0px, 30px, 0px);">
+                        <div class="dropdown-menu notification-menu notification-menu-1 card-notifications notifications-no-lines"
+                            x-placement="bottom-start"
+                            style="position: absolute; will-change: transform; top: 11px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                             <div class="p-3">
-                                <label class="title-notification"> {{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }} </label>
+                                <label class="title-notification"> {{ 'NOTIFICATIONS.NOTIFICATIONS' | translate }}
+                                </label>
                             </div>
                             <hr>
                             <div>
@@ -378,7 +404,10 @@
 
                                                         <div class="company-select">
 
-                                                            <p class="company-address-menu mt-2 text-no-wrap mb-1" [title]="item.description"> <b> {{item.notification_type.name}} </b> {{ item.description }} </p>
+                                                            <p class="company-address-menu mt-2 text-no-wrap mb-1"
+                                                                [title]="item.description"> <b>
+                                                                    {{item.notification_type.name}} </b> {{
+                                                                item.description }} </p>
 
                                                         </div>
 
@@ -397,7 +426,8 @@
 
                                             <div class="col-12 text-center">
 
-                                                <div class="pt-3 pb-3"> {{'GENERAL.NO_NOTIFICATIONS_AVAILABLE' | translate }} </div>
+                                                <div class="pt-3 pb-3"> {{'GENERAL.NO_NOTIFICATIONS_AVAILABLE' |
+                                                    translate }} </div>
 
                                             </div>
 
@@ -420,7 +450,8 @@
                                 <hr>
 
                                 <div class="text-center pt-2 pb-3">
-                                    <span class="view-mas point" (click)="redirectNotifications()"> {{'GENERAL.SEE_ALL' | translate }}</span>
+                                    <span class="view-mas point" (click)="redirectNotifications()"> {{'GENERAL.SEE_ALL'
+                                        | translate }}</span>
                                 </div>
                             </div>
                         </div>
@@ -433,25 +464,26 @@
                     <div class="btn-group dropup">
                         <button type="button" class="btn btn-menu-user" data-toggle="dropdown">
                             <figure class="profile-picture">
-                               
-                               <div class="rows">
-                                <div class="name-header" *ngFor='let item of names; let i = index'>
-                                    <span class="title-name-header">
-                                        {{ i +1 < 4 ? getInitials(item , i) : '+' + (names.length - i) }}
-                                    </span> 
+
+                                <div class="rows">
+                                    <div class="name-header" *ngFor='let item of names; let i = index'>
+                                        <span class="title-name-header">
+                                            {{ i +1 < 4 ? getInitials(item , i) : '+' + (names.length - i) }} </span>
+                                    </div>
                                 </div>
-                            </div>
 
                             </figure>
-                            
+
 
                             <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com"
                                 *ngIf="profile && profile.profile">
                                 <div class="profile-name">
 
-                                    <p class="profile-menu mt-2 text-no-wrap mb-1" [title]=" profile.profile.name + ' ' + profile.profile.surname">   {{ profile.profile.name + ' ' + profile.profile.surname }} </p>
+                                    <p class="profile-menu mt-2 text-no-wrap mb-1"
+                                        [title]=" profile.profile.name + ' ' + profile.profile.surname"> {{
+                                        profile.profile.name + ' ' + profile.profile.surname }} </p>
                                 </div>
-                               <!--  <span class="name nick-name" [ngClass]="{ 'name-activated': !color }">
+                                <!--  <span class="name nick-name" [ngClass]="{ 'name-activated': !color }">
                                     {{ profile.profile.name + ' ' + profile.profile.surname }}
                                 </span> -->
                             </div>
@@ -466,8 +498,9 @@
                                             <div class="rows">
                                                 <div class="circles" *ngFor='let item of names; let i = index'>
                                                     <span class="title-name-user">
-                                                    {{ i +1
-                                                    < 4 ? getInitials(item , i) : '+' + (names.length - i) }}</span> </div>
+                                                        {{ i +1
+                                                        < 4 ? getInitials(item , i) : '+' + (names.length - i) }}</span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -477,7 +510,9 @@
 
                                             <div class="profile-name-sub">
 
-                                                <p class="profile-menu-sub mt-2 text-no-wrap mb-1" [title]=" profile.profile.name + ' ' + profile.profile.surname"> {{ profile.profile.name + ' ' + profile.profile.surname }} </p>
+                                                <p class="profile-menu-sub mt-2 text-no-wrap mb-1"
+                                                    [title]=" profile.profile.name + ' ' + profile.profile.surname"> {{
+                                                    profile.profile.name + ' ' + profile.profile.surname }} </p>
 
                                             </div>
 
@@ -489,7 +524,9 @@
 
                                                 <p class="title-role mb-0">
 
-                                                    <span class="title-role" *ngFor="let item of  profile.profiles; let t=index" [title]="item.name"> {{item.name}} 
+                                                    <span class="title-role"
+                                                        *ngFor="let item of  profile.profiles; let t=index"
+                                                        [title]="item.name"> {{item.name}}
 
                                                         <span *ngIf=" t + 1 <  profile.profiles.length">,</span>
 
@@ -510,11 +547,13 @@
 
                                 <!-- mi perfil -->
 
-                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" (click)="openModalMyProfile()">
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                    (click)="openModalMyProfile()">
 
                                     <a role="menuitem" tabindex="-1">
 
-                                        <img class="img-menu-position" src="assets/icons/iconMenu/profile.svg"> {{ 'GENERAL.MY_PROFILE' | translate }}
+                                        <img class="img-menu-position" src="assets/icons/iconMenu/profile.svg"> {{
+                                        'GENERAL.MY_PROFILE' | translate }}
 
                                     </a>
 
@@ -524,7 +563,8 @@
 
                                 <!-- Perfil empresa -->
                                 <ng-container *ngIf="isAdminAdministrative()">
-                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/company-profile">
+                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                        routerLink="/company-profile">
                                         <a role="menuitem" tabindex="-1">
                                             <img src="assets/icons/iconMenu/companyProfile.svg"> Perfil empresa
                                         </a>
@@ -535,9 +575,12 @@
                                 <!-- compania asociada -->
 
                                 <ng-container *ngIf="canUser() || isCommercialDirector()">
-                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/management/associated-companies">
+                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                        routerLink="/management/associated-companies">
                                         <a role="menuitem" tabindex="-1">
-                                            <img class="img-menu-position" src="assets/icons/iconMenu/AssociatedCompanies.svg"> {{'COMPANIES.ASSOCIATED_COMPANIES' | translate }}
+                                            <img class="img-menu-position"
+                                                src="assets/icons/iconMenu/AssociatedCompanies.svg">
+                                            {{'COMPANIES.ASSOCIATED_COMPANIES' | translate }}
                                         </a>
                                     </li>
                                 </ng-container>
@@ -553,9 +596,11 @@
                                 isControlPanel() ||
                                 isCommercialDirector()) &&
                                 validatelogistics()">
-                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/bills">
+                                    <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                        routerLink="/bills">
                                         <a role="menuitem" tabindex="-1">
-                                            <img class="img-menu-position" src="assets/icons/iconMenu/Billing.svg"> {{'MENU.BILLING' | translate }}
+                                            <img class="img-menu-position" src="assets/icons/iconMenu/Billing.svg">
+                                            {{'MENU.BILLING' | translate }}
                                         </a>
                                     </li>
                                 </ng-container>
@@ -565,11 +610,14 @@
 
                                 <!-- configuración -->
 
-                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" (click)="openSettings()" *ngIf="(isAdminGlobal() || showChangeCompanyToAdminCompany() && (!this.Partners() || this.isControlPartners())) || (validateSAC() || isTraffic() && (franchisesActive() || !showStoreFranchise()) )">
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                    (click)="openSettings()"
+                                    *ngIf="(isAdminGlobal() || showChangeCompanyToAdminCompany() && (!this.Partners() || this.isControlPartners())) || (validateSAC() || isTraffic() && (franchisesActive() || !showStoreFranchise()) )">
 
                                     <a role="menuitem" tabindex="-1">
 
-                                        <img class="img-menu-position" src="assets/icons/iconMenu/Setting.svg"> {{ 'GENERAL.SETTING' | translate }}
+                                        <img class="img-menu-position" src="assets/icons/iconMenu/Setting.svg"> {{
+                                        'GENERAL.SETTING' | translate }}
 
                                     </a>
 
@@ -590,7 +638,8 @@
                                 </li> -->
 
                                 <!-- ACADEMY -->
-                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" (click)="goToLinkAcademy(urlAcademy)">
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                    (click)="goToLinkAcademy(urlAcademy)">
 
                                     <a role="menuitem" tabindex="-1">
 
@@ -604,11 +653,14 @@
 
                                 <!-- SUBSCRIPTION -->
 
-                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li" routerLink="/profile/invoicing" *ngIf="(isAdminGlobal() || showChangeCompanyToAdminCompany() && (!this.Partners() || this.isControlPartners())) || (validateSAC() || isTraffic() && (franchisesActive()|| !showStoreFranchise()))">
+                                <li class="pl-3 pointer border-icon-menu d-flex align-items-center size-menu-li"
+                                    routerLink="/profile/invoicing"
+                                    *ngIf="(isAdminGlobal() || showChangeCompanyToAdminCompany() && (!this.Partners() || this.isControlPartners())) || (validateSAC() || isTraffic() && (franchisesActive()|| !showStoreFranchise()))">
 
                                     <a role="menuitem" tabindex="-1">
 
-                                        <img class="img-menu-position" src="assets/icons/iconMenu/Subscription.svg"> {{'GENERAL.SUBSCRIPTION' | translate }}
+                                        <img class="img-menu-position" src="assets/icons/iconMenu/Subscription.svg">
+                                        {{'GENERAL.SUBSCRIPTION' | translate }}
 
                                     </a>
 
@@ -618,15 +670,20 @@
 
                                 <!-- cambiar company nuevo -->
 
-                                <ng-container *ngIf="companies && companies.length > 0 && (isAdminGlobal() || showChangeCompanyToAdminCompany()) || (validateSAC() || isTraffic() || Partners() && (franchisesActive()|| !showStoreFranchise()))">
+                                <ng-container
+                                    *ngIf="companies && companies.length > 0 && (isAdminGlobal() || showChangeCompanyToAdminCompany()) || (validateSAC() || isTraffic() || Partners() && (franchisesActive()|| !showStoreFranchise()))">
 
-                                    <li class="pl-3 size-change-company pointer border-icon-menu d-flex align-items-center" (click)="openModalChangeCompany()">
+                                    <li class="pl-3 size-change-company pointer border-icon-menu d-flex align-items-center"
+                                        (click)="openModalChangeCompany()">
 
                                         <a role="menuitem" tabindex="-1">
 
-                                            <img src="assets/icons/iconMenu/SwitchAccount.svg"> {{ 'GENERAL.SWITH_ACCOUNT' | translate }}
+                                            <img src="assets/icons/iconMenu/SwitchAccount.svg"> {{
+                                            'GENERAL.SWITH_ACCOUNT' | translate }}
 
-                                            <img class="change-user" type="button" src="assets/icons/iconMenu/arrowLeft.svg" id="dropdownMenuButtonChangeCompany">
+                                            <img class="change-user" type="button"
+                                                src="assets/icons/iconMenu/arrowLeft.svg"
+                                                id="dropdownMenuButtonChangeCompany">
 
 
                                             <div class="profile-name size-name-company-change">
@@ -639,7 +696,8 @@
 
                                                 <!-- <ng-container *ngIf="!Partners()"> -->
 
-                                                <p class="company mb-0 text-no-wrap  pl-4 mt-1" [title]="profile.company.name">{{ profile.company.name }}</p>
+                                                <p class="company mb-0 text-no-wrap  pl-4 mt-1"
+                                                    [title]="profile.company.name">{{ profile.company.name }}</p>
 
                                                 <!-- </ng-container> -->
 
@@ -658,7 +716,8 @@
 
                                     <a role="menuitem" tabindex="-1">
 
-                                        <img class="point img-menu-position" src="assets/icons/iconMenu/SignOff.svg"> {{ 'GENERAL.LOG_OUT' | translate }}
+                                        <img class="point img-menu-position" src="assets/icons/iconMenu/SignOff.svg"> {{
+                                        'GENERAL.LOG_OUT' | translate }}
 
                                     </a>
 
@@ -673,7 +732,8 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-7 offset-2 text-center">
-                                            <a class="privacity-policy block" target="_blank" [href]="urlPrivacyTerms"> {{ 'GENERAL.PRIVACY_POLICIES' | translate }} </a>
+                                            <a class="privacity-policy block" target="_blank" [href]="urlPrivacyTerms">
+                                                {{ 'GENERAL.PRIVACY_POLICIES' | translate }} </a>
                                         </div>
                                     </div>
                                 </li>
@@ -682,10 +742,12 @@
                         </div>
                     </div>
 
-                    <div class="dropdown-menu notification-menu" [ngClass]="{'show': showHelpGuide}" x-placement="bottom-start">
+                    <div class="dropdown-menu notification-menu" [ngClass]="{'show': showHelpGuide}"
+                        x-placement="bottom-start">
 
                         <div class="content" *ngIf="helpGuideStep">
-                            <div class="row" *ngIf="helpGuideStep.beforeUrl !== '' && helpGuideStep.beforeUrl !== null" (click)="before()">
+                            <div class="row" *ngIf="helpGuideStep.beforeUrl !== '' && helpGuideStep.beforeUrl !== null"
+                                (click)="before()">
                                 <div class="col-12 pl-5 text-left">
                                     <a (click)="skip()" class="skip-ref">{{ 'GENERAL.SKIP' | translate }}</a>
                                 </div>
@@ -702,10 +764,14 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-5 text-center pl-5">
-                                    <button class="btn btn-gray btn-block" *ngIf="helpGuideStep.beforeUrl === '' || helpGuideStep.beforeUrl === null" (click)="skip()">
+                                    <button class="btn btn-gray btn-block"
+                                        *ngIf="helpGuideStep.beforeUrl === '' || helpGuideStep.beforeUrl === null"
+                                        (click)="skip()">
                                         {{ 'GENERAL.SKIP' | translate }}
                                     </button>
-                                    <button class="btn btn-gray btn-block" *ngIf="helpGuideStep.beforeUrl !== '' && helpGuideStep.beforeUrl !== null" (click)="before()">
+                                    <button class="btn btn-gray btn-block"
+                                        *ngIf="helpGuideStep.beforeUrl !== '' && helpGuideStep.beforeUrl !== null"
+                                        (click)="before()">
                                         {{ 'GENERAL.BEFORE' | translate }}
                                     </button>
                                 </div>
@@ -713,10 +779,12 @@
                                     {{ helpGuideStep.step }}/{{ helpGuideStep.count }}
                                 </div>
                                 <div class="col-5 text-center pr-5">
-                                    <button class="btn btn-secondary btn-block" (click)="next()" *ngIf="helpGuideStep.nextUrl !== '' && helpGuideStep.nextUrl !== null">
+                                    <button class="btn btn-secondary btn-block" (click)="next()"
+                                        *ngIf="helpGuideStep.nextUrl !== '' && helpGuideStep.nextUrl !== null">
                                         Siguiente
                                     </button>
-                                    <button class="btn btn-secondary btn-block" (click)="end()" *ngIf="helpGuideStep.nextUrl === '' || helpGuideStep.nextUrl === null">
+                                    <button class="btn btn-secondary btn-block" (click)="end()"
+                                        *ngIf="helpGuideStep.nextUrl === '' || helpGuideStep.nextUrl === null">
                                         Finalizar
                                     </button>
                                 </div>
